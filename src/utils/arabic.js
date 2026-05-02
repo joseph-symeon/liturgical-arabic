@@ -13,20 +13,20 @@ export function getArabicText(annotation, arabicMode) {
   return voweled;
 }
 
-export function getLineText(line, annotations, arabicMode) {
-  return line
+export function getLineText(phrases, annotations, arabicMode) {
+  return phrases
     .map(function mapPart(part) {
-      if (part.annotationId && annotations[part.annotationId]) {
-        return getArabicText(annotations[part.annotationId], arabicMode);
+      if (part.id && annotations[part.id]) {
+        return getArabicText(annotations[part.id], arabicMode);
       }
       return part.text || "";
     })
     .join("");
 }
 
-export function getLogicalPhraseParts(line) {
-  return line.filter(function keepAnnotationPart(part) {
-    return Boolean(part.annotationId);
+export function getLogicalPhraseParts(phrases) {
+  return phrases.filter(function keepAnnotationPart(part) {
+    return Boolean(part.id);
   });
 }
 

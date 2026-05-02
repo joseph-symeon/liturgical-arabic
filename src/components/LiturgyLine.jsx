@@ -9,7 +9,7 @@ export default function LiturgyLine(props) {
     { className: "text-2xl leading-loose text-stone-950 md:text-3xl" },
     props.line.map(function renderPart(part, partIndex) {
       return h(HoverPhrase, {
-        key: (part.annotationId || part.text || "part") + partIndex,
+        key: (part.id || part.text || "part") + partIndex,
         part: part,
         arabicMode: props.arabicMode,
         speechRate: props.speechRate

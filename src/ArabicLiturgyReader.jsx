@@ -78,10 +78,10 @@ export default function ArabicLiturgyReader() {
       ),
       h(ReaderLayoutControls, { readerLayout, setReaderLayout }),
       h(VoiceControls, { speechRate, setSpeechRate }),
-      liturgyText.map(function renderBlock(block, blockIndex) {
+      liturgyText.map(function renderSection(section, sectionIndex) {
         return h(SpeakerBlock, {
-          key: (block.title || block.speaker) + blockIndex,
-          block,
+          key: section.section + sectionIndex,
+          section,
           arabicMode,
           speechRate,
           readerLayout

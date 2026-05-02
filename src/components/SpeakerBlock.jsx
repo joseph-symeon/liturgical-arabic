@@ -1,38 +1,47 @@
 import React from "react";
 import SpeakerLine from "./SpeakerLine.jsx";
-import { getLogicalPhraseParts } from "../utils/arabic.js";
 
 const h = React.createElement;
 
 export default function SpeakerBlock(props) {
-  const block = props.block;
+  const section = props.section;
   const isLineByLine = props.readerLayout === "line";
 
-  function renderGroupedLine(line, lineIndex) {
-    return h(SpeakerLine, {
-      key: block.speaker + "-grouped-" + lineIndex,
-      speaker: block.speaker,
-      line: line,
-      arabicMode: props.arabicMode,
-      speechRate: props.speechRate,
-      showSpeaker: true
+  function renderGrouped() {
+    const groups = [];
+    section.verses.forEach(function (verse) {
+      const last = groups[groups.length - 1];
+      if (last && last.speaker === verse.speaker) {
+        last.phrases = last.phrases.concat([{ text: " " }], verse.phrases);
+      } else {
+        groups.push({ speaker: verse.speaker, key: verse.verse, phrases: verse.phrases.slice() });
+      }
+    });
+
+    return groups.map(function (group) {
+      return h(SpeakerLine, {
+        key: group.key,
+        speaker: group.speaker,
+        line: group.phrases,
+        arabicMode: props.arabicMode,
+        speechRate: props.speechRate,
+        showSpeaker: true
+      });
     });
   }
 
-  function renderLogicalPhraseLines() {
-    let phraseIndex = 0;
-    return block.lines.flatMap(function eachLine(line, lineIndex) {
-      return getLogicalPhraseParts(line).map(function renderPhrase(part, partIndex) {
-        const showSpeaker = phraseIndex === 0;
-        phraseIndex += 1;
-        return h(SpeakerLine, {
-          key: block.speaker + "-line-" + lineIndex + "-" + partIndex,
-          speaker: block.speaker,
-          line: [part],
-          arabicMode: props.arabicMode,
-          speechRate: props.speechRate,
-          showSpeaker: showSpeaker
-        });
+  function renderLineByLine() {
+    let lastSpeaker = null;
+    return section.verses.map(function (verse) {
+      const showSpeaker = verse.speaker !== lastSpeaker;
+      lastSpeaker = verse.speaker;
+      return h(SpeakerLine, {
+        key: verse.verse,
+        speaker: verse.speaker,
+        line: verse.phrases,
+        arabicMode: props.arabicMode,
+        speechRate: props.speechRate,
+        showSpeaker
       });
     });
   }
@@ -40,7 +49,7 @@ export default function SpeakerBlock(props) {
   return h(
     "section",
     null,
-    block.title
+    section.section
       ? h(
           "h2",
           {
@@ -48,13 +57,13 @@ export default function SpeakerBlock(props) {
               "mx-auto mt-10 mb-4 max-w-4xl text-center text-lg font-semibold text-amber-800",
             dir: "ltr"
           },
-          block.title
+          section.section
         )
       : null,
     h(
       "div",
       { className: "mx-auto max-w-4xl py-2 text-right", dir: "rtl" },
-      isLineByLine ? renderLogicalPhraseLines() : block.lines.map(renderGroupedLine)
+      isLineByLine ? renderLineByLine() : renderGrouped()
     )
   );
 }

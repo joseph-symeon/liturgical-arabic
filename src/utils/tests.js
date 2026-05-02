@@ -34,22 +34,22 @@ export function runTests() {
     "Voweled Arabic should display with diacritics."
   );
   console.assert(
-    getLineText(liturgyText[0].lines[0], annotations, "plain") === "بسلام إلى الرب نطلب",
+    getLineText(liturgyText[0].verses[0].phrases, annotations, "plain") === "بسلام إلى الرب نطلب",
     "Line text should compose plain Arabic from annotations."
   );
   console.assert(
-    getLogicalPhraseParts(liturgyText[0].lines[2]).length === 4,
-    "Line-by-line view should split grouped lines into logical annotation phrases."
+    getLogicalPhraseParts(liturgyText[0].verses[2].phrases).length === 4,
+    "Line-by-line view should split grouped verses into logical annotation phrases."
   );
   console.assert(
-    liturgyText.some(function hasAntiphons(block) { return block.title === "Antiphons"; }),
+    liturgyText.some(function hasAntiphons(section) { return section.section === "Antiphons"; }),
     "Reader should include an Antiphons section."
   );
   console.assert(
-    liturgyText.find(function findAntiphons(block) { return block.title === "Antiphons"; }).lines.length === 1,
-    "Antiphons should render as one grouped paragraph."
+    liturgyText.find(function findAntiphons(section) { return section.section === "Antiphons"; }).verses.length === 10,
+    "Antiphons should have 10 verses."
   );
-  console.assert(liturgyText[0].title === "Litany of Peace", "First reader section should be titled Litany of Peace.");
+  console.assert(liturgyText[0].section === "Litany of Peace", "First reader section should be titled Litany of Peace.");
   console.assert(flashcardCsv.startsWith('"front","back"'), "CSV should include a flashcard header row.");
   console.assert(annotationCsv.startsWith('"id","section","arabic_voweled"'), "Annotations CSV should include database headers.");
   console.assert(annotationCsv.includes("\n"), "Annotations CSV should contain newline-separated rows.");

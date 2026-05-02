@@ -1,112 +1,55 @@
 const annotations = {
-  "antiphon-001": {
-    section: "Antiphons",
-    arabicVoweled: "اَلَّذِي لَمْ يَزَلْ غَيْرَ فَائِتٍ",
-    arabicPlain: "الذي لم يزل غير فائت",
-    translation: "who has not ceased being deathless",
-    literal: "who has not ceased, not dying",
-    unit: "Unit 2",
-    lesson: "Antiphons",
+  // ── Roles ─────────────────────────────────────────────────────────────────
+  "role-deacon": {
+    section: "Roles",
+    arabicVoweled: "الشَمَّاسْ",
+    arabicPlain: "الشماس",
+    translation: "Deacon",
+    literal: "The Deacon",
+    unit: "Roles",
+    lesson: "Roles",
     step: 1,
-    deck: "Antiphons",
-    tags: ["antiphon"]
+    deck: "Roles",
+    tags: ["role"]
   },
-  "antiphon-002": {
-    section: "Antiphons",
-    arabicVoweled: "وَقَبِلْتَ أَنْ تَتَجَسَّدَ مِنْ أَجْلِ خَلاصِنَا",
-    arabicPlain: "وقبلت ان تتجسد من اجل خلاصنا",
-    translation: "You accepted to become incarnate for our salvation",
-    literal: "you indeed accepted to become flesh for our salvation",
-    unit: "Unit 2",
-    lesson: "Antiphons",
+  "role-priest": {
+    section: "Roles",
+    arabicVoweled: "الكاهِنْ",
+    arabicPlain: "الكاهن",
+    translation: "Priest",
+    literal: "The Priest",
+    unit: "Roles",
+    lesson: "Roles",
     step: 2,
-    deck: "Antiphons",
-    tags: ["incarnation"]
+    deck: "Roles",
+    tags: ["role"]
   },
-  "antiphon-003": {
-    section: "Antiphons",
-    arabicVoweled: "مِنَ الْقِدِّيسَةِ وَالِدَةِ الإِلَهِ الدَّائِمَةِ الْبَتُولِيَّةِ مَرْيَمَ",
-    arabicPlain: "من القديسة والدة الاله الدائمة البتولية مريم",
-    translation: "from the holy Theotokos, ever-virgin Mary",
-    literal: "from the holy Mother of God, ever-virgin Mary",
-    unit: "Unit 2",
-    lesson: "Antiphons",
+  "role-choir": {
+    section: "Roles",
+    arabicVoweled: "الجَوْقة",
+    arabicPlain: "الجوقة",
+    translation: "Choir",
+    literal: "The Choir",
+    unit: "Roles",
+    lesson: "Roles",
     step: 3,
-    deck: "Antiphons",
-    tags: ["theotokos"]
+    deck: "Roles",
+    tags: ["role"]
   },
-  "antiphon-004": {
-    section: "Antiphons",
-    arabicVoweled: "وَتَأَنَّسْتَ بِغَيْرِ اسْتِحَالَةٍ",
-    arabicPlain: "وتأنست بغير استحالة",
-    translation: "and became man without change",
-    literal: "and you became human without alteration",
-    unit: "Unit 2",
-    lesson: "Antiphons",
+  "role-all": {
+    section: "Roles",
+    arabicVoweled: "الكُلُّ",
+    arabicPlain: "الكل",
+    translation: "All",
+    literal: "Everyone",
+    unit: "Roles",
+    lesson: "Roles",
     step: 4,
-    deck: "Antiphons",
-    tags: ["incarnation"]
+    deck: "Roles",
+    tags: ["role"]
   },
-  "antiphon-005": {
-    section: "Antiphons",
-    arabicVoweled: "وَصُلِبْتَ أَيُّهَا الْمَسِيحُ إِلَهُنَا",
-    arabicPlain: "وصلبت ايها المسيح الهنا",
-    translation: "and were crucified, O Christ our God",
-    literal: "and you were crucified, O Christ our God",
-    unit: "Unit 2",
-    lesson: "Antiphons",
-    step: 5,
-    deck: "Antiphons",
-    tags: ["crucifixion"]
-  },
-  "antiphon-006": {
-    section: "Antiphons",
-    arabicVoweled: "وَبِمَوْتِكَ وَطِئْتَ الْمَوْتَ",
-    arabicPlain: "وبموتك وطئت الموت",
-    translation: "and by Your death You trampled death",
-    literal: "and by your death you trampled death",
-    unit: "Unit 2",
-    lesson: "Antiphons",
-    step: 6,
-    deck: "Antiphons",
-    tags: ["resurrection"]
-  },
-  "antiphon-007": {
-    section: "Antiphons",
-    arabicVoweled: "وَأَنْتَ لَمْ تَزَلْ أَحَدَ الثَّالُوثِ الْقُدُسِ",
-    arabicPlain: "وانت لم تزل احد الثالوث القدس",
-    translation: "and You remain one of the Holy Trinity",
-    literal: "and you have not ceased being one of the Holy Trinity",
-    unit: "Unit 2",
-    lesson: "Antiphons",
-    step: 7,
-    deck: "Antiphons",
-    tags: ["trinity"]
-  },
-  "antiphon-008": {
-    section: "Antiphons",
-    arabicVoweled: "الْمُمَجَّدُ مَعَ الآبِ وَالرُّوحِ الْقُدُسِ",
-    arabicPlain: "الممجد مع الاب والروح القدس",
-    translation: "glorified with the Father and the Holy Spirit",
-    literal: "glorified with the Father and the Holy Spirit",
-    unit: "Unit 2",
-    lesson: "Antiphons",
-    step: 8,
-    deck: "Antiphons",
-    tags: ["trinity"]
-  },
-  "antiphon-009": {
-    section: "Antiphons",
-    arabicVoweled: "خَلِّصْنَا",
-    arabicPlain: "خلصنا",
-    translation: "save us",
-    literal: "save us",
-    unit: "Unit 2",
-    lesson: "Antiphons",
-    step: 9,
-    deck: "Antiphons",
-    tags: ["petition"]
-  },
+
+  // ── Litany of Peace ──────────────────────────────────────────────────────
   "peace-001": {
     section: "Litany of Peace",
     arabicVoweled: "بِسَلامٍ",
@@ -238,6 +181,164 @@ const annotations = {
     step: 1,
     deck: "Common Litany Phrases",
     tags: ["verbs", "mercy", "grace"]
+  },
+
+  // ── Antiphons ─────────────────────────────────────────────────────────────
+  "word-of-god-001": {
+    section: "Antiphons",
+    arabicVoweled: "يا كَلِمَةَ اللّٰهِ",
+    arabicPlain: "يا كلمة الله",
+    translation: "O Word of God",
+    literal: "O Word of God",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 1,
+    deck: "Antiphons",
+    tags: ["address", "word-of-god", "christology"]
+  },
+  "only-begotten-001": {
+    section: "Antiphons",
+    arabicVoweled: "الْابْنَ الْوَحيدَ",
+    arabicPlain: "الابن الوحيد",
+    translation: "the Only-Begotten Son",
+    literal: "the Only-Begotten Son",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 2,
+    deck: "Antiphons",
+    tags: ["christology", "only-begotten"]
+  },
+  "deathless-001": {
+    section: "Antiphons",
+    arabicVoweled: "الَّذي لَمْ يَزَلْ غَيرَ مائِتٍ",
+    arabicPlain: "الذي لم يزل غير مائت",
+    translation: "who has not ceased being deathless",
+    literal: "who has not ceased, not dying",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 3,
+    deck: "Antiphons",
+    tags: ["christology", "deathless"]
+  },
+  "accepted-incarnate-001": {
+    section: "Antiphons",
+    arabicVoweled: "لَقَدْ قَبِلْتَ أنْ تَتَجَسَّدَ",
+    arabicPlain: "لقد قبلت ان تتجسد",
+    translation: "you accepted to become incarnate",
+    literal: "you indeed accepted to become flesh",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 4,
+    deck: "Antiphons",
+    tags: ["incarnation"]
+  },
+  "for-our-salvation-001": {
+    section: "Antiphons",
+    arabicVoweled: "مِنْ أجْلِ خَلاصِنا",
+    arabicPlain: "من اجل خلاصنا",
+    translation: "for our salvation",
+    literal: "for the sake of our salvation",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 5,
+    deck: "Antiphons",
+    tags: ["salvation", "incarnation"]
+  },
+  "from-theotokos-001": {
+    section: "Antiphons",
+    arabicVoweled: "مِنَ القدّيسةِ والِدةِ الإِلهِ",
+    arabicPlain: "من القديسة والدة الاله",
+    translation: "from the holy Mother of God",
+    literal: "from the holy Mother of God",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 6,
+    deck: "Antiphons",
+    tags: ["theotokos", "incarnation"]
+  },
+  "ever-virgin-mary-001": {
+    section: "Antiphons",
+    arabicVoweled: "الدّائمةِ البَتوليَّةِ مَرْيَمَ",
+    arabicPlain: "الدائمة البتولية مريم",
+    translation: "the ever-virgin Mary",
+    literal: "the ever-virgin Mary",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 7,
+    deck: "Antiphons",
+    tags: ["theotokos", "mary"]
+  },
+  "became-man-001": {
+    section: "Antiphons",
+    arabicVoweled: "وَتأَنَّسْتَ بِغَيْرِ اسْتِحالَةٍ",
+    arabicPlain: "وتأنست بغير استحالة",
+    translation: "and became man without change",
+    literal: "and you became human without alteration",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 8,
+    deck: "Antiphons",
+    tags: ["incarnation", "christology"]
+  },
+  "crucified-001": {
+    section: "Antiphons",
+    arabicVoweled: "وَصُلِبْتَ أَيُّها الْمَسيحُ إِلَهُنا",
+    arabicPlain: "وصلبت ايها المسيح الهنا",
+    translation: "and were crucified, O Christ our God",
+    literal: "and you were crucified, O Christ our God",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 9,
+    deck: "Antiphons",
+    tags: ["crucifixion"]
+  },
+  "trampled-death-001": {
+    section: "Antiphons",
+    arabicVoweled: "وَبِمَوْتِكَ وَطِئْتَ الْمَوْتَ",
+    arabicPlain: "وبموتك وطئت الموت",
+    translation: "and by Your death You trampled death",
+    literal: "and by your death you trampled death",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 10,
+    deck: "Antiphons",
+    tags: ["resurrection", "death"]
+  },
+  "one-of-trinity-001": {
+    section: "Antiphons",
+    arabicVoweled: "وَأَنْتَ لَمْ تَزَلْ أَحَدَ الثّالوثِ الْقَدّوسِ",
+    arabicPlain: "وانت لم تزل احد الثالوث القدوس",
+    translation: "and You remain one of the Holy Trinity",
+    literal: "and you have not ceased being one of the Holy Trinity",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 11,
+    deck: "Antiphons",
+    tags: ["trinity"]
+  },
+  "glorified-with-father-001": {
+    section: "Antiphons",
+    arabicVoweled: "الْمُمَجَّدَ مَعَ الْآبِ والرّوحِ الْقُدُسِ",
+    arabicPlain: "الممجد مع الاب والروح القدس",
+    translation: "glorified with the Father and the Holy Spirit",
+    literal: "glorified with the Father and the Holy Spirit",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 12,
+    deck: "Antiphons",
+    tags: ["trinity"]
+  },
+  "save-us-001": {
+    section: "Antiphons",
+    arabicVoweled: "خَلِّصْنا",
+    arabicPlain: "خلصنا",
+    translation: "save us",
+    literal: "save us",
+    unit: "Unit 2",
+    lesson: "Antiphons",
+    step: 13,
+    deck: "Antiphons",
+    tags: ["petition"]
   }
 };
 

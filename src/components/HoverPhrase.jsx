@@ -7,7 +7,7 @@ const h = React.createElement;
 export default function HoverPhrase(props) {
   const [isOpen, setIsOpen] = useState(false);
   const part = props.part;
-  const annotation = part.annotationId ? annotations[part.annotationId] : null;
+  const annotation = part.id ? annotations[part.id] : null;
 
   if (!annotation) return h("span", null, part.text);
 
