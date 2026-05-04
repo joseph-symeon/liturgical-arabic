@@ -25,6 +25,8 @@ export default function SpeakerBlock(props) {
         line: group.phrases,
         arabicMode: props.arabicMode,
         speechRate: props.speechRate,
+        arabicFontFamily: props.arabicFontFamily,
+        arabicFontWeight: props.arabicFontWeight,
         showSpeaker: true
       });
     });
@@ -41,6 +43,8 @@ export default function SpeakerBlock(props) {
         line: verse.phrases,
         arabicMode: props.arabicMode,
         speechRate: props.speechRate,
+        arabicFontFamily: props.arabicFontFamily,
+        arabicFontWeight: props.arabicFontWeight,
         showSpeaker
       });
     });
@@ -49,12 +53,12 @@ export default function SpeakerBlock(props) {
   return h(
     "section",
     null,
-    section.section
+    section.section && props.showSectionHeading !== false
       ? h(
           "h2",
           {
             className:
-              "mx-auto mt-10 mb-4 max-w-4xl text-center text-lg font-semibold text-amber-800",
+              "liturgical-red mt-8 mb-4 text-[17px] font-semibold",
             dir: "ltr"
           },
           section.section
@@ -62,7 +66,7 @@ export default function SpeakerBlock(props) {
       : null,
     h(
       "div",
-      { className: "mx-auto max-w-4xl py-2 text-right", dir: "rtl" },
+      { className: "py-2 text-right", dir: "rtl" },
       isLineByLine ? renderLineByLine() : renderGrouped()
     )
   );

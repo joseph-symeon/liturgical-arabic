@@ -13,15 +13,12 @@ export function rowsToCsv(rows) {
 }
 
 export function buildFlashcardCsv(cards) {
-  const header = ["front", "back", "literal", "deck", "section", "unit", "tags"];
+  const header = ["front", "back", "literal", "tags"];
   const rows = cards.map(function mapCard(card) {
     return [
-      stripArabicDiacritics(card.arabicVoweled || card.arabicPlain),
+      stripArabicDiacritics(card.arabic_voweled || card.arabic_unvoweled),
       card.translation,
       card.literal,
-      card.deck,
-      card.section,
-      card.unit,
       card.tags.join(" ")
     ];
   });
@@ -29,31 +26,14 @@ export function buildFlashcardCsv(cards) {
 }
 
 export function buildAnnotationsCsv(cards) {
-  const header = [
-    "id",
-    "section",
-    "arabic_voweled",
-    "arabic_plain",
-    "translation",
-    "literal",
-    "unit",
-    "lesson",
-    "step",
-    "deck",
-    "tags"
-  ];
+  const header = ["id", "arabic_voweled", "arabic_unvoweled", "translation", "literal", "tags"];
   const rows = cards.map(function mapCard(card) {
     return [
       card.id,
-      card.section,
-      card.arabicVoweled || card.arabicPlain,
-      card.arabicPlain,
+      card.arabic_voweled,
+      card.arabic_unvoweled,
       card.translation,
       card.literal,
-      card.unit,
-      card.lesson,
-      card.step,
-      card.deck,
       card.tags.join(", ")
     ];
   });
@@ -73,9 +53,9 @@ export function downloadCsv(filename, csv) {
 }
 
 export function downloadAnnotationsDatabase(cards) {
-  downloadCsv("annotations-database.csv", buildAnnotationsCsv(cards));
+  downloadCsv("phrases-database.csv", buildAnnotationsCsv(cards));
 }
 
 export function downloadFlashcards(cards) {
-  downloadCsv("litany-of-peace-flashcards.csv", buildFlashcardCsv(cards));
+  downloadCsv("flashcards.csv", buildFlashcardCsv(cards));
 }

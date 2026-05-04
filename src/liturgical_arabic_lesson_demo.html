@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Loop Clip Demo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 0 16px;
+        line-height: 1.8;
+        background: #fff;
+        color: #111;
+      }
+
+      h1 { margin-bottom: 8px; }
+
+      .subtitle {
+        margin-top: 0;
+        margin-bottom: 28px;
+        color: #555;
+      }
+
+      .arabic {
+        font-size: 24px;
+        direction: rtl;
+        text-align: right;
+        font-family: "Amiri", "Scheherazade", serif;
+        line-height: 1.35;
+        margin-bottom: 28px;
+      }
+
+      .line {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .phrase {
+        position: relative;
+        cursor: pointer;
+        padding: 0 2px;
+      }
+
+      .phrase.active {
+        border-bottom: 1px dotted currentColor;
+      }
+
+      .phrase.active::after {
+        content: attr(data-translation);
+        position: absolute;
+        right: 0;
+        bottom: 110%;
+        background: #222;
+        color: #fff;
+        padding: 6px 8px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-family: Arial, sans-serif;
+        white-space: nowrap;
+        z-index: 20;
+      }
+
+      .youtube-hidden {
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        opacity: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .clip-player {
+        max-width: 460px;
+        margin-top: 24px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        position: relative;
+      }
+
+      .icon-button {
+        flex: 0 0 36px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: #fff;
+      }
+
+      .icon-button svg {
+        width: 16px;
+        height: 16px;
+        fill: #333;
+      }
+
+      input[type="range"] {
+        flex: 1 1 auto;
+        min-width: 0;
+        accent-color: #555;
+      }
+
+      .time {
+        flex: 0 0 auto;
+        font-size: 13px;
+        color: #555;
+        white-space: nowrap;
+      }
+
+      .speed-button {
+        flex: 0 0 42px;
+        width: 42px;
+        min-width: 42px;
+        max-width: 42px;
+        font-size: 12px;
+        padding: 4px 2px;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: #fff;
+      }
+
+      .speed-menu {
+        display: none;
+        position: absolute;
+        right: 34px;
+        bottom: 44px;
+        width: 130px;
+        padding: 10px;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        z-index: 10;
+      }
+
+      .speed-menu.open {
+        display: block;
+      }
+
+      .speed-title {
+        font-size: 12px;
+        color: #555;
+        margin-bottom: 8px;
+      }
+
+      .speed-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .speed-adjust {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+      }
+
+      .speed-value {
+        font-size: 13px;
+        min-width: 42px;
+        text-align: center;
+      }
+
+      .youtube-link {
+        flex: 0 0 28px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .youtube-link svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #111;
+          color: #eee;
+        }
+
+        .subtitle,
+        .time,
+        .speed-title {
+          color: #aaa;
+        }
+
+        .clip-player,
+        .speed-menu {
+          background: #1b1b1b;
+          border-color: #333;
+        }
+
+        .icon-button,
+        .speed-button,
+        .speed-adjust {
+          background: #222;
+          border-color: #444;
+          color: #eee;
+        }
+
+        .icon-button svg {
+          fill: #eee;
+        }
+
+        input[type="range"] {
+          accent-color: #aaa;
+        }
+
+        .phrase.active::after {
+          background: #333;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>The Antiphons</h1>
+    <p class="subtitle">Only-begotten Son and Word of God</p>
+
+    <div class="arabic">
+      <span class="line">
+        <span class="phrase" data-translation="O Word of God">يا كَلِمَةَ اللّٰهِ</span>
+        <span class="phrase" data-translation="the only-begotten Son">الْابْنَ الْوَحيدَ</span>
+      </span>
+
+      <span class="line">
+        <span class="phrase" data-translation="who has not ceased being deathless">الَّذي لَمْ يَزَلْ غَيرَ مائِتٍ</span>
+      </span>
+
+      <span class="line">
+        <span class="phrase" data-translation="You accepted to become incarnate">لَقَدْ قَبِلْتَ أنْ تَتَجَسَّدَ</span>
+        <span class="phrase" data-translation="for our salvation">مِنْ أجْلِ خَلاصِنا</span>
+      </span>
+
+      <span class="line">
+        <span class="phrase" data-translation="from the holy Theotokos">مِنَ القدّيسةِ والِدةِ الإِلهِ</span>
+        <span class="phrase" data-translation="ever-virgin Mary">الدّائمةِ البَتوليَّةِ مَرْيَمَ</span>
+      </span>
+    </div>
+
+    <div class="youtube-hidden">
+      <div id="player"></div>
+    </div>
+
+    <div class="clip-player">
+      <div class="controls">
+        <button id="playPause" class="icon-button">
+          <svg id="playIcon" viewBox="0 0 24 24">
+            <polygon points="6,4 20,12 6,20"></polygon>
+          </svg>
+          <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+
+        <input id="progress" type="range" min="0" step="0.05" value="0" />
+
+        <div class="time">
+          <span id="currentTime">0:00</span> /
+          <span id="duration">0:00</span>
+        </div>
+
+        <button id="speedButton" class="speed-button">1×</button>
+
+        <div id="speedMenu" class="speed-menu">
+          <div class="speed-title">Speed</div>
+          <div class="speed-row">
+            <button id="decreaseSpeed" class="speed-adjust">−</button>
+            <div id="speedValue" class="speed-value">1×</div>
+            <button id="increaseSpeed" class="speed-adjust">+</button>
+          </div>
+        </div>
+
+        <a id="ytLink" class="youtube-link" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="5" width="20" height="14" rx="4" fill="#ff0000"></rect>
+            <polygon points="10,8 16,12 10,16" fill="#fff"></polygon>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      const phrases = document.querySelectorAll('.phrase');
+
+      phrases.forEach((phrase) => {
+        phrase.addEventListener('click', (event) => {
+          event.stopPropagation();
+          phrases.forEach((p) => p.classList.remove('active'));
+          phrase.classList.add('active');
+        });
+      });
+
+      document.body.addEventListener('click', () => {
+        phrases.forEach((p) => p.classList.remove('active'));
+      });
+
+      const clip = {
+        videoId: '-dufaXx7Hm0',
+        start: 151,
+        end: 180,
+        playbackRate: 1.0
+      };
+
+      const clipDuration = clip.end - clip.start;
+
+      let player;
+      let interval;
+      let isSeeking = false;
+      let playbackRate = clip.playbackRate;
+
+      const btn = document.getElementById('playPause');
+      const progress = document.getElementById('progress');
+      const currentTimeEl = document.getElementById('currentTime');
+      const durationEl = document.getElementById('duration');
+      const ytLink = document.getElementById('ytLink');
+      const playIcon = document.getElementById('playIcon');
+      const pauseIcon = document.getElementById('pauseIcon');
+
+      const speedButton = document.getElementById('speedButton');
+      const speedMenu = document.getElementById('speedMenu');
+      const speedValue = document.getElementById('speedValue');
+      const decreaseSpeed = document.getElementById('decreaseSpeed');
+      const increaseSpeed = document.getElementById('increaseSpeed');
+
+      progress.max = clipDuration;
+      durationEl.textContent = formatTime(clipDuration);
+      ytLink.href = `https://www.youtube.com/watch?v=${clip.videoId}&t=${clip.start}s`;
+
+      updateSpeedDisplay();
+
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.body.appendChild(tag);
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          width: '1',
+          height: '1',
+          videoId: clip.videoId,
+          playerVars: {
+            controls: 0,
+            modestbranding: 1,
+            rel: 0,
+            iv_load_policy: 3,
+            playsinline: 1
+          },
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: onStateChange
+          }
+        });
+      }
+
+      function onPlayerReady(event) {
+        event.target.seekTo(clip.start, true);
+        event.target.setPlaybackRate(playbackRate);
+      }
+
+      function onStateChange(event) {
+        if (event.data === YT.PlayerState.PLAYING) {
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = 'block';
+          startLoop();
+        }
+
+        if (
+          event.data === YT.PlayerState.PAUSED ||
+          event.data === YT.PlayerState.ENDED
+        ) {
+          playIcon.style.display = 'block';
+          pauseIcon.style.display = 'none';
+        }
+      }
+
+      btn.onclick = () => {
+        const state = player.getPlayerState();
+
+        if (state === YT.PlayerState.PLAYING) {
+          player.pauseVideo();
+        } else {
+          player.seekTo(clip.start + Number(progress.value), true);
+          player.playVideo();
+        }
+      };
+
+      speedButton.onclick = () => {
+        speedMenu.classList.toggle('open');
+      };
+
+      decreaseSpeed.onclick = () => adjustSpeed(-0.05);
+      increaseSpeed.onclick = () => adjustSpeed(0.05);
+
+      function adjustSpeed(delta) {
+        playbackRate = Math.round((playbackRate + delta) * 100) / 100;
+
+        if (playbackRate < 0.25) playbackRate = 0.25;
+        if (playbackRate > 2) playbackRate = 2;
+
+        player.setPlaybackRate(playbackRate);
+        updateSpeedDisplay();
+      }
+
+      function updateSpeedDisplay() {
+        const display = Number(playbackRate.toFixed(2)).toString() + '×';
+        speedButton.textContent = display;
+        speedValue.textContent = display;
+      }
+
+      document.addEventListener('click', (event) => {
+        const inside =
+          speedButton.contains(event.target) ||
+          speedMenu.contains(event.target);
+
+        if (!inside) {
+          speedMenu.classList.remove('open');
+        }
+      });
+
+      progress.oninput = () => {
+        isSeeking = true;
+        currentTimeEl.textContent = formatTime(Number(progress.value));
+      };
+
+      progress.onchange = () => {
+        player.seekTo(clip.start + Number(progress.value), true);
+        isSeeking = false;
+      };
+
+      function startLoop() {
+        if (interval) clearInterval(interval);
+
+        interval = setInterval(() => {
+          if (!player || isSeeking) return;
+
+          const absoluteTime = player.getCurrentTime();
+
+          if (absoluteTime >= clip.end) {
+            player.seekTo(clip.start, true);
+            progress.value = 0;
+            currentTimeEl.textContent = formatTime(0);
+            return;
+          }
+
+          const relativeTime = absoluteTime - clip.start;
+
+          if (relativeTime >= 0 && relativeTime <= clipDuration) {
+            progress.value = relativeTime;
+            currentTimeEl.textContent = formatTime(relativeTime);
+          }
+        }, 100);
+      }
+
+      function formatTime(seconds) {
+        seconds = Math.max(0, Math.floor(seconds));
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+      }
+    </script>
+  </body>
+</html>

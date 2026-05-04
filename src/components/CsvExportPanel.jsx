@@ -28,7 +28,7 @@ export default function CsvExportPanel(props) {
       h(
         "button",
         {
-          className: "rounded-xl bg-stone-950 px-4 py-2 text-sm text-white hover:bg-stone-800",
+          className: "rounded-xl bg-stone-950 dark:bg-stone-200 px-4 py-2 text-sm text-white dark:text-stone-900 hover:bg-stone-800 dark:hover:bg-white",
           onClick: props.onDownload,
           type: "button"
         },
@@ -38,7 +38,7 @@ export default function CsvExportPanel(props) {
         "button",
         {
           className:
-            "rounded-xl border border-stone-300 px-4 py-2 text-sm text-stone-700 hover:bg-white",
+            "rounded-xl border border-stone-300 dark:border-stone-600 px-4 py-2 text-sm text-stone-700 dark:text-stone-300 hover:bg-white dark:hover:bg-stone-700",
           onClick: showAndSelectCsv,
           type: "button"
         },
@@ -48,7 +48,7 @@ export default function CsvExportPanel(props) {
         "button",
         {
           className:
-            "rounded-xl border border-stone-300 px-4 py-2 text-sm text-stone-700 hover:bg-white",
+            "rounded-xl border border-stone-300 dark:border-stone-600 px-4 py-2 text-sm text-stone-700 dark:text-stone-300 hover:bg-white dark:hover:bg-stone-700",
           onClick: function toggleCsv() {
             setIsOpen(function updateIsOpen(v) { return !v; });
           },
@@ -57,12 +57,12 @@ export default function CsvExportPanel(props) {
         isOpen ? "Hide CSV" : "Show CSV"
       )
     ),
-    notice ? h("p", { className: "mt-2 text-sm text-stone-500" }, notice) : null,
+    notice ? h("p", { className: "mt-2 text-sm text-stone-500 dark:text-stone-400" }, notice) : null,
     isOpen
       ? h("textarea", {
           ref: textAreaRef,
           className:
-            "mt-3 h-64 w-full rounded-xl border border-stone-300 bg-white p-3 font-mono text-xs text-stone-800",
+            "mt-3 h-64 w-full rounded-xl border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-900 p-3 font-mono text-xs text-stone-800 dark:text-stone-200",
           readOnly: true,
           value: csv
         })

@@ -11,15 +11,15 @@ export default function FlashcardPreview(props) {
 
   return h(
     "section",
-    { className: "mt-10 rounded-2xl border border-stone-200 bg-stone-50 p-5", dir: "ltr" },
+    { className: "mt-10 rounded-2xl border border-stone-200 dark:border-stone-700 bg-stone-50 dark:bg-stone-800 p-5", dir: "ltr" },
     h(
       "div",
       null,
-      h("h2", { className: "text-lg font-semibold text-stone-950" }, "Flashcards from this text"),
+      h("h2", { className: "text-lg font-semibold text-stone-950 dark:text-stone-50" }, "Flashcards from this text"),
       h(
         "p",
-        { className: "mt-1 text-sm text-stone-600" },
-        "These cards are generated from the same annotation data used by the hover translations."
+        { className: "mt-1 text-sm text-stone-600 dark:text-stone-400" },
+        "These cards are generated from the same phrase data used by the hover translations."
       ),
       h(
         "div",
@@ -28,7 +28,7 @@ export default function FlashcardPreview(props) {
           "button",
           {
             className:
-              "rounded-xl border border-stone-300 px-4 py-2 text-sm text-stone-700 hover:bg-white",
+              "rounded-xl border border-stone-300 dark:border-stone-600 px-4 py-2 text-sm text-stone-700 dark:text-stone-300 hover:bg-white dark:hover:bg-stone-700",
             onClick: function togglePreview() {
               setIsOpen(function updateIsOpen(v) { return !v; });
             },
@@ -44,21 +44,14 @@ export default function FlashcardPreview(props) {
             cards.map(function renderCard(card) {
               return h(
                 "div",
-                { key: card.id, className: "rounded-xl border border-stone-200 bg-white p-4" },
+                { key: card.id, className: "rounded-xl border border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 p-4" },
                 h(
                   "p",
                   { className: "text-right text-2xl leading-relaxed", dir: "rtl" },
-                  card.arabicVoweled || card.arabicPlain
+                  card.arabic_voweled || card.arabic_unvoweled
                 ),
-                h("p", { className: "mt-3 font-medium text-stone-950" }, card.translation),
-                h("p", { className: "mt-1 text-sm text-stone-500" }, "Literal: ", card.literal),
-                h(
-                  "p",
-                  { className: "mt-3 text-xs uppercase tracking-wide text-stone-400" },
-                  card.deck,
-                  " · ",
-                  card.unit
-                )
+                h("p", { className: "mt-3 font-medium text-stone-950 dark:text-stone-50" }, card.translation),
+                h("p", { className: "mt-1 text-sm text-stone-500 dark:text-stone-400" }, "Literal: ", card.literal)
               );
             })
           )

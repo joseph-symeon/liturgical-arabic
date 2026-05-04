@@ -8,30 +8,30 @@ export default function ReaderLayoutControls(props) {
     { className: "mb-8 flex justify-center", dir: "ltr" },
     h(
       "div",
-      { className: "inline-flex rounded-full border border-stone-300 bg-stone-100 p-1 text-sm" },
+      { className: "inline-flex rounded-full border border-stone-300 dark:border-stone-600 bg-stone-100 dark:bg-stone-700 p-1 text-sm" },
       h(
         "button",
         {
           className:
-            props.readerLayout === "grouped"
-              ? "rounded-full bg-white px-4 py-2 font-medium shadow-sm"
-              : "rounded-full px-4 py-2 text-stone-600",
-          onClick: function showGrouped() { props.setReaderLayout("grouped"); },
+            props.readerLayout === "paragraph"
+              ? "rounded-full bg-white dark:bg-stone-600 dark:text-stone-50 px-4 py-2 font-medium shadow-sm"
+              : "rounded-full px-4 py-2 text-stone-600 dark:text-stone-400",
+          onClick: function showParagraphs() { props.setReaderLayout("paragraph"); },
           type: "button"
         },
-        "Grouped"
+        "By paragraph"
       ),
       h(
         "button",
         {
           className:
             props.readerLayout === "line"
-              ? "rounded-full bg-white px-4 py-2 font-medium shadow-sm"
-              : "rounded-full px-4 py-2 text-stone-600",
+              ? "rounded-full bg-white dark:bg-stone-600 dark:text-stone-50 px-4 py-2 font-medium shadow-sm"
+              : "rounded-full px-4 py-2 text-stone-600 dark:text-stone-400",
           onClick: function showLineByLine() { props.setReaderLayout("line"); },
           type: "button"
         },
-        "Line by line"
+        "By line"
       )
     )
   );

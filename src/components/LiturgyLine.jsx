@@ -4,9 +4,15 @@ import HoverPhrase from "./HoverPhrase.jsx";
 const h = React.createElement;
 
 export default function LiturgyLine(props) {
+  const arabicFontFamily = props.arabicFontFamily || '"Noto Naskh Arabic", serif';
+  const arabicFontWeight = props.arabicFontWeight || "400";
+
   return h(
     "span",
-    { className: "text-2xl leading-loose text-stone-950 md:text-3xl" },
+    {
+      className: "text-2xl leading-loose text-stone-950 dark:text-stone-50 md:text-3xl",
+      style: { fontFamily: arabicFontFamily, fontWeight: arabicFontWeight }
+    },
     props.line.map(function renderPart(part, partIndex) {
       return h(HoverPhrase, {
         key: (part.id || part.text || "part") + partIndex,

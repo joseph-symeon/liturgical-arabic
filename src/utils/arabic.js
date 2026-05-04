@@ -4,20 +4,20 @@ export function safeString(value) {
 }
 
 export function stripArabicDiacritics(text) {
-  return safeString(text).replace(/[ً-ٰٟۖ-ۭ]/g, "");
+  return safeString(text).replace(/[ً-ٰٟۖ-ۭ]/g, "");
 }
 
-export function getArabicText(annotation, arabicMode) {
-  const voweled = annotation.arabicVoweled || annotation.arabicPlain;
+export function getArabicText(phrase, arabicMode) {
+  const voweled = phrase.arabic_voweled || phrase.arabic_unvoweled;
   if (arabicMode === "plain") return stripArabicDiacritics(voweled);
   return voweled;
 }
 
-export function getLineText(phrases, annotations, arabicMode) {
+export function getLineText(phrases, phrasesMap, arabicMode) {
   return phrases
     .map(function mapPart(part) {
-      if (part.id && annotations[part.id]) {
-        return getArabicText(annotations[part.id], arabicMode);
+      if (part.id && phrasesMap[part.id]) {
+        return getArabicText(phrasesMap[part.id], arabicMode);
       }
       return part.text || "";
     })

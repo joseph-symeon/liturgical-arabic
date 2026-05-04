@@ -1,73 +1,94 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import InteractiveText from "./InteractiveText.jsx";
 import LiturgyLine from "./LiturgyLine.jsx";
-import annotations from "../data/annotations.js";
-import { getArabicText, speakArabic } from "../utils/arabic.js";
+import PhraseTooltip from "./PhraseTooltip.jsx";
+import phrases from "../data/phrases.js";
+import { getArabicText } from "../utils/arabic.js";
 
 const h = React.createElement;
+const STACKED_SPEAKER_WIDTH = 520;
 
 export default function SpeakerLine(props) {
-  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [isStacked, setIsStacked] = useState(false);
+  const containerRef = useRef(null);
   const showSpeaker = props.showSpeaker !== false;
-  const annotation = annotations[props.speaker];
-  const speakerLabel = annotation
-    ? getArabicText(annotation, props.arabicMode)
+  const phrase = phrases[props.speaker];
+  const speakerLabel = phrase
+    ? getArabicText(phrase, props.arabicMode)
     : props.speaker;
+  const arabicFontFamily = props.arabicFontFamily || '"Noto Naskh Arabic", serif';
+
+  useEffect(() => {
+    if (!containerRef.current || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(function handleResize(entries) {
+      const width = entries[0]?.contentRect?.width || 0;
+      setIsStacked(width > 0 && width < STACKED_SPEAKER_WIDTH);
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  function renderSpeaker() {
+    return h(
+      "span",
+      {
+        className: "liturgical-red relative text-2xl leading-loose md:text-3xl",
+        style: {
+          flex: isStacked ? "0 0 auto" : "0 0 90px",
+          display: isStacked && !showSpeaker ? "none" : "block",
+          marginBottom: isStacked ? "2px" : 0,
+          textAlign: "right",
+          whiteSpace: "nowrap",
+          visibility: showSpeaker ? "visible" : "hidden",
+          fontFamily: arabicFontFamily,
+          fontWeight: 500
+        }
+      },
+      showSpeaker && phrase
+        ? h(
+            InteractiveText,
+            {
+              spokenText: phrase.arabic_voweled || phrase.arabic_unvoweled,
+              speechRate: props.speechRate,
+              tooltip: h(PhraseTooltip, { phrase })
+            },
+            speakerLabel,
+            ":"
+          )
+        : showSpeaker ? speakerLabel + ":" : ""
+    );
+  }
 
   return h(
     "div",
     {
-      className: "my-2 text-right",
+      ref: containerRef,
+      className: "text-right",
       dir: "rtl",
-      style: { display: "flex", flexDirection: "row", alignItems: "flex-start" }
+      style: {
+        display: "flex",
+        flexDirection: isStacked ? "column" : "row",
+        alignItems: "flex-start"
+      }
     },
-    h(
-      "span",
-      {
-        className: "relative text-2xl leading-loose font-semibold text-red-700 md:text-3xl",
-        style: {
-          flex: "0 0 90px",
-          textAlign: "right",
-          whiteSpace: "nowrap",
-          visibility: showSpeaker ? "visible" : "hidden"
-        }
-      },
-      showSpeaker && annotation
-        ? h(
-            "span",
-            {
-              className:
-                "cursor-default underline decoration-dotted decoration-red-300 underline-offset-4",
-              onMouseEnter: function () { setTooltipOpen(true); },
-              onMouseLeave: function () { setTooltipOpen(false); },
-              onClick: function () { speakArabic(annotation.arabicVoweled, props.speechRate); }
-            },
-            speakerLabel,
-            ":",
-            tooltipOpen
-              ? h(
-                  "span",
-                  {
-                    className:
-                      "absolute right-0 top-full z-20 mt-2 w-36 rounded-xl border border-stone-200 bg-white p-3 text-left text-sm font-normal leading-normal text-stone-900 shadow-lg",
-                    dir: "ltr"
-                  },
-                  h("span", { className: "block font-medium" }, "Translation: ", annotation.translation),
-                  h("span", { className: "mt-1 block text-stone-500" }, "Literal: ", annotation.literal)
-                )
-              : null
-          )
-        : showSpeaker ? speakerLabel + ":" : ""
-    ),
+    renderSpeaker(),
     h(
       "div",
       {
         className: "text-right",
-        style: { flex: 1, paddingRight: "8px", minWidth: 0 }
+        style: {
+          flex: 1,
+          paddingRight: isStacked ? "18px" : "8px",
+          minWidth: 0,
+          width: isStacked ? "100%" : "auto"
+        }
       },
       h(LiturgyLine, {
         line: props.line,
         arabicMode: props.arabicMode,
-        speechRate: props.speechRate
+        speechRate: props.speechRate,
+        arabicFontFamily: props.arabicFontFamily,
+        arabicFontWeight: props.arabicFontWeight
       })
     )
   );

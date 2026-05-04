@@ -5,7 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arabic Liturgy Reader</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Lateef:wght@300;400;600&family=Noto+Naskh+Arabic:wght@400;500;600&family=Noto+Sans+Arabic:wght@300;400;600&family=Scheherazade+New:wght@400;600&display=swap" rel="stylesheet">
   </head>
+  <style>
+    :root {
+      --liturgical-red: #b91c1c;
+      --liturgical-red-decoration: #fca5a5;
+    }
+
+    .liturgical-red {
+      color: var(--liturgical-red);
+    }
+
+    .liturgical-red-decoration {
+      text-decoration-color: var(--liturgical-red-decoration);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --liturgical-red: #f87171;
+        --liturgical-red-decoration: #b91c1c;
+      }
+
+      body { background: #1c1917; }
+    }
+  </style>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

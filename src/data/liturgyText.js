@@ -1,11 +1,16 @@
 const liturgyText = [
   {
     section: "Litany of Peace",
+    section_title_phrase: "section-litany-of-peace",
     verses: [
       {
         verse: 1,
         speaker: "role-deacon",
-        phrases: [{ id: "peace-001" }, { id: "petition-001" }]
+        phrases: [
+          { id: "peace-001" },
+          { text: " " },
+          { id: "petition-001" }
+        ]
       },
       {
         verse: 2,
@@ -61,6 +66,7 @@ const liturgyText = [
   },
   {
     section: "Antiphons",
+    section_title_phrase: "section-antiphons",
     verses: [
       {
         verse: 8,
