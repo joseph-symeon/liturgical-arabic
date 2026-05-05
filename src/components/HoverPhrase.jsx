@@ -13,7 +13,7 @@ export default function HoverPhrase(props) {
   if (!phrase) return h("span", null, part.text);
 
   const text = getArabicText(phrase, props.arabicMode);
-  const spokenText = phrase.arabic_voweled || phrase.arabic_unvoweled;
+  const spokenText = phrase.arabic;
 
   return h(
     InteractiveText,

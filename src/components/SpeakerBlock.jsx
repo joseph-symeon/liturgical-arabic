@@ -6,15 +6,22 @@ const h = React.createElement;
 export default function SpeakerBlock(props) {
   const section = props.section;
   const isLineByLine = props.readerLayout === "line";
+  const lines = section.lines || [];
+
+  function getLineParts(line) {
+    return [...line.phrases]
+      .sort((a, b) => a.display_order - b.display_order)
+      .map(part => (part.text ? { text: part.text } : { id: part.phrase_id }));
+  }
 
   function renderGrouped() {
     const groups = [];
-    section.verses.forEach(function (verse) {
+    lines.forEach(function (line) {
       const last = groups[groups.length - 1];
-      if (last && last.speaker === verse.speaker) {
-        last.phrases = last.phrases.concat([{ text: " " }], verse.phrases);
+      if (last && last.speaker === line.speaker && !line.break_before) {
+        last.phrases = last.phrases.concat([{ text: " " }], getLineParts(line));
       } else {
-        groups.push({ speaker: verse.speaker, key: verse.verse, phrases: verse.phrases.slice() });
+        groups.push({ speaker: line.speaker, key: line.line_order, phrases: getLineParts(line) });
       }
     });
 
@@ -34,13 +41,13 @@ export default function SpeakerBlock(props) {
 
   function renderLineByLine() {
     let lastSpeaker = null;
-    return section.verses.map(function (verse) {
-      const showSpeaker = verse.speaker !== lastSpeaker;
-      lastSpeaker = verse.speaker;
+    return lines.map(function (line) {
+      const showSpeaker = line.speaker !== lastSpeaker;
+      lastSpeaker = line.speaker;
       return h(SpeakerLine, {
-        key: verse.verse,
-        speaker: verse.speaker,
-        line: verse.phrases,
+        key: line.line_order,
+        speaker: line.speaker,
+        line: getLineParts(line),
         arabicMode: props.arabicMode,
         speechRate: props.speechRate,
         arabicFontFamily: props.arabicFontFamily,

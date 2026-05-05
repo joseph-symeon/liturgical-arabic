@@ -1,17 +1,30 @@
 // Singleton YouTube IFrame API loader.
 // Multiple YouTubeClipPlayer instances share one API load.
 
-const pendingCallbacks = [];
-let apiReady = false;
+const pendingCallbacks = typeof window !== 'undefined'
+  ? window.__ytPendingCallbacks || []
+  : [];
+if (typeof window !== 'undefined') {
+  window.__ytPendingCallbacks = pendingCallbacks;
+}
 
-if (typeof window !== 'undefined' && !window.__ytApiLoading) {
+function flushCallbacks() {
+  if (typeof window === 'undefined') return;
+  window.__ytApiReady = true;
+  pendingCallbacks.splice(0).forEach(cb => cb());
+}
+
+if (typeof window !== 'undefined' && window.YT?.Player) {
+  window.__ytApiReady = true;
+}
+
+if (typeof window !== 'undefined' && !window.__ytApiLoading && !window.__ytApiReady) {
   window.__ytApiLoading = true;
 
   const prev = window.onYouTubeIframeAPIReady;
   window.onYouTubeIframeAPIReady = () => {
-    apiReady = true;
     if (typeof prev === 'function') prev();
-    pendingCallbacks.splice(0).forEach(cb => cb());
+    flushCallbacks();
   };
 
   const tag = document.createElement('script');
@@ -20,7 +33,9 @@ if (typeof window !== 'undefined' && !window.__ytApiLoading) {
 }
 
 export function onYouTubeReady(callback) {
-  if (apiReady) {
+  if (typeof window === 'undefined') return;
+  if (window.YT?.Player || window.__ytApiReady) {
+    window.__ytApiReady = true;
     callback();
   } else {
     pendingCallbacks.push(callback);

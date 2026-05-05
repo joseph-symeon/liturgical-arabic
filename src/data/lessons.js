@@ -1,19 +1,39 @@
 const lessons = [
   {
-    id: 'lesson-antiphons',
-    unit_id: 'unit-2',
-    title: 'Antiphons',
-    display_order: 1,
-    quizlet_deck_url: null,
-    segments: [
+    "id": "lesson-antiphons",
+    "unit_id": "unit-2",
+    "title": "Antiphons",
+    "title_phrase": "section-antiphons",
+    "display_order": 1,
+    "quizlet_deck_url": null,
+    "exercises": [
       {
-        segment_id: 'antiphon-only-begotten',
-        audio_clip: {
-          video_id: '-dufaXx7Hm0',
-          start_seconds: 151,
-          end_seconds: 180,
-          default_playback_rate: 1.0
-        }
+        "exercise_id": "antiphon-only-begotten"
+      },
+      {
+        "exercise_id": "antiphon-accepted-incarnate"
+      },
+      {
+        "exercise_id": "antiphon-became-man"
+      },
+      {
+        "exercise_id": "antiphon-trampled-death"
+      },
+      {
+        "exercise_id": "antiphon-glorified-with-father"
+      }
+    ]
+  },
+  {
+    "id": "lesson-litany-of-peace",
+    "unit_id": "unit-3",
+    "title": "Litany of Peace",
+    "title_phrase": "section-litany-of-peace",
+    "display_order": 1,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "litany-of-peace"
       }
     ]
   }

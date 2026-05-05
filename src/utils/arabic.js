@@ -8,9 +8,9 @@ export function stripArabicDiacritics(text) {
 }
 
 export function getArabicText(phrase, arabicMode) {
-  const voweled = phrase.arabic_voweled || phrase.arabic_unvoweled;
-  if (arabicMode === "plain") return stripArabicDiacritics(voweled);
-  return voweled;
+  const vocalized = phrase.arabic;
+  if (arabicMode === "unvocalized") return stripArabicDiacritics(vocalized);
+  return vocalized;
 }
 
 export function getLineText(phrases, phrasesMap, arabicMode) {

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArabicLiturgyReader from "./ArabicLiturgyReader.jsx";
-import LessonsView from "./components/lesson/LessonsView.jsx";
-import liturgyText from "./data/liturgyText.js";
+import CourseOverview from "./components/course/CourseOverview.jsx";
+import LessonOverview from "./components/course/LessonOverview.jsx";
+import LessonPage from "./components/course/LessonPage.jsx";
+import liturgySections from "./data/liturgySections.js";
 import units from "./data/units.js";
 import lessons from "./data/lessons.js";
+import { getExerciseTitle } from "./components/course/exerciseTitles.js";
 import { speakArabic } from "./utils/arabic.js";
 
 const NAV_ITEM_STYLE = {
@@ -57,16 +60,109 @@ const ARABIC_WEIGHTS = [
   { label: "Semibold", value: "600" }
 ];
 
+const ORDERED_UNITS = [...units].sort((a, b) => a.display_order - b.display_order);
+const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
+  lessons
+    .filter(lesson => lesson.unit_id === unit.id)
+    .sort((a, b) => a.display_order - b.display_order)
+);
+const DEFAULT_LESSON_ID = COURSE_LESSONS[0]?.id ?? lessons[0]?.id ?? null;
+
+function parseNavigationHash() {
+  if (typeof window === "undefined") {
+    return { view: "home", selectedSectionIndex: null, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+  }
+
+  const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+  if (hash === "course") {
+    return { view: "course-overview", selectedSectionIndex: null, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+  }
+  if (hash === "reader/toc") {
+    return { view: "reader", selectedSectionIndex: null, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+  }
+  if (hash.startsWith("reader/section/")) {
+    const sectionIndex = Number(hash.replace("reader/section/", ""));
+    if (Number.isInteger(sectionIndex) && sectionIndex >= 0 && sectionIndex < liturgySections.length) {
+      return { view: "reader", selectedSectionIndex: sectionIndex, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+    }
+  }
+  if (hash.startsWith("course/")) {
+    const parts = hash.split("/");
+    const lessonId = parts[1] || DEFAULT_LESSON_ID;
+    if (parts[2] !== "exercise") {
+      return { view: "lesson-overview", selectedSectionIndex: null, selectedLessonId: lessonId, selectedExerciseIndex: 0 };
+    }
+    const exerciseNumber = parts[2] === "exercise" ? Number(parts[3]) : 1;
+    const selectedExerciseIndex = Number.isInteger(exerciseNumber) && exerciseNumber > 0 ? exerciseNumber - 1 : 0;
+    return { view: "lessons", selectedSectionIndex: null, selectedLessonId: lessonId, selectedExerciseIndex };
+  }
+  return { view: "home", selectedSectionIndex: null, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+}
+
+function getNavigationHash(view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex) {
+  if (view === "reader") {
+    return selectedSectionIndex === null ? "#reader/toc" : `#reader/section/${selectedSectionIndex}`;
+  }
+  if (view === "lessons") {
+    return `#course/${encodeURIComponent(selectedLessonId ?? "")}/exercise/${selectedExerciseIndex + 1}`;
+  }
+  if (view === "lesson-overview") {
+    return `#course/${encodeURIComponent(selectedLessonId ?? "")}`;
+  }
+  if (view === "course-overview") {
+    return "#course";
+  }
+  return "#home";
+}
+
 export default function App() {
-  const [view, setView] = useState("reader");
-  const [selectedSectionIndex, setSelectedSectionIndex] = useState(null);
-  const [selectedLessonId, setSelectedLessonId] = useState(lessons[0]?.id ?? null);
+  const [initialNavigation] = useState(() => parseNavigationHash());
+  const [view, setView] = useState(initialNavigation.view);
+  const [selectedSectionIndex, setSelectedSectionIndex] = useState(initialNavigation.selectedSectionIndex);
+  const [selectedLessonId, setSelectedLessonId] = useState(initialNavigation.selectedLessonId);
+  const [selectedExerciseIndex, setSelectedExerciseIndex] = useState(initialNavigation.selectedExerciseIndex);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [arabicMode, setArabicMode] = useState("voweled");
+  const [arabicMode, setArabicMode] = useState("vocalized");
   const [readerLayout, setReaderLayout] = useState("line");
   const [arabicFontFamily, setArabicFontFamily] = useState(SYSTEM_SANS_FONT);
   const [arabicFontWeight, setArabicFontWeight] = useState("300");
   const [speechRate, setSpeechRate] = useState(0.8);
+  const [isNarrowViewport, setIsNarrowViewport] = useState(false);
+
+  useEffect(() => {
+    function updateViewport() {
+      setIsNarrowViewport(window.innerWidth < 700);
+    }
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
+
+  useEffect(() => {
+    function updateNavigationFromHash() {
+      const nextNavigation = parseNavigationHash();
+      setView(nextNavigation.view);
+      setSelectedSectionIndex(nextNavigation.selectedSectionIndex);
+      setSelectedLessonId(nextNavigation.selectedLessonId);
+      setSelectedExerciseIndex(nextNavigation.selectedExerciseIndex);
+      setMenuOpen(false);
+    }
+
+    window.addEventListener("hashchange", updateNavigationFromHash);
+    return () => window.removeEventListener("hashchange", updateNavigationFromHash);
+  }, []);
+
+  useEffect(() => {
+    const nextHash = getNavigationHash(view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex);
+    if (window.location.hash !== nextHash) {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${nextHash}`);
+    }
+  }, [view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex]);
+
+  function goHome() {
+    setView("home");
+    setMenuOpen(false);
+  }
 
   function goToLiturgySection(sectionIndex) {
     setSelectedSectionIndex(sectionIndex);
@@ -80,8 +176,21 @@ export default function App() {
     setMenuOpen(false);
   }
 
-  function goToLesson(lessonId) {
+  function goToCourseOverview() {
+    setView("course-overview");
+    setMenuOpen(false);
+  }
+
+  function goToLessonOverview(lessonId) {
     setSelectedLessonId(lessonId);
+    setSelectedExerciseIndex(0);
+    setView("lesson-overview");
+    setMenuOpen(false);
+  }
+
+  function goToLesson(lessonId, exerciseIndex = 0) {
+    setSelectedLessonId(lessonId);
+    setSelectedExerciseIndex(exerciseIndex);
     setView("lessons");
     setMenuOpen(false);
   }
@@ -92,8 +201,41 @@ export default function App() {
   }
 
   function goToNextSection() {
-    setSelectedSectionIndex(index => (index === null ? 0 : Math.min(liturgyText.length - 1, index + 1)));
+    setSelectedSectionIndex(index => (index === null ? 0 : Math.min(liturgySections.length - 1, index + 1)));
     setView("reader");
+  }
+
+  function goToPreviousLesson() {
+    const selectedLessonIndex = COURSE_LESSONS.findIndex(lesson => lesson.id === selectedLessonId);
+    const previousLesson = COURSE_LESSONS[Math.max(0, selectedLessonIndex - 1)];
+    if (previousLesson) {
+      goToLesson(previousLesson.id, Math.max(0, (previousLesson.exercises?.length ?? 1) - 1));
+    }
+  }
+
+  function goToNextLesson() {
+    const selectedLessonIndex = COURSE_LESSONS.findIndex(lesson => lesson.id === selectedLessonId);
+    const nextLesson = COURSE_LESSONS[Math.min(COURSE_LESSONS.length - 1, selectedLessonIndex + 1)];
+    if (nextLesson) {
+      goToLesson(nextLesson.id, 0);
+    }
+  }
+
+  function goToPreviousExercise() {
+    if (selectedExerciseIndex > 0) {
+      goToLesson(selectedLessonId, selectedExerciseIndex - 1);
+      return;
+    }
+    goToPreviousLesson();
+  }
+
+  function goToNextExercise() {
+    const exerciseCount = selectedLesson?.exercises?.length ?? 0;
+    if (selectedExerciseIndex < exerciseCount - 1) {
+      goToLesson(selectedLessonId, selectedExerciseIndex + 1);
+      return;
+    }
+    goToNextLesson();
   }
 
   function adjustSpeechRate(delta) {
@@ -101,13 +243,63 @@ export default function App() {
   }
 
   const selectedLesson = lessons.find(l => l.id === selectedLessonId);
+  const selectedLessonIndex = COURSE_LESSONS.findIndex(lesson => lesson.id === selectedLessonId);
+  const clampedExerciseIndex = Math.max(0, Math.min(selectedExerciseIndex, (selectedLesson?.exercises?.length ?? 1) - 1));
+  const hasPreviousExercise = selectedLessonIndex > 0 || clampedExerciseIndex > 0;
+  const hasNextExercise =
+    selectedLessonIndex >= 0 &&
+    (selectedLessonIndex < COURSE_LESSONS.length - 1 || clampedExerciseIndex < (selectedLesson?.exercises?.length ?? 1) - 1);
+  const previousExerciseTitle =
+    clampedExerciseIndex > 0
+      ? getExerciseTitle(selectedLesson, clampedExerciseIndex - 1)
+      : getExerciseTitle(COURSE_LESSONS[selectedLessonIndex - 1], Math.max(0, (COURSE_LESSONS[selectedLessonIndex - 1]?.exercises?.length ?? 1) - 1));
+  const nextExerciseTitle =
+    clampedExerciseIndex < (selectedLesson?.exercises?.length ?? 1) - 1
+      ? getExerciseTitle(selectedLesson, clampedExerciseIndex + 1)
+      : getExerciseTitle(COURSE_LESSONS[selectedLessonIndex + 1], 0);
+
+  useEffect(() => {
+    if (view === "lessons" && selectedExerciseIndex !== clampedExerciseIndex) {
+      setSelectedExerciseIndex(clampedExerciseIndex);
+    }
+  }, [view, selectedExerciseIndex, clampedExerciseIndex]);
+
   const hasPreviousSection = selectedSectionIndex !== null && selectedSectionIndex > 0;
-  const hasNextSection = selectedSectionIndex === null || selectedSectionIndex < liturgyText.length - 1;
-  const previousSectionTitle = hasPreviousSection ? liturgyText[selectedSectionIndex - 1]?.section : null;
+  const hasNextSection = selectedSectionIndex === null || selectedSectionIndex < liturgySections.length - 1;
+  const previousSectionTitle = hasPreviousSection ? liturgySections[selectedSectionIndex - 1]?.section : null;
   const nextSectionTitle = hasNextSection
-    ? liturgyText[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
+    ? liturgySections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
   const speechRateDisplay = `${Number(speechRate.toFixed(2))}×`;
+  const hideContentForMenu = menuOpen && isNarrowViewport;
+
+  function renderHome() {
+    return (
+      <main className="mx-auto max-w-[700px] px-4 py-10 leading-8">
+        <header className="mb-8 text-center" dir="ltr">
+          <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Liturgical Arabic</h1>
+        </header>
+        <div className="grid gap-3" dir="ltr">
+          <button
+            type="button"
+            onClick={goToTableOfContents}
+            className="rounded border border-stone-300 px-4 py-3 text-left dark:border-stone-600"
+          >
+            Liturgy Text
+          </button>
+          {COURSE_LESSONS.length > 0 && (
+            <button
+              type="button"
+              onClick={goToCourseOverview}
+              className="rounded border border-stone-300 px-4 py-3 text-left dark:border-stone-600"
+            >
+              Course
+            </button>
+          )}
+        </div>
+      </main>
+    );
+  }
 
   return (
     <div
@@ -115,27 +307,49 @@ export default function App() {
       dir="ltr"
       style={{ display: "flex", flexDirection: "row", alignItems: "stretch" }}
     >
-      <aside
-        className="border-r border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900"
-        dir="ltr"
-        style={{ display: "flex", alignItems: "flex-start", gap: "8px", minHeight: "100vh", padding: "6px 10px" }}
+      <button
+        onClick={() => setMenuOpen(o => !o)}
+        aria-label="Open menu"
+        aria-expanded={menuOpen}
+        style={{
+          position: menuOpen ? "static" : "fixed",
+          top: "6px",
+          left: "10px",
+          zIndex: 30,
+          alignSelf: "flex-start",
+          fontSize: "20px",
+          lineHeight: 1,
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          padding: "4px 8px",
+          color: "inherit"
+        }}
       >
-        <button
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label="Open menu"
-          aria-expanded={menuOpen}
-          style={{ fontSize: "20px", lineHeight: 1, background: "none", border: "none", cursor: "pointer", padding: "4px 8px", color: "inherit" }}
-        >
-          ☰
-        </button>
+        ☰
+      </button>
 
-        {menuOpen && (
+      {menuOpen && (
+      <aside
+        className="bg-white dark:bg-stone-900"
+        dir="ltr"
+        style={{ display: "flex", alignItems: "flex-start", gap: "8px", minHeight: "100vh", padding: "6px 10px 6px 0" }}
+      >
           <div
             role="menu"
             className="bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100"
             style={{ display: "flex", flex: "0 0 280px", flexDirection: "column", gap: "8px", alignItems: "stretch", maxHeight: "calc(100vh - 12px)", overflowY: "auto", margin: 0, padding: "8px", listStyle: "none", borderRadius: "4px", fontFamily: "Arial, sans-serif", fontSize: "14px" }}
           >
               <div role="group" aria-label="Liturgy Text" style={MENU_GROUP_STYLE}>
+                <button
+                  role="menuitem"
+                  type="button"
+                  onClick={goHome}
+                  className={view === "home" ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                  style={SECTION_ITEM_STYLE}
+                >
+                  Home
+                </button>
                 <div className="text-stone-400 dark:text-stone-500" style={MENU_LABEL_STYLE}>
                   Liturgy Text
                 </div>
@@ -149,7 +363,7 @@ export default function App() {
                 >
                   Table of Contents
                 </button>
-                {liturgyText.map((section, sectionIndex) => (
+                {liturgySections.map((section, sectionIndex) => (
                   <button
                     key={section.section || sectionIndex}
                     role="menuitem"
@@ -171,8 +385,17 @@ export default function App() {
                   Course
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                {units.map(unit => {
-                  const unitLessons = lessons.filter(l => l.unit_id === unit.id);
+                <button
+                  role="menuitem"
+                  type="button"
+                  onClick={goToCourseOverview}
+                  className={view === "course-overview" ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                  style={LESSON_ITEM_STYLE}
+                >
+                  Course Overview
+                </button>
+                {ORDERED_UNITS.map(unit => {
+                  const unitLessons = COURSE_LESSONS.filter(l => l.unit_id === unit.id);
                   return (
                     <div key={unit.id}>
                     <div
@@ -185,8 +408,8 @@ export default function App() {
                         <button
                           key={lesson.id}
                           role="menuitem"
-                          onClick={() => goToLesson(lesson.id)}
-                          className={view === "lessons" && selectedLessonId === lesson.id ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+	                          onClick={() => goToLessonOverview(lesson.id)}
+	                          className={(view === "lessons" || view === "lesson-overview") && selectedLessonId === lesson.id ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
                           style={LESSON_ITEM_STYLE}
                         >
                           {lesson.title}
@@ -243,16 +466,16 @@ export default function App() {
                   <div style={{ display: "flex", gap: "6px" }}>
                     <button
                       type="button"
-                      onClick={() => setArabicMode("voweled")}
-                      className={arabicMode === "voweled" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
+                      onClick={() => setArabicMode("vocalized")}
+                      className={arabicMode === "vocalized" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
                       style={SETTING_BUTTON_STYLE}
                     >
                       Vocalized
                     </button>
                     <button
                       type="button"
-                      onClick={() => setArabicMode("plain")}
-                      className={arabicMode === "plain" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
+                      onClick={() => setArabicMode("unvocalized")}
+                      className={arabicMode === "unvocalized" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
                       style={SETTING_BUTTON_STYLE}
                     >
                       Unvocalized
@@ -310,10 +533,16 @@ export default function App() {
                 </div>
               </div>
           </div>
-        )}
       </aside>
+      )}
 
-      <div style={{ flex: "1 1 auto", minWidth: 0 }}>
+      <div
+        onClickCapture={() => {
+          if (menuOpen) setMenuOpen(false);
+        }}
+        style={{ flex: "1 1 auto", minWidth: 0, display: hideContentForMenu ? "none" : "block" }}
+      >
+        {view === "home" && renderHome()}
         {view === "reader" && (
           <ArabicLiturgyReader
             arabicMode={arabicMode}
@@ -332,15 +561,59 @@ export default function App() {
             onSelectSection={goToLiturgySection}
           />
         )}
+        {view === "course-overview" && (
+          <CourseOverview
+            units={ORDERED_UNITS}
+            lessons={COURSE_LESSONS}
+            selectedLessonId={selectedLessonId}
+            selectedExerciseIndex={clampedExerciseIndex}
+            onSelectLesson={goToLessonOverview}
+            onSelectExercise={goToLesson}
+          />
+        )}
+        {view === "lesson-overview" && selectedLesson && (
+          <LessonOverview
+            lesson={selectedLesson}
+            arabicMode={arabicMode}
+            speechRate={speechRate}
+            arabicFontFamily={arabicFontFamily}
+            onCourseOverview={goToCourseOverview}
+            onSelectExercise={goToLesson}
+          />
+        )}
         {view === "lessons" && selectedLesson && (
-          <LessonsView
+          <LessonPage
             lesson={selectedLesson}
             arabicMode={arabicMode}
             readerLayout={readerLayout}
             speechRate={speechRate}
             arabicFontFamily={arabicFontFamily}
             arabicFontWeight={arabicFontWeight}
+            selectedExerciseIndex={clampedExerciseIndex}
+            hasPreviousExercise={hasPreviousExercise}
+            hasNextExercise={hasNextExercise}
+            previousExerciseTitle={previousExerciseTitle}
+            nextExerciseTitle={nextExerciseTitle}
+            onCourseOverview={goToCourseOverview}
+            onPreviousExercise={goToPreviousExercise}
+            onNextExercise={goToNextExercise}
           />
+        )}
+        {view === "lessons" && !selectedLesson && (
+          <main className="mx-auto max-w-[700px] px-4 py-10 leading-8" dir="ltr">
+            <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Lesson not found</h1>
+            <p className="text-stone-600 dark:text-stone-300">
+              No lesson is configured for "{selectedLessonId}".
+            </p>
+          </main>
+        )}
+        {view === "lesson-overview" && !selectedLesson && (
+          <main className="mx-auto max-w-[700px] px-4 py-10 leading-8" dir="ltr">
+            <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Lesson not found</h1>
+            <p className="text-stone-600 dark:text-stone-300">
+              No lesson is configured for "{selectedLessonId}".
+            </p>
+          </main>
         )}
       </div>
     </div>

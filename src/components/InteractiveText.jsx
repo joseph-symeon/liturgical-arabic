@@ -5,8 +5,13 @@ const h = React.createElement;
 const TOOLTIP_MAX_WIDTH = 288;
 const TOOLTIP_GAP = 8;
 const VIEWPORT_PADDING = 8;
+let interactiveTextCount = 0;
 
 export default function InteractiveText(props) {
+  const idRef = useRef(null);
+  if (idRef.current === null) {
+    idRef.current = `interactive-text-${++interactiveTextCount}`;
+  }
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [usesHover, setUsesHover] = useState(false);
@@ -36,8 +41,15 @@ export default function InteractiveText(props) {
   useEffect(() => {
     if (!isOpen) return;
     const close = () => setIsOpen(false);
+    const closeOther = (event) => {
+      if (event.detail !== idRef.current) setIsOpen(false);
+    };
     document.addEventListener("click", close);
-    return () => document.removeEventListener("click", close);
+    document.addEventListener("interactive-text-open", closeOther);
+    return () => {
+      document.removeEventListener("click", close);
+      document.removeEventListener("interactive-text-open", closeOther);
+    };
   }, [isOpen]);
 
   function updateTooltipPosition() {
@@ -69,6 +81,7 @@ export default function InteractiveText(props) {
     if (isOpen) {
       speakArabic(props.spokenText, props.speechRate);
     } else {
+      document.dispatchEvent(new CustomEvent("interactive-text-open", { detail: idRef.current }));
       setIsOpen(true);
     }
   }

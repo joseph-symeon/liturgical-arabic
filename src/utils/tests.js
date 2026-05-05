@@ -1,5 +1,7 @@
 import phrases from "../data/phrases.js";
-import liturgyText from "../data/liturgyText.js";
+import segments from "../data/segments.js";
+import liturgySections from "../data/liturgySections.js";
+import { validateData } from "./dataValidation.js";
 import {
   safeString,
   stripArabicDiacritics,
@@ -10,7 +12,15 @@ import {
 import { csvEscape, rowsToCsv, buildFlashcardCsv, buildAnnotationsCsv } from "./csv.js";
 import { getFlashcards } from "./flashcards.js";
 
+function segmentLineParts(line) {
+  return line.phrases.map(function mapPart(part) {
+    return part.text ? { text: part.text } : { id: part.phrase_id };
+  });
+}
+
 export function runTests() {
+  validateData();
+
   const cards = getFlashcards();
   const phraseIds = Object.keys(phrases);
   const uniquePhraseIds = new Set(phraseIds);
@@ -23,32 +33,32 @@ export function runTests() {
   console.assert(cards.length === phraseIds.length, "Every phrase should become one card.");
   console.assert(phraseIds.length === uniquePhraseIds.size, "Phrase IDs should be unique.");
   console.assert(
-    getArabicText(phrases["petition-001"], "plain") === "إلى الرب نطلب",
-    "Plain Arabic should display without diacritics."
+    getArabicText(phrases["petition-001"], "unvocalized") === "إلى الرب نطلب",
+    "Unvocalized Arabic should display without diacritics."
   );
   console.assert(
-    getArabicText(phrases["petition-001"], "voweled") === "إِلَى الرَّبِّ نَطْلُب",
-    "Voweled Arabic should display with diacritics."
+    getArabicText(phrases["petition-001"], "vocalized") === "إِلَى الرَّبِّ نَطْلُب",
+    "Vocalized Arabic should display with diacritics."
   );
   console.assert(
-    getLineText(liturgyText[0].verses[0].phrases, phrases, "plain") === "بسلام إلى الرب نطلب",
-    "Line text should compose plain Arabic from phrases."
+    getLineText(segmentLineParts(segments["litany-peace-in-peace"]), phrases, "unvocalized") === "بسلام",
+    "Line text should compose unvocalized Arabic from phrases."
   );
   console.assert(
-    getLogicalPhraseParts(liturgyText[0].verses[2].phrases).length === 4,
+    getLogicalPhraseParts(segmentLineParts(segments["litany-peace-from-above"])).length === 2,
     "Line-by-line view should split grouped verses into logical phrase parts."
   );
   console.assert(
-    liturgyText.some(function hasAntiphons(section) { return section.section === "Antiphons"; }),
+    liturgySections.some(function hasAntiphons(section) { return section.section === "Antiphons"; }),
     "Reader should include an Antiphons section."
   );
   console.assert(
-    liturgyText.find(function findAntiphons(section) { return section.section === "Antiphons"; }).verses.length === 10,
-    "Antiphons should have 10 verses."
+    liturgySections.find(function findAntiphons(section) { return section.section === "Antiphons"; }).segment_ids.length === 10,
+    "Antiphons should have 10 segments."
   );
-  console.assert(liturgyText[0].section === "Litany of Peace", "First reader section should be titled Litany of Peace.");
+  console.assert(liturgySections[0].section === "Litany of Peace", "First reader section should be titled Litany of Peace.");
   console.assert(flashcardCsv.startsWith('"front","back"'), "CSV should include a flashcard header row.");
-  console.assert(annotationCsv.startsWith('"id","arabic_voweled"'), "Phrases CSV should include database headers.");
+  console.assert(annotationCsv.startsWith('"id","arabic"'), "Phrases CSV should include database headers.");
   console.assert(annotationCsv.includes("\n"), "Phrases CSV should contain newline-separated rows.");
   console.assert(0.5 <= 0.8 && 0.8 <= 1.2, "Default speech rate should be inside the UI range.");
 }

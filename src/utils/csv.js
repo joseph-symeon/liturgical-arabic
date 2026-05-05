@@ -16,7 +16,7 @@ export function buildFlashcardCsv(cards) {
   const header = ["front", "back", "literal", "tags"];
   const rows = cards.map(function mapCard(card) {
     return [
-      stripArabicDiacritics(card.arabic_voweled || card.arabic_unvoweled),
+      stripArabicDiacritics(card.arabic),
       card.translation,
       card.literal,
       card.tags.join(" ")
@@ -26,12 +26,11 @@ export function buildFlashcardCsv(cards) {
 }
 
 export function buildAnnotationsCsv(cards) {
-  const header = ["id", "arabic_voweled", "arabic_unvoweled", "translation", "literal", "tags"];
+  const header = ["id", "arabic", "translation", "literal", "tags"];
   const rows = cards.map(function mapCard(card) {
     return [
       card.id,
-      card.arabic_voweled,
-      card.arabic_unvoweled,
+      card.arabic,
       card.translation,
       card.literal,
       card.tags.join(", ")

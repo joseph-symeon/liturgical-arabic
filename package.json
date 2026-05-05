@@ -4,6 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "npm run generate:data",
+    "prebuild": "npm run generate:data",
+    "generate:data": "node scripts/generate-data.mjs",
+    "sync:notion:phrases": "node scripts/sync-notion-phrases.mjs && npm run generate:data",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

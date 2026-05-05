@@ -11,14 +11,18 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
   const playerId = playerIdRef.current;
 
   const playerRef = useRef(null);
+  const playerHostRef = useRef(null);
   const intervalRef = useRef(null);
   const isSeekingRef = useRef(false);
   const playbackRateRef = useRef(defaultPlaybackRate);
+  const userStartedRef = useRef(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const [progress, setProgress] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(defaultPlaybackRate);
   const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
+  const [playerError, setPlayerError] = useState(null);
 
   const clipDuration = endSeconds - startSeconds;
 
@@ -48,47 +52,73 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
 
   useEffect(() => {
     let destroyed = false;
+    setIsReady(false);
+    setPlayerError(null);
+
+    if (!videoId) {
+      setPlayerError('Missing YouTube video ID.');
+      return () => {
+        destroyed = true;
+      };
+    }
 
     onYouTubeReady(() => {
-      if (destroyed) return;
+      if (destroyed || !playerHostRef.current) return;
 
-      new window.YT.Player(playerId, {
-        width: '1',
-        height: '1',
-        videoId,
-        playerVars: {
-          controls: 0,
-          modestbranding: 1,
-          rel: 0,
-          iv_load_policy: 3,
-          playsinline: 1
-        },
-        events: {
-          onReady(event) {
-            if (destroyed) return;
-            playerRef.current = event.target;
-            event.target.seekTo(startSeconds, true);
-            event.target.setPlaybackRate(playbackRateRef.current);
+      playerHostRef.current.innerHTML = '';
+      const playerElement = document.createElement('div');
+      playerElement.id = playerId;
+      playerHostRef.current.appendChild(playerElement);
+
+      try {
+        new window.YT.Player(playerId, {
+          width: '200',
+          height: '200',
+          videoId,
+          playerVars: {
+            controls: 0,
+            modestbranding: 1,
+            rel: 0,
+            iv_load_policy: 3,
+            playsinline: 1
           },
-          onStateChange(event) {
-            const { PlayerState } = window.YT;
-            const state = event.data;
-            if (state === PlayerState.PLAYING || state === PlayerState.BUFFERING) {
-              setIsPlaying(true);
-              if (state === PlayerState.PLAYING) {
-                startLoop(event.target);
+          events: {
+            onReady(event) {
+              if (destroyed) return;
+              playerRef.current = event.target;
+              event.target.seekTo(startSeconds, true);
+              event.target.setPlaybackRate(playbackRateRef.current);
+              setIsReady(true);
+            },
+            onStateChange(event) {
+              const { PlayerState } = window.YT;
+              const state = event.data;
+              if (state === PlayerState.PLAYING || state === PlayerState.BUFFERING) {
+                if (!userStartedRef.current) {
+                  event.target.pauseVideo();
+                  event.target.seekTo(startSeconds, true);
+                  setProgress(0);
+                  setIsPlaying(false);
+                  return;
+                }
+                setIsPlaying(true);
+                if (state === PlayerState.PLAYING) {
+                  startLoop(event.target);
+                }
               }
-            }
-            if (state === PlayerState.PAUSED || state === PlayerState.ENDED) {
-              setIsPlaying(false);
-              if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-                intervalRef.current = null;
+              if (state === PlayerState.PAUSED || state === PlayerState.ENDED) {
+                setIsPlaying(false);
+                if (intervalRef.current) {
+                  clearInterval(intervalRef.current);
+                  intervalRef.current = null;
+                }
               }
             }
           }
-        }
-      });
+        });
+      } catch (error) {
+        setPlayerError(error instanceof Error ? error.message : 'Unable to initialize YouTube player.');
+      }
     });
 
     return () => {
@@ -101,6 +131,10 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
         try { playerRef.current.destroy(); } catch (_) {}
         playerRef.current = null;
       }
+      if (playerHostRef.current) {
+        playerHostRef.current.innerHTML = '';
+      }
+      setIsReady(false);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoId, startSeconds, endSeconds]);
@@ -115,11 +149,12 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
 
   function handlePlayPause() {
     const player = playerRef.current;
-    if (!player) return;
+    if (!player || !isReady) return;
     const state = player.getPlayerState();
     if (state === window.YT.PlayerState.PLAYING) {
       player.pauseVideo();
     } else {
+      userStartedRef.current = true;
       player.seekTo(startSeconds + progress, true);
       player.playVideo();
     }
@@ -153,14 +188,16 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
   return (
     <>
       <div className="yt-hidden" aria-hidden="true">
-        <div id={playerId} />
+        <div ref={playerHostRef} />
       </div>
 
       <div className="lp-clip-player">
+        {playerError && <p className="lp-player-error">{playerError}</p>}
         <div className="lp-controls">
           <button
             className="lp-icon-button"
             onClick={handlePlayPause}
+            disabled={!isReady}
             aria-label={isPlaying ? 'Pause' : 'Play'}
           >
             {isPlaying ? (

@@ -32,7 +32,7 @@ export default function SpeakerLine(props) {
     return h(
       "span",
       {
-        className: "liturgical-red relative text-2xl leading-loose md:text-3xl",
+	        className: "liturgical-red relative text-2xl leading-loose",
         style: {
           flex: isStacked ? "0 0 auto" : "0 0 90px",
           display: isStacked && !showSpeaker ? "none" : "block",
@@ -48,7 +48,7 @@ export default function SpeakerLine(props) {
         ? h(
             InteractiveText,
             {
-              spokenText: phrase.arabic_voweled || phrase.arabic_unvoweled,
+              spokenText: phrase.arabic,
               speechRate: props.speechRate,
               tooltip: h(PhraseTooltip, { phrase })
             },

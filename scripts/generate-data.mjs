@@ -1,0 +1,258 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const rootDir = path.resolve(__dirname, '..');
+const sourceDir = path.join(rootDir, 'src', 'data', 'source');
+const outputDir = path.join(rootDir, 'src', 'data');
+
+function readCsv(fileName) {
+  const filePath = path.join(sourceDir, fileName);
+  const text = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '');
+  const rows = parseCsv(text.trim());
+  if (rows.length === 0) return [];
+  const headers = rows[0];
+  return rows.slice(1).filter(row => row.some(cell => cell !== '')).map(row => {
+    const record = {};
+    headers.forEach((header, index) => {
+      record[header] = row[index] ?? '';
+    });
+    return record;
+  });
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let inQuotes = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const next = text[index + 1];
+
+    if (char === '"') {
+      if (inQuotes && next === '"') {
+        cell += '"';
+        index += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (char === ',' && !inQuotes) {
+      row.push(cell);
+      cell = '';
+      continue;
+    }
+
+    if ((char === '\n' || char === '\r') && !inQuotes) {
+      if (char === '\r' && next === '\n') index += 1;
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = '';
+      continue;
+    }
+
+    cell += char;
+  }
+
+  row.push(cell);
+  rows.push(row);
+  return rows;
+}
+
+function jsonCell(value, fallback) {
+  if (!value) return fallback;
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    throw new Error(`Invalid JSON cell: ${value}\n${error.message}`);
+  }
+}
+
+function optionalString(value) {
+  return value === '' ? undefined : value;
+}
+
+function optionalNullableString(value) {
+  return value === '' ? null : value;
+}
+
+function optionalBoolean(value) {
+  if (value === '') return undefined;
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  throw new Error(`Expected boolean cell to be true/false/empty, received "${value}".`);
+}
+
+function requiredNumber(value, label) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) {
+    throw new Error(`Expected numeric ${label}, received "${value}".`);
+  }
+  return number;
+}
+
+function cleanObject(object) {
+  return Object.fromEntries(Object.entries(object).filter(([, value]) => typeof value !== 'undefined'));
+}
+
+function formatJs(value) {
+  return JSON.stringify(value, null, 2);
+}
+
+function writeFile(fileName, contents) {
+  fs.writeFileSync(path.join(outputDir, fileName), `${contents.trim()}\n`);
+}
+
+function generatePhrases() {
+  const phrases = Object.fromEntries(readCsv('phrases.csv').map(row => [
+    row.id,
+    {
+      arabic: row.arabic,
+      translation: row.translation,
+      literal: row.literal,
+      tags: jsonCell(row.tags, [])
+    }
+  ]));
+
+  writeFile('phrases.js', `
+const phrases = ${formatJs(phrases)};
+
+export default phrases;
+`);
+}
+
+function generateSegments() {
+  const segments = Object.fromEntries(readCsv('segments.csv').map(row => [
+    row.id,
+    cleanObject({
+      speaker: row.speaker,
+      break_before: optionalBoolean(row.break_before),
+      phrases: jsonCell(row.phrases, [])
+    })
+  ]));
+
+  writeFile('segments.js', `
+function phraseParts(parts) {
+  return parts.map((part, index) => ({
+    ...part,
+    display_order: index + 1
+  }));
+}
+
+const sourceSegments = ${formatJs(segments)};
+
+const segments = Object.fromEntries(
+  Object.entries(sourceSegments).map(([id, segment]) => [
+    id,
+    {
+      ...segment,
+      phrases: phraseParts(segment.phrases)
+    }
+  ])
+);
+
+export default segments;
+`);
+}
+
+function generateLiturgySections() {
+  const liturgySections = readCsv('liturgySections.csv').map(row => ({
+    section: row.section,
+    section_title_phrase: row.section_title_phrase,
+    segment_ids: jsonCell(row.segment_ids, [])
+  }));
+
+  writeFile('liturgySections.js', `
+const liturgySections = ${formatJs(liturgySections)};
+
+export default liturgySections;
+`);
+}
+
+function generateExercises() {
+  const exerciseDefinitions = readCsv('exercises.csv').map(row => cleanObject({
+    id: row.id,
+    segment_ids: jsonCell(row.segment_ids, []),
+    title: optionalString(row.title),
+    title_phrase: optionalString(row.title_phrase),
+    audio_clip: jsonCell(row.audio_clip, null)
+  }));
+
+  writeFile('exercises.js', `
+import segments from './segments.js';
+
+export const exerciseDefinitions = ${formatJs(exerciseDefinitions)};
+
+export function resolveExercise(definition, segmentsMap = segments) {
+  const selectedSegments = definition.segment_ids
+    .map(segmentId => segmentsMap[segmentId])
+    .filter(Boolean);
+
+  const lines = selectedSegments
+    .map((segment, index) => ({
+      ...segment,
+      segment_id: definition.segment_ids[index],
+      line_order: index + 1,
+      phrases: segment.phrases.map(part => ({ ...part }))
+    }));
+
+  return {
+    ...definition,
+    lines
+  };
+}
+
+const exercises = Object.fromEntries(
+  exerciseDefinitions.map(definition => [definition.id, resolveExercise(definition)])
+);
+
+export default exercises;
+`);
+}
+
+function generateLessons() {
+  const lessons = readCsv('lessons.csv').map(row => ({
+    id: row.id,
+    unit_id: row.unit_id,
+    title: row.title,
+    title_phrase: row.title_phrase,
+    display_order: requiredNumber(row.display_order, 'display_order'),
+    quizlet_deck_url: optionalNullableString(row.quizlet_deck_url),
+    exercises: jsonCell(row.exercises, [])
+  }));
+
+  writeFile('lessons.js', `
+const lessons = ${formatJs(lessons)};
+
+export default lessons;
+`);
+}
+
+function generateUnits() {
+  const units = readCsv('units.csv').map(row => ({
+    id: row.id,
+    display_order: requiredNumber(row.display_order, 'display_order'),
+    title: row.title
+  }));
+
+  writeFile('units.js', `
+const units = ${formatJs(units)};
+
+export default units;
+`);
+}
+
+generatePhrases();
+generateSegments();
+generateLiturgySections();
+generateExercises();
+generateLessons();
+generateUnits();
+
+console.log('Generated src/data modules from src/data/source CSV files.');
