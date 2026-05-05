@@ -79,7 +79,13 @@ export default function SpeakerBlock(props) {
       : null,
     h(
       "div",
-      { className: "py-2 text-right", dir: "rtl" },
+      {
+        className: "py-2 text-right",
+        dir: "rtl",
+        style: {
+          overflowX: "clip"
+        }
+      },
       isLineByLine ? renderLineByLine() : renderGrouped()
     )
   );

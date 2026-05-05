@@ -42,6 +42,7 @@ export default function ArabicLiturgyReader({
       line_order: index + 1,
       phrases: segment.phrases.map(part => ({ ...part }))
     }));
+
   function renderArabicTitle(phrase) {
     if (!phrase) return null;
     const text = getArabicText(phrase, arabicMode);

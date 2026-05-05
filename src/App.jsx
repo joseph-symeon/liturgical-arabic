@@ -57,6 +57,8 @@ const ARABIC_WEIGHTS = [
 ];
 const SIDE_PANEL_WIDTH = 320;
 const DEFAULT_ARABIC_FONT_SIZE = 22;
+const NARROW_VIEWPORT_WIDTH = 700;
+const COMPACT_CHROME_WIDTH = 900;
 
 const ORDERED_UNITS = [...units].sort((a, b) => a.display_order - b.display_order);
 const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
@@ -139,19 +141,26 @@ export default function App() {
   const [arabicFontSize, setArabicFontSize] = useState(DEFAULT_ARABIC_FONT_SIZE);
   const [speechRate, setSpeechRate] = useState(0.8);
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
+  const [isCompactChrome, setIsCompactChrome] = useState(false);
   const [showCompactTitle, setShowCompactTitle] = useState(false);
 
   useEffect(() => {
     function updateViewport() {
-      setIsNarrowViewport(window.innerWidth < 700);
+      const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
+      setIsNarrowViewport(viewportWidth < NARROW_VIEWPORT_WIDTH);
+      setIsCompactChrome(viewportWidth < COMPACT_CHROME_WIDTH);
     }
     updateViewport();
     window.addEventListener("resize", updateViewport);
-    return () => window.removeEventListener("resize", updateViewport);
+    window.visualViewport?.addEventListener("resize", updateViewport);
+    return () => {
+      window.removeEventListener("resize", updateViewport);
+      window.visualViewport?.removeEventListener("resize", updateViewport);
+    };
   }, []);
 
   useEffect(() => {
-    if (!isNarrowViewport) {
+    if (!isCompactChrome) {
       setShowCompactTitle(false);
       return undefined;
     }
@@ -163,7 +172,7 @@ export default function App() {
     updateCompactTitle();
     window.addEventListener("scroll", updateCompactTitle, { passive: true });
     return () => window.removeEventListener("scroll", updateCompactTitle);
-  }, [isNarrowViewport]);
+  }, [isCompactChrome]);
 
   useEffect(() => {
     function updateNavigationFromHash() {
@@ -331,7 +340,7 @@ export default function App() {
   const speechRateDisplay = `${Number(speechRate.toFixed(2))}×`;
   const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
   const shouldShowCompactTitle =
-    isNarrowViewport &&
+    isCompactChrome &&
     showCompactTitle &&
     !menuOpen &&
     !displayMenuOpen &&
@@ -579,7 +588,7 @@ export default function App() {
         className="rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
         style={{
           position: "fixed",
-          top: isNarrowViewport ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
+          top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
           [isLeft ? "left" : "right"]: "12px",
           zIndex: 40,
           border: "none",
@@ -603,7 +612,7 @@ export default function App() {
         aria-hidden="true"
         className="bg-white dark:bg-[var(--dark-bg)]"
         style={{
-          display: isNarrowViewport ? "block" : "none",
+          display: isCompactChrome ? "block" : "none",
           position: "fixed",
           top: 0,
           left: 0,
@@ -614,7 +623,7 @@ export default function App() {
         }}
       />
 
-      {isNarrowViewport && compactPageTitle && (
+      {isCompactChrome && compactPageTitle && (
         <div
           aria-hidden="true"
           className="text-stone-900 dark:text-[var(--dark-text)]"
