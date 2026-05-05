@@ -122,6 +122,16 @@
   display: none;
 }
 
+.lp-course-lesson-title-button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-align: left;
+}
+
 .lp-course-lesson-summary::before {
   content: "▸";
   color: #78716c;

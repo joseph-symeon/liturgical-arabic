@@ -33,7 +33,13 @@ const sourceSegments = {
     "tags": [],
     "phrases": [
       {
-        "phrase_id": "lord-have-mercy-001"
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "have-mercy-001"
       },
       {
         "text": "."
@@ -3223,7 +3229,13 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "jesus-prayer-lord-jesus-christ-001"
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "jesus-prayer-jesus-christ-001"
       },
       {
         "text": "، "

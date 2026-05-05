@@ -159,6 +159,18 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
+        "exercise_id": "all-holy-trinity-address"
+      },
+      {
+        "exercise_id": "all-holy-trinity-lord"
+      },
+      {
+        "exercise_id": "all-holy-trinity-master"
+      },
+      {
+        "exercise_id": "all-holy-trinity-holy-one"
+      },
+      {
         "exercise_id": "all-holy-trinity"
       }
     ]

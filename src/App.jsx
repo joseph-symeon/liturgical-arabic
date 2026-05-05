@@ -181,13 +181,13 @@ export default function App() {
       setSelectedSectionIndex(nextNavigation.selectedSectionIndex);
       setSelectedLessonId(nextNavigation.selectedLessonId);
       setSelectedExerciseIndex(nextNavigation.selectedExerciseIndex);
-      setMenuOpen(false);
+      if (isNarrowViewport) setMenuOpen(false);
       setDisplayMenuOpen(false);
     }
 
     window.addEventListener("hashchange", updateNavigationFromHash);
     return () => window.removeEventListener("hashchange", updateNavigationFromHash);
-  }, []);
+  }, [isNarrowViewport]);
 
   useEffect(() => {
     const nextHash = getNavigationHash(view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex);
@@ -198,27 +198,27 @@ export default function App() {
 
   function goHome() {
     setView("home");
-    setMenuOpen(false);
+    if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
 
   function goToLiturgySection(sectionIndex) {
     setSelectedSectionIndex(sectionIndex);
     setView("reader");
-    setMenuOpen(false);
+    if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
 
   function goToTableOfContents() {
     setSelectedSectionIndex(null);
     setView("reader");
-    setMenuOpen(false);
+    if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
 
   function goToCourseOverview() {
     setView("course-overview");
-    setMenuOpen(false);
+    if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
 
@@ -231,7 +231,7 @@ export default function App() {
     setSelectedLessonId(lessonId);
     setSelectedExerciseIndex(0);
     setView("lesson-overview");
-    setMenuOpen(false);
+    if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
 
@@ -239,7 +239,7 @@ export default function App() {
     setSelectedLessonId(lessonId);
     setSelectedExerciseIndex(exerciseIndex);
     setView("lessons");
-    setMenuOpen(false);
+    if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
 
@@ -837,24 +837,39 @@ export default function App() {
                       <div className="lp-course-exercise-list">
                         {unitLessons.map(lesson => {
                           const isCurrentLesson = selectedLessonId === lesson.id;
+                          if (!hasMultipleExercises(lesson)) {
+                            return (
+                              <button
+                                key={lesson.id}
+                                role="menuitem"
+                                type="button"
+                                onClick={() => goToLesson(lesson.id, 0)}
+                                className={view === "lessons" && isCurrentLesson ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                                style={LESSON_ITEM_STYLE}
+                              >
+                                {lesson.title}
+                              </button>
+                            );
+                          }
+
                           return (
                             <details className="lp-course-lesson" key={lesson.id} defaultOpen={isCurrentLesson}>
                               <summary className={`lp-course-lesson-summary${isCurrentLesson ? " active" : ""}`}>
-                                {lesson.title}
+                                <button
+                                  role="menuitem"
+                                  type="button"
+                                  onClick={(event) => {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    goToLessonOverview(lesson.id);
+                                  }}
+                                  className="lp-course-lesson-title-button"
+                                >
+                                  {lesson.title}
+                                </button>
                               </summary>
 
                               <div className="lp-course-exercise-list">
-                                {hasMultipleExercises(lesson) && (
-                                  <button
-                                    role="menuitem"
-                                    type="button"
-                                    onClick={() => goToLessonOverview(lesson.id)}
-                                    className={view === "lesson-overview" && isCurrentLesson ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
-                                    style={LESSON_ITEM_STYLE}
-                                  >
-                                    Lesson page
-                                  </button>
-                                )}
                                 {(lesson.exercises || []).map((exercise, exerciseIndex) => (
                                   <button
                                     key={`${lesson.id}-${exercise.exercise_id}`}
@@ -884,7 +899,7 @@ export default function App() {
       <div
         className="app-content"
         onClickCapture={() => {
-          if (menuOpen) setMenuOpen(false);
+          if (isNarrowViewport && menuOpen) setMenuOpen(false);
           if (displayMenuOpen) setDisplayMenuOpen(false);
         }}
         style={{ flex: "1 1 auto", minWidth: 0, display: hideContentForMenu ? "none" : "block" }}

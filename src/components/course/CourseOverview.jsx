@@ -28,25 +28,39 @@ export default function CourseOverview({ units, lessons, selectedLessonId, selec
               <div className="lp-course-lesson-list">
                 {unitLessons.map(lesson => {
                   const isCurrentLesson = lesson.id === selectedLessonId;
+                  if (!hasMultipleExercises(lesson)) {
+                    return (
+                      <a
+                        key={lesson.id}
+                        href={`#course/${encodeURIComponent(lesson.id)}/exercise/1`}
+                        onClick={event => {
+                          event.preventDefault();
+                          onSelectExercise(lesson.id, 0);
+                        }}
+                        className={`lp-course-exercise-link${isCurrentLesson ? ' active' : ''}`}
+                      >
+                        {lesson.title}
+                      </a>
+                    );
+                  }
+
                   return (
                     <details className="lp-course-lesson" key={lesson.id} defaultOpen={isCurrentLesson}>
                       <summary className={`lp-course-lesson-summary${isCurrentLesson ? ' active' : ''}`}>
-                        {lesson.title}
+                        <button
+                          type="button"
+                          onClick={event => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            onSelectLesson(lesson.id);
+                          }}
+                          className="lp-course-lesson-title-button"
+                        >
+                          {lesson.title}
+                        </button>
                       </summary>
 
                       <div className="lp-course-exercise-list">
-                        {hasMultipleExercises(lesson) && (
-                          <a
-                            href={`#course/${encodeURIComponent(lesson.id)}`}
-                            onClick={event => {
-                              event.preventDefault();
-                              onSelectLesson(lesson.id);
-                            }}
-                            className={`lp-course-exercise-link${isCurrentLesson ? ' active' : ''}`}
-                          >
-                            Lesson page
-                          </a>
-                        )}
                         {(lesson.exercises || []).map((exercise, exerciseIndex) => (
                           <a
                             key={`${lesson.id}-${exercise.exercise_id}`}

@@ -55,10 +55,15 @@ export default function InteractiveText(props) {
   function updateTooltipPosition() {
     if (!textRef.current) return;
     const rect = textRef.current.getBoundingClientRect();
-    const maxLeft = window.innerWidth - TOOLTIP_MAX_WIDTH - VIEWPORT_PADDING;
-    const left = Math.max(VIEWPORT_PADDING, Math.min(rect.right - TOOLTIP_MAX_WIDTH, maxLeft));
+    const containerRect = textRef.current.closest(".app-content")?.getBoundingClientRect();
+    const bounds = containerRect ?? { left: 0, right: window.innerWidth };
+    const minLeft = Math.max(VIEWPORT_PADDING, bounds.left + VIEWPORT_PADDING);
+    const maxRight = Math.min(window.innerWidth - VIEWPORT_PADDING, bounds.right - VIEWPORT_PADDING);
+    const maxWidth = Math.max(160, Math.min(TOOLTIP_MAX_WIDTH, maxRight - minLeft));
+    const maxLeft = Math.max(minLeft, maxRight - maxWidth);
+    const left = Math.max(minLeft, Math.min(rect.right - maxWidth, maxLeft));
     const top = rect.bottom + TOOLTIP_GAP;
-    setTooltipPosition({ left, top });
+    setTooltipPosition({ left, top, maxWidth });
   }
 
   useEffect(() => {
@@ -115,7 +120,7 @@ export default function InteractiveText(props) {
               textTransform: "none",
               letterSpacing: 0,
               width: "fit-content",
-              maxWidth: `calc(100vw - ${VIEWPORT_PADDING * 2}px)`
+              maxWidth: tooltipPosition?.maxWidth ? `${tooltipPosition.maxWidth}px` : `calc(100vw - ${VIEWPORT_PADDING * 2}px)`
             }
           },
           props.tooltip

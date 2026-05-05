@@ -2620,6 +2620,16 @@ const phrases = {
       "christology"
     ]
   },
+  "jesus-prayer-jesus-christ-001": {
+    "arabic": "يَسُوعُ المَسِيحُ",
+    "translation": "Jesus Christ",
+    "literal": "Jesus Christ",
+    "tags": [
+      "jesus-prayer",
+      "christology",
+      "reusable"
+    ]
+  },
   "jesus-prayer-son-of-god-001": {
     "arabic": "ابْنَ اللهِ",
     "translation": "Son of God",
@@ -2637,6 +2647,18 @@ const phrases = {
       "jesus-prayer",
       "mercy",
       "petition"
+    ]
+  },
+  "have-mercy-001": {
+    "arabic": "ارْحَمْ",
+    "translation": "have mercy",
+    "literal": "have mercy",
+    "tags": [
+      "course",
+      "beginner",
+      "mercy",
+      "petition",
+      "reusable"
     ]
   },
   "to-father-001": {
@@ -2717,7 +2739,7 @@ const phrases = {
   },
   "all-holy-trinity-name-sake-001": {
     "arabic": "مِنْ أَجلِ اسْمِكَ",
-    "translation": "for Thy names sake",
+    "translation": "for Thy name's sake",
     "literal": "for the sake of your name",
     "tags": [
       "course",
@@ -2727,19 +2749,22 @@ const phrases = {
   },
   "vocative-o-lord-001": {
     "arabic": "يا رَبُّ",
-    "translation": "O Lord",
+    "translation": "Lord",
     "literal": "O Lord",
     "tags": [
       "course",
       "beginner",
       "all-holy-trinity",
+      "jesus-prayer",
+      "lord-have-mercy",
       "vocative",
-      "address"
+      "address",
+      "reusable"
     ]
   },
   "vocative-o-master-001": {
     "arabic": "يا سَيِّدُ",
-    "translation": "O Master",
+    "translation": "Master",
     "literal": "O Master",
     "tags": [
       "course",
@@ -2751,7 +2776,7 @@ const phrases = {
   },
   "vocative-o-holy-one-001": {
     "arabic": "يا قُدُّوسُ",
-    "translation": "O Holy One",
+    "translation": "Holy One",
     "literal": "O Holy One",
     "tags": [
       "course",

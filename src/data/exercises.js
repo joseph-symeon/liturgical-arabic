@@ -255,6 +255,39 @@ export const exerciseDefinitions = [
     "audio_clip": null
   },
   {
+    "id": "all-holy-trinity-address",
+    "segment_ids": [
+      "course-all-holy-trinity-address"
+    ],
+    "title_phrase": "all-holy-trinity-001",
+    "audio_clip": null
+  },
+  {
+    "id": "all-holy-trinity-lord",
+    "segment_ids": [
+      "course-all-holy-trinity-lord"
+    ],
+    "title": "Lord, cleanse us",
+    "title_phrase": "vocative-o-lord-001",
+    "audio_clip": null
+  },
+  {
+    "id": "all-holy-trinity-master",
+    "segment_ids": [
+      "course-all-holy-trinity-master"
+    ],
+    "title_phrase": "vocative-o-master-001",
+    "audio_clip": null
+  },
+  {
+    "id": "all-holy-trinity-holy-one",
+    "segment_ids": [
+      "course-all-holy-trinity-holy-one"
+    ],
+    "title_phrase": "vocative-o-holy-one-001",
+    "audio_clip": null
+  },
+  {
     "id": "all-holy-trinity",
     "segment_ids": [
       "course-all-holy-trinity-address",
@@ -262,7 +295,6 @@ export const exerciseDefinitions = [
       "course-all-holy-trinity-master",
       "course-all-holy-trinity-holy-one"
     ],
-    "title": "All Holy Trinity",
     "title_phrase": "all-holy-trinity-001",
     "audio_clip": null
   }
