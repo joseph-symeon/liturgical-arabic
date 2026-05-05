@@ -1,7 +1,7 @@
 import React from 'react';
 import LiturgyLine from '../LiturgyLine.jsx';
 
-export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', readerLayout = 'paragraph', speechRate = 0.8, arabicFontFamily, arabicFontWeight }) {
+export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', readerLayout = 'paragraph', speechRate = 0.8, arabicFontFamily, arabicFontWeight, arabicFontSize }) {
   if (!lines || lines.length === 0) return null;
 
   const sortedLines = [...lines]
@@ -42,6 +42,7 @@ export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', 
               speechRate={speechRate}
               arabicFontFamily={arabicFontFamily}
               arabicFontWeight={arabicFontWeight}
+              arabicFontSize={arabicFontSize}
             />
           </div>
         ))}
@@ -60,6 +61,7 @@ export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', 
               speechRate={speechRate}
               arabicFontFamily={arabicFontFamily}
               arabicFontWeight={arabicFontWeight}
+              arabicFontSize={arabicFontSize}
             />
           </div>
         );

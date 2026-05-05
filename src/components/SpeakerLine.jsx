@@ -18,6 +18,7 @@ export default function SpeakerLine(props) {
     ? getArabicText(phrase, props.arabicMode)
     : props.speaker;
   const arabicFontFamily = props.arabicFontFamily || '"Noto Naskh Arabic", serif';
+  const arabicFontSize = props.arabicFontSize || 24;
 
   useEffect(() => {
     if (!containerRef.current || typeof ResizeObserver === "undefined") return;
@@ -33,7 +34,7 @@ export default function SpeakerLine(props) {
     return h(
       "span",
       {
-	        className: "liturgical-red relative text-2xl leading-loose",
+	        className: "liturgical-red relative leading-loose",
         style: {
           flex: isStacked ? "0 0 auto" : "0 0 90px",
           display: !hasSpeaker || (isStacked && !showSpeaker) ? "none" : "block",
@@ -42,6 +43,7 @@ export default function SpeakerLine(props) {
           whiteSpace: "nowrap",
           visibility: showSpeaker ? "visible" : "hidden",
           fontFamily: arabicFontFamily,
+          fontSize: arabicFontSize,
           fontWeight: 500
         }
       },
@@ -90,7 +92,8 @@ export default function SpeakerLine(props) {
         arabicMode: props.arabicMode,
         speechRate: props.speechRate,
         arabicFontFamily: props.arabicFontFamily,
-        arabicFontWeight: props.arabicFontWeight
+        arabicFontWeight: props.arabicFontWeight,
+        arabicFontSize: props.arabicFontSize
       })
     )
   );

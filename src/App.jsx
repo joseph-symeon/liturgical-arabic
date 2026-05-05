@@ -8,7 +8,7 @@ import units from "./data/units.js";
 import lessons from "./data/lessons.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
 import { speakArabic } from "./utils/arabic.js";
-import chrysostomIcon from "./assets/chrysostom-icon.png";
+import appIcons from "./assets/icons/index.js";
 
 const NAV_ITEM_STYLE = {
   display: "block",
@@ -26,7 +26,6 @@ const NAV_ITEM_STYLE = {
 
 const LESSON_ITEM_STYLE = { ...NAV_ITEM_STYLE };
 const MENU_GROUP_STYLE = {
-  minWidth: "160px",
   padding: "10px 8px"
 };
 const MENU_LABEL_STYLE = {
@@ -48,11 +47,6 @@ const SETTING_BUTTON_STYLE = {
 const SYSTEM_SANS_FONT = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 const ARABIC_FONTS = [
   { label: "System sans", value: SYSTEM_SANS_FONT },
-  { label: "Noto Naskh Arabic", value: '"Noto Naskh Arabic", serif' },
-  { label: "Noto Sans Arabic", value: '"Noto Sans Arabic", sans-serif' },
-  { label: "Scheherazade New", value: '"Scheherazade New", serif' },
-  { label: "Lateef", value: '"Lateef", serif' },
-  { label: "Amiri", value: '"Amiri", serif' },
   { label: "System serif", value: "serif" }
 ];
 const ARABIC_WEIGHTS = [
@@ -61,6 +55,8 @@ const ARABIC_WEIGHTS = [
   { label: "Medium", value: "500" },
   { label: "Semibold", value: "600" }
 ];
+const SIDE_PANEL_WIDTH = 320;
+const DEFAULT_ARABIC_FONT_SIZE = 22;
 
 const ORDERED_UNITS = [...units].sort((a, b) => a.display_order - b.display_order);
 const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
@@ -69,6 +65,10 @@ const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
     .sort((a, b) => a.display_order - b.display_order)
 );
 const DEFAULT_LESSON_ID = COURSE_LESSONS[0]?.id ?? lessons[0]?.id ?? null;
+
+function hasMultipleExercises(lesson) {
+  return (lesson?.exercises?.length ?? 0) > 1;
+}
 
 function parseNavigationHash() {
   if (typeof window === "undefined") {
@@ -92,7 +92,13 @@ function parseNavigationHash() {
     const parts = hash.split("/");
     const lessonId = parts[1] || DEFAULT_LESSON_ID;
     if (parts[2] !== "exercise") {
-      return { view: "lesson-overview", selectedSectionIndex: null, selectedLessonId: lessonId, selectedExerciseIndex: 0 };
+      const lesson = lessons.find(item => item.id === lessonId);
+      return {
+        view: hasMultipleExercises(lesson) ? "lesson-overview" : "lessons",
+        selectedSectionIndex: null,
+        selectedLessonId: lessonId,
+        selectedExerciseIndex: 0
+      };
     }
     const exerciseNumber = parts[2] === "exercise" ? Number(parts[3]) : 1;
     const selectedExerciseIndex = Number.isInteger(exerciseNumber) && exerciseNumber > 0 ? exerciseNumber - 1 : 0;
@@ -127,11 +133,13 @@ export default function App() {
   const [displayMenuOpen, setDisplayMenuOpen] = useState(false);
   const [arabicMode, setArabicMode] = useState("vocalized");
   const [readerLayout, setReaderLayout] = useState("line");
-  const [showQuietPrayers, setShowQuietPrayers] = useState(true);
+  const [showQuietPrayers, setShowQuietPrayers] = useState(false);
   const [arabicFontFamily, setArabicFontFamily] = useState(SYSTEM_SANS_FONT);
   const [arabicFontWeight, setArabicFontWeight] = useState("300");
+  const [arabicFontSize, setArabicFontSize] = useState(DEFAULT_ARABIC_FONT_SIZE);
   const [speechRate, setSpeechRate] = useState(0.8);
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
+  const [showCompactTitle, setShowCompactTitle] = useState(false);
 
   useEffect(() => {
     function updateViewport() {
@@ -141,6 +149,21 @@ export default function App() {
     window.addEventListener("resize", updateViewport);
     return () => window.removeEventListener("resize", updateViewport);
   }, []);
+
+  useEffect(() => {
+    if (!isNarrowViewport) {
+      setShowCompactTitle(false);
+      return undefined;
+    }
+
+    function updateCompactTitle() {
+      setShowCompactTitle(window.scrollY > 120);
+    }
+
+    updateCompactTitle();
+    window.addEventListener("scroll", updateCompactTitle, { passive: true });
+    return () => window.removeEventListener("scroll", updateCompactTitle);
+  }, [isNarrowViewport]);
 
   useEffect(() => {
     function updateNavigationFromHash() {
@@ -191,6 +214,11 @@ export default function App() {
   }
 
   function goToLessonOverview(lessonId) {
+    const lesson = lessons.find(item => item.id === lessonId);
+    if (!hasMultipleExercises(lesson)) {
+      goToLesson(lessonId, 0);
+      return;
+    }
     setSelectedLessonId(lessonId);
     setSelectedExerciseIndex(0);
     setView("lesson-overview");
@@ -253,7 +281,15 @@ export default function App() {
     setSpeechRate(rate => Math.max(0.5, Math.min(1.2, Math.round((rate + delta) * 100) / 100)));
   }
 
+  function adjustArabicFontSize(delta) {
+    setArabicFontSize(size => Math.max(18, Math.min(36, size + delta)));
+  }
+
   const selectedLesson = lessons.find(l => l.id === selectedLessonId);
+  const selectedLessonUnit = ORDERED_UNITS.find(unit => unit.id === selectedLesson?.unit_id);
+  const selectedLessonWithUnit = selectedLesson
+    ? { ...selectedLesson, unitTitle: selectedLessonUnit?.title }
+    : null;
   const selectedLessonIndex = COURSE_LESSONS.findIndex(lesson => lesson.id === selectedLessonId);
   const clampedExerciseIndex = Math.max(0, Math.min(selectedExerciseIndex, (selectedLesson?.exercises?.length ?? 1) - 1));
   const hasPreviousExercise = selectedLessonIndex > 0 || clampedExerciseIndex > 0;
@@ -281,8 +317,25 @@ export default function App() {
   const nextSectionTitle = hasNextSection
     ? liturgySections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
+  const selectedLiturgySection = selectedSectionIndex === null ? null : liturgySections[selectedSectionIndex];
+  const compactPageTitle =
+    view === "reader"
+      ? (selectedLiturgySection?.section ?? "Table of Contents")
+      : view === "course-overview"
+        ? "Course Overview"
+        : view === "lesson-overview" || view === "lessons"
+          ? selectedLesson?.title
+          : view === "home"
+            ? "Liturgical Arabic"
+            : "";
   const speechRateDisplay = `${Number(speechRate.toFixed(2))}×`;
-  const hideContentForMenu = menuOpen && isNarrowViewport;
+  const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
+  const shouldShowCompactTitle =
+    isNarrowViewport &&
+    showCompactTitle &&
+    !menuOpen &&
+    !displayMenuOpen &&
+    Boolean(compactPageTitle);
   const liturgyMenuItems = liturgySections.reduce((items, section, sectionIndex) => {
     if (!section.section_group) {
       items.push({ type: "section", section, sectionIndex });
@@ -307,8 +360,8 @@ export default function App() {
       <main className="mx-auto max-w-[700px] px-4 py-10 leading-8">
         <header className="mb-8 text-center" dir="ltr">
           <img
-            src={chrysostomIcon}
-            alt="Saint John Chrysostom"
+            src={appIcons.chrysostom.src}
+            alt={appIcons.chrysostom.title}
             className="mx-auto mb-6 h-auto max-h-[260px] w-auto max-w-[58vw] opacity-80 dark:invert"
           />
           <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Liturgical Arabic</h1>
@@ -317,7 +370,7 @@ export default function App() {
           <button
             type="button"
             onClick={goToTableOfContents}
-            className="rounded border border-stone-300 px-4 py-3 text-left dark:border-stone-600"
+            className="rounded border border-stone-300 px-4 py-3 text-left dark:border-[var(--dark-border)]"
           >
             Liturgy Text
           </button>
@@ -325,7 +378,7 @@ export default function App() {
             <button
               type="button"
               onClick={goToCourseOverview}
-              className="rounded border border-stone-300 px-4 py-3 text-left dark:border-stone-600"
+              className="rounded border border-stone-300 px-4 py-3 text-left dark:border-[var(--dark-border)]"
             >
               Course
             </button>
@@ -336,231 +389,363 @@ export default function App() {
   }
 
   function renderDisplayMenu() {
+    function renderDisplaySection(title, children) {
+      return (
+        <section className="border-t border-stone-200 py-4 first:border-t-0 first:pt-0 dark:border-[var(--dark-border)]">
+          <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+            {title}
+          </h2>
+          <div className="grid gap-3">
+            {children}
+          </div>
+        </section>
+      );
+    }
+
+    function renderField(label, children) {
+      return (
+        <div>
+          <div className="mb-1 text-xs text-stone-500 dark:text-[var(--dark-muted)]">{label}</div>
+          {children}
+        </div>
+      );
+    }
+
+    function renderButtonRow(children) {
+      return <div className="flex flex-wrap items-center gap-2">{children}</div>;
+    }
+
     return (
       <div
-        role="menu"
+        role="group"
         aria-label="Display settings"
-        className="fixed right-3 top-12 z-30 w-[280px] rounded border border-stone-200 bg-white p-3 text-stone-900 shadow-lg dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+        className="text-stone-900 dark:text-[var(--dark-text)]"
         dir="ltr"
         onClick={event => event.stopPropagation()}
       >
-        <div className="text-stone-400 dark:text-stone-500" style={{ ...MENU_LABEL_STYLE, padding: "0 0 8px" }}>
+        <div className="text-stone-400 dark:text-[var(--dark-muted)]" style={{ ...MENU_LABEL_STYLE, padding: "0 0 12px" }}>
           Display
         </div>
-        <div className="mb-2">
-          <label className="mb-1 block text-xs text-stone-500 dark:text-stone-400" htmlFor="arabic-font-select">
-            Arabic font
-          </label>
-          <select
-            id="arabic-font-select"
-            value={arabicFontFamily}
-            onChange={(event) => setArabicFontFamily(event.target.value)}
-            className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-stone-600 dark:bg-stone-700"
-          >
-            {ARABIC_FONTS.map(font => (
-              <option key={font.value} value={font.value}>
-                {font.label}
-              </option>
+        {renderDisplaySection("Text", (
+          <>
+            {renderField("Size", (
+              renderButtonRow(
+                <>
+                  <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(-1)}>−</button>
+                  <div className="lp-speed-value">{arabicFontSize}px</div>
+                  <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(1)}>+</button>
+                  <button
+                    type="button"
+                    onClick={() => setArabicFontSize(DEFAULT_ARABIC_FONT_SIZE)}
+                    className="bg-stone-100 dark:bg-[var(--dark-surface)]"
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Reset
+                  </button>
+                </>
+              )
             ))}
-          </select>
-        </div>
-        <div className="mb-2">
-          <label className="mb-1 block text-xs text-stone-500 dark:text-stone-400" htmlFor="arabic-weight-select">
-            Arabic weight
-          </label>
-          <select
-            id="arabic-weight-select"
-            value={arabicFontWeight}
-            onChange={(event) => setArabicFontWeight(event.target.value)}
-            className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-stone-600 dark:bg-stone-700"
-          >
-            {ARABIC_WEIGHTS.map(weight => (
-              <option key={weight.value} value={weight.value}>
-                {weight.label}
-              </option>
+            {renderField("Arabic font", (
+              <select
+                id="arabic-font-select"
+                value={arabicFontFamily}
+                onChange={(event) => setArabicFontFamily(event.target.value)}
+                className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-[var(--dark-border)] dark:bg-[var(--dark-surface)]"
+              >
+                {ARABIC_FONTS.map(font => (
+                  <option key={font.value} value={font.value}>
+                    {font.label}
+                  </option>
+                ))}
+              </select>
             ))}
-          </select>
-        </div>
-        <div className="mb-2">
-          <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Vowels</div>
-          <div style={{ display: "flex", gap: "6px" }}>
-            <button
-              type="button"
-              onClick={() => setArabicMode("vocalized")}
-              className={arabicMode === "vocalized" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-              style={SETTING_BUTTON_STYLE}
-            >
-              Vocalized
-            </button>
-            <button
-              type="button"
-              onClick={() => setArabicMode("unvocalized")}
-              className={arabicMode === "unvocalized" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-              style={SETTING_BUTTON_STYLE}
-            >
-              Unvocalized
-            </button>
-          </div>
-        </div>
-        <div>
-          <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Layout</div>
-          <div style={{ display: "flex", gap: "6px" }}>
-            <button
-              type="button"
-              onClick={() => setReaderLayout("line")}
-              className={readerLayout === "line" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-              style={SETTING_BUTTON_STYLE}
-            >
-              Line
-            </button>
-            <button
-              type="button"
-              onClick={() => setReaderLayout("paragraph")}
-              className={readerLayout === "paragraph" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-              style={SETTING_BUTTON_STYLE}
-            >
-              Paragraph
-            </button>
-          </div>
-        </div>
-        <div className="mt-3">
-          <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Silent prayers</div>
-          <div style={{ display: "flex", gap: "6px" }}>
-            <button
-              type="button"
-              onClick={() => setShowQuietPrayers(true)}
-              className={showQuietPrayers ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-              style={SETTING_BUTTON_STYLE}
-            >
-              Show
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowQuietPrayers(false)}
-              className={!showQuietPrayers ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-              style={SETTING_BUTTON_STYLE}
-            >
-              Hide
-            </button>
-          </div>
-        </div>
-        <div className="mt-3">
-          <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Reader speed</div>
-          <div className="lp-speed-row">
-            <button
-              type="button"
-              className="lp-speed-adjust"
-              onClick={() => adjustSpeechRate(-0.05)}
-            >
-              −
-            </button>
-            <div className="lp-speed-value">{speechRateDisplay}</div>
-            <button
-              type="button"
-              className="lp-speed-adjust"
-              onClick={() => adjustSpeechRate(0.05)}
-            >
-              +
-            </button>
-          </div>
-          <button
-            type="button"
-            onClick={() => speakArabic("بِسَلامٍ", speechRate)}
-            className="mt-2 bg-stone-100 dark:bg-stone-700"
-            style={SETTING_BUTTON_STYLE}
-          >
-            Preview
-          </button>
-        </div>
+            {renderField("Arabic weight", (
+              <select
+                id="arabic-weight-select"
+                value={arabicFontWeight}
+                onChange={(event) => setArabicFontWeight(event.target.value)}
+                className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-[var(--dark-border)] dark:bg-[var(--dark-surface)]"
+              >
+                {ARABIC_WEIGHTS.map(weight => (
+                  <option key={weight.value} value={weight.value}>
+                    {weight.label}
+                  </option>
+                ))}
+              </select>
+            ))}
+          </>
+        ))}
+        {renderDisplaySection("Reading", (
+          <>
+            {renderField("Vowels", (
+              renderButtonRow(
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setArabicMode("vocalized")}
+                    className={arabicMode === "vocalized" ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Vocalized
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setArabicMode("unvocalized")}
+                    className={arabicMode === "unvocalized" ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Unvocalized
+                  </button>
+                </>
+              )
+            ))}
+            {renderField("Layout", (
+              renderButtonRow(
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setReaderLayout("line")}
+                    className={readerLayout === "line" ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Line
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setReaderLayout("paragraph")}
+                    className={readerLayout === "paragraph" ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Paragraph
+                  </button>
+                </>
+              )
+            ))}
+            {renderField("Silent prayers", (
+              renderButtonRow(
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setShowQuietPrayers(false)}
+                    className={!showQuietPrayers ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Hide
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowQuietPrayers(true)}
+                    className={showQuietPrayers ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Show
+                  </button>
+                </>
+              )
+            ))}
+          </>
+        ))}
+        {renderDisplaySection("Audio", (
+          renderField("Reader speed", (
+            renderButtonRow(
+              <>
+                <button type="button" className="lp-speed-adjust" onClick={() => adjustSpeechRate(-0.05)}>−</button>
+                <div className="lp-speed-value">{speechRateDisplay}</div>
+                <button type="button" className="lp-speed-adjust" onClick={() => adjustSpeechRate(0.05)}>+</button>
+                <button
+                  type="button"
+                  onClick={() => speakArabic("بِسَلامٍ", speechRate)}
+                  className="bg-stone-100 dark:bg-[var(--dark-surface)]"
+                  style={SETTING_BUTTON_STYLE}
+                >
+                  Preview
+                </button>
+              </>
+            )
+          ))
+        ))}
       </div>
     );
   }
 
-  return (
-    <div
-      className="min-h-screen bg-white dark:bg-stone-900 font-sans text-stone-900 dark:text-stone-100"
-      dir="ltr"
-      style={{ display: "flex", flexDirection: "row", alignItems: "stretch" }}
-    >
+  function renderPanelToggle({ side, isOpen, onClick, label, children }) {
+    const isLeft = side === "left";
+    return (
       <button
-        onClick={() => {
-          setMenuOpen(o => !o);
-          setDisplayMenuOpen(false);
-        }}
-        aria-label="Open menu"
-        aria-expanded={menuOpen}
-        style={{
-          position: menuOpen ? "static" : "fixed",
-          top: "6px",
-          left: "10px",
-          zIndex: 30,
-          alignSelf: "flex-start",
-          fontSize: "20px",
-          lineHeight: 1,
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          padding: "4px 8px",
-          color: "inherit"
-        }}
-      >
-        ☰
-      </button>
-
-      <button
-        onClick={() => {
-          setDisplayMenuOpen(o => !o);
-          setMenuOpen(false);
-        }}
-        aria-label="Display settings"
-        aria-expanded={displayMenuOpen}
-        title="Display settings"
-        className="rounded bg-white/80 text-stone-900 hover:bg-stone-100 dark:bg-stone-900/80 dark:text-stone-100 dark:hover:bg-stone-800"
+        onClick={onClick}
+        aria-label={label}
+        aria-expanded={isOpen}
+        title={label}
+        className="rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
         style={{
           position: "fixed",
-          top: "8px",
-          right: "12px",
-          zIndex: 30,
+          top: isNarrowViewport ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
+          [isLeft ? "left" : "right"]: "12px",
+          zIndex: 40,
           border: "none",
           cursor: "pointer",
           padding: "6px",
           color: "inherit"
         }}
       >
-        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-          <line x1="4" y1="6" x2="20" y2="6" />
-          <circle cx="9" cy="6" r="2" fill="currentColor" stroke="none" />
-          <line x1="4" y1="12" x2="20" y2="12" />
-          <circle cx="15" cy="12" r="2" fill="currentColor" stroke="none" />
-          <line x1="4" y1="18" x2="20" y2="18" />
-          <circle cx="11" cy="18" r="2" fill="currentColor" stroke="none" />
-        </svg>
+        {children}
       </button>
+    );
+  }
 
-      {displayMenuOpen && renderDisplayMenu()}
+  return (
+    <div
+      className="min-h-screen bg-white dark:bg-[var(--dark-bg)] font-sans text-stone-900 dark:text-[var(--dark-text)]"
+      dir="ltr"
+      style={{ display: "flex", flexDirection: "row", alignItems: "stretch" }}
+    >
+      <div
+        aria-hidden="true"
+        className="bg-white dark:bg-[var(--dark-bg)]"
+        style={{
+          display: isNarrowViewport ? "block" : "none",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "calc(env(safe-area-inset-top, 0px) + 52px)",
+          zIndex: 39,
+          borderBottom: "1px solid transparent"
+        }}
+      />
+
+      {isNarrowViewport && compactPageTitle && (
+        <div
+          aria-hidden="true"
+          className="text-stone-900 dark:text-[var(--dark-text)]"
+          style={{
+            position: "fixed",
+            top: "calc(env(safe-area-inset-top, 0px) + 11px)",
+            left: "58px",
+            right: "58px",
+            zIndex: 40,
+            opacity: shouldShowCompactTitle ? 1 : 0,
+            pointerEvents: "none",
+            overflow: "hidden",
+            textAlign: "center",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            fontSize: "14px",
+            fontWeight: 600,
+            lineHeight: "30px",
+            transition: "opacity 120ms ease"
+          }}
+        >
+          {compactPageTitle}
+        </div>
+      )}
+
+      {!(isNarrowViewport && displayMenuOpen) && renderPanelToggle({
+          side: "left",
+          isOpen: menuOpen,
+          label: "Navigation",
+          onClick: () => {
+            setMenuOpen(o => !o);
+            if (isNarrowViewport) setDisplayMenuOpen(false);
+          },
+          children: (
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="4" y1="7" x2="20" y2="7" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="17" x2="20" y2="17" />
+            </svg>
+          )
+        })}
+
+      {!(isNarrowViewport && menuOpen) && renderPanelToggle({
+          side: "right",
+          isOpen: displayMenuOpen,
+          label: "Display settings",
+          onClick: () => {
+            setDisplayMenuOpen(o => !o);
+            if (isNarrowViewport) setMenuOpen(false);
+          },
+          children: (
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="4" y1="6" x2="20" y2="6" />
+              <circle cx="9" cy="6" r="2" fill="currentColor" stroke="none" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <circle cx="15" cy="12" r="2" fill="currentColor" stroke="none" />
+              <line x1="4" y1="18" x2="20" y2="18" />
+              <circle cx="11" cy="18" r="2" fill="currentColor" stroke="none" />
+            </svg>
+          )
+        })}
+
+      {isNarrowViewport && menuOpen && (
+        <button
+          type="button"
+          aria-label="Close navigation"
+          onClick={() => setMenuOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 34,
+            border: 0,
+            background: "transparent",
+            cursor: "default"
+          }}
+        />
+      )}
+
+      {isNarrowViewport && displayMenuOpen && (
+        <button
+          type="button"
+          aria-label="Close display settings"
+          onClick={() => setDisplayMenuOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 34,
+            border: 0,
+            background: "transparent",
+            cursor: "default"
+          }}
+        />
+      )}
 
       {menuOpen && (
       <aside
-        className="bg-white dark:bg-stone-900"
+        className="bg-white dark:bg-[var(--dark-bg)] border-r border-stone-200 dark:border-[var(--dark-border)]"
         dir="ltr"
-        style={{ display: "flex", alignItems: "flex-start", gap: "10px", minHeight: "100vh", padding: "10px 12px 10px 0" }}
+        style={{
+          position: isNarrowViewport ? "fixed" : "sticky",
+          top: 0,
+          left: 0,
+          zIndex: 35,
+          flex: `0 0 ${SIDE_PANEL_WIDTH}px`,
+          width: SIDE_PANEL_WIDTH,
+          maxWidth: "calc(100vw - 56px)",
+          minHeight: "100vh",
+          maxHeight: "100vh",
+          overflowY: "auto",
+          padding: "48px 12px 14px"
+        }}
       >
           <div
             role="menu"
-            className="bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100"
-            style={{ display: "flex", flex: "0 0 300px", flexDirection: "column", gap: "14px", alignItems: "stretch", maxHeight: "calc(100vh - 20px)", overflowY: "auto", margin: 0, padding: "14px", listStyle: "none", borderRadius: "8px", fontFamily: "Arial, sans-serif", fontSize: "14px", boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
+            className="text-stone-900 dark:text-[var(--dark-text)]"
+            style={{ display: "flex", flexDirection: "column", gap: "14px", alignItems: "stretch", margin: 0, padding: 0, listStyle: "none", fontFamily: "Arial, sans-serif", fontSize: "14px" }}
           >
               <div role="group" aria-label="Liturgy Text" style={MENU_GROUP_STYLE}>
+                <div className="text-stone-400 dark:text-[var(--dark-muted)]" style={{ ...MENU_LABEL_STYLE, padding: "0 2px 12px" }}>
+                  Navigation
+                </div>
                 <button
                   role="menuitem"
                   type="button"
                   onClick={goHome}
-                  className={view === "home" ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                  className={view === "home" ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
                   style={SECTION_ITEM_STYLE}
                 >
                   Home
                 </button>
-                <div className="mt-3 text-stone-400 dark:text-stone-500" style={MENU_LABEL_STYLE}>
+                <div className="mt-3 text-stone-400 dark:text-[var(--dark-muted)]" style={MENU_LABEL_STYLE}>
                   Liturgy Text
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -568,7 +753,7 @@ export default function App() {
                   role="menuitem"
                   type="button"
                   onClick={goToTableOfContents}
-                  className={view === "reader" && selectedSectionIndex === null ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                  className={view === "reader" && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
                   style={SECTION_ITEM_STYLE}
                 >
                   Table of Contents
@@ -581,7 +766,7 @@ export default function App() {
                         role="menuitem"
                         type="button"
                         onClick={() => goToLiturgySection(item.sectionIndex)}
-                        className={view === "reader" && selectedSectionIndex === item.sectionIndex ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                        className={view === "reader" && selectedSectionIndex === item.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
                         style={SECTION_ITEM_STYLE}
                       >
                         {item.section.section || `Section ${item.sectionIndex + 1}`}
@@ -592,7 +777,7 @@ export default function App() {
                   const isCurrentGroup = item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex);
                   return (
                     <details className="lp-course-lesson" key={item.group} defaultOpen={isCurrentGroup || selectedSectionIndex === null}>
-                      <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-stone-500">
+                      <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
                         {item.group}
                       </summary>
                       <div className="lp-course-exercise-list">
@@ -602,7 +787,7 @@ export default function App() {
                             role="menuitem"
                             type="button"
                             onClick={() => goToLiturgySection(sectionItem.sectionIndex)}
-                            className={view === "reader" && selectedSectionIndex === sectionItem.sectionIndex ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                            className={view === "reader" && selectedSectionIndex === sectionItem.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
                             style={SECTION_ITEM_STYLE}
                           >
                             {sectionItem.section.section || `Section ${sectionItem.sectionIndex + 1}`}
@@ -615,10 +800,10 @@ export default function App() {
                 </div>
               </div>
 
-              <div role="separator" aria-hidden="true" className="border-t border-stone-200 dark:border-stone-600" />
+              <div role="separator" aria-hidden="true" className="border-t border-stone-200 dark:border-[var(--dark-border)]" />
 
               <div role="group" aria-label="Course" style={MENU_GROUP_STYLE}>
-                <div className="text-stone-400 dark:text-stone-500" style={MENU_LABEL_STYLE}>
+                <div className="text-stone-400 dark:text-[var(--dark-muted)]" style={MENU_LABEL_STYLE}>
                   Course
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -626,7 +811,7 @@ export default function App() {
                   role="menuitem"
                   type="button"
                   onClick={goToCourseOverview}
-                  className={view === "course-overview" ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                  className={view === "course-overview" ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
                   style={LESSON_ITEM_STYLE}
                 >
                   Course Overview
@@ -635,13 +820,12 @@ export default function App() {
                   const unitLessons = COURSE_LESSONS.filter(l => l.unit_id === unit.id);
                   const isCurrentUnit = unitLessons.some(lesson => lesson.id === selectedLessonId);
                   return (
-                    <details className="lp-course-unit" key={unit.id} defaultOpen={isCurrentUnit || view === "course-overview"}>
-                      <summary className="lp-course-unit-summary">
-                        <span>Unit {unit.display_order}</span>
-                        <span>{unit.title}</span>
+                    <details className="lp-course-lesson" key={unit.id} defaultOpen={isCurrentUnit || view === "course-overview"}>
+                      <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+                        {unit.title}
                       </summary>
 
-                      <div className="lp-course-lesson-list">
+                      <div className="lp-course-exercise-list">
                         {unitLessons.map(lesson => {
                           const isCurrentLesson = selectedLessonId === lesson.id;
                           return (
@@ -651,22 +835,24 @@ export default function App() {
                               </summary>
 
                               <div className="lp-course-exercise-list">
-                                <button
-                                  role="menuitem"
-                                  type="button"
-                                  onClick={() => goToLessonOverview(lesson.id)}
-                                  className={view === "lesson-overview" && isCurrentLesson ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
-                                  style={LESSON_ITEM_STYLE}
-                                >
-                                  Lesson page
-                                </button>
+                                {hasMultipleExercises(lesson) && (
+                                  <button
+                                    role="menuitem"
+                                    type="button"
+                                    onClick={() => goToLessonOverview(lesson.id)}
+                                    className={view === "lesson-overview" && isCurrentLesson ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                                    style={LESSON_ITEM_STYLE}
+                                  >
+                                    Lesson page
+                                  </button>
+                                )}
                                 {(lesson.exercises || []).map((exercise, exerciseIndex) => (
                                   <button
                                     key={`${lesson.id}-${exercise.exercise_id}`}
                                     role="menuitem"
                                     type="button"
                                     onClick={() => goToLesson(lesson.id, exerciseIndex)}
-                                    className={view === "lessons" && isCurrentLesson && clampedExerciseIndex === exerciseIndex ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                                    className={view === "lessons" && isCurrentLesson && clampedExerciseIndex === exerciseIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
                                     style={LESSON_ITEM_STYLE}
                                   >
                                     {getExerciseTitle(lesson, exerciseIndex)}
@@ -687,6 +873,7 @@ export default function App() {
       )}
 
       <div
+        className="app-content"
         onClickCapture={() => {
           if (menuOpen) setMenuOpen(false);
           if (displayMenuOpen) setDisplayMenuOpen(false);
@@ -703,6 +890,7 @@ export default function App() {
             speechRate={speechRate}
             arabicFontFamily={arabicFontFamily}
             arabicFontWeight={arabicFontWeight}
+            arabicFontSize={arabicFontSize}
             hasPreviousSection={hasPreviousSection}
             hasNextSection={hasNextSection}
             previousSectionTitle={previousSectionTitle}
@@ -723,24 +911,22 @@ export default function App() {
             onSelectExercise={goToLesson}
           />
         )}
-        {view === "lesson-overview" && selectedLesson && (
+        {view === "lesson-overview" && selectedLessonWithUnit && (
           <LessonOverview
-            lesson={selectedLesson}
-            arabicMode={arabicMode}
-            speechRate={speechRate}
-            arabicFontFamily={arabicFontFamily}
+            lesson={selectedLessonWithUnit}
             onCourseOverview={goToCourseOverview}
             onSelectExercise={goToLesson}
           />
         )}
-        {view === "lessons" && selectedLesson && (
+        {view === "lessons" && selectedLessonWithUnit && (
           <LessonPage
-            lesson={selectedLesson}
+            lesson={selectedLessonWithUnit}
             arabicMode={arabicMode}
             readerLayout={readerLayout}
             speechRate={speechRate}
             arabicFontFamily={arabicFontFamily}
             arabicFontWeight={arabicFontWeight}
+            arabicFontSize={arabicFontSize}
             selectedExerciseIndex={clampedExerciseIndex}
             hasPreviousExercise={hasPreviousExercise}
             hasNextExercise={hasNextExercise}
@@ -754,7 +940,7 @@ export default function App() {
         {view === "lessons" && !selectedLesson && (
           <main className="mx-auto max-w-[700px] px-4 py-10 leading-8" dir="ltr">
             <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Lesson not found</h1>
-            <p className="text-stone-600 dark:text-stone-300">
+            <p className="text-stone-600 dark:text-[var(--dark-muted)]">
               No lesson is configured for "{selectedLessonId}".
             </p>
           </main>
@@ -762,12 +948,34 @@ export default function App() {
         {view === "lesson-overview" && !selectedLesson && (
           <main className="mx-auto max-w-[700px] px-4 py-10 leading-8" dir="ltr">
             <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Lesson not found</h1>
-            <p className="text-stone-600 dark:text-stone-300">
+            <p className="text-stone-600 dark:text-[var(--dark-muted)]">
               No lesson is configured for "{selectedLessonId}".
             </p>
           </main>
         )}
       </div>
+
+      {displayMenuOpen && (
+        <aside
+          className="bg-white dark:bg-[var(--dark-bg)] border-l border-stone-200 dark:border-[var(--dark-border)]"
+          dir="ltr"
+          style={{
+            position: isNarrowViewport ? "fixed" : "sticky",
+            top: 0,
+            right: 0,
+            zIndex: 35,
+            flex: `0 0 ${SIDE_PANEL_WIDTH}px`,
+            width: SIDE_PANEL_WIDTH,
+            maxWidth: "calc(100vw - 56px)",
+            minHeight: "100vh",
+            maxHeight: "100vh",
+            overflowY: "auto",
+            padding: "48px 16px 16px"
+          }}
+        >
+          {renderDisplayMenu()}
+        </aside>
+      )}
     </div>
   );
 }

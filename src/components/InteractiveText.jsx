@@ -15,7 +15,7 @@ export default function InteractiveText(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [usesHover, setUsesHover] = useState(false);
-  const [tooltipPosition, setTooltipPosition] = useState({ left: VIEWPORT_PADDING, top: VIEWPORT_PADDING });
+  const [tooltipPosition, setTooltipPosition] = useState(null);
   const textRef = useRef(null);
   const showTranslation = usesHover ? isHovered : isOpen;
   const underlineCls = showTranslation
@@ -82,6 +82,7 @@ export default function InteractiveText(props) {
       speakArabic(props.spokenText, props.speechRate);
     } else {
       document.dispatchEvent(new CustomEvent("interactive-text-open", { detail: idRef.current }));
+      setTooltipPosition(null);
       setIsOpen(true);
     }
   }
@@ -105,11 +106,14 @@ export default function InteractiveText(props) {
           "span",
           {
             className:
-              "fixed z-20 inline-block max-w-72 rounded-xl border border-stone-200 dark:border-stone-600 bg-white dark:bg-stone-800 p-3 text-left text-sm font-normal leading-normal text-stone-900 dark:text-stone-100 shadow-lg",
+              "fixed z-20 inline-block max-w-72 rounded-xl border border-stone-200 dark:border-[var(--dark-border)] bg-white dark:bg-[var(--dark-surface)] p-3 text-left text-sm font-normal leading-normal text-stone-900 dark:text-[var(--dark-text)] shadow-lg",
             dir: "ltr",
             style: {
-              left: tooltipPosition.left,
-              top: tooltipPosition.top,
+              left: tooltipPosition?.left ?? VIEWPORT_PADDING,
+              top: tooltipPosition?.top ?? VIEWPORT_PADDING,
+              visibility: tooltipPosition ? "visible" : "hidden",
+              textTransform: "none",
+              letterSpacing: 0,
               width: "fit-content",
               maxWidth: `calc(100vw - ${VIEWPORT_PADDING * 2}px)`
             }

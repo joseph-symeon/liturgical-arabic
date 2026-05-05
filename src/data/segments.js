@@ -2398,13 +2398,19 @@ const sourceSegments = {
         "phrase_id": "have-mercy-on-us-001"
       },
       {
-        "text": " ("
+        "text": " (",
+        "tags": [
+          "rubric"
+        ]
       },
       {
         "phrase_id": "thrice-001"
       },
       {
-        "text": ")"
+        "text": ")",
+        "tags": [
+          "rubric"
+        ]
       }
     ]
   },
@@ -2474,13 +2480,25 @@ const sourceSegments = {
         "phrase_id": "with-strength-001"
       },
       {
-        "text": ". ("
+        "text": ". "
+      },
+      {
+        "text": "(",
+        "tags": [
+          "rubric"
+        ]
       },
       {
         "phrase_id": "dynamis-001"
       },
       {
-        "text": ")."
+        "text": ")",
+        "tags": [
+          "rubric"
+        ]
+      },
+      {
+        "text": "."
       }
     ]
   },
@@ -2521,7 +2539,6 @@ const sourceSegments = {
     "speaker": "",
     "break_before": true,
     "tags": [
-      "rubric",
       "trisagion"
     ],
     "phrases": [
@@ -2529,7 +2546,10 @@ const sourceSegments = {
         "phrase_id": "rubric-trisagion-baptized-001"
       },
       {
-        "text": ": "
+        "text": ": ",
+        "tags": [
+          "rubric"
+        ]
       },
       {
         "phrase_id": "as-many-of-you-001"
@@ -2561,7 +2581,6 @@ const sourceSegments = {
     "speaker": "",
     "break_before": true,
     "tags": [
-      "rubric",
       "trisagion"
     ],
     "phrases": [
@@ -2569,7 +2588,10 @@ const sourceSegments = {
         "phrase_id": "rubric-trisagion-cross-001"
       },
       {
-        "text": ": "
+        "text": ": ",
+        "tags": [
+          "rubric"
+        ]
       },
       {
         "phrase_id": "venerate-cross-001"
@@ -3225,7 +3247,13 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "beginner-glory-to-father-001"
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-father-001"
       },
       {
         "text": " "
@@ -3267,6 +3295,77 @@ const sourceSegments = {
       },
       {
         "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "course-trisagion-holy-god": {
+    "speaker": "",
+    "tags": [
+      "course",
+      "beginner",
+      "trisagion",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-god-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "course-trisagion-holy-mighty": {
+    "speaker": "",
+    "break_before": true,
+    "tags": [
+      "course",
+      "beginner",
+      "trisagion",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-mighty-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "course-trisagion-holy-immortal": {
+    "speaker": "",
+    "break_before": true,
+    "tags": [
+      "course",
+      "beginner",
+      "trisagion",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-immortal-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "course-trisagion-have-mercy": {
+    "speaker": "",
+    "break_before": true,
+    "tags": [
+      "course",
+      "beginner",
+      "trisagion",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "have-mercy-on-us-001"
       },
       {
         "text": "."

@@ -85,7 +85,7 @@
   transform: translateY(1px);
 }
 
-.lp-course-unit[open] .lp-course-unit-summary::before {
+.lp-course-unit[open] > .lp-course-unit-summary::before {
   content: "▾";
 }
 
@@ -130,7 +130,7 @@
   transform: translateY(1px);
 }
 
-.lp-course-lesson[open] .lp-course-lesson-summary::before {
+.lp-course-lesson[open] > .lp-course-lesson-summary::before {
   content: "▾";
 }
 
@@ -325,71 +325,71 @@
   .lp-subtitle,
   .lp-time,
   .lp-speed-title {
-    color: #aaa;
+    color: var(--dark-muted);
   }
 
   .lp-clip-player,
   .lp-speed-menu {
-    background: #292524;
-    border-color: #57534e;
+    background: var(--dark-surface);
+    border-color: var(--dark-border);
   }
 
   .lp-icon-button,
   .lp-speed-button,
   .lp-speed-adjust {
-    background: #292524;
-    border-color: #57534e;
-    color: #eee;
+    background: var(--dark-surface);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
   }
 
   .lp-icon-button svg {
-    fill: #eee;
+    fill: var(--dark-text);
   }
 
   .lp-progress {
-    accent-color: #aaa;
+    accent-color: var(--dark-muted);
   }
 
   .lp-course-unit,
   .lp-course-unit:last-child {
-    border-color: #57534e;
+    border-color: var(--dark-border);
   }
 
   .lp-course-unit-summary span:first-child {
-    color: #a8a29e;
+    color: var(--dark-muted);
   }
 
   .lp-course-unit-summary::before {
-    color: #a8a29e;
+    color: var(--dark-muted);
   }
 
   .lp-course-lesson-summary::before {
-    color: #a8a29e;
+    color: var(--dark-muted);
   }
 
   .lp-course-lesson-summary:hover,
   .lp-course-lesson-summary.active,
   .lp-course-exercise-link:hover,
   .lp-course-exercise-link.active {
-    background: #292524;
+    background: var(--dark-hover);
   }
 
   .lp-activity-link {
-    border-color: #57534e;
+    border-color: var(--dark-border);
   }
 
   .lp-activity-link:hover {
-    background: #292524;
+    background: var(--dark-hover);
   }
 
   .lp-exercise-title {
-    color: #ccc;
+    color: var(--dark-text);
   }
 
   .lp-config-note {
-    border-color: #57534e;
-    color: #d6d3d1;
-    background: #292524;
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+    background: var(--dark-surface);
   }
 
   .lp-player-error {

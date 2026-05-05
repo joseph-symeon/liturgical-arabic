@@ -3,13 +3,20 @@ const phrases = {
     "arabic": "أَيْضاً وَأَيْضاً",
     "translation": "Again and again",
     "literal": "Again and again",
-    "tags": []
+    "tags": [
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
+    ]
   },
   "to-thee-o-lord": {
     "arabic": "لَكَ يَا رَبّ",
     "translation": "To thee O Lord",
     "literal": "To you O Lord",
-    "tags": []
+    "tags": [
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
+    ]
   },
   "help-save-have-mercy-001": {
     "arabic": "أَعْضُدْ وَخَلِّصْ وَارْحَمْ",
@@ -18,7 +25,10 @@ const phrases = {
     "tags": [
       "verbs",
       "mercy",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "preserve-us-001": {
@@ -27,7 +37,10 @@ const phrases = {
     "literal": "and preserve us",
     "tags": [
       "petition",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "o-god-001": {
@@ -36,7 +49,10 @@ const phrases = {
     "literal": "O God",
     "tags": [
       "address",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "by-your-grace-001": {
@@ -45,7 +61,10 @@ const phrases = {
     "literal": "by Your grace",
     "tags": [
       "grace",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "for-our-salvation-001": {
@@ -54,7 +73,8 @@ const phrases = {
     "literal": "for the sake of our salvation",
     "tags": [
       "salvation",
-      "incarnation"
+      "incarnation",
+      "section: The Second Antiphon"
     ]
   },
   "accepted-incarnate-001": {
@@ -62,7 +82,8 @@ const phrases = {
     "translation": "who deigned to be incarnate",
     "literal": "indeed you accepted to be embodied",
     "tags": [
-      "incarnation"
+      "incarnation",
+      "section: The Second Antiphon"
     ]
   },
   "deathless-001": {
@@ -71,7 +92,8 @@ const phrases = {
     "literal": "who has not ceased being deathless",
     "tags": [
       "christology",
-      "deathless"
+      "deathless",
+      "section: The Second Antiphon"
     ]
   },
   "title-only-begotten-son-word-of-god": {
@@ -90,7 +112,8 @@ const phrases = {
     "literal": "for the sake of this holy house",
     "tags": [
       "church",
-      "place"
+      "place",
+      "section: Litany of Peace"
     ]
   },
   "role-priest": {
@@ -107,7 +130,8 @@ const phrases = {
     "literal": "from the holy Mother of God",
     "tags": [
       "theotokos",
-      "incarnation"
+      "incarnation",
+      "section: The Second Antiphon"
     ]
   },
   "enter-with-faith-001": {
@@ -117,7 +141,8 @@ const phrases = {
     "tags": [
       "faith",
       "reverence",
-      "fear-of-god"
+      "fear-of-god",
+      "section: Litany of Peace"
     ]
   },
   "role-choir": {
@@ -141,7 +166,8 @@ const phrases = {
     "translation": "and wast crucified O Christ our God",
     "literal": "and you were crucified O Christ our God",
     "tags": [
-      "crucifixion"
+      "crucifixion",
+      "section: The Second Antiphon"
     ]
   },
   "section-antiphons": {
@@ -159,7 +185,8 @@ const phrases = {
     "literal": "The second antiphon",
     "tags": [
       "section-title",
-      "antiphon"
+      "antiphon",
+      "section: The Second Antiphon"
     ]
   },
   "word-of-god-001": {
@@ -169,7 +196,8 @@ const phrases = {
     "tags": [
       "address",
       "word-of-god",
-      "christology"
+      "christology",
+      "section: The Second Antiphon"
     ]
   },
   "ever-virgin-mary-001": {
@@ -178,7 +206,8 @@ const phrases = {
     "literal": "the ever virgin Mary",
     "tags": [
       "theotokos",
-      "mary"
+      "mary",
+      "section: The Second Antiphon"
     ]
   },
   "became-man-001": {
@@ -187,7 +216,8 @@ const phrases = {
     "literal": "and you became human without alteration",
     "tags": [
       "incarnation",
-      "christology"
+      "christology",
+      "section: The Second Antiphon"
     ]
   },
   "save-us-001": {
@@ -195,7 +225,9 @@ const phrases = {
     "translation": "save us",
     "literal": "save us",
     "tags": [
-      "petition"
+      "petition",
+      "section: The Second Antiphon",
+      "section: The Entrance Hymn"
     ]
   },
   "lord-have-mercy-001": {
@@ -205,7 +237,12 @@ const phrases = {
     "tags": [
       "response",
       "mercy",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon",
+      "section: The Entrance Hymn",
+      "section: Prayer Before the Gospel"
     ]
   },
   "one-of-trinity-001": {
@@ -213,7 +250,8 @@ const phrases = {
     "translation": "who art one of the Holy Trinity",
     "literal": "and you have not ceased being one of the Holy Trinity",
     "tags": [
-      "trinity"
+      "trinity",
+      "section: The Second Antiphon"
     ]
   },
   "glorified-with-father-001": {
@@ -221,7 +259,8 @@ const phrases = {
     "translation": "glorified together with the Father and the Holy Spirit",
     "literal": "glorified with the Father and the Holy Spirit",
     "tags": [
-      "trinity"
+      "trinity",
+      "section: The Second Antiphon"
     ]
   },
   "whole-world-001": {
@@ -230,7 +269,8 @@ const phrases = {
     "literal": "for the sake of peace of the whole world",
     "tags": [
       "peace",
-      "world"
+      "world",
+      "section: Litany of Peace"
     ]
   },
   "union-001": {
@@ -238,7 +278,8 @@ const phrases = {
     "translation": "and the union of all",
     "literal": "and union of everyone",
     "tags": [
-      "unity"
+      "unity",
+      "section: Litany of Peace"
     ]
   },
   "salvation-001": {
@@ -247,7 +288,8 @@ const phrases = {
     "literal": "and salvation of our souls",
     "tags": [
       "salvation",
-      "souls"
+      "souls",
+      "section: Litany of Peace"
     ]
   },
   "section-litany-of-peace": {
@@ -256,7 +298,8 @@ const phrases = {
     "literal": "Petition of peace",
     "tags": [
       "section-title",
-      "litany"
+      "litany",
+      "section: Litany of Peace"
     ]
   },
   "only-begotten-001": {
@@ -265,7 +308,8 @@ const phrases = {
     "literal": "the Only Begotten Son",
     "tags": [
       "christology",
-      "only-begotten"
+      "only-begotten",
+      "section: The Second Antiphon"
     ]
   },
   "role-all": {
@@ -282,7 +326,10 @@ const phrases = {
     "literal": "With peace",
     "tags": [
       "peace",
-      "opening"
+      "opening",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "peace-from-above-001": {
@@ -291,7 +338,8 @@ const phrases = {
     "literal": "for the sake of the peace from on high",
     "tags": [
       "peace",
-      "petition"
+      "petition",
+      "section: Litany of Peace"
     ]
   },
   "trampled-death-001": {
@@ -300,7 +348,8 @@ const phrases = {
     "literal": "and by your death you trampled death",
     "tags": [
       "resurrection",
-      "death"
+      "death",
+      "section: The Second Antiphon"
     ]
   },
   "petition-001": {
@@ -309,7 +358,13 @@ const phrases = {
     "literal": "to the Lord we ask",
     "tags": [
       "petition",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon",
+      "section: The Entrance",
+      "section: The Entrance Hymn",
+      "section: Prayer Before the Gospel"
     ]
   },
   "holy-churches-001": {
@@ -318,7 +373,8 @@ const phrases = {
     "literal": "and the good stability of the holy churches of God",
     "tags": [
       "church",
-      "stability"
+      "stability",
+      "section: Litany of Peace"
     ]
   },
   "role-rubric": {
@@ -336,7 +392,8 @@ const phrases = {
     "literal": "The entrance",
     "tags": [
       "section-title",
-      "entrance"
+      "entrance",
+      "section: The Entrance"
     ]
   },
   "section-entrance-hymn": {
@@ -346,7 +403,8 @@ const phrases = {
     "tags": [
       "section-title",
       "entrance",
-      "hymn"
+      "hymn",
+      "section: The Entrance Hymn"
     ]
   },
   "amen-001": {
@@ -355,7 +413,18 @@ const phrases = {
     "literal": "Amen",
     "tags": [
       "response",
-      "repeated"
+      "repeated",
+      "section: The Preparation for the Divine Liturgy",
+      "section: Blessed is the Kingdom",
+      "section: Litany of Peace",
+      "section: The First Antiphon",
+      "section: Little Litany After the First Antiphon",
+      "section: The Second Antiphon",
+      "section: The Little Litany After the Second Antiphon",
+      "section: The Entrance",
+      "section: The Entrance Hymn",
+      "section: Thrice-Holy Hymn",
+      "section: Prayer Before the Gospel"
     ]
   },
   "entrance-master-lord-god-001": {
@@ -365,7 +434,8 @@ const phrases = {
     "tags": [
       "entrance",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: The Entrance"
     ]
   },
   "entrance-appointed-angels-001": {
@@ -376,7 +446,8 @@ const phrases = {
       "entrance",
       "priest-prayer",
       "quiet",
-      "angels"
+      "angels",
+      "section: The Entrance"
     ]
   },
   "entrance-service-glory-001": {
@@ -386,7 +457,8 @@ const phrases = {
     "tags": [
       "entrance",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: The Entrance"
     ]
   },
   "entrance-make-our-entrance-001": {
@@ -397,7 +469,8 @@ const phrases = {
       "entrance",
       "priest-prayer",
       "quiet",
-      "angels"
+      "angels",
+      "section: The Entrance"
     ]
   },
   "entrance-angels-serving-001": {
@@ -407,7 +480,8 @@ const phrases = {
     "tags": [
       "entrance",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: The Entrance"
     ]
   },
   "entrance-glorifying-goodness-001": {
@@ -417,7 +491,8 @@ const phrases = {
     "tags": [
       "entrance",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: The Entrance"
     ]
   },
   "doxology-for-fitting-001": {
@@ -426,7 +501,9 @@ const phrases = {
     "literal": "For it is fitting to you",
     "tags": [
       "doxology",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: The Entrance"
     ]
   },
   "doxology-glory-honor-worship-001": {
@@ -435,7 +512,9 @@ const phrases = {
     "literal": "all glory and honor and worship",
     "tags": [
       "doxology",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: The Entrance"
     ]
   },
   "doxology-father-son-spirit-001": {
@@ -445,7 +524,12 @@ const phrases = {
     "tags": [
       "doxology",
       "trinity",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon",
+      "section: The Entrance",
+      "section: The Entrance Hymn"
     ]
   },
   "doxology-now-ever-ages-001": {
@@ -454,7 +538,16 @@ const phrases = {
     "literal": "now and always and unto the age of ages",
     "tags": [
       "doxology",
-      "repeated"
+      "repeated",
+      "section: Blessed is the Kingdom",
+      "section: Litany of Peace",
+      "section: The First Antiphon",
+      "section: Little Litany After the First Antiphon",
+      "section: The Second Antiphon",
+      "section: The Little Litany After the Second Antiphon",
+      "section: The Entrance",
+      "section: Thrice-Holy Hymn",
+      "section: Prayer Before the Gospel"
     ]
   },
   "now-and-ever-001": {
@@ -463,7 +556,8 @@ const phrases = {
     "literal": "now and always",
     "tags": [
       "doxology",
-      "repeated"
+      "repeated",
+      "section: The Entrance Hymn"
     ]
   },
   "unto-ages-of-ages-001": {
@@ -472,7 +566,8 @@ const phrases = {
     "literal": "and unto the age of ages",
     "tags": [
       "doxology",
-      "repeated"
+      "repeated",
+      "section: The Entrance Hymn"
     ]
   },
   "entrance-bless-master-001": {
@@ -481,7 +576,8 @@ const phrases = {
     "literal": "Bless master",
     "tags": [
       "entrance",
-      "deacon"
+      "deacon",
+      "section: The Entrance"
     ]
   },
   "entrance-holy-entrance-001": {
@@ -489,7 +585,8 @@ const phrases = {
     "translation": "the holy entrance",
     "literal": "the holy entrance",
     "tags": [
-      "entrance"
+      "entrance",
+      "section: The Entrance"
     ]
   },
   "entrance-blessed-is-001": {
@@ -498,7 +595,8 @@ const phrases = {
     "literal": "Blessed is",
     "tags": [
       "entrance",
-      "blessing"
+      "blessing",
+      "section: The Entrance"
     ]
   },
   "entrance-holy-ones-001": {
@@ -507,7 +605,8 @@ const phrases = {
     "literal": "the entrance of your holy ones",
     "tags": [
       "entrance",
-      "blessing"
+      "blessing",
+      "section: The Entrance"
     ]
   },
   "entrance-always-001": {
@@ -516,7 +615,8 @@ const phrases = {
     "literal": "at every time",
     "tags": [
       "entrance",
-      "time"
+      "time",
+      "section: The Entrance"
     ]
   },
   "wisdom-001": {
@@ -525,7 +625,10 @@ const phrases = {
     "literal": "Wisdom",
     "tags": [
       "deacon",
-      "repeated"
+      "repeated",
+      "section: The Entrance",
+      "section: The Reading of the Epistle",
+      "section: The Reading of the Gospel"
     ]
   },
   "stand-upright-001": {
@@ -534,7 +637,9 @@ const phrases = {
     "literal": "Let us stand upright",
     "tags": [
       "deacon",
-      "repeated"
+      "repeated",
+      "section: The Entrance",
+      "section: The Reading of the Gospel"
     ]
   },
   "entrance-come-001": {
@@ -543,7 +648,8 @@ const phrases = {
     "literal": "Come",
     "tags": [
       "entrance",
-      "hymn"
+      "hymn",
+      "section: The Entrance Hymn"
     ]
   },
   "entrance-worship-bow-001": {
@@ -552,7 +658,8 @@ const phrases = {
     "literal": "we worship and bow down",
     "tags": [
       "entrance",
-      "hymn"
+      "hymn",
+      "section: The Entrance Hymn"
     ]
   },
   "entrance-christ-king-god-001": {
@@ -562,7 +669,8 @@ const phrases = {
     "tags": [
       "entrance",
       "hymn",
-      "christology"
+      "christology",
+      "section: The Entrance Hymn"
     ]
   },
   "son-of-god-001": {
@@ -571,7 +679,9 @@ const phrases = {
     "literal": "O Son of God",
     "tags": [
       "christology",
-      "address"
+      "address",
+      "section: The Second Antiphon",
+      "section: The Entrance Hymn"
     ]
   },
   "entrance-risen-dead-001": {
@@ -582,7 +692,9 @@ const phrases = {
       "entrance",
       "hymn",
       "ordinary-sundays",
-      "resurrection"
+      "resurrection",
+      "section: The Second Antiphon",
+      "section: The Entrance Hymn"
     ]
   },
   "entrance-we-sing-to-you-001": {
@@ -591,7 +703,9 @@ const phrases = {
     "literal": "we who chant to you",
     "tags": [
       "entrance",
-      "hymn"
+      "hymn",
+      "section: The Second Antiphon",
+      "section: The Entrance Hymn"
     ]
   },
   "alleluia-001": {
@@ -600,7 +714,11 @@ const phrases = {
     "literal": "Alleluia",
     "tags": [
       "hymn",
-      "repeated"
+      "repeated",
+      "section: The Second Antiphon",
+      "section: The Entrance Hymn",
+      "section: Thrice-Holy Hymn",
+      "section: The Reading of the Epistle"
     ]
   },
   "ordinary-sundays-label-001": {
@@ -609,7 +727,8 @@ const phrases = {
     "literal": "On ordinary Sundays",
     "tags": [
       "rubric",
-      "ordinary-sundays"
+      "ordinary-sundays",
+      "section: The Entrance Hymn"
     ]
   },
   "entrance-wondrous-saints-001": {
@@ -620,7 +739,9 @@ const phrases = {
       "entrance",
       "hymn",
       "weekdays",
-      "saints"
+      "saints",
+      "section: The Second Antiphon",
+      "section: The Entrance Hymn"
     ]
   },
   "weekdays-label-001": {
@@ -629,7 +750,9 @@ const phrases = {
     "literal": "During the days of the week",
     "tags": [
       "rubric",
-      "weekdays"
+      "weekdays",
+      "section: The Second Antiphon",
+      "section: The Entrance Hymn"
     ]
   },
   "entrance-rubric-chant-hymns-001": {
@@ -638,7 +761,8 @@ const phrases = {
     "literal": "Here the troparia and kontakion are chanted",
     "tags": [
       "rubric",
-      "entrance"
+      "entrance",
+      "section: The Entrance Hymn"
     ]
   },
   "entrance-rubric-refer-bulletin-001": {
@@ -647,7 +771,8 @@ const phrases = {
     "literal": "refer to the weekly bulletin",
     "tags": [
       "rubric",
-      "entrance"
+      "entrance",
+      "section: The Entrance Hymn"
     ]
   },
   "entrance-rubric-priest-prayer-001": {
@@ -656,7 +781,8 @@ const phrases = {
     "literal": "while the priest recites the following prayer",
     "tags": [
       "rubric",
-      "entrance"
+      "entrance",
+      "section: The Entrance Hymn"
     ]
   },
   "for-holy-art-thou-001": {
@@ -666,7 +792,8 @@ const phrases = {
     "tags": [
       "entrance",
       "trisagion",
-      "doxology"
+      "doxology",
+      "section: The Entrance Hymn"
     ]
   },
   "unto-thee-ascribe-glory-001": {
@@ -677,7 +804,8 @@ const phrases = {
       "entrance",
       "trisagion",
       "doxology",
-      "repeated"
+      "repeated",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-holy-god-resting-001": {
@@ -687,7 +815,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-seraphim-001": {
@@ -697,7 +826,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-cherubim-001": {
@@ -707,7 +837,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-heavenly-powers-001": {
@@ -717,7 +848,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-out-of-nothing-001": {
@@ -728,7 +860,8 @@ const phrases = {
       "priest-prayer",
       "quiet",
       "trisagion",
-      "creation"
+      "creation",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-created-humanity-001": {
@@ -739,7 +872,8 @@ const phrases = {
       "priest-prayer",
       "quiet",
       "trisagion",
-      "creation"
+      "creation",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-gives-wisdom-001": {
@@ -749,7 +883,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-not-neglect-sinners-001": {
@@ -759,7 +894,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-repentance-salvation-001": {
@@ -770,7 +906,8 @@ const phrases = {
       "priest-prayer",
       "quiet",
       "trisagion",
-      "salvation"
+      "salvation",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-made-worthy-servants-001": {
@@ -780,7 +917,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-stand-before-altar-001": {
@@ -790,7 +928,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-offer-worship-001": {
@@ -800,7 +939,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-receive-from-mouths-001": {
@@ -810,7 +950,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-thrice-holy-hymn-001": {
@@ -820,7 +961,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-visit-goodness-001": {
@@ -830,7 +972,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-forgive-every-sin-001": {
@@ -840,7 +983,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-sanctify-souls-bodies-001": {
@@ -850,7 +994,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-grant-worship-001": {
@@ -860,7 +1005,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-all-days-life-001": {
@@ -870,7 +1016,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-theotokos-intercessions-001": {
@@ -881,7 +1028,8 @@ const phrases = {
       "priest-prayer",
       "quiet",
       "trisagion",
-      "theotokos"
+      "theotokos",
+      "section: The Entrance Hymn"
     ]
   },
   "trisagion-all-saints-001": {
@@ -891,7 +1039,8 @@ const phrases = {
     "tags": [
       "priest-prayer",
       "quiet",
-      "trisagion"
+      "trisagion",
+      "section: The Entrance Hymn"
     ]
   },
   "role-reader": {
@@ -908,7 +1057,8 @@ const phrases = {
     "literal": "The preparation for the service of the Divine Liturgy",
     "tags": [
       "section-title",
-      "preparation"
+      "preparation",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "section-prothesis": {
@@ -931,13 +1081,14 @@ const phrases = {
     ]
   },
   "section-introductory-blessing": {
-    "arabic": "البَرَكَةُ الِافْتِتَاحِيَّة",
-    "translation": "Introductory Blessing",
-    "literal": "The introductory blessing",
+    "arabic": "مُبَارَكَةٌ مَمْلَكَةُ",
+    "translation": "Blessed is the Kingdom",
+    "literal": "Blessed is the kingdom",
     "tags": [
       "section-title",
       "liturgy",
-      "blessing"
+      "blessing",
+      "section: Blessed is the Kingdom"
     ]
   },
   "section-first-antiphon": {
@@ -946,7 +1097,8 @@ const phrases = {
     "literal": "The first antiphon",
     "tags": [
       "section-title",
-      "antiphon"
+      "antiphon",
+      "section: The First Antiphon"
     ]
   },
   "section-little-litany": {
@@ -965,7 +1117,8 @@ const phrases = {
     "tags": [
       "section-title",
       "litany",
-      "first-antiphon"
+      "first-antiphon",
+      "section: Little Litany After the First Antiphon"
     ]
   },
   "section-little-litany-after-second-antiphon": {
@@ -975,7 +1128,8 @@ const phrases = {
     "tags": [
       "section-title",
       "litany",
-      "second-antiphon"
+      "second-antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "section-trisagion-hymn": {
@@ -984,7 +1138,8 @@ const phrases = {
     "literal": "The thrice holy hymn",
     "tags": [
       "section-title",
-      "trisagion"
+      "trisagion",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "section-liturgy-word": {
@@ -1002,7 +1157,8 @@ const phrases = {
     "literal": "The reading of the epistle",
     "tags": [
       "section-title",
-      "epistle"
+      "epistle",
+      "section: The Reading of the Epistle"
     ]
   },
   "section-prayer-before-gospel": {
@@ -1011,7 +1167,8 @@ const phrases = {
     "literal": "Prayer before the Gospel",
     "tags": [
       "section-title",
-      "gospel"
+      "gospel",
+      "section: Prayer Before the Gospel"
     ]
   },
   "section-reading-gospel": {
@@ -1020,7 +1177,8 @@ const phrases = {
     "literal": "The reading of the holy Gospel",
     "tags": [
       "section-title",
-      "gospel"
+      "gospel",
+      "section: The Reading of the Gospel"
     ]
   },
   "preparation-heavenly-king-001": {
@@ -1029,7 +1187,8 @@ const phrases = {
     "literal": "O heavenly King the Comforter Spirit of truth",
     "tags": [
       "preparation",
-      "holy-spirit"
+      "holy-spirit",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "preparation-everywhere-present-001": {
@@ -1038,7 +1197,8 @@ const phrases = {
     "literal": "the one present in every place and filling all things",
     "tags": [
       "preparation",
-      "holy-spirit"
+      "holy-spirit",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "preparation-treasury-giver-001": {
@@ -1047,7 +1207,8 @@ const phrases = {
     "literal": "treasury of good things and giver of life",
     "tags": [
       "preparation",
-      "holy-spirit"
+      "holy-spirit",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "preparation-come-abide-001": {
@@ -1056,7 +1217,8 @@ const phrases = {
     "literal": "come and dwell in us",
     "tags": [
       "preparation",
-      "petition"
+      "petition",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "preparation-cleanse-save-001": {
@@ -1066,7 +1228,8 @@ const phrases = {
     "tags": [
       "preparation",
       "petition",
-      "salvation"
+      "salvation",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "preparation-rubric-omit-heavenly-king-001": {
@@ -1075,7 +1238,8 @@ const phrases = {
     "literal": "O Heavenly King is not said from Pascha until Pentecost",
     "tags": [
       "rubric",
-      "preparation"
+      "preparation",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "glory-highest-001": {
@@ -1084,7 +1248,8 @@ const phrases = {
     "literal": "Glory to God in the highest places",
     "tags": [
       "glory",
-      "preparation"
+      "preparation",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "earth-peace-goodwill-001": {
@@ -1093,7 +1258,8 @@ const phrases = {
     "literal": "and upon earth peace and among people good pleasure",
     "tags": [
       "peace",
-      "preparation"
+      "preparation",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "thrice-001": {
@@ -1102,7 +1268,10 @@ const phrases = {
     "literal": "three times",
     "tags": [
       "rubric",
-      "repeated"
+      "repeated",
+      "section: The Preparation for the Divine Liturgy",
+      "section: Thrice-Holy Hymn",
+      "section: The Reading of the Epistle"
     ]
   },
   "twice-001": {
@@ -1111,7 +1280,8 @@ const phrases = {
     "literal": "two times",
     "tags": [
       "rubric",
-      "repeated"
+      "repeated",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "open-my-lips-001": {
@@ -1120,7 +1290,8 @@ const phrases = {
     "literal": "O Lord open my lips",
     "tags": [
       "preparation",
-      "psalm"
+      "psalm",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "declare-praise-001": {
@@ -1129,7 +1300,8 @@ const phrases = {
     "literal": "and my mouth will proclaim your praise",
     "tags": [
       "preparation",
-      "psalm"
+      "psalm",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "open-door-mercy-001": {
@@ -1138,7 +1310,8 @@ const phrases = {
     "literal": "O Lord Lord open for us the door of your mercy",
     "tags": [
       "preparation",
-      "mercy"
+      "mercy",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "time-lord-act-001": {
@@ -1147,7 +1320,8 @@ const phrases = {
     "literal": "It is the time for the Lord to act",
     "tags": [
       "preparation",
-      "clergy-dialogue"
+      "clergy-dialogue",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "bless-holy-master-001": {
@@ -1156,7 +1330,8 @@ const phrases = {
     "literal": "Bless holy master",
     "tags": [
       "preparation",
-      "clergy-dialogue"
+      "clergy-dialogue",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "blessed-is-our-god-001": {
@@ -1165,7 +1340,8 @@ const phrases = {
     "literal": "Blessed is our God",
     "tags": [
       "blessing",
-      "clergy-dialogue"
+      "clergy-dialogue",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "always-now-ever-ages-001": {
@@ -1174,7 +1350,9 @@ const phrases = {
     "literal": "at every time now and always and unto the age of ages",
     "tags": [
       "doxology",
-      "repeated"
+      "repeated",
+      "section: The Preparation for the Divine Liturgy",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "pray-for-me-holy-master-001": {
@@ -1183,7 +1361,8 @@ const phrases = {
     "literal": "Pray for me holy master",
     "tags": [
       "preparation",
-      "clergy-dialogue"
+      "clergy-dialogue",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "lord-direct-steps-001": {
@@ -1192,7 +1371,8 @@ const phrases = {
     "literal": "May the Lord direct your steps toward every good work",
     "tags": [
       "preparation",
-      "clergy-dialogue"
+      "clergy-dialogue",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "remember-me-holy-master-001": {
@@ -1201,7 +1381,8 @@ const phrases = {
     "literal": "Remember me holy master",
     "tags": [
       "preparation",
-      "clergy-dialogue"
+      "clergy-dialogue",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "lord-remember-kingdom-001": {
@@ -1210,7 +1391,8 @@ const phrases = {
     "literal": "May the Lord God remember you in his kingdom",
     "tags": [
       "preparation",
-      "clergy-dialogue"
+      "clergy-dialogue",
+      "section: The Preparation for the Divine Liturgy"
     ]
   },
   "opening-bless-master-001": {
@@ -1218,7 +1400,8 @@ const phrases = {
     "translation": "Bless master",
     "literal": "Bless master",
     "tags": [
-      "opening"
+      "opening",
+      "section: Blessed is the Kingdom"
     ]
   },
   "opening-blessed-kingdom-001": {
@@ -1227,7 +1410,8 @@ const phrases = {
     "literal": "Blessed is the kingdom",
     "tags": [
       "opening",
-      "blessing"
+      "blessing",
+      "section: Blessed is the Kingdom"
     ]
   },
   "father-son-holy-spirit-001": {
@@ -1236,7 +1420,8 @@ const phrases = {
     "literal": "of the Father and the Son and the Holy Spirit",
     "tags": [
       "trinity",
-      "repeated"
+      "repeated",
+      "section: Blessed is the Kingdom"
     ]
   },
   "through-intercessions-001": {
@@ -1246,7 +1431,8 @@ const phrases = {
     "tags": [
       "antiphon",
       "theotokos",
-      "repeated"
+      "repeated",
+      "section: The First Antiphon"
     ]
   },
   "o-savior-save-us-001": {
@@ -1258,7 +1444,8 @@ const phrases = {
       "salvation",
       "address",
       "petition",
-      "repeated"
+      "repeated",
+      "section: The First Antiphon"
     ]
   },
   "glory-001": {
@@ -1267,7 +1454,10 @@ const phrases = {
     "literal": "Glory",
     "tags": [
       "doxology",
-      "repeated"
+      "repeated",
+      "section: The First Antiphon",
+      "section: The Second Antiphon",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "to-father-son-holy-spirit-001": {
@@ -1277,7 +1467,10 @@ const phrases = {
     "tags": [
       "trinity",
       "doxology",
-      "repeated"
+      "repeated",
+      "section: The First Antiphon",
+      "section: The Second Antiphon",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "rubric-deacon-holy-doors-little-litany-001": {
@@ -1286,7 +1479,8 @@ const phrases = {
     "literal": "The deacon stands before the holy doors and says the little litany",
     "tags": [
       "rubric",
-      "little-litany"
+      "little-litany",
+      "section: The First Antiphon"
     ]
   },
   "healthful-seasons-001": {
@@ -1296,7 +1490,8 @@ const phrases = {
     "tags": [
       "litany",
       "petition",
-      "creation"
+      "creation",
+      "section: Litany of Peace"
     ]
   },
   "abundance-fruits-earth-001": {
@@ -1306,7 +1501,8 @@ const phrases = {
     "tags": [
       "litany",
       "petition",
-      "creation"
+      "creation",
+      "section: Litany of Peace"
     ]
   },
   "peaceful-times-001": {
@@ -1316,7 +1512,8 @@ const phrases = {
     "tags": [
       "litany",
       "petition",
-      "peace"
+      "peace",
+      "section: Litany of Peace"
     ]
   },
   "travelers-sea-land-air-001": {
@@ -1325,7 +1522,8 @@ const phrases = {
     "literal": "for the sake of travelers by sea and land and air",
     "tags": [
       "litany",
-      "petition"
+      "petition",
+      "section: Litany of Peace"
     ]
   },
   "sick-suffering-captive-001": {
@@ -1334,7 +1532,8 @@ const phrases = {
     "literal": "and the sick and the suffering and the captives",
     "tags": [
       "litany",
-      "petition"
+      "petition",
+      "section: Litany of Peace"
     ]
   },
   "their-salvation-001": {
@@ -1344,7 +1543,8 @@ const phrases = {
     "tags": [
       "litany",
       "petition",
-      "salvation"
+      "salvation",
+      "section: Litany of Peace"
     ]
   },
   "deliverance-tribulation-001": {
@@ -1353,7 +1553,8 @@ const phrases = {
     "literal": "for the sake of our deliverance",
     "tags": [
       "litany",
-      "petition"
+      "petition",
+      "section: Litany of Peace"
     ]
   },
   "from-all-tribulation-001": {
@@ -1362,7 +1563,8 @@ const phrases = {
     "literal": "from every distress",
     "tags": [
       "litany",
-      "petition"
+      "petition",
+      "section: Litany of Peace"
     ]
   },
   "wrath-danger-necessity-001": {
@@ -1371,7 +1573,8 @@ const phrases = {
     "literal": "and wrath and danger and hardship",
     "tags": [
       "litany",
-      "petition"
+      "petition",
+      "section: Litany of Peace"
     ]
   },
   "calling-remembrance-001": {
@@ -1380,7 +1583,10 @@ const phrases = {
     "literal": "after our remembering",
     "tags": [
       "litany",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "all-holy-immaculate-001": {
@@ -1390,7 +1596,10 @@ const phrases = {
     "tags": [
       "litany",
       "theotokos",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "most-blessed-glorious-lady-001": {
@@ -1400,7 +1609,10 @@ const phrases = {
     "tags": [
       "litany",
       "theotokos",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "theotokos-001": {
@@ -1409,7 +1621,11 @@ const phrases = {
     "literal": "Mother of God",
     "tags": [
       "theotokos",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: The First Antiphon",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "ever-virgin-mary-002": {
@@ -1419,7 +1635,10 @@ const phrases = {
     "tags": [
       "theotokos",
       "mary",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "with-all-saints-001": {
@@ -1428,7 +1647,10 @@ const phrases = {
     "literal": "with all the saints",
     "tags": [
       "saints",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "commend-ourselves-001": {
@@ -1437,7 +1659,10 @@ const phrases = {
     "literal": "let us entrust ourselves",
     "tags": [
       "litany",
-      "petition"
+      "petition",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "and-each-other-001": {
@@ -1447,7 +1672,10 @@ const phrases = {
     "tags": [
       "litany",
       "petition",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "and-all-our-life-001": {
@@ -1457,7 +1685,10 @@ const phrases = {
     "tags": [
       "litany",
       "petition",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "unto-christ-our-god-001": {
@@ -1468,7 +1699,10 @@ const phrases = {
       "litany",
       "petition",
       "christology",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "o-lord-our-god-001": {
@@ -1479,7 +1713,8 @@ const phrases = {
       "litany",
       "quiet",
       "priest-prayer",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace"
     ]
   },
   "whose-might-beyond-compare-001": {
@@ -1489,7 +1724,8 @@ const phrases = {
     "tags": [
       "litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Litany of Peace"
     ]
   },
   "whose-glory-incomprehensible-001": {
@@ -1499,7 +1735,8 @@ const phrases = {
     "tags": [
       "litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Litany of Peace"
     ]
   },
   "whose-mercy-boundless-001": {
@@ -1509,7 +1746,8 @@ const phrases = {
     "tags": [
       "litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Litany of Peace"
     ]
   },
   "whose-love-ineffable-001": {
@@ -1519,7 +1757,8 @@ const phrases = {
     "tags": [
       "litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Litany of Peace"
     ]
   },
   "do-thou-o-master-001": {
@@ -1529,7 +1768,8 @@ const phrases = {
     "tags": [
       "litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Litany of Peace"
     ]
   },
   "in-tender-compassion-001": {
@@ -1539,7 +1779,8 @@ const phrases = {
     "tags": [
       "litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Litany of Peace"
     ]
   },
   "upon-us-001": {
@@ -1550,7 +1791,8 @@ const phrases = {
       "litany",
       "quiet",
       "priest-prayer",
-      "repeated"
+      "repeated",
+      "section: Litany of Peace"
     ]
   },
   "upon-this-holy-house-001": {
@@ -1561,7 +1803,8 @@ const phrases = {
       "litany",
       "quiet",
       "priest-prayer",
-      "church"
+      "church",
+      "section: Litany of Peace"
     ]
   },
   "grant-rich-mercies-001": {
@@ -1572,7 +1815,8 @@ const phrases = {
       "litany",
       "quiet",
       "priest-prayer",
-      "mercy"
+      "mercy",
+      "section: Litany of Peace"
     ]
   },
   "upon-those-pray-with-us-001": {
@@ -1582,7 +1826,8 @@ const phrases = {
     "tags": [
       "litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Litany of Peace"
     ]
   },
   "rubric-deacon-theotokos-icon-001": {
@@ -1590,7 +1835,8 @@ const phrases = {
     "translation": "The deacon moves and stands before the icon of the Theotokos",
     "literal": "The deacon moves and stands before the icon of the Theotokos",
     "tags": [
-      "rubric"
+      "rubric",
+      "section: Litany of Peace"
     ]
   },
   "save-thy-people-001": {
@@ -1600,7 +1846,8 @@ const phrases = {
     "tags": [
       "little-litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Little Litany After the First Antiphon"
     ]
   },
   "preserve-fullness-church-001": {
@@ -1610,7 +1857,8 @@ const phrases = {
     "tags": [
       "little-litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Little Litany After the First Antiphon"
     ]
   },
   "sanctify-love-house-001": {
@@ -1620,7 +1868,8 @@ const phrases = {
     "tags": [
       "little-litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Little Litany After the First Antiphon"
     ]
   },
   "glorify-by-power-001": {
@@ -1630,7 +1879,8 @@ const phrases = {
     "tags": [
       "little-litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Little Litany After the First Antiphon"
     ]
   },
   "forsake-us-not-001": {
@@ -1640,7 +1890,8 @@ const phrases = {
     "tags": [
       "little-litany",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: Little Litany After the First Antiphon"
     ]
   },
   "for-thine-might-001": {
@@ -1649,7 +1900,8 @@ const phrases = {
     "literal": "for yours is the might and yours is the kingdom and the power and the glory",
     "tags": [
       "little-litany",
-      "doxology"
+      "doxology",
+      "section: Little Litany After the First Antiphon"
     ]
   },
   "granted-common-supplications-001": {
@@ -1660,7 +1912,8 @@ const phrases = {
       "little-litany",
       "second-antiphon",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "common-supplications-accord-001": {
@@ -1671,7 +1924,8 @@ const phrases = {
       "little-litany",
       "second-antiphon",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "promise-two-three-001": {
@@ -1682,7 +1936,8 @@ const phrases = {
       "little-litany",
       "second-antiphon",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "gathered-in-thy-name-001": {
@@ -1693,7 +1948,8 @@ const phrases = {
       "little-litany",
       "second-antiphon",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "grant-their-requests-001": {
@@ -1704,7 +1960,8 @@ const phrases = {
       "little-litany",
       "second-antiphon",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "fulfill-desires-petitions-001": {
@@ -1715,7 +1972,8 @@ const phrases = {
       "little-litany",
       "second-antiphon",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "as-expedient-001": {
@@ -1726,7 +1984,8 @@ const phrases = {
       "little-litany",
       "second-antiphon",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "grant-knowledge-truth-001": {
@@ -1737,7 +1996,8 @@ const phrases = {
       "little-litany",
       "second-antiphon",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "age-to-come-life-everlasting-001": {
@@ -1748,7 +2008,8 @@ const phrases = {
       "little-litany",
       "second-antiphon",
       "quiet",
-      "priest-prayer"
+      "priest-prayer",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "good-god-lovest-mankind-001": {
@@ -1759,7 +2020,8 @@ const phrases = {
       "doxology",
       "little-litany",
       "second-antiphon",
-      "repeated"
+      "repeated",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "rubric-deacon-christ-icon-001": {
@@ -1767,7 +2029,9 @@ const phrases = {
     "translation": "The deacon moves and stands before the icon of Christ",
     "literal": "The deacon moves and stands before the icon of Christ",
     "tags": [
-      "rubric"
+      "rubric",
+      "section: Little Litany After the First Antiphon",
+      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "holy-god-001": {
@@ -1777,7 +2041,8 @@ const phrases = {
     "tags": [
       "trisagion",
       "hymn",
-      "repeated"
+      "repeated",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "holy-mighty-001": {
@@ -1787,7 +2052,8 @@ const phrases = {
     "tags": [
       "trisagion",
       "hymn",
-      "repeated"
+      "repeated",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "holy-immortal-001": {
@@ -1797,7 +2063,8 @@ const phrases = {
     "tags": [
       "trisagion",
       "hymn",
-      "repeated"
+      "repeated",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "have-mercy-on-us-001": {
@@ -1808,7 +2075,8 @@ const phrases = {
       "trisagion",
       "hymn",
       "mercy",
-      "repeated"
+      "repeated",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "with-strength-001": {
@@ -1816,7 +2084,8 @@ const phrases = {
     "translation": "With strength",
     "literal": "Power",
     "tags": [
-      "trisagion"
+      "trisagion",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "dynamis-001": {
@@ -1825,7 +2094,8 @@ const phrases = {
     "literal": "Dynamis",
     "tags": [
       "trisagion",
-      "rubric"
+      "rubric",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "rubric-trisagion-baptized-001": {
@@ -1834,7 +2104,8 @@ const phrases = {
     "literal": "On these feasts this is sung in place of the thrice holy hymn",
     "tags": [
       "rubric",
-      "trisagion"
+      "trisagion",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "as-many-of-you-001": {
@@ -1844,7 +2115,8 @@ const phrases = {
     "tags": [
       "trisagion",
       "hymn",
-      "baptism"
+      "baptism",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "baptized-into-christ-001": {
@@ -1854,7 +2126,8 @@ const phrases = {
     "tags": [
       "trisagion",
       "hymn",
-      "baptism"
+      "baptism",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "put-on-christ-001": {
@@ -1864,7 +2137,8 @@ const phrases = {
     "tags": [
       "trisagion",
       "hymn",
-      "baptism"
+      "baptism",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "rubric-trisagion-cross-001": {
@@ -1873,7 +2147,8 @@ const phrases = {
     "literal": "On feasts of the Holy Cross this is sung in place of the thrice holy hymn",
     "tags": [
       "rubric",
-      "trisagion"
+      "trisagion",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "venerate-cross-001": {
@@ -1883,7 +2158,8 @@ const phrases = {
     "tags": [
       "trisagion",
       "hymn",
-      "cross"
+      "cross",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "glorify-resurrection-001": {
@@ -1894,7 +2170,8 @@ const phrases = {
       "trisagion",
       "hymn",
       "resurrection",
-      "cross"
+      "cross",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "command-master-001": {
@@ -1902,7 +2179,8 @@ const phrases = {
     "translation": "Command master",
     "literal": "Command master",
     "tags": [
-      "word"
+      "word",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "blessed-cometh-001": {
@@ -1911,7 +2189,8 @@ const phrases = {
     "literal": "Blessed is the one who comes in the name of the Lord",
     "tags": [
       "word",
-      "blessing"
+      "blessing",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "bless-throne-high-001": {
@@ -1919,7 +2198,8 @@ const phrases = {
     "translation": "Bless master the throne on high",
     "literal": "Bless master the high throne",
     "tags": [
-      "word"
+      "word",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "blessed-throne-glory-001": {
@@ -1928,7 +2208,8 @@ const phrases = {
     "literal": "Blessed are you upon the throne of the glory of your kingdom",
     "tags": [
       "word",
-      "blessing"
+      "blessing",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "enthroned-cherubim-001": {
@@ -1937,7 +2218,8 @@ const phrases = {
     "literal": "O you who sit upon the cherubim",
     "tags": [
       "word",
-      "cherubim"
+      "cherubim",
+      "section: Thrice-Holy Hymn"
     ]
   },
   "let-us-attend-001": {
@@ -1945,7 +2227,9 @@ const phrases = {
     "translation": "Let us attend",
     "literal": "Let us pay attention",
     "tags": [
-      "word"
+      "word",
+      "section: The Reading of the Epistle",
+      "section: The Reading of the Gospel"
     ]
   },
   "reader-announces-prokeimenon-001": {
@@ -1954,7 +2238,8 @@ const phrases = {
     "literal": "The reader announces the prokeimenon of the epistle",
     "tags": [
       "rubric",
-      "epistle"
+      "epistle",
+      "section: The Reading of the Epistle"
     ]
   },
   "reader-announces-epistle-title-001": {
@@ -1963,7 +2248,8 @@ const phrases = {
     "literal": "The reader announces the title of the epistle",
     "tags": [
       "rubric",
-      "epistle"
+      "epistle",
+      "section: The Reading of the Epistle"
     ]
   },
   "reader-reads-epistle-001": {
@@ -1972,7 +2258,8 @@ const phrases = {
     "literal": "The reader reads the appointed epistle",
     "tags": [
       "rubric",
-      "epistle"
+      "epistle",
+      "section: The Reading of the Epistle"
     ]
   },
   "peace-reader-001": {
@@ -1981,7 +2268,8 @@ const phrases = {
     "literal": "Peace to you O reader",
     "tags": [
       "word",
-      "blessing"
+      "blessing",
+      "section: The Reading of the Epistle"
     ]
   },
   "illumine-hearts-001": {
@@ -1991,7 +2279,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "open-eyes-mind-001": {
@@ -2001,7 +2290,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "implant-fear-commandments-001": {
@@ -2011,7 +2301,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "spiritual-living-001": {
@@ -2021,7 +2312,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "illumination-souls-bodies-001": {
@@ -2031,7 +2323,8 @@ const phrases = {
     "tags": [
       "gospel",
       "doxology",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "unoriginate-father-spirit-001": {
@@ -2041,7 +2334,8 @@ const phrases = {
     "tags": [
       "gospel",
       "doxology",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "bless-proclaimer-gospel-001": {
@@ -2049,7 +2343,8 @@ const phrases = {
     "translation": "Bless master",
     "literal": "Bless master",
     "tags": [
-      "gospel"
+      "gospel",
+      "section: Prayer Before the Gospel"
     ]
   },
   "may-god-enable-gospel-001": {
@@ -2058,7 +2353,8 @@ const phrases = {
     "literal": "May God enable you",
     "tags": [
       "gospel",
-      "blessing"
+      "blessing",
+      "section: Prayer Before the Gospel"
     ]
   },
   "hear-holy-gospel-001": {
@@ -2067,7 +2363,8 @@ const phrases = {
     "literal": "Let us hear the holy Gospel",
     "tags": [
       "gospel",
-      "deacon"
+      "deacon",
+      "section: The Reading of the Gospel"
     ]
   },
   "peace-be-to-all-001": {
@@ -2076,7 +2373,8 @@ const phrases = {
     "literal": "Peace to all",
     "tags": [
       "gospel",
-      "blessing"
+      "blessing",
+      "section: The Reading of the Gospel"
     ]
   },
   "and-to-thy-spirit-001": {
@@ -2084,7 +2382,8 @@ const phrases = {
     "translation": "And to thy spirit",
     "literal": "And to your spirit also",
     "tags": [
-      "response"
+      "response",
+      "section: The Reading of the Gospel"
     ]
   },
   "reading-holy-gospel-001": {
@@ -2093,7 +2392,8 @@ const phrases = {
     "literal": "A noble passage from the Gospel",
     "tags": [
       "gospel",
-      "deacon"
+      "deacon",
+      "section: The Reading of the Gospel"
     ]
   },
   "glory-to-thee-lord-001": {
@@ -2102,7 +2402,8 @@ const phrases = {
     "literal": "Glory to you O Lord Glory to you",
     "tags": [
       "response",
-      "glory"
+      "glory",
+      "section: The Reading of the Gospel"
     ]
   },
   "rubric-appointed-gospel-001": {
@@ -2111,7 +2412,8 @@ const phrases = {
     "literal": "The priest or deacon reads the appointed Gospel passage",
     "tags": [
       "rubric",
-      "gospel"
+      "gospel",
+      "section: The Reading of the Gospel"
     ]
   },
   "illumine-hearts-002": {
@@ -2121,7 +2423,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "illumine-hearts-003": {
@@ -2131,7 +2434,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "open-eyes-mind-002": {
@@ -2141,7 +2445,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "implant-fear-commandments-002": {
@@ -2151,7 +2456,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "spiritual-living-002": {
@@ -2161,7 +2467,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "spiritual-living-003": {
@@ -2171,7 +2478,8 @@ const phrases = {
     "tags": [
       "gospel",
       "priest-prayer",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "illumination-souls-bodies-002": {
@@ -2181,7 +2489,8 @@ const phrases = {
     "tags": [
       "gospel",
       "doxology",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "illumination-souls-bodies-003": {
@@ -2191,7 +2500,8 @@ const phrases = {
     "tags": [
       "gospel",
       "doxology",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "unoriginate-father-spirit-002": {
@@ -2201,7 +2511,8 @@ const phrases = {
     "tags": [
       "gospel",
       "doxology",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "unoriginate-father-spirit-003": {
@@ -2211,7 +2522,8 @@ const phrases = {
     "tags": [
       "gospel",
       "doxology",
-      "quiet"
+      "quiet",
+      "section: Prayer Before the Gospel"
     ]
   },
   "bless-proclaimer-gospel-002": {
@@ -2219,7 +2531,8 @@ const phrases = {
     "translation": "him who proclaimeth the good tidings of the holy glorious gospel",
     "literal": "the one who proclaims the holy and glorious Gospel",
     "tags": [
-      "gospel"
+      "gospel",
+      "section: Prayer Before the Gospel"
     ]
   },
   "may-god-enable-gospel-002": {
@@ -2228,7 +2541,8 @@ const phrases = {
     "literal": "through the intercessions of the holy and glorious apostle",
     "tags": [
       "gospel",
-      "blessing"
+      "blessing",
+      "section: Prayer Before the Gospel"
     ]
   },
   "may-god-enable-gospel-003": {
@@ -2237,7 +2551,8 @@ const phrases = {
     "literal": "to proclaim",
     "tags": [
       "gospel",
-      "blessing"
+      "blessing",
+      "section: Prayer Before the Gospel"
     ]
   },
   "may-god-enable-gospel-004": {
@@ -2246,7 +2561,8 @@ const phrases = {
     "literal": "with great power",
     "tags": [
       "gospel",
-      "blessing"
+      "blessing",
+      "section: Prayer Before the Gospel"
     ]
   },
   "reading-holy-gospel-002": {
@@ -2255,7 +2571,8 @@ const phrases = {
     "literal": "of Saint",
     "tags": [
       "gospel",
-      "deacon"
+      "deacon",
+      "section: The Reading of the Gospel"
     ]
   },
   "reading-holy-gospel-003": {
@@ -2264,7 +2581,8 @@ const phrases = {
     "literal": "the evangelist and herald",
     "tags": [
       "gospel",
-      "deacon"
+      "deacon",
+      "section: The Reading of the Gospel"
     ]
   },
   "reading-holy-gospel-004": {
@@ -2273,7 +2591,8 @@ const phrases = {
     "literal": "and pure disciple",
     "tags": [
       "gospel",
-      "deacon"
+      "deacon",
+      "section: The Reading of the Gospel"
     ]
   },
   "placeholder-so-and-so-001": {
@@ -2283,7 +2602,8 @@ const phrases = {
     "tags": [
       "rubric",
       "placeholder",
-      "gospel"
+      "gospel",
+      "section: The Reading of the Gospel"
     ]
   },
   "jesus-prayer-lord-jesus-christ-001": {
@@ -2315,14 +2635,14 @@ const phrases = {
       "petition"
     ]
   },
-  "beginner-glory-to-father-001": {
-    "arabic": "المَجْدُ لِلآبِ",
-    "translation": "Glory to the Father",
-    "literal": "Glory to the Father",
+  "to-father-001": {
+    "arabic": "لِلآبِ",
+    "translation": "to the Father",
+    "literal": "to the Father",
     "tags": [
-      "course",
-      "beginner",
-      "doxology"
+      "trinity",
+      "doxology",
+      "repeated"
     ]
   },
   "beginner-and-to-son-001": {

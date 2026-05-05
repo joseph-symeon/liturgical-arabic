@@ -38,6 +38,7 @@ export default function SpeakerBlock(props) {
         speechRate: props.speechRate,
         arabicFontFamily: props.arabicFontFamily,
         arabicFontWeight: props.arabicFontWeight,
+        arabicFontSize: props.arabicFontSize,
         showSpeaker: true
       });
     });
@@ -56,6 +57,7 @@ export default function SpeakerBlock(props) {
         speechRate: props.speechRate,
         arabicFontFamily: props.arabicFontFamily,
         arabicFontWeight: props.arabicFontWeight,
+        arabicFontSize: props.arabicFontSize,
         showSpeaker
       });
     });
@@ -69,7 +71,7 @@ export default function SpeakerBlock(props) {
           "h2",
           {
             className:
-              "liturgical-red mt-8 mb-4 text-[17px] font-semibold",
+              "mt-8 mb-4 text-[17px] font-semibold",
             dir: "ltr"
           },
           section.section

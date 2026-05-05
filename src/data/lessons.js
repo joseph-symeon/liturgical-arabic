@@ -2,7 +2,7 @@ const lessons = [
   {
     "id": "lesson-antiphons",
     "unit_id": "unit-2",
-    "title": "Antiphons",
+    "title": "The Antiphons",
     "title_phrase": "section-antiphons",
     "display_order": 3,
     "quizlet_deck_url": null,

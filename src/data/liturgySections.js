@@ -21,7 +21,7 @@ const liturgySections = [
     ]
   },
   {
-    "section": "Introductory Blessing",
+    "section": "Blessed is the Kingdom",
     "section_title_phrase": "section-introductory-blessing",
     "section_group": "Liturgy of the Catechumen",
     "section_group_title_phrase": "section-liturgy-catechumen",

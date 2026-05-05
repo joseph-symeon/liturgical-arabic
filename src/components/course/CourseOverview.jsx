@@ -2,6 +2,10 @@ import React from 'react';
 import './course.css';
 import { getExerciseTitle } from './exerciseTitles.js';
 
+function hasMultipleExercises(lesson) {
+  return (lesson.exercises || []).length > 1;
+}
+
 export default function CourseOverview({ units, lessons, selectedLessonId, selectedExerciseIndex, onSelectLesson, onSelectExercise }) {
   return (
     <main className="lp-page" dir="ltr">
@@ -31,16 +35,18 @@ export default function CourseOverview({ units, lessons, selectedLessonId, selec
                       </summary>
 
                       <div className="lp-course-exercise-list">
-                        <a
-                          href={`#course/${encodeURIComponent(lesson.id)}`}
-                          onClick={event => {
-                            event.preventDefault();
-                            onSelectLesson(lesson.id);
-                          }}
-                          className={`lp-course-exercise-link${isCurrentLesson ? ' active' : ''}`}
-                        >
-                          Lesson page
-                        </a>
+                        {hasMultipleExercises(lesson) && (
+                          <a
+                            href={`#course/${encodeURIComponent(lesson.id)}`}
+                            onClick={event => {
+                              event.preventDefault();
+                              onSelectLesson(lesson.id);
+                            }}
+                            className={`lp-course-exercise-link${isCurrentLesson ? ' active' : ''}`}
+                          >
+                            Lesson page
+                          </a>
+                        )}
                         {(lesson.exercises || []).map((exercise, exerciseIndex) => (
                           <a
                             key={`${lesson.id}-${exercise.exercise_id}`}

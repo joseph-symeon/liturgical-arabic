@@ -1,30 +1,19 @@
 import React from 'react';
 import './course.css';
-import BilingualTitle from '../BilingualTitle.jsx';
+import PageHeader from '../PageHeader.jsx';
 import { getExerciseTitle } from './exerciseTitles.js';
 
 export default function LessonOverview({
   lesson,
-  arabicMode,
-  speechRate,
-  arabicFontFamily,
   onCourseOverview,
   onSelectExercise
 }) {
   return (
     <main className="lp-page" dir="ltr">
-      <header className="mb-8" dir="ltr">
-        <BilingualTitle
-          as="h1"
-          english={lesson.title}
-          phraseId={lesson.title_phrase}
-          arabicMode={arabicMode}
-          speechRate={speechRate}
-          arabicFontFamily={arabicFontFamily}
-          arabicFontWeight="500"
-          className="text-2xl font-medium leading-tight md:text-3xl"
-        />
-      </header>
+      <PageHeader
+        eyebrow={lesson.unitTitle || lesson.unit_title}
+        title={lesson.title}
+      />
 
       <div className="lp-activity-list">
         {(lesson.exercises || []).map((exercise, exerciseIndex) => (
@@ -42,14 +31,14 @@ export default function LessonOverview({
         ))}
       </div>
 
-      <nav className="lp-course-nav" dir="ltr" aria-label="Lesson navigation">
-        <div className="lp-course-nav-row">
+      <nav className="lp-course-nav page-nav" dir="ltr" aria-label="Lesson navigation">
+        <div className="page-nav-grid">
           <button
             type="button"
             onClick={onCourseOverview}
-            className="rounded border border-stone-300 px-3 py-1 text-sm dark:border-stone-600"
+            className="page-nav-button page-nav-button-center"
           >
-            Course Overview
+            <span className="page-nav-label">Course Overview</span>
           </button>
         </div>
       </nav>

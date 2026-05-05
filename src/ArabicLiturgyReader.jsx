@@ -6,6 +6,7 @@ import SpeakerBlock from "./components/SpeakerBlock.jsx";
 import InteractiveText from "./components/InteractiveText.jsx";
 import PhraseTooltip from "./components/PhraseTooltip.jsx";
 import BilingualTitle from "./components/BilingualTitle.jsx";
+import PageHeader from "./components/PageHeader.jsx";
 import { getArabicText } from "./utils/arabic.js";
 
 const h = React.createElement;
@@ -18,6 +19,7 @@ export default function ArabicLiturgyReader({
   speechRate = 0.8,
   arabicFontFamily,
   arabicFontWeight,
+  arabicFontSize,
   hasPreviousSection = false,
   hasNextSection = false,
   previousSectionTitle,
@@ -55,22 +57,40 @@ export default function ArabicLiturgyReader({
   }
 
   function renderSectionNav(className) {
+    function renderNavLabel(action, destination) {
+      return h(
+        React.Fragment,
+        null,
+        h("span", { className: "page-nav-label" }, action),
+        destination ? h("span", { className: "page-nav-destination" }, destination) : null
+      );
+    }
+
     return h(
       "nav",
-      { className, dir: "ltr", "aria-label": "Liturgy section navigation" },
+      { className: `${className} page-nav`, dir: "ltr", "aria-label": "Liturgy section navigation" },
       h(
         "div",
-        { className: "flex flex-wrap gap-2" },
+        { className: "page-nav-grid" },
         h(
           "button",
           {
             type: "button",
             onClick: onPreviousSection,
             disabled: !hasPreviousSection,
-            className:
-              "rounded border border-stone-300 dark:border-stone-600 px-3 py-1 text-sm disabled:cursor-default disabled:opacity-40"
+            className: "page-nav-button page-nav-button-start"
           },
-          previousSectionTitle ? `Previous: ${previousSectionTitle}` : "Previous"
+          renderNavLabel("Previous", previousSectionTitle)
+        ),
+        h(
+          "button",
+          {
+            type: "button",
+            onClick: onTableOfContents,
+            disabled: isTableOfContents,
+            className: "page-nav-button page-nav-button-center"
+          },
+          h("span", { className: "page-nav-label" }, "Table of Contents")
         ),
         h(
           "button",
@@ -78,25 +98,9 @@ export default function ArabicLiturgyReader({
             type: "button",
             onClick: onNextSection,
             disabled: !hasNextSection,
-            className:
-              "rounded border border-stone-300 dark:border-stone-600 px-3 py-1 text-sm disabled:cursor-default disabled:opacity-40"
+            className: "page-nav-button page-nav-button-end"
           },
-          nextSectionTitle ? `Next: ${nextSectionTitle}` : "Next"
-        )
-      ),
-      h(
-        "div",
-        { className: "flex flex-wrap gap-2" },
-        h(
-          "button",
-          {
-            type: "button",
-            onClick: onTableOfContents,
-            disabled: isTableOfContents,
-            className:
-              "rounded border border-stone-300 dark:border-stone-600 px-3 py-1 text-sm disabled:cursor-default disabled:opacity-40"
-          },
-          "Table of Contents"
+          renderNavLabel("Next", nextSectionTitle)
         )
       )
     );
@@ -134,7 +138,7 @@ export default function ArabicLiturgyReader({
             onSelectSection(sectionIndex);
           },
           className:
-            "block w-full rounded px-2 py-1 hover:bg-stone-100 dark:hover:bg-stone-800"
+            "block w-full rounded px-2 py-1 hover:bg-stone-100 dark:hover:bg-[var(--dark-hover)]"
         },
         h(
           "span",
@@ -209,46 +213,21 @@ export default function ArabicLiturgyReader({
     "main",
     { className: "mx-auto max-w-[700px] px-4 py-10 leading-8" },
     h(
-      "header",
-      { className: "mb-8", dir: "ltr" },
+      PageHeader,
       isTableOfContents
-        ? h(
-            "h1",
-            { className: "mb-2 text-center text-2xl font-medium leading-tight md:text-3xl" },
-            "Table of Contents"
-          )
-        : h(
-            React.Fragment,
-            null,
-            selectedSection.section_group
-              ? h(
-                  BilingualTitle,
-                  {
-                    as: "div",
-                    english: selectedSection.section_group,
-                    phraseId: selectedSection.section_group_title_phrase,
-                    arabicMode,
-                    speechRate,
-                    arabicFontFamily,
-                    arabicFontWeight: "500",
-                    className: "mb-2 text-sm font-semibold uppercase tracking-wide"
-                  }
-                )
-              : null,
-            h(
-              BilingualTitle,
-              {
-                as: "h1",
-                english: selectedSection.section,
-                phraseId: selectedSection.section_title_phrase,
-                arabicMode,
-                speechRate,
-                arabicFontFamily,
-                arabicFontWeight: "500",
-                className: "text-2xl font-medium leading-tight md:text-3xl"
-              }
-            )
-          )
+        ? {
+            title: "Table of Contents",
+            align: "center"
+          }
+        : {
+            eyebrow: selectedSection.section_group,
+            title: selectedSection.section,
+            titlePhrase: selectedSection.section_title_phrase,
+            arabicMode,
+            speechRate,
+            arabicFontFamily,
+            arabicFontWeight: "500"
+          }
     ),
     isTableOfContents
       ? renderTableOfContents()
@@ -263,6 +242,7 @@ export default function ArabicLiturgyReader({
           speechRate,
           arabicFontFamily,
           arabicFontWeight,
+          arabicFontSize,
           readerLayout,
           showSectionHeading: false
         }),

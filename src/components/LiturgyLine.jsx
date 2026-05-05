@@ -7,14 +7,16 @@ const ARABIC_LEADING_PUNCTUATION = /^[،؛؟,.!:;]/;
 export default function LiturgyLine(props) {
   const arabicFontFamily = props.arabicFontFamily || '"Noto Naskh Arabic", serif';
   const arabicFontWeight = props.arabicFontWeight || "400";
+  const arabicFontSize = props.arabicFontSize || 24;
 
   return h(
     "span",
     {
-	      className: "text-2xl leading-loose text-stone-950 dark:text-stone-50",
+	      className: "leading-loose text-stone-950 dark:text-[var(--dark-text)]",
       style: {
         fontFamily: arabicFontFamily,
         fontWeight: arabicFontWeight,
+        fontSize: arabicFontSize,
         overflowWrap: "normal",
         whiteSpace: "normal"
       }

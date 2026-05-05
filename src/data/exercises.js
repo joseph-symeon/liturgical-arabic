@@ -235,13 +235,16 @@ export const exerciseDefinitions = [
       "course-both-now-beginner"
     ],
     "title": "Glory to the Father",
-    "title_phrase": "beginner-glory-to-father-001",
+    "title_phrase": "glory-001",
     "audio_clip": null
   },
   {
     "id": "trisagion-hymn-core",
     "segment_ids": [
-      "trisagion-hymn-holy-god-2"
+      "course-trisagion-holy-god",
+      "course-trisagion-holy-mighty",
+      "course-trisagion-holy-immortal",
+      "course-trisagion-have-mercy"
     ],
     "title": "Holy God Holy Mighty Holy Immortal",
     "title_phrase": "holy-god-001",

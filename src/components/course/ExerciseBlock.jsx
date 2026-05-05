@@ -1,14 +1,10 @@
 import React from 'react';
 import ArabicPhraseRenderer from './ArabicPhraseRenderer.jsx';
 import YouTubeClipPlayer from './YouTubeClipPlayer.jsx';
-import { getResolvedExerciseTitle } from './exerciseTitles.js';
 
-export default function ExerciseBlock({ exercise, audioClip, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight }) {
-  const exerciseTitle = getResolvedExerciseTitle(exercise);
-
+export default function ExerciseBlock({ exercise, audioClip, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight, arabicFontSize }) {
   return (
     <div className="lp-exercise">
-      {exerciseTitle && <h2 className="lp-exercise-title">{exerciseTitle}</h2>}
       <ArabicPhraseRenderer
         lines={exercise.lines}
         arabicMode={arabicMode}
@@ -16,6 +12,7 @@ export default function ExerciseBlock({ exercise, audioClip, arabicMode, readerL
         speechRate={speechRate}
         arabicFontFamily={arabicFontFamily}
         arabicFontWeight={arabicFontWeight}
+        arabicFontSize={arabicFontSize}
       />
       {audioClip && (
         <YouTubeClipPlayer

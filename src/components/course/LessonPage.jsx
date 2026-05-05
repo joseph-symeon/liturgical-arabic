@@ -1,8 +1,9 @@
 import React from 'react';
 import './course.css';
 import ExerciseBlock from './ExerciseBlock.jsx';
-import BilingualTitle from '../BilingualTitle.jsx';
+import PageHeader from '../PageHeader.jsx';
 import exercises from '../../data/exercises.js';
+import { getExerciseTitle } from './exerciseTitles.js';
 
 export default function LessonPage({
   lesson,
@@ -11,6 +12,7 @@ export default function LessonPage({
   speechRate,
   arabicFontFamily,
   arabicFontWeight,
+  arabicFontSize,
   selectedExerciseIndex,
   hasPreviousExercise,
   hasNextExercise,
@@ -29,21 +31,25 @@ export default function LessonPage({
     }));
   const selectedExercise = resolvedExercises[selectedExerciseIndex] ?? resolvedExercises[0];
   const missingExercises = selectedExercise && !selectedExercise.exercise ? [selectedExercise] : [];
+  const unitTitle = lesson.unitTitle || lesson.unit_title;
+  const exerciseTitle = getExerciseTitle(lesson, selectedExerciseIndex);
+
+  function renderNavLabel(action, destination) {
+    return (
+      <>
+        <span className="page-nav-label">{action}</span>
+        {destination && <span className="page-nav-destination">{destination}</span>}
+      </>
+    );
+  }
 
   return (
     <div className="lp-page" dir="ltr">
-      <header className="mb-8" dir="ltr">
-        <BilingualTitle
-          as="h1"
-          english={lesson.title}
-          phraseId={lesson.title_phrase}
-          arabicMode={arabicMode}
-          speechRate={speechRate}
-          arabicFontFamily={arabicFontFamily}
-          arabicFontWeight="500"
-          className="text-2xl font-medium leading-tight md:text-3xl"
-        />
-      </header>
+      <PageHeader
+        eyebrow={unitTitle}
+        title={lesson.title}
+        secondaryTitle={exerciseTitle}
+      />
       {lesson.subtitle && <p className="lp-subtitle">{lesson.subtitle}</p>}
 
       {missingExercises.length > 0 && (
@@ -62,35 +68,34 @@ export default function LessonPage({
           speechRate={speechRate}
           arabicFontFamily={arabicFontFamily}
           arabicFontWeight={arabicFontWeight}
+          arabicFontSize={arabicFontSize}
         />
       )}
 
-      <nav className="lp-course-nav" dir="ltr" aria-label="Course lesson navigation">
-        <div className="lp-course-nav-row">
+      <nav className="lp-course-nav page-nav" dir="ltr" aria-label="Course lesson navigation">
+        <div className="page-nav-grid">
           <button
             type="button"
             onClick={onPreviousExercise}
             disabled={!hasPreviousExercise}
-            className="rounded border border-stone-300 px-3 py-1 text-sm disabled:cursor-default disabled:opacity-40 dark:border-stone-600"
+            className="page-nav-button page-nav-button-start"
           >
-            {previousExerciseTitle ? `Previous: ${previousExerciseTitle}` : 'Previous'}
+            {renderNavLabel('Previous', previousExerciseTitle)}
+          </button>
+          <button
+            type="button"
+            onClick={onCourseOverview}
+            className="page-nav-button page-nav-button-center"
+          >
+            <span className="page-nav-label">Course Overview</span>
           </button>
           <button
             type="button"
             onClick={onNextExercise}
             disabled={!hasNextExercise}
-            className="rounded border border-stone-300 px-3 py-1 text-sm disabled:cursor-default disabled:opacity-40 dark:border-stone-600"
+            className="page-nav-button page-nav-button-end"
           >
-            {nextExerciseTitle ? `Next: ${nextExerciseTitle}` : 'Next'}
-          </button>
-        </div>
-        <div className="lp-course-nav-row">
-          <button
-            type="button"
-            onClick={onCourseOverview}
-            className="rounded border border-stone-300 px-3 py-1 text-sm dark:border-stone-600"
-          >
-            Course Overview
+            {renderNavLabel('Next', nextExerciseTitle)}
           </button>
         </div>
       </nav>

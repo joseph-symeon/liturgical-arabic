@@ -33,7 +33,7 @@ export default function BilingualTitle({
     as,
     {
       className:
-        `liturgical-red grid grid-cols-2 items-baseline gap-4 ${className}`.trim()
+        `grid grid-cols-2 items-baseline gap-4 ${className}`.trim()
     },
     h("span", { className: "text-left" }, english),
     h(
