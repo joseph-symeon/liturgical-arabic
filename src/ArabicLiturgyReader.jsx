@@ -231,7 +231,7 @@ export default function ArabicLiturgyReader({
                     speechRate,
                     arabicFontFamily,
                     arabicFontWeight: "500",
-                    className: "mb-2 text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-stone-400"
+                    className: "mb-2 text-sm font-semibold uppercase tracking-wide"
                   }
                 )
               : null,

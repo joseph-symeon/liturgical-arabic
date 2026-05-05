@@ -11,12 +11,13 @@
   </head>
   <style>
     :root {
-      --liturgical-red: #b91c1c;
-      --liturgical-red-decoration: #fca5a5;
+      --rubric-red: #b91c1c;
+      --liturgical-red: var(--rubric-red);
+      --liturgical-red-decoration: var(--rubric-red);
     }
 
     .liturgical-red {
-      color: var(--liturgical-red);
+      color: var(--liturgical-red) !important;
     }
 
     .liturgical-red-decoration {
@@ -25,8 +26,9 @@
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --liturgical-red: #f87171;
-        --liturgical-red-decoration: #b91c1c;
+        --rubric-red: #f87171;
+        --liturgical-red: var(--rubric-red);
+        --liturgical-red-decoration: var(--rubric-red);
       }
 
       body { background: #1c1917; }

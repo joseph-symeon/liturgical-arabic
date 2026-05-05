@@ -2368,7 +2368,7 @@ const phrases = {
     ]
   },
   "all-holy-trinity-001": {
-    "arabic": "أَيُّهَا الثَّالُوثُ الكُلِّيُّ القُدْسِ",
+    "arabic": "أَيُّها الثّالوثُ القُدّوسُ",
     "translation": "All holy Trinity",
     "literal": "O all holy Trinity",
     "tags": [
@@ -2380,7 +2380,7 @@ const phrases = {
     ]
   },
   "all-holy-trinity-have-mercy-001": {
-    "arabic": "ارْحَمْنَا",
+    "arabic": "ارْحَمنا",
     "translation": "have mercy on us",
     "literal": "have mercy on us",
     "tags": [
@@ -2392,7 +2392,7 @@ const phrases = {
     ]
   },
   "all-holy-trinity-name-sake-001": {
-    "arabic": "مِنْ أَجْلِ اسْمِكَ",
+    "arabic": "مِنْ أَجلِ اسْمِكَ",
     "translation": "for Thy names sake",
     "literal": "for the sake of your name",
     "tags": [
@@ -2402,7 +2402,7 @@ const phrases = {
     ]
   },
   "vocative-o-lord-001": {
-    "arabic": "يَا رَبُّ",
+    "arabic": "يا رَبُّ",
     "translation": "O Lord",
     "literal": "O Lord",
     "tags": [
@@ -2414,7 +2414,7 @@ const phrases = {
     ]
   },
   "vocative-o-master-001": {
-    "arabic": "يَا سَيِّدُ",
+    "arabic": "يا سَيِّدُ",
     "translation": "O Master",
     "literal": "O Master",
     "tags": [
@@ -2426,7 +2426,7 @@ const phrases = {
     ]
   },
   "vocative-o-holy-one-001": {
-    "arabic": "يَا قُدُّوسُ",
+    "arabic": "يا قُدُّوسُ",
     "translation": "O Holy One",
     "literal": "O Holy One",
     "tags": [
@@ -2438,7 +2438,7 @@ const phrases = {
     ]
   },
   "all-holy-trinity-cleanse-sins-001": {
-    "arabic": "طَهِّرْنَا مِنْ خَطَايَانَا",
+    "arabic": "اغْفِرْ خَطايانا",
     "translation": "cleanse us from our sins",
     "literal": "purify us from our sins",
     "tags": [
@@ -2449,7 +2449,7 @@ const phrases = {
     ]
   },
   "all-holy-trinity-pardon-iniquities-001": {
-    "arabic": "تَجَاوَزْ عَنْ آثَامِنَا",
+    "arabic": "تَجاوَزْ عَنْ سَيِّئاتِنا",
     "translation": "pardon our iniquities",
     "literal": "pass over our iniquities",
     "tags": [
@@ -2460,7 +2460,7 @@ const phrases = {
     ]
   },
   "all-holy-trinity-visit-heal-001": {
-    "arabic": "اطَّلِعْ وَاشْفِ أَمْرَاضَنَا",
+    "arabic": "اطَّلِعْ واشْفِ أَمْراضَنا",
     "translation": "visit and heal our infirmities",
     "literal": "look upon and heal our illnesses",
     "tags": [
