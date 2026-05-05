@@ -5,6 +5,12 @@ const phrases = {
     "literal": "Again and again",
     "tags": []
   },
+  "to-thee-o-lord": {
+    "arabic": "لَكَ يَا رَبّ",
+    "translation": "To thee, O Lord",
+    "literal": "To you, O Lord",
+    "tags": []
+  },
   "help-save-001": {
     "arabic": "أَعْضُدْ وَخَلِّصْ وَارْحَمْ وَاحْفَظْنَا يَا اللَّهُ بِنِعْمَتِكَ",
     "translation": "Help, save, have mercy, and preserve us, O God, by Your grace",
