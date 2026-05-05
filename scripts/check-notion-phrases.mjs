@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 const envPath = path.join(rootDir, '.env.local');
-const outputPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.csv');
+const inputPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.csv');
 
 const NOTION_VERSION = '2022-06-28';
 
@@ -32,24 +32,48 @@ if (!databaseId) {
   throw new Error('Missing NOTION_PHRASES_DATABASE_ID. Add it to .env.local or your shell environment.');
 }
 
+const localRows = readLocalPhraseRows();
+const duplicateLocalIds = findDuplicateIds(localRows.map(row => row.id));
+if (duplicateLocalIds.length > 0) {
+  throw new Error(`Duplicate local phrase IDs found: ${duplicateLocalIds.join(', ')}`);
+}
+
 const pages = await fetchDatabasePages(databaseId);
-const rows = pages
+const notionRows = pages
   .filter(page => shouldSyncPage(page, requiredStatus))
   .map(pageToPhraseRow)
   .filter(row => row.id);
-
-if (rows.length === 0) {
-  const propertyNames = pages[0] ? Object.keys(pages[0].properties).join(', ') : 'none';
-  throw new Error(
-    `Notion returned ${pages.length} page(s), but none produced a phrase row with a non-empty ID.\n` +
-    `No local files were changed.\n` +
-    `Properties found on the first page: ${propertyNames}\n` +
-    `Expected a property named one of: ${PROPERTY_NAMES.id.join(', ')}`
-  );
+const duplicateNotionIds = findDuplicateIds(notionRows.map(row => row.id));
+if (duplicateNotionIds.length > 0) {
+  throw new Error(`Duplicate Notion phrase IDs found: ${duplicateNotionIds.join(', ')}`);
 }
 
-writePhrasesCsv(rows);
-console.log(`Synced ${rows.length} Notion phrase rows to ${path.relative(rootDir, outputPath)}.`);
+const localById = new Map(localRows.map(row => [row.id, row]));
+const notionById = new Map(notionRows.map(row => [row.id, row]));
+const missingInNotion = localRows.filter(row => !notionById.has(row.id)).map(row => row.id);
+const missingLocally = notionRows.filter(row => !localById.has(row.id)).map(row => row.id);
+const changed = [];
+
+localRows.forEach(localRow => {
+  const notionRow = notionById.get(localRow.id);
+  if (!notionRow) return;
+
+  const fields = ['arabic', 'translation', 'literal', 'tags'].filter(field => !valuesEqual(localRow[field], notionRow[field]));
+  if (fields.length > 0) {
+    changed.push({ id: localRow.id, fields });
+  }
+});
+
+if (missingInNotion.length === 0 && missingLocally.length === 0 && changed.length === 0) {
+  console.log(`No phrase drift found. ${localRows.length} local row(s) match Notion.`);
+  process.exit(0);
+}
+
+console.log('Phrase drift found between local data and Notion.');
+printList('Local rows missing in Notion', missingInNotion);
+printList('Notion rows missing locally', missingLocally);
+printChanged(changed);
+process.exitCode = 1;
 
 function loadEnvLocal() {
   if (!fs.existsSync(envPath)) return;
@@ -70,6 +94,102 @@ function loadEnvLocal() {
   });
 }
 
+function readLocalPhraseRows() {
+  return readCsv(inputPath)
+    .filter(row => row.id)
+    .map(row => ({
+      id: row.id,
+      arabic: row.arabic ?? '',
+      translation: row.translation ?? '',
+      literal: row.literal ?? '',
+      tags: parseTags(row.tags, row.id)
+    }));
+}
+
+function readCsv(filePath) {
+  const text = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '').trim();
+  const rows = parseCsv(text);
+  if (rows.length === 0) return [];
+  const headers = rows[0];
+  return rows.slice(1).filter(row => row.some(cell => cell !== '')).map(row => {
+    const record = {};
+    headers.forEach((header, index) => {
+      record[header] = row[index] ?? '';
+    });
+    return record;
+  });
+}
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let inQuotes = false;
+
+  for (let index = 0; index < text.length; index += 1) {
+    const char = text[index];
+    const next = text[index + 1];
+
+    if (char === '"') {
+      if (inQuotes && next === '"') {
+        cell += '"';
+        index += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (char === ',' && !inQuotes) {
+      row.push(cell);
+      cell = '';
+      continue;
+    }
+
+    if ((char === '\n' || char === '\r') && !inQuotes) {
+      if (char === '\r' && next === '\n') index += 1;
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = '';
+      continue;
+    }
+
+    cell += char;
+  }
+
+  row.push(cell);
+  rows.push(row);
+  return rows;
+}
+
+function parseTags(value, id) {
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value);
+    if (!Array.isArray(parsed)) {
+      throw new Error('Tags JSON must be an array.');
+    }
+    return normalizeTags(parsed);
+  } catch (error) {
+    throw new Error(`Invalid tags JSON for phrase "${id}": ${error.message}`);
+  }
+}
+
+function normalizeTags(tags) {
+  return [...new Set((tags || []).map(tag => String(tag)).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+}
+
+function findDuplicateIds(ids) {
+  const seen = new Set();
+  const duplicates = new Set();
+  ids.forEach(id => {
+    if (seen.has(id)) duplicates.add(id);
+    seen.add(id);
+  });
+  return [...duplicates];
+}
+
 async function fetchDatabasePages(id) {
   const pages = [];
   let startCursor;
@@ -79,7 +199,6 @@ async function fetchDatabasePages(id) {
       method: 'POST',
       body: startCursor ? { start_cursor: startCursor } : {}
     });
-
     pages.push(...data.results);
     startCursor = data.has_more ? data.next_cursor : undefined;
   } while (startCursor);
@@ -98,7 +217,7 @@ function pageToPhraseRow(page) {
     arabic: readPlainProperty(page, PROPERTY_NAMES.arabic),
     translation: readPlainProperty(page, PROPERTY_NAMES.translation),
     literal: readPlainProperty(page, PROPERTY_NAMES.literal),
-    tags: JSON.stringify(readTagsProperty(page, PROPERTY_NAMES.tags))
+    tags: normalizeTags(readTagsProperty(page, PROPERTY_NAMES.tags))
   };
 }
 
@@ -134,15 +253,7 @@ function readTagsProperty(page, names) {
 
   const text = readPlainProperty(page, names).trim();
   if (!text) return [];
-
-  if (text.startsWith('[')) {
-    const parsed = JSON.parse(text);
-    if (!Array.isArray(parsed)) {
-      throw new Error(`Tags JSON must be an array for phrase "${readPlainProperty(page, PROPERTY_NAMES.id)}".`);
-    }
-    return parsed;
-  }
-
+  if (text.startsWith('[')) return JSON.parse(text);
   return text.split(',').map(tag => tag.trim()).filter(Boolean);
 }
 
@@ -158,19 +269,20 @@ function richTextPlain(parts) {
   return (parts || []).map(part => part.plain_text).join('');
 }
 
-function writePhrasesCsv(rows) {
-  const header = ['id', 'arabic', 'translation', 'literal', 'tags'];
-  const lines = [
-    header.map(csvEscape).join(','),
-    ...rows.map(row => header.map(column => csvEscape(row[column] ?? '')).join(','))
-  ];
-
-  fs.writeFileSync(outputPath, `${lines.join('\n')}\n`);
+function valuesEqual(left, right) {
+  return JSON.stringify(left) === JSON.stringify(right);
 }
 
-function csvEscape(value) {
-  const text = String(value);
-  return `"${text.replace(/"/g, '""')}"`;
+function printList(label, items) {
+  console.log(`${label}: ${items.length}`);
+  items.slice(0, 20).forEach(item => console.log(`  - ${item}`));
+  if (items.length > 20) console.log(`  ...and ${items.length - 20} more`);
+}
+
+function printChanged(items) {
+  console.log(`Rows with changed fields: ${items.length}`);
+  items.slice(0, 40).forEach(item => console.log(`  - ${item.id}: ${item.fields.join(', ')}`));
+  if (items.length > 40) console.log(`  ...and ${items.length - 40} more`);
 }
 
 async function notionRequest(endpoint, options = {}) {

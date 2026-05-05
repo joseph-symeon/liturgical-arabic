@@ -1,6 +1,7 @@
 name: Deploy to GitHub Pages
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
 
@@ -26,6 +27,17 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Sync phrases from Notion when configured
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_PHRASES_DATABASE_ID: ${{ secrets.NOTION_PHRASES_DATABASE_ID }}
+          NOTION_PHRASES_STATUS: ${{ secrets.NOTION_PHRASES_STATUS }}
+        run: |
+          if [ -n "$NOTION_TOKEN" ] && [ -n "$NOTION_PHRASES_DATABASE_ID" ]; then
+            npm run sync:notion:phrases
+          else
+            echo "Notion secrets not configured; using committed phrase snapshot."
+          fi
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -1,0 +1,27 @@
+name: Check Notion Phrase Drift
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check phrases against Notion
+        run: npm run check:notion:phrases
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_PHRASES_DATABASE_ID: ${{ secrets.NOTION_PHRASES_DATABASE_ID }}
+          NOTION_PHRASES_STATUS: ${{ secrets.NOTION_PHRASES_STATUS }}

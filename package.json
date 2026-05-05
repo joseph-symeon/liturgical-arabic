@@ -8,6 +8,7 @@
     "prebuild": "npm run generate:data",
     "generate:data": "node scripts/generate-data.mjs",
     "tag:phrases:sections": "node scripts/tag-phrase-sections.mjs",
+    "check:notion:phrases": "node scripts/check-notion-phrases.mjs",
     "sync:notion:phrases": "node scripts/sync-notion-phrases.mjs && npm run generate:data",
     "notion:phrases:tags-native": "node scripts/convert-notion-tags-to-multiselect.mjs",
     "push:notion:phrases": "node scripts/push-notion-phrases.mjs",
