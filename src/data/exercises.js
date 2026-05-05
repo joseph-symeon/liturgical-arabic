@@ -209,18 +209,28 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-lord-have-mercy-choir"
     ],
-    "title": "Lord have mercy",
+    "title": "Lord, have mercy",
     "title_phrase": "lord-have-mercy-001",
-    "audio_clip": null
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 34,
+      "end_seconds": 36.5,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "jesus-prayer",
     "segment_ids": [
       "course-jesus-prayer"
     ],
-    "title": "Lord Jesus Christ",
+    "title": "The Jesus Prayer",
     "title_phrase": "jesus-prayer-lord-jesus-christ-001",
-    "audio_clip": null
+    "audio_clip": {
+      "video_id": "f-DJruJ0HRs",
+      "start_seconds": 0,
+      "end_seconds": 3.3,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "glory-both-now",
@@ -240,7 +250,12 @@ export const exerciseDefinitions = [
     ],
     "title": "Glory to the Father",
     "title_phrase": "glory-001",
-    "audio_clip": null
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 15.5,
+      "end_seconds": 22.25,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "trisagion-hymn-core",
@@ -252,7 +267,12 @@ export const exerciseDefinitions = [
     ],
     "title": "Holy God Holy Mighty Holy Immortal",
     "title_phrase": "holy-god-001",
-    "audio_clip": null
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 0,
+      "end_seconds": 15.25,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "all-holy-trinity-address",
@@ -260,7 +280,12 @@ export const exerciseDefinitions = [
       "course-all-holy-trinity-address"
     ],
     "title_phrase": "all-holy-trinity-001",
-    "audio_clip": null
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 22.65,
+      "end_seconds": 24.75,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "all-holy-trinity-lord",
@@ -269,7 +294,12 @@ export const exerciseDefinitions = [
     ],
     "title": "Lord, cleanse us",
     "title_phrase": "vocative-o-lord-001",
-    "audio_clip": null
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 25.25,
+      "end_seconds": 27,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "all-holy-trinity-master",
@@ -277,7 +307,12 @@ export const exerciseDefinitions = [
       "course-all-holy-trinity-master"
     ],
     "title_phrase": "vocative-o-master-001",
-    "audio_clip": null
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 27.5,
+      "end_seconds": 30,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "all-holy-trinity-holy-one",
@@ -285,7 +320,12 @@ export const exerciseDefinitions = [
       "course-all-holy-trinity-holy-one"
     ],
     "title_phrase": "vocative-o-holy-one-001",
-    "audio_clip": null
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 30.25,
+      "end_seconds": 33.5,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "all-holy-trinity",
@@ -296,7 +336,12 @@ export const exerciseDefinitions = [
       "course-all-holy-trinity-holy-one"
     ],
     "title_phrase": "all-holy-trinity-001",
-    "audio_clip": null
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 22.65,
+      "end_seconds": 33.5,
+      "default_playback_rate": 1
+    }
   }
 ];
 

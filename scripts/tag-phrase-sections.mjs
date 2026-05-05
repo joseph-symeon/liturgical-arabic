@@ -1,35 +1,31 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import segments from '../src/data/segments.js';
+import liturgySections from '../src/data/liturgySections.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 const sourceDir = path.join(rootDir, 'src', 'data', 'source');
 const phrasesPath = path.join(sourceDir, 'phrases.csv');
-const segmentsPath = path.join(sourceDir, 'segments.csv');
-const sectionsPath = path.join(sourceDir, 'liturgySections.csv');
 
 const SECTION_TAG_PREFIX = 'section: ';
 
 const phrases = readCsv(phrasesPath);
-const segments = new Map(readCsv(segmentsPath).map(row => [row.id, row]));
-const sections = readCsv(sectionsPath);
 const sectionTagsByPhraseId = new Map();
 
-sections.forEach(section => {
+liturgySections.forEach(section => {
   const sectionTag = `${SECTION_TAG_PREFIX}${section.section}`;
   addSectionTag(section.section_title_phrase, sectionTag);
 
-  const segmentIds = parseJsonCell(section.segment_ids, [], `segment_ids for section "${section.section}"`);
-  segmentIds.forEach(segmentId => {
-    const segment = segments.get(segmentId);
+  section.segment_ids.forEach(segmentId => {
+    const segment = segments[segmentId];
     if (!segment) {
       console.warn(`Skipping missing segment "${segmentId}" referenced by section "${section.section}".`);
       return;
     }
 
-    const parts = parseJsonCell(segment.phrases, [], `phrases for segment "${segmentId}"`);
-    parts.forEach(part => addSectionTag(part.phrase_id, sectionTag));
+    segment.phrases.forEach(part => addSectionTag(part.phrase_id, sectionTag));
   });
 });
 

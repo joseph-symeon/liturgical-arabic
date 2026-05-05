@@ -1,6 +1,6 @@
-# Data Source CSVs
+# Data Sources
 
-These CSV files generate `src/data/*.js`.
+Only phrases are CSV-backed. App structure is edited directly in `src/data/*.js` for faster local iteration.
 
 For phrase text, **Notion is the canonical editorial source**. Treat `phrases.csv` as a local snapshot/staging file:
 
@@ -10,37 +10,25 @@ For phrase text, **Notion is the canonical editorial source**. Treat `phrases.cs
 - Use local `phrases.csv` edits only for intentional batch/scripted cleanup.
 - Before pushing local phrase changes back to Notion, run `npm run push:notion:phrases` as a dry run first.
 
-The other CSV files remain the local source of truth for app structure:
+These files are hand-edited directly so course structure, phrase composition, section order, and audio timings can be adjusted and previewed immediately during development:
 
-- `segments.csv`
-- `liturgySections.csv`
-- `exercises.csv`
-- `lessons.csv`
-- `units.csv`
+- `src/data/units.js`
+- `src/data/lessons.js`
+- `src/data/segments.js`
+- `src/data/liturgySections.js`
+- `src/data/exercises.js`
 
-After editing them, regenerate the app data modules with:
+After editing `phrases.csv`, regenerate the phrase data module with:
 
 ```sh
 npm run generate:data
 ```
 
-`npm run dev` and `npm run build` also regenerate data first.
+`npm run dev` and `npm run build` also regenerate phrase data first.
 
 Columns that contain arrays or objects should be valid JSON:
 
 - `phrases.csv`: `tags`
-- `segments.csv`: `tags`, `phrases`
-- `liturgySections.csv`: `segment_ids`
-- `exercises.csv`: `segment_ids`, `audio_clip`
-- `lessons.csv`: `exercises`
-
-`liturgySections.csv` can also use `section_group` and `section_group_title_phrase` to organize related reader sections under a larger liturgical heading.
-
-For example, a `segments.csv` `phrases` cell can contain:
-
-```json
-[{"phrase_id":"peace-from-above-001"},{"text":"، "},{"phrase_id":"salvation-001"}]
-```
 
 ## Notion Sync For Phrases
 

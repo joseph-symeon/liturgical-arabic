@@ -242,7 +242,6 @@ const phrases = {
       "response",
       "mercy",
       "repeated",
-      "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
       "section: The Little Litany After the Second Antiphon",
       "section: The Entrance Hymn",
@@ -2658,7 +2657,8 @@ const phrases = {
       "beginner",
       "mercy",
       "petition",
-      "reusable"
+      "reusable",
+      "section: Litany of Peace"
     ]
   },
   "to-father-001": {
@@ -2759,7 +2759,8 @@ const phrases = {
       "lord-have-mercy",
       "vocative",
       "address",
-      "reusable"
+      "reusable",
+      "section: Litany of Peace"
     ]
   },
   "vocative-o-master-001": {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ArabicLiturgyReader from "./ArabicLiturgyReader.jsx";
 import CourseOverview from "./components/course/CourseOverview.jsx";
-import LessonOverview from "./components/course/LessonOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
 import liturgySections from "./data/liturgySections.js";
 import units from "./data/units.js";
@@ -94,9 +93,8 @@ function parseNavigationHash() {
     const parts = hash.split("/");
     const lessonId = parts[1] || DEFAULT_LESSON_ID;
     if (parts[2] !== "exercise") {
-      const lesson = lessons.find(item => item.id === lessonId);
       return {
-        view: hasMultipleExercises(lesson) ? "lesson-overview" : "lessons",
+        view: "lessons",
         selectedSectionIndex: null,
         selectedLessonId: lessonId,
         selectedExerciseIndex: 0
@@ -115,9 +113,6 @@ function getNavigationHash(view, selectedSectionIndex, selectedLessonId, selecte
   }
   if (view === "lessons") {
     return `#course/${encodeURIComponent(selectedLessonId ?? "")}/exercise/${selectedExerciseIndex + 1}`;
-  }
-  if (view === "lesson-overview") {
-    return `#course/${encodeURIComponent(selectedLessonId ?? "")}`;
   }
   if (view === "course-overview") {
     return "#course";
@@ -222,19 +217,6 @@ export default function App() {
     setDisplayMenuOpen(false);
   }
 
-  function goToLessonOverview(lessonId) {
-    const lesson = lessons.find(item => item.id === lessonId);
-    if (!hasMultipleExercises(lesson)) {
-      goToLesson(lessonId, 0);
-      return;
-    }
-    setSelectedLessonId(lessonId);
-    setSelectedExerciseIndex(0);
-    setView("lesson-overview");
-    if (isNarrowViewport) setMenuOpen(false);
-    setDisplayMenuOpen(false);
-  }
-
   function goToLesson(lessonId, exerciseIndex = 0) {
     setSelectedLessonId(lessonId);
     setSelectedExerciseIndex(exerciseIndex);
@@ -332,7 +314,7 @@ export default function App() {
       ? (selectedLiturgySection?.section ?? "Table of Contents")
       : view === "course-overview"
         ? "Course Overview"
-        : view === "lesson-overview" || view === "lessons"
+        : view === "lessons"
           ? selectedLesson?.title
           : view === "home"
             ? "Liturgical Arabic"
@@ -855,18 +837,7 @@ export default function App() {
                           return (
                             <details className="lp-course-lesson" key={lesson.id} defaultOpen={isCurrentLesson}>
                               <summary className={`lp-course-lesson-summary${isCurrentLesson ? " active" : ""}`}>
-                                <button
-                                  role="menuitem"
-                                  type="button"
-                                  onClick={(event) => {
-                                    event.preventDefault();
-                                    event.stopPropagation();
-                                    goToLessonOverview(lesson.id);
-                                  }}
-                                  className="lp-course-lesson-title-button"
-                                >
-                                  {lesson.title}
-                                </button>
+                                {lesson.title}
                               </summary>
 
                               <div className="lp-course-exercise-list">
@@ -931,14 +902,6 @@ export default function App() {
             lessons={COURSE_LESSONS}
             selectedLessonId={selectedLessonId}
             selectedExerciseIndex={clampedExerciseIndex}
-            onSelectLesson={goToLessonOverview}
-            onSelectExercise={goToLesson}
-          />
-        )}
-        {view === "lesson-overview" && selectedLessonWithUnit && (
-          <LessonOverview
-            lesson={selectedLessonWithUnit}
-            onCourseOverview={goToCourseOverview}
             onSelectExercise={goToLesson}
           />
         )}
@@ -962,14 +925,6 @@ export default function App() {
           />
         )}
         {view === "lessons" && !selectedLesson && (
-          <main className="mx-auto max-w-[700px] px-4 py-10 leading-8" dir="ltr">
-            <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Lesson not found</h1>
-            <p className="text-stone-600 dark:text-[var(--dark-muted)]">
-              No lesson is configured for "{selectedLessonId}".
-            </p>
-          </main>
-        )}
-        {view === "lesson-overview" && !selectedLesson && (
           <main className="mx-auto max-w-[700px] px-4 py-10 leading-8" dir="ltr">
             <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Lesson not found</h1>
             <p className="text-stone-600 dark:text-[var(--dark-muted)]">
