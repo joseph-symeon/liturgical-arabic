@@ -11,7 +11,8 @@ const STACKED_SPEAKER_WIDTH = 520;
 export default function SpeakerLine(props) {
   const [isStacked, setIsStacked] = useState(false);
   const containerRef = useRef(null);
-  const showSpeaker = props.showSpeaker !== false;
+  const hasSpeaker = Boolean(props.speaker);
+  const showSpeaker = hasSpeaker && props.showSpeaker !== false;
   const phrase = phrases[props.speaker];
   const speakerLabel = phrase
     ? getArabicText(phrase, props.arabicMode)
@@ -35,7 +36,7 @@ export default function SpeakerLine(props) {
 	        className: "liturgical-red relative text-2xl leading-loose",
         style: {
           flex: isStacked ? "0 0 auto" : "0 0 90px",
-          display: isStacked && !showSpeaker ? "none" : "block",
+          display: !hasSpeaker || (isStacked && !showSpeaker) ? "none" : "block",
           marginBottom: isStacked ? "2px" : 0,
           textAlign: "right",
           whiteSpace: "nowrap",
@@ -80,7 +81,8 @@ export default function SpeakerLine(props) {
           flex: 1,
           paddingRight: isStacked ? "18px" : "8px",
           minWidth: 0,
-          width: isStacked ? "100%" : "auto"
+          width: isStacked ? "100%" : "auto",
+          marginRight: !hasSpeaker && !isStacked ? "90px" : 0
         }
       },
       h(LiturgyLine, {

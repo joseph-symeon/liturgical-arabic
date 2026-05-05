@@ -8,16 +8,18 @@ import units from "./data/units.js";
 import lessons from "./data/lessons.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
 import { speakArabic } from "./utils/arabic.js";
+import chrysostomIcon from "./assets/chrysostom-icon.png";
 
 const NAV_ITEM_STYLE = {
   display: "block",
   width: "100%",
   textAlign: "left",
-  padding: "6px 8px",
+  padding: "9px 10px",
   border: "none",
-  borderRadius: "4px",
+  borderRadius: "6px",
   cursor: "pointer",
-  fontSize: "inherit",
+  fontSize: "14px",
+  lineHeight: 1.3,
   fontFamily: "inherit",
   color: "inherit"
 };
@@ -25,14 +27,14 @@ const NAV_ITEM_STYLE = {
 const LESSON_ITEM_STYLE = { ...NAV_ITEM_STYLE };
 const MENU_GROUP_STYLE = {
   minWidth: "160px",
-  padding: "8px"
+  padding: "10px 8px"
 };
 const MENU_LABEL_STYLE = {
-  padding: "0 0 6px",
-  fontSize: "11px",
+  padding: "0 2px 8px",
+  fontSize: "12px",
   fontWeight: 600,
   textTransform: "uppercase",
-  letterSpacing: "0.1em"
+  letterSpacing: "0.08em"
 };
 const SECTION_ITEM_STYLE = { ...NAV_ITEM_STYLE };
 const SETTING_BUTTON_STYLE = {
@@ -122,8 +124,10 @@ export default function App() {
   const [selectedLessonId, setSelectedLessonId] = useState(initialNavigation.selectedLessonId);
   const [selectedExerciseIndex, setSelectedExerciseIndex] = useState(initialNavigation.selectedExerciseIndex);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [displayMenuOpen, setDisplayMenuOpen] = useState(false);
   const [arabicMode, setArabicMode] = useState("vocalized");
   const [readerLayout, setReaderLayout] = useState("line");
+  const [showQuietPrayers, setShowQuietPrayers] = useState(true);
   const [arabicFontFamily, setArabicFontFamily] = useState(SYSTEM_SANS_FONT);
   const [arabicFontWeight, setArabicFontWeight] = useState("300");
   const [speechRate, setSpeechRate] = useState(0.8);
@@ -146,6 +150,7 @@ export default function App() {
       setSelectedLessonId(nextNavigation.selectedLessonId);
       setSelectedExerciseIndex(nextNavigation.selectedExerciseIndex);
       setMenuOpen(false);
+      setDisplayMenuOpen(false);
     }
 
     window.addEventListener("hashchange", updateNavigationFromHash);
@@ -162,23 +167,27 @@ export default function App() {
   function goHome() {
     setView("home");
     setMenuOpen(false);
+    setDisplayMenuOpen(false);
   }
 
   function goToLiturgySection(sectionIndex) {
     setSelectedSectionIndex(sectionIndex);
     setView("reader");
     setMenuOpen(false);
+    setDisplayMenuOpen(false);
   }
 
   function goToTableOfContents() {
     setSelectedSectionIndex(null);
     setView("reader");
     setMenuOpen(false);
+    setDisplayMenuOpen(false);
   }
 
   function goToCourseOverview() {
     setView("course-overview");
     setMenuOpen(false);
+    setDisplayMenuOpen(false);
   }
 
   function goToLessonOverview(lessonId) {
@@ -186,6 +195,7 @@ export default function App() {
     setSelectedExerciseIndex(0);
     setView("lesson-overview");
     setMenuOpen(false);
+    setDisplayMenuOpen(false);
   }
 
   function goToLesson(lessonId, exerciseIndex = 0) {
@@ -193,6 +203,7 @@ export default function App() {
     setSelectedExerciseIndex(exerciseIndex);
     setView("lessons");
     setMenuOpen(false);
+    setDisplayMenuOpen(false);
   }
 
   function goToPreviousSection() {
@@ -272,11 +283,34 @@ export default function App() {
     : null;
   const speechRateDisplay = `${Number(speechRate.toFixed(2))}×`;
   const hideContentForMenu = menuOpen && isNarrowViewport;
+  const liturgyMenuItems = liturgySections.reduce((items, section, sectionIndex) => {
+    if (!section.section_group) {
+      items.push({ type: "section", section, sectionIndex });
+      return items;
+    }
+
+    const last = items[items.length - 1];
+    if (last && last.type === "group" && last.group === section.section_group) {
+      last.sections.push({ section, sectionIndex });
+    } else {
+      items.push({
+        type: "group",
+        group: section.section_group,
+        sections: [{ section, sectionIndex }]
+      });
+    }
+    return items;
+  }, []);
 
   function renderHome() {
     return (
       <main className="mx-auto max-w-[700px] px-4 py-10 leading-8">
         <header className="mb-8 text-center" dir="ltr">
+          <img
+            src={chrysostomIcon}
+            alt="Saint John Chrysostom"
+            className="mx-auto mb-6 h-auto max-h-[260px] w-auto max-w-[58vw] opacity-80 dark:invert"
+          />
           <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Liturgical Arabic</h1>
         </header>
         <div className="grid gap-3" dir="ltr">
@@ -301,6 +335,147 @@ export default function App() {
     );
   }
 
+  function renderDisplayMenu() {
+    return (
+      <div
+        role="menu"
+        aria-label="Display settings"
+        className="fixed right-3 top-12 z-30 w-[280px] rounded border border-stone-200 bg-white p-3 text-stone-900 shadow-lg dark:border-stone-700 dark:bg-stone-800 dark:text-stone-100"
+        dir="ltr"
+        onClick={event => event.stopPropagation()}
+      >
+        <div className="text-stone-400 dark:text-stone-500" style={{ ...MENU_LABEL_STYLE, padding: "0 0 8px" }}>
+          Display
+        </div>
+        <div className="mb-2">
+          <label className="mb-1 block text-xs text-stone-500 dark:text-stone-400" htmlFor="arabic-font-select">
+            Arabic font
+          </label>
+          <select
+            id="arabic-font-select"
+            value={arabicFontFamily}
+            onChange={(event) => setArabicFontFamily(event.target.value)}
+            className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-stone-600 dark:bg-stone-700"
+          >
+            {ARABIC_FONTS.map(font => (
+              <option key={font.value} value={font.value}>
+                {font.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-2">
+          <label className="mb-1 block text-xs text-stone-500 dark:text-stone-400" htmlFor="arabic-weight-select">
+            Arabic weight
+          </label>
+          <select
+            id="arabic-weight-select"
+            value={arabicFontWeight}
+            onChange={(event) => setArabicFontWeight(event.target.value)}
+            className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-stone-600 dark:bg-stone-700"
+          >
+            {ARABIC_WEIGHTS.map(weight => (
+              <option key={weight.value} value={weight.value}>
+                {weight.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-2">
+          <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Vowels</div>
+          <div style={{ display: "flex", gap: "6px" }}>
+            <button
+              type="button"
+              onClick={() => setArabicMode("vocalized")}
+              className={arabicMode === "vocalized" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
+              style={SETTING_BUTTON_STYLE}
+            >
+              Vocalized
+            </button>
+            <button
+              type="button"
+              onClick={() => setArabicMode("unvocalized")}
+              className={arabicMode === "unvocalized" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
+              style={SETTING_BUTTON_STYLE}
+            >
+              Unvocalized
+            </button>
+          </div>
+        </div>
+        <div>
+          <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Layout</div>
+          <div style={{ display: "flex", gap: "6px" }}>
+            <button
+              type="button"
+              onClick={() => setReaderLayout("line")}
+              className={readerLayout === "line" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
+              style={SETTING_BUTTON_STYLE}
+            >
+              Line
+            </button>
+            <button
+              type="button"
+              onClick={() => setReaderLayout("paragraph")}
+              className={readerLayout === "paragraph" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
+              style={SETTING_BUTTON_STYLE}
+            >
+              Paragraph
+            </button>
+          </div>
+        </div>
+        <div className="mt-3">
+          <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Silent prayers</div>
+          <div style={{ display: "flex", gap: "6px" }}>
+            <button
+              type="button"
+              onClick={() => setShowQuietPrayers(true)}
+              className={showQuietPrayers ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
+              style={SETTING_BUTTON_STYLE}
+            >
+              Show
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowQuietPrayers(false)}
+              className={!showQuietPrayers ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
+              style={SETTING_BUTTON_STYLE}
+            >
+              Hide
+            </button>
+          </div>
+        </div>
+        <div className="mt-3">
+          <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Reader speed</div>
+          <div className="lp-speed-row">
+            <button
+              type="button"
+              className="lp-speed-adjust"
+              onClick={() => adjustSpeechRate(-0.05)}
+            >
+              −
+            </button>
+            <div className="lp-speed-value">{speechRateDisplay}</div>
+            <button
+              type="button"
+              className="lp-speed-adjust"
+              onClick={() => adjustSpeechRate(0.05)}
+            >
+              +
+            </button>
+          </div>
+          <button
+            type="button"
+            onClick={() => speakArabic("بِسَلامٍ", speechRate)}
+            className="mt-2 bg-stone-100 dark:bg-stone-700"
+            style={SETTING_BUTTON_STYLE}
+          >
+            Preview
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="min-h-screen bg-white dark:bg-stone-900 font-sans text-stone-900 dark:text-stone-100"
@@ -308,7 +483,10 @@ export default function App() {
       style={{ display: "flex", flexDirection: "row", alignItems: "stretch" }}
     >
       <button
-        onClick={() => setMenuOpen(o => !o)}
+        onClick={() => {
+          setMenuOpen(o => !o);
+          setDisplayMenuOpen(false);
+        }}
         aria-label="Open menu"
         aria-expanded={menuOpen}
         style={{
@@ -329,16 +507,48 @@ export default function App() {
         ☰
       </button>
 
+      <button
+        onClick={() => {
+          setDisplayMenuOpen(o => !o);
+          setMenuOpen(false);
+        }}
+        aria-label="Display settings"
+        aria-expanded={displayMenuOpen}
+        title="Display settings"
+        className="rounded bg-white/80 text-stone-900 hover:bg-stone-100 dark:bg-stone-900/80 dark:text-stone-100 dark:hover:bg-stone-800"
+        style={{
+          position: "fixed",
+          top: "8px",
+          right: "12px",
+          zIndex: 30,
+          border: "none",
+          cursor: "pointer",
+          padding: "6px",
+          color: "inherit"
+        }}
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <line x1="4" y1="6" x2="20" y2="6" />
+          <circle cx="9" cy="6" r="2" fill="currentColor" stroke="none" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <circle cx="15" cy="12" r="2" fill="currentColor" stroke="none" />
+          <line x1="4" y1="18" x2="20" y2="18" />
+          <circle cx="11" cy="18" r="2" fill="currentColor" stroke="none" />
+        </svg>
+      </button>
+
+      {displayMenuOpen && renderDisplayMenu()}
+
       {menuOpen && (
       <aside
         className="bg-white dark:bg-stone-900"
         dir="ltr"
-        style={{ display: "flex", alignItems: "flex-start", gap: "8px", minHeight: "100vh", padding: "6px 10px 6px 0" }}
+        style={{ display: "flex", alignItems: "flex-start", gap: "10px", minHeight: "100vh", padding: "10px 12px 10px 0" }}
       >
           <div
             role="menu"
             className="bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-900 dark:text-stone-100"
-            style={{ display: "flex", flex: "0 0 280px", flexDirection: "column", gap: "8px", alignItems: "stretch", maxHeight: "calc(100vh - 12px)", overflowY: "auto", margin: 0, padding: "8px", listStyle: "none", borderRadius: "4px", fontFamily: "Arial, sans-serif", fontSize: "14px" }}
+            style={{ display: "flex", flex: "0 0 300px", flexDirection: "column", gap: "14px", alignItems: "stretch", maxHeight: "calc(100vh - 20px)", overflowY: "auto", margin: 0, padding: "14px", listStyle: "none", borderRadius: "8px", fontFamily: "Arial, sans-serif", fontSize: "14px", boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}
           >
               <div role="group" aria-label="Liturgy Text" style={MENU_GROUP_STYLE}>
                 <button
@@ -350,10 +560,10 @@ export default function App() {
                 >
                   Home
                 </button>
-                <div className="text-stone-400 dark:text-stone-500" style={MENU_LABEL_STYLE}>
+                <div className="mt-3 text-stone-400 dark:text-stone-500" style={MENU_LABEL_STYLE}>
                   Liturgy Text
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                 <button
                   role="menuitem"
                   type="button"
@@ -363,18 +573,45 @@ export default function App() {
                 >
                   Table of Contents
                 </button>
-                {liturgySections.map((section, sectionIndex) => (
-                  <button
-                    key={section.section || sectionIndex}
-                    role="menuitem"
-                    type="button"
-                    onClick={() => goToLiturgySection(sectionIndex)}
-                    className={view === "reader" && selectedSectionIndex === sectionIndex ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
-                    style={SECTION_ITEM_STYLE}
-                  >
-                    {section.section || `Section ${sectionIndex + 1}`}
-                  </button>
-                ))}
+                {liturgyMenuItems.map(item => {
+                  if (item.type === "section") {
+                    return (
+                      <button
+                        key={item.section.section || item.sectionIndex}
+                        role="menuitem"
+                        type="button"
+                        onClick={() => goToLiturgySection(item.sectionIndex)}
+                        className={view === "reader" && selectedSectionIndex === item.sectionIndex ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                        style={SECTION_ITEM_STYLE}
+                      >
+                        {item.section.section || `Section ${item.sectionIndex + 1}`}
+                      </button>
+                    );
+                  }
+
+                  const isCurrentGroup = item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex);
+                  return (
+                    <details className="lp-course-lesson" key={item.group} defaultOpen={isCurrentGroup || selectedSectionIndex === null}>
+                      <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-stone-500">
+                        {item.group}
+                      </summary>
+                      <div className="lp-course-exercise-list">
+                        {item.sections.map(sectionItem => (
+                          <button
+                            key={sectionItem.section.section || sectionItem.sectionIndex}
+                            role="menuitem"
+                            type="button"
+                            onClick={() => goToLiturgySection(sectionItem.sectionIndex)}
+                            className={view === "reader" && selectedSectionIndex === sectionItem.sectionIndex ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                            style={SECTION_ITEM_STYLE}
+                          >
+                            {sectionItem.section.section || `Section ${sectionItem.sectionIndex + 1}`}
+                          </button>
+                        ))}
+                      </div>
+                    </details>
+                  );
+                })}
                 </div>
               </div>
 
@@ -384,7 +621,7 @@ export default function App() {
                 <div className="text-stone-400 dark:text-stone-500" style={MENU_LABEL_STYLE}>
                   Course
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                 <button
                   role="menuitem"
                   type="button"
@@ -396,140 +633,53 @@ export default function App() {
                 </button>
                 {ORDERED_UNITS.map(unit => {
                   const unitLessons = COURSE_LESSONS.filter(l => l.unit_id === unit.id);
+                  const isCurrentUnit = unitLessons.some(lesson => lesson.id === selectedLessonId);
                   return (
-                    <div key={unit.id}>
-                    <div
-                      className="text-stone-400 dark:text-stone-500"
-                      style={{ padding: "6px 16px 2px", fontSize: "11px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em" }}
-                    >
-                      Unit {unit.display_order}: {unit.title}
-                    </div>
-                      {unitLessons.map(lesson => (
-                        <button
-                          key={lesson.id}
-                          role="menuitem"
-	                          onClick={() => goToLessonOverview(lesson.id)}
-	                          className={(view === "lessons" || view === "lesson-overview") && selectedLessonId === lesson.id ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
-                          style={LESSON_ITEM_STYLE}
-                        >
-                          {lesson.title}
-                        </button>
-                      ))}
-                    </div>
+                    <details className="lp-course-unit" key={unit.id} defaultOpen={isCurrentUnit || view === "course-overview"}>
+                      <summary className="lp-course-unit-summary">
+                        <span>Unit {unit.display_order}</span>
+                        <span>{unit.title}</span>
+                      </summary>
+
+                      <div className="lp-course-lesson-list">
+                        {unitLessons.map(lesson => {
+                          const isCurrentLesson = selectedLessonId === lesson.id;
+                          return (
+                            <details className="lp-course-lesson" key={lesson.id} defaultOpen={isCurrentLesson}>
+                              <summary className={`lp-course-lesson-summary${isCurrentLesson ? " active" : ""}`}>
+                                {lesson.title}
+                              </summary>
+
+                              <div className="lp-course-exercise-list">
+                                <button
+                                  role="menuitem"
+                                  type="button"
+                                  onClick={() => goToLessonOverview(lesson.id)}
+                                  className={view === "lesson-overview" && isCurrentLesson ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                                  style={LESSON_ITEM_STYLE}
+                                >
+                                  Lesson page
+                                </button>
+                                {(lesson.exercises || []).map((exercise, exerciseIndex) => (
+                                  <button
+                                    key={`${lesson.id}-${exercise.exercise_id}`}
+                                    role="menuitem"
+                                    type="button"
+                                    onClick={() => goToLesson(lesson.id, exerciseIndex)}
+                                    className={view === "lessons" && isCurrentLesson && clampedExerciseIndex === exerciseIndex ? "bg-stone-100 dark:bg-stone-700 font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-stone-700"}
+                                    style={LESSON_ITEM_STYLE}
+                                  >
+                                    {getExerciseTitle(lesson, exerciseIndex)}
+                                  </button>
+                                ))}
+                              </div>
+                            </details>
+                          );
+                        })}
+                      </div>
+                    </details>
                   );
                 })}
-                </div>
-              </div>
-
-              <div role="separator" aria-hidden="true" className="border-t border-stone-200 dark:border-stone-600" />
-
-              <div role="group" aria-label="Display" style={{ ...MENU_GROUP_STYLE, minWidth: "260px" }}>
-                <div className="text-stone-400 dark:text-stone-500" style={{ ...MENU_LABEL_STYLE, padding: "0 0 6px" }}>
-                  Display
-                </div>
-                <div className="mb-2">
-                  <label className="mb-1 block text-xs text-stone-500 dark:text-stone-400" htmlFor="arabic-font-select">
-                    Arabic font
-                  </label>
-                  <select
-                    id="arabic-font-select"
-                    value={arabicFontFamily}
-                    onChange={(event) => setArabicFontFamily(event.target.value)}
-                    className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-stone-600 dark:bg-stone-700"
-                  >
-                    {ARABIC_FONTS.map(font => (
-                      <option key={font.value} value={font.value}>
-                        {font.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-2">
-                  <label className="mb-1 block text-xs text-stone-500 dark:text-stone-400" htmlFor="arabic-weight-select">
-                    Arabic weight
-                  </label>
-                  <select
-                    id="arabic-weight-select"
-                    value={arabicFontWeight}
-                    onChange={(event) => setArabicFontWeight(event.target.value)}
-                    className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-stone-600 dark:bg-stone-700"
-                  >
-                    {ARABIC_WEIGHTS.map(weight => (
-                      <option key={weight.value} value={weight.value}>
-                        {weight.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-2">
-                  <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Vowels</div>
-                  <div style={{ display: "flex", gap: "6px" }}>
-                    <button
-                      type="button"
-                      onClick={() => setArabicMode("vocalized")}
-                      className={arabicMode === "vocalized" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-                      style={SETTING_BUTTON_STYLE}
-                    >
-                      Vocalized
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setArabicMode("unvocalized")}
-                      className={arabicMode === "unvocalized" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-                      style={SETTING_BUTTON_STYLE}
-                    >
-                      Unvocalized
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Layout</div>
-                  <div style={{ display: "flex", gap: "6px" }}>
-                    <button
-                      type="button"
-                      onClick={() => setReaderLayout("line")}
-                      className={readerLayout === "line" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-                      style={SETTING_BUTTON_STYLE}
-                    >
-                      Line
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setReaderLayout("paragraph")}
-                      className={readerLayout === "paragraph" ? "bg-stone-200 dark:bg-stone-600 font-semibold" : "bg-stone-100 dark:bg-stone-700"}
-                      style={SETTING_BUTTON_STYLE}
-                    >
-                      Paragraph
-                    </button>
-                  </div>
-                </div>
-                <div className="mt-3">
-                  <div className="mb-1 text-xs text-stone-500 dark:text-stone-400">Reader speed</div>
-                  <div className="lp-speed-row">
-                    <button
-                      type="button"
-                      className="lp-speed-adjust"
-                      onClick={() => adjustSpeechRate(-0.05)}
-                    >
-                      −
-                    </button>
-                    <div className="lp-speed-value">{speechRateDisplay}</div>
-                    <button
-                      type="button"
-                      className="lp-speed-adjust"
-                      onClick={() => adjustSpeechRate(0.05)}
-                    >
-                      +
-                    </button>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => speakArabic("بِسَلامٍ", speechRate)}
-                    className="mt-2 bg-stone-100 dark:bg-stone-700"
-                    style={SETTING_BUTTON_STYLE}
-                  >
-                    Preview
-                  </button>
                 </div>
               </div>
           </div>
@@ -539,6 +689,7 @@ export default function App() {
       <div
         onClickCapture={() => {
           if (menuOpen) setMenuOpen(false);
+          if (displayMenuOpen) setDisplayMenuOpen(false);
         }}
         style={{ flex: "1 1 auto", minWidth: 0, display: hideContentForMenu ? "none" : "block" }}
       >
@@ -547,6 +698,7 @@ export default function App() {
           <ArabicLiturgyReader
             arabicMode={arabicMode}
             readerLayout={readerLayout}
+            showQuietPrayers={showQuietPrayers}
             selectedSectionIndex={selectedSectionIndex}
             speechRate={speechRate}
             arabicFontFamily={arabicFontFamily}

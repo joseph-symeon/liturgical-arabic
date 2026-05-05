@@ -1,7 +1,41 @@
 const liturgySections = [
   {
+    "section": "The Preparation for the Divine Liturgy",
+    "section_title_phrase": "section-preparation-divine-liturgy",
+    "section_group": "Prothesis",
+    "section_group_title_phrase": "section-prothesis",
+    "segment_ids": [
+      "preparation-heavenly-king",
+      "preparation-treasury-giver",
+      "preparation-cleanse-save",
+      "preparation-rubric-omit-heavenly-king",
+      "preparation-glory-highest",
+      "preparation-open-my-lips",
+      "preparation-open-door-mercy",
+      "preparation-time-lord-act",
+      "preparation-blessed-is-our-god",
+      "preparation-pray-for-me",
+      "preparation-lord-direct-steps",
+      "preparation-remember-me",
+      "preparation-lord-remember-kingdom"
+    ]
+  },
+  {
+    "section": "Introductory Blessing",
+    "section_title_phrase": "section-introductory-blessing",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "opening-bless-master",
+      "opening-blessed-kingdom",
+      "opening-amen"
+    ]
+  },
+  {
     "section": "Litany of Peace",
     "section_title_phrase": "section-litany-of-peace",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
     "segment_ids": [
       "litany-peace-in-peace",
       "litany-peace-let-us-pray",
@@ -15,14 +49,71 @@ const liturgySections = [
       "litany-peace-holy-house",
       "litany-peace-let-us-pray",
       "litany-peace-lord-have-mercy-choir",
+      "litany-peace-healthful-seasons",
+      "litany-peace-let-us-pray",
+      "litany-peace-lord-have-mercy-choir",
+      "litany-peace-travelers",
+      "litany-peace-let-us-pray",
+      "litany-peace-lord-have-mercy-choir",
+      "litany-peace-deliverance",
+      "litany-peace-let-us-pray",
+      "litany-peace-lord-have-mercy-choir",
       "litany-peace-help-save",
-      "litany-peace-lord-have-mercy-all"
+      "litany-peace-lord-have-mercy-choir",
+      "litany-peace-calling-remembrance",
+      "litany-peace-to-thee-o-lord",
+      "litany-peace-priest-might-quiet",
+      "litany-peace-priest-look-quiet",
+      "litany-peace-priest-doxology",
+      "litany-peace-choir-amen",
+      "litany-peace-rubric-theotokos-icon"
     ]
   },
   {
-    "section": "Antiphons",
-    "section_title_phrase": "section-antiphons",
+    "section": "The First Antiphon",
+    "section_title_phrase": "section-first-antiphon",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
     "segment_ids": [
+      "first-antiphon-through-theotokos-1",
+      "first-antiphon-glory",
+      "first-antiphon-through-theotokos-2",
+      "first-antiphon-both-now",
+      "first-antiphon-through-theotokos-3",
+      "first-antiphon-rubric-little-litany"
+    ]
+  },
+  {
+    "section": "Little Litany After the First Antiphon",
+    "section_title_phrase": "section-little-litany-after-first-antiphon",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "little-litany-again",
+      "little-litany-lord-have-mercy-1",
+      "little-litany-help-save",
+      "little-litany-lord-have-mercy-2",
+      "little-litany-calling-remembrance",
+      "little-litany-to-thee-o-lord",
+      "little-litany-save-thy-people-quiet",
+      "little-litany-glorify-forsake-quiet",
+      "little-litany-for-thine-might",
+      "little-litany-amen",
+      "little-litany-rubric-christ-icon"
+    ]
+  },
+  {
+    "section": "The Second Antiphon",
+    "section_title_phrase": "section-second-antiphon",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "second-antiphon-save-us-risen-1",
+      "second-antiphon-weekdays-label",
+      "second-antiphon-save-us-weekdays",
+      "second-antiphon-glory",
+      "second-antiphon-save-us-risen-2",
+      "second-antiphon-both-now",
       "antiphon-word-of-god-only-begotten",
       "antiphon-deathless",
       "antiphon-accepted-incarnate",
@@ -33,6 +124,150 @@ const liturgySections = [
       "antiphon-one-of-trinity",
       "antiphon-glorified-with-father",
       "antiphon-save-us"
+    ]
+  },
+  {
+    "section": "The Little Litany After the Second Antiphon",
+    "section_title_phrase": "section-little-litany-after-second-antiphon",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "little-litany-again",
+      "little-litany-lord-have-mercy-1",
+      "little-litany-help-save",
+      "little-litany-lord-have-mercy-2",
+      "little-litany-calling-remembrance",
+      "little-litany-to-thee-o-lord",
+      "little-litany-common-supplications-quiet",
+      "little-litany-fulfill-quiet",
+      "little-litany-good-god-doxology",
+      "little-litany-amen",
+      "little-litany-rubric-christ-icon"
+    ]
+  },
+  {
+    "section": "The Entrance",
+    "section_title_phrase": "section-entrance",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "entrance-let-us-pray",
+      "entrance-priest-master-lord-quiet",
+      "entrance-priest-doxology",
+      "entrance-amen-bless-master",
+      "entrance-blessed-entrance",
+      "entrance-deacon-amen",
+      "entrance-wisdom-stand-upright"
+    ]
+  },
+  {
+    "section": "The Entrance Hymn",
+    "section_title_phrase": "section-entrance-hymn",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "entrance-hymn-come-worship",
+      "entrance-hymn-save-us-son-of-god",
+      "entrance-hymn-risen-label",
+      "entrance-hymn-risen-sundays",
+      "entrance-hymn-risen-alleluia",
+      "entrance-hymn-weekdays-label",
+      "entrance-hymn-wondrous-weekdays",
+      "entrance-hymn-wondrous-alleluia",
+      "entrance-hymn-rubric",
+      "trisagion-holy-god-resting-quiet",
+      "trisagion-seraphim-quiet",
+      "trisagion-cherubim-quiet",
+      "trisagion-heavenly-powers-quiet",
+      "trisagion-out-of-nothing-quiet",
+      "trisagion-created-humanity-quiet",
+      "trisagion-gives-wisdom-quiet",
+      "trisagion-not-neglect-sinners-quiet",
+      "trisagion-repentance-salvation-quiet",
+      "trisagion-made-worthy-servants-quiet",
+      "trisagion-stand-before-altar-quiet",
+      "trisagion-offer-worship-quiet",
+      "trisagion-receive-from-mouths-quiet",
+      "trisagion-thrice-holy-hymn-quiet",
+      "trisagion-visit-goodness-quiet",
+      "trisagion-forgive-every-sin-quiet",
+      "trisagion-sanctify-souls-bodies-quiet",
+      "trisagion-grant-worship-quiet",
+      "trisagion-all-days-life-quiet",
+      "trisagion-theotokos-intercessions-quiet",
+      "trisagion-all-saints-quiet",
+      "entrance-hymn-final-let-us-pray",
+      "entrance-hymn-final-lord-have-mercy",
+      "entrance-hymn-holy-art-benediction",
+      "entrance-hymn-deacon-ages",
+      "entrance-hymn-final-amen"
+    ]
+  },
+  {
+    "section": "Thrice-Holy Hymn",
+    "section_title_phrase": "section-trisagion-hymn",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "trisagion-hymn-holy-god-1",
+      "trisagion-hymn-glory",
+      "trisagion-hymn-holy-immortal",
+      "trisagion-with-strength",
+      "trisagion-hymn-holy-god-2",
+      "trisagion-rubric-baptized",
+      "trisagion-rubric-cross",
+      "word-command-master",
+      "word-blessed-cometh",
+      "word-bless-throne",
+      "word-blessed-throne",
+      "word-amen"
+    ]
+  },
+  {
+    "section": "The Reading of the Epistle",
+    "section_title_phrase": "section-reading-epistle",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "epistle-let-us-attend-1",
+      "epistle-reader-prokeimenon",
+      "epistle-wisdom",
+      "epistle-reader-title",
+      "epistle-let-us-attend-2",
+      "epistle-reader-reads",
+      "epistle-peace-reader",
+      "epistle-alleluia"
+    ]
+  },
+  {
+    "section": "Prayer Before the Gospel",
+    "section_title_phrase": "section-prayer-before-gospel",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "gospel-prayer-let-us-pray",
+      "gospel-prayer-illumine-quiet",
+      "gospel-prayer-commandments-quiet",
+      "gospel-prayer-doxology-quiet",
+      "gospel-bless-proclaimer",
+      "gospel-may-god-enable",
+      "gospel-reading-amen"
+    ]
+  },
+  {
+    "section": "The Reading of the Gospel",
+    "section_title_phrase": "section-reading-gospel",
+    "section_group": "Liturgy of the Catechumen",
+    "section_group_title_phrase": "section-liturgy-catechumen",
+    "segment_ids": [
+      "gospel-wisdom-stand",
+      "gospel-peace-all",
+      "gospel-and-spirit",
+      "gospel-reading-from",
+      "gospel-glory-before",
+      "gospel-let-us-attend",
+      "gospel-appointed-reading-rubric",
+      "gospel-glory-after"
     ]
   }
 ];

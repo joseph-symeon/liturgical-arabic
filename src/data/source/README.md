@@ -13,10 +13,12 @@ npm run generate:data
 Columns that contain arrays or objects should be valid JSON:
 
 - `phrases.csv`: `tags`
-- `segments.csv`: `phrases`
+- `segments.csv`: `tags`, `phrases`
 - `liturgySections.csv`: `segment_ids`
 - `exercises.csv`: `segment_ids`, `audio_clip`
 - `lessons.csv`: `exercises`
+
+`liturgySections.csv` can also use `section_group` and `section_group_title_phrase` to organize related reader sections under a larger liturgical heading.
 
 For example, a `segments.csv` `phrases` cell can contain:
 

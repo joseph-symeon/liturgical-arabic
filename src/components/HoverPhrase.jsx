@@ -14,13 +14,15 @@ export default function HoverPhrase(props) {
 
   const text = getArabicText(phrase, props.arabicMode);
   const spokenText = phrase.arabic;
+  const isRubric = phrase.tags?.includes("rubric");
 
   return h(
     InteractiveText,
     {
       spokenText,
       speechRate: props.speechRate,
-      tooltip: h(PhraseTooltip, { phrase })
+      tooltip: h(PhraseTooltip, { phrase }),
+      className: isRubric ? "liturgical-red" : undefined
     },
     text
   );

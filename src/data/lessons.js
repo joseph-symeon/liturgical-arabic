@@ -4,9 +4,12 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "Antiphons",
     "title_phrase": "section-antiphons",
-    "display_order": 1,
+    "display_order": 3,
     "quizlet_deck_url": null,
     "exercises": [
+      {
+        "exercise_id": "first-antiphon-through-theotokos"
+      },
       {
         "exercise_id": "antiphon-only-begotten"
       },
@@ -29,11 +32,130 @@ const lessons = [
     "unit_id": "unit-3",
     "title": "Litany of Peace",
     "title_phrase": "section-litany-of-peace",
-    "display_order": 1,
+    "display_order": 2,
     "quizlet_deck_url": null,
     "exercises": [
       {
         "exercise_id": "litany-of-peace"
+      }
+    ]
+  },
+  {
+    "id": "lesson-entrance",
+    "unit_id": "unit-2",
+    "title": "The Entrance",
+    "title_phrase": "section-entrance",
+    "display_order": 5,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "entrance-let-us-pray"
+      },
+      {
+        "exercise_id": "entrance-bless-master"
+      },
+      {
+        "exercise_id": "entrance-wisdom-stand-upright"
+      },
+      {
+        "exercise_id": "entrance-come-worship"
+      },
+      {
+        "exercise_id": "entrance-save-us-risen"
+      },
+      {
+        "exercise_id": "entrance-save-us-wondrous"
+      }
+    ]
+  },
+  {
+    "id": "lesson-glory",
+    "unit_id": "unit-1",
+    "title": "Glory",
+    "title_phrase": "glory-001",
+    "display_order": 3,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "glory-both-now-beginner"
+      }
+    ]
+  },
+  {
+    "id": "lesson-thrice-holy",
+    "unit_id": "unit-1",
+    "title": "Thrice Holy Hymn",
+    "title_phrase": "section-trisagion-hymn",
+    "display_order": 4,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "trisagion-hymn-core"
+      }
+    ]
+  },
+  {
+    "id": "lesson-little-litanies",
+    "unit_id": "unit-2",
+    "title": "Little Litanies",
+    "title_phrase": "section-little-litany",
+    "display_order": 4,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "little-litany-again"
+      }
+    ]
+  },
+  {
+    "id": "lesson-liturgy-word",
+    "unit_id": "unit-2",
+    "title": "Liturgy of the Word",
+    "title_phrase": "section-liturgy-word",
+    "display_order": 6,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "liturgy-word-gospel-dialogue"
+      }
+    ]
+  },
+  {
+    "id": "lesson-lord-have-mercy",
+    "unit_id": "unit-1",
+    "title": "Lord have mercy",
+    "title_phrase": "lord-have-mercy-001",
+    "display_order": 1,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "lord-have-mercy"
+      }
+    ]
+  },
+  {
+    "id": "lesson-jesus-prayer",
+    "unit_id": "unit-1",
+    "title": "Jesus Prayer",
+    "title_phrase": "jesus-prayer-lord-jesus-christ-001",
+    "display_order": 2,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "jesus-prayer"
+      }
+    ]
+  },
+  {
+    "id": "lesson-all-holy-trinity",
+    "unit_id": "unit-1",
+    "title": "All Holy Trinity",
+    "title_phrase": "all-holy-trinity-001",
+    "display_order": 5,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "all-holy-trinity"
       }
     ]
   }

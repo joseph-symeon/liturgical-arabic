@@ -7,18 +7,45 @@ const phrases = {
   },
   "to-thee-o-lord": {
     "arabic": "لَكَ يَا رَبّ",
-    "translation": "To thee, O Lord",
-    "literal": "To you, O Lord",
+    "translation": "To thee O Lord",
+    "literal": "To you O Lord",
     "tags": []
   },
-  "help-save-001": {
-    "arabic": "أَعْضُدْ وَخَلِّصْ وَارْحَمْ وَاحْفَظْنَا يَا اللَّهُ بِنِعْمَتِكَ",
-    "translation": "Help, save, have mercy, and preserve us, O God, by Your grace",
-    "literal": "Support and save and have mercy and preserve us, O God, by Your grace",
+  "help-save-have-mercy-001": {
+    "arabic": "أَعْضُدْ وَخَلِّصْ وَارْحَمْ",
+    "translation": "Help save have mercy",
+    "literal": "Support and save and have mercy",
     "tags": [
       "verbs",
       "mercy",
-      "grace"
+      "repeated"
+    ]
+  },
+  "preserve-us-001": {
+    "arabic": "وَاحْفَظْنَا",
+    "translation": "and preserve us",
+    "literal": "and preserve us",
+    "tags": [
+      "petition",
+      "repeated"
+    ]
+  },
+  "o-god-001": {
+    "arabic": "يَا اللَّهُ",
+    "translation": "O God",
+    "literal": "O God",
+    "tags": [
+      "address",
+      "repeated"
+    ]
+  },
+  "by-your-grace-001": {
+    "arabic": "بِنِعْمَتِكَ",
+    "translation": "by Your grace",
+    "literal": "by Your grace",
+    "tags": [
+      "grace",
+      "repeated"
     ]
   },
   "for-our-salvation-001": {
@@ -33,7 +60,7 @@ const phrases = {
   "accepted-incarnate-001": {
     "arabic": "لَقَدْ قَبِلْتَ أنْ تَتَجَسَّدَ",
     "translation": "who deigned to be incarnate",
-    "literal": "indeed, you accepted to be embodied",
+    "literal": "indeed you accepted to be embodied",
     "tags": [
       "incarnation"
     ]
@@ -49,8 +76,8 @@ const phrases = {
   },
   "title-only-begotten-son-word-of-god": {
     "arabic": "يا كَلِمَةَ اللّٰهِ الابْنَ الوَحيد",
-    "translation": "Only-begotten Son and Word of God",
-    "literal": "O Word of God, the Only-Begotten Son",
+    "translation": "Only begotten Son and Word of God",
+    "literal": "O Word of God the Only Begotten Son",
     "tags": [
       "section-title",
       "lesson-title",
@@ -85,7 +112,7 @@ const phrases = {
   },
   "enter-with-faith-001": {
     "arabic": "وَالَّذِينَ يَدْخُلُونَ إِلَيْهِ بِإِيمَانٍ وَوَرَعٍ وَخَوْفِ اللَّه",
-    "translation": "and those who with faith, reverence, and the fear of God enter therein",
+    "translation": "and those who with faith reverence and the fear of God enter therein",
     "literal": "and those who enter into it with faith and reverence and fear of God",
     "tags": [
       "faith",
@@ -111,8 +138,8 @@ const phrases = {
   },
   "crucified-001": {
     "arabic": "وَصُلِبْتَ أَيُّها الْمَسيحُ إِلَهُنا",
-    "translation": "and wast crucified, O Christ our God",
-    "literal": "and you were crucified, O Christ our God",
+    "translation": "and wast crucified O Christ our God",
+    "literal": "and you were crucified O Christ our God",
     "tags": [
       "crucifixion"
     ]
@@ -124,6 +151,15 @@ const phrases = {
     "tags": [
       "section-title",
       "antiphons"
+    ]
+  },
+  "section-second-antiphon": {
+    "arabic": "الأَنْدِيفُونَا الثَّانِيَة",
+    "translation": "The Second Antiphon",
+    "literal": "The second antiphon",
+    "tags": [
+      "section-title",
+      "antiphon"
     ]
   },
   "word-of-god-001": {
@@ -138,8 +174,8 @@ const phrases = {
   },
   "ever-virgin-mary-001": {
     "arabic": "الدّائمةِ البَتوليَّةِ مَرْيَمَ",
-    "translation": "the ever-virgin Mary",
-    "literal": "the ever-virgin Mary",
+    "translation": "the ever virgin Mary",
+    "literal": "the ever virgin Mary",
     "tags": [
       "theotokos",
       "mary"
@@ -164,8 +200,8 @@ const phrases = {
   },
   "lord-have-mercy-001": {
     "arabic": "يَا رَبُّ ارْحَمْ",
-    "translation": "Lord, have mercy",
-    "literal": "O Lord, have mercy",
+    "translation": "Lord have mercy",
+    "literal": "O Lord have mercy",
     "tags": [
       "response",
       "mercy",
@@ -225,8 +261,8 @@ const phrases = {
   },
   "only-begotten-001": {
     "arabic": "الْابْنَ الْوَحيدَ",
-    "translation": "the Only-Begotten Son",
-    "literal": "the Only-Begotten Son",
+    "translation": "the Only Begotten Son",
+    "literal": "the Only Begotten Son",
     "tags": [
       "christology",
       "only-begotten"
@@ -283,6 +319,2155 @@ const phrases = {
     "tags": [
       "church",
       "stability"
+    ]
+  },
+  "role-rubric": {
+    "arabic": "إِرْشَاد",
+    "translation": "Rubric",
+    "literal": "Instruction",
+    "tags": [
+      "role",
+      "rubric"
+    ]
+  },
+  "section-entrance": {
+    "arabic": "الدُّخُول",
+    "translation": "The Entrance",
+    "literal": "The entrance",
+    "tags": [
+      "section-title",
+      "entrance"
+    ]
+  },
+  "section-entrance-hymn": {
+    "arabic": "تَرْنِيمَةُ الدُّخُول",
+    "translation": "The Entrance Hymn",
+    "literal": "Hymn of the entrance",
+    "tags": [
+      "section-title",
+      "entrance",
+      "hymn"
+    ]
+  },
+  "amen-001": {
+    "arabic": "آمِين",
+    "translation": "Amen",
+    "literal": "Amen",
+    "tags": [
+      "response",
+      "repeated"
+    ]
+  },
+  "entrance-master-lord-god-001": {
+    "arabic": "أَيُّهَا السَّيِّدُ الرَّبُّ إِلَهُنَا",
+    "translation": "O Master Lord our God",
+    "literal": "O Master Lord our God",
+    "tags": [
+      "entrance",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "entrance-appointed-angels-001": {
+    "arabic": "يَا مَنْ أَقَامَ فِي السَّمَاوَاتِ طَغْمَاتٍ وَجُنُودَ مَلَائِكَةٍ وَرُؤَسَاءَ مَلَائِكَةٍ",
+    "translation": "who hast appointed in heaven orders and hosts of angels and archangels",
+    "literal": "O you who appointed in the heavens ranks and hosts of angels and archangels",
+    "tags": [
+      "entrance",
+      "priest-prayer",
+      "quiet",
+      "angels"
+    ]
+  },
+  "entrance-service-glory-001": {
+    "arabic": "لِخِدْمَةِ مَجْدِهِ",
+    "translation": "for the service of thy glory",
+    "literal": "for the service of his glory",
+    "tags": [
+      "entrance",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "entrance-make-our-entrance-001": {
+    "arabic": "إِجْعَلْ دُخُولَنَا مَقْرُونًا بِدُخُولِ مَلَائِكَةٍ قِدِّيسِينَ",
+    "translation": "Cause that with our entrance there may be an entrance of holy angels",
+    "literal": "make our entrance joined with an entrance of holy angels",
+    "tags": [
+      "entrance",
+      "priest-prayer",
+      "quiet",
+      "angels"
+    ]
+  },
+  "entrance-angels-serving-001": {
+    "arabic": "يُشَارِكُونَنَا فِي الْخِدْمَةِ",
+    "translation": "serving with us",
+    "literal": "sharing with us in the service",
+    "tags": [
+      "entrance",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "entrance-glorifying-goodness-001": {
+    "arabic": "وَيُمَجِّدُونَ مَعَنَا صَلَاحَكَ",
+    "translation": "and glorifying thy goodness",
+    "literal": "and they glorify your goodness with us",
+    "tags": [
+      "entrance",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "doxology-for-fitting-001": {
+    "arabic": "لِأَنَّهُ يَنْبَغِي لَكَ",
+    "translation": "For unto thee are due",
+    "literal": "For it is fitting to you",
+    "tags": [
+      "doxology",
+      "repeated"
+    ]
+  },
+  "doxology-glory-honor-worship-001": {
+    "arabic": "كُلُّ مَجْدٍ وَإِكْرَامٍ وَسُجُودٍ",
+    "translation": "all glory honor and worship",
+    "literal": "all glory and honor and worship",
+    "tags": [
+      "doxology",
+      "repeated"
+    ]
+  },
+  "doxology-father-son-spirit-001": {
+    "arabic": "أَيُّهَا الآبُ وَالابْنُ وَالرُّوحُ الْقُدُسُ",
+    "translation": "to the Father and to the Son and to the Holy Spirit",
+    "literal": "O Father and Son and Holy Spirit",
+    "tags": [
+      "doxology",
+      "trinity",
+      "repeated"
+    ]
+  },
+  "doxology-now-ever-ages-001": {
+    "arabic": "الآنَ وَكُلَّ أَوَانٍ وَإِلَى دَهْرِ الدَّاهِرِينَ",
+    "translation": "now and ever and unto ages of ages",
+    "literal": "now and always and unto the age of ages",
+    "tags": [
+      "doxology",
+      "repeated"
+    ]
+  },
+  "now-and-ever-001": {
+    "arabic": "الآنَ وَكُلَّ أَوَانٍ",
+    "translation": "now and ever",
+    "literal": "now and always",
+    "tags": [
+      "doxology",
+      "repeated"
+    ]
+  },
+  "unto-ages-of-ages-001": {
+    "arabic": "وَإِلَى دَهْرِ الدَّاهِرِينَ",
+    "translation": "and unto ages of ages",
+    "literal": "and unto the age of ages",
+    "tags": [
+      "doxology",
+      "repeated"
+    ]
+  },
+  "entrance-bless-master-001": {
+    "arabic": "بَارِكْ يَا سَيِّدُ",
+    "translation": "Bless master",
+    "literal": "Bless master",
+    "tags": [
+      "entrance",
+      "deacon"
+    ]
+  },
+  "entrance-holy-entrance-001": {
+    "arabic": "الدُّخُولَ الْمُقَدَّس",
+    "translation": "the holy entrance",
+    "literal": "the holy entrance",
+    "tags": [
+      "entrance"
+    ]
+  },
+  "entrance-blessed-is-001": {
+    "arabic": "مُبَارَكٌ هُوَ",
+    "translation": "Blessed is",
+    "literal": "Blessed is",
+    "tags": [
+      "entrance",
+      "blessing"
+    ]
+  },
+  "entrance-holy-ones-001": {
+    "arabic": "دُخُولُ قِدِّيسِيكَ",
+    "translation": "the entrance of thy holy ones",
+    "literal": "the entrance of your holy ones",
+    "tags": [
+      "entrance",
+      "blessing"
+    ]
+  },
+  "entrance-always-001": {
+    "arabic": "كُلَّ حِينٍ",
+    "translation": "always",
+    "literal": "at every time",
+    "tags": [
+      "entrance",
+      "time"
+    ]
+  },
+  "wisdom-001": {
+    "arabic": "الْحِكْمَة",
+    "translation": "Wisdom",
+    "literal": "Wisdom",
+    "tags": [
+      "deacon",
+      "repeated"
+    ]
+  },
+  "stand-upright-001": {
+    "arabic": "فَلْنَسْتَقِم",
+    "translation": "Stand upright",
+    "literal": "Let us stand upright",
+    "tags": [
+      "deacon",
+      "repeated"
+    ]
+  },
+  "entrance-come-001": {
+    "arabic": "هَلُمُّوا",
+    "translation": "Come",
+    "literal": "Come",
+    "tags": [
+      "entrance",
+      "hymn"
+    ]
+  },
+  "entrance-worship-bow-001": {
+    "arabic": "نَسْجُدْ وَنَرْكَعْ",
+    "translation": "let us worship and fall down",
+    "literal": "we worship and bow down",
+    "tags": [
+      "entrance",
+      "hymn"
+    ]
+  },
+  "entrance-christ-king-god-001": {
+    "arabic": "لِلْمَسِيحِ مَلِكِنَا وَإِلَهِنَا",
+    "translation": "before Christ our King and our God",
+    "literal": "to Christ our King and our God",
+    "tags": [
+      "entrance",
+      "hymn",
+      "christology"
+    ]
+  },
+  "son-of-god-001": {
+    "arabic": "يَا ابْنَ الله",
+    "translation": "O Son of God",
+    "literal": "O Son of God",
+    "tags": [
+      "christology",
+      "address"
+    ]
+  },
+  "entrance-risen-dead-001": {
+    "arabic": "يَا مَنْ قَامَ مِنْ بَيْنِ الأَمْوَات",
+    "translation": "who art risen from the dead",
+    "literal": "O you who rose from among the dead",
+    "tags": [
+      "entrance",
+      "hymn",
+      "ordinary-sundays",
+      "resurrection"
+    ]
+  },
+  "entrance-we-sing-to-you-001": {
+    "arabic": "نَحْنُ الْمُرَتِّلِينَ لَكَ",
+    "translation": "who sing to thee",
+    "literal": "we who chant to you",
+    "tags": [
+      "entrance",
+      "hymn"
+    ]
+  },
+  "alleluia-001": {
+    "arabic": "هَلِّلُويَا",
+    "translation": "Alleluia",
+    "literal": "Alleluia",
+    "tags": [
+      "hymn",
+      "repeated"
+    ]
+  },
+  "ordinary-sundays-label-001": {
+    "arabic": "فِي الآحَادِ العَادِيَّة",
+    "translation": "Ordinary Sundays",
+    "literal": "On ordinary Sundays",
+    "tags": [
+      "rubric",
+      "ordinary-sundays"
+    ]
+  },
+  "entrance-wondrous-saints-001": {
+    "arabic": "يَا مَنْ هُوَ عَجِيبٌ فِي قِدِّيسِيه",
+    "translation": "who art wondrous in the saints",
+    "literal": "O you who are wondrous in his saints",
+    "tags": [
+      "entrance",
+      "hymn",
+      "weekdays",
+      "saints"
+    ]
+  },
+  "weekdays-label-001": {
+    "arabic": "خِلَالَ أَيَّامِ الأُسْبُوع",
+    "translation": "Weekdays",
+    "literal": "During the days of the week",
+    "tags": [
+      "rubric",
+      "weekdays"
+    ]
+  },
+  "entrance-rubric-chant-hymns-001": {
+    "arabic": "هُنَا نُرَتِّلُ الطَّرُوبَارِيَّاتِ وَالْقِنْدَاقَ",
+    "translation": "Here we chant hymns appointed for the day and season",
+    "literal": "Here the troparia and kontakion are chanted",
+    "tags": [
+      "rubric",
+      "entrance"
+    ]
+  },
+  "entrance-rubric-refer-bulletin-001": {
+    "arabic": "رَاجِعِ النَّشْرَةَ الأُسْبُوعِيَّة",
+    "translation": "refer to the bulletin",
+    "literal": "refer to the weekly bulletin",
+    "tags": [
+      "rubric",
+      "entrance"
+    ]
+  },
+  "entrance-rubric-priest-prayer-001": {
+    "arabic": "بَيْنَمَا يَتْلُو الْكَاهِنُ الإِفْشِينَ التَّالِي",
+    "translation": "while the priest says the following prayer",
+    "literal": "while the priest recites the following prayer",
+    "tags": [
+      "rubric",
+      "entrance"
+    ]
+  },
+  "for-holy-art-thou-001": {
+    "arabic": "لأَنَّكَ قُدُّوسٌ أَنْتَ يَا إِلَهَنَا",
+    "translation": "For holy art thou O our God",
+    "literal": "for you are holy O our God",
+    "tags": [
+      "entrance",
+      "trisagion",
+      "doxology"
+    ]
+  },
+  "unto-thee-ascribe-glory-001": {
+    "arabic": "وَلَكَ نُرْسِلُ المَجْد",
+    "translation": "and unto thee we ascribe glory",
+    "literal": "and to you we send up glory",
+    "tags": [
+      "entrance",
+      "trisagion",
+      "doxology",
+      "repeated"
+    ]
+  },
+  "trisagion-holy-god-resting-001": {
+    "arabic": "أَيُّهَا الْإِلَهُ الْقُدُّوسُ الْمُسْتَرِيحُ فِي الْقِدِّيسِينَ",
+    "translation": "O holy God who restest among the holy ones",
+    "literal": "O holy God resting among the holy ones",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-seraphim-001": {
+    "arabic": "الْمُسَبَّحُ مِنَ السِّيرَافِيمِ بِأَصْوَاتٍ ثُلاثِيَّةِ التَّقْدِيسِ",
+    "translation": "who art hymned by the seraphim with the thrice holy cry",
+    "literal": "praised by the seraphim with thrice holy voices",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-cherubim-001": {
+    "arabic": "وَالْمُمَجَّدُ مِنَ الشِّيرُوبِيمِ",
+    "translation": "and glorified by the cherubim",
+    "literal": "and glorified by the cherubim",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-heavenly-powers-001": {
+    "arabic": "وَالْمَسْجُودُ لَهُ مِنْ كُلِّ قُوَّةٍ سَمَاوِيَّةٍ",
+    "translation": "and worshipped by every heavenly power",
+    "literal": "and worshipped by every heavenly power",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-out-of-nothing-001": {
+    "arabic": "يَا مَنْ أَخْرَجَ كُلَّ شَيْءٍ مِنَ الْعَدَمِ إِلَى الْوُجُودِ",
+    "translation": "who out of nothing hast brought all things into being",
+    "literal": "O you who brought everything from nothing into being",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion",
+      "creation"
+    ]
+  },
+  "trisagion-created-humanity-001": {
+    "arabic": "وَخَلَقَ الْإِنْسَانَ عَلَى صُورَتِهِ وَمِثَالِهِ",
+    "translation": "who hast created man according to thine own image and likeness",
+    "literal": "and created humanity according to his image and likeness",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion",
+      "creation"
+    ]
+  },
+  "trisagion-gives-wisdom-001": {
+    "arabic": "وَيَمْنَحُ الطَّالِبَ حِكْمَةً وَفَهْمًا",
+    "translation": "who givest to him that asketh wisdom and understanding",
+    "literal": "and gives wisdom and understanding to the one who asks",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-not-neglect-sinners-001": {
+    "arabic": "وَلَا يُهْمِلُ الَّذِينَ يُخْطِئُونَ",
+    "translation": "who despisest not the sinner",
+    "literal": "and does not neglect those who sin",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-repentance-salvation-001": {
+    "arabic": "بَلْ وَضَعَ تَوْبَةً لِلْخَلَاصِ",
+    "translation": "but hast appointed repentance unto salvation",
+    "literal": "but established repentance for salvation",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion",
+      "salvation"
+    ]
+  },
+  "trisagion-made-worthy-servants-001": {
+    "arabic": "يَا مَنْ أَهَّلْتَنَا نَحْنُ عَبِيدَهُ الأَذِلَّاءَ غَيْرَ الْمُسْتَحِقِّينَ",
+    "translation": "who hast vouchsafed unto us thy humble and unworthy servants",
+    "literal": "O you who made us his humble and unworthy servants worthy",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-stand-before-altar-001": {
+    "arabic": "لأَنْ نَقِفَ فِي هَذِهِ السَّاعَةِ أَيْضًا أَمَامَ مَجْدِ مَذْبَحِهِ الْمُقَدَّسِ",
+    "translation": "even in this hour to stand before the glory of thy holy altar",
+    "literal": "to stand in this hour before the glory of his holy altar",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-offer-worship-001": {
+    "arabic": "وَأَنْ نُقَدِّمَ لَهُ السُّجُودَ وَالتَّمْجِيدَ الْوَاجِبَيْنِ",
+    "translation": "and to offer the worship and praise which are due unto thee",
+    "literal": "and to offer to him the worship and glorification that are due",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-receive-from-mouths-001": {
+    "arabic": "أَنْتَ أَيُّهَا السَّيِّدُ تَقَبَّلْ مِنْ أَفْوَاهِنَا أَيْضًا نَحْنُ الْخَطَأَةَ",
+    "translation": "Thyself O Master receive even from the mouth of us sinners",
+    "literal": "You O Master receive also from our mouths we sinners",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-thrice-holy-hymn-001": {
+    "arabic": "التَّسْبِيحَ الْمُثَلَّثَ التَّقْدِيسِ",
+    "translation": "the thrice holy hymn",
+    "literal": "the thrice holy praise",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-visit-goodness-001": {
+    "arabic": "وَافْتَقِدْنَا بِصَلَاحِكَ",
+    "translation": "and visit us in thy goodness",
+    "literal": "and visit us in your goodness",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-forgive-every-sin-001": {
+    "arabic": "وَاغْفِرْ لَنَا كُلَّ إِثْمٍ طَوْعِيٍّ أَوْ كُرْهِيٍّ",
+    "translation": "Pardon us every transgression both voluntary and involuntary",
+    "literal": "and forgive us every voluntary or involuntary sin",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-sanctify-souls-bodies-001": {
+    "arabic": "وَقَدِّسْ نُفُوسَنَا وَأَجْسَادَنَا",
+    "translation": "sanctify our souls and bodies",
+    "literal": "and sanctify our souls and bodies",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-grant-worship-001": {
+    "arabic": "وَامْنَحْنَا أَنْ نَعْبُدَكَ بِقَدَاسَةٍ",
+    "translation": "and grant us to serve thee in holiness",
+    "literal": "and grant us to worship you in holiness",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-all-days-life-001": {
+    "arabic": "كُلَّ أَيَّامِ حَيَاتِنَا",
+    "translation": "all the days of our life",
+    "literal": "all the days of our life",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "trisagion-theotokos-intercessions-001": {
+    "arabic": "بِشَفَاعَاتِ وَالِدَةِ الْإِلَهِ الْقِدِّيسَةِ",
+    "translation": "through the intercessions of the holy Theotokos",
+    "literal": "through the intercessions of the holy Theotokos",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion",
+      "theotokos"
+    ]
+  },
+  "trisagion-all-saints-001": {
+    "arabic": "وَجَمِيعِ الْقِدِّيسِينَ الَّذِينَ أَرْضَوْكَ مُنْذُ الدَّهْرِ",
+    "translation": "and of all the saints who from the beginning of the world have been well pleasing unto thee",
+    "literal": "and all the saints who have pleased you from the age",
+    "tags": [
+      "priest-prayer",
+      "quiet",
+      "trisagion"
+    ]
+  },
+  "role-reader": {
+    "arabic": "القَارِئ",
+    "translation": "Reader",
+    "literal": "The Reader",
+    "tags": [
+      "role"
+    ]
+  },
+  "section-preparation-divine-liturgy": {
+    "arabic": "التَّهْيِئَةُ لِخِدْمَةِ القُدَّاسِ الإِلَهِي",
+    "translation": "The Preparation for the Divine Liturgy",
+    "literal": "The preparation for the service of the Divine Liturgy",
+    "tags": [
+      "section-title",
+      "preparation"
+    ]
+  },
+  "section-prothesis": {
+    "arabic": "البْرُوثِيسِيس",
+    "translation": "Prothesis",
+    "literal": "Prothesis",
+    "tags": [
+      "section-title",
+      "preparation"
+    ]
+  },
+  "section-liturgy-catechumen": {
+    "arabic": "قُدَّاسُ المَوْعُوظِينَ",
+    "translation": "Liturgy of the Catechumen",
+    "literal": "Liturgy of the catechumens",
+    "tags": [
+      "section-title",
+      "liturgy",
+      "catechumen"
+    ]
+  },
+  "section-introductory-blessing": {
+    "arabic": "البَرَكَةُ الِافْتِتَاحِيَّة",
+    "translation": "Introductory Blessing",
+    "literal": "The introductory blessing",
+    "tags": [
+      "section-title",
+      "liturgy",
+      "blessing"
+    ]
+  },
+  "section-first-antiphon": {
+    "arabic": "الأَنْدِيفُونَا الأُولَى",
+    "translation": "The First Antiphon",
+    "literal": "The first antiphon",
+    "tags": [
+      "section-title",
+      "antiphon"
+    ]
+  },
+  "section-little-litany": {
+    "arabic": "الطِلْبَةُ الصُّغْرَى",
+    "translation": "The Little Litany",
+    "literal": "The small petition",
+    "tags": [
+      "section-title",
+      "litany"
+    ]
+  },
+  "section-little-litany-after-first-antiphon": {
+    "arabic": "الطِلْبَةُ الصُّغْرَى",
+    "translation": "Little Litany After the First Antiphon",
+    "literal": "The small petition after the first antiphon",
+    "tags": [
+      "section-title",
+      "litany",
+      "first-antiphon"
+    ]
+  },
+  "section-little-litany-after-second-antiphon": {
+    "arabic": "الطِلْبَةُ الصُّغْرَى",
+    "translation": "The Little Litany After the Second Antiphon",
+    "literal": "The small petition after the second antiphon",
+    "tags": [
+      "section-title",
+      "litany",
+      "second-antiphon"
+    ]
+  },
+  "section-trisagion-hymn": {
+    "arabic": "التَّسْبِيحُ المُثَلَّثُ التَّقْدِيس",
+    "translation": "Thrice Holy Hymn",
+    "literal": "The thrice holy hymn",
+    "tags": [
+      "section-title",
+      "trisagion"
+    ]
+  },
+  "section-liturgy-word": {
+    "arabic": "قُدَّاسُ الكَلِمَة",
+    "translation": "The Liturgy of the Word",
+    "literal": "The liturgy of the word",
+    "tags": [
+      "section-title",
+      "word"
+    ]
+  },
+  "section-reading-epistle": {
+    "arabic": "قِرَاءَةُ الرِّسَالَة",
+    "translation": "The Reading of the Epistle",
+    "literal": "The reading of the epistle",
+    "tags": [
+      "section-title",
+      "epistle"
+    ]
+  },
+  "section-prayer-before-gospel": {
+    "arabic": "إِفْشِينُ مَا قَبْلَ الإِنْجِيل",
+    "translation": "Prayer Before the Gospel",
+    "literal": "Prayer before the Gospel",
+    "tags": [
+      "section-title",
+      "gospel"
+    ]
+  },
+  "section-reading-gospel": {
+    "arabic": "قِرَاءَةُ الإِنْجِيلِ المُقَدَّس",
+    "translation": "The Reading of the Gospel",
+    "literal": "The reading of the holy Gospel",
+    "tags": [
+      "section-title",
+      "gospel"
+    ]
+  },
+  "preparation-heavenly-king-001": {
+    "arabic": "أَيُّهَا المَلِكُ السَّمَاوِيُّ المُعَزِّي رُوحُ الحَقّ",
+    "translation": "O heavenly King Comforter the Spirit of truth",
+    "literal": "O heavenly King the Comforter Spirit of truth",
+    "tags": [
+      "preparation",
+      "holy-spirit"
+    ]
+  },
+  "preparation-everywhere-present-001": {
+    "arabic": "الحَاضِرُ فِي كُلِّ مَكَانٍ وَالمَالِئُ الكُلّ",
+    "translation": "who art everywhere present and fillest all things",
+    "literal": "the one present in every place and filling all things",
+    "tags": [
+      "preparation",
+      "holy-spirit"
+    ]
+  },
+  "preparation-treasury-giver-001": {
+    "arabic": "كَنْزُ الصَّالِحَاتِ وَرَازِقُ الحَيَاة",
+    "translation": "the Treasury of good things and Giver of life",
+    "literal": "treasury of good things and giver of life",
+    "tags": [
+      "preparation",
+      "holy-spirit"
+    ]
+  },
+  "preparation-come-abide-001": {
+    "arabic": "هَلُمَّ وَاسْكُنْ فِينَا",
+    "translation": "Come and abide in us",
+    "literal": "come and dwell in us",
+    "tags": [
+      "preparation",
+      "petition"
+    ]
+  },
+  "preparation-cleanse-save-001": {
+    "arabic": "وَطَهِّرْنَا مِنْ كُلِّ دَنَسٍ وَخَلِّصْ أَيُّهَا الصَّالِحُ نُفُوسَنَا",
+    "translation": "and cleanse us from every stain and save our souls O good One",
+    "literal": "and purify us from every stain and save O Good One our souls",
+    "tags": [
+      "preparation",
+      "petition",
+      "salvation"
+    ]
+  },
+  "preparation-rubric-omit-heavenly-king-001": {
+    "arabic": "لا نَقُولُ أَيُّهَا المَلِكُ السَّمَاوِيُّ مِنَ الفِصْحِ إِلَى العَنْصَرَة",
+    "translation": "We do not say O heavenly King from Pascha until Pentecost",
+    "literal": "O Heavenly King is not said from Pascha until Pentecost",
+    "tags": [
+      "rubric",
+      "preparation"
+    ]
+  },
+  "glory-highest-001": {
+    "arabic": "المَجْدُ للهِ فِي العُلَى",
+    "translation": "Glory to God in the highest",
+    "literal": "Glory to God in the highest places",
+    "tags": [
+      "glory",
+      "preparation"
+    ]
+  },
+  "earth-peace-goodwill-001": {
+    "arabic": "وَعَلَى الأَرْضِ السَّلَامُ وَفِي النَّاسِ المَسَرَّة",
+    "translation": "and on earth peace good will among men",
+    "literal": "and upon earth peace and among people good pleasure",
+    "tags": [
+      "peace",
+      "preparation"
+    ]
+  },
+  "thrice-001": {
+    "arabic": "ثَلَاثًا",
+    "translation": "thrice",
+    "literal": "three times",
+    "tags": [
+      "rubric",
+      "repeated"
+    ]
+  },
+  "twice-001": {
+    "arabic": "مَرَّتَيْن",
+    "translation": "twice",
+    "literal": "two times",
+    "tags": [
+      "rubric",
+      "repeated"
+    ]
+  },
+  "open-my-lips-001": {
+    "arabic": "يَا رَبُّ افْتَحْ شَفَتَيَّ",
+    "translation": "O Lord thou shalt open my lips",
+    "literal": "O Lord open my lips",
+    "tags": [
+      "preparation",
+      "psalm"
+    ]
+  },
+  "declare-praise-001": {
+    "arabic": "فَيُخْبِرَ فَمِي بِتَسْبِيحِكَ",
+    "translation": "and my mouth shall declare thy praise",
+    "literal": "and my mouth will proclaim your praise",
+    "tags": [
+      "preparation",
+      "psalm"
+    ]
+  },
+  "open-door-mercy-001": {
+    "arabic": "يَا رَبُّ يَا رَبُّ افْتَحْ لَنَا بَابَ رَحْمَتِكَ",
+    "translation": "O Lord Lord open unto us the door of thy mercy",
+    "literal": "O Lord Lord open for us the door of your mercy",
+    "tags": [
+      "preparation",
+      "mercy"
+    ]
+  },
+  "time-lord-act-001": {
+    "arabic": "إِنَّهُ وَقْتُ عَمَلِ الرَّبّ",
+    "translation": "It is time for the Lord to act",
+    "literal": "It is the time for the Lord to act",
+    "tags": [
+      "preparation",
+      "clergy-dialogue"
+    ]
+  },
+  "bless-holy-master-001": {
+    "arabic": "بَارِكْ يَا سَيِّدِي القُدُّوس",
+    "translation": "Bless holy master",
+    "literal": "Bless holy master",
+    "tags": [
+      "preparation",
+      "clergy-dialogue"
+    ]
+  },
+  "blessed-is-our-god-001": {
+    "arabic": "مُبَارَكٌ إِلَهُنَا",
+    "translation": "Blessed is our God",
+    "literal": "Blessed is our God",
+    "tags": [
+      "blessing",
+      "clergy-dialogue"
+    ]
+  },
+  "always-now-ever-ages-001": {
+    "arabic": "كُلَّ حِينٍ الآنَ وَكُلَّ أَوَانٍ وَإِلَى دَهْرِ الدَّاهِرِينَ",
+    "translation": "always now and ever and unto ages of ages",
+    "literal": "at every time now and always and unto the age of ages",
+    "tags": [
+      "doxology",
+      "repeated"
+    ]
+  },
+  "pray-for-me-holy-master-001": {
+    "arabic": "صَلِّ مِنْ أَجْلِي يَا سَيِّدِي القُدُّوس",
+    "translation": "Pray for me holy master",
+    "literal": "Pray for me holy master",
+    "tags": [
+      "preparation",
+      "clergy-dialogue"
+    ]
+  },
+  "lord-direct-steps-001": {
+    "arabic": "يُسَدِّدُ الرَّبُّ خُطَاكَ إِلَى كُلِّ عَمَلٍ صَالِح",
+    "translation": "The Lord direct thy steps unto every good work",
+    "literal": "May the Lord direct your steps toward every good work",
+    "tags": [
+      "preparation",
+      "clergy-dialogue"
+    ]
+  },
+  "remember-me-holy-master-001": {
+    "arabic": "اذْكُرْنِي يَا سَيِّدِي القُدُّوس",
+    "translation": "Remember me holy master",
+    "literal": "Remember me holy master",
+    "tags": [
+      "preparation",
+      "clergy-dialogue"
+    ]
+  },
+  "lord-remember-kingdom-001": {
+    "arabic": "يَذْكُرُكَ الرَّبُّ الإِلَهُ فِي مَلَكُوتِهِ",
+    "translation": "The Lord God remember thee in his kingdom",
+    "literal": "May the Lord God remember you in his kingdom",
+    "tags": [
+      "preparation",
+      "clergy-dialogue"
+    ]
+  },
+  "opening-bless-master-001": {
+    "arabic": "بَارِكْ يَا سَيِّد",
+    "translation": "Bless master",
+    "literal": "Bless master",
+    "tags": [
+      "opening"
+    ]
+  },
+  "opening-blessed-kingdom-001": {
+    "arabic": "مُبَارَكَةٌ مَمْلَكَةُ",
+    "translation": "Blessed is the kingdom",
+    "literal": "Blessed is the kingdom",
+    "tags": [
+      "opening",
+      "blessing"
+    ]
+  },
+  "father-son-holy-spirit-001": {
+    "arabic": "الآبِ وَالابْنِ وَالرُّوحِ القُدُس",
+    "translation": "of the Father and of the Son and of the Holy Spirit",
+    "literal": "of the Father and the Son and the Holy Spirit",
+    "tags": [
+      "trinity",
+      "repeated"
+    ]
+  },
+  "through-intercessions-001": {
+    "arabic": "بِشَفَاعَاتِ",
+    "translation": "Through the intercessions",
+    "literal": "By the intercessions",
+    "tags": [
+      "antiphon",
+      "theotokos",
+      "repeated"
+    ]
+  },
+  "o-savior-save-us-001": {
+    "arabic": "يَا مُخَلِّصُ خَلِّصْنَا",
+    "translation": "O Savior save us",
+    "literal": "O Savior save us",
+    "tags": [
+      "antiphon",
+      "salvation",
+      "address",
+      "petition",
+      "repeated"
+    ]
+  },
+  "glory-001": {
+    "arabic": "المَجْدُ",
+    "translation": "Glory",
+    "literal": "Glory",
+    "tags": [
+      "doxology",
+      "repeated"
+    ]
+  },
+  "to-father-son-holy-spirit-001": {
+    "arabic": "لِلآبِ وَالابْنِ وَالرُّوحِ القُدُس",
+    "translation": "to the Father and to the Son and to the Holy Spirit",
+    "literal": "to the Father and the Son and the Holy Spirit",
+    "tags": [
+      "trinity",
+      "doxology",
+      "repeated"
+    ]
+  },
+  "rubric-deacon-holy-doors-little-litany-001": {
+    "arabic": "يَقِفُ الشَّمَّاسُ أَمَامَ الأَبْوَابِ المُقَدَّسَةِ وَيَقُولُ الطِلْبَةَ الصُّغْرَى",
+    "translation": "The deacon moves and stands before the holy doors and says the little litany",
+    "literal": "The deacon stands before the holy doors and says the little litany",
+    "tags": [
+      "rubric",
+      "little-litany"
+    ]
+  },
+  "healthful-seasons-001": {
+    "arabic": "مِنْ أَجْلِ اعْتِدَالِ الأَهْوِيَةِ",
+    "translation": "For healthful seasons",
+    "literal": "for the sake of temperate weather",
+    "tags": [
+      "litany",
+      "petition",
+      "creation"
+    ]
+  },
+  "abundance-fruits-earth-001": {
+    "arabic": "وَخِصْبِ الأَرْضِ بِالثِّمَارِ",
+    "translation": "abundance of the fruits of the earth",
+    "literal": "and fruitfulness of the earth with fruits",
+    "tags": [
+      "litany",
+      "petition",
+      "creation"
+    ]
+  },
+  "peaceful-times-001": {
+    "arabic": "وَأَوْقَاتٍ سَلَامِيَّة",
+    "translation": "and peaceful times",
+    "literal": "and peaceful times",
+    "tags": [
+      "litany",
+      "petition",
+      "peace"
+    ]
+  },
+  "travelers-sea-land-air-001": {
+    "arabic": "مِنْ أَجْلِ المُسَافِرِينَ بِالبَحْرِ وَالبَرِّ وَالجَوِّ",
+    "translation": "For travelers by sea by land and by air",
+    "literal": "for the sake of travelers by sea and land and air",
+    "tags": [
+      "litany",
+      "petition"
+    ]
+  },
+  "sick-suffering-captive-001": {
+    "arabic": "وَالمَرْضَى وَالمُتَأَلِّمِينَ وَالأَسْرَى",
+    "translation": "the sick the suffering the captive",
+    "literal": "and the sick and the suffering and the captives",
+    "tags": [
+      "litany",
+      "petition"
+    ]
+  },
+  "their-salvation-001": {
+    "arabic": "وَخَلَاصِهِم",
+    "translation": "and for their salvation",
+    "literal": "and their salvation",
+    "tags": [
+      "litany",
+      "petition",
+      "salvation"
+    ]
+  },
+  "deliverance-tribulation-001": {
+    "arabic": "مِنْ أَجْلِ نَجَاتِنَا",
+    "translation": "For our deliverance",
+    "literal": "for the sake of our deliverance",
+    "tags": [
+      "litany",
+      "petition"
+    ]
+  },
+  "from-all-tribulation-001": {
+    "arabic": "مِنْ كُلِّ ضِيقٍ",
+    "translation": "from all tribulation",
+    "literal": "from every distress",
+    "tags": [
+      "litany",
+      "petition"
+    ]
+  },
+  "wrath-danger-necessity-001": {
+    "arabic": "وَغَضَبٍ وَخَطَرٍ وَشِدَّة",
+    "translation": "wrath danger and necessity",
+    "literal": "and wrath and danger and hardship",
+    "tags": [
+      "litany",
+      "petition"
+    ]
+  },
+  "calling-remembrance-001": {
+    "arabic": "بَعْدَ ذِكْرِنَا",
+    "translation": "Calling to remembrance",
+    "literal": "after our remembering",
+    "tags": [
+      "litany",
+      "repeated"
+    ]
+  },
+  "all-holy-immaculate-001": {
+    "arabic": "الكُلِّيَّةَ القَدَاسَةِ الطَّاهِرَةَ",
+    "translation": "our all holy immaculate",
+    "literal": "the all holy pure one",
+    "tags": [
+      "litany",
+      "theotokos",
+      "repeated"
+    ]
+  },
+  "most-blessed-glorious-lady-001": {
+    "arabic": "الفَائِقَةَ البَرَكَاتِ المَجِيدَةَ سَيِّدَتَنَا",
+    "translation": "most blessed and glorious Lady",
+    "literal": "our most blessed and glorious Lady",
+    "tags": [
+      "litany",
+      "theotokos",
+      "repeated"
+    ]
+  },
+  "theotokos-001": {
+    "arabic": "وَالِدَةَ الإِلَهِ",
+    "translation": "the Theotokos",
+    "literal": "Mother of God",
+    "tags": [
+      "theotokos",
+      "repeated"
+    ]
+  },
+  "ever-virgin-mary-002": {
+    "arabic": "الدَّائِمَةَ البَتُولِيَّةِ مَرْيَمَ",
+    "translation": "and ever virgin Mary",
+    "literal": "the ever virgin Mary",
+    "tags": [
+      "theotokos",
+      "mary",
+      "repeated"
+    ]
+  },
+  "with-all-saints-001": {
+    "arabic": "مَعَ جَمِيعِ القِدِّيسِينَ",
+    "translation": "with all the saints",
+    "literal": "with all the saints",
+    "tags": [
+      "saints",
+      "repeated"
+    ]
+  },
+  "commend-ourselves-001": {
+    "arabic": "فَلْنُودِعْ ذَوَاتِنَا",
+    "translation": "let us commend ourselves",
+    "literal": "let us entrust ourselves",
+    "tags": [
+      "litany",
+      "petition"
+    ]
+  },
+  "and-each-other-001": {
+    "arabic": "وَبَعْضُنَا بَعْضًا",
+    "translation": "and each other",
+    "literal": "and one another",
+    "tags": [
+      "litany",
+      "petition",
+      "repeated"
+    ]
+  },
+  "and-all-our-life-001": {
+    "arabic": "وَكُلَّ حَيَاتِنَا",
+    "translation": "and all our life",
+    "literal": "and all our life",
+    "tags": [
+      "litany",
+      "petition",
+      "repeated"
+    ]
+  },
+  "unto-christ-our-god-001": {
+    "arabic": "لِلْمَسِيحِ الإِلَه",
+    "translation": "unto Christ our God",
+    "literal": "to Christ God",
+    "tags": [
+      "litany",
+      "petition",
+      "christology",
+      "repeated"
+    ]
+  },
+  "o-lord-our-god-001": {
+    "arabic": "أَيُّهَا الرَّبُّ إِلَهُنَا",
+    "translation": "O Lord our God",
+    "literal": "O Lord our God",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer",
+      "repeated"
+    ]
+  },
+  "whose-might-beyond-compare-001": {
+    "arabic": "الَّذِي عِزَّتُهُ لا تُوصَفُ",
+    "translation": "whose might is beyond compare",
+    "literal": "whose power is indescribable",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "whose-glory-incomprehensible-001": {
+    "arabic": "وَمَجْدُهُ لا يُدْرَك",
+    "translation": "whose glory is incomprehensible",
+    "literal": "and whose glory cannot be comprehended",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "whose-mercy-boundless-001": {
+    "arabic": "وَرَحْمَتُهُ لا تُحَدُّ",
+    "translation": "whose mercy is boundless",
+    "literal": "and whose mercy has no limit",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "whose-love-ineffable-001": {
+    "arabic": "وَمَحَبَّتُهُ لِلْبَشَرِ لا تُقَاس",
+    "translation": "and whose love toward mankind is ineffable",
+    "literal": "and whose love for mankind cannot be measured",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "do-thou-o-master-001": {
+    "arabic": "تَطَلَّعْ أَنْتَ أَيُّهَا السَّيِّدُ",
+    "translation": "do thou thyself O Master look down",
+    "literal": "you yourself O Master look",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "in-tender-compassion-001": {
+    "arabic": "بِتَحَنُّنِكَ",
+    "translation": "in thy tender compassion",
+    "literal": "with your tender compassion",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "upon-us-001": {
+    "arabic": "عَلَيْنَا",
+    "translation": "upon us",
+    "literal": "upon us",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer",
+      "repeated"
+    ]
+  },
+  "upon-this-holy-house-001": {
+    "arabic": "وَعَلَى هَذَا البَيْتِ المُقَدَّس",
+    "translation": "and upon this holy house",
+    "literal": "and upon this holy house",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer",
+      "church"
+    ]
+  },
+  "grant-rich-mercies-001": {
+    "arabic": "وَاجْعَلْ مَرَاحِمَكَ وَرَأَفَاتِكَ غَنِيَّةً",
+    "translation": "and grant thy rich mercies and compassions",
+    "literal": "and make your mercies and compassions abundant",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer",
+      "mercy"
+    ]
+  },
+  "upon-those-pray-with-us-001": {
+    "arabic": "وَعَلَى الَّذِينَ يُصَلُّونَ مَعَنَا",
+    "translation": "and those who pray with us",
+    "literal": "and upon those who pray with us",
+    "tags": [
+      "litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "rubric-deacon-theotokos-icon-001": {
+    "arabic": "يَنْتَقِلُ الشَّمَّاسُ وَيَقِفُ أَمَامَ أَيْقُونَةِ السَّيِّدَة",
+    "translation": "The deacon moves and stands before the icon of the Theotokos",
+    "literal": "The deacon moves and stands before the icon of the Theotokos",
+    "tags": [
+      "rubric"
+    ]
+  },
+  "save-thy-people-001": {
+    "arabic": "يَا رَبُّ إِلَهُنَا خَلِّصْ شَعْبَكَ وَبَارِكْ مِيرَاثَكَ",
+    "translation": "O Lord our God save thy people and bless thine inheritance",
+    "literal": "O Lord our God save your people and bless your inheritance",
+    "tags": [
+      "little-litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "preserve-fullness-church-001": {
+    "arabic": "وَاحْفَظْ كَمَالَ كَنِيسَتِكَ",
+    "translation": "preserve the fullness of thy Church",
+    "literal": "preserve the fullness of your Church",
+    "tags": [
+      "little-litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "sanctify-love-house-001": {
+    "arabic": "قَدِّسِ الَّذِينَ يُحِبُّونَ جَمَالَ بَيْتِكَ",
+    "translation": "sanctify those who love the beauty of thy house",
+    "literal": "sanctify those who love the beauty of your house",
+    "tags": [
+      "little-litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "glorify-by-power-001": {
+    "arabic": "مَجِّدْهُمْ بِقُوَّتِكَ الإِلَهِيَّةِ",
+    "translation": "glorify them in recompense by thy divine power",
+    "literal": "glorify them by your divine power",
+    "tags": [
+      "little-litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "forsake-us-not-001": {
+    "arabic": "وَلَا تُهْمِلْنَا نَحْنُ المُتَوَكِّلِينَ عَلَيْكَ",
+    "translation": "and forsake us not who hope on thee",
+    "literal": "and do not neglect us who trust in you",
+    "tags": [
+      "little-litany",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "for-thine-might-001": {
+    "arabic": "لأَنَّ لَكَ العِزَّةَ وَلَكَ المُلْكَ وَالقُدْرَةَ وَالمَجْد",
+    "translation": "For thine is the might and thine is the kingdom and the power and the glory",
+    "literal": "for yours is the might and yours is the kingdom and the power and the glory",
+    "tags": [
+      "little-litany",
+      "doxology"
+    ]
+  },
+  "granted-common-supplications-001": {
+    "arabic": "يَا مَنْ أَنْعَمَ عَلَيْنَا",
+    "translation": "O thou who hast granted us",
+    "literal": "O you who granted us",
+    "tags": [
+      "little-litany",
+      "second-antiphon",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "common-supplications-accord-001": {
+    "arabic": "بِهَذِهِ الطَّلِبَاتِ المُشْتَرَكَةِ المُتَّفِقَة",
+    "translation": "to make these common supplications in one accord",
+    "literal": "with these common supplications in agreement",
+    "tags": [
+      "little-litany",
+      "second-antiphon",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "promise-two-three-001": {
+    "arabic": "وَوَعَدْتَ أَنَّهُ إِذَا اجْتَمَعَ اثْنَانِ أَوْ ثَلَاثَة",
+    "translation": "and dost promise that when two or three",
+    "literal": "and you promised that if two or three gather",
+    "tags": [
+      "little-litany",
+      "second-antiphon",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "gathered-in-thy-name-001": {
+    "arabic": "بِاسْمِكَ",
+    "translation": "are gathered together in thy name",
+    "literal": "in your name",
+    "tags": [
+      "little-litany",
+      "second-antiphon",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "grant-their-requests-001": {
+    "arabic": "أَنْ تَمْنَحَهُمْ طَلِبَاتِهِمْ",
+    "translation": "thou wilt grant their requests",
+    "literal": "that you grant them their requests",
+    "tags": [
+      "little-litany",
+      "second-antiphon",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "fulfill-desires-petitions-001": {
+    "arabic": "أَنْتَ الآنَ أَتْمِمْ طَلِبَاتِ عَبِيدِكَ",
+    "translation": "do thou also now fulfill the desires and petitions of thy servants",
+    "literal": "you now fulfill the petitions of your servants",
+    "tags": [
+      "little-litany",
+      "second-antiphon",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "as-expedient-001": {
+    "arabic": "حَسَبَ مَا يُوافِقُ مَنْفَعَتَهُمْ",
+    "translation": "as may be most expedient for them",
+    "literal": "according to what accords with their benefit",
+    "tags": [
+      "little-litany",
+      "second-antiphon",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "grant-knowledge-truth-001": {
+    "arabic": "مَانِحًا لَنَا فِي هَذَا الدَّهْرِ مَعْرِفَةَ حَقِّكَ",
+    "translation": "granting us in this age the knowledge of thy truth",
+    "literal": "granting us in this age knowledge of your truth",
+    "tags": [
+      "little-litany",
+      "second-antiphon",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "age-to-come-life-everlasting-001": {
+    "arabic": "وَفِي الدَّهْرِ الآتِي حَيَاةً أَبَدِيَّة",
+    "translation": "and in the age to come life everlasting",
+    "literal": "and in the coming age eternal life",
+    "tags": [
+      "little-litany",
+      "second-antiphon",
+      "quiet",
+      "priest-prayer"
+    ]
+  },
+  "good-god-lovest-mankind-001": {
+    "arabic": "لأَنَّكَ إِلَهٌ صَالِحٌ وَمُحِبٌّ لِلْبَشَر",
+    "translation": "For thou art a good God and lovest mankind",
+    "literal": "for you are a good God and lover of mankind",
+    "tags": [
+      "doxology",
+      "little-litany",
+      "second-antiphon",
+      "repeated"
+    ]
+  },
+  "rubric-deacon-christ-icon-001": {
+    "arabic": "يَنْتَقِلُ الشَّمَّاسُ وَيَقِفُ أَمَامَ أَيْقُونَةِ السَّيِّد",
+    "translation": "The deacon moves and stands before the icon of Christ",
+    "literal": "The deacon moves and stands before the icon of Christ",
+    "tags": [
+      "rubric"
+    ]
+  },
+  "holy-god-001": {
+    "arabic": "قُدُّوسٌ اللهُ",
+    "translation": "Holy God",
+    "literal": "Holy God",
+    "tags": [
+      "trisagion",
+      "hymn",
+      "repeated"
+    ]
+  },
+  "holy-mighty-001": {
+    "arabic": "قُدُّوسٌ القَوِيُّ",
+    "translation": "Holy Mighty",
+    "literal": "Holy Mighty",
+    "tags": [
+      "trisagion",
+      "hymn",
+      "repeated"
+    ]
+  },
+  "holy-immortal-001": {
+    "arabic": "قُدُّوسٌ الَّذِي لا يَمُوتُ",
+    "translation": "Holy Immortal",
+    "literal": "Holy Immortal",
+    "tags": [
+      "trisagion",
+      "hymn",
+      "repeated"
+    ]
+  },
+  "have-mercy-on-us-001": {
+    "arabic": "ارْحَمْنَا",
+    "translation": "have mercy on us",
+    "literal": "have mercy on us",
+    "tags": [
+      "trisagion",
+      "hymn",
+      "mercy",
+      "repeated"
+    ]
+  },
+  "with-strength-001": {
+    "arabic": "قُوَّة",
+    "translation": "With strength",
+    "literal": "Power",
+    "tags": [
+      "trisagion"
+    ]
+  },
+  "dynamis-001": {
+    "arabic": "دِينَامِيس",
+    "translation": "Dynamis",
+    "literal": "Dynamis",
+    "tags": [
+      "trisagion",
+      "rubric"
+    ]
+  },
+  "rubric-trisagion-baptized-001": {
+    "arabic": "فِي أَعْيَادِ المِيلَادِ وَالظُّهُورِ وَسَبْتِ لَعَازَرَ وَسَبْتِ النُّورِ وَالفِصْحِ وَأُسْبُوعِ الفِصْحِ وَوَدَاعِ الفِصْحِ وَالعَنْصَرَةِ نُرَتِّلُ بَدَلًا عَنْهَا",
+    "translation": "On Christmas Theophany Lazarus Saturday the Vesperal Divine Liturgy on Holy Saturday Pascha Bright Week the leavetaking of Pascha Pentecost in place of the thrice holy shall be sung",
+    "literal": "On these feasts this is sung in place of the thrice holy hymn",
+    "tags": [
+      "rubric",
+      "trisagion"
+    ]
+  },
+  "as-many-of-you-001": {
+    "arabic": "أَنْتُمُ الَّذِينَ",
+    "translation": "As many of you as",
+    "literal": "You who",
+    "tags": [
+      "trisagion",
+      "hymn",
+      "baptism"
+    ]
+  },
+  "baptized-into-christ-001": {
+    "arabic": "بِالمَسِيحِ اعْتَمَدْتُمْ",
+    "translation": "have been baptized into Christ",
+    "literal": "were baptized in Christ",
+    "tags": [
+      "trisagion",
+      "hymn",
+      "baptism"
+    ]
+  },
+  "put-on-christ-001": {
+    "arabic": "المَسِيحَ قَدْ لَبِسْتُمْ",
+    "translation": "have put on Christ",
+    "literal": "have clothed yourselves with Christ",
+    "tags": [
+      "trisagion",
+      "hymn",
+      "baptism"
+    ]
+  },
+  "rubric-trisagion-cross-001": {
+    "arabic": "فِي أَعْيَادِ الصَّلِيبِ نُرَتِّلُ",
+    "translation": "On feasts of the Holy Cross in place of the thrice holy shall be sung",
+    "literal": "On feasts of the Holy Cross this is sung in place of the thrice holy hymn",
+    "tags": [
+      "rubric",
+      "trisagion"
+    ]
+  },
+  "venerate-cross-001": {
+    "arabic": "لِصَلِيبِكَ يَا سَيِّدُنَا نَسْجُدُ",
+    "translation": "We venerate thy cross O Master",
+    "literal": "We bow before your cross O Master",
+    "tags": [
+      "trisagion",
+      "hymn",
+      "cross"
+    ]
+  },
+  "glorify-resurrection-001": {
+    "arabic": "وَلِقِيَامَتِكَ المُقَدَّسَةِ نُمَجِّد",
+    "translation": "and thy holy resurrection we glorify",
+    "literal": "and we glorify your holy resurrection",
+    "tags": [
+      "trisagion",
+      "hymn",
+      "resurrection",
+      "cross"
+    ]
+  },
+  "command-master-001": {
+    "arabic": "بَارِكْ يَا سَيِّد",
+    "translation": "Command master",
+    "literal": "Command master",
+    "tags": [
+      "word"
+    ]
+  },
+  "blessed-cometh-001": {
+    "arabic": "مُبَارَكٌ الآتِي بِاسْمِ الرَّبّ",
+    "translation": "Blessed is he that cometh in the name of the Lord",
+    "literal": "Blessed is the one who comes in the name of the Lord",
+    "tags": [
+      "word",
+      "blessing"
+    ]
+  },
+  "bless-throne-high-001": {
+    "arabic": "بَارِكْ يَا سَيِّدُ الكَاثِدْرَا العُلْيَا",
+    "translation": "Bless master the throne on high",
+    "literal": "Bless master the high throne",
+    "tags": [
+      "word"
+    ]
+  },
+  "blessed-throne-glory-001": {
+    "arabic": "مُبَارَكٌ أَنْتَ عَلَى عَرْشِ مَجْدِ مُلْكِكَ",
+    "translation": "Blessed art thou on the throne of the glory of thy kingdom",
+    "literal": "Blessed are you upon the throne of the glory of your kingdom",
+    "tags": [
+      "word",
+      "blessing"
+    ]
+  },
+  "enthroned-cherubim-001": {
+    "arabic": "أَيُّهَا الجَالِسُ عَلَى الشِّيرُوبِيم",
+    "translation": "who art enthroned upon the cherubim",
+    "literal": "O you who sit upon the cherubim",
+    "tags": [
+      "word",
+      "cherubim"
+    ]
+  },
+  "let-us-attend-001": {
+    "arabic": "لِنُصْغِ",
+    "translation": "Let us attend",
+    "literal": "Let us pay attention",
+    "tags": [
+      "word"
+    ]
+  },
+  "reader-announces-prokeimenon-001": {
+    "arabic": "يُعْلِنُ القَارِئُ بْرُوكِيمِنُونَ الرِّسَالَة",
+    "translation": "Announces the prokeimenon of the epistle",
+    "literal": "The reader announces the prokeimenon of the epistle",
+    "tags": [
+      "rubric",
+      "epistle"
+    ]
+  },
+  "reader-announces-epistle-title-001": {
+    "arabic": "يُعْلِنُ القَارِئُ عُنْوَانَ الرِّسَالَة",
+    "translation": "Announces the title of the epistle",
+    "literal": "The reader announces the title of the epistle",
+    "tags": [
+      "rubric",
+      "epistle"
+    ]
+  },
+  "reader-reads-epistle-001": {
+    "arabic": "يَتْلُو القَارِئُ الفَصْلَ المُعَيَّنَ",
+    "translation": "Reads the epistle for the day",
+    "literal": "The reader reads the appointed epistle",
+    "tags": [
+      "rubric",
+      "epistle"
+    ]
+  },
+  "peace-reader-001": {
+    "arabic": "السَّلَامُ لَكَ أَيُّهَا القَارِئ",
+    "translation": "Peace be to thee that readest",
+    "literal": "Peace to you O reader",
+    "tags": [
+      "word",
+      "blessing"
+    ]
+  },
+  "illumine-hearts-001": {
+    "arabic": "أَيُّهَا السَّيِّدُ المُحِبُّ البَشَرِ",
+    "translation": "O Master who lovest mankind",
+    "literal": "O Master who loves mankind",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "open-eyes-mind-001": {
+    "arabic": "وَافْتَحْ حَدَقَتَيْ ذِهْنِنَا",
+    "translation": "and open the eyes of our mind",
+    "literal": "and open the eyes of our mind",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "implant-fear-commandments-001": {
+    "arabic": "ضَعْ فِينَا",
+    "translation": "implant in us also",
+    "literal": "place in us",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "spiritual-living-001": {
+    "arabic": "حَتَّى نَسْلُكَ سِيرَةً رُوحِيَّةً",
+    "translation": "that we may enter upon a spiritual manner of living",
+    "literal": "so that we may walk a spiritual life",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "illumination-souls-bodies-001": {
+    "arabic": "لأَنَّكَ أَنْتَ اسْتِنَارَةُ",
+    "translation": "For thou art the Illumination",
+    "literal": "for you are the illumination",
+    "tags": [
+      "gospel",
+      "doxology",
+      "quiet"
+    ]
+  },
+  "unoriginate-father-spirit-001": {
+    "arabic": "مَعَ أَبِيكَ الَّذِي لا بَدْءَ لَهُ",
+    "translation": "together with thine unoriginate Father",
+    "literal": "with your Father without beginning",
+    "tags": [
+      "gospel",
+      "doxology",
+      "quiet"
+    ]
+  },
+  "bless-proclaimer-gospel-001": {
+    "arabic": "بَارِكْ يَا سَيِّدُ",
+    "translation": "Bless master",
+    "literal": "Bless master",
+    "tags": [
+      "gospel"
+    ]
+  },
+  "may-god-enable-gospel-001": {
+    "arabic": "لِيُمَكِّنْكَ اللهُ",
+    "translation": "May God enable thee",
+    "literal": "May God enable you",
+    "tags": [
+      "gospel",
+      "blessing"
+    ]
+  },
+  "hear-holy-gospel-001": {
+    "arabic": "لِنَسْمَعِ الإِنْجِيلَ المُقَدَّس",
+    "translation": "Let us hear the holy gospel",
+    "literal": "Let us hear the holy Gospel",
+    "tags": [
+      "gospel",
+      "deacon"
+    ]
+  },
+  "peace-be-to-all-001": {
+    "arabic": "السَّلَامُ لِلْجَمِيع",
+    "translation": "Peace be to all",
+    "literal": "Peace to all",
+    "tags": [
+      "gospel",
+      "blessing"
+    ]
+  },
+  "and-to-thy-spirit-001": {
+    "arabic": "وَلِرُوحِكَ أَيْضًا",
+    "translation": "And to thy spirit",
+    "literal": "And to your spirit also",
+    "tags": [
+      "response"
+    ]
+  },
+  "reading-holy-gospel-001": {
+    "arabic": "فَصْلٌ شَرِيفٌ مِنْ بِشَارَةِ",
+    "translation": "The reading from the holy gospel",
+    "literal": "A noble passage from the Gospel",
+    "tags": [
+      "gospel",
+      "deacon"
+    ]
+  },
+  "glory-to-thee-lord-001": {
+    "arabic": "المَجْدُ لَكَ يَا رَبُّ المَجْدُ لَكَ",
+    "translation": "Glory to thee O Lord Glory to thee",
+    "literal": "Glory to you O Lord Glory to you",
+    "tags": [
+      "response",
+      "glory"
+    ]
+  },
+  "rubric-appointed-gospel-001": {
+    "arabic": "يَتْلُو الكَاهِنُ أَوِ الشَّمَّاسُ الفَصْلَ المُعَيَّن",
+    "translation": "The priest or deacon reads the appointed gospel",
+    "literal": "The priest or deacon reads the appointed Gospel passage",
+    "tags": [
+      "rubric",
+      "gospel"
+    ]
+  },
+  "illumine-hearts-002": {
+    "arabic": "أَشْرِقْ فِي قُلُوبِنَا",
+    "translation": "Illumine our hearts",
+    "literal": "shine in our hearts",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "illumine-hearts-003": {
+    "arabic": "بِنُورِ مَعْرِفَةِ لَاهُوتِكَ",
+    "translation": "with the pure light of thy divine knowledge",
+    "literal": "with the light of the knowledge of your divinity",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "open-eyes-mind-002": {
+    "arabic": "لِفَهْمِ تَعَالِيمِ إِنْجِيلِكَ",
+    "translation": "to the understanding of thy gospel teachings",
+    "literal": "to understand the teachings of your Gospel",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "implant-fear-commandments-002": {
+    "arabic": "خَشْيَةَ وَصَايَاكَ المَغْبُوطَة",
+    "translation": "the fear of thy blessed commandments",
+    "literal": "the fear of your blessed commandments",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "spiritual-living-002": {
+    "arabic": "مُفَكِّرِينَ وَعَامِلِينَ",
+    "translation": "both thinking and doing",
+    "literal": "thinking and doing",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "spiritual-living-003": {
+    "arabic": "مَا يُرْضِيكَ",
+    "translation": "such things as are well pleasing unto thee",
+    "literal": "what pleases you",
+    "tags": [
+      "gospel",
+      "priest-prayer",
+      "quiet"
+    ]
+  },
+  "illumination-souls-bodies-002": {
+    "arabic": "نُفُوسِنَا وَأَجْسَادِنَا",
+    "translation": "of our souls and bodies",
+    "literal": "of our souls and bodies",
+    "tags": [
+      "gospel",
+      "doxology",
+      "quiet"
+    ]
+  },
+  "illumination-souls-bodies-003": {
+    "arabic": "أَيُّهَا المَسِيحُ الإِلَه",
+    "translation": "O Christ our God",
+    "literal": "O Christ God",
+    "tags": [
+      "gospel",
+      "doxology",
+      "quiet"
+    ]
+  },
+  "unoriginate-father-spirit-002": {
+    "arabic": "وَرُوحِكَ الكُلِّيِّ قُدْسُهُ الصَّالِحِ",
+    "translation": "and thine all holy good Spirit",
+    "literal": "and your all holy good Spirit",
+    "tags": [
+      "gospel",
+      "doxology",
+      "quiet"
+    ]
+  },
+  "unoriginate-father-spirit-003": {
+    "arabic": "والمُحْيِي",
+    "translation": "and life giving",
+    "literal": "and life giving",
+    "tags": [
+      "gospel",
+      "doxology",
+      "quiet"
+    ]
+  },
+  "bless-proclaimer-gospel-002": {
+    "arabic": "مَنْ يُبَشِّرُ بِالإِنْجِيلِ المُقَدَّسِ المَجِيد",
+    "translation": "him who proclaimeth the good tidings of the holy glorious gospel",
+    "literal": "the one who proclaims the holy and glorious Gospel",
+    "tags": [
+      "gospel"
+    ]
+  },
+  "may-god-enable-gospel-002": {
+    "arabic": "بِشَفَاعَاتِ الرَّسُولِ القُدُّوسِ المَجِيدِ",
+    "translation": "through the prayers of the holy glorious apostle and evangelist",
+    "literal": "through the intercessions of the holy and glorious apostle",
+    "tags": [
+      "gospel",
+      "blessing"
+    ]
+  },
+  "may-god-enable-gospel-003": {
+    "arabic": "أَنْ تُبَشِّرَ",
+    "translation": "to proclaim the good tidings",
+    "literal": "to proclaim",
+    "tags": [
+      "gospel",
+      "blessing"
+    ]
+  },
+  "may-god-enable-gospel-004": {
+    "arabic": "بِقُوَّةٍ عَظِيمَة",
+    "translation": "with great power",
+    "literal": "with great power",
+    "tags": [
+      "gospel",
+      "blessing"
+    ]
+  },
+  "reading-holy-gospel-002": {
+    "arabic": "القِدِّيسِ",
+    "translation": "according to Saint",
+    "literal": "of Saint",
+    "tags": [
+      "gospel",
+      "deacon"
+    ]
+  },
+  "reading-holy-gospel-003": {
+    "arabic": "الإِنْجِيلِيِّ البَشِيرِ",
+    "translation": "the evangelist and herald",
+    "literal": "the evangelist and herald",
+    "tags": [
+      "gospel",
+      "deacon"
+    ]
+  },
+  "reading-holy-gospel-004": {
+    "arabic": "وَالتِّلْمِيذِ الطَّاهِرِ",
+    "translation": "and pure disciple",
+    "literal": "and pure disciple",
+    "tags": [
+      "gospel",
+      "deacon"
+    ]
+  },
+  "placeholder-so-and-so-001": {
+    "arabic": "فُلَان",
+    "translation": "so and so",
+    "literal": "so and so",
+    "tags": [
+      "rubric",
+      "placeholder",
+      "gospel"
+    ]
+  },
+  "jesus-prayer-lord-jesus-christ-001": {
+    "arabic": "يَا رَبُّ يَسُوعُ المَسِيحُ",
+    "translation": "Lord Jesus Christ",
+    "literal": "O Lord Jesus Christ",
+    "tags": [
+      "jesus-prayer",
+      "address",
+      "christology"
+    ]
+  },
+  "jesus-prayer-son-of-god-001": {
+    "arabic": "ابْنَ اللهِ",
+    "translation": "Son of God",
+    "literal": "Son of God",
+    "tags": [
+      "jesus-prayer",
+      "christology"
+    ]
+  },
+  "jesus-prayer-have-mercy-on-me-001": {
+    "arabic": "ارْحَمْنِي",
+    "translation": "have mercy on me",
+    "literal": "have mercy on me",
+    "tags": [
+      "jesus-prayer",
+      "mercy",
+      "petition"
+    ]
+  },
+  "beginner-glory-to-father-001": {
+    "arabic": "المَجْدُ لِلآبِ",
+    "translation": "Glory to the Father",
+    "literal": "Glory to the Father",
+    "tags": [
+      "course",
+      "beginner",
+      "doxology"
+    ]
+  },
+  "beginner-and-to-son-001": {
+    "arabic": "وَالابْنِ",
+    "translation": "and to the Son",
+    "literal": "and the Son",
+    "tags": [
+      "course",
+      "beginner",
+      "doxology",
+      "trinity"
+    ]
+  },
+  "beginner-and-to-holy-spirit-001": {
+    "arabic": "وَالرُّوحِ القُدُس",
+    "translation": "and to the Holy Spirit",
+    "literal": "and the Holy Spirit",
+    "tags": [
+      "course",
+      "beginner",
+      "doxology",
+      "trinity"
+    ]
+  },
+  "beginner-both-now-001": {
+    "arabic": "الآنَ وَكُلَّ أَوَانٍ",
+    "translation": "Both now and ever",
+    "literal": "now and always",
+    "tags": [
+      "course",
+      "beginner",
+      "doxology"
+    ]
+  },
+  "beginner-unto-ages-001": {
+    "arabic": "وَإِلَى دَهْرِ الدَّاهِرِينَ",
+    "translation": "and unto ages of ages",
+    "literal": "and unto the age of ages",
+    "tags": [
+      "course",
+      "beginner",
+      "doxology"
+    ]
+  },
+  "all-holy-trinity-001": {
+    "arabic": "أَيُّهَا الثَّالُوثُ الكُلِّيُّ القُدْسِ",
+    "translation": "All holy Trinity",
+    "literal": "O all holy Trinity",
+    "tags": [
+      "course",
+      "beginner",
+      "all-holy-trinity",
+      "trinity",
+      "address"
+    ]
+  },
+  "all-holy-trinity-have-mercy-001": {
+    "arabic": "ارْحَمْنَا",
+    "translation": "have mercy on us",
+    "literal": "have mercy on us",
+    "tags": [
+      "course",
+      "beginner",
+      "all-holy-trinity",
+      "mercy",
+      "petition"
+    ]
+  },
+  "all-holy-trinity-name-sake-001": {
+    "arabic": "مِنْ أَجْلِ اسْمِكَ",
+    "translation": "for Thy names sake",
+    "literal": "for the sake of your name",
+    "tags": [
+      "course",
+      "beginner",
+      "all-holy-trinity"
+    ]
+  },
+  "vocative-o-lord-001": {
+    "arabic": "يَا رَبُّ",
+    "translation": "O Lord",
+    "literal": "O Lord",
+    "tags": [
+      "course",
+      "beginner",
+      "all-holy-trinity",
+      "vocative",
+      "address"
+    ]
+  },
+  "vocative-o-master-001": {
+    "arabic": "يَا سَيِّدُ",
+    "translation": "O Master",
+    "literal": "O Master",
+    "tags": [
+      "course",
+      "beginner",
+      "all-holy-trinity",
+      "vocative",
+      "address"
+    ]
+  },
+  "vocative-o-holy-one-001": {
+    "arabic": "يَا قُدُّوسُ",
+    "translation": "O Holy One",
+    "literal": "O Holy One",
+    "tags": [
+      "course",
+      "beginner",
+      "all-holy-trinity",
+      "vocative",
+      "address"
+    ]
+  },
+  "all-holy-trinity-cleanse-sins-001": {
+    "arabic": "طَهِّرْنَا مِنْ خَطَايَانَا",
+    "translation": "cleanse us from our sins",
+    "literal": "purify us from our sins",
+    "tags": [
+      "course",
+      "beginner",
+      "all-holy-trinity",
+      "petition"
+    ]
+  },
+  "all-holy-trinity-pardon-iniquities-001": {
+    "arabic": "تَجَاوَزْ عَنْ آثَامِنَا",
+    "translation": "pardon our iniquities",
+    "literal": "pass over our iniquities",
+    "tags": [
+      "course",
+      "beginner",
+      "all-holy-trinity",
+      "petition"
+    ]
+  },
+  "all-holy-trinity-visit-heal-001": {
+    "arabic": "اطَّلِعْ وَاشْفِ أَمْرَاضَنَا",
+    "translation": "visit and heal our infirmities",
+    "literal": "look upon and heal our illnesses",
+    "tags": [
+      "course",
+      "beginner",
+      "all-holy-trinity",
+      "petition"
     ]
   }
 };

@@ -33,8 +33,11 @@ export function validateData() {
   assertUnique(units.map(unit => unit.id), 'units', errors);
 
   Object.entries(segments).forEach(([segmentId, segment]) => {
-    if (!segment.speaker || !phraseIds.has(segment.speaker)) {
+    if (segment.speaker && !phraseIds.has(segment.speaker)) {
       errors.push(`Segment "${segmentId}" references missing speaker "${segment.speaker}".`);
+    }
+    if (segment.tags && !Array.isArray(segment.tags)) {
+      errors.push(`Segment "${segmentId}" tags must be an array.`);
     }
     if (!Array.isArray(segment.phrases) || segment.phrases.length === 0) {
       errors.push(`Segment "${segmentId}" must define a non-empty phrases array.`);
@@ -69,6 +72,9 @@ export function validateData() {
     }
     if (section.section_title_phrase && !phraseIds.has(section.section_title_phrase)) {
       errors.push(`Liturgy section "${section.section}" references missing title phrase "${section.section_title_phrase}".`);
+    }
+    if (section.section_group_title_phrase && !phraseIds.has(section.section_group_title_phrase)) {
+      errors.push(`Liturgy section "${section.section}" references missing group title phrase "${section.section_group_title_phrase}".`);
     }
   });
 

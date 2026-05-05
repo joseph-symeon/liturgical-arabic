@@ -11,7 +11,11 @@ export default function SpeakerBlock(props) {
   function getLineParts(line) {
     return [...line.phrases]
       .sort((a, b) => a.display_order - b.display_order)
-      .map(part => (part.text ? { text: part.text } : { id: part.phrase_id }));
+      .map(part =>
+        part.text
+          ? { text: part.text, isRubric: line.tags?.includes("rubric") || part.tags?.includes("rubric") }
+          : { id: part.phrase_id }
+      );
   }
 
   function renderGrouped() {
@@ -42,7 +46,7 @@ export default function SpeakerBlock(props) {
   function renderLineByLine() {
     let lastSpeaker = null;
     return lines.map(function (line) {
-      const showSpeaker = line.speaker !== lastSpeaker;
+      const showSpeaker = Boolean(line.speaker) && line.speaker !== lastSpeaker;
       lastSpeaker = line.speaker;
       return h(SpeakerLine, {
         key: line.line_order,

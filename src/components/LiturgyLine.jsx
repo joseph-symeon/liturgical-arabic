@@ -12,11 +12,18 @@ export default function LiturgyLine(props) {
     "span",
     {
 	      className: "text-2xl leading-loose text-stone-950 dark:text-stone-50",
-      style: { fontFamily: arabicFontFamily, fontWeight: arabicFontWeight }
+      style: {
+        fontFamily: arabicFontFamily,
+        fontWeight: arabicFontWeight,
+        overflowWrap: "normal",
+        whiteSpace: "normal"
+      }
     },
     props.line.map(function renderPart(part, partIndex) {
-      if (part.text && ARABIC_LEADING_PUNCTUATION.test(part.text)) {
-        return h("span", { key: (part.text || "part") + partIndex }, "\u2060", part.text);
+      if (part.text) {
+        const className = part.isRubric ? "liturgical-red" : undefined;
+        const text = ARABIC_LEADING_PUNCTUATION.test(part.text) ? `\u2060${part.text}` : part.text;
+        return h("span", { key: (part.text || "part") + partIndex, className }, text);
       }
       return h(HoverPhrase, {
         key: (part.id || part.text || "part") + partIndex,

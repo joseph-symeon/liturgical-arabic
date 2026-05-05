@@ -133,6 +133,7 @@ function generateSegments() {
     cleanObject({
       speaker: row.speaker,
       break_before: optionalBoolean(row.break_before),
+      tags: jsonCell(row.tags, []),
       phrases: jsonCell(row.phrases, [])
     })
   ]));
@@ -162,9 +163,11 @@ export default segments;
 }
 
 function generateLiturgySections() {
-  const liturgySections = readCsv('liturgySections.csv').map(row => ({
+  const liturgySections = readCsv('liturgySections.csv').map(row => cleanObject({
     section: row.section,
     section_title_phrase: row.section_title_phrase,
+    section_group: optionalString(row.section_group),
+    section_group_title_phrase: optionalString(row.section_group_title_phrase),
     segment_ids: jsonCell(row.segment_ids, [])
   }));
 

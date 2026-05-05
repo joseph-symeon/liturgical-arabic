@@ -88,7 +88,7 @@ export default function InteractiveText(props) {
 
   return h(
     "span",
-    { className: "relative inline-block" },
+    { className: "relative inline" },
     h(
       "span",
       {

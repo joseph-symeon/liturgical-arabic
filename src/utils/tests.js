@@ -49,14 +49,14 @@ export function runTests() {
     "Line-by-line view should split grouped verses into logical phrase parts."
   );
   console.assert(
-    liturgySections.some(function hasAntiphons(section) { return section.section === "Antiphons"; }),
-    "Reader should include an Antiphons section."
+    liturgySections.some(function hasSecondAntiphon(section) { return section.section === "The Second Antiphon"; }),
+    "Reader should include a Second Antiphon section."
   );
   console.assert(
-    liturgySections.find(function findAntiphons(section) { return section.section === "Antiphons"; }).segment_ids.length === 10,
-    "Antiphons should have 10 segments."
+    liturgySections.find(function findSecondAntiphon(section) { return section.section === "The Second Antiphon"; }).segment_ids.length === 16,
+    "The Second Antiphon should have 16 segments."
   );
-  console.assert(liturgySections[0].section === "Litany of Peace", "First reader section should be titled Litany of Peace.");
+  console.assert(liturgySections[0].section === "The Preparation for the Divine Liturgy", "First reader section should be titled The Preparation for the Divine Liturgy.");
   console.assert(flashcardCsv.startsWith('"front","back"'), "CSV should include a flashcard header row.");
   console.assert(annotationCsv.startsWith('"id","arabic"'), "Phrases CSV should include database headers.");
   console.assert(annotationCsv.includes("\n"), "Phrases CSV should contain newline-separated rows.");

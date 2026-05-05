@@ -86,6 +86,178 @@ export const exerciseDefinitions = [
       "end_seconds": 160,
       "default_playback_rate": 1
     }
+  },
+  {
+    "id": "entrance-let-us-pray",
+    "segment_ids": [
+      "entrance-let-us-pray"
+    ],
+    "audio_clip": null
+  },
+  {
+    "id": "entrance-bless-master",
+    "segment_ids": [
+      "entrance-amen-bless-master"
+    ],
+    "audio_clip": null
+  },
+  {
+    "id": "entrance-wisdom-stand-upright",
+    "segment_ids": [
+      "entrance-wisdom-stand-upright"
+    ],
+    "audio_clip": null
+  },
+  {
+    "id": "entrance-come-worship",
+    "segment_ids": [
+      "entrance-hymn-come-worship"
+    ],
+    "audio_clip": null
+  },
+  {
+    "id": "entrance-save-us-risen",
+    "segment_ids": [
+      "entrance-hymn-save-us-son-of-god",
+      "entrance-hymn-risen-label",
+      "entrance-hymn-risen-sundays",
+      "entrance-hymn-risen-alleluia"
+    ],
+    "title": "Save us, O Son of God",
+    "audio_clip": null
+  },
+  {
+    "id": "entrance-save-us-wondrous",
+    "segment_ids": [
+      "entrance-hymn-save-us-son-of-god",
+      "entrance-hymn-weekdays-label",
+      "entrance-hymn-wondrous-weekdays",
+      "entrance-hymn-wondrous-alleluia"
+    ],
+    "title": "Save us, O Son of God",
+    "audio_clip": null
+  },
+  {
+    "id": "preparation-glory",
+    "segment_ids": [
+      "preparation-glory-highest"
+    ],
+    "title": "Glory to God in the highest",
+    "title_phrase": "glory-highest-001",
+    "audio_clip": null
+  },
+  {
+    "id": "preparation-open-my-lips",
+    "segment_ids": [
+      "preparation-open-my-lips"
+    ],
+    "title": "O Lord, open my lips",
+    "title_phrase": "open-my-lips-001",
+    "audio_clip": null
+  },
+  {
+    "id": "first-antiphon-through-theotokos",
+    "segment_ids": [
+      "first-antiphon-through-theotokos-1"
+    ],
+    "title": "Through the intercessions of the Theotokos",
+    "title_phrase": "through-intercessions-001",
+    "audio_clip": null
+  },
+  {
+    "id": "little-litany-again",
+    "segment_ids": [
+      "little-litany-again",
+      "little-litany-help-save"
+    ],
+    "title": "Again and again, in peace",
+    "audio_clip": null
+  },
+  {
+    "id": "trisagion-hymn-main",
+    "segment_ids": [
+      "trisagion-hymn-holy-god-1",
+      "trisagion-hymn-glory",
+      "trisagion-hymn-holy-immortal",
+      "trisagion-with-strength",
+      "trisagion-hymn-holy-god-2"
+    ],
+    "title": "Holy God, Holy Mighty, Holy Immortal",
+    "title_phrase": "holy-god-001",
+    "audio_clip": null
+  },
+  {
+    "id": "liturgy-word-gospel-dialogue",
+    "segment_ids": [
+      "gospel-wisdom-stand",
+      "gospel-peace-all",
+      "gospel-and-spirit",
+      "gospel-reading-from",
+      "gospel-glory-before",
+      "gospel-let-us-attend"
+    ],
+    "title": "Wisdom. Stand upright.",
+    "title_phrase": "wisdom-001",
+    "audio_clip": null
+  },
+  {
+    "id": "lord-have-mercy",
+    "segment_ids": [
+      "litany-peace-lord-have-mercy-choir"
+    ],
+    "title": "Lord have mercy",
+    "title_phrase": "lord-have-mercy-001",
+    "audio_clip": null
+  },
+  {
+    "id": "jesus-prayer",
+    "segment_ids": [
+      "course-jesus-prayer"
+    ],
+    "title": "Lord Jesus Christ",
+    "title_phrase": "jesus-prayer-lord-jesus-christ-001",
+    "audio_clip": null
+  },
+  {
+    "id": "glory-both-now",
+    "segment_ids": [
+      "first-antiphon-glory",
+      "first-antiphon-both-now"
+    ],
+    "title": "Glory to the Father",
+    "title_phrase": "glory-001",
+    "audio_clip": null
+  },
+  {
+    "id": "glory-both-now-beginner",
+    "segment_ids": [
+      "course-glory-beginner",
+      "course-both-now-beginner"
+    ],
+    "title": "Glory to the Father",
+    "title_phrase": "beginner-glory-to-father-001",
+    "audio_clip": null
+  },
+  {
+    "id": "trisagion-hymn-core",
+    "segment_ids": [
+      "trisagion-hymn-holy-god-2"
+    ],
+    "title": "Holy God Holy Mighty Holy Immortal",
+    "title_phrase": "holy-god-001",
+    "audio_clip": null
+  },
+  {
+    "id": "all-holy-trinity",
+    "segment_ids": [
+      "course-all-holy-trinity-address",
+      "course-all-holy-trinity-lord",
+      "course-all-holy-trinity-master",
+      "course-all-holy-trinity-holy-one"
+    ],
+    "title": "All Holy Trinity",
+    "title_phrase": "all-holy-trinity-001",
+    "audio_clip": null
   }
 ];
 
