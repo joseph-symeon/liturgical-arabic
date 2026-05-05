@@ -80,6 +80,12 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
+        "exercise_id": "glory-beginner"
+      },
+      {
+        "exercise_id": "both-now-beginner"
+      },
+      {
         "exercise_id": "glory-both-now-beginner"
       }
     ]

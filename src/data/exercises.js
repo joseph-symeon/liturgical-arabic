@@ -238,9 +238,37 @@ export const exerciseDefinitions = [
       "first-antiphon-glory",
       "first-antiphon-both-now"
     ],
-    "title": "Glory to the Father",
+    "title": "Glory... Both now...",
     "title_phrase": "glory-001",
     "audio_clip": null
+  },
+  {
+    "id": "glory-beginner",
+    "segment_ids": [
+      "course-glory-beginner"
+    ],
+    "title": "Glory to the Father",
+    "title_phrase": "glory-001",
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 15.45,
+      "end_seconds": 18.4,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "both-now-beginner",
+    "segment_ids": [
+      "course-both-now-beginner"
+    ],
+    "title": "Both now and ever",
+    "title_phrase": "beginner-both-now-001",
+    "audio_clip": {
+      "video_id": "oLdHO28NWuM",
+      "start_seconds": 18.75,
+      "end_seconds": 22.25,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "glory-both-now-beginner",
@@ -248,7 +276,7 @@ export const exerciseDefinitions = [
       "course-glory-beginner",
       "course-both-now-beginner"
     ],
-    "title": "Glory to the Father",
+    "title": "Glory... Both now...",
     "title_phrase": "glory-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
