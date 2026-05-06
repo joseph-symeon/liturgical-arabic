@@ -72,9 +72,6 @@ const lessons = [
         "exercise_id": "litany-peace-deliverance"
       },
       {
-        "exercise_id": "litany-peace-help-save"
-      },
-      {
         "exercise_id": "litany-peace-priest-doxology"
       },
       {

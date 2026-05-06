@@ -1,7 +1,8 @@
 import React from 'react';
 import LiturgyLine from '../LiturgyLine.jsx';
+import SpeakerLine from '../SpeakerLine.jsx';
 
-export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', readerLayout = 'paragraph', speechRate = 0.8, arabicFontFamily, arabicFontWeight, arabicFontSize }) {
+export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', readerLayout = 'paragraph', speechRate = 0.8, arabicFontFamily, arabicFontWeight, arabicFontSize, showSpeakers = false }) {
   if (!lines || lines.length === 0) return null;
 
   const sortedLines = [...lines]
@@ -18,6 +19,31 @@ export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', 
     return parts.flatMap(({ phrase_id }, index) => (
       index === 0 ? [{ id: phrase_id }] : [{ text: ' ' }, { id: phrase_id }]
     ));
+  }
+
+  if (showSpeakers) {
+    let lastSpeaker = null;
+    return (
+      <div className="my-2 text-right" dir="rtl">
+        {sortedLines.map(line => {
+          const showSpeaker = Boolean(line.speaker) && line.speaker !== lastSpeaker;
+          lastSpeaker = line.speaker;
+          return (
+            <SpeakerLine
+              key={line.line_order}
+              speaker={line.speaker}
+              line={getLineParts(line)}
+              arabicMode={arabicMode}
+              speechRate={speechRate}
+              arabicFontFamily={arabicFontFamily}
+              arabicFontWeight={arabicFontWeight}
+              arabicFontSize={arabicFontSize}
+              showSpeaker={showSpeaker}
+            />
+          );
+        })}
+      </div>
+    );
   }
 
   if (readerLayout === 'paragraph' || readerLayout === 'grouped') {

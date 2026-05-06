@@ -13,6 +13,7 @@ export default function ExerciseBlock({ exercise, audioClip, arabicMode, readerL
         arabicFontFamily={arabicFontFamily}
         arabicFontWeight={arabicFontWeight}
         arabicFontSize={arabicFontSize}
+        showSpeakers={exercise.show_speakers}
       />
       {audioClip && (
         <YouTubeClipPlayer

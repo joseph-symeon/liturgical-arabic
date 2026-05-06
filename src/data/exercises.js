@@ -277,11 +277,13 @@ export const exerciseDefinitions = [
       "litany-peace-travelers",
       "litany-peace-deliverance",
       "litany-peace-help-save",
+      "litany-peace-calling-remembrance",
       "litany-peace-priest-doxology",
       "litany-peace-choir-amen"
     ],
     "title": "Litany of Peace",
     "title_phrase": "section-litany-of-peace",
+    "show_speakers": true,
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -354,6 +356,7 @@ export const exerciseDefinitions = [
     ],
     "title": "The Entrance",
     "title_phrase": "section-entrance",
+    "show_speakers": true,
     "audio_clip": null
   },
   {
@@ -436,6 +439,7 @@ export const exerciseDefinitions = [
     ],
     "title": "Little Litanies",
     "title_phrase": "section-little-litany",
+    "show_speakers": true,
     "audio_clip": null
   },
   {
@@ -505,6 +509,7 @@ export const exerciseDefinitions = [
     ],
     "title": "The Liturgy of the Word",
     "title_phrase": "section-liturgy-word",
+    "show_speakers": true,
     "audio_clip": null
   },
   {
