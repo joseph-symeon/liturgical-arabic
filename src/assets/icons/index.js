@@ -1,4 +1,4 @@
-import chrysostomSrc from "../chrysostom-icon.png";
+import chrysostomSrc from "./chrysostom.png";
 import holyTrinitySrc from "./holy-trinity.png";
 
 const appIcons = {

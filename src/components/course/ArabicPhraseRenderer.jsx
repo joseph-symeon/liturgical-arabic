@@ -12,7 +12,7 @@ export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', 
     const hasExplicitText = parts.some(part => part.text);
 
     if (hasExplicitText) {
-      return parts.map(part => (part.text ? { text: part.text } : { id: part.phrase_id }));
+      return parts.map(part => (part.text ? { text: part.text, isRubric: line.tags?.includes('rubric') || part.tags?.includes('rubric') } : { id: part.phrase_id }));
     }
 
     return parts.flatMap(({ phrase_id }, index) => (

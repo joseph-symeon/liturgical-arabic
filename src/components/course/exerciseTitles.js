@@ -13,6 +13,10 @@ function getFirstPhraseTranslation(line) {
   return phrases[firstPhraseId]?.translation;
 }
 
+function asServiceBookAbbreviation(text) {
+  return /[.!?]$/.test(text) ? text : `${text}.`;
+}
+
 function getGeneratedExerciseTitle(exercise) {
   const lines = getOrderedLines(exercise);
   const firstTitle = getFirstPhraseTranslation(lines[0]);
@@ -21,9 +25,9 @@ function getGeneratedExerciseTitle(exercise) {
   if (lines.length <= 1) return firstTitle;
 
   const lastTitle = getFirstPhraseTranslation(lines[lines.length - 1]);
-  if (!lastTitle || lastTitle === firstTitle) return `${firstTitle}...`;
+  if (!lastTitle || lastTitle === firstTitle) return asServiceBookAbbreviation(firstTitle);
 
-  return `${firstTitle}... ${lastTitle}...`;
+  return `${asServiceBookAbbreviation(firstTitle)} ${asServiceBookAbbreviation(lastTitle)}`;
 }
 
 export function getExerciseTitle(lesson, exerciseIndex) {

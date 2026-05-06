@@ -14,6 +14,9 @@ const lessons = [
         "exercise_id": "first-antiphon-through-theotokos"
       },
       {
+        "exercise_id": "antiphon-save-us-son-of-god"
+      },
+      {
         "exercise_id": "antiphon-only-begotten"
       },
       {
@@ -27,6 +30,9 @@ const lessons = [
       },
       {
         "exercise_id": "antiphon-glorified-with-father"
+      },
+      {
+        "exercise_id": "antiphons-summary"
       }
     ]
   },
@@ -38,6 +44,39 @@ const lessons = [
     "display_order": 2,
     "quizlet_deck_url": null,
     "exercises": [
+      {
+        "exercise_id": "litany-peace-peace-from-above"
+      },
+      {
+        "exercise_id": "litany-peace-whole-world"
+      },
+      {
+        "exercise_id": "litany-peace-holy-house"
+      },
+      {
+        "exercise_id": "litany-peace-father-metropolitan"
+      },
+      {
+        "exercise_id": "litany-peace-country-authorities"
+      },
+      {
+        "exercise_id": "litany-peace-this-city"
+      },
+      {
+        "exercise_id": "litany-peace-healthful-seasons"
+      },
+      {
+        "exercise_id": "litany-peace-travelers"
+      },
+      {
+        "exercise_id": "litany-peace-deliverance"
+      },
+      {
+        "exercise_id": "litany-peace-help-save"
+      },
+      {
+        "exercise_id": "litany-peace-priest-doxology"
+      },
       {
         "exercise_id": "litany-of-peace"
       }
@@ -52,22 +91,19 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "exercise_id": "entrance-let-us-pray"
+        "exercise_id": "entrance-bless-master"
       },
       {
-        "exercise_id": "entrance-bless-master"
+        "exercise_id": "entrance-blessed-entrance"
       },
       {
         "exercise_id": "entrance-wisdom-stand-upright"
       },
       {
-        "exercise_id": "entrance-come-worship"
+        "exercise_id": "entrance-holy-art-benediction"
       },
       {
-        "exercise_id": "entrance-save-us-risen"
-      },
-      {
-        "exercise_id": "entrance-save-us-wondrous"
+        "exercise_id": "entrance-summary"
       }
     ]
   },
@@ -113,6 +149,21 @@ const lessons = [
     "exercises": [
       {
         "exercise_id": "little-litany-again"
+      },
+      {
+        "exercise_id": "little-litany-help-save"
+      },
+      {
+        "exercise_id": "little-litany-calling-remembrance"
+      },
+      {
+        "exercise_id": "little-litany-for-thine-might"
+      },
+      {
+        "exercise_id": "little-litany-good-god"
+      },
+      {
+        "exercise_id": "little-litanies-summary"
       }
     ]
   },
@@ -125,7 +176,13 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "exercise_id": "liturgy-word-gospel-dialogue"
+        "exercise_id": "word-epistle-reading"
+      },
+      {
+        "exercise_id": "word-gospel-reading"
+      },
+      {
+        "exercise_id": "liturgy-word-summary"
       }
     ]
   },

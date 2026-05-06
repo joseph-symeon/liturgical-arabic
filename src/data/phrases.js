@@ -138,10 +138,20 @@ const phrases = {
       "section: The Second Antiphon"
     ]
   },
-  "enter-with-faith-001": {
-    "arabic": "وَالَّذِينَ يَدْخُلُونَ إِلَيْهِ بِإِيمَانٍ وَوَرَعٍ وَخَوْفِ اللَّه",
-    "translation": "and those who with faith reverence and the fear of God enter therein",
-    "literal": "and those who enter into it with faith and reverence and fear of God",
+  "those-who-enter-001": {
+    "arabic": "وَالَّذِينَ يَدْخُلُونَ إِلَيْهِ",
+    "translation": "and those who enter therein",
+    "literal": "and those who enter into it",
+    "tags": [
+      "church",
+      "entrance",
+      "section: Litany of Peace"
+    ]
+  },
+  "with-faith-reverence-fear-001": {
+    "arabic": "بِإِيمَانٍ وَوَرَعٍ وَخَوْفِ اللَّه",
+    "translation": "with faith reverence and the fear of God",
+    "literal": "with faith and reverence and fear of God",
     "tags": [
       "faith",
       "reverence",
@@ -236,12 +246,13 @@ const phrases = {
   },
   "lord-have-mercy-001": {
     "arabic": "يَا رَبُّ ارْحَمْ",
-    "translation": "Lord have mercy",
+    "translation": "Lord, have mercy",
     "literal": "O Lord have mercy",
     "tags": [
       "response",
       "mercy",
       "repeated",
+      "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
       "section: The Little Litany After the Second Antiphon",
       "section: The Entrance Hymn",
@@ -347,7 +358,7 @@ const phrases = {
   },
   "trampled-death-001": {
     "arabic": "وَبِمَوْتِكَ وَطِئْتَ الْمَوْتَ",
-    "translation": "and trampled down death by dath",
+    "translation": "and trampled down death by death",
     "literal": "and by your death you trampled death",
     "tags": [
       "resurrection",
@@ -1486,6 +1497,138 @@ const phrases = {
       "section: The First Antiphon"
     ]
   },
+  "father-metropolitan-001": {
+    "arabic": "مِنْ أَجْلِ أَبِينَا وَمِتْرُوبُولِيتِنَا",
+    "translation": "For our father and metropolitan",
+    "literal": "for the sake of our father and metropolitan",
+    "tags": [
+      "litany",
+      "petition",
+      "hierarchy",
+      "section: Litany of Peace"
+    ]
+  },
+  "rubric-so-and-so-001": {
+    "arabic": "(فُلان)",
+    "translation": "N",
+    "literal": "so and so",
+    "tags": [
+      "rubric",
+      "placeholder",
+      "section: Litany of Peace"
+    ]
+  },
+  "bishop-001": {
+    "arabic": "وَرَئِيسِ كَهَنَتِنَا",
+    "translation": "our bishop",
+    "literal": "and our chief priest",
+    "tags": [
+      "litany",
+      "petition",
+      "hierarchy",
+      "section: Litany of Peace"
+    ]
+  },
+  "honorable-presbytery-001": {
+    "arabic": "وَالكَهَنَةِ المُكَرَّمِينَ",
+    "translation": "the honorable presbytery",
+    "literal": "and the honored priests",
+    "tags": [
+      "litany",
+      "petition",
+      "clergy",
+      "section: Litany of Peace"
+    ]
+  },
+  "diaconate-in-christ-001": {
+    "arabic": "وَالشَّمَامِسَةِ الخُدَّامِ بِالمَسِيح",
+    "translation": "the diaconate in Christ",
+    "literal": "and the deacons serving in Christ",
+    "tags": [
+      "litany",
+      "petition",
+      "clergy",
+      "section: Litany of Peace"
+    ]
+  },
+  "clergy-people-001": {
+    "arabic": "وَجَمِيعِ الإِكْلِيرُوسِ وَالشَّعْب",
+    "translation": "all the clergy and the people",
+    "literal": "and all the clergy and the people",
+    "tags": [
+      "litany",
+      "petition",
+      "clergy",
+      "people",
+      "section: Litany of Peace"
+    ]
+  },
+  "country-president-001": {
+    "arabic": "مِنْ أَجْلِ حُكَّامِنَا",
+    "translation": "For our country its president (or appropriate head of state)",
+    "literal": "For our rulers",
+    "tags": [
+      "litany",
+      "petition",
+      "civil-authorities",
+      "section: Litany of Peace"
+    ]
+  },
+  "rubric-appropriate-head-state-001": {
+    "arabic": "(أَوْ رَئِيسِ الدَّوْلَةِ المُنَاسِب)",
+    "translation": "(or appropriate head of state)",
+    "literal": "or the appropriate head of state",
+    "tags": [
+      "rubric",
+      "placeholder",
+      "civil-authorities",
+      "section: Litany of Peace"
+    ]
+  },
+  "support-good-work-001": {
+    "arabic": "وَمُؤَازَرَتِهِمْ فِي كُلِّ عَمَلٍ صَالِح",
+    "translation": "civil authorities and armed forces",
+    "literal": "and helping them in every good deed",
+    "tags": [
+      "litany",
+      "petition",
+      "civil-authorities",
+      "section: Litany of Peace"
+    ]
+  },
+  "this-city-001": {
+    "arabic": "مِنْ أَجْلِ هَذِهِ المَدِينَة",
+    "translation": "For this city",
+    "literal": "for the sake of this city",
+    "tags": [
+      "litany",
+      "petition",
+      "place",
+      "section: Litany of Peace"
+    ]
+  },
+  "monasteries-cities-villages-001": {
+    "arabic": "وَجَمِيعِ الأَدْيِرَةِ وَالمُدُنِ وَالقُرَى",
+    "translation": "and every city and countryside",
+    "literal": "and all monasteries and cities and villages",
+    "tags": [
+      "litany",
+      "petition",
+      "place",
+      "section: Litany of Peace"
+    ]
+  },
+  "faithful-dwell-therein-001": {
+    "arabic": "وَالمُؤْمِنِينَ السَّاكِنِينَ فِيهَا",
+    "translation": "and the faithful who dwell therein",
+    "literal": "and the faithful dwelling in them",
+    "tags": [
+      "litany",
+      "petition",
+      "faithful",
+      "section: Litany of Peace"
+    ]
+  },
   "healthful-seasons-001": {
     "arabic": "مِنْ أَجْلِ اعْتِدَالِ الأَهْوِيَةِ",
     "translation": "For healthful seasons",
@@ -1519,13 +1662,25 @@ const phrases = {
       "section: Litany of Peace"
     ]
   },
-  "travelers-sea-land-air-001": {
-    "arabic": "مِنْ أَجْلِ المُسَافِرِينَ بِالبَحْرِ وَالبَرِّ وَالجَوِّ",
-    "translation": "For travelers by sea by land and by air",
-    "literal": "for the sake of travelers by sea and land and air",
+  "travelers-001": {
+    "arabic": "مِنْ أَجْلِ المُسَافِرِينَ",
+    "translation": "For travelers",
+    "literal": "for the sake of travelers",
     "tags": [
       "litany",
       "petition",
+      "travel",
+      "section: Litany of Peace"
+    ]
+  },
+  "sea-land-air-001": {
+    "arabic": "بِالبَحْرِ وَالبَرِّ وَالجَوِّ",
+    "translation": "by sea by land and by air",
+    "literal": "by sea and land and air",
+    "tags": [
+      "litany",
+      "petition",
+      "travel",
       "section: Litany of Peace"
     ]
   },
@@ -2694,9 +2849,19 @@ const phrases = {
     ]
   },
   "beginner-both-now-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ",
-    "translation": "Both now and ever",
-    "literal": "now and always",
+    "arabic": "الآنَ",
+    "translation": "Both now",
+    "literal": "now",
+    "tags": [
+      "course",
+      "beginner",
+      "doxology"
+    ]
+  },
+  "beginner-and-ever-001": {
+    "arabic": "وَكُلَّ أَوَانٍ",
+    "translation": "and ever",
+    "literal": "always",
     "tags": [
       "course",
       "beginner",

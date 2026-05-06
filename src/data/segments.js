@@ -32,13 +32,7 @@ const sourceSegments = {
     "tags": [],
     "phrases": [
       {
-        "phrase_id": "vocative-o-lord-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": "."
@@ -101,7 +95,118 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "enter-with-faith-001"
+        "phrase_id": "those-who-enter-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "with-faith-reverence-fear-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "litany-peace-father-metropolitan": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "father-metropolitan-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "rubric-so-and-so-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "text": "("
+      },
+      {
+        "phrase_id": "bishop-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "rubric-so-and-so-001"
+      },
+      {
+        "text": ")"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "honorable-presbytery-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "diaconate-in-christ-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "clergy-people-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "litany-peace-country-authorities": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "country-president-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "support-good-work-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "litany-peace-this-city": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "this-city-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "monasteries-cities-villages-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "faithful-dwell-therein-001"
       },
       {
         "text": "،"
@@ -144,6 +249,24 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "lord-have-mercy-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "course-lord-have-mercy-split": {
+    "speaker": "role-choir",
+    "tags": [],
+    "phrases": [
+      {
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "have-mercy-001"
       },
       {
         "text": "."
@@ -752,6 +875,38 @@ const sourceSegments = {
       }
     ]
   },
+  "course-entrance-hymn-risen-sundays": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "entrance",
+      "hymn",
+      "ordinary-sundays"
+    ],
+    "phrases": [
+      {
+        "text": "(",
+        "tags": [
+          "rubric"
+        ]
+      },
+      {
+        "phrase_id": "ordinary-sundays-label-001"
+      },
+      {
+        "text": ") ",
+        "tags": [
+          "rubric"
+        ]
+      },
+      {
+        "phrase_id": "entrance-risen-dead-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
   "entrance-hymn-risen-alleluia": {
     "speaker": "role-choir",
     "tags": [
@@ -803,6 +958,38 @@ const sourceSegments = {
       "weekdays"
     ],
     "phrases": [
+      {
+        "phrase_id": "entrance-wondrous-saints-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "course-entrance-hymn-wondrous-weekdays": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "entrance",
+      "hymn",
+      "weekdays"
+    ],
+    "phrases": [
+      {
+        "text": "(",
+        "tags": [
+          "rubric"
+        ]
+      },
+      {
+        "phrase_id": "weekdays-label-001"
+      },
+      {
+        "text": ") ",
+        "tags": [
+          "rubric"
+        ]
+      },
       {
         "phrase_id": "entrance-wondrous-saints-001"
       },
@@ -1575,7 +1762,13 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "travelers-sea-land-air-001"
+        "phrase_id": "travelers-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "sea-land-air-001"
       },
       {
         "text": "، "
@@ -3298,6 +3491,12 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "beginner-both-now-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "beginner-and-ever-001"
       },
       {
         "text": " "

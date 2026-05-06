@@ -21,12 +21,28 @@ export const exerciseDefinitions = [
     }
   },
   {
+    "id": "antiphon-save-us-son-of-god",
+    "segment_ids": [
+      "entrance-hymn-save-us-son-of-god",
+      "course-entrance-hymn-risen-sundays",
+      "course-entrance-hymn-wondrous-weekdays",
+      "entrance-hymn-risen-alleluia"
+    ],
+    "title": "Save us, O Son of God",
+    "audio_clip": {
+      "video_id": "-dufaXx7Hm0",
+      "start_seconds": 151,
+      "end_seconds": 180.5,
+      "default_playback_rate": 1
+    }
+  },
+  {
     "id": "antiphon-accepted-incarnate",
     "segment_ids": [
       "antiphon-accepted-incarnate",
       "antiphon-from-theotokos"
     ],
-    "title": "You accepted to become incarnate",
+    "title": "Who deigned to be incarnate",
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 151,
@@ -40,6 +56,7 @@ export const exerciseDefinitions = [
       "antiphon-became-man",
       "antiphon-crucified"
     ],
+    "title": "and without change became man",
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 151,
@@ -53,6 +70,7 @@ export const exerciseDefinitions = [
       "antiphon-trampled-death",
       "antiphon-one-of-trinity"
     ],
+    "title": "and trampled down death by death",
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 151,
@@ -74,16 +92,39 @@ export const exerciseDefinitions = [
     }
   },
   {
-    "id": "litany-of-peace",
+    "id": "antiphons-summary",
     "segment_ids": [
-      "litany-peace-in-peace",
-      "litany-peace-let-us-pray",
-      "litany-peace-from-above",
-      "litany-peace-whole-world",
-      "litany-peace-holy-house",
-      "litany-peace-help-save",
-      "litany-peace-lord-have-mercy-all"
+      "first-antiphon-through-theotokos-1",
+      "entrance-hymn-save-us-son-of-god",
+      "course-entrance-hymn-risen-sundays",
+      "course-entrance-hymn-wondrous-weekdays",
+      "entrance-hymn-risen-alleluia",
+      "antiphon-word-of-god-only-begotten",
+      "antiphon-deathless",
+      "antiphon-accepted-incarnate",
+      "antiphon-from-theotokos",
+      "antiphon-became-man",
+      "antiphon-crucified",
+      "antiphon-trampled-death",
+      "antiphon-one-of-trinity",
+      "antiphon-glorified-with-father",
+      "antiphon-save-us"
     ],
+    "title": "The Antiphons",
+    "title_phrase": "section-antiphons",
+    "audio_clip": {
+      "video_id": "-dufaXx7Hm0",
+      "start_seconds": 150.75,
+      "end_seconds": 180.5,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-peace-from-above",
+    "segment_ids": [
+      "litany-peace-from-above"
+    ],
+    "title": "For the peace from above",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -92,53 +133,227 @@ export const exerciseDefinitions = [
     }
   },
   {
-    "id": "entrance-let-us-pray",
+    "id": "litany-peace-whole-world",
     "segment_ids": [
-      "entrance-let-us-pray"
+      "litany-peace-whole-world"
     ],
-    "audio_clip": null
+    "title": "For the peace of the whole world",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-holy-house",
+    "segment_ids": [
+      "litany-peace-holy-house"
+    ],
+    "title": "For this holy house",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-father-metropolitan",
+    "segment_ids": [
+      "litany-peace-father-metropolitan"
+    ],
+    "title": "For our father and metropolitan",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-country-authorities",
+    "segment_ids": [
+      "litany-peace-country-authorities"
+    ],
+    "title": "For our country",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-this-city",
+    "segment_ids": [
+      "litany-peace-this-city"
+    ],
+    "title": "For this city",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-healthful-seasons",
+    "segment_ids": [
+      "litany-peace-healthful-seasons"
+    ],
+    "title": "For healthful seasons",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-travelers",
+    "segment_ids": [
+      "litany-peace-travelers"
+    ],
+    "title": "For travelers",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-deliverance",
+    "segment_ids": [
+      "litany-peace-deliverance"
+    ],
+    "title": "For our deliverance",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-help-save",
+    "segment_ids": [
+      "litany-peace-help-save"
+    ],
+    "title": "Help, save, have mercy",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-peace-priest-doxology",
+    "segment_ids": [
+      "litany-peace-priest-doxology"
+    ],
+    "title": "For unto thee are due",
+    "title_phrase": "doxology-for-fitting-001",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
+  },
+  {
+    "id": "litany-of-peace",
+    "segment_ids": [
+      "litany-peace-in-peace",
+      "litany-peace-from-above",
+      "litany-peace-whole-world",
+      "litany-peace-holy-house",
+      "litany-peace-father-metropolitan",
+      "litany-peace-country-authorities",
+      "litany-peace-this-city",
+      "litany-peace-healthful-seasons",
+      "litany-peace-travelers",
+      "litany-peace-deliverance",
+      "litany-peace-help-save",
+      "litany-peace-priest-doxology",
+      "litany-peace-choir-amen"
+    ],
+    "title": "Litany of Peace",
+    "title_phrase": "section-litany-of-peace",
+    "audio_clip": {
+      "video_id": "KJKt0V4zJjY",
+      "start_seconds": 92.75,
+      "end_seconds": 160,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "entrance-bless-master",
     "segment_ids": [
       "entrance-amen-bless-master"
     ],
+    "title": "Bless master, the holy entrance",
+    "audio_clip": null
+  },
+  {
+    "id": "entrance-blessed-entrance",
+    "segment_ids": [
+      "entrance-blessed-entrance"
+    ],
+    "title": "Blessed is the entrance",
     "audio_clip": null
   },
   {
     "id": "entrance-wisdom-stand-upright",
     "segment_ids": [
-      "entrance-wisdom-stand-upright"
-    ],
-    "audio_clip": null
-  },
-  {
-    "id": "entrance-come-worship",
-    "segment_ids": [
+      "entrance-wisdom-stand-upright",
       "entrance-hymn-come-worship"
     ],
+    "title": "Wisdom. Stand upright. Come, let us worship",
+    "title_phrase": "wisdom-001",
     "audio_clip": null
   },
   {
-    "id": "entrance-save-us-risen",
+    "id": "entrance-save-us-son-of-god",
     "segment_ids": [
       "entrance-hymn-save-us-son-of-god",
-      "entrance-hymn-risen-label",
-      "entrance-hymn-risen-sundays",
+      "course-entrance-hymn-risen-sundays",
+      "course-entrance-hymn-wondrous-weekdays",
       "entrance-hymn-risen-alleluia"
     ],
     "title": "Save us, O Son of God",
     "audio_clip": null
   },
   {
-    "id": "entrance-save-us-wondrous",
+    "id": "entrance-holy-art-benediction",
     "segment_ids": [
-      "entrance-hymn-save-us-son-of-god",
-      "entrance-hymn-weekdays-label",
-      "entrance-hymn-wondrous-weekdays",
-      "entrance-hymn-wondrous-alleluia"
+      "entrance-hymn-holy-art-benediction",
+      "entrance-hymn-deacon-ages",
+      "entrance-hymn-final-amen"
     ],
-    "title": "Save us, O Son of God",
+    "title": "For holy art thou",
+    "title_phrase": "for-holy-art-thou-001",
+    "audio_clip": null
+  },
+  {
+    "id": "entrance-summary",
+    "segment_ids": [
+      "entrance-amen-bless-master",
+      "entrance-blessed-entrance",
+      "entrance-wisdom-stand-upright",
+      "entrance-hymn-come-worship",
+      "entrance-hymn-save-us-son-of-god",
+      "course-entrance-hymn-risen-sundays",
+      "course-entrance-hymn-wondrous-weekdays",
+      "entrance-hymn-risen-alleluia",
+      "entrance-hymn-holy-art-benediction",
+      "entrance-hymn-deacon-ages",
+      "entrance-hymn-final-amen"
+    ],
+    "title": "The Entrance",
+    "title_phrase": "section-entrance",
     "audio_clip": null
   },
   {
@@ -171,10 +386,56 @@ export const exerciseDefinitions = [
   {
     "id": "little-litany-again",
     "segment_ids": [
-      "little-litany-again",
-      "little-litany-help-save"
+      "little-litany-again"
     ],
     "title": "Again and again, in peace",
+    "audio_clip": null
+  },
+  {
+    "id": "little-litany-help-save",
+    "segment_ids": [
+      "little-litany-help-save"
+    ],
+    "title": "Help, save, have mercy",
+    "audio_clip": null
+  },
+  {
+    "id": "little-litany-calling-remembrance",
+    "segment_ids": [
+      "little-litany-calling-remembrance"
+    ],
+    "title": "Calling to remembrance",
+    "audio_clip": null
+  },
+  {
+    "id": "little-litany-for-thine-might",
+    "segment_ids": [
+      "little-litany-for-thine-might"
+    ],
+    "title": "For thine is the might",
+    "title_phrase": "for-thine-might-001",
+    "audio_clip": null
+  },
+  {
+    "id": "little-litany-good-god",
+    "segment_ids": [
+      "little-litany-good-god-doxology"
+    ],
+    "title": "For thou art a good God",
+    "title_phrase": "good-god-lovest-mankind-001",
+    "audio_clip": null
+  },
+  {
+    "id": "little-litanies-summary",
+    "segment_ids": [
+      "little-litany-again",
+      "little-litany-help-save",
+      "little-litany-calling-remembrance",
+      "little-litany-for-thine-might",
+      "little-litany-good-god-doxology"
+    ],
+    "title": "Little Litanies",
+    "title_phrase": "section-little-litany",
     "audio_clip": null
   },
   {
@@ -191,23 +452,65 @@ export const exerciseDefinitions = [
     "audio_clip": null
   },
   {
-    "id": "liturgy-word-gospel-dialogue",
+    "id": "word-epistle-reading",
+    "segment_ids": [
+      "epistle-let-us-attend-1",
+      "epistle-reader-prokeimenon",
+      "epistle-wisdom",
+      "epistle-reader-title",
+      "epistle-let-us-attend-2",
+      "epistle-reader-reads",
+      "epistle-peace-reader",
+      "epistle-alleluia"
+    ],
+    "title": "The Reading of the Epistle",
+    "title_phrase": "section-reading-epistle",
+    "audio_clip": null
+  },
+  {
+    "id": "word-gospel-reading",
     "segment_ids": [
       "gospel-wisdom-stand",
       "gospel-peace-all",
       "gospel-and-spirit",
       "gospel-reading-from",
       "gospel-glory-before",
-      "gospel-let-us-attend"
+      "gospel-let-us-attend",
+      "gospel-appointed-reading-rubric",
+      "gospel-glory-after"
     ],
-    "title": "Wisdom. Stand upright.",
-    "title_phrase": "wisdom-001",
+    "title": "The Reading of the Gospel",
+    "title_phrase": "section-reading-gospel",
+    "audio_clip": null
+  },
+  {
+    "id": "liturgy-word-summary",
+    "segment_ids": [
+      "epistle-let-us-attend-1",
+      "epistle-reader-prokeimenon",
+      "epistle-wisdom",
+      "epistle-reader-title",
+      "epistle-let-us-attend-2",
+      "epistle-reader-reads",
+      "epistle-peace-reader",
+      "epistle-alleluia",
+      "gospel-wisdom-stand",
+      "gospel-peace-all",
+      "gospel-and-spirit",
+      "gospel-reading-from",
+      "gospel-glory-before",
+      "gospel-let-us-attend",
+      "gospel-appointed-reading-rubric",
+      "gospel-glory-after"
+    ],
+    "title": "The Liturgy of the Word",
+    "title_phrase": "section-liturgy-word",
     "audio_clip": null
   },
   {
     "id": "lord-have-mercy",
     "segment_ids": [
-      "litany-peace-lord-have-mercy-choir"
+      "course-lord-have-mercy-split"
     ],
     "title": "Lord, have mercy",
     "title_phrase": "lord-have-mercy-001",
@@ -238,7 +541,7 @@ export const exerciseDefinitions = [
       "first-antiphon-glory",
       "first-antiphon-both-now"
     ],
-    "title": "Glory... Both now...",
+    "title": "Glory. Both now.",
     "title_phrase": "glory-001",
     "audio_clip": null
   },
@@ -247,7 +550,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-glory-beginner"
     ],
-    "title": "Glory to the Father",
     "title_phrase": "glory-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
@@ -261,7 +563,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-both-now-beginner"
     ],
-    "title": "Both now and ever",
     "title_phrase": "beginner-both-now-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
@@ -276,7 +577,6 @@ export const exerciseDefinitions = [
       "course-glory-beginner",
       "course-both-now-beginner"
     ],
-    "title": "Glory... Both now...",
     "title_phrase": "glory-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",

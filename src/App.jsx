@@ -58,6 +58,7 @@ const SIDE_PANEL_WIDTH = 320;
 const DEFAULT_ARABIC_FONT_SIZE = 22;
 const NARROW_VIEWPORT_WIDTH = 700;
 const COMPACT_CHROME_WIDTH = 900;
+const NAV_MENU_STORAGE_KEY = "liturgical-arabic:navigation-menu-open";
 
 const ORDERED_UNITS = [...units].sort((a, b) => a.display_order - b.display_order);
 const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
@@ -126,7 +127,12 @@ export default function App() {
   const [selectedSectionIndex, setSelectedSectionIndex] = useState(initialNavigation.selectedSectionIndex);
   const [selectedLessonId, setSelectedLessonId] = useState(initialNavigation.selectedLessonId);
   const [selectedExerciseIndex, setSelectedExerciseIndex] = useState(initialNavigation.selectedExerciseIndex);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
+    if (viewportWidth < NARROW_VIEWPORT_WIDTH) return false;
+    return window.localStorage.getItem(NAV_MENU_STORAGE_KEY) === "true";
+  });
   const [displayMenuOpen, setDisplayMenuOpen] = useState(false);
   const [arabicMode, setArabicMode] = useState("vocalized");
   const [readerLayout, setReaderLayout] = useState("line");
@@ -143,7 +149,9 @@ export default function App() {
   useEffect(() => {
     function updateViewport() {
       const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
-      setIsNarrowViewport(viewportWidth < NARROW_VIEWPORT_WIDTH);
+      const nextIsNarrowViewport = viewportWidth < NARROW_VIEWPORT_WIDTH;
+      setIsNarrowViewport(nextIsNarrowViewport);
+      if (nextIsNarrowViewport) setMenuOpen(false);
       setIsCompactChrome(viewportWidth < COMPACT_CHROME_WIDTH);
     }
     updateViewport();
@@ -154,6 +162,11 @@ export default function App() {
       window.visualViewport?.removeEventListener("resize", updateViewport);
     };
   }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || isNarrowViewport) return;
+    window.localStorage.setItem(NAV_MENU_STORAGE_KEY, menuOpen ? "true" : "false");
+  }, [menuOpen, isNarrowViewport]);
 
   useEffect(() => {
     if (!isCompactChrome) {
@@ -302,14 +315,18 @@ export default function App() {
   const hasNextExercise =
     selectedLessonIndex >= 0 &&
     (selectedLessonIndex < COURSE_LESSONS.length - 1 || clampedExerciseIndex < (selectedLesson?.exercises?.length ?? 1) - 1);
-  const previousExerciseTitle =
-    clampedExerciseIndex > 0
+  const previousLesson = COURSE_LESSONS[selectedLessonIndex - 1];
+  const nextLesson = COURSE_LESSONS[selectedLessonIndex + 1];
+  const previousExerciseTitle = hasPreviousExercise
+    ? clampedExerciseIndex > 0
       ? getExerciseTitle(selectedLesson, clampedExerciseIndex - 1)
-      : getExerciseTitle(COURSE_LESSONS[selectedLessonIndex - 1], Math.max(0, (COURSE_LESSONS[selectedLessonIndex - 1]?.exercises?.length ?? 1) - 1));
-  const nextExerciseTitle =
-    clampedExerciseIndex < (selectedLesson?.exercises?.length ?? 1) - 1
+      : getExerciseTitle(previousLesson, Math.max(0, (previousLesson?.exercises?.length ?? 1) - 1))
+    : null;
+  const nextExerciseTitle = hasNextExercise
+    ? clampedExerciseIndex < (selectedLesson?.exercises?.length ?? 1) - 1
       ? getExerciseTitle(selectedLesson, clampedExerciseIndex + 1)
-      : getExerciseTitle(COURSE_LESSONS[selectedLessonIndex + 1], 0);
+      : getExerciseTitle(nextLesson, 0)
+    : null;
 
   useEffect(() => {
     if (view === "lessons" && selectedExerciseIndex !== clampedExerciseIndex) {
@@ -368,7 +385,7 @@ export default function App() {
           <img
             src={appIcons.chrysostom.src}
             alt={appIcons.chrysostom.title}
-            className="mx-auto mb-6 h-auto max-h-[260px] w-auto max-w-[58vw] opacity-80 dark:invert"
+            className="mx-auto mb-6 h-auto max-h-[260px] w-auto max-w-[58vw] opacity-90"
           />
           <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Liturgical Arabic</h1>
         </header>
