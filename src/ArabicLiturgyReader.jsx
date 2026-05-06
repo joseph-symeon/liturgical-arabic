@@ -212,7 +212,7 @@ export default function ArabicLiturgyReader({
 
   return h(
     "main",
-    { className: "mx-auto max-w-[700px] px-4 py-10 leading-8" },
+    { className: "bottom-nav-page mx-auto max-w-[700px] px-4 py-10 leading-8" },
     h(
       PageHeader,
       isTableOfContents
@@ -247,6 +247,6 @@ export default function ArabicLiturgyReader({
           readerLayout,
           showSectionHeading: false
         }),
-    renderSectionNav("mt-8 grid gap-2")
+    renderSectionNav("bottom-page-nav grid gap-2")
   );
 }

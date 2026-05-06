@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ArabicLiturgyReader from "./ArabicLiturgyReader.jsx";
 import CourseOverview from "./components/course/CourseOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
@@ -138,6 +138,7 @@ export default function App() {
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
   const [isCompactChrome, setIsCompactChrome] = useState(false);
   const [showCompactTitle, setShowCompactTitle] = useState(false);
+  const previousNavigationKeyRef = useRef(null);
 
   useEffect(() => {
     function updateViewport() {
@@ -189,6 +190,20 @@ export default function App() {
     if (window.location.hash !== nextHash) {
       window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${nextHash}`);
     }
+  }, [view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex]);
+
+  useEffect(() => {
+    const navigationKey = `${view}:${selectedSectionIndex ?? "toc"}:${selectedLessonId ?? ""}:${selectedExerciseIndex}`;
+    if (previousNavigationKeyRef.current === null) {
+      previousNavigationKeyRef.current = navigationKey;
+      return;
+    }
+    if (previousNavigationKeyRef.current === navigationKey) return;
+
+    previousNavigationKeyRef.current = navigationKey;
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    });
   }, [view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex]);
 
   function goHome() {
@@ -873,7 +888,12 @@ export default function App() {
           if (isNarrowViewport && menuOpen) setMenuOpen(false);
           if (displayMenuOpen) setDisplayMenuOpen(false);
         }}
-        style={{ flex: "1 1 auto", minWidth: 0, display: hideContentForMenu ? "none" : "block" }}
+        style={{
+          "--side-panel-offset": menuOpen && !isNarrowViewport ? `${SIDE_PANEL_WIDTH}px` : "0px",
+          flex: "1 1 auto",
+          minWidth: 0,
+          display: hideContentForMenu ? "none" : "block"
+        }}
       >
         {view === "home" && renderHome()}
         {view === "reader" && (

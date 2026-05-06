@@ -1,4 +1,5 @@
 .lp-page {
+  --page-nav-max-width: 820px;
   direction: ltr;
   max-width: 820px;
   margin: 40px auto;
@@ -19,6 +20,9 @@
 }
 
 .lp-exercise {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
   margin-bottom: 32px;
 }
 
@@ -185,9 +189,11 @@
 }
 
 .lp-clip-player {
-  max-width: 460px;
-  margin-top: 24px;
-  padding: 12px;
+  align-self: flex-start;
+  display: inline-block;
+  max-width: 100%;
+  margin-top: auto;
+  padding: 8px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #fff;
@@ -204,7 +210,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  width: 100%;
+  width: auto;
   position: relative;
 }
 
@@ -226,23 +232,44 @@
   opacity: 0.45;
 }
 
+.lp-icon-button.active {
+  color: #333;
+  border-color: #ccc;
+}
+
 .lp-icon-button svg {
   width: 16px;
   height: 16px;
-  fill: #333;
+  fill: currentColor;
 }
 
-.lp-progress {
-  flex: 1 1 auto;
-  min-width: 0;
-  accent-color: #555;
-}
-
-.lp-time {
+.lp-loop-button {
   flex: 0 0 auto;
-  font-size: 13px;
-  color: #555;
-  white-space: nowrap;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e7e5e4;
+  border-radius: 6px;
+  background: #fff;
+  color: #78716c;
+  cursor: pointer;
+}
+
+.lp-loop-button.active {
+  color: #333;
+  border-color: #ccc;
+}
+
+.lp-loop-button svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
 }
 
 .lp-speed-wrapper {
@@ -254,6 +281,7 @@
   width: 42px;
   min-width: 42px;
   max-width: 42px;
+  height: 36px;
   font-size: 12px;
   padding: 4px 2px;
   text-align: center;
@@ -307,9 +335,9 @@
 }
 
 .lp-youtube-link {
-  flex: 0 0 28px;
-  width: 28px;
-  height: 28px;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -317,13 +345,12 @@
 }
 
 .lp-youtube-link svg {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
 }
 
 @media (prefers-color-scheme: dark) {
   .lp-subtitle,
-  .lp-time,
   .lp-speed-title {
     color: var(--dark-muted);
   }
@@ -335,6 +362,7 @@
   }
 
   .lp-icon-button,
+  .lp-loop-button,
   .lp-speed-button,
   .lp-speed-adjust {
     background: var(--dark-surface);
@@ -346,8 +374,10 @@
     fill: var(--dark-text);
   }
 
-  .lp-progress {
-    accent-color: var(--dark-muted);
+  .lp-icon-button.active,
+  .lp-loop-button.active {
+    color: var(--dark-text);
+    border-color: var(--dark-muted);
   }
 
   .lp-course-unit,

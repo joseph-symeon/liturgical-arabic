@@ -13,39 +13,30 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
   const playerRef = useRef(null);
   const playerHostRef = useRef(null);
   const intervalRef = useRef(null);
-  const isSeekingRef = useRef(false);
   const playbackRateRef = useRef(defaultPlaybackRate);
   const userStartedRef = useRef(false);
+  const loopEnabledRef = useRef(true);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(defaultPlaybackRate);
+  const [loopEnabled, setLoopEnabled] = useState(true);
   const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
   const [playerError, setPlayerError] = useState(null);
-
-  const clipDuration = endSeconds - startSeconds;
-
-  function formatTime(seconds) {
-    seconds = Math.max(0, Math.floor(seconds));
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  }
 
   function startLoop(player) {
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      if (!player || isSeekingRef.current) return;
+      if (!player) return;
       const absoluteTime = player.getCurrentTime();
       if (absoluteTime >= endSeconds) {
+        if (!loopEnabledRef.current) {
+          player.pauseVideo();
+          player.seekTo(startSeconds, true);
+          return;
+        }
         player.seekTo(startSeconds, true);
-        setProgress(0);
         return;
-      }
-      const relativeTime = absoluteTime - startSeconds;
-      if (relativeTime >= 0 && relativeTime <= clipDuration) {
-        setProgress(relativeTime);
       }
     }, 100);
   }
@@ -97,7 +88,6 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
                 if (!userStartedRef.current) {
                   event.target.pauseVideo();
                   event.target.seekTo(startSeconds, true);
-                  setProgress(0);
                   setIsPlaying(false);
                   return;
                 }
@@ -154,27 +144,17 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
     if (state === window.YT.PlayerState.PLAYING) {
       player.pauseVideo();
     } else {
+      const currentTime = player.getCurrentTime();
       userStartedRef.current = true;
-      player.seekTo(startSeconds + progress, true);
+      if (currentTime < startSeconds || currentTime >= endSeconds) {
+        player.seekTo(startSeconds, true);
+      }
       player.playVideo();
     }
   }
 
-  function handleProgressChange(e) {
-    isSeekingRef.current = true;
-    setProgress(Number(e.target.value));
-  }
-
-  function handleSeekCommit(e) {
-    const player = playerRef.current;
-    if (player) {
-      player.seekTo(startSeconds + Number(e.target.value), true);
-    }
-    isSeekingRef.current = false;
-  }
-
   function adjustSpeed(delta) {
-    const next = Math.max(0.25, Math.min(2, Math.round((playbackRateRef.current + delta) * 100) / 100));
+    const next = Math.max(0.5, Math.min(2, Math.round((playbackRateRef.current + delta) * 10) / 10));
     playbackRateRef.current = next;
     setPlaybackRate(next);
     if (playerRef.current) {
@@ -182,7 +162,15 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
     }
   }
 
-  const speedDisplay = `${Number(playbackRate.toFixed(2))}×`;
+  function toggleLoop() {
+    setLoopEnabled(value => {
+      const next = !value;
+      loopEnabledRef.current = next;
+      return next;
+    });
+  }
+
+  const speedDisplay = `${playbackRate.toFixed(1)}×`;
   const ytUrl = `https://www.youtube.com/watch?v=${videoId}&t=${startSeconds}s`;
 
   return (
@@ -195,7 +183,7 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
         {playerError && <p className="lp-player-error">{playerError}</p>}
         <div className="lp-controls">
           <button
-            className="lp-icon-button"
+            className={`lp-icon-button${isPlaying ? " active" : ""}`}
             onClick={handlePlayPause}
             disabled={!isReady}
             aria-label={isPlaying ? 'Pause' : 'Play'}
@@ -212,21 +200,20 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
             )}
           </button>
 
-          <input
-            className="lp-progress"
-            type="range"
-            min="0"
-            max={clipDuration}
-            step="0.05"
-            value={progress}
-            onChange={handleProgressChange}
-            onMouseUp={handleSeekCommit}
-            onTouchEnd={handleSeekCommit}
-          />
-
-          <div className="lp-time">
-            {formatTime(progress)} / {formatTime(clipDuration)}
-          </div>
+          <button
+            type="button"
+            className={`lp-loop-button${loopEnabled ? " active" : ""}`}
+            onClick={toggleLoop}
+            aria-label={loopEnabled ? "Disable loop" : "Enable loop"}
+            aria-pressed={loopEnabled}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17 2l4 4-4 4" />
+              <path d="M3 11V9a3 3 0 0 1 3-3h15" />
+              <path d="M7 22l-4-4 4-4" />
+              <path d="M21 13v2a3 3 0 0 1-3 3H3" />
+            </svg>
+          </button>
 
           <div className="lp-speed-wrapper" onClick={e => e.stopPropagation()}>
             <button
@@ -240,9 +227,9 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
               <div className="lp-speed-menu">
                 <div className="lp-speed-title">Speed</div>
                 <div className="lp-speed-row">
-                  <button className="lp-speed-adjust" onClick={() => adjustSpeed(-0.05)}>−</button>
+                  <button className="lp-speed-adjust" onClick={() => adjustSpeed(-0.1)}>−</button>
                   <div className="lp-speed-value">{speedDisplay}</div>
-                  <button className="lp-speed-adjust" onClick={() => adjustSpeed(0.05)}>+</button>
+                  <button className="lp-speed-adjust" onClick={() => adjustSpeed(0.1)}>+</button>
                 </div>
               </div>
             )}

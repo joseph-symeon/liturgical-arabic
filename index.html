@@ -107,6 +107,16 @@
       line-height: 1.25;
     }
 
+    .bottom-nav-page {
+      display: flex;
+      min-height: calc(100svh - 120px);
+      flex-direction: column;
+    }
+
+    .bottom-page-nav.page-nav {
+      margin-top: auto;
+    }
+
     @media (max-width: 900px) {
       .app-content {
         padding-top: calc(env(safe-area-inset-top, 0px) + 52px);
@@ -150,6 +160,7 @@
       .page-nav-destination {
         color: var(--dark-muted);
       }
+
     }
   </style>
   <body>

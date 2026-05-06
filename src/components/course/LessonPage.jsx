@@ -44,7 +44,7 @@ export default function LessonPage({
   }
 
   return (
-    <div className="lp-page" dir="ltr">
+    <div className="lp-page bottom-nav-page" dir="ltr">
       <PageHeader
         eyebrow={unitTitle}
         title={lesson.title}
@@ -72,7 +72,7 @@ export default function LessonPage({
         />
       )}
 
-      <nav className="lp-course-nav page-nav" dir="ltr" aria-label="Course lesson navigation">
+      <nav className="lp-course-nav page-nav bottom-page-nav" dir="ltr" aria-label="Course lesson navigation">
         <div className="page-nav-grid">
           <button
             type="button"

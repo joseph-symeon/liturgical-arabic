@@ -16,7 +16,7 @@ export const exerciseDefinitions = [
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 150.75,
-      "end_seconds": 162,
+      "end_seconds": 162.05,
       "default_playback_rate": 1
     }
   },
