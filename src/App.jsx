@@ -55,7 +55,7 @@ const ARABIC_WEIGHTS = [
   { label: "Semibold", value: "600" }
 ];
 const SIDE_PANEL_WIDTH = 320;
-const DEFAULT_ARABIC_FONT_SIZE = 22;
+const DEFAULT_ARABIC_FONT_SIZE = 20;
 const NARROW_VIEWPORT_WIDTH = 700;
 const COMPACT_CHROME_WIDTH = 900;
 const NAV_MENU_STORAGE_KEY = "liturgical-arabic:navigation-menu-open";
