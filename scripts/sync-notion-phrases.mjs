@@ -1,13 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 const envPath = path.join(rootDir, '.env.local');
-const outputPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.csv');
+const outputPath = path.join(rootDir, 'src', 'data', 'phrases.js');
+const syncManifestPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.sync.json');
 
 const NOTION_VERSION = '2022-06-28';
+const FORCE = process.argv.includes('--force');
 
 const PROPERTY_NAMES = {
   id: ['ID', 'Id', 'id'],
@@ -48,7 +50,16 @@ if (rows.length === 0) {
   );
 }
 
-writePhrasesCsv(rows);
+const localRows = fs.existsSync(outputPath) ? await readLocalPhraseRows() : [];
+const localDrift = findLocalDrift(localRows, rows);
+if (localDrift.hasDrift && !FORCE) {
+  console.error(formatLocalDriftMessage(localDrift));
+  process.exitCode = 1;
+  throw new Error('Refusing to replace local phrases.js with Notion data. Re-run with `npm run sync:notion:phrases -- --force` only when Notion should overwrite local phrase edits.');
+}
+
+writePhrasesJs(rows);
+writeSyncManifest(pages, rows);
 console.log(`Synced ${rows.length} Notion phrase rows to ${path.relative(rootDir, outputPath)}.`);
 
 function loadEnvLocal() {
@@ -68,6 +79,20 @@ function loadEnvLocal() {
       process.env[key] = value;
     }
   });
+}
+
+async function readLocalPhraseRows() {
+  const phrasesModule = await import(`${pathToFileURL(outputPath).href}?${Date.now()}`);
+  const phrases = phrasesModule.default ?? {};
+  return Object.entries(phrases)
+    .filter(([id]) => id)
+    .map(([id, phrase]) => ({
+      id,
+      arabic: phrase.arabic ?? '',
+      translation: phrase.translation ?? '',
+      literal: phrase.literal ?? '',
+      tags: normalizeTags(phrase.tags)
+    }));
 }
 
 async function fetchDatabasePages(id) {
@@ -98,8 +123,71 @@ function pageToPhraseRow(page) {
     arabic: readPlainProperty(page, PROPERTY_NAMES.arabic),
     translation: readPlainProperty(page, PROPERTY_NAMES.translation),
     literal: readPlainProperty(page, PROPERTY_NAMES.literal),
-    tags: JSON.stringify(readTagsProperty(page, PROPERTY_NAMES.tags))
+    tags: JSON.stringify(normalizeTags(readTagsProperty(page, PROPERTY_NAMES.tags)))
   };
+}
+
+function findLocalDrift(localRows, notionRows) {
+  const localById = new Map(localRows.map(row => [row.id, row]));
+  const notionById = new Map(notionRows.map(row => [row.id, normalizeNotionRow(row)]));
+  const missingInNotion = localRows.filter(row => !notionById.has(row.id)).map(row => row.id);
+  const missingLocally = notionRows.filter(row => !localById.has(row.id)).map(row => row.id);
+  const changed = [];
+
+  localRows.forEach(localRow => {
+    const notionRow = notionById.get(localRow.id);
+    if (!notionRow) return;
+
+    const fields = ['arabic', 'translation', 'literal', 'tags'].filter(field => !valuesEqual(localRow[field], notionRow[field]));
+    if (fields.length > 0) changed.push({ id: localRow.id, fields });
+  });
+
+  return {
+    missingInNotion,
+    missingLocally,
+    changed,
+    hasDrift: missingInNotion.length > 0 || missingLocally.length > 0 || changed.length > 0
+  };
+}
+
+function normalizeNotionRow(row) {
+  return {
+    id: row.id,
+    arabic: row.arabic ?? '',
+    translation: row.translation ?? '',
+    literal: row.literal ?? '',
+    tags: normalizeTags(JSON.parse(row.tags || '[]'))
+  };
+}
+
+function normalizeTags(tags) {
+  return [...new Set((tags || []).map(tag => String(tag)).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+}
+
+function valuesEqual(left, right) {
+  return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function formatLocalDriftMessage(drift) {
+  const lines = [
+    'Local phrases.js differs from Notion. No local files were changed.',
+    `- Local phrase IDs missing in Notion: ${drift.missingInNotion.length}`,
+    `- Notion phrase IDs missing locally: ${drift.missingLocally.length}`,
+    `- Phrase IDs with changed fields: ${drift.changed.length}`
+  ];
+
+  drift.changed.slice(0, 20).forEach(item => {
+    lines.push(`  - ${item.id}: ${item.fields.join(', ')}`);
+  });
+
+  if (drift.changed.length > 20) {
+    lines.push(`  - ...and ${drift.changed.length - 20} more changed phrase(s)`);
+  }
+
+  lines.push('Use `npm run check:notion:phrases` for a read-only drift report.');
+  lines.push('Use `npm run sync:notion:phrases -- --force` only when Notion should overwrite local phrase edits.');
+
+  return lines.join('\n');
 }
 
 function getProperty(page, names) {
@@ -158,19 +246,47 @@ function richTextPlain(parts) {
   return (parts || []).map(part => part.plain_text).join('');
 }
 
-function writePhrasesCsv(rows) {
-  const header = ['id', 'arabic', 'translation', 'literal', 'tags'];
-  const lines = [
-    header.map(csvEscape).join(','),
-    ...rows.map(row => header.map(column => csvEscape(row[column] ?? '')).join(','))
-  ];
+function writePhrasesJs(rows) {
+  const phrases = Object.fromEntries(rows.map(row => [
+    row.id,
+    {
+      arabic: row.arabic,
+      translation: row.translation,
+      literal: row.literal,
+      tags: JSON.parse(row.tags)
+    }
+  ]));
 
-  fs.writeFileSync(outputPath, `${lines.join('\n')}\n`);
+  const header = [
+    '// Phrase text can be edited locally in this file for fast development.',
+    '// Run `npm run sync:notion:phrases` only when you intentionally want Notion to replace it.',
+    '// Run `npm run push:notion:phrases` to dry-run pushing local phrase edits back to Notion.'
+  ].join('\n');
+
+  fs.writeFileSync(outputPath, `${header}\n\nconst phrases = ${JSON.stringify(phrases, null, 2)};\n\nexport default phrases;\n`);
 }
 
-function csvEscape(value) {
-  const text = String(value);
-  return `"${text.replace(/"/g, '""')}"`;
+function writeSyncManifest(pages, rows) {
+  const syncedIds = new Set(rows.map(row => row.id));
+  const phrases = {};
+
+  pages.forEach(page => {
+    const id = readPlainProperty(page, PROPERTY_NAMES.id);
+    if (!id || !syncedIds.has(id)) return;
+
+    phrases[id] = {
+      notion_page_id: page.id,
+      last_edited_time: page.last_edited_time
+    };
+  });
+
+  const manifest = {
+    database_id: databaseId,
+    synced_at: new Date().toISOString(),
+    phrases
+  };
+
+  fs.writeFileSync(syncManifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
 async function notionRequest(endpoint, options = {}) {

@@ -1,11 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 const envPath = path.join(rootDir, '.env.local');
-const inputPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.csv');
+const inputPath = path.join(rootDir, 'src', 'data', 'phrases.js');
 
 const NOTION_VERSION = '2022-06-28';
 
@@ -32,7 +32,7 @@ if (!databaseId) {
   throw new Error('Missing NOTION_PHRASES_DATABASE_ID. Add it to .env.local or your shell environment.');
 }
 
-const localRows = readLocalPhraseRows();
+const localRows = await readLocalPhraseRows();
 const duplicateLocalIds = findDuplicateIds(localRows.map(row => row.id));
 if (duplicateLocalIds.length > 0) {
   throw new Error(`Duplicate local phrase IDs found: ${duplicateLocalIds.join(', ')}`);
@@ -94,86 +94,18 @@ function loadEnvLocal() {
   });
 }
 
-function readLocalPhraseRows() {
-  return readCsv(inputPath)
-    .filter(row => row.id)
-    .map(row => ({
-      id: row.id,
-      arabic: row.arabic ?? '',
-      translation: row.translation ?? '',
-      literal: row.literal ?? '',
-      tags: parseTags(row.tags, row.id)
+async function readLocalPhraseRows() {
+  const phrasesModule = await import(`${pathToFileURL(inputPath).href}?${Date.now()}`);
+  const phrases = phrasesModule.default ?? {};
+  return Object.entries(phrases)
+    .filter(([id]) => id)
+    .map(([id, phrase]) => ({
+      id,
+      arabic: phrase.arabic ?? '',
+      translation: phrase.translation ?? '',
+      literal: phrase.literal ?? '',
+      tags: normalizeTags(phrase.tags)
     }));
-}
-
-function readCsv(filePath) {
-  const text = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '').trim();
-  const rows = parseCsv(text);
-  if (rows.length === 0) return [];
-  const headers = rows[0];
-  return rows.slice(1).filter(row => row.some(cell => cell !== '')).map(row => {
-    const record = {};
-    headers.forEach((header, index) => {
-      record[header] = row[index] ?? '';
-    });
-    return record;
-  });
-}
-
-function parseCsv(text) {
-  const rows = [];
-  let row = [];
-  let cell = '';
-  let inQuotes = false;
-
-  for (let index = 0; index < text.length; index += 1) {
-    const char = text[index];
-    const next = text[index + 1];
-
-    if (char === '"') {
-      if (inQuotes && next === '"') {
-        cell += '"';
-        index += 1;
-      } else {
-        inQuotes = !inQuotes;
-      }
-      continue;
-    }
-
-    if (char === ',' && !inQuotes) {
-      row.push(cell);
-      cell = '';
-      continue;
-    }
-
-    if ((char === '\n' || char === '\r') && !inQuotes) {
-      if (char === '\r' && next === '\n') index += 1;
-      row.push(cell);
-      rows.push(row);
-      row = [];
-      cell = '';
-      continue;
-    }
-
-    cell += char;
-  }
-
-  row.push(cell);
-  rows.push(row);
-  return rows;
-}
-
-function parseTags(value, id) {
-  if (!value) return [];
-  try {
-    const parsed = JSON.parse(value);
-    if (!Array.isArray(parsed)) {
-      throw new Error('Tags JSON must be an array.');
-    }
-    return normalizeTags(parsed);
-  } catch (error) {
-    throw new Error(`Invalid tags JSON for phrase "${id}": ${error.message}`);
-  }
 }
 
 function normalizeTags(tags) {

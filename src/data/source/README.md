@@ -1,14 +1,11 @@
 # Data Sources
 
-Only phrases are CSV-backed. App structure is edited directly in `src/data/*.js` for faster local iteration.
+Phrase text now uses a two-source workflow:
 
-For phrase text, **Notion is the canonical editorial source**. Treat `phrases.csv` as a local snapshot/staging file:
+- `src/data/phrases.js` is the local app data file and can be edited directly for fast development.
+- Notion is the shared editorial database for classroom and reviewer corrections.
 
-- Make ordinary phrase edits in Notion.
-- Run the GitHub Pages deploy workflow to build the live app from Notion.
-- Run `npm run sync:notion:phrases` when you want to refresh the committed local snapshot.
-- Use local `phrases.csv` edits only for intentional batch/scripted cleanup.
-- Before pushing local phrase changes back to Notion, run `npm run push:notion:phrases` as a dry run first.
+There is no phrase CSV in the active workflow. `npm run dev` and `npm run build` do not regenerate phrase data, so local edits in `src/data/phrases.js` are not overwritten by normal development or deploy builds.
 
 These files are hand-edited directly so course structure, phrase composition, section order, and audio timings can be adjusted and previewed immediately during development:
 
@@ -17,22 +14,9 @@ These files are hand-edited directly so course structure, phrase composition, se
 - `src/data/segments.js`
 - `src/data/liturgySections.js`
 - `src/data/exercises.js`
-
-After editing `phrases.csv`, regenerate the phrase data module with:
-
-```sh
-npm run generate:data
-```
-
-`npm run dev` and `npm run build` also regenerate phrase data first.
-
-Columns that contain arrays or objects should be valid JSON:
-
-- `phrases.csv`: `tags`
+- `src/data/phrases.js`
 
 ## Notion Sync For Phrases
-
-You can sync `phrases.csv` from the Notion phrases database.
 
 Create a local `.env.local` file:
 
@@ -47,13 +31,21 @@ To check whether Notion and local phrase data differ without writing anything:
 npm run check:notion:phrases
 ```
 
-To pull Notion into local files:
+To pull Notion into `src/data/phrases.js`:
 
 ```sh
 npm run sync:notion:phrases
 ```
 
-To push intentional local batch changes back to Notion, dry-run first:
+If local `src/data/phrases.js` differs from Notion, this command refuses to overwrite it. To intentionally replace local phrase text with Notion data:
+
+```sh
+npm run sync:notion:phrases -- --force
+```
+
+A successful sync writes a local, git-ignored sync manifest at `src/data/source/phrases.sync.json`. The manifest records each Notion phrase page ID and `last_edited_time` so later pushes can detect Notion edits made after your last sync.
+
+To push intentional local phrase edits from `src/data/phrases.js` back to Notion, dry-run first:
 
 ```sh
 npm run push:notion:phrases
@@ -63,6 +55,14 @@ Then apply:
 
 ```sh
 npm run push:notion:phrases -- --apply
+```
+
+Pushes are conflict-aware. If a Notion phrase changed after your last local sync, the push refuses to overwrite it and tells you which phrase IDs are unsafe. In normal use, resolve this by reviewing the local and Notion versions before choosing which one should win.
+
+Only use the force flag when local `src/data/phrases.js` is intentionally authoritative and should overwrite newer Notion edits:
+
+```sh
+npm run push:notion:phrases -- --apply --force
 ```
 
 The Notion database should have these properties:
@@ -77,13 +77,13 @@ The Notion database should have these properties:
 
 ## GitHub Actions
 
-The `Deploy to GitHub Pages` workflow syncs phrases from Notion at build time when Notion secrets are configured, then deploys the app. This is the classroom-friendly workflow:
+The `Deploy to GitHub Pages` workflow intentionally force-syncs phrases from Notion at build time when Notion secrets are configured, then deploys the app. This is the classroom-friendly workflow:
 
 ```text
 Edit Notion -> Run Deploy to GitHub Pages -> Live app updates
 ```
 
-The deploy workflow does not commit generated phrase data. It builds the live app from Notion and leaves Git as the code plus fallback-snapshot repository.
+The deploy workflow does not commit generated phrase data. It builds the live app from Notion and leaves Git as the code plus local phrase snapshot repository.
 
 The `Check Notion Phrase Drift` workflow can compare the committed local phrase snapshot with Notion without writing anything.
 
@@ -94,5 +94,3 @@ Add these repository secrets in GitHub under **Settings > Secrets and variables 
 - Optional: `NOTION_PHRASES_STATUS`
 
 For live classroom corrections, run **Actions > Deploy to GitHub Pages > Run workflow**.
-
-Use local `npm run sync:notion:phrases` occasionally when you want the committed fallback snapshot to catch up with Notion.

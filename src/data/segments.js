@@ -2428,10 +2428,22 @@ const sourceSegments = {
         "phrase_id": "for-thine-might-001"
       },
       {
+        "text": " "
+      },
+      {
+        "phrase_id": "for-thine-kingdom-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "power-and-glory-001"
+      },
+      {
         "text": "، "
       },
       {
-        "phrase_id": "doxology-father-son-spirit-001"
+        "phrase_id": "doxology-of-father-son-spirit-001"
       },
       {
         "text": "، "
@@ -2532,6 +2544,12 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "good-god-lovest-mankind-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "little-litany-ascribe-glory-001"
       },
       {
         "text": "، "

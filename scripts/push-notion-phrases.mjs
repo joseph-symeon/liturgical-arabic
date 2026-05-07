@@ -1,14 +1,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 const envPath = path.join(rootDir, '.env.local');
-const inputPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.csv');
+const inputPath = path.join(rootDir, 'src', 'data', 'phrases.js');
+const syncManifestPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.sync.json');
 
 const NOTION_VERSION = '2022-06-28';
 const APPLY = process.argv.includes('--apply');
+const FORCE = process.argv.includes('--force');
 
 const PROPERTY_NAMES = {
   id: ['ID', 'Id', 'id'],
@@ -33,7 +35,7 @@ if (!databaseId) {
   throw new Error('Missing NOTION_PHRASES_DATABASE_ID. Add it to .env.local or your shell environment.');
 }
 
-const rows = readPhraseRows();
+const rows = await readPhraseRows();
 if (rows.length === 0) {
   throw new Error(`No phrase rows found in ${path.relative(rootDir, inputPath)}.`);
 }
@@ -46,12 +48,21 @@ if (duplicateIds.length > 0) {
 const database = await notionRequest(`/databases/${databaseId}`);
 const schema = resolveSchema(database.properties);
 const pages = await fetchDatabasePages(databaseId);
+const syncManifest = readSyncManifest();
+const nextSyncManifest = createNextSyncManifest(syncManifest);
 const existingPagesById = new Map();
 
 pages.forEach(page => {
   const id = readPlainProperty(page.properties[schema.id.name]);
   if (id) existingPagesById.set(id, page);
 });
+
+const conflicts = findPushConflicts(rows, existingPagesById, schema, syncManifest);
+if (conflicts.length > 0 && !FORCE) {
+  console.error(formatConflictMessage(conflicts));
+  process.exitCode = 1;
+  throw new Error('Refusing to push because Notion has newer phrase edits. Run `npm run sync:notion:phrases` first, or use `-- --apply --force` only if local phrases.js should overwrite Notion.');
+}
 
 let created = 0;
 let updated = 0;
@@ -64,35 +75,43 @@ for (const row of rows) {
   if (!page) {
     created += 1;
     if (APPLY) {
-      await notionRequest('/pages', {
+      const createdPage = await notionRequest('/pages', {
         method: 'POST',
         body: {
           parent: { database_id: databaseId },
           properties
         }
       });
+      recordSyncedPage(nextSyncManifest, row.id, createdPage);
     }
     continue;
   }
 
   if (pageMatchesRow(page, row, schema)) {
     unchanged += 1;
+    recordSyncedPage(nextSyncManifest, row.id, page);
     continue;
   }
 
   updated += 1;
   if (APPLY) {
-    await notionRequest(`/pages/${page.id}`, {
+    const updatedPage = await notionRequest(`/pages/${page.id}`, {
       method: 'PATCH',
       body: { properties }
     });
+    recordSyncedPage(nextSyncManifest, row.id, updatedPage);
   }
+}
+
+if (APPLY) {
+  writeSyncManifest(nextSyncManifest);
 }
 
 const mode = APPLY ? 'Pushed' : 'Dry run';
 console.log(`${mode}: ${created} to create, ${updated} to update, ${unchanged} unchanged.`);
 if (!APPLY) {
   console.log('No Notion changes were made. Run `npm run push:notion:phrases -- --apply` to write these changes.');
+  console.log('If Notion has been edited directly, run `npm run sync:notion:phrases` before applying a push.');
 }
 
 function loadEnvLocal() {
@@ -114,86 +133,110 @@ function loadEnvLocal() {
   });
 }
 
-function readPhraseRows() {
-  return readCsv(inputPath)
-    .filter(row => row.id)
-    .map(row => ({
-      id: row.id,
-      arabic: row.arabic ?? '',
-      translation: row.translation ?? '',
-      literal: row.literal ?? '',
-      tags: parseTags(row.tags, row.id)
+async function readPhraseRows() {
+  const phrasesModule = await import(`${pathToFileURL(inputPath).href}?${Date.now()}`);
+  const phrases = phrasesModule.default ?? {};
+  return Object.entries(phrases)
+    .filter(([id]) => id)
+    .map(([id, phrase]) => ({
+      id,
+      arabic: phrase.arabic ?? '',
+      translation: phrase.translation ?? '',
+      literal: phrase.literal ?? '',
+      tags: normalizeTags(phrase.tags)
     }));
 }
 
-function readCsv(filePath) {
-  const text = fs.readFileSync(filePath, 'utf8').replace(/^\uFEFF/, '').trim();
-  const rows = parseCsv(text);
-  if (rows.length === 0) return [];
-  const headers = rows[0];
-  return rows.slice(1).filter(row => row.some(cell => cell !== '')).map(row => {
-    const record = {};
-    headers.forEach((header, index) => {
-      record[header] = row[index] ?? '';
-    });
-    return record;
+function normalizeTags(tags) {
+  return [...new Set((tags || []).map(tag => String(tag)).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+}
+
+function readSyncManifest() {
+  if (!fs.existsSync(syncManifestPath)) return null;
+
+  try {
+    const manifest = JSON.parse(fs.readFileSync(syncManifestPath, 'utf8'));
+    if (manifest.database_id && manifest.database_id !== databaseId) {
+      throw new Error(
+        `Sync manifest database_id does not match NOTION_PHRASES_DATABASE_ID.\n` +
+        `Manifest: ${manifest.database_id}\n` +
+        `Environment: ${databaseId}`
+      );
+    }
+    return manifest;
+  } catch (error) {
+    throw new Error(`Unable to read ${path.relative(rootDir, syncManifestPath)}: ${error.message}`);
+  }
+}
+
+function createNextSyncManifest(manifest) {
+  return {
+    database_id: databaseId,
+    synced_at: new Date().toISOString(),
+    phrases: { ...(manifest?.phrases ?? {}) }
+  };
+}
+
+function writeSyncManifest(manifest) {
+  fs.writeFileSync(syncManifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+}
+
+function recordSyncedPage(manifest, id, page) {
+  if (!page?.id || !page?.last_edited_time) return;
+  manifest.phrases[id] = {
+    notion_page_id: page.id,
+    last_edited_time: page.last_edited_time
+  };
+}
+
+function getPushConflict(id, page, manifest) {
+  const lastSynced = manifest?.phrases?.[id]?.last_edited_time;
+
+  if (!lastSynced) {
+    return {
+      id,
+      notionLastEdited: page.last_edited_time,
+      localLastSynced: null,
+      reason: 'no local sync timestamp'
+    };
+  }
+
+  if (page.last_edited_time > lastSynced) {
+    return {
+      id,
+      notionLastEdited: page.last_edited_time,
+      localLastSynced: lastSynced,
+      reason: 'Notion changed after last sync'
+    };
+  }
+
+  return null;
+}
+
+function findPushConflicts(rows, existingPagesById, schema, manifest) {
+  return rows.flatMap(row => {
+    const page = existingPagesById.get(row.id);
+    if (!page || pageMatchesRow(page, row, schema)) return [];
+    const conflict = getPushConflict(row.id, page, manifest);
+    return conflict ? [conflict] : [];
   });
 }
 
-function parseCsv(text) {
-  const rows = [];
-  let row = [];
-  let cell = '';
-  let inQuotes = false;
+function formatConflictMessage(conflicts) {
+  const shown = conflicts.slice(0, 20);
+  const lines = [
+    `Refusing to push ${conflicts.length} phrase update(s) because Notion has newer or unsynced data:`,
+    ...shown.map(conflict => {
+      const synced = conflict.localLastSynced ?? 'never';
+      return `- ${conflict.id}: ${conflict.reason}; Notion last edited ${conflict.notionLastEdited}; local last synced ${synced}`;
+    })
+  ];
 
-  for (let index = 0; index < text.length; index += 1) {
-    const char = text[index];
-    const next = text[index + 1];
-
-    if (char === '"') {
-      if (inQuotes && next === '"') {
-        cell += '"';
-        index += 1;
-      } else {
-        inQuotes = !inQuotes;
-      }
-      continue;
-    }
-
-    if (char === ',' && !inQuotes) {
-      row.push(cell);
-      cell = '';
-      continue;
-    }
-
-    if ((char === '\n' || char === '\r') && !inQuotes) {
-      if (char === '\r' && next === '\n') index += 1;
-      row.push(cell);
-      rows.push(row);
-      row = [];
-      cell = '';
-      continue;
-    }
-
-    cell += char;
+  if (conflicts.length > shown.length) {
+    lines.push(`- ...and ${conflicts.length - shown.length} more`);
   }
 
-  row.push(cell);
-  rows.push(row);
-  return rows;
-}
-
-function parseTags(value, id) {
-  if (!value) return [];
-  try {
-    const parsed = JSON.parse(value);
-    if (!Array.isArray(parsed)) {
-      throw new Error('Tags JSON must be an array.');
-    }
-    return parsed.map(tag => String(tag));
-  } catch (error) {
-    throw new Error(`Invalid tags JSON for phrase "${id}": ${error.message}`);
-  }
+  return lines.join('\n');
 }
 
 function findDuplicateIds(ids) {
@@ -294,7 +337,7 @@ function pageMatchesRow(page, row, schema) {
     readPlainProperty(properties[schema.arabic.name]) === row.arabic &&
     readPlainProperty(properties[schema.translation.name]) === row.translation &&
     readPlainProperty(properties[schema.literal.name]) === row.literal &&
-    arraysEqual(readTagsProperty(properties[schema.tags.name]), row.tags)
+    arraysEqual(normalizeTags(readTagsProperty(properties[schema.tags.name])), row.tags)
   );
 }
 

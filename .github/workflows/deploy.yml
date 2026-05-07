@@ -34,7 +34,7 @@ jobs:
           NOTION_PHRASES_STATUS: ${{ secrets.NOTION_PHRASES_STATUS }}
         run: |
           if [ -n "$NOTION_TOKEN" ] && [ -n "$NOTION_PHRASES_DATABASE_ID" ]; then
-            npm run sync:notion:phrases
+            npm run sync:notion:phrases -- --force
           else
             echo "Notion secrets not configured; using committed phrase snapshot."
           fi
