@@ -26,6 +26,248 @@
   margin-bottom: 32px;
 }
 
+.lp-activity-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 14px;
+  color: #57534e;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.lp-activity-kind {
+  border: 1px solid #d6d3d1;
+  border-radius: 999px;
+  padding: 2px 8px;
+  background: #fafaf9;
+  color: #44403c;
+  font-weight: 600;
+}
+
+.lp-activity-title {
+  color: #78716c;
+}
+
+.lp-sequence-activity {
+  display: grid;
+  gap: 18px;
+}
+
+.lp-sequence-step {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid #e7e5e4;
+  padding-top: 14px;
+}
+
+.lp-sequence-step:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.lp-sequence-step-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #57534e;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.lp-sequence-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  border: 1px solid #d6d3d1;
+  border-radius: 999px;
+  background: #fafaf9;
+  color: #44403c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.lp-sequence-step-title {
+  font-weight: 600;
+}
+
+.lp-sequence-step-review {
+  border-top-color: #d6d3d1;
+}
+
+.lp-recall-activity {
+  display: grid;
+  gap: 14px;
+}
+
+.lp-recall-prompt {
+  display: grid;
+  gap: 6px;
+  max-width: 560px;
+  color: #44403c;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.lp-recall-prompt-line {
+  border-left: 3px solid #d6d3d1;
+  padding-left: 10px;
+}
+
+.lp-recall-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lp-recall-button {
+  border: 1px solid #d6d3d1;
+  border-radius: 6px;
+  background: #fff;
+  color: #44403c;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.2;
+  padding: 8px 10px;
+}
+
+.lp-recall-button:hover,
+.lp-recall-button.active {
+  background: #f5f5f4;
+}
+
+.lp-recall-reveal {
+  border-top: 1px solid #e7e5e4;
+  padding-top: 10px;
+}
+
+.lp-cloze-activity {
+  display: grid;
+  gap: 14px;
+}
+
+.lp-cloze-prompt {
+  color: #57534e;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.lp-cloze-lines {
+  display: grid;
+  gap: 8px;
+  text-align: right;
+}
+
+.lp-cloze-line {
+  color: #1c1917;
+  line-height: 2.2;
+}
+
+.lp-cloze-blank {
+  display: inline-block;
+  width: min(8em, 42vw);
+  margin: 0 0.18em;
+  border-bottom: 2px solid #a8a29e;
+  transform: translateY(0.18em);
+}
+
+.lp-cloze-answer {
+  color: #9f1239;
+  font-weight: 500;
+}
+
+.lp-cloze-filled {
+  display: inline-block;
+  margin: 0 0.18em;
+  border: 1px solid #d6d3d1;
+  border-radius: 6px;
+  background: #fafaf9;
+  color: #9f1239;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.7;
+  padding: 0 0.35em;
+}
+
+.lp-arrange-bank {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.lp-arrange-tile {
+  border: 1px solid #d6d3d1;
+  border-radius: 6px;
+  background: #fff;
+  color: #1c1917;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 6px 10px;
+}
+
+.lp-arrange-tile:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.lp-arrange-result {
+  color: #7c2d12;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.lp-arrange-result.correct {
+  color: #166534;
+}
+
+.lp-arrange-result.incorrect {
+  color: #9f1239;
+}
+
+.lp-synced-caption-activity {
+  display: grid;
+  gap: 16px;
+}
+
+.lp-synced-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  padding: 32px 0;
+  text-align: center;
+}
+
+.lp-synced-line {
+  max-width: 100%;
+  opacity: 0;
+  transition: opacity 90ms ease, transform 90ms ease;
+}
+
+.lp-synced-line.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.lp-synced-arabic {
+  color: #fff;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 500;
+  line-height: 1.35;
+  text-shadow:
+    -1px -1px 0 rgba(17, 17, 17, 0.78),
+    1px -1px 0 rgba(17, 17, 17, 0.78),
+    -1px 1px 0 rgba(17, 17, 17, 0.78),
+    1px 1px 0 rgba(17, 17, 17, 0.78),
+    0 3px 8px rgba(0, 0, 0, 0.28);
+}
+
 .lp-exercise-title {
   font-size: 17px;
   font-weight: 600;

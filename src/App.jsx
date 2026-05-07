@@ -4,7 +4,7 @@ import CourseOverview from "./components/course/CourseOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
 import InteractiveText from "./components/InteractiveText.jsx";
 import PhraseTooltip from "./components/PhraseTooltip.jsx";
-import liturgySections from "./data/liturgySections.js";
+import { defaultServiceText } from "./data/serviceTexts.js";
 import phrases from "./data/phrases.js";
 import units from "./data/units.js";
 import lessons from "./data/lessons.js";
@@ -76,6 +76,7 @@ const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
     .sort((a, b) => a.display_order - b.display_order)
 );
 const DEFAULT_LESSON_ID = COURSE_LESSONS[0]?.id ?? lessons[0]?.id ?? null;
+const readerSections = defaultServiceText.sections;
 
 function hasMultipleExercises(lesson) {
   return (lesson?.exercises?.length ?? 0) > 1;
@@ -95,7 +96,7 @@ function parseNavigationHash() {
   }
   if (hash.startsWith("reader/section/")) {
     const sectionIndex = Number(hash.replace("reader/section/", ""));
-    if (Number.isInteger(sectionIndex) && sectionIndex >= 0 && sectionIndex < liturgySections.length) {
+    if (Number.isInteger(sectionIndex) && sectionIndex >= 0 && sectionIndex < readerSections.length) {
       return { view: "reader", selectedSectionIndex: sectionIndex, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
     }
   }
@@ -272,7 +273,7 @@ export default function App() {
   }
 
   function goToNextSection() {
-    setSelectedSectionIndex(index => (index === null ? 0 : Math.min(liturgySections.length - 1, index + 1)));
+    setSelectedSectionIndex(index => (index === null ? 0 : Math.min(readerSections.length - 1, index + 1)));
     setView("reader");
   }
 
@@ -348,12 +349,12 @@ export default function App() {
   }, [view, selectedExerciseIndex, clampedExerciseIndex]);
 
   const hasPreviousSection = selectedSectionIndex !== null && selectedSectionIndex > 0;
-  const hasNextSection = selectedSectionIndex === null || selectedSectionIndex < liturgySections.length - 1;
-  const previousSectionTitle = hasPreviousSection ? liturgySections[selectedSectionIndex - 1]?.section : null;
+  const hasNextSection = selectedSectionIndex === null || selectedSectionIndex < readerSections.length - 1;
+  const previousSectionTitle = hasPreviousSection ? readerSections[selectedSectionIndex - 1]?.section : null;
   const nextSectionTitle = hasNextSection
-    ? liturgySections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
+    ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
-  const selectedLiturgySection = selectedSectionIndex === null ? null : liturgySections[selectedSectionIndex];
+  const selectedLiturgySection = selectedSectionIndex === null ? null : readerSections[selectedSectionIndex];
   const compactPageTitle =
     view === "reader"
       ? (selectedLiturgySection?.section ?? "Table of Contents")
@@ -372,7 +373,7 @@ export default function App() {
     !menuOpen &&
     !displayMenuOpen &&
     Boolean(compactPageTitle);
-  const liturgyMenuItems = liturgySections.reduce((items, section, sectionIndex) => {
+  const liturgyMenuItems = readerSections.reduce((items, section, sectionIndex) => {
     if (!section.section_group) {
       items.push({ type: "section", section, sectionIndex });
       return items;

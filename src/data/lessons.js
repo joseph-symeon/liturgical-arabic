@@ -149,6 +149,106 @@ const lessons = [
     ]
   },
   {
+    "id": "lesson-caption-poc-glory",
+    "unit_id": "unit-1",
+    "title": "Caption POC: Glory. Both now.",
+    "title_phrase": "glory-001",
+    "display_order": 3.1,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "caption-poc-glory-beginner"
+      },
+      {
+        "exercise_id": "caption-poc-both-now-beginner"
+      },
+      {
+        "exercise_id": "caption-poc-glory-both-now-beginner"
+      }
+    ]
+  },
+  {
+    "id": "lesson-caption-poc-thrice-holy",
+    "unit_id": "unit-1",
+    "title": "Caption POC: Thrice Holy Hymn",
+    "title_phrase": "section-trisagion-hymn",
+    "display_order": 4.1,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "caption-poc-trisagion-hymn-core"
+      }
+    ]
+  },
+  {
+    "id": "lesson-activity-demo-listen-repeat",
+    "unit_id": "unit-1",
+    "title": "Activity Demo: Listen & Repeat",
+    "title_phrase": "section-trisagion-hymn",
+    "display_order": 4.2,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "activity-demo-listen-repeat-holy-god"
+      }
+    ]
+  },
+  {
+    "id": "lesson-activity-demo-listen-recall",
+    "unit_id": "unit-1",
+    "title": "Activity Demo: Listen & Recall",
+    "title_phrase": "section-trisagion-hymn",
+    "display_order": 4.3,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "activity-demo-listen-recall-holy-god"
+      }
+    ]
+  },
+  {
+    "id": "lesson-activity-demo-cloze",
+    "unit_id": "unit-1",
+    "title": "Activity Demo: Arrange",
+    "title_phrase": "section-trisagion-hymn",
+    "display_order": 4.4,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "activity-demo-cloze-holy-god"
+      }
+    ]
+  },
+  {
+    "id": "lesson-activity-demo-synced-caption",
+    "unit_id": "unit-1",
+    "title": "Activity Demo: Synced Caption",
+    "title_phrase": "section-trisagion-hymn",
+    "display_order": 4.5,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "activity-demo-synced-caption-holy-god"
+      },
+      {
+        "exercise_id": "activity-demo-synced-caption-all-holy-trinity"
+      }
+    ]
+  },
+  {
+    "id": "lesson-activity-demo-sequence",
+    "unit_id": "unit-1",
+    "title": "Activity Demo: Step Practice",
+    "title_phrase": "all-holy-trinity-001",
+    "display_order": 6.1,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "activity-demo-all-holy-trinity-sequence"
+      }
+    ]
+  },
+  {
     "id": "lesson-little-litanies",
     "unit_id": "unit-2",
     "title": "Little Litanies",
@@ -243,6 +343,31 @@ const lessons = [
       },
       {
         "exercise_id": "all-holy-trinity"
+      }
+    ]
+  },
+  {
+    "id": "lesson-caption-poc-all-holy-trinity",
+    "unit_id": "unit-1",
+    "title": "Caption POC: All Holy Trinity",
+    "title_phrase": "all-holy-trinity-001",
+    "display_order": 6,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "caption-poc-all-holy-trinity-address"
+      },
+      {
+        "exercise_id": "caption-poc-all-holy-trinity-lord"
+      },
+      {
+        "exercise_id": "caption-poc-all-holy-trinity-master"
+      },
+      {
+        "exercise_id": "caption-poc-all-holy-trinity-holy-one"
+      },
+      {
+        "exercise_id": "caption-poc-all-holy-trinity"
       }
     ]
   }

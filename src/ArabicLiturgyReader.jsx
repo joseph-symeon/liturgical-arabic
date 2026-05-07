@@ -1,5 +1,5 @@
 import React from "react";
-import liturgySections from "./data/liturgySections.js";
+import { defaultServiceText } from "./data/serviceTexts.js";
 import phrases from "./data/phrases.js";
 import segments from "./data/segments.js";
 import SpeakerBlock from "./components/SpeakerBlock.jsx";
@@ -7,6 +7,7 @@ import PageHeader from "./components/PageHeader.jsx";
 import { getArabicText } from "./utils/arabic.js";
 
 const h = React.createElement;
+const readerSections = defaultServiceText.sections;
 
 export default function ArabicLiturgyReader({
   arabicMode = "vocalized",
@@ -27,7 +28,7 @@ export default function ArabicLiturgyReader({
   onSelectSection
 }) {
   const isTableOfContents = selectedSectionIndex === null;
-  const selectedSection = isTableOfContents ? null : liturgySections[selectedSectionIndex] || liturgySections[0];
+  const selectedSection = isTableOfContents ? null : readerSections[selectedSectionIndex] || readerSections[0];
   const selectedSectionSegments = selectedSection
     ? selectedSection.segment_ids.map(segmentId => segments[segmentId]).filter(Boolean)
       .filter(segment => showQuietPrayers || !segment.tags?.includes("quiet"))
@@ -97,7 +98,7 @@ export default function ArabicLiturgyReader({
 
   function renderTableOfContents() {
     const items = [];
-    liturgySections.forEach(function collectSection(section, sectionIndex) {
+    readerSections.forEach(function collectSection(section, sectionIndex) {
       if (!section.section_group) {
         items.push({ type: "section", section, sectionIndex });
         return;

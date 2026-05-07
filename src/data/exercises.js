@@ -2,6 +2,11 @@
 // This file is not generated from CSV.
 
 import segments from './segments.js';
+import phrases from './phrases.js';
+import captionTracks from './captionTracks.js';
+import alignments from './alignments.js';
+import activities from './activities.js';
+import { deriveCaptionClip } from '../utils/captionClips.js';
 
 export const exerciseDefinitions = [
   {
@@ -552,6 +557,42 @@ export const exerciseDefinitions = [
     }
   },
   {
+    "id": "caption-poc-glory-beginner",
+    "activity_id": "activity-caption-poc-glory-beginner"
+  },
+  {
+    "id": "caption-poc-both-now-beginner",
+    "activity_id": "activity-caption-poc-both-now-beginner"
+  },
+  {
+    "id": "caption-poc-glory-both-now-beginner",
+    "activity_id": "activity-caption-poc-glory-both-now-beginner"
+  },
+  {
+    "id": "caption-poc-trisagion-hymn-core",
+    "activity_id": "activity-caption-poc-trisagion-hymn-core"
+  },
+  {
+    "id": "activity-demo-listen-repeat-holy-god",
+    "activity_id": "activity-demo-listen-repeat-holy-god"
+  },
+  {
+    "id": "activity-demo-listen-recall-holy-god",
+    "activity_id": "activity-demo-listen-recall-holy-god"
+  },
+  {
+    "id": "activity-demo-cloze-holy-god",
+    "activity_id": "activity-demo-cloze-holy-god"
+  },
+  {
+    "id": "activity-demo-synced-caption-holy-god",
+    "activity_id": "activity-demo-synced-caption-holy-god"
+  },
+  {
+    "id": "activity-demo-synced-caption-all-holy-trinity",
+    "activity_id": "activity-demo-synced-caption-all-holy-trinity"
+  },
+  {
     "id": "all-holy-trinity-address",
     "segment_ids": [
       "course-all-holy-trinity-address"
@@ -613,24 +654,88 @@ export const exerciseDefinitions = [
       "end_seconds": 33.5,
       "default_playback_rate": 1
     }
+  },
+  {
+    "id": "caption-poc-all-holy-trinity-address",
+    "activity_id": "activity-caption-poc-all-holy-trinity-address"
+  },
+  {
+    "id": "caption-poc-all-holy-trinity-lord",
+    "activity_id": "activity-caption-poc-all-holy-trinity-lord"
+  },
+  {
+    "id": "caption-poc-all-holy-trinity-master",
+    "activity_id": "activity-caption-poc-all-holy-trinity-master"
+  },
+  {
+    "id": "caption-poc-all-holy-trinity-holy-one",
+    "activity_id": "activity-caption-poc-all-holy-trinity-holy-one"
+  },
+  {
+    "id": "caption-poc-all-holy-trinity",
+    "activity_id": "activity-caption-poc-all-holy-trinity"
+  },
+  {
+    "id": "activity-demo-all-holy-trinity-sequence",
+    "activity_id": "activity-demo-all-holy-trinity-sequence"
   }
 ];
 
 export function resolveExercise(definition, segmentsMap = segments) {
-  const selectedSegments = definition.segment_ids
-    .map(segmentId => segmentsMap[segmentId])
-    .filter(Boolean);
+  const activity = definition.activity_id ? activities[definition.activity_id] : null;
+  const segmentIds = definition.segment_ids || activity?.target?.segment_ids || [];
+  const captionClip = definition.caption_clip || (
+    activity?.media
+      ? {
+          recording_id: activity.media.recording_id,
+          alignment_id: activity.media.alignment_id,
+          default_playback_rate: activity.media.default_playback_rate
+        }
+      : null
+  );
+  const resolvedDefinition = {
+    ...definition,
+    activity,
+    segment_ids: segmentIds,
+    caption_clip: captionClip
+  };
 
-  const lines = selectedSegments
-    .map((segment, index) => ({
-      ...segment,
-      segment_id: definition.segment_ids[index],
-      line_order: index + 1,
-      phrases: segment.phrases.map(part => ({ ...part }))
-    }));
+  function getLinesForSegmentIds(ids) {
+    return ids
+      .map(segmentId => segmentsMap[segmentId])
+      .filter(Boolean)
+      .map((segment, index) => ({
+        ...segment,
+        segment_id: ids[index],
+        line_order: index + 1,
+        phrases: segment.phrases.map(part => ({ ...part }))
+      }));
+  }
+
+  function getAudioClipForSegmentIds(ids) {
+    return deriveCaptionClip(
+      { ...resolvedDefinition, segment_ids: ids },
+      phrases,
+      segmentsMap,
+      captionTracks,
+      alignments
+    );
+  }
+
+  const lines = getLinesForSegmentIds(segmentIds);
+  const activitySteps = activity?.steps?.map((step, index) => ({
+    ...step,
+    step_order: index + 1,
+    lines: getLinesForSegmentIds(step.segment_ids),
+    audio_clip: getAudioClipForSegmentIds(step.segment_ids)
+  })) || [];
+
+  const audioClip = definition.audio_clip || deriveCaptionClip(resolvedDefinition, phrases, segmentsMap, captionTracks, alignments);
 
   return {
-    ...definition,
+    ...resolvedDefinition,
+    audio_clip: audioClip,
+    activity_steps: activitySteps,
     lines
   };
 }

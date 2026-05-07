@@ -1,6 +1,6 @@
 import phrases from "../data/phrases.js";
 import segments from "../data/segments.js";
-import liturgySections from "../data/liturgySections.js";
+import { defaultServiceText } from "../data/serviceTexts.js";
 import { validateData } from "./dataValidation.js";
 import {
   safeString,
@@ -26,6 +26,7 @@ export function runTests() {
   const uniquePhraseIds = new Set(phraseIds);
   const flashcardCsv = buildFlashcardCsv(cards);
   const annotationCsv = buildAnnotationsCsv(cards);
+  const readerSections = defaultServiceText.sections;
 
   console.assert(stripArabicDiacritics("بِسَلامٍ") === "بسلام", "Should strip Arabic diacritics.");
   console.assert(csvEscape('He said "test"') === '"He said ""test"""', "Should escape CSV quotes.");
@@ -49,14 +50,15 @@ export function runTests() {
     "Line-by-line view should split grouped verses into logical phrase parts."
   );
   console.assert(
-    liturgySections.some(function hasSecondAntiphon(section) { return section.section === "The Second Antiphon"; }),
+    readerSections.some(function hasSecondAntiphon(section) { return section.section === "The Second Antiphon"; }),
     "Reader should include a Second Antiphon section."
   );
   console.assert(
-    liturgySections.find(function findSecondAntiphon(section) { return section.section === "The Second Antiphon"; }).segment_ids.length === 16,
+    readerSections.find(function findSecondAntiphon(section) { return section.section === "The Second Antiphon"; }).segment_ids.length === 16,
     "The Second Antiphon should have 16 segments."
   );
-  console.assert(liturgySections[0].section === "The Preparation for the Divine Liturgy", "First reader section should be titled The Preparation for the Divine Liturgy.");
+  console.assert(readerSections[0].section === "The Preparation for the Divine Liturgy", "First reader section should be titled The Preparation for the Divine Liturgy.");
+  console.assert(defaultServiceText.id === "divine-liturgy-john-chrysostom", "Default service text should be the Divine Liturgy.");
   console.assert(flashcardCsv.startsWith('"front","back"'), "CSV should include a flashcard header row.");
   console.assert(annotationCsv.startsWith('"id","arabic"'), "Phrases CSV should include database headers.");
   console.assert(annotationCsv.includes("\n"), "Phrases CSV should contain newline-separated rows.");

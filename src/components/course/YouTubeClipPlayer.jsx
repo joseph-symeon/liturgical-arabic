@@ -3,7 +3,7 @@ import { onYouTubeReady } from '../../utils/youtube.js';
 
 let playerCount = 0;
 
-export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, defaultPlaybackRate = 1.0 }) {
+export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, defaultPlaybackRate = 1.0, onTimeUpdate }) {
   const playerIdRef = useRef(null);
   if (playerIdRef.current === null) {
     playerIdRef.current = `yt-clip-${++playerCount}`;
@@ -13,9 +13,12 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
   const playerRef = useRef(null);
   const playerHostRef = useRef(null);
   const intervalRef = useRef(null);
+  const endTimerRef = useRef(null);
   const playbackRateRef = useRef(defaultPlaybackRate);
   const userStartedRef = useRef(false);
   const loopEnabledRef = useRef(true);
+  const playClockRef = useRef({ mediaTime: startSeconds, wallTime: 0, playbackRate: defaultPlaybackRate });
+  const playRequestedRef = useRef(false);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
@@ -24,21 +27,57 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
   const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
   const [playerError, setPlayerError] = useState(null);
 
+  function clearEndTimer() {
+    if (endTimerRef.current) {
+      clearTimeout(endTimerRef.current);
+      endTimerRef.current = null;
+    }
+  }
+
+  function finishClip(player) {
+    if (!player) return;
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    clearEndTimer();
+    if (!loopEnabledRef.current) {
+      player.pauseVideo();
+      player.seekTo(startSeconds, true);
+      playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+      onTimeUpdate?.(startSeconds);
+      return;
+    }
+    player.seekTo(startSeconds, true);
+    playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+    onTimeUpdate?.(startSeconds);
+    endTimerRef.current = setTimeout(() => {
+      startLoop(player);
+    }, 180);
+  }
+
   function startLoop(player) {
     if (intervalRef.current) clearInterval(intervalRef.current);
+    clearEndTimer();
+    const currentTime = player.getCurrentTime();
+    if (!playRequestedRef.current) {
+      playClockRef.current = { mediaTime: currentTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+    }
+    const remainingSeconds = Math.max(0, endSeconds - currentTime);
+    const playbackRate = playbackRateRef.current || 1;
+    endTimerRef.current = setTimeout(() => {
+      finishClip(player);
+    }, Math.max(0, (remainingSeconds / playbackRate) * 1000 - 80));
     intervalRef.current = setInterval(() => {
       if (!player) return;
-      const absoluteTime = player.getCurrentTime();
-      if (absoluteTime >= endSeconds) {
-        if (!loopEnabledRef.current) {
-          player.pauseVideo();
-          player.seekTo(startSeconds, true);
-          return;
-        }
-        player.seekTo(startSeconds, true);
+      const clock = playClockRef.current;
+      const estimatedTime = clock.mediaTime + ((performance.now() - clock.wallTime) / 1000) * clock.playbackRate;
+      onTimeUpdate?.(estimatedTime);
+      if (estimatedTime >= endSeconds) {
+        finishClip(player);
         return;
       }
-    }, 100);
+    }, 40);
   }
 
   useEffect(() => {
@@ -79,6 +118,7 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
               playerRef.current = event.target;
               event.target.seekTo(startSeconds, true);
               event.target.setPlaybackRate(playbackRateRef.current);
+              playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
               setIsReady(true);
             },
             onStateChange(event) {
@@ -88,6 +128,7 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
                 if (!userStartedRef.current) {
                   event.target.pauseVideo();
                   event.target.seekTo(startSeconds, true);
+                  playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
                   setIsPlaying(false);
                   return;
                 }
@@ -102,6 +143,7 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
                   clearInterval(intervalRef.current);
                   intervalRef.current = null;
                 }
+                clearEndTimer();
               }
             }
           }
@@ -117,6 +159,7 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
+      clearEndTimer();
       if (playerRef.current) {
         try { playerRef.current.destroy(); } catch (_) {}
         playerRef.current = null;
@@ -142,13 +185,21 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
     if (!player || !isReady) return;
     const state = player.getPlayerState();
     if (state === window.YT.PlayerState.PLAYING) {
+      playRequestedRef.current = false;
       player.pauseVideo();
     } else {
       const currentTime = player.getCurrentTime();
       userStartedRef.current = true;
+      playRequestedRef.current = true;
       if (currentTime < startSeconds || currentTime >= endSeconds) {
         player.seekTo(startSeconds, true);
+        playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+        onTimeUpdate?.(startSeconds);
+      } else {
+        playClockRef.current = { mediaTime: currentTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+        onTimeUpdate?.(currentTime);
       }
+      startLoop(player);
       player.playVideo();
     }
   }
@@ -156,6 +207,11 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
   function adjustSpeed(delta) {
     const next = Math.max(0.5, Math.min(2, Math.round((playbackRateRef.current + delta) * 10) / 10));
     playbackRateRef.current = next;
+    playClockRef.current = {
+      mediaTime: playerRef.current?.getCurrentTime?.() ?? playClockRef.current.mediaTime,
+      wallTime: performance.now(),
+      playbackRate: next
+    };
     setPlaybackRate(next);
     if (playerRef.current) {
       playerRef.current.setPlaybackRate(next);

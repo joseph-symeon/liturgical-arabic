@@ -12,7 +12,10 @@ These files are hand-edited directly so course structure, phrase composition, se
 - `src/data/units.js`
 - `src/data/lessons.js`
 - `src/data/segments.js`
-- `src/data/liturgySections.js`
+- `src/data/serviceTexts.js`
+- `src/data/recordings.js`
+- `src/data/alignments.js`
+- `src/data/activities.js`
 - `src/data/exercises.js`
 - `src/data/phrases.js`
 
