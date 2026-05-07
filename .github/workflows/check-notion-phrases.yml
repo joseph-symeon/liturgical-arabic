@@ -20,7 +20,7 @@ jobs:
       - run: npm ci
 
       - name: Check phrases against Notion
-        run: npm run check:notion:phrases
+        run: npm run phrases:check
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_PHRASES_DATABASE_ID: ${{ secrets.NOTION_PHRASES_DATABASE_ID }}

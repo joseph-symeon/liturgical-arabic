@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check:notion:phrases": "node scripts/check-notion-phrases.mjs",
-    "sync:notion:phrases": "node scripts/sync-notion-phrases.mjs",
-    "push:notion:phrases": "node scripts/push-notion-phrases.mjs",
+    "phrases:check": "node scripts/check-notion-phrases.mjs",
+    "phrases:check:pull": "node scripts/sync-notion-phrases.mjs --check",
+    "phrases:check:push": "node scripts/push-notion-phrases.mjs",
+    "phrases:pull": "node scripts/sync-notion-phrases.mjs --force",
+    "phrases:push": "node scripts/push-notion-phrases.mjs --apply",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

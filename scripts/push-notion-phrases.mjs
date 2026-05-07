@@ -10,7 +10,6 @@ const syncManifestPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.sy
 
 const NOTION_VERSION = '2022-06-28';
 const APPLY = process.argv.includes('--apply');
-const FORCE = process.argv.includes('--force');
 
 const PROPERTY_NAMES = {
   id: ['ID', 'Id', 'id'],
@@ -51,6 +50,7 @@ const pages = await fetchDatabasePages(databaseId);
 const syncManifest = readSyncManifest();
 const nextSyncManifest = createNextSyncManifest(syncManifest);
 const existingPagesById = new Map();
+const localIds = new Set(rows.map(row => row.id));
 
 pages.forEach(page => {
   const id = readPlainProperty(page.properties[schema.id.name]);
@@ -58,22 +58,20 @@ pages.forEach(page => {
 });
 
 const conflicts = findPushConflicts(rows, existingPagesById, schema, syncManifest);
-if (conflicts.length > 0 && !FORCE) {
-  console.error(formatConflictMessage(conflicts));
-  process.exitCode = 1;
-  throw new Error('Refusing to push because Notion has newer phrase edits. Run `npm run sync:notion:phrases` first, or use `-- --apply --force` only if local phrases.js should overwrite Notion.');
-}
 
-let created = 0;
-let updated = 0;
-let unchanged = 0;
+const plan = {
+  created: [],
+  updated: [],
+  archived: [],
+  unchanged: []
+};
 
 for (const row of rows) {
   const page = existingPagesById.get(row.id);
   const properties = buildPhraseProperties(row, schema, Boolean(page));
 
   if (!page) {
-    created += 1;
+    plan.created.push(row.id);
     if (APPLY) {
       const createdPage = await notionRequest('/pages', {
         method: 'POST',
@@ -88,12 +86,12 @@ for (const row of rows) {
   }
 
   if (pageMatchesRow(page, row, schema)) {
-    unchanged += 1;
+    plan.unchanged.push(row.id);
     recordSyncedPage(nextSyncManifest, row.id, page);
     continue;
   }
 
-  updated += 1;
+  plan.updated.push(row.id);
   if (APPLY) {
     const updatedPage = await notionRequest(`/pages/${page.id}`, {
       method: 'PATCH',
@@ -103,15 +101,35 @@ for (const row of rows) {
   }
 }
 
+for (const [id, page] of existingPagesById.entries()) {
+  if (localIds.has(id)) continue;
+
+  plan.archived.push(id);
+  if (APPLY) {
+    await notionRequest(`/pages/${page.id}`, {
+      method: 'PATCH',
+      body: { archived: true }
+    });
+    delete nextSyncManifest.phrases[id];
+  }
+}
+
+if (conflicts.length > 0 && APPLY) {
+  console.log(formatConflictWarning(conflicts, 'apply'));
+}
+
 if (APPLY) {
   writeSyncManifest(nextSyncManifest);
 }
 
-const mode = APPLY ? 'Pushed' : 'Dry run';
-console.log(`${mode}: ${created} to create, ${updated} to update, ${unchanged} unchanged.`);
+console.log(formatPushPlan(plan, APPLY));
 if (!APPLY) {
-  console.log('No Notion changes were made. Run `npm run push:notion:phrases -- --apply` to write these changes.');
-  console.log('If Notion has been edited directly, run `npm run sync:notion:phrases` before applying a push.');
+  if (conflicts.length > 0) {
+    console.log(formatConflictWarning(conflicts, 'check'));
+  }
+  console.log('No Notion changes were made. Run `npm run phrases:push` to write these changes.');
+  console.log('Notion rows that do not exist in local phrases.js will be archived, not permanently deleted.');
+  console.log('If Notion has been edited directly, run `npm run phrases:check:pull` before applying a push.');
 }
 
 function loadEnvLocal() {
@@ -222,18 +240,61 @@ function findPushConflicts(rows, existingPagesById, schema, manifest) {
   });
 }
 
-function formatConflictMessage(conflicts) {
+function formatPushPlan(plan, apply) {
+  const lines = [
+    apply
+      ? 'Push complete: local phrases.js has been written to Notion.'
+      : 'Push check: local phrases.js would be written to Notion.',
+    `- Local phrase IDs that would be created in Notion: ${plan.created.length}`,
+    `- Local phrase IDs that would update Notion: ${plan.updated.length}`,
+    `- Notion phrase IDs that would be archived: ${plan.archived.length}`,
+    `- Phrase IDs already matching: ${plan.unchanged.length}`
+  ];
+
+  appendIdList(lines, 'Create in Notion', plan.created);
+  appendIdList(lines, 'Update in Notion', plan.updated);
+  appendIdList(lines, 'Archive in Notion', plan.archived);
+
+  if (!apply) {
+    lines.push('No Notion changes were made.');
+  }
+
+  return lines.join('\n');
+}
+
+function appendIdList(lines, label, ids) {
+  if (ids.length === 0) return;
+
+  lines.push(`${label}:`);
+  ids.slice(0, 20).forEach(id => lines.push(`  - ${id}`));
+  if (ids.length > 20) {
+    lines.push(`  - ...and ${ids.length - 20} more`);
+  }
+}
+
+function formatConflictWarning(conflicts, mode) {
   const shown = conflicts.slice(0, 20);
   const lines = [
-    `Refusing to push ${conflicts.length} phrase update(s) because Notion has newer or unsynced data:`,
+    mode === 'apply'
+      ? `Warning: overwrote ${conflicts.length} newer or unsynced Notion update(s) because local phrases.js was pushed:`
+      : `Warning: ${conflicts.length} update(s) would overwrite newer or unsynced Notion data:`,
     ...shown.map(conflict => {
       const synced = conflict.localLastSynced ?? 'never';
-      return `- ${conflict.id}: ${conflict.reason}; Notion last edited ${conflict.notionLastEdited}; local last synced ${synced}`;
+      return [
+        `- ${conflict.id}`,
+        `  reason: ${conflict.reason}`,
+        `  Notion last edited: ${conflict.notionLastEdited}`,
+        `  Local last synced:  ${synced}`
+      ].join('\n');
     })
   ];
 
   if (conflicts.length > shown.length) {
     lines.push(`- ...and ${conflicts.length - shown.length} more`);
+  }
+
+  if (mode === 'check') {
+    lines.push('Run `npm run phrases:push` only if local phrases.js should overwrite those Notion edits.');
   }
 
   return lines.join('\n');

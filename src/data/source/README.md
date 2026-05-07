@@ -25,45 +25,65 @@ NOTION_TOKEN=secret_your_notion_integration_token
 NOTION_PHRASES_DATABASE_ID=your_notion_phrases_database_id
 ```
 
-To check whether Notion and local phrase data differ without writing anything:
+### Command Reference
+
+Use these commands to keep local `src/data/phrases.js` and Notion in sync.
 
 ```sh
-npm run check:notion:phrases
+npm run phrases:check
 ```
 
-To pull Notion into `src/data/phrases.js`:
+Read-only drift report. Shows phrase IDs that are missing or changed between local and Notion. It does not describe which direction would win.
 
 ```sh
-npm run sync:notion:phrases
+npm run phrases:check:pull
 ```
 
-If local `src/data/phrases.js` differs from Notion, this command refuses to overwrite it. To intentionally replace local phrase text with Notion data:
+Read-only pull preview. Shows what would change locally if Notion replaced `src/data/phrases.js`.
 
 ```sh
-npm run sync:notion:phrases -- --force
+npm run phrases:pull
+```
+
+Pull from Notion. Notion wins and replaces local `src/data/phrases.js`.
+
+```sh
+npm run phrases:check:push
+```
+
+Read-only push preview. Shows what would be created, updated, or archived in Notion if local `src/data/phrases.js` won. If Notion has newer edits, this prints a warning but still writes nothing.
+
+```sh
+npm run phrases:push
+```
+
+Push to Notion. Local `src/data/phrases.js` wins. Notion rows that do not exist locally are archived, not permanently deleted. If Notion has newer edits, the command prints a warning and then overwrites them with local phrase data.
+
+### Typical Rhythms
+
+At the start of a coding session:
+
+```sh
+git pull
+npm run phrases:pull
+```
+
+Before pushing local phrase edits to Notion:
+
+```sh
+npm run phrases:check:push
+npm run phrases:push
+```
+
+If you are unsure which side has changes:
+
+```sh
+npm run phrases:check
+npm run phrases:check:pull
+npm run phrases:check:push
 ```
 
 A successful sync writes a local, git-ignored sync manifest at `src/data/source/phrases.sync.json`. The manifest records each Notion phrase page ID and `last_edited_time` so later pushes can detect Notion edits made after your last sync.
-
-To push intentional local phrase edits from `src/data/phrases.js` back to Notion, dry-run first:
-
-```sh
-npm run push:notion:phrases
-```
-
-Then apply:
-
-```sh
-npm run push:notion:phrases -- --apply
-```
-
-Pushes are conflict-aware. If a Notion phrase changed after your last local sync, the push refuses to overwrite it and tells you which phrase IDs are unsafe. In normal use, resolve this by reviewing the local and Notion versions before choosing which one should win.
-
-Only use the force flag when local `src/data/phrases.js` is intentionally authoritative and should overwrite newer Notion edits:
-
-```sh
-npm run push:notion:phrases -- --apply --force
-```
 
 The Notion database should have these properties:
 

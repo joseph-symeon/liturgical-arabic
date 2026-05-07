@@ -10,6 +10,7 @@ const syncManifestPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.sy
 
 const NOTION_VERSION = '2022-06-28';
 const FORCE = process.argv.includes('--force');
+const CHECK = process.argv.includes('--check');
 
 const PROPERTY_NAMES = {
   id: ['ID', 'Id', 'id'],
@@ -52,10 +53,15 @@ if (rows.length === 0) {
 
 const localRows = fs.existsSync(outputPath) ? await readLocalPhraseRows() : [];
 const localDrift = findLocalDrift(localRows, rows);
+if (CHECK) {
+  console.log(formatPullCheckMessage(localDrift, rows.length));
+  process.exit(localDrift.hasDrift ? 1 : 0);
+}
+
 if (localDrift.hasDrift && !FORCE) {
   console.error(formatLocalDriftMessage(localDrift));
   process.exitCode = 1;
-  throw new Error('Refusing to replace local phrases.js with Notion data. Re-run with `npm run sync:notion:phrases -- --force` only when Notion should overwrite local phrase edits.');
+  throw new Error('Refusing to replace local phrases.js with Notion data. Re-run with `npm run phrases:pull` only when Notion should overwrite local phrase edits.');
 }
 
 writePhrasesJs(rows);
@@ -184,8 +190,50 @@ function formatLocalDriftMessage(drift) {
     lines.push(`  - ...and ${drift.changed.length - 20} more changed phrase(s)`);
   }
 
-  lines.push('Use `npm run check:notion:phrases` for a read-only drift report.');
-  lines.push('Use `npm run sync:notion:phrases -- --force` only when Notion should overwrite local phrase edits.');
+  lines.push('Use `npm run phrases:check` for a read-only drift report.');
+  lines.push('Use `npm run phrases:pull` only when Notion should overwrite local phrase edits.');
+
+  return lines.join('\n');
+}
+
+function formatPullCheckMessage(drift, notionRowCount) {
+  if (!drift.hasDrift) {
+    return `Pull check: local phrases.js already matches ${notionRowCount} Notion phrase row(s).`;
+  }
+
+  const lines = [
+    'Pull check: pulling Notion would replace local phrases.js with Notion data.',
+    `- Local phrase IDs that would be removed: ${drift.missingInNotion.length}`,
+    `- Notion phrase IDs that would be added locally: ${drift.missingLocally.length}`,
+    `- Phrase IDs with fields that would change locally: ${drift.changed.length}`
+  ];
+
+  if (drift.missingInNotion.length > 0) {
+    lines.push('Local-only phrase IDs:');
+    drift.missingInNotion.slice(0, 20).forEach(id => lines.push(`  - ${id}`));
+    if (drift.missingInNotion.length > 20) {
+      lines.push(`  - ...and ${drift.missingInNotion.length - 20} more`);
+    }
+  }
+
+  if (drift.missingLocally.length > 0) {
+    lines.push('Notion-only phrase IDs:');
+    drift.missingLocally.slice(0, 20).forEach(id => lines.push(`  - ${id}`));
+    if (drift.missingLocally.length > 20) {
+      lines.push(`  - ...and ${drift.missingLocally.length - 20} more`);
+    }
+  }
+
+  if (drift.changed.length > 0) {
+    lines.push('Changed phrase IDs:');
+    drift.changed.slice(0, 20).forEach(item => lines.push(`  - ${item.id}: ${item.fields.join(', ')}`));
+    if (drift.changed.length > 20) {
+      lines.push(`  - ...and ${drift.changed.length - 20} more`);
+    }
+  }
+
+  lines.push('No local files were changed.');
+  lines.push('Run `npm run phrases:pull` only when Notion should overwrite local phrase edits.');
 
   return lines.join('\n');
 }
@@ -259,8 +307,8 @@ function writePhrasesJs(rows) {
 
   const header = [
     '// Phrase text can be edited locally in this file for fast development.',
-    '// Run `npm run sync:notion:phrases` only when you intentionally want Notion to replace it.',
-    '// Run `npm run push:notion:phrases` to dry-run pushing local phrase edits back to Notion.'
+    '// Run `npm run phrases:pull` only when you intentionally want Notion to replace it.',
+    '// Run `npm run phrases:check:push` to dry-run pushing local phrase edits back to Notion.'
   ].join('\n');
 
   fs.writeFileSync(outputPath, `${header}\n\nconst phrases = ${JSON.stringify(phrases, null, 2)};\n\nexport default phrases;\n`);
