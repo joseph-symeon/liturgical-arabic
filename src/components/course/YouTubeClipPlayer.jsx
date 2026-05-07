@@ -171,7 +171,6 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
   }
 
   const speedDisplay = `${playbackRate.toFixed(1)}×`;
-  const ytUrl = `https://www.youtube.com/watch?v=${videoId}&t=${startSeconds}s`;
 
   return (
     <>
@@ -181,7 +180,7 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
 
       <div className="lp-clip-player">
         {playerError && <p className="lp-player-error">{playerError}</p>}
-        <div className="lp-player-cta">Hear Chant</div>
+        <div className="lp-player-cta">Play Chant</div>
         <div className="lp-controls">
           <button
             className={`lp-icon-button${isPlaying ? " active" : ""}`}
@@ -235,19 +234,6 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
               </div>
             )}
           </div>
-
-          <a
-            className="lp-youtube-link"
-            href={ytUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Watch on YouTube"
-          >
-            <svg viewBox="0 0 24 24">
-              <rect x="2" y="5" width="20" height="14" rx="4" fill="#ff0000" />
-              <polygon points="10,8 16,12 10,16" fill="#fff" />
-            </svg>
-          </a>
         </div>
       </div>
     </>

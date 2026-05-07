@@ -207,8 +207,8 @@
 }
 
 .lp-player-cta {
-  margin: 0 0 6px;
-  color: #78716c;
+  margin: 0 0 6px 4px;
+  color: #ddd;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -344,26 +344,14 @@
   text-align: center;
 }
 
-.lp-youtube-link {
-  flex: 0 0 36px;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.lp-youtube-link svg {
-  width: 28px;
-  height: 28px;
-}
-
 @media (prefers-color-scheme: dark) {
   .lp-subtitle,
-  .lp-player-cta,
   .lp-speed-title {
     color: var(--dark-muted);
+  }
+
+  .lp-player-cta {
+    color: var(--dark-border);
   }
 
   .lp-clip-player,
