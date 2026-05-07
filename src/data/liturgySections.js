@@ -96,8 +96,8 @@ const liturgySections = [
     ]
   },
   {
-    "section": "Little Litany After the First Antiphon",
-    "section_title_phrase": "section-little-litany-after-first-antiphon",
+    "section": "The Little Litany",
+    "section_title_phrase": "section-little-litany",
     "section_group": "Liturgy of the Catechumen",
     "section_group_title_phrase": "section-liturgy-catechumen",
     "segment_ids": [
@@ -139,8 +139,8 @@ const liturgySections = [
     ]
   },
   {
-    "section": "The Little Litany After the Second Antiphon",
-    "section_title_phrase": "section-little-litany-after-second-antiphon",
+    "section": "The Little Litany",
+    "section_title_phrase": "section-little-litany",
     "section_group": "Liturgy of the Catechumen",
     "section_group_title_phrase": "section-liturgy-catechumen",
     "segment_ids": [
@@ -166,7 +166,8 @@ const liturgySections = [
       "entrance-let-us-pray",
       "entrance-priest-master-lord-quiet",
       "entrance-priest-doxology",
-      "entrance-amen-bless-master",
+      "entrance-amen",
+      "entrance-bless-master",
       "entrance-blessed-entrance",
       "entrance-deacon-amen",
       "entrance-wisdom-stand-upright"

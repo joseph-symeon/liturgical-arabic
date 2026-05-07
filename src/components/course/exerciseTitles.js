@@ -13,30 +13,27 @@ function getFirstPhraseTranslation(line) {
   return phrases[firstPhraseId]?.translation;
 }
 
-function asServiceBookAbbreviation(text) {
-  return /[.!?]$/.test(text) ? text : `${text}.`;
-}
-
 function getGeneratedExerciseTitle(exercise) {
   const lines = getOrderedLines(exercise);
   const firstTitle = getFirstPhraseTranslation(lines[0]);
-  if (!firstTitle) return null;
+  return firstTitle || null;
+}
 
-  if (lines.length <= 1) return firstTitle;
-
-  const lastTitle = getFirstPhraseTranslation(lines[lines.length - 1]);
-  if (!lastTitle || lastTitle === firstTitle) return asServiceBookAbbreviation(firstTitle);
-
-  return `${asServiceBookAbbreviation(firstTitle)} ${asServiceBookAbbreviation(lastTitle)}`;
+function capitalizeFirstLetter(title) {
+  if (!title) return title;
+  return title.charAt(0).toUpperCase() + title.slice(1);
 }
 
 export function getExerciseTitle(lesson, exerciseIndex) {
   const exerciseId = lesson?.exercises?.[exerciseIndex]?.exercise_id;
   const exercise = exerciseId ? exercises[exerciseId] : null;
+  const isFinalExercise = exerciseIndex === (lesson?.exercises?.length ?? 0) - 1;
 
-  return exercise?.title || getGeneratedExerciseTitle(exercise) || `Exercise ${exerciseIndex + 1}`;
+  return capitalizeFirstLetter(
+    (isFinalExercise ? lesson?.title : null) || getGeneratedExerciseTitle(exercise) || `Exercise ${exerciseIndex + 1}`
+  );
 }
 
 export function getResolvedExerciseTitle(exercise) {
-  return exercise?.title || getGeneratedExerciseTitle(exercise);
+  return capitalizeFirstLetter(getGeneratedExerciseTitle(exercise));
 }

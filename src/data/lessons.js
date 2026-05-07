@@ -3,6 +3,18 @@
 
 const lessons = [
   {
+    "id": "lesson-come-let-us-worship",
+    "unit_id": "unit-2",
+    "title": "Come, let us worship",
+    "display_order": 1,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "come-let-us-worship"
+      }
+    ]
+  },
+  {
     "id": "lesson-antiphons",
     "unit_id": "unit-2",
     "title": "The Antiphons",
@@ -107,7 +119,7 @@ const lessons = [
   {
     "id": "lesson-glory",
     "unit_id": "unit-1",
-    "title": "Glory",
+    "title": "Glory. Both now.",
     "title_phrase": "glory-001",
     "display_order": 3,
     "quizlet_deck_url": null,

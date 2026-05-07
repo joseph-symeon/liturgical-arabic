@@ -693,7 +693,7 @@ const sourceSegments = {
       }
     ]
   },
-  "entrance-amen-bless-master": {
+  "entrance-amen": {
     "speaker": "role-deacon",
     "break_before": true,
     "tags": [
@@ -704,8 +704,16 @@ const sourceSegments = {
         "phrase_id": "amen-001"
       },
       {
-        "text": ". "
-      },
+        "text": "."
+      }
+    ]
+  },
+  "entrance-bless-master": {
+    "speaker": "role-deacon",
+    "tags": [
+      "entrance"
+    ],
+    "phrases": [
       {
         "phrase_id": "entrance-bless-master-001"
       },
@@ -729,7 +737,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "entrance-blessed-is-001"
+        "phrase_id": "entrance-blessed-entrance-001"
       },
       {
         "text": " "
@@ -3677,6 +3685,92 @@ const sourceSegments = {
       },
       {
         "phrase_id": "all-holy-trinity-name-sake-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "course-come-worship-god-king": {
+    "speaker": "",
+    "tags": [
+      "course",
+      "unit-2",
+      "come-let-us-worship"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "come-worship-fall-down-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-god-our-king-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "course-come-worship-christ-king": {
+    "speaker": "",
+    "break_before": true,
+    "tags": [
+      "course",
+      "unit-2",
+      "come-let-us-worship"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "come-worship-fall-down-001"
+      },
+      {
+        "text": " لِ"
+      },
+      {
+        "phrase_id": "christ-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "our-king-god-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "course-come-worship-christ-himself": {
+    "speaker": "",
+    "break_before": true,
+    "tags": [
+      "course",
+      "unit-2",
+      "come-let-us-worship"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "come-worship-fall-down-001"
+      },
+      {
+        "text": " لِ"
+      },
+      {
+        "phrase_id": "christ-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "this-is-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "our-king-lord-god-001"
       },
       {
         "text": "."

@@ -145,13 +145,17 @@ export default function App() {
   const [isCompactChrome, setIsCompactChrome] = useState(false);
   const [showCompactTitle, setShowCompactTitle] = useState(false);
   const previousNavigationKeyRef = useRef(null);
+  const previousIsNarrowViewportRef = useRef(null);
 
   useEffect(() => {
     function updateViewport() {
       const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
       const nextIsNarrowViewport = viewportWidth < NARROW_VIEWPORT_WIDTH;
       setIsNarrowViewport(nextIsNarrowViewport);
-      if (nextIsNarrowViewport) setMenuOpen(false);
+      if (nextIsNarrowViewport && previousIsNarrowViewportRef.current !== true) {
+        setMenuOpen(false);
+      }
+      previousIsNarrowViewportRef.current = nextIsNarrowViewport;
       setIsCompactChrome(viewportWidth < COMPACT_CHROME_WIDTH);
     }
     updateViewport();

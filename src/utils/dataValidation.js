@@ -88,9 +88,6 @@ export function validateData() {
         }
       });
     }
-    if (exercise.title_phrase && !phraseIds.has(exercise.title_phrase)) {
-      errors.push(`Exercise "${exercise.id}" references missing title phrase "${exercise.title_phrase}".`);
-    }
     if (exercise.audio_clip) {
       ['video_id', 'start_seconds', 'end_seconds', 'default_playback_rate'].forEach(field => {
         if (typeof exercise.audio_clip[field] === 'undefined') {

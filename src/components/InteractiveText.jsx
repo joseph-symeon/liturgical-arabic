@@ -3,7 +3,7 @@ import { speakArabic } from "../utils/arabic.js";
 
 const h = React.createElement;
 const TOOLTIP_MAX_WIDTH = 288;
-const TOOLTIP_GAP = 8;
+const TOOLTIP_GAP = 16;
 const VIEWPORT_PADDING = 8;
 let interactiveTextCount = 0;
 
@@ -17,6 +17,7 @@ export default function InteractiveText(props) {
   const [usesHover, setUsesHover] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState(null);
   const textRef = useRef(null);
+  const tooltipRef = useRef(null);
   const showTranslation = usesHover ? isHovered : isOpen;
   const underlineCls = showTranslation
     ? " decoration-current decoration-dotted underline underline-offset-4"
@@ -60,9 +61,22 @@ export default function InteractiveText(props) {
     const minLeft = Math.max(VIEWPORT_PADDING, bounds.left + VIEWPORT_PADDING);
     const maxRight = Math.min(window.innerWidth - VIEWPORT_PADDING, bounds.right - VIEWPORT_PADDING);
     const maxWidth = Math.max(160, Math.min(TOOLTIP_MAX_WIDTH, maxRight - minLeft));
-    const maxLeft = Math.max(minLeft, maxRight - maxWidth);
-    const left = Math.max(minLeft, Math.min(rect.right - maxWidth, maxLeft));
-    const top = rect.bottom + TOOLTIP_GAP;
+    const measuredRect = tooltipRef.current?.getBoundingClientRect();
+    const tooltipWidth = measuredRect?.width
+      ? Math.min(maxWidth, measuredRect.width)
+      : maxWidth;
+    const tooltipHeight = measuredRect?.height ?? 0;
+    const maxLeft = Math.max(minLeft, maxRight - tooltipWidth);
+    const preferredLeft = rect.left + rect.width / 2 - tooltipWidth / 2;
+    const left = Math.max(minLeft, Math.min(preferredLeft, maxLeft));
+    const belowTop = rect.bottom + TOOLTIP_GAP;
+    const aboveTop = rect.top - tooltipHeight - TOOLTIP_GAP;
+    const top =
+      tooltipHeight > 0 &&
+      belowTop + tooltipHeight > window.innerHeight - VIEWPORT_PADDING &&
+      aboveTop >= VIEWPORT_PADDING
+        ? aboveTop
+        : belowTop;
     setTooltipPosition({ left, top, maxWidth });
   }
 
@@ -100,6 +114,7 @@ export default function InteractiveText(props) {
       {
         ref: textRef,
         className: `cursor-default rounded-sm transition${underlineCls}${props.className ? ` ${props.className}` : ""}`,
+        style: showTranslation ? { textDecorationSkipInk: "none" } : undefined,
         onMouseEnter: function () { setIsHovered(true); },
         onMouseLeave: function () { setIsHovered(false); },
         onClick: handleClick
@@ -110,6 +125,7 @@ export default function InteractiveText(props) {
       ? h(
           "span",
           {
+            ref: tooltipRef,
             className:
               "fixed z-20 inline-block max-w-72 rounded-xl border border-stone-200 dark:border-[var(--dark-border)] bg-white dark:bg-[var(--dark-surface)] p-3 text-left text-sm font-normal leading-normal text-stone-900 dark:text-[var(--dark-text)] shadow-lg",
             dir: "ltr",

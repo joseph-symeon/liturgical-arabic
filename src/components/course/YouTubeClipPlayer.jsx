@@ -181,6 +181,7 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
 
       <div className="lp-clip-player">
         {playerError && <p className="lp-player-error">{playerError}</p>}
+        <div className="lp-player-cta">Hear Chant</div>
         <div className="lp-controls">
           <button
             className={`lp-icon-button${isPlaying ? " active" : ""}`}

@@ -603,10 +603,10 @@ const phrases = {
       "section: The Entrance"
     ]
   },
-  "entrance-blessed-is-001": {
-    "arabic": "مُبَارَكٌ هُوَ",
-    "translation": "Blessed is",
-    "literal": "Blessed is",
+  "entrance-blessed-entrance-001": {
+    "arabic": "مُبَارَكٌ هُوَ دُخُولُ",
+    "translation": "Blessed is the entrance",
+    "literal": "Blessed is the entrance",
     "tags": [
       "entrance",
       "blessing",
@@ -614,9 +614,9 @@ const phrases = {
     ]
   },
   "entrance-holy-ones-001": {
-    "arabic": "دُخُولُ قِدِّيسِيكَ",
-    "translation": "the entrance of thy holy ones",
-    "literal": "the entrance of your holy ones",
+    "arabic": "قِدِّيسِيكَ",
+    "translation": "of thy holy ones",
+    "literal": "of your holy ones",
     "tags": [
       "entrance",
       "blessing",
@@ -1122,28 +1122,6 @@ const phrases = {
     "tags": [
       "section-title",
       "litany"
-    ]
-  },
-  "section-little-litany-after-first-antiphon": {
-    "arabic": "الطِلْبَةُ الصُّغْرَى",
-    "translation": "Little Litany After the First Antiphon",
-    "literal": "The small petition after the first antiphon",
-    "tags": [
-      "section-title",
-      "litany",
-      "first-antiphon",
-      "section: Little Litany After the First Antiphon"
-    ]
-  },
-  "section-little-litany-after-second-antiphon": {
-    "arabic": "الطِلْبَةُ الصُّغْرَى",
-    "translation": "The Little Litany After the Second Antiphon",
-    "literal": "The small petition after the second antiphon",
-    "tags": [
-      "section-title",
-      "litany",
-      "second-antiphon",
-      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "section-trisagion-hymn": {
@@ -2880,8 +2858,8 @@ const phrases = {
   },
   "all-holy-trinity-001": {
     "arabic": "أَيُّها الثّالوثُ القُدّوسُ",
-    "translation": "All holy Trinity",
-    "literal": "O all holy Trinity",
+    "translation": "All Holy Trinity",
+    "literal": "O all Holy Trinity",
     "tags": [
       "course",
       "beginner",
@@ -2983,6 +2961,74 @@ const phrases = {
       "beginner",
       "all-holy-trinity",
       "petition"
+    ]
+  },
+  "come-worship-fall-down-001": {
+    "arabic": "هَلُمُّوا لِنَسْجُدَ وَنَرْكَعَ",
+    "translation": "Come let us worship and fall down",
+    "literal": "Come let us worship and bow down",
+    "tags": [
+      "course",
+      "unit-2",
+      "come-let-us-worship",
+      "worship",
+      "reusable"
+    ]
+  },
+  "before-god-our-king-001": {
+    "arabic": "لِمَلِكِنَا وَإِلَهِنَا",
+    "translation": "before God our King",
+    "literal": "to our King and our God",
+    "tags": [
+      "course",
+      "unit-2",
+      "come-let-us-worship",
+      "worship"
+    ]
+  },
+  "christ-001": {
+    "arabic": "المَسِيحِ",
+    "translation": "Christ",
+    "literal": "Christ",
+    "tags": [
+      "course",
+      "unit-2",
+      "come-let-us-worship",
+      "christology",
+      "reusable"
+    ]
+  },
+  "our-king-god-001": {
+    "arabic": "مَلِكِنَا وَإِلَهِنَا",
+    "translation": "our King and our God",
+    "literal": "our King and our God",
+    "tags": [
+      "course",
+      "unit-2",
+      "come-let-us-worship",
+      "worship"
+    ]
+  },
+  "this-is-001": {
+    "arabic": "هَذَا هُوَ",
+    "translation": "Himself",
+    "literal": "this is",
+    "tags": [
+      "course",
+      "unit-2",
+      "come-let-us-worship",
+      "worship"
+    ]
+  },
+  "our-king-lord-god-001": {
+    "arabic": "مَلِكُنَا وَرَبُّنَا وَإِلَهُنَا",
+    "translation": "our King and our God",
+    "literal": "our King and our Lord and our God",
+    "tags": [
+      "course",
+      "unit-2",
+      "come-let-us-worship",
+      "worship"
     ]
   }
 };

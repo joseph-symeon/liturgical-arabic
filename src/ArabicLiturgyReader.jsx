@@ -3,9 +3,6 @@ import liturgySections from "./data/liturgySections.js";
 import phrases from "./data/phrases.js";
 import segments from "./data/segments.js";
 import SpeakerBlock from "./components/SpeakerBlock.jsx";
-import InteractiveText from "./components/InteractiveText.jsx";
-import PhraseTooltip from "./components/PhraseTooltip.jsx";
-import BilingualTitle from "./components/BilingualTitle.jsx";
 import PageHeader from "./components/PageHeader.jsx";
 import { getArabicText } from "./utils/arabic.js";
 
@@ -45,16 +42,7 @@ export default function ArabicLiturgyReader({
 
   function renderArabicTitle(phrase) {
     if (!phrase) return null;
-    const text = getArabicText(phrase, arabicMode);
-    return h(
-      InteractiveText,
-      {
-        spokenText: phrase.arabic,
-        speechRate,
-        tooltip: h(PhraseTooltip, { phrase })
-      },
-      text
-    );
+    return getArabicText(phrase, arabicMode);
   }
 
   function renderSectionNav(className) {
@@ -143,7 +131,7 @@ export default function ArabicLiturgyReader({
         },
         h(
           "span",
-          { className: "grid grid-cols-[1fr_auto] items-baseline gap-4" },
+          { className: "grid grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] items-baseline gap-4" },
           h("span", { className: `text-left ${isGrouped ? "pl-2" : ""}` }, section.section || `Section ${sectionIndex + 1}`),
           titlePhrase
             ? h(

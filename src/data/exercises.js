@@ -11,8 +11,6 @@ export const exerciseDefinitions = [
       "antiphon-word-of-god-only-begotten",
       "antiphon-deathless"
     ],
-    "title": "Only-begotten Son and Word of God",
-    "title_phrase": "title-only-begotten-son-word-of-god",
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 150.75,
@@ -28,7 +26,6 @@ export const exerciseDefinitions = [
       "course-entrance-hymn-wondrous-weekdays",
       "entrance-hymn-risen-alleluia"
     ],
-    "title": "Save us, O Son of God",
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 151,
@@ -42,7 +39,6 @@ export const exerciseDefinitions = [
       "antiphon-accepted-incarnate",
       "antiphon-from-theotokos"
     ],
-    "title": "Who deigned to be incarnate",
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 151,
@@ -56,7 +52,6 @@ export const exerciseDefinitions = [
       "antiphon-became-man",
       "antiphon-crucified"
     ],
-    "title": "and without change became man",
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 151,
@@ -70,7 +65,6 @@ export const exerciseDefinitions = [
       "antiphon-trampled-death",
       "antiphon-one-of-trinity"
     ],
-    "title": "and trampled down death by death",
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 151,
@@ -110,8 +104,6 @@ export const exerciseDefinitions = [
       "antiphon-glorified-with-father",
       "antiphon-save-us"
     ],
-    "title": "The Antiphons",
-    "title_phrase": "section-antiphons",
     "audio_clip": {
       "video_id": "-dufaXx7Hm0",
       "start_seconds": 150.75,
@@ -124,7 +116,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-from-above"
     ],
-    "title": "For the peace from above",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -137,7 +128,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-whole-world"
     ],
-    "title": "For the peace of the whole world",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -150,7 +140,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-holy-house"
     ],
-    "title": "For this holy house",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -163,7 +152,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-father-metropolitan"
     ],
-    "title": "For our father and metropolitan",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -176,7 +164,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-country-authorities"
     ],
-    "title": "For our country",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -189,7 +176,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-this-city"
     ],
-    "title": "For this city",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -202,7 +188,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-healthful-seasons"
     ],
-    "title": "For healthful seasons",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -215,7 +200,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-travelers"
     ],
-    "title": "For travelers",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -228,7 +212,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-deliverance"
     ],
-    "title": "For our deliverance",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -241,7 +224,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-help-save"
     ],
-    "title": "Help, save, have mercy",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -254,8 +236,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "litany-peace-priest-doxology"
     ],
-    "title": "For unto thee are due",
-    "title_phrase": "doxology-for-fitting-001",
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
       "start_seconds": 92.75,
@@ -281,8 +261,6 @@ export const exerciseDefinitions = [
       "litany-peace-priest-doxology",
       "litany-peace-choir-amen"
     ],
-    "title": "Litany of Peace",
-    "title_phrase": "section-litany-of-peace",
     "show_speakers": true,
     "audio_clip": {
       "video_id": "KJKt0V4zJjY",
@@ -294,9 +272,8 @@ export const exerciseDefinitions = [
   {
     "id": "entrance-bless-master",
     "segment_ids": [
-      "entrance-amen-bless-master"
+      "entrance-bless-master"
     ],
-    "title": "Bless master, the holy entrance",
     "audio_clip": null
   },
   {
@@ -304,7 +281,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "entrance-blessed-entrance"
     ],
-    "title": "Blessed is the entrance",
     "audio_clip": null
   },
   {
@@ -313,8 +289,6 @@ export const exerciseDefinitions = [
       "entrance-wisdom-stand-upright",
       "entrance-hymn-come-worship"
     ],
-    "title": "Wisdom. Stand upright. Come, let us worship",
-    "title_phrase": "wisdom-001",
     "audio_clip": null
   },
   {
@@ -325,7 +299,6 @@ export const exerciseDefinitions = [
       "course-entrance-hymn-wondrous-weekdays",
       "entrance-hymn-risen-alleluia"
     ],
-    "title": "Save us, O Son of God",
     "audio_clip": null
   },
   {
@@ -335,14 +308,13 @@ export const exerciseDefinitions = [
       "entrance-hymn-deacon-ages",
       "entrance-hymn-final-amen"
     ],
-    "title": "For holy art thou",
-    "title_phrase": "for-holy-art-thou-001",
     "audio_clip": null
   },
   {
     "id": "entrance-summary",
     "segment_ids": [
-      "entrance-amen-bless-master",
+      "entrance-amen",
+      "entrance-bless-master",
       "entrance-blessed-entrance",
       "entrance-wisdom-stand-upright",
       "entrance-hymn-come-worship",
@@ -354,8 +326,6 @@ export const exerciseDefinitions = [
       "entrance-hymn-deacon-ages",
       "entrance-hymn-final-amen"
     ],
-    "title": "The Entrance",
-    "title_phrase": "section-entrance",
     "show_speakers": true,
     "audio_clip": null
   },
@@ -364,8 +334,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "preparation-glory-highest"
     ],
-    "title": "Glory to God in the highest",
-    "title_phrase": "glory-highest-001",
     "audio_clip": null
   },
   {
@@ -373,8 +341,15 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "preparation-open-my-lips"
     ],
-    "title": "O Lord, open my lips",
-    "title_phrase": "open-my-lips-001",
+    "audio_clip": null
+  },
+  {
+    "id": "come-let-us-worship",
+    "segment_ids": [
+      "course-come-worship-god-king",
+      "course-come-worship-christ-king",
+      "course-come-worship-christ-himself"
+    ],
     "audio_clip": null
   },
   {
@@ -382,8 +357,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "first-antiphon-through-theotokos-1"
     ],
-    "title": "Through the intercessions of the Theotokos",
-    "title_phrase": "through-intercessions-001",
     "audio_clip": null
   },
   {
@@ -391,7 +364,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "little-litany-again"
     ],
-    "title": "Again and again, in peace",
     "audio_clip": null
   },
   {
@@ -399,7 +371,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "little-litany-help-save"
     ],
-    "title": "Help, save, have mercy",
     "audio_clip": null
   },
   {
@@ -407,7 +378,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "little-litany-calling-remembrance"
     ],
-    "title": "Calling to remembrance",
     "audio_clip": null
   },
   {
@@ -415,8 +385,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "little-litany-for-thine-might"
     ],
-    "title": "For thine is the might",
-    "title_phrase": "for-thine-might-001",
     "audio_clip": null
   },
   {
@@ -424,8 +392,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "little-litany-good-god-doxology"
     ],
-    "title": "For thou art a good God",
-    "title_phrase": "good-god-lovest-mankind-001",
     "audio_clip": null
   },
   {
@@ -437,8 +403,6 @@ export const exerciseDefinitions = [
       "little-litany-for-thine-might",
       "little-litany-good-god-doxology"
     ],
-    "title": "Little Litanies",
-    "title_phrase": "section-little-litany",
     "show_speakers": true,
     "audio_clip": null
   },
@@ -451,8 +415,6 @@ export const exerciseDefinitions = [
       "trisagion-with-strength",
       "trisagion-hymn-holy-god-2"
     ],
-    "title": "Holy God, Holy Mighty, Holy Immortal",
-    "title_phrase": "holy-god-001",
     "audio_clip": null
   },
   {
@@ -467,8 +429,6 @@ export const exerciseDefinitions = [
       "epistle-peace-reader",
       "epistle-alleluia"
     ],
-    "title": "The Reading of the Epistle",
-    "title_phrase": "section-reading-epistle",
     "audio_clip": null
   },
   {
@@ -483,8 +443,6 @@ export const exerciseDefinitions = [
       "gospel-appointed-reading-rubric",
       "gospel-glory-after"
     ],
-    "title": "The Reading of the Gospel",
-    "title_phrase": "section-reading-gospel",
     "audio_clip": null
   },
   {
@@ -507,8 +465,6 @@ export const exerciseDefinitions = [
       "gospel-appointed-reading-rubric",
       "gospel-glory-after"
     ],
-    "title": "The Liturgy of the Word",
-    "title_phrase": "section-liturgy-word",
     "show_speakers": true,
     "audio_clip": null
   },
@@ -517,8 +473,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-lord-have-mercy-split"
     ],
-    "title": "Lord, have mercy",
-    "title_phrase": "lord-have-mercy-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 34,
@@ -531,8 +485,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-jesus-prayer"
     ],
-    "title": "The Jesus Prayer",
-    "title_phrase": "jesus-prayer-lord-jesus-christ-001",
     "audio_clip": {
       "video_id": "f-DJruJ0HRs",
       "start_seconds": 0,
@@ -546,8 +498,6 @@ export const exerciseDefinitions = [
       "first-antiphon-glory",
       "first-antiphon-both-now"
     ],
-    "title": "Glory. Both now.",
-    "title_phrase": "glory-001",
     "audio_clip": null
   },
   {
@@ -555,7 +505,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-glory-beginner"
     ],
-    "title_phrase": "glory-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 15.45,
@@ -568,7 +517,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-both-now-beginner"
     ],
-    "title_phrase": "beginner-both-now-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 18.75,
@@ -582,7 +530,6 @@ export const exerciseDefinitions = [
       "course-glory-beginner",
       "course-both-now-beginner"
     ],
-    "title_phrase": "glory-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 15.5,
@@ -598,8 +545,6 @@ export const exerciseDefinitions = [
       "course-trisagion-holy-immortal",
       "course-trisagion-have-mercy"
     ],
-    "title": "Holy God Holy Mighty Holy Immortal",
-    "title_phrase": "holy-god-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 0,
@@ -612,7 +557,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-all-holy-trinity-address"
     ],
-    "title_phrase": "all-holy-trinity-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 22.65,
@@ -625,8 +569,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-all-holy-trinity-lord"
     ],
-    "title": "Lord, cleanse us",
-    "title_phrase": "vocative-o-lord-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 25.25,
@@ -639,7 +581,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-all-holy-trinity-master"
     ],
-    "title_phrase": "vocative-o-master-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 27.5,
@@ -652,7 +593,6 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "course-all-holy-trinity-holy-one"
     ],
-    "title_phrase": "vocative-o-holy-one-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 30.25,
@@ -668,7 +608,6 @@ export const exerciseDefinitions = [
       "course-all-holy-trinity-master",
       "course-all-holy-trinity-holy-one"
     ],
-    "title_phrase": "all-holy-trinity-001",
     "audio_clip": {
       "video_id": "oLdHO28NWuM",
       "start_seconds": 22.65,
