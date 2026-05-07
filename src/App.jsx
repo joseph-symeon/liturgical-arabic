@@ -2,11 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import ArabicLiturgyReader from "./ArabicLiturgyReader.jsx";
 import CourseOverview from "./components/course/CourseOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
+import InteractiveText from "./components/InteractiveText.jsx";
+import PhraseTooltip from "./components/PhraseTooltip.jsx";
 import liturgySections from "./data/liturgySections.js";
+import phrases from "./data/phrases.js";
 import units from "./data/units.js";
 import lessons from "./data/lessons.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
-import { speakArabic } from "./utils/arabic.js";
+import { getArabicText, speakArabic } from "./utils/arabic.js";
 import appIcons from "./assets/icons/index.js";
 
 const NAV_ITEM_STYLE = {
@@ -59,6 +62,12 @@ const DEFAULT_ARABIC_FONT_SIZE = 20;
 const NARROW_VIEWPORT_WIDTH = 700;
 const COMPACT_CHROME_WIDTH = 900;
 const NAV_MENU_STORAGE_KEY = "liturgical-arabic:navigation-menu-open";
+const HOME_TITLE_PHRASE_IDS = {
+  divineLiturgy: "homepage-divine-liturgy-001",
+  johnChrysostom: "homepage-john-chrysostom-001",
+  prayersAnaphora: "homepage-prayers-anaphora-001",
+  basilGreat: "homepage-basil-great-001"
+};
 
 const ORDERED_UNITS = [...units].sort((a, b) => a.display_order - b.display_order);
 const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
@@ -383,31 +392,76 @@ export default function App() {
   }, []);
 
   function renderHome() {
+    function renderHomeArabicPhrase(phraseId, className = "") {
+      const phrase = phrases[phraseId];
+      if (!phrase) return null;
+
+      return (
+        <InteractiveText
+          spokenText={phrase.arabic}
+          speechRate={speechRate}
+          tooltip={<PhraseTooltip phrase={phrase} />}
+          className={className}
+        >
+          {getArabicText(phrase, arabicMode)}
+        </InteractiveText>
+      );
+    }
+
+    const homeArabicStyle = {
+      fontFamily: arabicFontFamily,
+      fontWeight: arabicFontWeight,
+      fontSize: `${Math.max(arabicFontSize + 1, 21)}px`
+    };
+    const homeTitleFontSize = `${Math.max(arabicFontSize + 1, 21)}px`;
+
     return (
-      <main className="mx-auto max-w-[700px] px-4 py-10 leading-8">
-        <header className="mb-8 text-center" dir="ltr">
+      <main className="mx-auto flex min-h-[calc(100vh-120px)] max-w-[640px] flex-col justify-center px-6 py-10" dir="ltr">
+        <header className="mb-9 text-center">
+          <div
+            className="mx-auto mb-5 grid max-w-[560px] gap-1.5 leading-relaxed"
+            dir="rtl"
+            style={homeArabicStyle}
+          >
+            <div>{renderHomeArabicPhrase(HOME_TITLE_PHRASE_IDS.divineLiturgy)}</div>
+            <div>{renderHomeArabicPhrase(HOME_TITLE_PHRASE_IDS.johnChrysostom, "liturgical-red")}</div>
+            <div>{renderHomeArabicPhrase(HOME_TITLE_PHRASE_IDS.prayersAnaphora)}</div>
+            <div>{renderHomeArabicPhrase(HOME_TITLE_PHRASE_IDS.basilGreat, "liturgical-red")}</div>
+          </div>
           <img
-            src={appIcons.chrysostom.src}
-            alt={appIcons.chrysostom.title}
-            className="mx-auto mb-6 h-auto max-h-[260px] w-auto max-w-[58vw] opacity-90"
+            src={appIcons.serviceBookTitleIcon.src}
+            alt={appIcons.serviceBookTitleIcon.title}
+            className="mx-auto mb-6 h-auto max-h-[220px] w-auto max-w-[68vw] opacity-90 dark:opacity-95"
           />
-          <h1 className="mb-2 text-2xl font-medium leading-tight md:text-3xl">Liturgical Arabic</h1>
+          <div
+            className="mx-auto max-w-[460px] text-center text-stone-800 dark:text-[var(--dark-text)]"
+            style={{ fontSize: homeTitleFontSize }}
+          >
+            <p className="leading-tight">The Divine Liturgy of</p>
+            <h1 className="liturgical-red mt-1 font-medium leading-tight">
+              Saint John Chrysostom
+            </h1>
+            <p className="mx-auto mt-3 max-w-[420px] leading-tight">
+              with the Prayers and Anaphora of the Divine Liturgy of
+            </p>
+            <p className="liturgical-red mt-1 font-medium leading-tight">Saint Basil the Great</p>
+          </div>
         </header>
-        <div className="grid gap-3" dir="ltr">
+        <div className="grid gap-3">
           <button
             type="button"
             onClick={goToTableOfContents}
-            className="rounded border border-stone-300 px-4 py-3 text-left dark:border-[var(--dark-border)]"
+            className="rounded-md border border-stone-300 px-4 py-3 text-center text-base font-medium transition hover:bg-stone-50 dark:border-[var(--dark-border)] dark:hover:bg-[var(--dark-hover)]"
           >
-            Liturgy Text
+            Read the Liturgy
           </button>
           {COURSE_LESSONS.length > 0 && (
             <button
               type="button"
               onClick={goToCourseOverview}
-              className="rounded border border-stone-300 px-4 py-3 text-left dark:border-[var(--dark-border)]"
+              className="rounded-md border border-stone-300 px-4 py-3 text-center text-base font-medium transition hover:bg-stone-50 dark:border-[var(--dark-border)] dark:hover:bg-[var(--dark-hover)]"
             >
-              Course
+              Learn Liturgical Arabic
             </button>
           )}
         </div>

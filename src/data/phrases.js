@@ -3072,6 +3072,42 @@ const phrases = {
       "unit-2",
       "worship"
     ]
+  },
+  "homepage-divine-liturgy-001": {
+    "arabic": "القُدّاسُ الإِلٰهِيّ",
+    "translation": "The Divine Liturgy",
+    "literal": "The Divine Liturgy",
+    "tags": [
+      "homepage",
+      "title"
+    ]
+  },
+  "homepage-john-chrysostom-001": {
+    "arabic": "لِلْقِدّيسِ يُوحَنّا الذَّهَبِيِّ الفَمِ",
+    "translation": "of Saint John Chrysostom",
+    "literal": "of Saint John Chrysostom",
+    "tags": [
+      "homepage",
+      "title"
+    ]
+  },
+  "homepage-prayers-anaphora-001": {
+    "arabic": "مَعَ صَلَوَاتٍ وَأَنَافُورَا (تَقْدِمَةِ القَرَابِينِ) لِلْقُدّاسِ الإِلٰهِيّ",
+    "translation": "with the Prayers and Anaphora of the Divine Liturgy",
+    "literal": "with prayers and anaphora (offering of the gifts) for the Divine Liturgy",
+    "tags": [
+      "homepage",
+      "title"
+    ]
+  },
+  "homepage-basil-great-001": {
+    "arabic": "لِلْقِدّيسِ بَاسِيلْيُوسَ الكَبِيرِ",
+    "translation": "of Saint Basil the Great",
+    "literal": "of Saint Basil the Great",
+    "tags": [
+      "homepage",
+      "title"
+    ]
   }
 };
 
