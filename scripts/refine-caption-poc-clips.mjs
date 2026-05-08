@@ -1,10 +1,10 @@
 import { spawnSync } from 'node:child_process';
-import exercises from '../src/data/exercises.js';
-import { exerciseDefinitions } from '../src/data/exercises.js';
-import phrases from '../src/data/phrases.js';
-import segments from '../src/data/segments.js';
-import activities from '../src/data/activities.js';
-import captionTracks from '../src/data/captionTracks.js';
+import exercises from '../src/data/course/exercises.js';
+import { exerciseDefinitions } from '../src/data/course/exercises.js';
+import phrases from '../src/data/texts/phrases.js';
+import segments from '../src/data/texts/segments.js';
+import activities from '../src/data/course/activities.js';
+import captionTracks from '../src/data/media/captionTracks.js';
 import { findCaptionClipMatch } from '../src/utils/captionClips.js';
 
 const AUDIO_PATH = process.argv[2];

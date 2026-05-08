@@ -2,12 +2,57 @@
 // Activities describe how a learner practices reusable text, independent of course ordering.
 
 const POC_MEDIA = {
-  recording_id: "recording-more-honorable-cyFH8CZASSk",
-  alignment_id: "alignment-more-honorable-course-poc-v1",
+  recording_id: "recording-g_4r4wzt2Vg",
+  alignment_id: "alignment-great-compline-g_4r4wzt2Vg-poc-v1",
+  default_playback_rate: 1
+};
+
+const PARAKLESIS_ST_MARINA_MEDIA = {
+  recording_id: "recording-oLdHO28NWuM",
+  alignment_id: "alignment-paraklesis-st-marina-oLdHO28NWuM-poc-v1",
   default_playback_rate: 1
 };
 
 export const activityDefinitions = [
+  {
+    "id": "activity-caption-poc-lord-have-mercy",
+    "type": "listen-repeat",
+    "title": "Listen & Repeat: Lord, have mercy",
+    "target": {
+      "segment_ids": [
+        "course-lord-have-mercy-split"
+      ]
+    },
+    "media": PARAKLESIS_ST_MARINA_MEDIA
+  },
+  {
+    "id": "activity-demo-synced-caption-lord-have-mercy",
+    "type": "synced-caption",
+    "title": "Phrase Captions: Lord, have mercy",
+    "target": {
+      "segment_ids": [
+        "course-lord-have-mercy-split"
+      ]
+    },
+    "media": PARAKLESIS_ST_MARINA_MEDIA
+  },
+  {
+    "id": "activity-demo-arrange-lord-have-mercy",
+    "type": "arrange-cloze",
+    "title": "Arrange: Lord, have mercy",
+    "target": {
+      "segment_ids": [
+        "course-lord-have-mercy-split"
+      ]
+    },
+    "cloze": {
+      "phrase_ids": [
+        "vocative-o-lord-001",
+        "have-mercy-001"
+      ]
+    },
+    "media": PARAKLESIS_ST_MARINA_MEDIA
+  },
   {
     "id": "activity-caption-poc-glory-beginner",
     "type": "listen-repeat",
@@ -19,8 +64,30 @@ export const activityDefinitions = [
     "media": POC_MEDIA
   },
   {
+    "id": "activity-demo-synced-caption-glory-beginner",
+    "type": "synced-caption",
+    "title": "Phrase Captions: Glory",
+    "target": {
+      "segment_ids": [
+        "course-glory-beginner"
+      ]
+    },
+    "media": POC_MEDIA
+  },
+  {
     "id": "activity-caption-poc-both-now-beginner",
     "type": "listen-repeat",
+    "target": {
+      "segment_ids": [
+        "course-both-now-beginner"
+      ]
+    },
+    "media": POC_MEDIA
+  },
+  {
+    "id": "activity-demo-synced-caption-both-now-beginner",
+    "type": "synced-caption",
+    "title": "Phrase Captions: Both now",
     "target": {
       "segment_ids": [
         "course-both-now-beginner"
@@ -40,14 +107,13 @@ export const activityDefinitions = [
     "media": POC_MEDIA
   },
   {
-    "id": "activity-caption-poc-trisagion-hymn-core",
-    "type": "listen-repeat",
+    "id": "activity-demo-synced-caption-glory-both-now",
+    "type": "synced-caption",
+    "title": "Phrase Captions: Glory. Both now.",
     "target": {
       "segment_ids": [
-        "course-trisagion-holy-god",
-        "course-trisagion-holy-mighty",
-        "course-trisagion-holy-immortal",
-        "course-trisagion-have-mercy"
+        "course-glory-beginner",
+        "course-both-now-beginner"
       ]
     },
     "media": POC_MEDIA
@@ -56,20 +122,6 @@ export const activityDefinitions = [
     "id": "activity-demo-listen-repeat-holy-god",
     "type": "listen-repeat",
     "title": "Listen & Repeat: Holy God",
-    "target": {
-      "segment_ids": [
-        "course-trisagion-holy-god",
-        "course-trisagion-holy-mighty",
-        "course-trisagion-holy-immortal",
-        "course-trisagion-have-mercy"
-      ]
-    },
-    "media": POC_MEDIA
-  },
-  {
-    "id": "activity-demo-listen-recall-holy-god",
-    "type": "listen-recall",
-    "title": "Recall: Holy God",
     "target": {
       "segment_ids": [
         "course-trisagion-holy-god",
@@ -105,7 +157,7 @@ export const activityDefinitions = [
   {
     "id": "activity-demo-synced-caption-holy-god",
     "type": "synced-caption",
-    "title": "Synced Caption: Holy God",
+    "title": "Phrase Captions: Holy God",
     "target": {
       "segment_ids": [
         "course-trisagion-holy-god",
@@ -114,35 +166,12 @@ export const activityDefinitions = [
         "course-trisagion-have-mercy"
       ]
     },
-    "captions": [
-      {
-        "phrase_id": "holy-god-001",
-        "start_seconds": 363.24,
-        "end_seconds": 365.12
-      },
-      {
-        "phrase_id": "holy-mighty-001",
-        "start_seconds": 365.12,
-        "end_seconds": 366.36
-      },
-      {
-        "phrase_id": "holy-immortal-001",
-        "start_seconds": 366.36,
-        "end_seconds": 367.88
-      },
-      {
-        "phrase_id": "have-mercy-on-us-001",
-        "start_seconds": 367.88,
-        "end_seconds": 368.2
-      }
-    ],
-    "sync_lead_seconds": 0.08,
     "media": POC_MEDIA
   },
   {
     "id": "activity-demo-synced-caption-all-holy-trinity",
     "type": "synced-caption",
-    "title": "Synced Caption: All Holy Trinity",
+    "title": "Phrase Captions: All Holy Trinity",
     "target": {
       "segment_ids": [
         "course-all-holy-trinity-address",
@@ -151,54 +180,33 @@ export const activityDefinitions = [
         "course-all-holy-trinity-holy-one"
       ]
     },
-    "captions": [
-      {
-        "phrase_id": "all-holy-trinity-001",
-        "start_seconds": 387.199,
-        "end_seconds": 388.919
-      },
-      {
-        "phrase_id": "all-holy-trinity-have-mercy-001",
-        "start_seconds": 388.919,
-        "end_seconds": 390.12
-      },
-      {
-        "phrase_id": "vocative-o-lord-001",
-        "start_seconds": 390.12,
-        "end_seconds": 390.759
-      },
-      {
-        "phrase_id": "all-holy-trinity-cleanse-sins-001",
-        "start_seconds": 390.759,
-        "end_seconds": 392.56
-      },
-      {
-        "phrase_id": "vocative-o-master-001",
-        "start_seconds": 392.56,
-        "end_seconds": 393.639
-      },
-      {
-        "phrase_id": "all-holy-trinity-pardon-iniquities-001",
-        "start_seconds": 393.639,
-        "end_seconds": 396.16
-      },
-      {
-        "phrase_id": "vocative-o-holy-one-001",
-        "start_seconds": 396.16,
-        "end_seconds": 397.24
-      },
-      {
-        "phrase_id": "all-holy-trinity-visit-heal-001",
-        "start_seconds": 397.24,
-        "end_seconds": 399.639
-      },
-      {
-        "phrase_id": "all-holy-trinity-name-sake-001",
-        "start_seconds": 399.639,
-        "end_seconds": 401.09
-      }
-    ],
-    "sync_lead_seconds": 0.08,
+    "media": POC_MEDIA
+  },
+  {
+    "id": "activity-demo-arrange-all-holy-trinity",
+    "type": "arrange-cloze",
+    "title": "Arrange: All Holy Trinity",
+    "target": {
+      "segment_ids": [
+        "course-all-holy-trinity-address",
+        "course-all-holy-trinity-lord",
+        "course-all-holy-trinity-master",
+        "course-all-holy-trinity-holy-one"
+      ]
+    },
+    "cloze": {
+      "phrase_ids": [
+        "all-holy-trinity-001",
+        "all-holy-trinity-have-mercy-001",
+        "vocative-o-lord-001",
+        "all-holy-trinity-cleanse-sins-001",
+        "vocative-o-master-001",
+        "all-holy-trinity-pardon-iniquities-001",
+        "vocative-o-holy-one-001",
+        "all-holy-trinity-visit-heal-001",
+        "all-holy-trinity-name-sake-001"
+      ]
+    },
     "media": POC_MEDIA
   },
   {
@@ -244,46 +252,6 @@ export const activityDefinitions = [
   {
     "id": "activity-caption-poc-all-holy-trinity",
     "type": "listen-repeat",
-    "target": {
-      "segment_ids": [
-        "course-all-holy-trinity-address",
-        "course-all-holy-trinity-lord",
-        "course-all-holy-trinity-master",
-        "course-all-holy-trinity-holy-one"
-      ]
-    },
-    "media": POC_MEDIA
-  },
-  {
-    "id": "activity-demo-all-holy-trinity-sequence",
-    "type": "listen-repeat-sequence",
-    "title": "Step Practice: All Holy Trinity",
-    "steps": [
-      {
-        "title": "Address",
-        "segment_ids": [
-          "course-all-holy-trinity-address"
-        ]
-      },
-      {
-        "title": "Lord",
-        "segment_ids": [
-          "course-all-holy-trinity-lord"
-        ]
-      },
-      {
-        "title": "Master",
-        "segment_ids": [
-          "course-all-holy-trinity-master"
-        ]
-      },
-      {
-        "title": "Holy One",
-        "segment_ids": [
-          "course-all-holy-trinity-holy-one"
-        ]
-      }
-    ],
     "target": {
       "segment_ids": [
         "course-all-holy-trinity-address",

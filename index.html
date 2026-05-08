@@ -13,6 +13,10 @@
     :root {
       --rubric-red: #b91c1c;
       --liturgical-red: var(--rubric-red);
+      --liturgical-red-control: var(--liturgical-red);
+      --liturgical-red-control-fill: var(--liturgical-red-control);
+      --liturgical-red-highlight-fill: color-mix(in srgb, var(--liturgical-red-control) 16%, transparent);
+      --liturgical-red-highlight-ring: color-mix(in srgb, var(--liturgical-red-control) 12%, transparent);
       --liturgical-red-decoration: var(--rubric-red);
       --dark-bg: #181a1b;
       --dark-surface: #1f2223;
@@ -78,6 +82,7 @@
       justify-content: flex-start;
       min-height: 54px;
       min-width: 0;
+      overflow: hidden;
       border: 0;
       border-radius: 8px;
       background: transparent;
@@ -118,6 +123,10 @@
 
     .page-nav-label {
       display: block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       font-size: 12px;
       font-weight: 600;
       line-height: 1.2;
@@ -125,10 +134,12 @@
 
     .page-nav-destination {
       display: block;
+      width: 100%;
+      max-width: 100%;
       margin-top: 3px;
       overflow: hidden;
-      overflow-wrap: anywhere;
-      white-space: normal;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       color: #78716c;
       font-size: 13px;
       font-weight: 400;
@@ -168,6 +179,10 @@
       :root {
         --rubric-red: #f87171;
         --liturgical-red: var(--rubric-red);
+        --liturgical-red-control: #b91c1c;
+        --liturgical-red-control-fill: color-mix(in srgb, var(--liturgical-red-control) 62%, transparent);
+        --liturgical-red-highlight-fill: color-mix(in srgb, var(--liturgical-red-control) 34%, transparent);
+        --liturgical-red-highlight-ring: color-mix(in srgb, var(--liturgical-red-control) 24%, transparent);
         --liturgical-red-decoration: var(--rubric-red);
       }
 

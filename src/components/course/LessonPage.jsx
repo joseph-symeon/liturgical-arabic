@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './course.css';
 import ExerciseBlock from './ExerciseBlock.jsx';
 import PageHeader from '../PageHeader.jsx';
-import exercises from '../../data/exercises.js';
+import YouTubeClipPlayer from './YouTubeClipPlayer.jsx';
+import exercises from '../../data/course/exercises.js';
+import recordings from '../../data/media/recordings.js';
 import { getExerciseTitle } from './exerciseTitles.js';
+
+function getActivityLabel(activity) {
+  if (!activity) return null;
+  if (activity.type === 'listen-repeat') return 'Listen & Repeat';
+  if (activity.type === 'synced-caption') return 'Phrase Captions';
+  if (activity.type === 'arrange-cloze') return 'Arrange';
+  if (activity.type === 'cloze') return 'Cloze';
+  return activity.type;
+}
 
 export default function LessonPage({
   lesson,
@@ -23,16 +34,38 @@ export default function LessonPage({
   onNextExercise
 }) {
   const exerciseItems = lesson.exercises ?? [];
+  const selectedExerciseItem = exerciseItems[selectedExerciseIndex] ?? exerciseItems[0];
+  const activityOptions = selectedExerciseItem?.activity_options || [];
+  const [selectedActivityOptionId, setSelectedActivityOptionId] = useState(null);
+  const [karaokeMode, setKaraokeMode] = useState(false);
+  const [showSyncedCaptionTranslation, setShowSyncedCaptionTranslation] = useState(false);
+  const [syncedTime, setSyncedTime] = useState(null);
+  const selectedActivityOption = activityOptions.find(option => option.exercise_id === selectedActivityOptionId) || activityOptions[0] || null;
+
+  useEffect(() => {
+    setSelectedActivityOptionId(null);
+    setSyncedTime(null);
+  }, [lesson.id, selectedExerciseIndex]);
+
   const resolvedExercises = exerciseItems
-    .map(({ exercise_id, audio_clip }) => ({
-      exercise_id,
-      exercise: exercises[exercise_id],
-      audio_clip: audio_clip || exercises[exercise_id]?.audio_clip
-    }));
+    .map((item, index) => {
+      const option = index === selectedExerciseIndex ? selectedActivityOption : null;
+      const exerciseId = option?.exercise_id || item.exercise_id;
+      return {
+        exercise_id: exerciseId,
+        exercise: exercises[exerciseId],
+        audio_clip: item.audio_clip || exercises[exerciseId]?.audio_clip
+      };
+    });
   const selectedExercise = resolvedExercises[selectedExerciseIndex] ?? resolvedExercises[0];
   const missingExercises = selectedExercise && !selectedExercise.exercise ? [selectedExercise] : [];
   const unitTitle = lesson.unitTitle || lesson.unit_title;
   const exerciseTitle = getExerciseTitle(lesson, selectedExerciseIndex);
+  const isSyncedCaptionActivity = selectedExercise?.exercise?.activity?.type === 'synced-caption';
+  const canUseKaraokeMode = selectedExercise?.exercise?.activity?.type === 'listen-repeat'
+    && (selectedExercise.exercise.activity?.captions?.length || 0) > 0;
+  const selectedActivityLabel = selectedActivityOption?.label || getActivityLabel(selectedExercise?.exercise?.activity);
+  const shouldTrackPlayerTime = isSyncedCaptionActivity || canUseKaraokeMode;
 
   function renderNavLabel(action, destination) {
     return (
@@ -40,6 +73,22 @@ export default function LessonPage({
         <span className="page-nav-label">{action}</span>
         {destination && <span className="page-nav-destination">{destination}</span>}
       </>
+    );
+  }
+
+  function renderPlayer() {
+    const clip = selectedExercise?.audio_clip;
+    if (!clip) return null;
+    const clipVideoId = clip.video_id || recordings[clip.recording_id]?.youtube?.video_id;
+    return (
+      <YouTubeClipPlayer
+        videoId={clipVideoId}
+        recordingId={clip.recording_id}
+        startSeconds={clip.start_seconds}
+        endSeconds={clip.end_seconds}
+        defaultPlaybackRate={clip.default_playback_rate}
+        onTimeUpdate={shouldTrackPlayerTime ? setSyncedTime : undefined}
+      />
     );
   }
 
@@ -58,17 +107,84 @@ export default function LessonPage({
         </p>
       )}
 
+      <div className="lp-activity-toolbar">
+        <div className="lp-activity-controls">
+          {selectedActivityLabel && (
+            <>
+              <label className="lp-activity-control-label" htmlFor="lp-activity-select">Activity</label>
+              <div className="lp-activity-card">
+                <div className="lp-activity-field">
+                  {activityOptions.length > 1 ? (
+                    <select
+                      id="lp-activity-select"
+                      className="lp-activity-select"
+                      value={selectedActivityOption?.exercise_id || selectedExerciseItem.exercise_id}
+                      onChange={event => {
+                        setSelectedActivityOptionId(event.target.value);
+                        setSyncedTime(null);
+                      }}
+                    >
+                      {activityOptions.map(option => (
+                        <option key={option.exercise_id} value={option.exercise_id}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <span className="lp-activity-static">{selectedActivityLabel}</span>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className="lp-toolbar-player">
+          {renderPlayer()}
+        </div>
+      </div>
+
+      {(canUseKaraokeMode || isSyncedCaptionActivity) && (
+        <div className="lp-mode-toggle-row lp-activity-mode-row" dir="ltr">
+          {canUseKaraokeMode && (
+            <label className="lp-mode-toggle">
+              <input
+                type="checkbox"
+                checked={karaokeMode}
+                onChange={event => setKaraokeMode(event.target.checked)}
+              />
+              <span className="lp-mode-switch" aria-hidden="true" />
+              <span>Karaoke mode</span>
+            </label>
+          )}
+
+          {isSyncedCaptionActivity && (
+            <label className="lp-mode-toggle">
+              <input
+                type="checkbox"
+                checked={showSyncedCaptionTranslation}
+                onChange={event => setShowSyncedCaptionTranslation(event.target.checked)}
+              />
+              <span className="lp-mode-switch" aria-hidden="true" />
+              <span>Show translation</span>
+            </label>
+          )}
+        </div>
+      )}
+
       {selectedExercise?.exercise && (
         <ExerciseBlock
-          key={selectedExercise.exercise_id}
+          key={`${lesson.id}-${selectedExerciseIndex}`}
           exercise={selectedExercise.exercise}
-          audioClip={selectedExercise.audio_clip}
           arabicMode={arabicMode}
           readerLayout={readerLayout}
           speechRate={speechRate}
           arabicFontFamily={arabicFontFamily}
           arabicFontWeight={arabicFontWeight}
           arabicFontSize={arabicFontSize}
+          karaokeMode={karaokeMode}
+          showSyncedCaptionTranslation={showSyncedCaptionTranslation}
+          syncedTime={syncedTime}
         />
       )}
 

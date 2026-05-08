@@ -1,4 +1,4 @@
-import phrases from "../data/phrases.js";
+import phrases from "../data/texts/phrases.js";
 
 export function getFlashcards() {
   return Object.keys(phrases).map(function mapPhraseId(id) {

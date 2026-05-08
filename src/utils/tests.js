@@ -1,6 +1,6 @@
-import phrases from "../data/phrases.js";
-import segments from "../data/segments.js";
-import { defaultServiceText } from "../data/serviceTexts.js";
+import phrases from "../data/texts/phrases.js";
+import segments from "../data/texts/segments.js";
+import { defaultServiceText } from "../data/texts/serviceTexts.js";
 import { validateData } from "./dataValidation.js";
 import {
   safeString,

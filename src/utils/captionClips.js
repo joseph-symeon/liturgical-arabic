@@ -16,10 +16,37 @@ function tokenizeArabic(text) {
   return normalizeArabic(text).split(' ').filter(Boolean);
 }
 
+function getEditDistance(a, b) {
+  if (a === b) return 0;
+  if (Math.abs(a.length - b.length) > 2) return Infinity;
+
+  const previous = Array.from({ length: b.length + 1 }, (_, index) => index);
+  const current = Array.from({ length: b.length + 1 }, () => 0);
+
+  for (let aIndex = 1; aIndex <= a.length; aIndex += 1) {
+    current[0] = aIndex;
+    for (let bIndex = 1; bIndex <= b.length; bIndex += 1) {
+      const substitutionCost = a[aIndex - 1] === b[bIndex - 1] ? 0 : 1;
+      current[bIndex] = Math.min(
+        previous[bIndex] + 1,
+        current[bIndex - 1] + 1,
+        previous[bIndex - 1] + substitutionCost
+      );
+    }
+    previous.splice(0, previous.length, ...current);
+  }
+
+  return previous[b.length];
+}
+
 function tokensMatch(expectedToken, captionToken) {
   if (expectedToken === captionToken) return true;
   if (expectedToken.length > 2 && captionToken === `${expectedToken}ي`) return true;
   if (captionToken.length > 2 && expectedToken === `${captionToken}ي`) return true;
+  const minLength = Math.min(expectedToken.length, captionToken.length);
+  const maxLength = Math.max(expectedToken.length, captionToken.length);
+  const maxDistance = minLength >= 4 ? 2 : maxLength >= 4 ? 1 : 0;
+  if (maxDistance > 0 && getEditDistance(expectedToken, captionToken) <= maxDistance) return true;
   return false;
 }
 
@@ -118,6 +145,7 @@ export function deriveCaptionClip(definition, phrasesMap, segmentsMap, captionTr
   const endSeconds = alignedClip?.end_seconds ?? config.pinned_end_seconds ?? derivedEndSeconds;
 
   return {
+    recording_id: config.recording_id,
     video_id: track.video_id,
     start_seconds: startSeconds,
     end_seconds: endSeconds,
@@ -129,16 +157,25 @@ function getSegmentKey(segmentIds) {
   return (segmentIds || []).join('\u001f');
 }
 
-export function getAlignmentClip(alignmentId, segmentIds, recordingId, alignments) {
+export function getAlignmentMatch(alignmentId, segmentIds, recordingId, alignments) {
   const alignment = alignments?.[alignmentId];
   if (!alignment || alignment.recording_id !== recordingId) return null;
 
   const segmentKey = getSegmentKey(segmentIds);
-  const match = alignment.matches.find(item => getSegmentKey(item.segment_ids) === segmentKey);
+  return alignment.matches.find(item => getSegmentKey(item.segment_ids) === segmentKey) || null;
+}
+
+export function getAlignmentClip(alignmentId, segmentIds, recordingId, alignments) {
+  const match = getAlignmentMatch(alignmentId, segmentIds, recordingId, alignments);
   if (!match) return null;
 
   return {
     start_seconds: match.start_seconds,
     end_seconds: match.end_seconds
   };
+}
+
+export function getAlignmentPhraseTimings(alignmentId, segmentIds, recordingId, alignments) {
+  const match = getAlignmentMatch(alignmentId, segmentIds, recordingId, alignments);
+  return match?.phrase_timings?.map(timing => ({ ...timing })) || [];
 }

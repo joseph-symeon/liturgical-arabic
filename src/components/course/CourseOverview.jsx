@@ -7,52 +7,31 @@ function hasMultipleExercises(lesson) {
 }
 
 const CURRICULUM_OUTLINE_NOTES = `
-Unit 1
-1. Lord have mercy
-2. Jesus Prayer
-3. Glory
+Unit 1: Foundations for Participation
+1. Lord, have mercy
+2. The Jesus Prayer
+3. Glory. Both now.
 4. Thrice Holy Hymn
 5. All Holy Trinity
-6. The Lord's Prayer
-7. Through the prayers
 
-Unit 2
-1. Come Let Us Worship
-2. More Honorable than the Cherubim
-3. Antiphons
-4. Little Litanies
-   - Again and again in peace
-   - Calling to Remembrance
-   - Save Thy People
-   - 2 Benedictions
-5. The Entrance
-6. Liturgy of the Word
-7. The Great Entrance
-   - 5 supplications
+Unit 2: Entering the Liturgy
+1. Come, let us worship
+2. The Antiphons
+3. Little Litanies
+4. The Entrance
+5. Liturgy of the Word
 
-Unit 3
-1. Cherubic Hymn
-2. Litany of Peace
-   - 10 supplications
-3. Litany of Supplication
-   - 10 supplications
-4. The Creed
-5. The Holy Anaphora
-6. Litany After the Anaphora
-   - 10 supplications
-7. Litany Before the Lord's Prayer
-   - 3 supplications
+Unit 3: Petitions and Responses
+1. Litany of Peace
+2. Future: Litany of Supplication
+3. Future: The Creed
+4. Future: The Holy Anaphora
 
-Unit 4
-1. The Elevation
-2. Pre-Communion Prayers
-   - I believe, O Lord and I confess
-   - Of Thy mystic supper
-3. Communion Hymns
-4. Post Communion Hymns
-5. Litany of Thanksgiving
-6. Prayer Behind the Amvon
-7. The Dismissal
+Unit 4: Receiving and Dismissal
+1. Future: The Elevation
+2. Future: Pre-Communion Prayers
+3. Future: Communion Hymns
+4. Future: Thanksgiving and Dismissal
 `;
 
 export default function CourseOverview({ units, lessons, selectedLessonId, selectedExerciseIndex, onSelectExercise }) {

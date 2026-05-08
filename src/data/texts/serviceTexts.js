@@ -291,6 +291,57 @@ export const serviceTextDefinitions = [
         ]
       }
     ]
+  },
+  {
+    "id": "great-compline",
+    "title": "Great Compline",
+    "short_title": "Great Compline",
+    "tradition": "antiochian",
+    "language": "ar",
+    "sections": [
+      {
+        "section": "Opening Prayers",
+        "section_group": "Great Compline",
+        "segment_ids": [
+          "course-trisagion-holy-god",
+          "course-trisagion-holy-mighty",
+          "course-trisagion-holy-immortal",
+          "course-trisagion-have-mercy",
+          "course-glory-beginner",
+          "course-both-now-beginner",
+          "course-all-holy-trinity-address",
+          "course-all-holy-trinity-lord",
+          "course-all-holy-trinity-master",
+          "course-all-holy-trinity-holy-one"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "paraklesis-st-marina",
+    "title": "Paraklesis to St. Marina",
+    "short_title": "St. Marina Paraklesis",
+    "tradition": "antiochian",
+    "language": "ar",
+    "sections": [
+      {
+        "section": "Opening Prayers",
+        "section_group": "Paraklesis to St. Marina",
+        "segment_ids": [
+          "course-trisagion-holy-god",
+          "course-trisagion-holy-mighty",
+          "course-trisagion-holy-immortal",
+          "course-trisagion-have-mercy",
+          "course-glory-beginner",
+          "course-both-now-beginner",
+          "course-all-holy-trinity-address",
+          "course-all-holy-trinity-lord",
+          "course-all-holy-trinity-master",
+          "course-all-holy-trinity-holy-one",
+          "course-lord-have-mercy-split"
+        ]
+      }
+    ]
   }
 ];
 

@@ -2,7 +2,7 @@ import React from 'react';
 import LiturgyLine from '../LiturgyLine.jsx';
 import SpeakerLine from '../SpeakerLine.jsx';
 
-export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', readerLayout = 'paragraph', speechRate = 0.8, arabicFontFamily, arabicFontWeight, arabicFontSize, showSpeakers = false }) {
+export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', readerLayout = 'paragraph', speechRate = 0.8, arabicFontFamily, arabicFontWeight, arabicFontSize, showSpeakers = false, activePhraseId = null }) {
   if (!lines || lines.length === 0) return null;
 
   const sortedLines = [...lines]
@@ -13,11 +13,15 @@ export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', 
     const hasExplicitText = parts.some(part => part.text);
 
     if (hasExplicitText) {
-      return parts.map(part => (part.text ? { text: part.text, isRubric: line.tags?.includes('rubric') || part.tags?.includes('rubric') } : { id: part.phrase_id }));
+      return parts.map(part => (part.text
+        ? { text: part.text, isRubric: line.tags?.includes('rubric') || part.tags?.includes('rubric') }
+        : { id: part.phrase_id, className: part.phrase_id === activePhraseId ? 'lp-karaoke-active' : undefined }));
     }
 
     return parts.flatMap(({ phrase_id }, index) => (
-      index === 0 ? [{ id: phrase_id }] : [{ text: ' ' }, { id: phrase_id }]
+      index === 0
+        ? [{ id: phrase_id, className: phrase_id === activePhraseId ? 'lp-karaoke-active' : undefined }]
+        : [{ text: ' ' }, { id: phrase_id, className: phrase_id === activePhraseId ? 'lp-karaoke-active' : undefined }]
     ));
   }
 
@@ -38,6 +42,7 @@ export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', 
               arabicFontFamily={arabicFontFamily}
               arabicFontWeight={arabicFontWeight}
               arabicFontSize={arabicFontSize}
+              activePhraseId={activePhraseId}
               showSpeaker={showSpeaker}
             />
           );
@@ -69,6 +74,7 @@ export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', 
               arabicFontFamily={arabicFontFamily}
               arabicFontWeight={arabicFontWeight}
               arabicFontSize={arabicFontSize}
+              activePhraseId={activePhraseId}
             />
           </div>
         ))}
@@ -88,6 +94,7 @@ export default function ArabicPhraseRenderer({ lines, arabicMode = 'vocalized', 
               arabicFontFamily={arabicFontFamily}
               arabicFontWeight={arabicFontWeight}
               arabicFontSize={arabicFontSize}
+              activePhraseId={activePhraseId}
             />
           </div>
         );

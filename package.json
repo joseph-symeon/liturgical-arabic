@@ -9,11 +9,17 @@
     "phrases:check:push": "node scripts/push-notion-phrases.mjs",
     "phrases:pull": "node scripts/sync-notion-phrases.mjs --force",
     "phrases:push": "node scripts/push-notion-phrases.mjs --apply",
+    "import:recording": "node scripts/import-recording.mjs",
+    "import:recording:check": "node scripts/check-recording-import-deps.mjs",
+    "import:recording:transcribe": "node scripts/transcribe-recording.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

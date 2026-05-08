@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import InteractiveText from "./InteractiveText.jsx";
 import LiturgyLine from "./LiturgyLine.jsx";
 import PhraseTooltip from "./PhraseTooltip.jsx";
-import phrases from "../data/phrases.js";
+import phrases from "../data/texts/phrases.js";
 import { getArabicText } from "../utils/arabic.js";
 
 const h = React.createElement;
@@ -93,7 +93,8 @@ export default function SpeakerLine(props) {
         speechRate: props.speechRate,
         arabicFontFamily: props.arabicFontFamily,
         arabicFontWeight: props.arabicFontWeight,
-        arabicFontSize: props.arabicFontSize
+        arabicFontSize: props.arabicFontSize,
+        activePhraseId: props.activePhraseId
       })
     )
   );

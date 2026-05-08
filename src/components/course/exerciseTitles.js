@@ -1,5 +1,5 @@
-import exercises from '../../data/exercises.js';
-import phrases from '../../data/phrases.js';
+import exercises from '../../data/course/exercises.js';
+import phrases from '../../data/texts/phrases.js';
 
 function getOrderedLines(exercise) {
   return [...(exercise?.lines || [])].sort((a, b) => a.line_order - b.line_order);
@@ -25,12 +25,13 @@ function capitalizeFirstLetter(title) {
 }
 
 export function getExerciseTitle(lesson, exerciseIndex) {
-  const exerciseId = lesson?.exercises?.[exerciseIndex]?.exercise_id;
+  const exerciseItem = lesson?.exercises?.[exerciseIndex];
+  const exerciseId = exerciseItem?.exercise_id;
   const exercise = exerciseId ? exercises[exerciseId] : null;
   const isFinalExercise = exerciseIndex === (lesson?.exercises?.length ?? 0) - 1;
 
   return capitalizeFirstLetter(
-    (isFinalExercise ? lesson?.title : null) || getGeneratedExerciseTitle(exercise) || `Exercise ${exerciseIndex + 1}`
+    exerciseItem?.title || (isFinalExercise ? lesson?.title : null) || getGeneratedExerciseTitle(exercise) || `Exercise ${exerciseIndex + 1}`
   );
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { defaultServiceText } from "./data/serviceTexts.js";
-import phrases from "./data/phrases.js";
-import segments from "./data/segments.js";
+import { defaultServiceText } from "./data/texts/serviceTexts.js";
+import phrases from "./data/texts/phrases.js";
+import segments from "./data/texts/segments.js";
 import SpeakerBlock from "./components/SpeakerBlock.jsx";
 import PageHeader from "./components/PageHeader.jsx";
 import { getArabicText } from "./utils/arabic.js";

@@ -3,7 +3,7 @@ import { onYouTubeReady } from '../../utils/youtube.js';
 
 let playerCount = 0;
 
-export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, defaultPlaybackRate = 1.0, onTimeUpdate }) {
+export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, endSeconds, defaultPlaybackRate = 1.0, onTimeUpdate }) {
   const playerIdRef = useRef(null);
   if (playerIdRef.current === null) {
     playerIdRef.current = `yt-clip-${++playerCount}`;
@@ -19,6 +19,7 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
   const loopEnabledRef = useRef(true);
   const playClockRef = useRef({ mediaTime: startSeconds, wallTime: 0, playbackRate: defaultPlaybackRate });
   const playRequestedRef = useRef(false);
+  const onTimeUpdateRef = useRef(onTimeUpdate);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
@@ -26,6 +27,14 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
   const [loopEnabled, setLoopEnabled] = useState(true);
   const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
   const [playerError, setPlayerError] = useState(null);
+
+  useEffect(() => {
+    onTimeUpdateRef.current = onTimeUpdate;
+  }, [onTimeUpdate]);
+
+  function emitTimeUpdate(time) {
+    onTimeUpdateRef.current?.(time);
+  }
 
   function clearEndTimer() {
     if (endTimerRef.current) {
@@ -45,12 +54,12 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
       player.pauseVideo();
       player.seekTo(startSeconds, true);
       playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
-      onTimeUpdate?.(startSeconds);
+      emitTimeUpdate(startSeconds);
       return;
     }
     player.seekTo(startSeconds, true);
     playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
-    onTimeUpdate?.(startSeconds);
+    emitTimeUpdate(startSeconds);
     endTimerRef.current = setTimeout(() => {
       startLoop(player);
     }, 180);
@@ -67,12 +76,12 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
     const playbackRate = playbackRateRef.current || 1;
     endTimerRef.current = setTimeout(() => {
       finishClip(player);
-    }, Math.max(0, (remainingSeconds / playbackRate) * 1000 - 80));
+    }, Math.max(0, (remainingSeconds / playbackRate) * 1000));
     intervalRef.current = setInterval(() => {
       if (!player) return;
       const clock = playClockRef.current;
       const estimatedTime = clock.mediaTime + ((performance.now() - clock.wallTime) / 1000) * clock.playbackRate;
-      onTimeUpdate?.(estimatedTime);
+      emitTimeUpdate(estimatedTime);
       if (estimatedTime >= endSeconds) {
         finishClip(player);
         return;
@@ -86,7 +95,7 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
     setPlayerError(null);
 
     if (!videoId) {
-      setPlayerError('Missing YouTube video ID.');
+      setPlayerError(recordingId ? `Recording "${recordingId}" is missing a YouTube video ID.` : 'Missing YouTube video ID.');
       return () => {
         destroyed = true;
       };
@@ -194,10 +203,10 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
       if (currentTime < startSeconds || currentTime >= endSeconds) {
         player.seekTo(startSeconds, true);
         playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
-        onTimeUpdate?.(startSeconds);
+        emitTimeUpdate(startSeconds);
       } else {
         playClockRef.current = { mediaTime: currentTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
-        onTimeUpdate?.(currentTime);
+        emitTimeUpdate(currentTime);
       }
       startLoop(player);
       player.playVideo();
@@ -234,61 +243,63 @@ export default function YouTubeClipPlayer({ videoId, startSeconds, endSeconds, d
         <div ref={playerHostRef} />
       </div>
 
-      <div className="lp-clip-player">
-        {playerError && <p className="lp-player-error">{playerError}</p>}
-        <div className="lp-player-cta">Play Chant</div>
-        <div className="lp-controls">
-          <button
-            className={`lp-icon-button${isPlaying ? " active" : ""}`}
-            onClick={handlePlayPause}
-            disabled={!isReady}
-            aria-label={isPlaying ? 'Pause' : 'Play'}
-          >
-            {isPlaying ? (
-              <svg viewBox="0 0 24 24">
-                <rect x="6" y="4" width="4" height="16" />
-                <rect x="14" y="4" width="4" height="16" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24">
-                <polygon points="6,4 20,12 6,20" />
-              </svg>
-            )}
-          </button>
-
-          <button
-            type="button"
-            className={`lp-loop-button${loopEnabled ? " active" : ""}`}
-            onClick={toggleLoop}
-            aria-label={loopEnabled ? "Disable loop" : "Enable loop"}
-            aria-pressed={loopEnabled}
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M17 2l4 4-4 4" />
-              <path d="M3 11V9a3 3 0 0 1 3-3h15" />
-              <path d="M7 22l-4-4 4-4" />
-              <path d="M21 13v2a3 3 0 0 1-3 3H3" />
-            </svg>
-          </button>
-
-          <div className="lp-speed-wrapper" onClick={e => e.stopPropagation()}>
+      <div className="lp-player-stack">
+        <div className="lp-player-label">Play Chant</div>
+        <div className="lp-clip-player">
+          {playerError && <p className="lp-player-error">{playerError}</p>}
+          <div className="lp-controls">
             <button
-              className="lp-speed-button"
-              onClick={() => setSpeedMenuOpen(o => !o)}
+              className={`lp-icon-button${isPlaying ? " active" : ""}`}
+              onClick={handlePlayPause}
+              disabled={!isReady}
+              aria-label={isPlaying ? 'Pause' : 'Play'}
             >
-              {speedDisplay}
+              {isPlaying ? (
+                <svg viewBox="0 0 24 24">
+                  <rect x="6" y="4" width="4" height="16" />
+                  <rect x="14" y="4" width="4" height="16" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24">
+                  <polygon points="6,4 20,12 6,20" />
+                </svg>
+              )}
             </button>
 
-            {speedMenuOpen && (
-              <div className="lp-speed-menu">
-                <div className="lp-speed-title">Speed</div>
-                <div className="lp-speed-row">
-                  <button className="lp-speed-adjust" onClick={() => adjustSpeed(-0.1)}>−</button>
-                  <div className="lp-speed-value">{speedDisplay}</div>
-                  <button className="lp-speed-adjust" onClick={() => adjustSpeed(0.1)}>+</button>
+            <button
+              type="button"
+              className={`lp-loop-button${loopEnabled ? " active" : ""}`}
+              onClick={toggleLoop}
+              aria-label={loopEnabled ? "Disable loop" : "Enable loop"}
+              aria-pressed={loopEnabled}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17 2l4 4-4 4" />
+                <path d="M3 11V9a3 3 0 0 1 3-3h15" />
+                <path d="M7 22l-4-4 4-4" />
+                <path d="M21 13v2a3 3 0 0 1-3 3H3" />
+              </svg>
+            </button>
+
+            <div className="lp-speed-wrapper" onClick={e => e.stopPropagation()}>
+              <button
+                className="lp-speed-button"
+                onClick={() => setSpeedMenuOpen(o => !o)}
+              >
+                {speedDisplay}
+              </button>
+
+              {speedMenuOpen && (
+                <div className="lp-speed-menu">
+                  <div className="lp-speed-title">Speed</div>
+                  <div className="lp-speed-row">
+                    <button className="lp-speed-adjust" onClick={() => adjustSpeed(-0.1)}>−</button>
+                    <div className="lp-speed-value">{speedDisplay}</div>
+                    <button className="lp-speed-adjust" onClick={() => adjustSpeed(0.1)}>+</button>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>

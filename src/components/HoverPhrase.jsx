@@ -1,7 +1,7 @@
 import React from "react";
 import InteractiveText from "./InteractiveText.jsx";
 import PhraseTooltip from "./PhraseTooltip.jsx";
-import phrases from "../data/phrases.js";
+import phrases from "../data/texts/phrases.js";
 import { getArabicText } from "../utils/arabic.js";
 
 const h = React.createElement;
@@ -22,7 +22,7 @@ export default function HoverPhrase(props) {
       spokenText,
       speechRate: props.speechRate,
       tooltip: h(PhraseTooltip, { phrase }),
-      className: isRubric ? "liturgical-red" : undefined
+      className: [isRubric ? "liturgical-red" : null, props.className].filter(Boolean).join(" ") || undefined
     },
     text
   );

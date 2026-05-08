@@ -2,22 +2,23 @@
 
 Phrase text now uses a two-source workflow:
 
-- `src/data/phrases.js` is the local app data file and can be edited directly for fast development.
+- `src/data/texts/phrases.js` is the local app data file and can be edited directly for fast development.
 - Notion is the shared editorial database for classroom and reviewer corrections.
 
-There is no phrase CSV in the active workflow. `npm run dev` and `npm run build` do not regenerate phrase data, so local edits in `src/data/phrases.js` are not overwritten by normal development or deploy builds.
+There is no phrase CSV in the active workflow. `npm run dev` and `npm run build` do not regenerate phrase data, so local edits in `src/data/texts/phrases.js` are not overwritten by normal development or deploy builds.
 
 These files are hand-edited directly so course structure, phrase composition, section order, and audio timings can be adjusted and previewed immediately during development:
 
-- `src/data/units.js`
-- `src/data/lessons.js`
-- `src/data/segments.js`
-- `src/data/serviceTexts.js`
-- `src/data/recordings.js`
-- `src/data/alignments.js`
-- `src/data/activities.js`
-- `src/data/exercises.js`
-- `src/data/phrases.js`
+- `src/data/course/units.js`
+- `src/data/course/lessons.js`
+- `src/data/course/activities.js`
+- `src/data/course/exercises.js`
+- `src/data/texts/phrases.js`
+- `src/data/texts/segments.js`
+- `src/data/texts/serviceTexts.js`
+- `src/data/media/recordings.js`
+- `src/data/media/alignments.js`
+- `src/data/media/captionTracks.js`
 
 ## Notion Sync For Phrases
 
@@ -30,7 +31,7 @@ NOTION_PHRASES_DATABASE_ID=your_notion_phrases_database_id
 
 ### Command Reference
 
-Use these commands to keep local `src/data/phrases.js` and Notion in sync.
+Use these commands to keep local `src/data/texts/phrases.js` and Notion in sync.
 
 ```sh
 npm run phrases:check
@@ -42,25 +43,25 @@ Read-only drift report. Shows phrase IDs that are missing or changed between loc
 npm run phrases:check:pull
 ```
 
-Read-only pull preview. Shows what would change locally if Notion replaced `src/data/phrases.js`.
+Read-only pull preview. Shows what would change locally if Notion replaced `src/data/texts/phrases.js`.
 
 ```sh
 npm run phrases:pull
 ```
 
-Pull from Notion. Notion wins and replaces local `src/data/phrases.js`.
+Pull from Notion. Notion wins and replaces local `src/data/texts/phrases.js`.
 
 ```sh
 npm run phrases:check:push
 ```
 
-Read-only push preview. Shows what would be created, updated, or archived in Notion if local `src/data/phrases.js` won. If Notion has newer edits, this prints a warning but still writes nothing.
+Read-only push preview. Shows what would be created, updated, or archived in Notion if local `src/data/texts/phrases.js` won. If Notion has newer edits, this prints a warning but still writes nothing.
 
 ```sh
 npm run phrases:push
 ```
 
-Push to Notion. Local `src/data/phrases.js` wins. Notion rows that do not exist locally are archived, not permanently deleted. If Notion has newer edits, the command prints a warning and then overwrites them with local phrase data.
+Push to Notion. Local `src/data/texts/phrases.js` wins. Notion rows that do not exist locally are archived, not permanently deleted. If Notion has newer edits, the command prints a warning and then overwrites them with local phrase data.
 
 ### Typical Rhythms
 

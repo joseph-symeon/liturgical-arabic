@@ -5,7 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 const envPath = path.join(rootDir, '.env.local');
-const outputPath = path.join(rootDir, 'src', 'data', 'phrases.js');
+const outputPath = path.join(rootDir, 'src', 'data', 'texts', 'phrases.js');
 const syncManifestPath = path.join(rootDir, 'src', 'data', 'source', 'phrases.sync.json');
 
 const NOTION_VERSION = '2022-06-28';

@@ -1,5 +1,5 @@
 import React from "react";
-import phrases from "../data/phrases.js";
+import phrases from "../data/texts/phrases.js";
 import InteractiveText from "./InteractiveText.jsx";
 import PhraseTooltip from "./PhraseTooltip.jsx";
 import { getArabicText } from "../utils/arabic.js";

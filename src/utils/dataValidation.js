@@ -1,12 +1,12 @@
-import phrases from '../data/phrases.js';
-import segments from '../data/segments.js';
-import { exerciseDefinitions } from '../data/exercises.js';
-import lessons from '../data/lessons.js';
-import units from '../data/units.js';
-import { serviceTextDefinitions } from '../data/serviceTexts.js';
-import recordings from '../data/recordings.js';
-import { alignmentDefinitions } from '../data/alignments.js';
-import { activityDefinitions } from '../data/activities.js';
+import phrases from '../data/texts/phrases.js';
+import segments from '../data/texts/segments.js';
+import { exerciseDefinitions } from '../data/course/exercises.js';
+import lessons from '../data/course/lessons.js';
+import units from '../data/course/units.js';
+import { serviceTextDefinitions } from '../data/texts/serviceTexts.js';
+import recordings from '../data/media/recordings.js';
+import { alignmentDefinitions } from '../data/media/alignments.js';
+import { activityDefinitions } from '../data/course/activities.js';
 
 function assertUnique(ids, label, errors) {
   const seen = new Set();
@@ -41,6 +41,7 @@ export function validateData() {
   const alignmentIds = new Set(alignmentDefinitions.map(alignment => alignment.id));
   const alignmentsById = Object.fromEntries(alignmentDefinitions.map(alignment => [alignment.id, alignment]));
   const activityIds = new Set(activityDefinitions.map(activity => activity.id));
+  const serviceTextIds = new Set(serviceTextDefinitions.map(serviceText => serviceText.id));
 
   assertUnique(Object.keys(phrases), 'phrases', errors);
   assertUnique(Object.keys(segments), 'segments', errors);
@@ -133,26 +134,11 @@ export function validateData() {
       if (alignment && !findAlignmentMatch(alignment, activity.target?.segment_ids)) {
         errors.push(`Activity "${activity.id}" target.segment_ids do not match alignment "${activity.media.alignment_id}".`);
       }
-    }
-    if (activity.steps) {
-      if (!Array.isArray(activity.steps) || activity.steps.length === 0) {
-        errors.push(`Activity "${activity.id}" steps must be a non-empty array when present.`);
-      } else {
-        activity.steps.forEach((step, index) => {
-          if (!Array.isArray(step.segment_ids) || step.segment_ids.length === 0) {
-            errors.push(`Activity "${activity.id}" step ${index + 1} must define segment_ids.`);
-          } else {
-            step.segment_ids.forEach(segmentId => {
-              if (!segmentIds.has(segmentId)) {
-                errors.push(`Activity "${activity.id}" step ${index + 1} references missing segment "${segmentId}".`);
-              }
-            });
-            const alignment = activity.media?.alignment_id ? alignmentsById[activity.media.alignment_id] : null;
-            if (alignment && !findAlignmentMatch(alignment, step.segment_ids)) {
-              errors.push(`Activity "${activity.id}" step ${index + 1} segment_ids do not match alignment "${activity.media.alignment_id}".`);
-            }
-          }
-        });
+      if (activity.type === 'synced-caption' && alignment) {
+        const match = findAlignmentMatch(alignment, activity.target?.segment_ids);
+        if (!Array.isArray(match?.phrase_timings) || match.phrase_timings.length === 0) {
+          errors.push(`Activity "${activity.id}" requires phrase_timings on alignment "${activity.media.alignment_id}".`);
+        }
       }
     }
     if (activity.captions) {
@@ -187,11 +173,17 @@ export function validateData() {
       });
     }
     if (exercise.audio_clip) {
-      ['video_id', 'start_seconds', 'end_seconds', 'default_playback_rate'].forEach(field => {
+      ['start_seconds', 'end_seconds', 'default_playback_rate'].forEach(field => {
         if (typeof exercise.audio_clip[field] === 'undefined') {
           errors.push(`Exercise "${exercise.id}" audio_clip is missing "${field}".`);
         }
       });
+      if (!exercise.audio_clip.video_id && !exercise.audio_clip.recording_id) {
+        errors.push(`Exercise "${exercise.id}" audio_clip must define either "video_id" or "recording_id".`);
+      }
+      if (exercise.audio_clip.recording_id && !recordingIds.has(exercise.audio_clip.recording_id)) {
+        errors.push(`Exercise "${exercise.id}" audio_clip references missing recording "${exercise.audio_clip.recording_id}".`);
+      }
     }
     if (exercise.caption_clip) {
       if (!exercise.caption_clip.recording_id) {
@@ -206,6 +198,9 @@ export function validateData() {
   });
 
   alignmentDefinitions.forEach(alignment => {
+    if (alignment.service_text_id && !serviceTextIds.has(alignment.service_text_id)) {
+      errors.push(`Alignment "${alignment.id}" references missing service text "${alignment.service_text_id}".`);
+    }
     if (!recordingIds.has(alignment.recording_id)) {
       errors.push(`Alignment "${alignment.id}" references missing recording "${alignment.recording_id}".`);
     }
@@ -228,6 +223,24 @@ export function validateData() {
       } else if (match.end_seconds <= match.start_seconds) {
         errors.push(`Alignment "${alignment.id}" match ${index + 1} must end after it starts.`);
       }
+      if (match.phrase_timings) {
+        if (!Array.isArray(match.phrase_timings)) {
+          errors.push(`Alignment "${alignment.id}" match ${index + 1} phrase_timings must be an array.`);
+        } else {
+          match.phrase_timings.forEach((timing, timingIndex) => {
+            if (!timing.phrase_id || !phraseIds.has(timing.phrase_id)) {
+              errors.push(`Alignment "${alignment.id}" match ${index + 1} phrase timing ${timingIndex + 1} references missing phrase "${timing.phrase_id}".`);
+            }
+            if (typeof timing.start_seconds !== 'number' || typeof timing.end_seconds !== 'number') {
+              errors.push(`Alignment "${alignment.id}" match ${index + 1} phrase timing ${timingIndex + 1} must define numeric start_seconds and end_seconds.`);
+            } else if (timing.end_seconds <= timing.start_seconds) {
+              errors.push(`Alignment "${alignment.id}" match ${index + 1} phrase timing ${timingIndex + 1} must end after it starts.`);
+            } else if (typeof match.start_seconds === 'number' && typeof match.end_seconds === 'number' && (timing.start_seconds < match.start_seconds || timing.end_seconds > match.end_seconds)) {
+              errors.push(`Alignment "${alignment.id}" match ${index + 1} phrase timing ${timingIndex + 1} must stay inside the match time range.`);
+            }
+          });
+        }
+      }
     });
   });
 
@@ -241,6 +254,20 @@ export function validateData() {
     (lesson.exercises || []).forEach(item => {
       if (!exerciseIds.has(item.exercise_id)) {
         errors.push(`Lesson "${lesson.id}" references missing exercise "${item.exercise_id}".`);
+      }
+      if (item.activity_options) {
+        if (!Array.isArray(item.activity_options) || item.activity_options.length === 0) {
+          errors.push(`Lesson "${lesson.id}" exercise "${item.exercise_id}" activity_options must be a non-empty array when present.`);
+        } else {
+          item.activity_options.forEach((option, index) => {
+            if (!option.label) {
+              errors.push(`Lesson "${lesson.id}" exercise "${item.exercise_id}" activity option ${index + 1} is missing "label".`);
+            }
+            if (!exerciseIds.has(option.exercise_id)) {
+              errors.push(`Lesson "${lesson.id}" exercise "${item.exercise_id}" activity option ${index + 1} references missing exercise "${option.exercise_id}".`);
+            }
+          });
+        }
       }
     });
   });
