@@ -6,7 +6,7 @@ import phrases from '../texts/phrases.js';
 import captionTracks from '../media/captionTracks.js';
 import alignments from '../media/alignments.js';
 import activities from './activities.js';
-import { deriveCaptionClip, getAlignmentPhraseTimings } from '../../utils/captionClips.js';
+import { deriveCaptionClip, findAlignmentMatch, getAlignmentPhraseTimings } from '../../utils/captionClips.js';
 
 export const exerciseDefinitions = [
   {
@@ -16,9 +16,9 @@ export const exerciseDefinitions = [
       "antiphon-deathless"
     ],
     "audio_clip": {
-      "video_id": "-dufaXx7Hm0",
-      "start_seconds": 150.75,
-      "end_seconds": 162.05,
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 150.77,
+      "end_seconds": 162.68,
       "default_playback_rate": 1
     }
   },
@@ -31,9 +31,9 @@ export const exerciseDefinitions = [
       "entrance-hymn-risen-alleluia"
     ],
     "audio_clip": {
-      "video_id": "-dufaXx7Hm0",
-      "start_seconds": 151,
-      "end_seconds": 180.5,
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 80.7,
+      "end_seconds": 99.78,
       "default_playback_rate": 1
     }
   },
@@ -44,9 +44,9 @@ export const exerciseDefinitions = [
       "antiphon-from-theotokos"
     ],
     "audio_clip": {
-      "video_id": "-dufaXx7Hm0",
-      "start_seconds": 151,
-      "end_seconds": 180.5,
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 162.68,
+      "end_seconds": 180.3,
       "default_playback_rate": 1
     }
   },
@@ -57,9 +57,9 @@ export const exerciseDefinitions = [
       "antiphon-crucified"
     ],
     "audio_clip": {
-      "video_id": "-dufaXx7Hm0",
-      "start_seconds": 151,
-      "end_seconds": 180.5,
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 180.3,
+      "end_seconds": 193.35,
       "default_playback_rate": 1
     }
   },
@@ -70,9 +70,9 @@ export const exerciseDefinitions = [
       "antiphon-one-of-trinity"
     ],
     "audio_clip": {
-      "video_id": "-dufaXx7Hm0",
-      "start_seconds": 151,
-      "end_seconds": 180.5,
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 193.35,
+      "end_seconds": 204.22,
       "default_playback_rate": 1
     }
   },
@@ -83,20 +83,15 @@ export const exerciseDefinitions = [
       "antiphon-save-us"
     ],
     "audio_clip": {
-      "video_id": "-dufaXx7Hm0",
-      "start_seconds": 151,
-      "end_seconds": 180.5,
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 204.22,
+      "end_seconds": 218.22,
       "default_playback_rate": 1
     }
   },
   {
     "id": "antiphons-summary",
     "segment_ids": [
-      "first-antiphon-through-theotokos-1",
-      "entrance-hymn-save-us-son-of-god",
-      "course-entrance-hymn-risen-sundays",
-      "course-entrance-hymn-wondrous-weekdays",
-      "entrance-hymn-risen-alleluia",
       "antiphon-word-of-god-only-begotten",
       "antiphon-deathless",
       "antiphon-accepted-incarnate",
@@ -105,13 +100,12 @@ export const exerciseDefinitions = [
       "antiphon-crucified",
       "antiphon-trampled-death",
       "antiphon-one-of-trinity",
-      "antiphon-glorified-with-father",
-      "antiphon-save-us"
+      "antiphon-glorified-with-father"
     ],
     "audio_clip": {
-      "video_id": "-dufaXx7Hm0",
-      "start_seconds": 150.75,
-      "end_seconds": 180.5,
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 150.77,
+      "end_seconds": 210.02,
       "default_playback_rate": 1
     }
   },
@@ -361,7 +355,12 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "first-antiphon-through-theotokos-1"
     ],
-    "audio_clip": null
+    "audio_clip": {
+      "recording_id": "recording-KJKt0V4zJjY",
+      "start_seconds": 399.45,
+      "end_seconds": 409.38,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "little-litany-again",
@@ -738,5 +737,120 @@ export function resolveExercise(definition, segmentsMap = segments) {
 const exercises = Object.fromEntries(
   exerciseDefinitions.map(definition => [definition.id, resolveExercise(definition)])
 );
+
+const STANDARD_ACTIVITY_OPTIONS = [
+  {
+    label: 'Listen & Repeat',
+    activity_type: 'listen-repeat'
+  },
+  {
+    label: 'Phrase Captions',
+    activity_type: 'synced-caption'
+  }
+];
+
+function getPhraseIdsForLines(lines) {
+  return (lines || []).flatMap(line => (
+    (line.phrases || [])
+      .filter(part => part.phrase_id)
+      .map(part => part.phrase_id)
+  ));
+}
+
+function buildEvenCaptions(audioClip, phraseIds) {
+  if (!audioClip || phraseIds.length === 0) return [];
+
+  const duration = audioClip.end_seconds - audioClip.start_seconds;
+  const phraseDuration = duration / phraseIds.length;
+  return phraseIds.map((phraseId, index) => ({
+    phrase_id: phraseId,
+    start_seconds: Math.round((audioClip.start_seconds + phraseDuration * index) * 1000) / 1000,
+    end_seconds: Math.round((audioClip.start_seconds + phraseDuration * (index + 1)) * 1000) / 1000
+  }));
+}
+
+function getAlignedCaptions(exercise) {
+  const match = findAlignmentMatch(exercise.audio_clip?.recording_id, exercise.segment_ids, alignments);
+  return match?.match?.phrase_timings?.map(timing => ({ ...timing })) || [];
+}
+
+export function getExercisePhraseCount(exerciseId) {
+  return getPhraseIdsForLines(exercises[exerciseId]?.lines).length;
+}
+
+export function getStandardActivityOptions(exerciseId) {
+  const activityOptions = [...STANDARD_ACTIVITY_OPTIONS];
+  if (getExercisePhraseCount(exerciseId) <= 12) {
+    activityOptions.push({
+      label: 'Arrange',
+      activity_type: 'arrange-cloze'
+    });
+  }
+  return activityOptions;
+}
+
+function getDerivedActivity(exercise, activityType) {
+  if (!activityType) return exercise.activity;
+
+  const phraseIds = getPhraseIdsForLines(exercise.lines);
+  const alignedCaptions = getAlignedCaptions(exercise);
+  const captions = alignedCaptions.length ? alignedCaptions : buildEvenCaptions(exercise.audio_clip, phraseIds);
+  const alignmentMatch = findAlignmentMatch(exercise.audio_clip?.recording_id, exercise.segment_ids, alignments);
+  const commonActivity = {
+    id: `${exercise.id}:${activityType}`,
+    target: {
+      segment_ids: exercise.segment_ids
+    },
+    media: exercise.audio_clip?.recording_id
+      ? {
+          recording_id: exercise.audio_clip.recording_id,
+          alignment_id: alignmentMatch?.alignment?.id,
+          default_playback_rate: exercise.audio_clip.default_playback_rate
+        }
+      : null
+  };
+
+  if (activityType === 'listen-repeat') {
+    return {
+      ...commonActivity,
+      type: 'listen-repeat',
+      title: 'Listen & Repeat',
+      captions
+    };
+  }
+
+  if (activityType === 'synced-caption') {
+    return {
+      ...commonActivity,
+      type: 'synced-caption',
+      title: 'Phrase Captions',
+      captions
+    };
+  }
+
+  if (activityType === 'arrange-cloze') {
+    return {
+      ...commonActivity,
+      type: 'arrange-cloze',
+      title: 'Arrange',
+      cloze: {
+        phrase_ids: phraseIds
+      }
+    };
+  }
+
+  return exercise.activity;
+}
+
+export function getExerciseWithActivity(exerciseId, activityType = null) {
+  const exercise = exercises[exerciseId];
+  if (!exercise || !activityType) return exercise;
+
+  return {
+    ...exercise,
+    id: `${exercise.id}:${activityType}`,
+    activity: getDerivedActivity(exercise, activityType)
+  };
+}
 
 export default exercises;

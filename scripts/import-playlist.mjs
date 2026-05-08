@@ -15,6 +15,7 @@ const booleanFlags = new Set([
   '--download-audio',
   '--transcribe',
   '--force',
+  '--skip-promote',
   '--dry-run',
   '--help',
   '-h'
@@ -45,13 +46,14 @@ function usage() {
 
 Options:
   --language <code>        Caption/ASR language. Default: ar
-  --out-dir <path>         Directory for per-video inbox folders. Default: recordings/inbox
+  --out-dir <path>         Directory for temporary import folders. Default: .recording-cache/imports
   --download-audio         Download each video's local M4A after writing manifests
   --transcribe             Run faster-whisper after importing. Implies --download-audio
   --model <name>           faster-whisper model for --transcribe. Default: small
   --limit <count>          Process only the first N playlist entries
   --start-index <number>   Start with this 1-based playlist index
   --force                  Overwrite existing manifest.json files
+  --skip-promote           Do not update src/data/media after --transcribe
   --dry-run                Print the planned work without writing or running imports`);
 }
 
@@ -66,13 +68,14 @@ function hasFlag(name) {
 const playlistInput = positionals[0];
 const serviceTextId = getFlag('--service-text-id');
 const language = getFlag('--language') || 'ar';
-const outDir = resolve(getFlag('--out-dir') || 'recordings/inbox');
+const outDir = resolve(getFlag('--out-dir') || '.recording-cache/imports');
 const shouldTranscribe = hasFlag('--transcribe');
 const shouldDownloadAudio = hasFlag('--download-audio') || shouldTranscribe;
 const model = getFlag('--model') || 'small';
 const limit = getFlag('--limit') ? Number.parseInt(getFlag('--limit'), 10) : null;
 const startIndex = getFlag('--start-index') ? Number.parseInt(getFlag('--start-index'), 10) : 1;
 const shouldForce = hasFlag('--force');
+const shouldPromote = shouldTranscribe && !hasFlag('--skip-promote');
 const isDryRun = hasFlag('--dry-run');
 
 if (hasFlag('--help') || hasFlag('-h')) {
@@ -182,6 +185,10 @@ function runTranscribe(generatedRecordingPath) {
   ], { stdio: 'inherit' });
 }
 
+function runPromote() {
+  run(process.execPath, ['scripts/promote-recording-imports.mjs', outDir], { stdio: 'inherit' });
+}
+
 const playlist = getPlaylistMetadata(playlistInput);
 const playlistId = playlistIdFrom(playlistInput, playlist);
 const playlistTitle = playlist.title || null;
@@ -222,7 +229,7 @@ const planned = entries.map((entry, index) => {
 console.log(`Playlist: ${playlistTitle || playlistId}`);
 console.log(`Videos: ${planned.length}`);
 console.log(`Output: ${outDir}`);
-console.log(`Actions: write manifests${shouldDownloadAudio ? ', download M4A' : ''}${shouldTranscribe ? ', transcribe ASR' : ''}`);
+console.log(`Actions: write manifests${shouldDownloadAudio ? ', download M4A' : ''}${shouldTranscribe ? ', transcribe ASR' : ''}${shouldPromote ? ', promote runtime data' : ''}`);
 
 for (const item of planned) {
   const relativeManifestPath = item.manifestPath.replace(`${process.cwd()}/`, '');
@@ -242,4 +249,8 @@ for (const item of planned) {
     const generatedRecordingPath = resolve(item.dir, 'recording.generated.json');
     runTranscribe(generatedRecordingPath);
   }
+}
+
+if (!isDryRun && shouldPromote) {
+  runPromote();
 }

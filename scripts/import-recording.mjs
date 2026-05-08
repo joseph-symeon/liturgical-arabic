@@ -6,7 +6,7 @@ const manifestPath = process.argv[2];
 const shouldDownloadAudio = process.argv.includes('--download-audio');
 
 if (!manifestPath) {
-  console.error('Usage: node scripts/import-recording.mjs recordings/inbox/<slug>/manifest.json [--download-audio]');
+  console.error('Usage: node scripts/import-recording.mjs .recording-cache/imports/<slug>/manifest.json [--download-audio]');
   process.exit(1);
 }
 

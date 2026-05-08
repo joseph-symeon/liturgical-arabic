@@ -378,6 +378,285 @@ export const alignmentDefinitions = [
         ]
       }
     ]
+  },
+  {
+    "id": "alignment-divine-liturgy-KJKt0V4zJjY-antiphons-v1",
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "recording_id": "recording-KJKt0V4zJjY",
+    "method": "faster-whisper-small-pinned-phrase-timings",
+    "matches": [
+      {
+        "segment_ids": [
+          "first-antiphon-through-theotokos-1"
+        ],
+        "start_seconds": 399.45,
+        "end_seconds": 409.38,
+        "phrase_timings": [
+          {
+            "phrase_id": "through-intercessions-001",
+            "start_seconds": 399.74,
+            "end_seconds": 401.14
+          },
+          {
+            "phrase_id": "theotokos-001",
+            "start_seconds": 401.14,
+            "end_seconds": 403.6
+          },
+          {
+            "phrase_id": "o-savior-save-us-001",
+            "start_seconds": 403.6,
+            "end_seconds": 407.7
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "alignment-divine-liturgy--dufaXx7Hm0-antiphons-v1",
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "recording_id": "recording--dufaXx7Hm0",
+    "method": "faster-whisper-small-pinned-phrase-timings",
+    "matches": [
+      {
+        "segment_ids": [
+          "entrance-hymn-save-us-son-of-god",
+          "course-entrance-hymn-risen-sundays",
+          "course-entrance-hymn-wondrous-weekdays",
+          "entrance-hymn-risen-alleluia"
+        ],
+        "start_seconds": 80.7,
+        "end_seconds": 99.78,
+        "phrase_timings": [
+          {
+            "phrase_id": "save-us-001",
+            "start_seconds": 80.7,
+            "end_seconds": 82.9
+          },
+          {
+            "phrase_id": "son-of-god-001",
+            "start_seconds": 82.9,
+            "end_seconds": 84.96
+          },
+          {
+            "phrase_id": "entrance-risen-dead-001",
+            "start_seconds": 85.5,
+            "end_seconds": 91.64
+          },
+          {
+            "phrase_id": "entrance-we-sing-to-you-001",
+            "start_seconds": 91.64,
+            "end_seconds": 96.02
+          },
+          {
+            "phrase_id": "alleluia-001",
+            "start_seconds": 96.02,
+            "end_seconds": 98.64
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "antiphon-word-of-god-only-begotten",
+          "antiphon-deathless"
+        ],
+        "start_seconds": 150.77,
+        "end_seconds": 162.68,
+        "phrase_timings": [
+          {
+            "phrase_id": "word-of-god-001",
+            "start_seconds": 150.77,
+            "end_seconds": 153.78
+          },
+          {
+            "phrase_id": "only-begotten-001",
+            "start_seconds": 153.78,
+            "end_seconds": 155.8
+          },
+          {
+            "phrase_id": "deathless-001",
+            "start_seconds": 156.14,
+            "end_seconds": 162.68
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "antiphon-accepted-incarnate",
+          "antiphon-from-theotokos"
+        ],
+        "start_seconds": 162.68,
+        "end_seconds": 180.3,
+        "phrase_timings": [
+          {
+            "phrase_id": "accepted-incarnate-001",
+            "start_seconds": 162.68,
+            "end_seconds": 165.88
+          },
+          {
+            "phrase_id": "for-our-salvation-001",
+            "start_seconds": 165.88,
+            "end_seconds": 170.54
+          },
+          {
+            "phrase_id": "from-theotokos-001",
+            "start_seconds": 170.54,
+            "end_seconds": 175.28
+          },
+          {
+            "phrase_id": "ever-virgin-mary-001",
+            "start_seconds": 175.8,
+            "end_seconds": 180.2
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "antiphon-became-man",
+          "antiphon-crucified"
+        ],
+        "start_seconds": 180.3,
+        "end_seconds": 193.35,
+        "phrase_timings": [
+          {
+            "phrase_id": "became-man-001",
+            "start_seconds": 180.3,
+            "end_seconds": 185.56
+          },
+          {
+            "phrase_id": "crucified-001",
+            "start_seconds": 185.56,
+            "end_seconds": 193.35
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "antiphon-trampled-death",
+          "antiphon-one-of-trinity"
+        ],
+        "start_seconds": 193.35,
+        "end_seconds": 204.22,
+        "phrase_timings": [
+          {
+            "phrase_id": "trampled-death-001",
+            "start_seconds": 193.35,
+            "end_seconds": 197.4
+          },
+          {
+            "phrase_id": "one-of-trinity-001",
+            "start_seconds": 197.4,
+            "end_seconds": 204.22
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "antiphon-glorified-with-father",
+          "antiphon-save-us"
+        ],
+        "start_seconds": 204.22,
+        "end_seconds": 218.22,
+        "phrase_timings": [
+          {
+            "phrase_id": "glorified-with-001",
+            "start_seconds": 204.22,
+            "end_seconds": 206.4
+          },
+          {
+            "phrase_id": "father-holy-spirit-001",
+            "start_seconds": 206.4,
+            "end_seconds": 210.02
+          },
+          {
+            "phrase_id": "save-us-001",
+            "start_seconds": 210.02,
+            "end_seconds": 218.22
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "antiphon-word-of-god-only-begotten",
+          "antiphon-deathless",
+          "antiphon-accepted-incarnate",
+          "antiphon-from-theotokos",
+          "antiphon-became-man",
+          "antiphon-crucified",
+          "antiphon-trampled-death",
+          "antiphon-one-of-trinity",
+          "antiphon-glorified-with-father"
+        ],
+        "start_seconds": 150.77,
+        "end_seconds": 210.02,
+        "phrase_timings": [
+          {
+            "phrase_id": "word-of-god-001",
+            "start_seconds": 150.77,
+            "end_seconds": 153.78
+          },
+          {
+            "phrase_id": "only-begotten-001",
+            "start_seconds": 153.78,
+            "end_seconds": 155.8
+          },
+          {
+            "phrase_id": "deathless-001",
+            "start_seconds": 156.14,
+            "end_seconds": 162.68
+          },
+          {
+            "phrase_id": "accepted-incarnate-001",
+            "start_seconds": 162.68,
+            "end_seconds": 165.88
+          },
+          {
+            "phrase_id": "for-our-salvation-001",
+            "start_seconds": 165.88,
+            "end_seconds": 170.54
+          },
+          {
+            "phrase_id": "from-theotokos-001",
+            "start_seconds": 170.54,
+            "end_seconds": 175.28
+          },
+          {
+            "phrase_id": "ever-virgin-mary-001",
+            "start_seconds": 175.8,
+            "end_seconds": 180.2
+          },
+          {
+            "phrase_id": "became-man-001",
+            "start_seconds": 180.3,
+            "end_seconds": 185.56
+          },
+          {
+            "phrase_id": "crucified-001",
+            "start_seconds": 185.56,
+            "end_seconds": 193.35
+          },
+          {
+            "phrase_id": "trampled-death-001",
+            "start_seconds": 193.35,
+            "end_seconds": 197.4
+          },
+          {
+            "phrase_id": "one-of-trinity-001",
+            "start_seconds": 197.4,
+            "end_seconds": 204.22
+          },
+          {
+            "phrase_id": "glorified-with-001",
+            "start_seconds": 204.22,
+            "end_seconds": 206.4
+          },
+          {
+            "phrase_id": "father-holy-spirit-001",
+            "start_seconds": 206.4,
+            "end_seconds": 210.02
+          }
+        ]
+      }
+    ]
   }
 ];
 

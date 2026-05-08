@@ -124,8 +124,24 @@ export function findCaptionClipMatch(definition, phrasesMap, segmentsMap, captio
 
 export function deriveCaptionClip(definition, phrasesMap, segmentsMap, captionTracks, alignments) {
   const config = definition.caption_clip;
+  if (!config) return null;
+
+  const alignedClip = config.alignment_id
+    ? getAlignmentClip(config.alignment_id, definition.segment_ids, config.recording_id, alignments)
+    : null;
+  if (alignedClip) {
+    const track = captionTracks[config.recording_id] || captionTracks[config.video_id];
+    return {
+      recording_id: config.recording_id,
+      video_id: track?.video_id || config.video_id,
+      start_seconds: alignedClip.start_seconds,
+      end_seconds: alignedClip.end_seconds,
+      default_playback_rate: config.default_playback_rate ?? 1
+    };
+  }
+
   const match = findCaptionClipMatch(definition, phrasesMap, segmentsMap, captionTracks);
-  if (!config || !match) return null;
+  if (!match) return null;
 
   const { track, captionWords, matchStart, matchEnd } = match;
   const startPadding = config.start_padding_seconds ?? 0.15;
@@ -136,13 +152,9 @@ export function deriveCaptionClip(definition, phrasesMap, segmentsMap, captionTr
   const derivedEndSeconds = typeof nextWordStart === 'number'
     ? Math.min(paddedEnd, Math.max(captionWords[matchEnd].start, nextWordStart - boundaryGuard))
     : paddedEnd;
-  const alignedClip = config.alignment_id
-    ? getAlignmentClip(config.alignment_id, definition.segment_ids, config.recording_id, alignments)
-    : null;
-  const startSeconds = alignedClip?.start_seconds
-    ?? config.pinned_start_seconds
+  const startSeconds = config.pinned_start_seconds
     ?? Math.max(0, captionWords[matchStart].start - startPadding);
-  const endSeconds = alignedClip?.end_seconds ?? config.pinned_end_seconds ?? derivedEndSeconds;
+  const endSeconds = config.pinned_end_seconds ?? derivedEndSeconds;
 
   return {
     recording_id: config.recording_id,
@@ -163,6 +175,19 @@ export function getAlignmentMatch(alignmentId, segmentIds, recordingId, alignmen
 
   const segmentKey = getSegmentKey(segmentIds);
   return alignment.matches.find(item => getSegmentKey(item.segment_ids) === segmentKey) || null;
+}
+
+export function findAlignmentMatch(recordingId, segmentIds, alignments) {
+  if (!recordingId) return null;
+
+  const segmentKey = getSegmentKey(segmentIds);
+  const alignment = Object.values(alignments || {}).find(item => (
+    item.recording_id === recordingId
+      && item.matches?.some(match => getSegmentKey(match.segment_ids) === segmentKey)
+  ));
+  const match = alignment?.matches?.find(item => getSegmentKey(item.segment_ids) === segmentKey);
+
+  return alignment && match ? { alignment, match } : null;
 }
 
 export function getAlignmentClip(alignmentId, segmentIds, recordingId, alignments) {

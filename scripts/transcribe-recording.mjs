@@ -5,9 +5,10 @@ import { spawnSync } from 'node:child_process';
 const generatedRecordingPath = process.argv[2];
 const modelArgIndex = process.argv.indexOf('--model');
 const model = modelArgIndex >= 0 ? process.argv[modelArgIndex + 1] : 'small';
+const shouldPromote = !process.argv.includes('--skip-promote');
 
 if (!generatedRecordingPath) {
-  console.error('Usage: node scripts/transcribe-recording.mjs recordings/inbox/<slug>/recording.generated.json [--model small]');
+  console.error('Usage: node scripts/transcribe-recording.mjs .recording-cache/imports/<slug>/recording.generated.json [--model small] [--skip-promote]');
   process.exit(1);
 }
 
@@ -83,3 +84,16 @@ console.log(JSON.stringify({
   updated_recording: absoluteGeneratedPath,
   captions: updatedRecording.captions
 }, null, 2));
+
+if (shouldPromote) {
+  const promoteRoot = dirname(generatedDir);
+  const result = spawnSync(process.execPath, ['scripts/promote-recording-imports.mjs', promoteRoot], {
+    stdio: 'inherit'
+  });
+  if (result.error?.code === 'ENOENT') {
+    throw new Error(`Missing required command: ${process.execPath}`);
+  }
+  if (result.status !== 0) {
+    throw new Error(`promote-recording-imports exited with status ${result.status}`);
+  }
+}

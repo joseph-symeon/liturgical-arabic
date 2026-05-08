@@ -3,9 +3,13 @@ import './course.css';
 import ExerciseBlock from './ExerciseBlock.jsx';
 import PageHeader from '../PageHeader.jsx';
 import YouTubeClipPlayer from './YouTubeClipPlayer.jsx';
-import exercises from '../../data/course/exercises.js';
+import exercises, { getExerciseWithActivity, getStandardActivityOptions } from '../../data/course/exercises.js';
 import recordings from '../../data/media/recordings.js';
 import { getExerciseTitle } from './exerciseTitles.js';
+
+const SYNCED_CAPTION_TEXT_MODE_STORAGE_KEY = 'liturgical-arabic:synced-caption-text-mode';
+const SYNCED_CAPTION_TEXT_MODES = ['none', 'translation', 'literal'];
+const ACTIVITY_SELECTION_STORAGE_KEY = 'liturgical-arabic:activity-selection';
 
 function getActivityLabel(activity) {
   if (!activity) return null;
@@ -14,6 +18,54 @@ function getActivityLabel(activity) {
   if (activity.type === 'arrange-cloze') return 'Arrange';
   if (activity.type === 'cloze') return 'Cloze';
   return activity.type;
+}
+
+function getActivityOptions(item) {
+  if (item?.activity_options) return item.activity_options;
+  if (item?.activity_policy === 'standard') return getStandardActivityOptions(item.exercise_id);
+  return [];
+}
+
+function getActivityOptionValue(option) {
+  return option?.exercise_id || option?.activity_type || null;
+}
+
+function getStoredSyncedCaptionTextMode() {
+  if (typeof window === 'undefined') return 'none';
+  const stored = window.localStorage.getItem(SYNCED_CAPTION_TEXT_MODE_STORAGE_KEY);
+  return SYNCED_CAPTION_TEXT_MODES.includes(stored) ? stored : 'none';
+}
+
+function getStoredActivitySelections() {
+  if (typeof window === 'undefined') return {};
+
+  try {
+    const stored = window.localStorage.getItem(ACTIVITY_SELECTION_STORAGE_KEY);
+    const parsed = stored ? JSON.parse(stored) : {};
+    return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function getActivitySelectionKey(lessonId, exerciseItem, exerciseIndex) {
+  return `${lessonId}:${exerciseItem?.exercise_id || exerciseIndex}`;
+}
+
+function getStoredActivityOptionId(lessonId, exerciseItem, exerciseIndex, activityOptions) {
+  const selectionKey = getActivitySelectionKey(lessonId, exerciseItem, exerciseIndex);
+  const storedValue = getStoredActivitySelections()[selectionKey];
+  return activityOptions.some(option => getActivityOptionValue(option) === storedValue) ? storedValue : null;
+}
+
+function storeActivityOptionId(lessonId, exerciseItem, exerciseIndex, activityOptionId) {
+  if (typeof window === 'undefined' || !activityOptionId) return;
+
+  const selectionKey = getActivitySelectionKey(lessonId, exerciseItem, exerciseIndex);
+  window.localStorage.setItem(ACTIVITY_SELECTION_STORAGE_KEY, JSON.stringify({
+    ...getStoredActivitySelections(),
+    [selectionKey]: activityOptionId
+  }));
 }
 
 export default function LessonPage({
@@ -35,25 +87,35 @@ export default function LessonPage({
 }) {
   const exerciseItems = lesson.exercises ?? [];
   const selectedExerciseItem = exerciseItems[selectedExerciseIndex] ?? exerciseItems[0];
-  const activityOptions = selectedExerciseItem?.activity_options || [];
-  const [selectedActivityOptionId, setSelectedActivityOptionId] = useState(null);
+  const activityOptions = getActivityOptions(selectedExerciseItem);
+  const [selectedActivityOptionId, setSelectedActivityOptionId] = useState(() => (
+    getStoredActivityOptionId(lesson.id, selectedExerciseItem, selectedExerciseIndex, activityOptions)
+  ));
   const [karaokeMode, setKaraokeMode] = useState(false);
-  const [showSyncedCaptionTranslation, setShowSyncedCaptionTranslation] = useState(false);
+  const [syncedCaptionTextMode, setSyncedCaptionTextMode] = useState(getStoredSyncedCaptionTextMode);
   const [syncedTime, setSyncedTime] = useState(null);
-  const selectedActivityOption = activityOptions.find(option => option.exercise_id === selectedActivityOptionId) || activityOptions[0] || null;
+  const selectedActivityOption = activityOptions.find(option => (
+    getActivityOptionValue(option) === selectedActivityOptionId
+  )) || activityOptions[0] || null;
 
   useEffect(() => {
-    setSelectedActivityOptionId(null);
+    setSelectedActivityOptionId(getStoredActivityOptionId(lesson.id, selectedExerciseItem, selectedExerciseIndex, activityOptions));
     setSyncedTime(null);
   }, [lesson.id, selectedExerciseIndex]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(SYNCED_CAPTION_TEXT_MODE_STORAGE_KEY, syncedCaptionTextMode);
+  }, [syncedCaptionTextMode]);
 
   const resolvedExercises = exerciseItems
     .map((item, index) => {
       const option = index === selectedExerciseIndex ? selectedActivityOption : null;
       const exerciseId = option?.exercise_id || item.exercise_id;
+      const activityType = option?.activity_type || item.activity_type || null;
       return {
         exercise_id: exerciseId,
-        exercise: exercises[exerciseId],
+        exercise: activityType ? getExerciseWithActivity(exerciseId, activityType) : exercises[exerciseId],
         audio_clip: item.audio_clip || exercises[exerciseId]?.audio_clip
       };
     });
@@ -80,8 +142,14 @@ export default function LessonPage({
     const clip = selectedExercise?.audio_clip;
     if (!clip) return null;
     const clipVideoId = clip.video_id || recordings[clip.recording_id]?.youtube?.video_id;
+    const clipKey = [
+      clip.recording_id || clipVideoId,
+      clip.start_seconds,
+      clip.end_seconds
+    ].join(':');
     return (
       <YouTubeClipPlayer
+        key={clipKey}
         videoId={clipVideoId}
         recordingId={clip.recording_id}
         startSeconds={clip.start_seconds}
@@ -118,14 +186,15 @@ export default function LessonPage({
                     <select
                       id="lp-activity-select"
                       className="lp-activity-select"
-                      value={selectedActivityOption?.exercise_id || selectedExerciseItem.exercise_id}
+                      value={getActivityOptionValue(selectedActivityOption) || selectedExerciseItem.exercise_id}
                       onChange={event => {
                         setSelectedActivityOptionId(event.target.value);
+                        storeActivityOptionId(lesson.id, selectedExerciseItem, selectedExerciseIndex, event.target.value);
                         setSyncedTime(null);
                       }}
                     >
                       {activityOptions.map(option => (
-                        <option key={option.exercise_id} value={option.exercise_id}>
+                        <option key={getActivityOptionValue(option)} value={getActivityOptionValue(option)}>
                           {option.label}
                         </option>
                       ))}
@@ -159,15 +228,22 @@ export default function LessonPage({
           )}
 
           {isSyncedCaptionActivity && (
-            <label className="lp-mode-toggle">
-              <input
-                type="checkbox"
-                checked={showSyncedCaptionTranslation}
-                onChange={event => setShowSyncedCaptionTranslation(event.target.checked)}
-              />
-              <span className="lp-mode-switch" aria-hidden="true" />
-              <span>Show translation</span>
-            </label>
+            <div className="lp-segmented-control" role="group" aria-label="Phrase caption text">
+              {[
+                ['none', 'Arabic'],
+                ['translation', 'Translation'],
+                ['literal', 'Literal']
+              ].map(([mode, label]) => (
+                <button
+                  key={mode}
+                  type="button"
+                  className={syncedCaptionTextMode === mode ? 'active' : ''}
+                  onClick={() => setSyncedCaptionTextMode(mode)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           )}
         </div>
       )}
@@ -183,7 +259,7 @@ export default function LessonPage({
           arabicFontWeight={arabicFontWeight}
           arabicFontSize={arabicFontSize}
           karaokeMode={karaokeMode}
-          showSyncedCaptionTranslation={showSyncedCaptionTranslation}
+          syncedCaptionTextMode={syncedCaptionTextMode}
           syncedTime={syncedTime}
         />
       )}

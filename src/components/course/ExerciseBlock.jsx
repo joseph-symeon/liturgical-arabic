@@ -21,14 +21,16 @@ import ArabicPhraseRenderer from './ArabicPhraseRenderer.jsx';
 import phrases from '../../data/texts/phrases.js';
 import { getArabicText } from '../../utils/arabic.js';
 
-function getActiveCaption(captions, currentTime, leadSeconds = 0) {
+function getActiveCaption(captions, currentTime, leadSeconds = 0, clipEndSeconds = null) {
   if (typeof currentTime !== 'number') return null;
   return captions.find((caption, index) => {
     const nextCaption = captions[index + 1];
+    const isFinalCaption = index === captions.length - 1;
     const displayStart = caption.start_seconds - leadSeconds;
     const displayEnd = caption.display_end_seconds ?? (nextCaption
       ? Math.min(caption.end_seconds, nextCaption.start_seconds - 0.01)
-      : caption.end_seconds);
+      : Math.max(caption.end_seconds, clipEndSeconds ?? caption.end_seconds));
+    if (isFinalCaption) return currentTime >= displayStart && currentTime <= displayEnd;
     return currentTime >= displayStart && currentTime < displayEnd;
   }) || null;
 }
@@ -158,7 +160,7 @@ function getArrangeRows(arrangedPhraseIds, lineCounts) {
   });
 }
 
-export default function ExerciseBlock({ exercise, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight, arabicFontSize, karaokeMode = false, showSyncedCaptionTranslation = true, syncedTime = null }) {
+export default function ExerciseBlock({ exercise, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight, arabicFontSize, karaokeMode = false, syncedCaptionTextMode = 'none', syncedTime = null }) {
   const isListenRepeatActivity = exercise.activity?.type === 'listen-repeat';
   const isClozeActivity = exercise.activity?.type === 'cloze' || exercise.activity?.type === 'arrange-cloze';
   const isArrangeClozeActivity = exercise.activity?.type === 'arrange-cloze';
@@ -196,7 +198,7 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
   const captions = exercise.activity?.captions || [];
   const leadSeconds = exercise.activity?.sync_lead_seconds ?? 0;
   const initialSyncedCaption = isSyncedCaptionActivity && typeof syncedTime !== 'number' ? captions[0] : null;
-  const activeCaption = getActiveCaption(captions, syncedTime, leadSeconds) || initialSyncedCaption;
+  const activeCaption = getActiveCaption(captions, syncedTime, leadSeconds, exercise.audio_clip?.end_seconds) || initialSyncedCaption;
   const activePhrase = activeCaption ? phrases[activeCaption.phrase_id] : null;
   const karaokeActivePhraseId = isListenRepeatActivity && karaokeMode ? activeCaption?.phrase_id : null;
 
@@ -242,6 +244,12 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
   }
 
   function renderSyncedCaptionActivity() {
+    const syncedCaptionSecondaryText = syncedCaptionTextMode === 'translation'
+      ? activePhrase?.translation
+      : syncedCaptionTextMode === 'literal'
+        ? activePhrase?.literal
+        : null;
+
     return (
       <>
         <div className="lp-synced-stage" dir="rtl">
@@ -255,9 +263,9 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
               }}
             >
               <div className="lp-synced-arabic">{getArabicText(activePhrase, arabicMode)}</div>
-              {showSyncedCaptionTranslation && (activePhrase.translation || activePhrase.literal) && (
+              {syncedCaptionSecondaryText && (
                 <div className="lp-synced-translation" dir="ltr">
-                  {activePhrase.translation || activePhrase.literal}
+                  {syncedCaptionSecondaryText}
                 </div>
               )}
             </div>

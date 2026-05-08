@@ -82,6 +82,8 @@ The player uses `recording_id` to find the hosted YouTube source, then uses `sta
 
 Legacy course clips can still provide a direct `video_id` until that audio has been imported as a first-class recording. New clips should prefer `recording_id` plus alignment data.
 
+Alignment timings should be refined against the cached audio waveform before they become first-class data. ASR/CC timings locate the text, but the committed `start_seconds` and `end_seconds` represent the musical/textual boundary heard in the recording.
+
 ## Generated And Curated Data
 
 Commit:

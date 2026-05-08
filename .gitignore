@@ -5,7 +5,9 @@ dist/
 *.local
 src/data/source/phrases.sync.json
 .recording-cache/
+recordings/
 recordings/**/recording.generated.json
+recordings/**/*.asr.json
 recordings/**/*.m4a
 recordings/**/*.mp4
 recordings/**/*.webm

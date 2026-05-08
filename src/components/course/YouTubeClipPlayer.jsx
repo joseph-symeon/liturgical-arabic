@@ -91,8 +91,17 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
 
   useEffect(() => {
     let destroyed = false;
+    userStartedRef.current = false;
+    playRequestedRef.current = false;
+    playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
     setIsReady(false);
+    setIsPlaying(false);
     setPlayerError(null);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    clearEndTimer();
 
     if (!videoId) {
       setPlayerError(recordingId ? `Recording "${recordingId}" is missing a YouTube video ID.` : 'Missing YouTube video ID.');
@@ -115,6 +124,7 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
           height: '200',
           videoId,
           playerVars: {
+            autoplay: 0,
             controls: 0,
             modestbranding: 1,
             rel: 0,
@@ -126,6 +136,7 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
               if (destroyed) return;
               playerRef.current = event.target;
               event.target.seekTo(startSeconds, true);
+              event.target.pauseVideo();
               event.target.setPlaybackRate(playbackRateRef.current);
               playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
               setIsReady(true);
@@ -164,12 +175,15 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
 
     return () => {
       destroyed = true;
+      userStartedRef.current = false;
+      playRequestedRef.current = false;
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
         intervalRef.current = null;
       }
       clearEndTimer();
       if (playerRef.current) {
+        try { playerRef.current.pauseVideo(); } catch (_) {}
         try { playerRef.current.destroy(); } catch (_) {}
         playerRef.current = null;
       }

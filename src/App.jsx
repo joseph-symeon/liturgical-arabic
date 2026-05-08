@@ -62,6 +62,8 @@ const DEFAULT_ARABIC_FONT_SIZE = 20;
 const NARROW_VIEWPORT_WIDTH = 700;
 const COMPACT_CHROME_WIDTH = 900;
 const NAV_MENU_STORAGE_KEY = "liturgical-arabic:navigation-menu-open";
+const NAV_DETAILS_STORAGE_KEY = "liturgical-arabic:navigation-details-open";
+const DISPLAY_SETTINGS_STORAGE_KEY = "liturgical-arabic:display-settings";
 const HOME_TITLE_PHRASE_IDS = {
   divineLiturgy: "homepage-divine-liturgy-001",
   johnChrysostom: "homepage-john-chrysostom-001",
@@ -131,8 +133,52 @@ function getNavigationHash(view, selectedSectionIndex, selectedLessonId, selecte
   return "#home";
 }
 
+function getStoredNavDetailsOpen() {
+  if (typeof window === "undefined") return {};
+
+  try {
+    const stored = window.localStorage.getItem(NAV_DETAILS_STORAGE_KEY);
+    const parsed = stored ? JSON.parse(stored) : {};
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function getStoredDisplaySettings() {
+  const defaults = {
+    arabicMode: "vocalized",
+    readerLayout: "line",
+    showQuietPrayers: false,
+    arabicFontFamily: SYSTEM_SANS_FONT,
+    arabicFontWeight: "300",
+    arabicFontSize: DEFAULT_ARABIC_FONT_SIZE,
+    speechRate: 0.8
+  };
+
+  if (typeof window === "undefined") return defaults;
+
+  try {
+    const stored = window.localStorage.getItem(DISPLAY_SETTINGS_STORAGE_KEY);
+    const parsed = stored ? JSON.parse(stored) : {};
+    const settings = parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+    return {
+      arabicMode: ["vocalized", "unvocalized"].includes(settings.arabicMode) ? settings.arabicMode : defaults.arabicMode,
+      readerLayout: ["line", "paragraph"].includes(settings.readerLayout) ? settings.readerLayout : defaults.readerLayout,
+      showQuietPrayers: typeof settings.showQuietPrayers === "boolean" ? settings.showQuietPrayers : defaults.showQuietPrayers,
+      arabicFontFamily: ARABIC_FONTS.some(font => font.value === settings.arabicFontFamily) ? settings.arabicFontFamily : defaults.arabicFontFamily,
+      arabicFontWeight: ARABIC_WEIGHTS.some(weight => weight.value === settings.arabicFontWeight) ? settings.arabicFontWeight : defaults.arabicFontWeight,
+      arabicFontSize: typeof settings.arabicFontSize === "number" ? Math.max(18, Math.min(36, settings.arabicFontSize)) : defaults.arabicFontSize,
+      speechRate: typeof settings.speechRate === "number" ? Math.max(0.5, Math.min(1.2, settings.speechRate)) : defaults.speechRate
+    };
+  } catch {
+    return defaults;
+  }
+}
+
 export default function App() {
   const [initialNavigation] = useState(() => parseNavigationHash());
+  const [initialDisplaySettings] = useState(() => getStoredDisplaySettings());
   const [view, setView] = useState(initialNavigation.view);
   const [selectedSectionIndex, setSelectedSectionIndex] = useState(initialNavigation.selectedSectionIndex);
   const [selectedLessonId, setSelectedLessonId] = useState(initialNavigation.selectedLessonId);
@@ -144,13 +190,14 @@ export default function App() {
     return window.localStorage.getItem(NAV_MENU_STORAGE_KEY) === "true";
   });
   const [displayMenuOpen, setDisplayMenuOpen] = useState(false);
-  const [arabicMode, setArabicMode] = useState("vocalized");
-  const [readerLayout, setReaderLayout] = useState("line");
-  const [showQuietPrayers, setShowQuietPrayers] = useState(false);
-  const [arabicFontFamily, setArabicFontFamily] = useState(SYSTEM_SANS_FONT);
-  const [arabicFontWeight, setArabicFontWeight] = useState("300");
-  const [arabicFontSize, setArabicFontSize] = useState(DEFAULT_ARABIC_FONT_SIZE);
-  const [speechRate, setSpeechRate] = useState(0.8);
+  const [navDetailsOpen, setNavDetailsOpen] = useState(getStoredNavDetailsOpen);
+  const [arabicMode, setArabicMode] = useState(initialDisplaySettings.arabicMode);
+  const [readerLayout, setReaderLayout] = useState(initialDisplaySettings.readerLayout);
+  const [showQuietPrayers, setShowQuietPrayers] = useState(initialDisplaySettings.showQuietPrayers);
+  const [arabicFontFamily, setArabicFontFamily] = useState(initialDisplaySettings.arabicFontFamily);
+  const [arabicFontWeight, setArabicFontWeight] = useState(initialDisplaySettings.arabicFontWeight);
+  const [arabicFontSize, setArabicFontSize] = useState(initialDisplaySettings.arabicFontSize);
+  const [speechRate, setSpeechRate] = useState(initialDisplaySettings.speechRate);
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
   const [isCompactChrome, setIsCompactChrome] = useState(false);
   const [showCompactTitle, setShowCompactTitle] = useState(false);
@@ -181,6 +228,24 @@ export default function App() {
     if (typeof window === "undefined" || isNarrowViewport) return;
     window.localStorage.setItem(NAV_MENU_STORAGE_KEY, menuOpen ? "true" : "false");
   }, [menuOpen, isNarrowViewport]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(NAV_DETAILS_STORAGE_KEY, JSON.stringify(navDetailsOpen));
+  }, [navDetailsOpen]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(DISPLAY_SETTINGS_STORAGE_KEY, JSON.stringify({
+      arabicMode,
+      readerLayout,
+      showQuietPrayers,
+      arabicFontFamily,
+      arabicFontWeight,
+      arabicFontSize,
+      speechRate
+    }));
+  }, [arabicMode, readerLayout, showQuietPrayers, arabicFontFamily, arabicFontWeight, arabicFontSize, speechRate]);
 
   useEffect(() => {
     if (!isCompactChrome) {
@@ -316,6 +381,17 @@ export default function App() {
 
   function adjustArabicFontSize(delta) {
     setArabicFontSize(size => Math.max(18, Math.min(36, size + delta)));
+  }
+
+  function isNavDetailOpen(id, defaultOpen = false) {
+    return Object.hasOwn(navDetailsOpen, id) ? navDetailsOpen[id] : defaultOpen;
+  }
+
+  function setNavDetailOpen(id, open) {
+    setNavDetailsOpen(detailsOpen => ({
+      ...detailsOpen,
+      [id]: open
+    }));
   }
 
   const selectedLesson = lessons.find(l => l.id === selectedLessonId);
@@ -857,8 +933,14 @@ export default function App() {
                   }
 
                   const isCurrentGroup = item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex);
+                  const detailId = `liturgy:${item.group}`;
                   return (
-                    <details className="lp-course-lesson" key={item.group} defaultOpen={isCurrentGroup || selectedSectionIndex === null}>
+                    <details
+                      className="lp-course-lesson"
+                      key={item.group}
+                      open={isNavDetailOpen(detailId, isCurrentGroup || selectedSectionIndex === null)}
+                      onToggle={event => setNavDetailOpen(detailId, event.currentTarget.open)}
+                    >
                       <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
                         {item.group}
                       </summary>
@@ -901,8 +983,14 @@ export default function App() {
                 {ORDERED_UNITS.map(unit => {
                   const unitLessons = COURSE_LESSONS.filter(l => l.unit_id === unit.id);
                   const isCurrentUnit = unitLessons.some(lesson => lesson.id === selectedLessonId);
+                  const unitDetailId = `course-unit:${unit.id}`;
                   return (
-                    <details className="lp-course-lesson" key={unit.id} defaultOpen={isCurrentUnit || view === "course-overview"}>
+                    <details
+                      className="lp-course-lesson"
+                      key={unit.id}
+                      open={isNavDetailOpen(unitDetailId, isCurrentUnit || view === "course-overview")}
+                      onToggle={event => setNavDetailOpen(unitDetailId, event.currentTarget.open)}
+                    >
                       <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
                         {unit.title}
                       </summary>
@@ -925,8 +1013,14 @@ export default function App() {
                             );
                           }
 
+                          const lessonDetailId = `course-lesson:${lesson.id}`;
                           return (
-                            <details className="lp-course-lesson" key={lesson.id} defaultOpen={isCurrentLesson}>
+                            <details
+                              className="lp-course-lesson"
+                              key={lesson.id}
+                              open={isNavDetailOpen(lessonDetailId, isCurrentLesson)}
+                              onToggle={event => setNavDetailOpen(lessonDetailId, event.currentTarget.open)}
+                            >
                               <summary className={`lp-course-lesson-summary${isCurrentLesson ? " active" : ""}`}>
                                 {lesson.title}
                               </summary>

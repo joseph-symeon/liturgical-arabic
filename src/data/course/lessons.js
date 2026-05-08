@@ -23,28 +23,42 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "exercise_id": "first-antiphon-through-theotokos"
+        "exercise_id": "first-antiphon-through-theotokos",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "antiphon-save-us-son-of-god"
+        "exercise_id": "antiphon-save-us-son-of-god",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "antiphon-only-begotten"
+        "exercise_id": "antiphon-only-begotten",
+        "audio_sequence": "only-begotten-hymn",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "antiphon-accepted-incarnate"
+        "exercise_id": "antiphon-accepted-incarnate",
+        "audio_sequence": "only-begotten-hymn",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "antiphon-became-man"
+        "exercise_id": "antiphon-became-man",
+        "audio_sequence": "only-begotten-hymn",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "antiphon-trampled-death"
+        "exercise_id": "antiphon-trampled-death",
+        "audio_sequence": "only-begotten-hymn",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "antiphon-glorified-with-father"
+        "exercise_id": "antiphon-glorified-with-father",
+        "audio_sequence": "only-begotten-hymn",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "antiphons-summary"
+        "title": "O Word of God. Glorified Together.",
+        "exercise_id": "antiphons-summary",
+        "activity_policy": "standard"
       }
     ]
   },
@@ -135,6 +149,10 @@ const lessons = [
           {
             "label": "Phrase Captions",
             "exercise_id": "activity-demo-synced-caption-glory-beginner"
+          },
+          {
+            "label": "Arrange",
+            "activity_type": "arrange-cloze"
           }
         ]
       },
@@ -149,6 +167,10 @@ const lessons = [
           {
             "label": "Phrase Captions",
             "exercise_id": "activity-demo-synced-caption-both-now-beginner"
+          },
+          {
+            "label": "Arrange",
+            "activity_type": "arrange-cloze"
           }
         ]
       },
@@ -163,6 +185,10 @@ const lessons = [
           {
             "label": "Phrase Captions",
             "exercise_id": "activity-demo-synced-caption-glory-both-now"
+          },
+          {
+            "label": "Arrange",
+            "activity_type": "arrange-cloze"
           }
         ]
       }

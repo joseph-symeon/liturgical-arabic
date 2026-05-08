@@ -167,6 +167,41 @@
   transform: translateX(16px);
 }
 
+.lp-segmented-control {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid #d6d3d1;
+  border-radius: 7px;
+  background: #fafaf9;
+}
+
+.lp-segmented-control button {
+  min-height: 30px;
+  border: 0;
+  border-left: 1px solid #d6d3d1;
+  background: transparent;
+  color: #57534e;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  padding: 0 10px;
+}
+
+.lp-segmented-control button:first-child {
+  border-left: 0;
+}
+
+.lp-segmented-control button:hover {
+  background: #f5f5f4;
+}
+
+.lp-segmented-control button.active {
+  background: #e7e5e4;
+  color: #1c1917;
+  font-weight: 600;
+}
+
 .lp-karaoke-active {
   border-radius: 5px;
   background: var(--liturgical-red-highlight-fill);
@@ -458,11 +493,14 @@
   align-items: center;
   justify-content: center;
   min-height: 220px;
-  padding: 32px 0;
+  padding: 32px 0 72px;
   text-align: center;
 }
 
 .lp-synced-line {
+  display: grid;
+  grid-template-rows: auto 0;
+  justify-items: center;
   max-width: 100%;
   opacity: 0;
   transition: opacity 90ms ease, transform 90ms ease;
@@ -867,8 +905,8 @@
 
   .lp-activity-select {
     color-scheme: dark;
-    background: var(--dark-active);
-    border-color: #6b7280;
+    background: var(--dark-surface);
+    border-color: var(--dark-border);
     color: var(--dark-text);
   }
 
@@ -885,6 +923,25 @@
 
   .lp-mode-toggle {
     color: var(--dark-muted);
+  }
+
+  .lp-segmented-control {
+    border-color: var(--dark-border);
+    background: var(--dark-surface);
+  }
+
+  .lp-segmented-control button {
+    border-left-color: var(--dark-border);
+    color: var(--dark-muted);
+  }
+
+  .lp-segmented-control button:hover {
+    background: var(--dark-hover);
+  }
+
+  .lp-segmented-control button.active {
+    background: var(--dark-active);
+    color: var(--dark-text);
   }
 
   .lp-arrange-prompt,

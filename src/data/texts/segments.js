@@ -392,7 +392,13 @@ const sourceSegments = {
     "tags": [],
     "phrases": [
       {
-        "phrase_id": "glorified-with-father-001"
+        "phrase_id": "glorified-with-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "father-holy-spirit-001"
       },
       {
         "text": "،"

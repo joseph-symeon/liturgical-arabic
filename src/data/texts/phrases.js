@@ -1376,6 +1376,24 @@ const phrases = {
       "trinity"
     ]
   },
+  "glorified-with-001": {
+    "arabic": "الْمُمَجَّدَ مَعَ",
+    "translation": "glorified together with",
+    "literal": "glorified with",
+    "tags": [
+      "section: The Second Antiphon",
+      "trinity"
+    ]
+  },
+  "father-holy-spirit-001": {
+    "arabic": "الْآبِ والرّوحِ الْقُدُسِ",
+    "translation": "the Father and the Holy Spirit",
+    "literal": "the Father and the Holy Spirit",
+    "tags": [
+      "section: The Second Antiphon",
+      "trinity"
+    ]
+  },
   "may-god-enable-gospel-004": {
     "arabic": "بِقُوَّةٍ عَظِيمَة",
     "translation": "with great power",

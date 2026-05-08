@@ -42,6 +42,7 @@ export function validateData() {
   const alignmentsById = Object.fromEntries(alignmentDefinitions.map(alignment => [alignment.id, alignment]));
   const activityIds = new Set(activityDefinitions.map(activity => activity.id));
   const serviceTextIds = new Set(serviceTextDefinitions.map(serviceText => serviceText.id));
+  const activityPolicies = new Set(['standard']);
 
   assertUnique(Object.keys(phrases), 'phrases', errors);
   assertUnique(Object.keys(segments), 'segments', errors);
@@ -251,9 +252,13 @@ export function validateData() {
     if (lesson.title_phrase && !phraseIds.has(lesson.title_phrase)) {
       errors.push(`Lesson "${lesson.id}" references missing title phrase "${lesson.title_phrase}".`);
     }
+    let previousAudioSequenceItem = null;
     (lesson.exercises || []).forEach(item => {
       if (!exerciseIds.has(item.exercise_id)) {
         errors.push(`Lesson "${lesson.id}" references missing exercise "${item.exercise_id}".`);
+      }
+      if (item.activity_policy && !activityPolicies.has(item.activity_policy)) {
+        errors.push(`Lesson "${lesson.id}" exercise "${item.exercise_id}" uses unknown activity_policy "${item.activity_policy}".`);
       }
       if (item.activity_options) {
         if (!Array.isArray(item.activity_options) || item.activity_options.length === 0) {
@@ -263,12 +268,32 @@ export function validateData() {
             if (!option.label) {
               errors.push(`Lesson "${lesson.id}" exercise "${item.exercise_id}" activity option ${index + 1} is missing "label".`);
             }
-            if (!exerciseIds.has(option.exercise_id)) {
+            if (option.exercise_id && !exerciseIds.has(option.exercise_id)) {
               errors.push(`Lesson "${lesson.id}" exercise "${item.exercise_id}" activity option ${index + 1} references missing exercise "${option.exercise_id}".`);
+            }
+            if (!option.exercise_id && !option.activity_type) {
+              errors.push(`Lesson "${lesson.id}" exercise "${item.exercise_id}" activity option ${index + 1} must define exercise_id or activity_type.`);
             }
           });
         }
       }
+
+      if (item.audio_sequence && previousAudioSequenceItem?.audio_sequence === item.audio_sequence) {
+        const previousExercise = exerciseDefinitions.find(exercise => exercise.id === previousAudioSequenceItem.exercise_id);
+        const currentExercise = exerciseDefinitions.find(exercise => exercise.id === item.exercise_id);
+        const previousClip = previousExercise?.audio_clip;
+        const currentClip = currentExercise?.audio_clip;
+        const previousRecording = previousClip?.recording_id || previousClip?.video_id;
+        const currentRecording = currentClip?.recording_id || currentClip?.video_id;
+        if (!previousClip || !currentClip) {
+          errors.push(`Lesson "${lesson.id}" audio sequence "${item.audio_sequence}" requires clips on "${previousAudioSequenceItem.exercise_id}" and "${item.exercise_id}".`);
+        } else if (previousRecording !== currentRecording) {
+          errors.push(`Lesson "${lesson.id}" audio sequence "${item.audio_sequence}" changes recording between "${previousAudioSequenceItem.exercise_id}" and "${item.exercise_id}".`);
+        } else if (Math.abs(previousClip.end_seconds - currentClip.start_seconds) > 0.01) {
+          errors.push(`Lesson "${lesson.id}" audio sequence "${item.audio_sequence}" must join "${previousAudioSequenceItem.exercise_id}" end_seconds (${previousClip.end_seconds}) to "${item.exercise_id}" start_seconds (${currentClip.start_seconds}).`);
+        }
+      }
+      previousAudioSequenceItem = item.audio_sequence ? item : null;
     });
   });
 
