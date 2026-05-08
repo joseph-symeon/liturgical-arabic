@@ -368,35 +368,60 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "little-litany-again"
     ],
-    "audio_clip": null
+    "audio_clip": {
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 0.3,
+      "end_seconds": 5.275,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "little-litany-help-save",
     "segment_ids": [
       "little-litany-help-save"
     ],
-    "audio_clip": null
+    "audio_clip": {
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 9.9,
+      "end_seconds": 17.3,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "little-litany-calling-remembrance",
     "segment_ids": [
       "little-litany-calling-remembrance"
     ],
-    "audio_clip": null
+    "audio_clip": {
+      "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 21.925,
+      "end_seconds": 49.225,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "little-litany-for-thine-might",
     "segment_ids": [
       "little-litany-for-thine-might"
     ],
-    "audio_clip": null
+      "audio_clip": {
+        "recording_id": "recording--dufaXx7Hm0",
+      "start_seconds": 54.9,
+      "end_seconds": 76.75,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "little-litany-good-god",
     "segment_ids": [
       "little-litany-good-god-doxology"
     ],
-    "audio_clip": null
+    "audio_clip": {
+      "recording_id": "recording-fzQ4dmF-1Bg",
+      "start_seconds": 63.415,
+      "end_seconds": 85.7,
+      "default_playback_rate": 1
+    }
   },
   {
     "id": "little-litanies-summary",
