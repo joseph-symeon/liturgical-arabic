@@ -1,0 +1,1747 @@
+{
+  "engine": "faster-whisper",
+  "model": "small",
+  "language": "ar",
+  "language_probability": 1.0,
+  "duration_seconds": 96.576,
+  "words": [
+    {
+      "text": "الأبواب،",
+      "start": 0.0,
+      "end": 2.08,
+      "probability": 0.7081
+    },
+    {
+      "text": "الأبواب،",
+      "start": 2.08,
+      "end": 3.4,
+      "probability": 0.8407
+    },
+    {
+      "text": "حكمة",
+      "start": 3.4,
+      "end": 4.64,
+      "probability": 0.7652
+    },
+    {
+      "text": "لنصضيه",
+      "start": 4.64,
+      "end": 7.36,
+      "probability": 0.7923
+    },
+    {
+      "text": "ومنه",
+      "start": 7.36,
+      "end": 8.84,
+      "probability": 0.5633
+    },
+    {
+      "text": "بيلاحٍ",
+      "start": 8.84,
+      "end": 9.68,
+      "probability": 0.4832
+    },
+    {
+      "text": "واحدٍ",
+      "start": 9.68,
+      "end": 10.46,
+      "probability": 0.7467
+    },
+    {
+      "text": "آبٍ",
+      "start": 10.46,
+      "end": 11.0,
+      "probability": 0.78
+    },
+    {
+      "text": "ضابت",
+      "start": 11.0,
+      "end": 11.58,
+      "probability": 0.6713
+    },
+    {
+      "text": "الكل",
+      "start": 11.58,
+      "end": 11.98,
+      "probability": 0.6538
+    },
+    {
+      "text": "خالك",
+      "start": 11.98,
+      "end": 13.0,
+      "probability": 0.85
+    },
+    {
+      "text": "السماء",
+      "start": 13.0,
+      "end": 13.64,
+      "probability": 0.8839
+    },
+    {
+      "text": "والأرض",
+      "start": 13.64,
+      "end": 14.28,
+      "probability": 0.8999
+    },
+    {
+      "text": "كل",
+      "start": 14.28,
+      "end": 14.9,
+      "probability": 0.98
+    },
+    {
+      "text": "ما",
+      "start": 14.9,
+      "end": 15.22,
+      "probability": 0.9428
+    },
+    {
+      "text": "يرى",
+      "start": 15.22,
+      "end": 15.72,
+      "probability": 0.8944
+    },
+    {
+      "text": "وما",
+      "start": 15.72,
+      "end": 16.08,
+      "probability": 0.8514
+    },
+    {
+      "text": "لا",
+      "start": 16.08,
+      "end": 16.34,
+      "probability": 0.9885
+    },
+    {
+      "text": "يرى",
+      "start": 16.34,
+      "end": 17.1,
+      "probability": 0.9698
+    },
+    {
+      "text": "وفي",
+      "start": 17.1,
+      "end": 17.44,
+      "probability": 0.5468
+    },
+    {
+      "text": "ربٍ",
+      "start": 17.44,
+      "end": 17.9,
+      "probability": 0.8616
+    },
+    {
+      "text": "واحدٍ",
+      "start": 17.9,
+      "end": 18.7,
+      "probability": 0.935
+    },
+    {
+      "text": "يسوع",
+      "start": 18.7,
+      "end": 19.14,
+      "probability": 0.8143
+    },
+    {
+      "text": "الناسيح",
+      "start": 19.14,
+      "end": 20.08,
+      "probability": 0.6442
+    },
+    {
+      "text": "ابن",
+      "start": 20.08,
+      "end": 20.62,
+      "probability": 0.8476
+    },
+    {
+      "text": "الله",
+      "start": 20.62,
+      "end": 21.04,
+      "probability": 0.8954
+    },
+    {
+      "text": "وحيد",
+      "start": 21.04,
+      "end": 22.0,
+      "probability": 0.7042
+    },
+    {
+      "text": "المولود",
+      "start": 22.0,
+      "end": 22.94,
+      "probability": 0.6095
+    },
+    {
+      "text": "من",
+      "start": 22.94,
+      "end": 23.18,
+      "probability": 0.9409
+    },
+    {
+      "text": "اللاب",
+      "start": 23.18,
+      "end": 23.68,
+      "probability": 0.7244
+    },
+    {
+      "text": "قبل",
+      "start": 23.68,
+      "end": 24.14,
+      "probability": 0.8198
+    },
+    {
+      "text": "كل",
+      "start": 24.14,
+      "end": 24.48,
+      "probability": 0.8754
+    },
+    {
+      "text": "الدهور",
+      "start": 24.48,
+      "end": 25.2,
+      "probability": 0.6909
+    },
+    {
+      "text": "نورٍ",
+      "start": 25.2,
+      "end": 26.1,
+      "probability": 0.5885
+    },
+    {
+      "text": "من",
+      "start": 26.1,
+      "end": 26.24,
+      "probability": 0.9848
+    },
+    {
+      "text": "نور،",
+      "start": 26.24,
+      "end": 27.06,
+      "probability": 0.6873
+    },
+    {
+      "text": "إلهِن",
+      "start": 27.06,
+      "end": 27.56,
+      "probability": 0.5721
+    },
+    {
+      "text": "حقٍ،",
+      "start": 27.56,
+      "end": 28.08,
+      "probability": 0.6237
+    },
+    {
+      "text": "إلهِن",
+      "start": 28.08,
+      "end": 28.54,
+      "probability": 0.9583
+    },
+    {
+      "text": "حقٍ",
+      "start": 28.54,
+      "end": 29.28,
+      "probability": 0.9211
+    },
+    {
+      "text": "مولودٍ",
+      "start": 29.28,
+      "end": 29.98,
+      "probability": 0.9096
+    },
+    {
+      "text": "غيرِ",
+      "start": 29.98,
+      "end": 30.36,
+      "probability": 0.7259
+    },
+    {
+      "text": "مصروق،",
+      "start": 30.36,
+      "end": 31.32,
+      "probability": 0.6826
+    },
+    {
+      "text": "مساومِ",
+      "start": 31.32,
+      "end": 31.92,
+      "probability": 0.5646
+    },
+    {
+      "text": "للآر",
+      "start": 31.92,
+      "end": 32.36,
+      "probability": 0.4424
+    },
+    {
+      "text": "في",
+      "start": 32.36,
+      "end": 32.54,
+      "probability": 0.5578
+    },
+    {
+      "text": "الجهور",
+      "start": 32.54,
+      "end": 33.1,
+      "probability": 0.3281
+    },
+    {
+      "text": "الذي",
+      "start": 33.1,
+      "end": 33.86,
+      "probability": 0.5093
+    },
+    {
+      "text": "به",
+      "start": 33.86,
+      "end": 34.28,
+      "probability": 0.8041
+    },
+    {
+      "text": "كان",
+      "start": 34.28,
+      "end": 34.8,
+      "probability": 0.7197
+    },
+    {
+      "text": "كل",
+      "start": 34.8,
+      "end": 35.12,
+      "probability": 0.9351
+    },
+    {
+      "text": "الشيء،",
+      "start": 35.12,
+      "end": 36.06,
+      "probability": 0.6679
+    },
+    {
+      "text": "الذي",
+      "start": 36.06,
+      "end": 36.42,
+      "probability": 0.9207
+    },
+    {
+      "text": "من",
+      "start": 36.42,
+      "end": 36.82,
+      "probability": 0.9426
+    },
+    {
+      "text": "أجننا",
+      "start": 36.82,
+      "end": 37.4,
+      "probability": 0.811
+    },
+    {
+      "text": "محمل",
+      "start": 37.4,
+      "end": 37.82,
+      "probability": 0.9347
+    },
+    {
+      "text": "بشر،",
+      "start": 37.82,
+      "end": 38.74,
+      "probability": 0.5945
+    },
+    {
+      "text": "ومن",
+      "start": 38.74,
+      "end": 38.92,
+      "probability": 0.9754
+    },
+    {
+      "text": "أجلِ",
+      "start": 38.92,
+      "end": 39.4,
+      "probability": 0.6689
+    },
+    {
+      "text": "خداصنا،",
+      "start": 39.4,
+      "end": 40.58,
+      "probability": 0.5004
+    },
+    {
+      "text": "نسأل",
+      "start": 40.58,
+      "end": 41.16,
+      "probability": 0.584
+    },
+    {
+      "text": "من",
+      "start": 41.16,
+      "end": 41.34,
+      "probability": 0.9347
+    },
+    {
+      "text": "السماء،",
+      "start": 41.34,
+      "end": 42.5,
+      "probability": 0.7339
+    },
+    {
+      "text": "وتجسأل",
+      "start": 42.5,
+      "end": 43.22,
+      "probability": 0.7414
+    },
+    {
+      "text": "من",
+      "start": 43.22,
+      "end": 43.52,
+      "probability": 0.8553
+    },
+    {
+      "text": "الروح",
+      "start": 43.52,
+      "end": 43.9,
+      "probability": 0.5926
+    },
+    {
+      "text": "الكدس،",
+      "start": 43.9,
+      "end": 44.98,
+      "probability": 0.6521
+    },
+    {
+      "text": "ومن",
+      "start": 44.98,
+      "end": 45.2,
+      "probability": 0.9706
+    },
+    {
+      "text": "مريام",
+      "start": 45.2,
+      "end": 45.66,
+      "probability": 0.6895
+    },
+    {
+      "text": "العظراء",
+      "start": 45.66,
+      "end": 46.34,
+      "probability": 0.5496
+    },
+    {
+      "text": "والأنس،",
+      "start": 46.34,
+      "end": 47.3,
+      "probability": 0.5656
+    },
+    {
+      "text": "وصلِب",
+      "start": 47.3,
+      "end": 48.1,
+      "probability": 0.304
+    },
+    {
+      "text": "عامنا",
+      "start": 48.1,
+      "end": 48.58,
+      "probability": 0.5762
+    },
+    {
+      "text": "عما",
+      "start": 48.58,
+      "end": 48.86,
+      "probability": 0.4314
+    },
+    {
+      "text": "عهدي",
+      "start": 48.86,
+      "end": 49.2,
+      "probability": 0.705
+    },
+    {
+      "text": "بالاقصر",
+      "start": 49.2,
+      "end": 49.84,
+      "probability": 0.5141
+    },
+    {
+      "text": "منطين،",
+      "start": 49.84,
+      "end": 50.64,
+      "probability": 0.5173
+    },
+    {
+      "text": "وتألم",
+      "start": 50.64,
+      "end": 51.34,
+      "probability": 0.6687
+    },
+    {
+      "text": "ورقُبر،",
+      "start": 51.34,
+      "end": 52.5,
+      "probability": 0.4644
+    },
+    {
+      "text": "وقامف",
+      "start": 52.5,
+      "end": 53.12,
+      "probability": 0.7521
+    },
+    {
+      "text": "لها",
+      "start": 53.12,
+      "end": 53.44,
+      "probability": 0.57
+    },
+    {
+      "text": "من",
+      "start": 53.44,
+      "end": 53.62,
+      "probability": 0.9525
+    },
+    {
+      "text": "ثالف",
+      "start": 53.62,
+      "end": 54.14,
+      "probability": 0.6663
+    },
+    {
+      "text": "عالمات",
+      "start": 54.14,
+      "end": 54.76,
+      "probability": 0.8419
+    },
+    {
+      "text": "في",
+      "start": 54.76,
+      "end": 54.88,
+      "probability": 0.6309
+    },
+    {
+      "text": "الكدر،",
+      "start": 54.88,
+      "end": 55.42,
+      "probability": 0.4864
+    },
+    {
+      "text": "وصاعدة",
+      "start": 55.42,
+      "end": 56.42,
+      "probability": 0.7993
+    },
+    {
+      "text": "إلى",
+      "start": 56.42,
+      "end": 56.58,
+      "probability": 0.8482
+    },
+    {
+      "text": "السماء،",
+      "start": 56.58,
+      "end": 57.68,
+      "probability": 0.861
+    },
+    {
+      "text": "وجلس",
+      "start": 57.68,
+      "end": 58.1,
+      "probability": 0.6969
+    },
+    {
+      "text": "عن",
+      "start": 58.1,
+      "end": 58.42,
+      "probability": 0.7216
+    },
+    {
+      "text": "يمين",
+      "start": 58.42,
+      "end": 58.86,
+      "probability": 0.9045
+    },
+    {
+      "text": "الآب،",
+      "start": 58.86,
+      "end": 59.78,
+      "probability": 0.7953
+    },
+    {
+      "text": "وايضاً",
+      "start": 59.78,
+      "end": 60.36,
+      "probability": 0.5542
+    },
+    {
+      "text": "يأتي",
+      "start": 60.36,
+      "end": 60.72,
+      "probability": 0.9543
+    },
+    {
+      "text": "بمجدٍ",
+      "start": 60.72,
+      "end": 61.34,
+      "probability": 0.5029
+    },
+    {
+      "text": "ليدينا",
+      "start": 61.34,
+      "end": 61.9,
+      "probability": 0.5726
+    },
+    {
+      "text": "الحياة",
+      "start": 61.9,
+      "end": 62.44,
+      "probability": 0.4485
+    },
+    {
+      "text": "والأموات،",
+      "start": 62.44,
+      "end": 63.3,
+      "probability": 0.8523
+    },
+    {
+      "text": "الذي",
+      "start": 63.3,
+      "end": 64.02,
+      "probability": 0.3583
+    },
+    {
+      "text": "لا",
+      "start": 64.02,
+      "end": 64.42,
+      "probability": 0.8969
+    },
+    {
+      "text": "فناء",
+      "start": 64.42,
+      "end": 64.94,
+      "probability": 0.7534
+    },
+    {
+      "text": "للملك،",
+      "start": 64.94,
+      "end": 65.88,
+      "probability": 0.3139
+    },
+    {
+      "text": "وبالروح",
+      "start": 65.88,
+      "end": 66.64,
+      "probability": 0.8129
+    },
+    {
+      "text": "الكدس،",
+      "start": 66.64,
+      "end": 67.56,
+      "probability": 0.6475
+    },
+    {
+      "text": "والرب",
+      "start": 67.56,
+      "end": 67.94,
+      "probability": 0.6736
+    },
+    {
+      "text": "المحي،",
+      "start": 67.94,
+      "end": 68.98,
+      "probability": 0.8913
+    },
+    {
+      "text": "الممسك",
+      "start": 68.98,
+      "end": 69.76,
+      "probability": 0.6322
+    },
+    {
+      "text": "من",
+      "start": 69.76,
+      "end": 69.98,
+      "probability": 0.923
+    },
+    {
+      "text": "الآب،",
+      "start": 69.98,
+      "end": 70.88,
+      "probability": 0.6969
+    },
+    {
+      "text": "الذي",
+      "start": 70.88,
+      "end": 71.32,
+      "probability": 0.9408
+    },
+    {
+      "text": "يوامع",
+      "start": 71.32,
+      "end": 72.0,
+      "probability": 0.6799
+    },
+    {
+      "text": "الآب،",
+      "start": 72.0,
+      "end": 72.64,
+      "probability": 0.8189
+    },
+    {
+      "text": "والبن",
+      "start": 72.64,
+      "end": 73.14,
+      "probability": 0.7296
+    },
+    {
+      "text": "مسجود",
+      "start": 73.14,
+      "end": 73.76,
+      "probability": 0.5917
+    },
+    {
+      "text": "النه",
+      "start": 73.76,
+      "end": 74.14,
+      "probability": 0.5708
+    },
+    {
+      "text": "ومبشد،",
+      "start": 74.14,
+      "end": 75.26,
+      "probability": 0.4374
+    },
+    {
+      "text": "الناطق",
+      "start": 75.26,
+      "end": 76.0,
+      "probability": 0.7207
+    },
+    {
+      "text": "الأميّة،",
+      "start": 76.0,
+      "end": 77.12,
+      "probability": 0.5244
+    },
+    {
+      "text": "وبيكنيسةٍ",
+      "start": 77.12,
+      "end": 78.08,
+      "probability": 0.5584
+    },
+    {
+      "text": "واحدة",
+      "start": 78.08,
+      "end": 78.8,
+      "probability": 0.842
+    },
+    {
+      "text": "جانعة",
+      "start": 78.8,
+      "end": 79.42,
+      "probability": 0.4731
+    },
+    {
+      "text": "مقدسة",
+      "start": 79.42,
+      "end": 80.16,
+      "probability": 0.7873
+    },
+    {
+      "text": "رسمية،",
+      "start": 80.16,
+      "end": 81.34,
+      "probability": 0.8874
+    },
+    {
+      "text": "وأعترفه",
+      "start": 81.34,
+      "end": 82.12,
+      "probability": 0.588
+    },
+    {
+      "text": "مع",
+      "start": 82.12,
+      "end": 82.34,
+      "probability": 0.9726
+    },
+    {
+      "text": "عديةٍ",
+      "start": 82.34,
+      "end": 83.08,
+      "probability": 0.6667
+    },
+    {
+      "text": "واحدة",
+      "start": 83.08,
+      "end": 83.78,
+      "probability": 0.9946
+    },
+    {
+      "text": "لمطفرة",
+      "start": 83.78,
+      "end": 84.4,
+      "probability": 0.6698
+    },
+    {
+      "text": "الزطاية،",
+      "start": 84.4,
+      "end": 85.6,
+      "probability": 0.8103
+    },
+    {
+      "text": "واحدة",
+      "start": 85.6,
+      "end": 86.2,
+      "probability": 0.2324
+    },
+    {
+      "text": "ربشة",
+      "start": 86.2,
+      "end": 86.76,
+      "probability": 0.5677
+    },
+    {
+      "text": "في",
+      "start": 86.76,
+      "end": 86.98,
+      "probability": 0.4423
+    },
+    {
+      "text": "عامة",
+      "start": 86.98,
+      "end": 87.52,
+      "probability": 0.4959
+    },
+    {
+      "text": "الموت",
+      "start": 87.52,
+      "end": 88.02,
+      "probability": 0.7717
+    },
+    {
+      "text": "والحياة،",
+      "start": 88.02,
+      "end": 89.82,
+      "probability": 0.6363
+    },
+    {
+      "text": "في",
+      "start": 89.82,
+      "end": 90.12,
+      "probability": 0.8915
+    },
+    {
+      "text": "كدر",
+      "start": 90.12,
+      "end": 90.62,
+      "probability": 0.0858
+    },
+    {
+      "text": "ذاتي",
+      "start": 90.62,
+      "end": 91.68,
+      "probability": 0.485
+    },
+    {
+      "text": "قومين.",
+      "start": 91.68,
+      "end": 93.3,
+      "probability": 0.5009
+    }
+  ],
+  "segments": [
+    {
+      "index": 1,
+      "start": 0.0,
+      "end": 7.36,
+      "text": "الأبواب، الأبواب، حكمة لنصضيه",
+      "words": [
+        {
+          "text": "الأبواب،",
+          "start": 0.0,
+          "end": 2.08,
+          "probability": 0.7081
+        },
+        {
+          "text": "الأبواب،",
+          "start": 2.08,
+          "end": 3.4,
+          "probability": 0.8407
+        },
+        {
+          "text": "حكمة",
+          "start": 3.4,
+          "end": 4.64,
+          "probability": 0.7652
+        },
+        {
+          "text": "لنصضيه",
+          "start": 4.64,
+          "end": 7.36,
+          "probability": 0.7923
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "start": 7.36,
+      "end": 22.0,
+      "text": "ومنه بيلاحٍ واحدٍ آبٍ ضابت الكل خالك السماء والأرض كل ما يرى وما لا يرى وفي ربٍ واحدٍ يسوع الناسيح ابن الله وحيد",
+      "words": [
+        {
+          "text": "ومنه",
+          "start": 7.36,
+          "end": 8.84,
+          "probability": 0.5633
+        },
+        {
+          "text": "بيلاحٍ",
+          "start": 8.84,
+          "end": 9.68,
+          "probability": 0.4832
+        },
+        {
+          "text": "واحدٍ",
+          "start": 9.68,
+          "end": 10.46,
+          "probability": 0.7467
+        },
+        {
+          "text": "آبٍ",
+          "start": 10.46,
+          "end": 11.0,
+          "probability": 0.78
+        },
+        {
+          "text": "ضابت",
+          "start": 11.0,
+          "end": 11.58,
+          "probability": 0.6713
+        },
+        {
+          "text": "الكل",
+          "start": 11.58,
+          "end": 11.98,
+          "probability": 0.6538
+        },
+        {
+          "text": "خالك",
+          "start": 11.98,
+          "end": 13.0,
+          "probability": 0.85
+        },
+        {
+          "text": "السماء",
+          "start": 13.0,
+          "end": 13.64,
+          "probability": 0.8839
+        },
+        {
+          "text": "والأرض",
+          "start": 13.64,
+          "end": 14.28,
+          "probability": 0.8999
+        },
+        {
+          "text": "كل",
+          "start": 14.28,
+          "end": 14.9,
+          "probability": 0.98
+        },
+        {
+          "text": "ما",
+          "start": 14.9,
+          "end": 15.22,
+          "probability": 0.9428
+        },
+        {
+          "text": "يرى",
+          "start": 15.22,
+          "end": 15.72,
+          "probability": 0.8944
+        },
+        {
+          "text": "وما",
+          "start": 15.72,
+          "end": 16.08,
+          "probability": 0.8514
+        },
+        {
+          "text": "لا",
+          "start": 16.08,
+          "end": 16.34,
+          "probability": 0.9885
+        },
+        {
+          "text": "يرى",
+          "start": 16.34,
+          "end": 17.1,
+          "probability": 0.9698
+        },
+        {
+          "text": "وفي",
+          "start": 17.1,
+          "end": 17.44,
+          "probability": 0.5468
+        },
+        {
+          "text": "ربٍ",
+          "start": 17.44,
+          "end": 17.9,
+          "probability": 0.8616
+        },
+        {
+          "text": "واحدٍ",
+          "start": 17.9,
+          "end": 18.7,
+          "probability": 0.935
+        },
+        {
+          "text": "يسوع",
+          "start": 18.7,
+          "end": 19.14,
+          "probability": 0.8143
+        },
+        {
+          "text": "الناسيح",
+          "start": 19.14,
+          "end": 20.08,
+          "probability": 0.6442
+        },
+        {
+          "text": "ابن",
+          "start": 20.08,
+          "end": 20.62,
+          "probability": 0.8476
+        },
+        {
+          "text": "الله",
+          "start": 20.62,
+          "end": 21.04,
+          "probability": 0.8954
+        },
+        {
+          "text": "وحيد",
+          "start": 21.04,
+          "end": 22.0,
+          "probability": 0.7042
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "start": 22.0,
+      "end": 33.1,
+      "text": "المولود من اللاب قبل كل الدهور نورٍ من نور، إلهِن حقٍ، إلهِن حقٍ مولودٍ غيرِ مصروق، مساومِ للآر في الجهور",
+      "words": [
+        {
+          "text": "المولود",
+          "start": 22.0,
+          "end": 22.94,
+          "probability": 0.6095
+        },
+        {
+          "text": "من",
+          "start": 22.94,
+          "end": 23.18,
+          "probability": 0.9409
+        },
+        {
+          "text": "اللاب",
+          "start": 23.18,
+          "end": 23.68,
+          "probability": 0.7244
+        },
+        {
+          "text": "قبل",
+          "start": 23.68,
+          "end": 24.14,
+          "probability": 0.8198
+        },
+        {
+          "text": "كل",
+          "start": 24.14,
+          "end": 24.48,
+          "probability": 0.8754
+        },
+        {
+          "text": "الدهور",
+          "start": 24.48,
+          "end": 25.2,
+          "probability": 0.6909
+        },
+        {
+          "text": "نورٍ",
+          "start": 25.2,
+          "end": 26.1,
+          "probability": 0.5885
+        },
+        {
+          "text": "من",
+          "start": 26.1,
+          "end": 26.24,
+          "probability": 0.9848
+        },
+        {
+          "text": "نور،",
+          "start": 26.24,
+          "end": 27.06,
+          "probability": 0.6873
+        },
+        {
+          "text": "إلهِن",
+          "start": 27.06,
+          "end": 27.56,
+          "probability": 0.5721
+        },
+        {
+          "text": "حقٍ،",
+          "start": 27.56,
+          "end": 28.08,
+          "probability": 0.6237
+        },
+        {
+          "text": "إلهِن",
+          "start": 28.08,
+          "end": 28.54,
+          "probability": 0.9583
+        },
+        {
+          "text": "حقٍ",
+          "start": 28.54,
+          "end": 29.28,
+          "probability": 0.9211
+        },
+        {
+          "text": "مولودٍ",
+          "start": 29.28,
+          "end": 29.98,
+          "probability": 0.9096
+        },
+        {
+          "text": "غيرِ",
+          "start": 29.98,
+          "end": 30.36,
+          "probability": 0.7259
+        },
+        {
+          "text": "مصروق،",
+          "start": 30.36,
+          "end": 31.32,
+          "probability": 0.6826
+        },
+        {
+          "text": "مساومِ",
+          "start": 31.32,
+          "end": 31.92,
+          "probability": 0.5646
+        },
+        {
+          "text": "للآر",
+          "start": 31.92,
+          "end": 32.36,
+          "probability": 0.4424
+        },
+        {
+          "text": "في",
+          "start": 32.36,
+          "end": 32.54,
+          "probability": 0.5578
+        },
+        {
+          "text": "الجهور",
+          "start": 32.54,
+          "end": 33.1,
+          "probability": 0.3281
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "start": 33.1,
+      "end": 47.3,
+      "text": "الذي به كان كل الشيء، الذي من أجننا محمل بشر، ومن أجلِ خداصنا، نسأل من السماء، وتجسأل من الروح الكدس، ومن مريام العظراء والأنس،",
+      "words": [
+        {
+          "text": "الذي",
+          "start": 33.1,
+          "end": 33.86,
+          "probability": 0.5093
+        },
+        {
+          "text": "به",
+          "start": 33.86,
+          "end": 34.28,
+          "probability": 0.8041
+        },
+        {
+          "text": "كان",
+          "start": 34.28,
+          "end": 34.8,
+          "probability": 0.7197
+        },
+        {
+          "text": "كل",
+          "start": 34.8,
+          "end": 35.12,
+          "probability": 0.9351
+        },
+        {
+          "text": "الشيء،",
+          "start": 35.12,
+          "end": 36.06,
+          "probability": 0.6679
+        },
+        {
+          "text": "الذي",
+          "start": 36.06,
+          "end": 36.42,
+          "probability": 0.9207
+        },
+        {
+          "text": "من",
+          "start": 36.42,
+          "end": 36.82,
+          "probability": 0.9426
+        },
+        {
+          "text": "أجننا",
+          "start": 36.82,
+          "end": 37.4,
+          "probability": 0.811
+        },
+        {
+          "text": "محمل",
+          "start": 37.4,
+          "end": 37.82,
+          "probability": 0.9347
+        },
+        {
+          "text": "بشر،",
+          "start": 37.82,
+          "end": 38.74,
+          "probability": 0.5945
+        },
+        {
+          "text": "ومن",
+          "start": 38.74,
+          "end": 38.92,
+          "probability": 0.9754
+        },
+        {
+          "text": "أجلِ",
+          "start": 38.92,
+          "end": 39.4,
+          "probability": 0.6689
+        },
+        {
+          "text": "خداصنا،",
+          "start": 39.4,
+          "end": 40.58,
+          "probability": 0.5004
+        },
+        {
+          "text": "نسأل",
+          "start": 40.58,
+          "end": 41.16,
+          "probability": 0.584
+        },
+        {
+          "text": "من",
+          "start": 41.16,
+          "end": 41.34,
+          "probability": 0.9347
+        },
+        {
+          "text": "السماء،",
+          "start": 41.34,
+          "end": 42.5,
+          "probability": 0.7339
+        },
+        {
+          "text": "وتجسأل",
+          "start": 42.5,
+          "end": 43.22,
+          "probability": 0.7414
+        },
+        {
+          "text": "من",
+          "start": 43.22,
+          "end": 43.52,
+          "probability": 0.8553
+        },
+        {
+          "text": "الروح",
+          "start": 43.52,
+          "end": 43.9,
+          "probability": 0.5926
+        },
+        {
+          "text": "الكدس،",
+          "start": 43.9,
+          "end": 44.98,
+          "probability": 0.6521
+        },
+        {
+          "text": "ومن",
+          "start": 44.98,
+          "end": 45.2,
+          "probability": 0.9706
+        },
+        {
+          "text": "مريام",
+          "start": 45.2,
+          "end": 45.66,
+          "probability": 0.6895
+        },
+        {
+          "text": "العظراء",
+          "start": 45.66,
+          "end": 46.34,
+          "probability": 0.5496
+        },
+        {
+          "text": "والأنس،",
+          "start": 46.34,
+          "end": 47.3,
+          "probability": 0.5656
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "start": 47.3,
+      "end": 63.3,
+      "text": "وصلِب عامنا عما عهدي بالاقصر منطين، وتألم ورقُبر، وقامف لها من ثالف عالمات في الكدر، وصاعدة إلى السماء، وجلس عن يمين الآب، وايضاً يأتي بمجدٍ ليدينا الحياة والأموات،",
+      "words": [
+        {
+          "text": "وصلِب",
+          "start": 47.3,
+          "end": 48.1,
+          "probability": 0.304
+        },
+        {
+          "text": "عامنا",
+          "start": 48.1,
+          "end": 48.58,
+          "probability": 0.5762
+        },
+        {
+          "text": "عما",
+          "start": 48.58,
+          "end": 48.86,
+          "probability": 0.4314
+        },
+        {
+          "text": "عهدي",
+          "start": 48.86,
+          "end": 49.2,
+          "probability": 0.705
+        },
+        {
+          "text": "بالاقصر",
+          "start": 49.2,
+          "end": 49.84,
+          "probability": 0.5141
+        },
+        {
+          "text": "منطين،",
+          "start": 49.84,
+          "end": 50.64,
+          "probability": 0.5173
+        },
+        {
+          "text": "وتألم",
+          "start": 50.64,
+          "end": 51.34,
+          "probability": 0.6687
+        },
+        {
+          "text": "ورقُبر،",
+          "start": 51.34,
+          "end": 52.5,
+          "probability": 0.4644
+        },
+        {
+          "text": "وقامف",
+          "start": 52.5,
+          "end": 53.12,
+          "probability": 0.7521
+        },
+        {
+          "text": "لها",
+          "start": 53.12,
+          "end": 53.44,
+          "probability": 0.57
+        },
+        {
+          "text": "من",
+          "start": 53.44,
+          "end": 53.62,
+          "probability": 0.9525
+        },
+        {
+          "text": "ثالف",
+          "start": 53.62,
+          "end": 54.14,
+          "probability": 0.6663
+        },
+        {
+          "text": "عالمات",
+          "start": 54.14,
+          "end": 54.76,
+          "probability": 0.8419
+        },
+        {
+          "text": "في",
+          "start": 54.76,
+          "end": 54.88,
+          "probability": 0.6309
+        },
+        {
+          "text": "الكدر،",
+          "start": 54.88,
+          "end": 55.42,
+          "probability": 0.4864
+        },
+        {
+          "text": "وصاعدة",
+          "start": 55.42,
+          "end": 56.42,
+          "probability": 0.7993
+        },
+        {
+          "text": "إلى",
+          "start": 56.42,
+          "end": 56.58,
+          "probability": 0.8482
+        },
+        {
+          "text": "السماء،",
+          "start": 56.58,
+          "end": 57.68,
+          "probability": 0.861
+        },
+        {
+          "text": "وجلس",
+          "start": 57.68,
+          "end": 58.1,
+          "probability": 0.6969
+        },
+        {
+          "text": "عن",
+          "start": 58.1,
+          "end": 58.42,
+          "probability": 0.7216
+        },
+        {
+          "text": "يمين",
+          "start": 58.42,
+          "end": 58.86,
+          "probability": 0.9045
+        },
+        {
+          "text": "الآب،",
+          "start": 58.86,
+          "end": 59.78,
+          "probability": 0.7953
+        },
+        {
+          "text": "وايضاً",
+          "start": 59.78,
+          "end": 60.36,
+          "probability": 0.5542
+        },
+        {
+          "text": "يأتي",
+          "start": 60.36,
+          "end": 60.72,
+          "probability": 0.9543
+        },
+        {
+          "text": "بمجدٍ",
+          "start": 60.72,
+          "end": 61.34,
+          "probability": 0.5029
+        },
+        {
+          "text": "ليدينا",
+          "start": 61.34,
+          "end": 61.9,
+          "probability": 0.5726
+        },
+        {
+          "text": "الحياة",
+          "start": 61.9,
+          "end": 62.44,
+          "probability": 0.4485
+        },
+        {
+          "text": "والأموات،",
+          "start": 62.44,
+          "end": 63.3,
+          "probability": 0.8523
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "start": 63.3,
+      "end": 85.6,
+      "text": "الذي لا فناء للملك، وبالروح الكدس، والرب المحي، الممسك من الآب، الذي يوامع الآب، والبن مسجود النه ومبشد، الناطق الأميّة، وبيكنيسةٍ واحدة جانعة مقدسة رسمية، وأعترفه مع عديةٍ واحدة لمطفرة الزطاية،",
+      "words": [
+        {
+          "text": "الذي",
+          "start": 63.3,
+          "end": 64.02,
+          "probability": 0.3583
+        },
+        {
+          "text": "لا",
+          "start": 64.02,
+          "end": 64.42,
+          "probability": 0.8969
+        },
+        {
+          "text": "فناء",
+          "start": 64.42,
+          "end": 64.94,
+          "probability": 0.7534
+        },
+        {
+          "text": "للملك،",
+          "start": 64.94,
+          "end": 65.88,
+          "probability": 0.3139
+        },
+        {
+          "text": "وبالروح",
+          "start": 65.88,
+          "end": 66.64,
+          "probability": 0.8129
+        },
+        {
+          "text": "الكدس،",
+          "start": 66.64,
+          "end": 67.56,
+          "probability": 0.6475
+        },
+        {
+          "text": "والرب",
+          "start": 67.56,
+          "end": 67.94,
+          "probability": 0.6736
+        },
+        {
+          "text": "المحي،",
+          "start": 67.94,
+          "end": 68.98,
+          "probability": 0.8913
+        },
+        {
+          "text": "الممسك",
+          "start": 68.98,
+          "end": 69.76,
+          "probability": 0.6322
+        },
+        {
+          "text": "من",
+          "start": 69.76,
+          "end": 69.98,
+          "probability": 0.923
+        },
+        {
+          "text": "الآب،",
+          "start": 69.98,
+          "end": 70.88,
+          "probability": 0.6969
+        },
+        {
+          "text": "الذي",
+          "start": 70.88,
+          "end": 71.32,
+          "probability": 0.9408
+        },
+        {
+          "text": "يوامع",
+          "start": 71.32,
+          "end": 72.0,
+          "probability": 0.6799
+        },
+        {
+          "text": "الآب،",
+          "start": 72.0,
+          "end": 72.64,
+          "probability": 0.8189
+        },
+        {
+          "text": "والبن",
+          "start": 72.64,
+          "end": 73.14,
+          "probability": 0.7296
+        },
+        {
+          "text": "مسجود",
+          "start": 73.14,
+          "end": 73.76,
+          "probability": 0.5917
+        },
+        {
+          "text": "النه",
+          "start": 73.76,
+          "end": 74.14,
+          "probability": 0.5708
+        },
+        {
+          "text": "ومبشد،",
+          "start": 74.14,
+          "end": 75.26,
+          "probability": 0.4374
+        },
+        {
+          "text": "الناطق",
+          "start": 75.26,
+          "end": 76.0,
+          "probability": 0.7207
+        },
+        {
+          "text": "الأميّة،",
+          "start": 76.0,
+          "end": 77.12,
+          "probability": 0.5244
+        },
+        {
+          "text": "وبيكنيسةٍ",
+          "start": 77.12,
+          "end": 78.08,
+          "probability": 0.5584
+        },
+        {
+          "text": "واحدة",
+          "start": 78.08,
+          "end": 78.8,
+          "probability": 0.842
+        },
+        {
+          "text": "جانعة",
+          "start": 78.8,
+          "end": 79.42,
+          "probability": 0.4731
+        },
+        {
+          "text": "مقدسة",
+          "start": 79.42,
+          "end": 80.16,
+          "probability": 0.7873
+        },
+        {
+          "text": "رسمية،",
+          "start": 80.16,
+          "end": 81.34,
+          "probability": 0.8874
+        },
+        {
+          "text": "وأعترفه",
+          "start": 81.34,
+          "end": 82.12,
+          "probability": 0.588
+        },
+        {
+          "text": "مع",
+          "start": 82.12,
+          "end": 82.34,
+          "probability": 0.9726
+        },
+        {
+          "text": "عديةٍ",
+          "start": 82.34,
+          "end": 83.08,
+          "probability": 0.6667
+        },
+        {
+          "text": "واحدة",
+          "start": 83.08,
+          "end": 83.78,
+          "probability": 0.9946
+        },
+        {
+          "text": "لمطفرة",
+          "start": 83.78,
+          "end": 84.4,
+          "probability": 0.6698
+        },
+        {
+          "text": "الزطاية،",
+          "start": 84.4,
+          "end": 85.6,
+          "probability": 0.8103
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "start": 85.6,
+      "end": 93.3,
+      "text": "واحدة ربشة في عامة الموت والحياة، في كدر ذاتي قومين.",
+      "words": [
+        {
+          "text": "واحدة",
+          "start": 85.6,
+          "end": 86.2,
+          "probability": 0.2324
+        },
+        {
+          "text": "ربشة",
+          "start": 86.2,
+          "end": 86.76,
+          "probability": 0.5677
+        },
+        {
+          "text": "في",
+          "start": 86.76,
+          "end": 86.98,
+          "probability": 0.4423
+        },
+        {
+          "text": "عامة",
+          "start": 86.98,
+          "end": 87.52,
+          "probability": 0.4959
+        },
+        {
+          "text": "الموت",
+          "start": 87.52,
+          "end": 88.02,
+          "probability": 0.7717
+        },
+        {
+          "text": "والحياة،",
+          "start": 88.02,
+          "end": 89.82,
+          "probability": 0.6363
+        },
+        {
+          "text": "في",
+          "start": 89.82,
+          "end": 90.12,
+          "probability": 0.8915
+        },
+        {
+          "text": "كدر",
+          "start": 90.12,
+          "end": 90.62,
+          "probability": 0.0858
+        },
+        {
+          "text": "ذاتي",
+          "start": 90.62,
+          "end": 91.68,
+          "probability": 0.485
+        },
+        {
+          "text": "قومين.",
+          "start": 91.68,
+          "end": 93.3,
+          "probability": 0.5009
+        }
+      ]
+    }
+  ]
+}

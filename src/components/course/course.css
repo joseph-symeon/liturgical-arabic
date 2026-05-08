@@ -36,6 +36,8 @@
   grid-template-rows: auto 1fr;
   gap: 6px;
   min-width: 180px;
+  position: relative;
+  z-index: 1;
 }
 
 .lp-activity-field {
@@ -77,7 +79,10 @@
 .lp-activity-select {
   width: 100%;
   min-width: min(260px, 100%);
+  min-height: 40px;
   padding: 8px 32px 8px 10px;
+  appearance: auto;
+  -webkit-appearance: menulist;
 }
 
 .lp-activity-static {
@@ -675,6 +680,7 @@
 
 @media (max-width: 680px) {
   .lp-activity-toolbar {
+    flex-direction: column;
     align-items: stretch;
     gap: 12px;
   }
@@ -690,7 +696,7 @@
   }
 
   .lp-toolbar-player {
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex: 0 0 auto;
   }
 }

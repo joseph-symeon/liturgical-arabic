@@ -1,0 +1,3087 @@
+{
+  "engine": "faster-whisper",
+  "model": "small",
+  "language": "ar",
+  "language_probability": 1.0,
+  "duration_seconds": 360.235,
+  "words": [
+    {
+      "text": "لنكمل",
+      "start": 0.0,
+      "end": 1.64,
+      "probability": 0.8837
+    },
+    {
+      "text": "طلبتنا",
+      "start": 1.64,
+      "end": 2.82,
+      "probability": 0.9494
+    },
+    {
+      "text": "للرب",
+      "start": 2.82,
+      "end": 5.12,
+      "probability": 0.8469
+    },
+    {
+      "text": "إيلى",
+      "start": 6.82,
+      "end": 8.22,
+      "probability": 0.2933
+    },
+    {
+      "text": "لا",
+      "start": 8.22,
+      "end": 9.06,
+      "probability": 0.4762
+    },
+    {
+      "text": "يسون",
+      "start": 9.06,
+      "end": 12.38,
+      "probability": 0.6965
+    },
+    {
+      "text": "من",
+      "start": 12.38,
+      "end": 13.24,
+      "probability": 0.9412
+    },
+    {
+      "text": "عجل",
+      "start": 13.24,
+      "end": 13.66,
+      "probability": 0.8645
+    },
+    {
+      "text": "هذه",
+      "start": 13.66,
+      "end": 14.2,
+      "probability": 0.9658
+    },
+    {
+      "text": "القرابين",
+      "start": 14.2,
+      "end": 15.4,
+      "probability": 0.9518
+    },
+    {
+      "text": "الكريمى",
+      "start": 15.4,
+      "end": 17.06,
+      "probability": 0.7606
+    },
+    {
+      "text": "المقدمة",
+      "start": 17.06,
+      "end": 18.12,
+      "probability": 0.9011
+    },
+    {
+      "text": "إلى",
+      "start": 18.12,
+      "end": 18.5,
+      "probability": 0.9925
+    },
+    {
+      "text": "الرب",
+      "start": 18.5,
+      "end": 19.0,
+      "probability": 0.614
+    },
+    {
+      "text": "نطلب",
+      "start": 19.0,
+      "end": 20.2,
+      "probability": 0.8271
+    },
+    {
+      "text": "يا",
+      "start": 21.0,
+      "end": 21.9,
+      "probability": 0.8559
+    },
+    {
+      "text": "ربور",
+      "start": 21.9,
+      "end": 26.68,
+      "probability": 0.6807
+    },
+    {
+      "text": "خام",
+      "start": 26.68,
+      "end": 28.32,
+      "probability": 0.4087
+    },
+    {
+      "text": "من",
+      "start": 29.06,
+      "end": 29.76,
+      "probability": 0.2471
+    },
+    {
+      "text": "عجل",
+      "start": 29.76,
+      "end": 30.2,
+      "probability": 0.7278
+    },
+    {
+      "text": "هذا",
+      "start": 30.2,
+      "end": 30.88,
+      "probability": 0.9266
+    },
+    {
+      "text": "البيت",
+      "start": 30.88,
+      "end": 31.62,
+      "probability": 0.9161
+    },
+    {
+      "text": "المقدس",
+      "start": 31.62,
+      "end": 33.28,
+      "probability": 0.8905
+    },
+    {
+      "text": "والذين",
+      "start": 33.28,
+      "end": 35.18,
+      "probability": 0.9276
+    },
+    {
+      "text": "يدخلون",
+      "start": 35.18,
+      "end": 36.24,
+      "probability": 0.9596
+    },
+    {
+      "text": "إليه",
+      "start": 36.24,
+      "end": 37.66,
+      "probability": 0.9754
+    },
+    {
+      "text": "بيمان",
+      "start": 37.66,
+      "end": 39.3,
+      "probability": 0.7317
+    },
+    {
+      "text": "ورع",
+      "start": 39.3,
+      "end": 40.0,
+      "probability": 0.9528
+    },
+    {
+      "text": "وخوف",
+      "start": 40.0,
+      "end": 40.74,
+      "probability": 0.8482
+    },
+    {
+      "text": "الله",
+      "start": 40.74,
+      "end": 41.64,
+      "probability": 0.9053
+    },
+    {
+      "text": "للرب",
+      "start": 41.64,
+      "end": 42.7,
+      "probability": 0.8598
+    },
+    {
+      "text": "نطلب",
+      "start": 42.7,
+      "end": 43.62,
+      "probability": 0.714
+    },
+    {
+      "text": "إيلى",
+      "start": 45.18,
+      "end": 46.58,
+      "probability": 0.027
+    },
+    {
+      "text": "لا",
+      "start": 46.58,
+      "end": 47.42,
+      "probability": 0.0053
+    },
+    {
+      "text": "يسون",
+      "start": 47.42,
+      "end": 50.66,
+      "probability": 0.3231
+    },
+    {
+      "text": "من",
+      "start": 51.32,
+      "end": 52.74,
+      "probability": 0.4893
+    },
+    {
+      "text": "عجل",
+      "start": 52.74,
+      "end": 53.3,
+      "probability": 0.9858
+    },
+    {
+      "text": "نجاتنا",
+      "start": 53.3,
+      "end": 54.84,
+      "probability": 0.896
+    },
+    {
+      "text": "من",
+      "start": 54.84,
+      "end": 55.56,
+      "probability": 0.9934
+    },
+    {
+      "text": "كل",
+      "start": 55.56,
+      "end": 55.8,
+      "probability": 0.9747
+    },
+    {
+      "text": "ضيق",
+      "start": 55.8,
+      "end": 56.56,
+      "probability": 0.909
+    },
+    {
+      "text": "وغضب",
+      "start": 56.56,
+      "end": 57.36,
+      "probability": 0.4778
+    },
+    {
+      "text": "وخطر",
+      "start": 57.36,
+      "end": 58.26,
+      "probability": 0.8542
+    },
+    {
+      "text": "وشدة",
+      "start": 58.26,
+      "end": 59.08,
+      "probability": 0.7903
+    },
+    {
+      "text": "إلى",
+      "start": 59.08,
+      "end": 60.62,
+      "probability": 0.9614
+    },
+    {
+      "text": "الرب",
+      "start": 60.62,
+      "end": 61.16,
+      "probability": 0.5298
+    },
+    {
+      "text": "نطلب",
+      "start": 61.16,
+      "end": 62.46,
+      "probability": 0.5856
+    },
+    {
+      "text": "يا",
+      "start": 62.46,
+      "end": 63.98,
+      "probability": 0.2595
+    },
+    {
+      "text": "ربور",
+      "start": 63.98,
+      "end": 67.82,
+      "probability": 0.4049
+    },
+    {
+      "text": "خام",
+      "start": 67.82,
+      "end": 70.06,
+      "probability": 0.4664
+    },
+    {
+      "text": "أوضد",
+      "start": 70.06,
+      "end": 71.3,
+      "probability": 0.4756
+    },
+    {
+      "text": "وخلص",
+      "start": 71.3,
+      "end": 72.08,
+      "probability": 0.9595
+    },
+    {
+      "text": "ورحم",
+      "start": 72.08,
+      "end": 72.86,
+      "probability": 0.9416
+    },
+    {
+      "text": "وحفظنا",
+      "start": 72.86,
+      "end": 74.0,
+      "probability": 0.8155
+    },
+    {
+      "text": "يا",
+      "start": 74.0,
+      "end": 74.22,
+      "probability": 0.8874
+    },
+    {
+      "text": "الله",
+      "start": 74.22,
+      "end": 74.92,
+      "probability": 0.9634
+    },
+    {
+      "text": "بنعمتك",
+      "start": 74.92,
+      "end": 78.02,
+      "probability": 0.9193
+    },
+    {
+      "text": "كيميا",
+      "start": 78.02,
+      "end": 80.22,
+      "probability": 0.6109
+    },
+    {
+      "text": "لا",
+      "start": 80.22,
+      "end": 81.5,
+      "probability": 0.0869
+    },
+    {
+      "text": "يسون",
+      "start": 81.5,
+      "end": 84.78,
+      "probability": 0.4928
+    },
+    {
+      "text": "أن",
+      "start": 85.5,
+      "end": 86.2,
+      "probability": 0.4731
+    },
+    {
+      "text": "يكون",
+      "start": 86.2,
+      "end": 87.02,
+      "probability": 0.9944
+    },
+    {
+      "text": "نهارنا",
+      "start": 87.02,
+      "end": 88.5,
+      "probability": 0.9704
+    },
+    {
+      "text": "كله",
+      "start": 88.5,
+      "end": 89.52,
+      "probability": 0.9784
+    },
+    {
+      "text": "كاملا",
+      "start": 89.52,
+      "end": 90.38,
+      "probability": 0.9246
+    },
+    {
+      "text": "مقدسا",
+      "start": 90.38,
+      "end": 91.42,
+      "probability": 0.9401
+    },
+    {
+      "text": "سلاميا",
+      "start": 91.42,
+      "end": 92.56,
+      "probability": 0.9402
+    },
+    {
+      "text": "وبلا",
+      "start": 92.56,
+      "end": 93.8,
+      "probability": 0.8808
+    },
+    {
+      "text": "خطية",
+      "start": 93.8,
+      "end": 94.6,
+      "probability": 0.731
+    },
+    {
+      "text": "عالرب",
+      "start": 94.6,
+      "end": 95.54,
+      "probability": 0.6382
+    },
+    {
+      "text": "نسأل",
+      "start": 95.54,
+      "end": 97.64,
+      "probability": 0.8398
+    },
+    {
+      "text": "إستجب",
+      "start": 99.32,
+      "end": 100.72,
+      "probability": 0.4675
+    },
+    {
+      "text": "يا",
+      "start": 100.72,
+      "end": 101.5,
+      "probability": 0.8678
+    },
+    {
+      "text": "رب",
+      "start": 101.5,
+      "end": 105.62,
+      "probability": 0.5684
+    },
+    {
+      "text": "ملاكى",
+      "start": 105.62,
+      "end": 106.9,
+      "probability": 0.6824
+    },
+    {
+      "text": "سلام",
+      "start": 106.9,
+      "end": 107.52,
+      "probability": 0.9721
+    },
+    {
+      "text": "مرشدا",
+      "start": 107.52,
+      "end": 108.68,
+      "probability": 0.8488
+    },
+    {
+      "text": "أمينا",
+      "start": 108.68,
+      "end": 109.56,
+      "probability": 0.8549
+    },
+    {
+      "text": "حافظا",
+      "start": 109.56,
+      "end": 111.06,
+      "probability": 0.6368
+    },
+    {
+      "text": "نفوسنا",
+      "start": 111.06,
+      "end": 112.26,
+      "probability": 0.7859
+    },
+    {
+      "text": "واجسادنا",
+      "start": 112.26,
+      "end": 115.04,
+      "probability": 0.772
+    },
+    {
+      "text": "الرب",
+      "start": 115.04,
+      "end": 115.58,
+      "probability": 0.6289
+    },
+    {
+      "text": "نسأل",
+      "start": 115.58,
+      "end": 117.36,
+      "probability": 0.8881
+    },
+    {
+      "text": "قرى",
+      "start": 117.36,
+      "end": 119.12,
+      "probability": 0.4373
+    },
+    {
+      "text": "سوريا",
+      "start": 119.12,
+      "end": 124.36,
+      "probability": 0.5406
+    },
+    {
+      "text": "مسامحتا",
+      "start": 127.22,
+      "end": 128.62,
+      "probability": 0.6491
+    },
+    {
+      "text": "خطيانا",
+      "start": 128.62,
+      "end": 130.02,
+      "probability": 0.8745
+    },
+    {
+      "text": "وغفران",
+      "start": 130.02,
+      "end": 131.06,
+      "probability": 0.9016
+    },
+    {
+      "text": "زلاتنا",
+      "start": 131.06,
+      "end": 132.8,
+      "probability": 0.8057
+    },
+    {
+      "text": "الرب",
+      "start": 132.8,
+      "end": 133.34,
+      "probability": 0.9505
+    },
+    {
+      "text": "نسأل",
+      "start": 133.34,
+      "end": 135.2,
+      "probability": 0.9973
+    },
+    {
+      "text": "إستجب",
+      "start": 137.22,
+      "end": 138.62,
+      "probability": 0.4516
+    },
+    {
+      "text": "يا",
+      "start": 138.62,
+      "end": 139.44,
+      "probability": 0.8466
+    },
+    {
+      "text": "رب",
+      "start": 139.44,
+      "end": 142.6,
+      "probability": 0.5406
+    },
+    {
+      "text": "الصالحات",
+      "start": 142.6,
+      "end": 144.46,
+      "probability": 0.8798
+    },
+    {
+      "text": "والموافقات",
+      "start": 144.46,
+      "end": 146.14,
+      "probability": 0.9822
+    },
+    {
+      "text": "لنفوسنا",
+      "start": 146.14,
+      "end": 147.7,
+      "probability": 0.8822
+    },
+    {
+      "text": "والسلام",
+      "start": 147.7,
+      "end": 149.4,
+      "probability": 0.9248
+    },
+    {
+      "text": "للعالميا",
+      "start": 149.4,
+      "end": 151.3,
+      "probability": 0.7213
+    },
+    {
+      "text": "الرب",
+      "start": 151.3,
+      "end": 151.88,
+      "probability": 0.6224
+    },
+    {
+      "text": "نسأل",
+      "start": 151.88,
+      "end": 153.68,
+      "probability": 0.9678
+    },
+    {
+      "text": "فراسوا",
+      "start": 156.62,
+      "end": 158.02,
+      "probability": 0.5492
+    },
+    {
+      "text": "كريا",
+      "start": 158.02,
+      "end": 159.42,
+      "probability": 0.3256
+    },
+    {
+      "text": "أن",
+      "start": 160.42,
+      "end": 161.5,
+      "probability": 0.1617
+    },
+    {
+      "text": "نتم",
+      "start": 161.5,
+      "end": 162.02,
+      "probability": 0.571
+    },
+    {
+      "text": "ما",
+      "start": 162.02,
+      "end": 162.62,
+      "probability": 0.6887
+    },
+    {
+      "text": "بقية",
+      "start": 162.62,
+      "end": 163.86,
+      "probability": 0.7417
+    },
+    {
+      "text": "زمان",
+      "start": 163.86,
+      "end": 165.18,
+      "probability": 0.9788
+    },
+    {
+      "text": "حياتنا",
+      "start": 165.18,
+      "end": 167.0,
+      "probability": 0.9769
+    },
+    {
+      "text": "بسلام",
+      "start": 167.0,
+      "end": 168.8,
+      "probability": 0.9531
+    },
+    {
+      "text": "وتوبة",
+      "start": 168.8,
+      "end": 169.98,
+      "probability": 0.9015
+    },
+    {
+      "text": "أررب",
+      "start": 169.98,
+      "end": 170.74,
+      "probability": 0.6108
+    },
+    {
+      "text": "نسأل",
+      "start": 170.74,
+      "end": 172.64,
+      "probability": 0.8868
+    },
+    {
+      "text": "إستجب",
+      "start": 174.1,
+      "end": 175.5,
+      "probability": 0.3659
+    },
+    {
+      "text": "يا",
+      "start": 175.5,
+      "end": 176.62,
+      "probability": 0.9157
+    },
+    {
+      "text": "رب",
+      "start": 176.62,
+      "end": 179.62,
+      "probability": 0.5923
+    },
+    {
+      "text": "أن",
+      "start": 179.62,
+      "end": 180.48,
+      "probability": 0.8481
+    },
+    {
+      "text": "تكون",
+      "start": 180.48,
+      "end": 181.34,
+      "probability": 0.9952
+    },
+    {
+      "text": "واخر",
+      "start": 181.34,
+      "end": 182.62,
+      "probability": 0.891
+    },
+    {
+      "text": "حياتنا",
+      "start": 182.62,
+      "end": 184.06,
+      "probability": 0.9837
+    },
+    {
+      "text": "مسحية",
+      "start": 184.06,
+      "end": 185.8,
+      "probability": 0.8452
+    },
+    {
+      "text": "سلامية",
+      "start": 185.8,
+      "end": 187.2,
+      "probability": 0.9513
+    },
+    {
+      "text": "بلا",
+      "start": 187.2,
+      "end": 188.48,
+      "probability": 0.4671
+    },
+    {
+      "text": "حزن",
+      "start": 188.48,
+      "end": 189.08,
+      "probability": 0.8608
+    },
+    {
+      "text": "ولا",
+      "start": 189.08,
+      "end": 189.56,
+      "probability": 0.8821
+    },
+    {
+      "text": "خزن",
+      "start": 189.56,
+      "end": 191.2,
+      "probability": 0.8248
+    },
+    {
+      "text": "وجوابا",
+      "start": 191.84,
+      "end": 193.04,
+      "probability": 0.7948
+    },
+    {
+      "text": "حسنا",
+      "start": 193.04,
+      "end": 193.88,
+      "probability": 0.9011
+    },
+    {
+      "text": "لدى",
+      "start": 193.88,
+      "end": 194.74,
+      "probability": 0.7952
+    },
+    {
+      "text": "منبر",
+      "start": 194.74,
+      "end": 195.28,
+      "probability": 0.5614
+    },
+    {
+      "text": "المسيح",
+      "start": 195.28,
+      "end": 197.44,
+      "probability": 0.9856
+    },
+    {
+      "text": "المره",
+      "start": 197.44,
+      "end": 198.28,
+      "probability": 0.7902
+    },
+    {
+      "text": "بنسأل",
+      "start": 198.28,
+      "end": 200.34,
+      "probability": 0.827
+    },
+    {
+      "text": "فراسوا",
+      "start": 203.8,
+      "end": 205.2,
+      "probability": 0.393
+    },
+    {
+      "text": "كريا",
+      "start": 205.2,
+      "end": 206.6,
+      "probability": 0.1436
+    },
+    {
+      "text": "بعد",
+      "start": 208.2,
+      "end": 209.06,
+      "probability": 0.8048
+    },
+    {
+      "text": "ذكرنا",
+      "start": 209.06,
+      "end": 210.26,
+      "probability": 0.8205
+    },
+    {
+      "text": "الكلية",
+      "start": 210.26,
+      "end": 211.04,
+      "probability": 0.7114
+    },
+    {
+      "text": "القداسة",
+      "start": 211.04,
+      "end": 212.16,
+      "probability": 0.8774
+    },
+    {
+      "text": "الطاهرة",
+      "start": 212.16,
+      "end": 212.86,
+      "probability": 0.9388
+    },
+    {
+      "text": "الفائقة",
+      "start": 212.96,
+      "end": 214.0,
+      "probability": 0.8879
+    },
+    {
+      "text": "البركات",
+      "start": 214.0,
+      "end": 215.1,
+      "probability": 0.8221
+    },
+    {
+      "text": "المجيدة",
+      "start": 215.1,
+      "end": 216.3,
+      "probability": 0.906
+    },
+    {
+      "text": "سيدتنا",
+      "start": 216.3,
+      "end": 218.16,
+      "probability": 0.9067
+    },
+    {
+      "text": "والدت",
+      "start": 218.16,
+      "end": 219.5,
+      "probability": 0.6198
+    },
+    {
+      "text": "لله",
+      "start": 219.5,
+      "end": 220.8,
+      "probability": 0.5889
+    },
+    {
+      "text": "أدائمة",
+      "start": 220.8,
+      "end": 222.2,
+      "probability": 0.6841
+    },
+    {
+      "text": "الفطولية",
+      "start": 222.2,
+      "end": 223.54,
+      "probability": 0.7243
+    },
+    {
+      "text": "مريام",
+      "start": 223.54,
+      "end": 225.32,
+      "probability": 0.8128
+    },
+    {
+      "text": "مع",
+      "start": 225.32,
+      "end": 226.04,
+      "probability": 0.9856
+    },
+    {
+      "text": "جميع",
+      "start": 226.04,
+      "end": 227.26,
+      "probability": 0.9958
+    },
+    {
+      "text": "القدسين",
+      "start": 227.26,
+      "end": 229.3,
+      "probability": 0.9442
+    },
+    {
+      "text": "فالنود",
+      "start": 229.3,
+      "end": 230.44,
+      "probability": 0.9097
+    },
+    {
+      "text": "ذواتنا",
+      "start": 230.44,
+      "end": 231.64,
+      "probability": 0.8899
+    },
+    {
+      "text": "بعضنا",
+      "start": 231.64,
+      "end": 232.64,
+      "probability": 0.7525
+    },
+    {
+      "text": "بعضا",
+      "start": 232.64,
+      "end": 233.34,
+      "probability": 0.8037
+    },
+    {
+      "text": "وكل",
+      "start": 233.92,
+      "end": 234.8,
+      "probability": 0.8369
+    },
+    {
+      "text": "حياة",
+      "start": 234.8,
+      "end": 236.24,
+      "probability": 0.8689
+    },
+    {
+      "text": "المسيح",
+      "start": 236.24,
+      "end": 237.56,
+      "probability": 0.987
+    },
+    {
+      "text": "الإله",
+      "start": 237.56,
+      "end": 239.12,
+      "probability": 0.6612
+    },
+    {
+      "text": "لك",
+      "start": 239.12,
+      "end": 240.46,
+      "probability": 0.9474
+    },
+    {
+      "text": "يا",
+      "start": 240.46,
+      "end": 241.22,
+      "probability": 0.9324
+    },
+    {
+      "text": "رب",
+      "start": 241.22,
+      "end": 244.36,
+      "probability": 0.7523
+    },
+    {
+      "text": "ليجل",
+      "start": 246.3,
+      "end": 246.9,
+      "probability": 0.6639
+    },
+    {
+      "text": "رافات",
+      "start": 246.9,
+      "end": 247.86,
+      "probability": 0.7083
+    },
+    {
+      "text": "ابنك",
+      "start": 247.86,
+      "end": 248.28,
+      "probability": 0.6798
+    },
+    {
+      "text": "الوحيد",
+      "start": 248.28,
+      "end": 249.22,
+      "probability": 0.9076
+    },
+    {
+      "text": "الذي",
+      "start": 249.22,
+      "end": 249.66,
+      "probability": 0.9537
+    },
+    {
+      "text": "أنت",
+      "start": 249.66,
+      "end": 250.08,
+      "probability": 0.8411
+    },
+    {
+      "text": "مبارك",
+      "start": 250.08,
+      "end": 251.18,
+      "probability": 0.9793
+    },
+    {
+      "text": "معه",
+      "start": 251.18,
+      "end": 252.26,
+      "probability": 0.9062
+    },
+    {
+      "text": "ومع",
+      "start": 252.26,
+      "end": 253.4,
+      "probability": 0.9747
+    },
+    {
+      "text": "روحك",
+      "start": 253.4,
+      "end": 254.18,
+      "probability": 0.828
+    },
+    {
+      "text": "الكلي",
+      "start": 254.18,
+      "end": 254.74,
+      "probability": 0.649
+    },
+    {
+      "text": "قدسوا",
+      "start": 254.74,
+      "end": 255.58,
+      "probability": 0.7114
+    },
+    {
+      "text": "الصالح",
+      "start": 255.58,
+      "end": 256.58,
+      "probability": 0.9864
+    },
+    {
+      "text": "والمحين",
+      "start": 256.58,
+      "end": 257.3,
+      "probability": 0.8195
+    },
+    {
+      "text": "الآن",
+      "start": 258.12,
+      "end": 259.04,
+      "probability": 0.8435
+    },
+    {
+      "text": "وكل",
+      "start": 259.04,
+      "end": 260.02,
+      "probability": 0.8829
+    },
+    {
+      "text": "عوان",
+      "start": 260.02,
+      "end": 261.3,
+      "probability": 0.7203
+    },
+    {
+      "text": "وإلى",
+      "start": 261.3,
+      "end": 262.72,
+      "probability": 0.6245
+    },
+    {
+      "text": "دهر",
+      "start": 262.72,
+      "end": 263.3,
+      "probability": 0.9641
+    },
+    {
+      "text": "داهرين",
+      "start": 263.3,
+      "end": 266.3,
+      "probability": 0.8455
+    },
+    {
+      "text": "آمين",
+      "start": 269.76,
+      "end": 270.46,
+      "probability": 0.5429
+    },
+    {
+      "text": "السلام",
+      "start": 271.16,
+      "end": 272.86,
+      "probability": 0.8109
+    },
+    {
+      "text": "لجميعكم",
+      "start": 272.86,
+      "end": 276.62,
+      "probability": 0.9039
+    },
+    {
+      "text": "وارروحك",
+      "start": 279.6,
+      "end": 281.0,
+      "probability": 0.5803
+    },
+    {
+      "text": "لنحب",
+      "start": 282.62,
+      "end": 284.02,
+      "probability": 0.9554
+    },
+    {
+      "text": "بعضنا",
+      "start": 284.02,
+      "end": 285.04,
+      "probability": 0.9026
+    },
+    {
+      "text": "بعضا",
+      "start": 285.04,
+      "end": 285.74,
+      "probability": 0.9258
+    },
+    {
+      "text": "لكي",
+      "start": 285.94,
+      "end": 287.2,
+      "probability": 0.8959
+    },
+    {
+      "text": "بعز",
+      "start": 287.2,
+      "end": 287.72,
+      "probability": 0.8975
+    },
+    {
+      "text": "من",
+      "start": 287.72,
+      "end": 287.98,
+      "probability": 0.9052
+    },
+    {
+      "text": "واحد",
+      "start": 287.98,
+      "end": 290.12,
+      "probability": 0.9484
+    },
+    {
+      "text": "نعترف",
+      "start": 290.12,
+      "end": 291.24,
+      "probability": 0.8735
+    },
+    {
+      "text": "مقرين",
+      "start": 291.24,
+      "end": 294.18,
+      "probability": 0.8656
+    },
+    {
+      "text": "أخبك",
+      "start": 296.02,
+      "end": 297.42,
+      "probability": 0.2611
+    },
+    {
+      "text": "يا",
+      "start": 297.42,
+      "end": 298.48,
+      "probability": 0.9746
+    },
+    {
+      "text": "رب",
+      "start": 298.48,
+      "end": 300.36,
+      "probability": 0.8243
+    },
+    {
+      "text": "يا",
+      "start": 300.84,
+      "end": 301.54,
+      "probability": 0.0525
+    },
+    {
+      "text": "طوات",
+      "start": 301.54,
+      "end": 305.52,
+      "probability": 0.5088
+    },
+    {
+      "text": "أرواب",
+      "start": 310.08,
+      "end": 311.48,
+      "probability": 0.4997
+    },
+    {
+      "text": "ثبات",
+      "start": 311.48,
+      "end": 312.88,
+      "probability": 0.4716
+    },
+    {
+      "text": "ومالجا",
+      "start": 315.68,
+      "end": 317.08,
+      "probability": 0.4791
+    },
+    {
+      "text": "ومخالص",
+      "start": 324.38,
+      "end": 325.78,
+      "probability": 0.3559
+    },
+    {
+      "text": "بآب",
+      "start": 329.34,
+      "end": 330.74,
+      "probability": 0.69
+    },
+    {
+      "text": "ولم",
+      "start": 330.74,
+      "end": 332.14,
+      "probability": 0.3227
+    },
+    {
+      "text": "وروح",
+      "start": 332.14,
+      "end": 334.4,
+      "probability": 0.6416
+    },
+    {
+      "text": "قدس",
+      "start": 334.4,
+      "end": 336.42,
+      "probability": 0.691
+    },
+    {
+      "text": "ثالوث",
+      "start": 338.78,
+      "end": 340.18,
+      "probability": 0.7006
+    },
+    {
+      "text": "متسا",
+      "start": 340.18,
+      "end": 341.58,
+      "probability": 0.6673
+    },
+    {
+      "text": "في",
+      "start": 341.58,
+      "end": 343.84,
+      "probability": 0.2458
+    },
+    {
+      "text": "الجوهر",
+      "start": 343.84,
+      "end": 346.78,
+      "probability": 0.5983
+    },
+    {
+      "text": "ومعير",
+      "start": 346.78,
+      "end": 348.78,
+      "probability": 0.5499
+    },
+    {
+      "text": "ونفاصل",
+      "start": 355.34,
+      "end": 356.74,
+      "probability": 0.5084
+    }
+  ],
+  "segments": [
+    {
+      "index": 1,
+      "start": 0.0,
+      "end": 5.12,
+      "text": "لنكمل طلبتنا للرب",
+      "words": [
+        {
+          "text": "لنكمل",
+          "start": 0.0,
+          "end": 1.64,
+          "probability": 0.8837
+        },
+        {
+          "text": "طلبتنا",
+          "start": 1.64,
+          "end": 2.82,
+          "probability": 0.9494
+        },
+        {
+          "text": "للرب",
+          "start": 2.82,
+          "end": 5.12,
+          "probability": 0.8469
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "start": 6.82,
+      "end": 12.38,
+      "text": "إيلى لا يسون",
+      "words": [
+        {
+          "text": "إيلى",
+          "start": 6.82,
+          "end": 8.22,
+          "probability": 0.2933
+        },
+        {
+          "text": "لا",
+          "start": 8.22,
+          "end": 9.06,
+          "probability": 0.4762
+        },
+        {
+          "text": "يسون",
+          "start": 9.06,
+          "end": 12.38,
+          "probability": 0.6965
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "start": 12.38,
+      "end": 20.2,
+      "text": "من عجل هذه القرابين الكريمى المقدمة إلى الرب نطلب",
+      "words": [
+        {
+          "text": "من",
+          "start": 12.38,
+          "end": 13.24,
+          "probability": 0.9412
+        },
+        {
+          "text": "عجل",
+          "start": 13.24,
+          "end": 13.66,
+          "probability": 0.8645
+        },
+        {
+          "text": "هذه",
+          "start": 13.66,
+          "end": 14.2,
+          "probability": 0.9658
+        },
+        {
+          "text": "القرابين",
+          "start": 14.2,
+          "end": 15.4,
+          "probability": 0.9518
+        },
+        {
+          "text": "الكريمى",
+          "start": 15.4,
+          "end": 17.06,
+          "probability": 0.7606
+        },
+        {
+          "text": "المقدمة",
+          "start": 17.06,
+          "end": 18.12,
+          "probability": 0.9011
+        },
+        {
+          "text": "إلى",
+          "start": 18.12,
+          "end": 18.5,
+          "probability": 0.9925
+        },
+        {
+          "text": "الرب",
+          "start": 18.5,
+          "end": 19.0,
+          "probability": 0.614
+        },
+        {
+          "text": "نطلب",
+          "start": 19.0,
+          "end": 20.2,
+          "probability": 0.8271
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "start": 21.0,
+      "end": 28.32,
+      "text": "يا ربور خام",
+      "words": [
+        {
+          "text": "يا",
+          "start": 21.0,
+          "end": 21.9,
+          "probability": 0.8559
+        },
+        {
+          "text": "ربور",
+          "start": 21.9,
+          "end": 26.68,
+          "probability": 0.6807
+        },
+        {
+          "text": "خام",
+          "start": 26.68,
+          "end": 28.32,
+          "probability": 0.4087
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "start": 29.32,
+      "end": 33.28,
+      "text": "من عجل هذا البيت المقدس",
+      "words": [
+        {
+          "text": "من",
+          "start": 29.06,
+          "end": 29.76,
+          "probability": 0.2471
+        },
+        {
+          "text": "عجل",
+          "start": 29.76,
+          "end": 30.2,
+          "probability": 0.7278
+        },
+        {
+          "text": "هذا",
+          "start": 30.2,
+          "end": 30.88,
+          "probability": 0.9266
+        },
+        {
+          "text": "البيت",
+          "start": 30.88,
+          "end": 31.62,
+          "probability": 0.9161
+        },
+        {
+          "text": "المقدس",
+          "start": 31.62,
+          "end": 33.28,
+          "probability": 0.8905
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "start": 33.28,
+      "end": 37.66,
+      "text": "والذين يدخلون إليه",
+      "words": [
+        {
+          "text": "والذين",
+          "start": 33.28,
+          "end": 35.18,
+          "probability": 0.9276
+        },
+        {
+          "text": "يدخلون",
+          "start": 35.18,
+          "end": 36.24,
+          "probability": 0.9596
+        },
+        {
+          "text": "إليه",
+          "start": 36.24,
+          "end": 37.66,
+          "probability": 0.9754
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "start": 37.66,
+      "end": 43.62,
+      "text": "بيمان ورع وخوف الله للرب نطلب",
+      "words": [
+        {
+          "text": "بيمان",
+          "start": 37.66,
+          "end": 39.3,
+          "probability": 0.7317
+        },
+        {
+          "text": "ورع",
+          "start": 39.3,
+          "end": 40.0,
+          "probability": 0.9528
+        },
+        {
+          "text": "وخوف",
+          "start": 40.0,
+          "end": 40.74,
+          "probability": 0.8482
+        },
+        {
+          "text": "الله",
+          "start": 40.74,
+          "end": 41.64,
+          "probability": 0.9053
+        },
+        {
+          "text": "للرب",
+          "start": 41.64,
+          "end": 42.7,
+          "probability": 0.8598
+        },
+        {
+          "text": "نطلب",
+          "start": 42.7,
+          "end": 43.62,
+          "probability": 0.714
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "start": 45.18,
+      "end": 50.66,
+      "text": "إيلى لا يسون",
+      "words": [
+        {
+          "text": "إيلى",
+          "start": 45.18,
+          "end": 46.58,
+          "probability": 0.027
+        },
+        {
+          "text": "لا",
+          "start": 46.58,
+          "end": 47.42,
+          "probability": 0.0053
+        },
+        {
+          "text": "يسون",
+          "start": 47.42,
+          "end": 50.66,
+          "probability": 0.3231
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "start": 51.32,
+      "end": 56.56,
+      "text": "من عجل نجاتنا من كل ضيق",
+      "words": [
+        {
+          "text": "من",
+          "start": 51.32,
+          "end": 52.74,
+          "probability": 0.4893
+        },
+        {
+          "text": "عجل",
+          "start": 52.74,
+          "end": 53.3,
+          "probability": 0.9858
+        },
+        {
+          "text": "نجاتنا",
+          "start": 53.3,
+          "end": 54.84,
+          "probability": 0.896
+        },
+        {
+          "text": "من",
+          "start": 54.84,
+          "end": 55.56,
+          "probability": 0.9934
+        },
+        {
+          "text": "كل",
+          "start": 55.56,
+          "end": 55.8,
+          "probability": 0.9747
+        },
+        {
+          "text": "ضيق",
+          "start": 55.8,
+          "end": 56.56,
+          "probability": 0.909
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "start": 56.56,
+      "end": 62.46,
+      "text": "وغضب وخطر وشدة إلى الرب نطلب",
+      "words": [
+        {
+          "text": "وغضب",
+          "start": 56.56,
+          "end": 57.36,
+          "probability": 0.4778
+        },
+        {
+          "text": "وخطر",
+          "start": 57.36,
+          "end": 58.26,
+          "probability": 0.8542
+        },
+        {
+          "text": "وشدة",
+          "start": 58.26,
+          "end": 59.08,
+          "probability": 0.7903
+        },
+        {
+          "text": "إلى",
+          "start": 59.08,
+          "end": 60.62,
+          "probability": 0.9614
+        },
+        {
+          "text": "الرب",
+          "start": 60.62,
+          "end": 61.16,
+          "probability": 0.5298
+        },
+        {
+          "text": "نطلب",
+          "start": 61.16,
+          "end": 62.46,
+          "probability": 0.5856
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "start": 62.46,
+      "end": 70.06,
+      "text": "يا ربور خام",
+      "words": [
+        {
+          "text": "يا",
+          "start": 62.46,
+          "end": 63.98,
+          "probability": 0.2595
+        },
+        {
+          "text": "ربور",
+          "start": 63.98,
+          "end": 67.82,
+          "probability": 0.4049
+        },
+        {
+          "text": "خام",
+          "start": 67.82,
+          "end": 70.06,
+          "probability": 0.4664
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "start": 70.06,
+      "end": 72.86,
+      "text": "أوضد وخلص ورحم",
+      "words": [
+        {
+          "text": "أوضد",
+          "start": 70.06,
+          "end": 71.3,
+          "probability": 0.4756
+        },
+        {
+          "text": "وخلص",
+          "start": 71.3,
+          "end": 72.08,
+          "probability": 0.9595
+        },
+        {
+          "text": "ورحم",
+          "start": 72.08,
+          "end": 72.86,
+          "probability": 0.9416
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "start": 72.86,
+      "end": 78.02,
+      "text": "وحفظنا يا الله بنعمتك",
+      "words": [
+        {
+          "text": "وحفظنا",
+          "start": 72.86,
+          "end": 74.0,
+          "probability": 0.8155
+        },
+        {
+          "text": "يا",
+          "start": 74.0,
+          "end": 74.22,
+          "probability": 0.8874
+        },
+        {
+          "text": "الله",
+          "start": 74.22,
+          "end": 74.92,
+          "probability": 0.9634
+        },
+        {
+          "text": "بنعمتك",
+          "start": 74.92,
+          "end": 78.02,
+          "probability": 0.9193
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "start": 78.02,
+      "end": 84.78,
+      "text": "كيميا لا يسون",
+      "words": [
+        {
+          "text": "كيميا",
+          "start": 78.02,
+          "end": 80.22,
+          "probability": 0.6109
+        },
+        {
+          "text": "لا",
+          "start": 80.22,
+          "end": 81.5,
+          "probability": 0.0869
+        },
+        {
+          "text": "يسون",
+          "start": 81.5,
+          "end": 84.78,
+          "probability": 0.4928
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "start": 85.78,
+      "end": 92.56,
+      "text": "أن يكون نهارنا كله كاملا مقدسا سلاميا",
+      "words": [
+        {
+          "text": "أن",
+          "start": 85.5,
+          "end": 86.2,
+          "probability": 0.4731
+        },
+        {
+          "text": "يكون",
+          "start": 86.2,
+          "end": 87.02,
+          "probability": 0.9944
+        },
+        {
+          "text": "نهارنا",
+          "start": 87.02,
+          "end": 88.5,
+          "probability": 0.9704
+        },
+        {
+          "text": "كله",
+          "start": 88.5,
+          "end": 89.52,
+          "probability": 0.9784
+        },
+        {
+          "text": "كاملا",
+          "start": 89.52,
+          "end": 90.38,
+          "probability": 0.9246
+        },
+        {
+          "text": "مقدسا",
+          "start": 90.38,
+          "end": 91.42,
+          "probability": 0.9401
+        },
+        {
+          "text": "سلاميا",
+          "start": 91.42,
+          "end": 92.56,
+          "probability": 0.9402
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "start": 92.56,
+      "end": 97.64,
+      "text": "وبلا خطية عالرب نسأل",
+      "words": [
+        {
+          "text": "وبلا",
+          "start": 92.56,
+          "end": 93.8,
+          "probability": 0.8808
+        },
+        {
+          "text": "خطية",
+          "start": 93.8,
+          "end": 94.6,
+          "probability": 0.731
+        },
+        {
+          "text": "عالرب",
+          "start": 94.6,
+          "end": 95.54,
+          "probability": 0.6382
+        },
+        {
+          "text": "نسأل",
+          "start": 95.54,
+          "end": 97.64,
+          "probability": 0.8398
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "start": 99.32,
+      "end": 105.62,
+      "text": "إستجب يا رب",
+      "words": [
+        {
+          "text": "إستجب",
+          "start": 99.32,
+          "end": 100.72,
+          "probability": 0.4675
+        },
+        {
+          "text": "يا",
+          "start": 100.72,
+          "end": 101.5,
+          "probability": 0.8678
+        },
+        {
+          "text": "رب",
+          "start": 101.5,
+          "end": 105.62,
+          "probability": 0.5684
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "start": 105.62,
+      "end": 109.56,
+      "text": "ملاكى سلام مرشدا أمينا",
+      "words": [
+        {
+          "text": "ملاكى",
+          "start": 105.62,
+          "end": 106.9,
+          "probability": 0.6824
+        },
+        {
+          "text": "سلام",
+          "start": 106.9,
+          "end": 107.52,
+          "probability": 0.9721
+        },
+        {
+          "text": "مرشدا",
+          "start": 107.52,
+          "end": 108.68,
+          "probability": 0.8488
+        },
+        {
+          "text": "أمينا",
+          "start": 108.68,
+          "end": 109.56,
+          "probability": 0.8549
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "start": 109.56,
+      "end": 117.36,
+      "text": "حافظا نفوسنا واجسادنا الرب نسأل",
+      "words": [
+        {
+          "text": "حافظا",
+          "start": 109.56,
+          "end": 111.06,
+          "probability": 0.6368
+        },
+        {
+          "text": "نفوسنا",
+          "start": 111.06,
+          "end": 112.26,
+          "probability": 0.7859
+        },
+        {
+          "text": "واجسادنا",
+          "start": 112.26,
+          "end": 115.04,
+          "probability": 0.772
+        },
+        {
+          "text": "الرب",
+          "start": 115.04,
+          "end": 115.58,
+          "probability": 0.6289
+        },
+        {
+          "text": "نسأل",
+          "start": 115.58,
+          "end": 117.36,
+          "probability": 0.8881
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "start": 117.36,
+      "end": 124.36,
+      "text": "قرى سوريا",
+      "words": [
+        {
+          "text": "قرى",
+          "start": 117.36,
+          "end": 119.12,
+          "probability": 0.4373
+        },
+        {
+          "text": "سوريا",
+          "start": 119.12,
+          "end": 124.36,
+          "probability": 0.5406
+        }
+      ]
+    },
+    {
+      "index": 21,
+      "start": 127.22,
+      "end": 130.02,
+      "text": "مسامحتا خطيانا",
+      "words": [
+        {
+          "text": "مسامحتا",
+          "start": 127.22,
+          "end": 128.62,
+          "probability": 0.6491
+        },
+        {
+          "text": "خطيانا",
+          "start": 128.62,
+          "end": 130.02,
+          "probability": 0.8745
+        }
+      ]
+    },
+    {
+      "index": 22,
+      "start": 130.02,
+      "end": 135.2,
+      "text": "وغفران زلاتنا الرب نسأل",
+      "words": [
+        {
+          "text": "وغفران",
+          "start": 130.02,
+          "end": 131.06,
+          "probability": 0.9016
+        },
+        {
+          "text": "زلاتنا",
+          "start": 131.06,
+          "end": 132.8,
+          "probability": 0.8057
+        },
+        {
+          "text": "الرب",
+          "start": 132.8,
+          "end": 133.34,
+          "probability": 0.9505
+        },
+        {
+          "text": "نسأل",
+          "start": 133.34,
+          "end": 135.2,
+          "probability": 0.9973
+        }
+      ]
+    },
+    {
+      "index": 23,
+      "start": 137.22,
+      "end": 142.6,
+      "text": "إستجب يا رب",
+      "words": [
+        {
+          "text": "إستجب",
+          "start": 137.22,
+          "end": 138.62,
+          "probability": 0.4516
+        },
+        {
+          "text": "يا",
+          "start": 138.62,
+          "end": 139.44,
+          "probability": 0.8466
+        },
+        {
+          "text": "رب",
+          "start": 139.44,
+          "end": 142.6,
+          "probability": 0.5406
+        }
+      ]
+    },
+    {
+      "index": 24,
+      "start": 142.6,
+      "end": 147.7,
+      "text": "الصالحات والموافقات لنفوسنا",
+      "words": [
+        {
+          "text": "الصالحات",
+          "start": 142.6,
+          "end": 144.46,
+          "probability": 0.8798
+        },
+        {
+          "text": "والموافقات",
+          "start": 144.46,
+          "end": 146.14,
+          "probability": 0.9822
+        },
+        {
+          "text": "لنفوسنا",
+          "start": 146.14,
+          "end": 147.7,
+          "probability": 0.8822
+        }
+      ]
+    },
+    {
+      "index": 25,
+      "start": 147.7,
+      "end": 153.68,
+      "text": "والسلام للعالميا الرب نسأل",
+      "words": [
+        {
+          "text": "والسلام",
+          "start": 147.7,
+          "end": 149.4,
+          "probability": 0.9248
+        },
+        {
+          "text": "للعالميا",
+          "start": 149.4,
+          "end": 151.3,
+          "probability": 0.7213
+        },
+        {
+          "text": "الرب",
+          "start": 151.3,
+          "end": 151.88,
+          "probability": 0.6224
+        },
+        {
+          "text": "نسأل",
+          "start": 151.88,
+          "end": 153.68,
+          "probability": 0.9678
+        }
+      ]
+    },
+    {
+      "index": 26,
+      "start": 156.62,
+      "end": 159.42,
+      "text": "فراسوا كريا",
+      "words": [
+        {
+          "text": "فراسوا",
+          "start": 156.62,
+          "end": 158.02,
+          "probability": 0.5492
+        },
+        {
+          "text": "كريا",
+          "start": 158.02,
+          "end": 159.42,
+          "probability": 0.3256
+        }
+      ]
+    },
+    {
+      "index": 27,
+      "start": 160.42,
+      "end": 167.0,
+      "text": "أن نتم ما بقية زمان حياتنا",
+      "words": [
+        {
+          "text": "أن",
+          "start": 160.42,
+          "end": 161.5,
+          "probability": 0.1617
+        },
+        {
+          "text": "نتم",
+          "start": 161.5,
+          "end": 162.02,
+          "probability": 0.571
+        },
+        {
+          "text": "ما",
+          "start": 162.02,
+          "end": 162.62,
+          "probability": 0.6887
+        },
+        {
+          "text": "بقية",
+          "start": 162.62,
+          "end": 163.86,
+          "probability": 0.7417
+        },
+        {
+          "text": "زمان",
+          "start": 163.86,
+          "end": 165.18,
+          "probability": 0.9788
+        },
+        {
+          "text": "حياتنا",
+          "start": 165.18,
+          "end": 167.0,
+          "probability": 0.9769
+        }
+      ]
+    },
+    {
+      "index": 28,
+      "start": 167.0,
+      "end": 172.64,
+      "text": "بسلام وتوبة أررب نسأل",
+      "words": [
+        {
+          "text": "بسلام",
+          "start": 167.0,
+          "end": 168.8,
+          "probability": 0.9531
+        },
+        {
+          "text": "وتوبة",
+          "start": 168.8,
+          "end": 169.98,
+          "probability": 0.9015
+        },
+        {
+          "text": "أررب",
+          "start": 169.98,
+          "end": 170.74,
+          "probability": 0.6108
+        },
+        {
+          "text": "نسأل",
+          "start": 170.74,
+          "end": 172.64,
+          "probability": 0.8868
+        }
+      ]
+    },
+    {
+      "index": 29,
+      "start": 174.1,
+      "end": 179.62,
+      "text": "إستجب يا رب",
+      "words": [
+        {
+          "text": "إستجب",
+          "start": 174.1,
+          "end": 175.5,
+          "probability": 0.3659
+        },
+        {
+          "text": "يا",
+          "start": 175.5,
+          "end": 176.62,
+          "probability": 0.9157
+        },
+        {
+          "text": "رب",
+          "start": 176.62,
+          "end": 179.62,
+          "probability": 0.5923
+        }
+      ]
+    },
+    {
+      "index": 30,
+      "start": 179.62,
+      "end": 184.06,
+      "text": "أن تكون واخر حياتنا",
+      "words": [
+        {
+          "text": "أن",
+          "start": 179.62,
+          "end": 180.48,
+          "probability": 0.8481
+        },
+        {
+          "text": "تكون",
+          "start": 180.48,
+          "end": 181.34,
+          "probability": 0.9952
+        },
+        {
+          "text": "واخر",
+          "start": 181.34,
+          "end": 182.62,
+          "probability": 0.891
+        },
+        {
+          "text": "حياتنا",
+          "start": 182.62,
+          "end": 184.06,
+          "probability": 0.9837
+        }
+      ]
+    },
+    {
+      "index": 31,
+      "start": 184.06,
+      "end": 187.2,
+      "text": "مسحية سلامية",
+      "words": [
+        {
+          "text": "مسحية",
+          "start": 184.06,
+          "end": 185.8,
+          "probability": 0.8452
+        },
+        {
+          "text": "سلامية",
+          "start": 185.8,
+          "end": 187.2,
+          "probability": 0.9513
+        }
+      ]
+    },
+    {
+      "index": 32,
+      "start": 187.2,
+      "end": 191.2,
+      "text": "بلا حزن ولا خزن",
+      "words": [
+        {
+          "text": "بلا",
+          "start": 187.2,
+          "end": 188.48,
+          "probability": 0.4671
+        },
+        {
+          "text": "حزن",
+          "start": 188.48,
+          "end": 189.08,
+          "probability": 0.8608
+        },
+        {
+          "text": "ولا",
+          "start": 189.08,
+          "end": 189.56,
+          "probability": 0.8821
+        },
+        {
+          "text": "خزن",
+          "start": 189.56,
+          "end": 191.2,
+          "probability": 0.8248
+        }
+      ]
+    },
+    {
+      "index": 33,
+      "start": 191.84,
+      "end": 200.34,
+      "text": "وجوابا حسنا لدى منبر المسيح المره بنسأل",
+      "words": [
+        {
+          "text": "وجوابا",
+          "start": 191.84,
+          "end": 193.04,
+          "probability": 0.7948
+        },
+        {
+          "text": "حسنا",
+          "start": 193.04,
+          "end": 193.88,
+          "probability": 0.9011
+        },
+        {
+          "text": "لدى",
+          "start": 193.88,
+          "end": 194.74,
+          "probability": 0.7952
+        },
+        {
+          "text": "منبر",
+          "start": 194.74,
+          "end": 195.28,
+          "probability": 0.5614
+        },
+        {
+          "text": "المسيح",
+          "start": 195.28,
+          "end": 197.44,
+          "probability": 0.9856
+        },
+        {
+          "text": "المره",
+          "start": 197.44,
+          "end": 198.28,
+          "probability": 0.7902
+        },
+        {
+          "text": "بنسأل",
+          "start": 198.28,
+          "end": 200.34,
+          "probability": 0.827
+        }
+      ]
+    },
+    {
+      "index": 34,
+      "start": 203.8,
+      "end": 206.6,
+      "text": "فراسوا كريا",
+      "words": [
+        {
+          "text": "فراسوا",
+          "start": 203.8,
+          "end": 205.2,
+          "probability": 0.393
+        },
+        {
+          "text": "كريا",
+          "start": 205.2,
+          "end": 206.6,
+          "probability": 0.1436
+        }
+      ]
+    },
+    {
+      "index": 35,
+      "start": 208.2,
+      "end": 212.2,
+      "text": "بعد ذكرنا الكلية القداسة الطاهرة",
+      "words": [
+        {
+          "text": "بعد",
+          "start": 208.2,
+          "end": 209.06,
+          "probability": 0.8048
+        },
+        {
+          "text": "ذكرنا",
+          "start": 209.06,
+          "end": 210.26,
+          "probability": 0.8205
+        },
+        {
+          "text": "الكلية",
+          "start": 210.26,
+          "end": 211.04,
+          "probability": 0.7114
+        },
+        {
+          "text": "القداسة",
+          "start": 211.04,
+          "end": 212.16,
+          "probability": 0.8774
+        },
+        {
+          "text": "الطاهرة",
+          "start": 212.16,
+          "end": 212.86,
+          "probability": 0.9388
+        }
+      ]
+    },
+    {
+      "index": 36,
+      "start": 212.96,
+      "end": 216.3,
+      "text": "الفائقة البركات المجيدة",
+      "words": [
+        {
+          "text": "الفائقة",
+          "start": 212.96,
+          "end": 214.0,
+          "probability": 0.8879
+        },
+        {
+          "text": "البركات",
+          "start": 214.0,
+          "end": 215.1,
+          "probability": 0.8221
+        },
+        {
+          "text": "المجيدة",
+          "start": 215.1,
+          "end": 216.3,
+          "probability": 0.906
+        }
+      ]
+    },
+    {
+      "index": 37,
+      "start": 216.3,
+      "end": 220.8,
+      "text": "سيدتنا والدت لله",
+      "words": [
+        {
+          "text": "سيدتنا",
+          "start": 216.3,
+          "end": 218.16,
+          "probability": 0.9067
+        },
+        {
+          "text": "والدت",
+          "start": 218.16,
+          "end": 219.5,
+          "probability": 0.6198
+        },
+        {
+          "text": "لله",
+          "start": 219.5,
+          "end": 220.8,
+          "probability": 0.5889
+        }
+      ]
+    },
+    {
+      "index": 38,
+      "start": 220.8,
+      "end": 225.32,
+      "text": "أدائمة الفطولية مريام",
+      "words": [
+        {
+          "text": "أدائمة",
+          "start": 220.8,
+          "end": 222.2,
+          "probability": 0.6841
+        },
+        {
+          "text": "الفطولية",
+          "start": 222.2,
+          "end": 223.54,
+          "probability": 0.7243
+        },
+        {
+          "text": "مريام",
+          "start": 223.54,
+          "end": 225.32,
+          "probability": 0.8128
+        }
+      ]
+    },
+    {
+      "index": 39,
+      "start": 225.32,
+      "end": 229.3,
+      "text": "مع جميع القدسين",
+      "words": [
+        {
+          "text": "مع",
+          "start": 225.32,
+          "end": 226.04,
+          "probability": 0.9856
+        },
+        {
+          "text": "جميع",
+          "start": 226.04,
+          "end": 227.26,
+          "probability": 0.9958
+        },
+        {
+          "text": "القدسين",
+          "start": 227.26,
+          "end": 229.3,
+          "probability": 0.9442
+        }
+      ]
+    },
+    {
+      "index": 40,
+      "start": 229.3,
+      "end": 233.3,
+      "text": "فالنود ذواتنا بعضنا بعضا",
+      "words": [
+        {
+          "text": "فالنود",
+          "start": 229.3,
+          "end": 230.44,
+          "probability": 0.9097
+        },
+        {
+          "text": "ذواتنا",
+          "start": 230.44,
+          "end": 231.64,
+          "probability": 0.8899
+        },
+        {
+          "text": "بعضنا",
+          "start": 231.64,
+          "end": 232.64,
+          "probability": 0.7525
+        },
+        {
+          "text": "بعضا",
+          "start": 232.64,
+          "end": 233.34,
+          "probability": 0.8037
+        }
+      ]
+    },
+    {
+      "index": 41,
+      "start": 233.92,
+      "end": 239.12,
+      "text": "وكل حياة المسيح الإله",
+      "words": [
+        {
+          "text": "وكل",
+          "start": 233.92,
+          "end": 234.8,
+          "probability": 0.8369
+        },
+        {
+          "text": "حياة",
+          "start": 234.8,
+          "end": 236.24,
+          "probability": 0.8689
+        },
+        {
+          "text": "المسيح",
+          "start": 236.24,
+          "end": 237.56,
+          "probability": 0.987
+        },
+        {
+          "text": "الإله",
+          "start": 237.56,
+          "end": 239.12,
+          "probability": 0.6612
+        }
+      ]
+    },
+    {
+      "index": 42,
+      "start": 239.12,
+      "end": 244.36,
+      "text": "لك يا رب",
+      "words": [
+        {
+          "text": "لك",
+          "start": 239.12,
+          "end": 240.46,
+          "probability": 0.9474
+        },
+        {
+          "text": "يا",
+          "start": 240.46,
+          "end": 241.22,
+          "probability": 0.9324
+        },
+        {
+          "text": "رب",
+          "start": 241.22,
+          "end": 244.36,
+          "probability": 0.7523
+        }
+      ]
+    },
+    {
+      "index": 43,
+      "start": 246.3,
+      "end": 252.26,
+      "text": "ليجل رافات ابنك الوحيد الذي أنت مبارك معه",
+      "words": [
+        {
+          "text": "ليجل",
+          "start": 246.3,
+          "end": 246.9,
+          "probability": 0.6639
+        },
+        {
+          "text": "رافات",
+          "start": 246.9,
+          "end": 247.86,
+          "probability": 0.7083
+        },
+        {
+          "text": "ابنك",
+          "start": 247.86,
+          "end": 248.28,
+          "probability": 0.6798
+        },
+        {
+          "text": "الوحيد",
+          "start": 248.28,
+          "end": 249.22,
+          "probability": 0.9076
+        },
+        {
+          "text": "الذي",
+          "start": 249.22,
+          "end": 249.66,
+          "probability": 0.9537
+        },
+        {
+          "text": "أنت",
+          "start": 249.66,
+          "end": 250.08,
+          "probability": 0.8411
+        },
+        {
+          "text": "مبارك",
+          "start": 250.08,
+          "end": 251.18,
+          "probability": 0.9793
+        },
+        {
+          "text": "معه",
+          "start": 251.18,
+          "end": 252.26,
+          "probability": 0.9062
+        }
+      ]
+    },
+    {
+      "index": 44,
+      "start": 252.26,
+      "end": 257.3,
+      "text": "ومع روحك الكلي قدسوا الصالح والمحين",
+      "words": [
+        {
+          "text": "ومع",
+          "start": 252.26,
+          "end": 253.4,
+          "probability": 0.9747
+        },
+        {
+          "text": "روحك",
+          "start": 253.4,
+          "end": 254.18,
+          "probability": 0.828
+        },
+        {
+          "text": "الكلي",
+          "start": 254.18,
+          "end": 254.74,
+          "probability": 0.649
+        },
+        {
+          "text": "قدسوا",
+          "start": 254.74,
+          "end": 255.58,
+          "probability": 0.7114
+        },
+        {
+          "text": "الصالح",
+          "start": 255.58,
+          "end": 256.58,
+          "probability": 0.9864
+        },
+        {
+          "text": "والمحين",
+          "start": 256.58,
+          "end": 257.3,
+          "probability": 0.8195
+        }
+      ]
+    },
+    {
+      "index": 45,
+      "start": 258.12,
+      "end": 261.3,
+      "text": "الآن وكل عوان",
+      "words": [
+        {
+          "text": "الآن",
+          "start": 258.12,
+          "end": 259.04,
+          "probability": 0.8435
+        },
+        {
+          "text": "وكل",
+          "start": 259.04,
+          "end": 260.02,
+          "probability": 0.8829
+        },
+        {
+          "text": "عوان",
+          "start": 260.02,
+          "end": 261.3,
+          "probability": 0.7203
+        }
+      ]
+    },
+    {
+      "index": 46,
+      "start": 261.3,
+      "end": 266.3,
+      "text": "وإلى دهر داهرين",
+      "words": [
+        {
+          "text": "وإلى",
+          "start": 261.3,
+          "end": 262.72,
+          "probability": 0.6245
+        },
+        {
+          "text": "دهر",
+          "start": 262.72,
+          "end": 263.3,
+          "probability": 0.9641
+        },
+        {
+          "text": "داهرين",
+          "start": 263.3,
+          "end": 266.3,
+          "probability": 0.8455
+        }
+      ]
+    },
+    {
+      "index": 47,
+      "start": 269.76,
+      "end": 270.3,
+      "text": "آمين",
+      "words": [
+        {
+          "text": "آمين",
+          "start": 269.76,
+          "end": 270.46,
+          "probability": 0.5429
+        }
+      ]
+    },
+    {
+      "index": 48,
+      "start": 271.16,
+      "end": 276.62,
+      "text": "السلام لجميعكم",
+      "words": [
+        {
+          "text": "السلام",
+          "start": 271.16,
+          "end": 272.86,
+          "probability": 0.8109
+        },
+        {
+          "text": "لجميعكم",
+          "start": 272.86,
+          "end": 276.62,
+          "probability": 0.9039
+        }
+      ]
+    },
+    {
+      "index": 49,
+      "start": 279.6,
+      "end": 281.0,
+      "text": "وارروحك",
+      "words": [
+        {
+          "text": "وارروحك",
+          "start": 279.6,
+          "end": 281.0,
+          "probability": 0.5803
+        }
+      ]
+    },
+    {
+      "index": 50,
+      "start": 282.62,
+      "end": 285.3,
+      "text": "لنحب بعضنا بعضا",
+      "words": [
+        {
+          "text": "لنحب",
+          "start": 282.62,
+          "end": 284.02,
+          "probability": 0.9554
+        },
+        {
+          "text": "بعضنا",
+          "start": 284.02,
+          "end": 285.04,
+          "probability": 0.9026
+        },
+        {
+          "text": "بعضا",
+          "start": 285.04,
+          "end": 285.74,
+          "probability": 0.9258
+        }
+      ]
+    },
+    {
+      "index": 51,
+      "start": 285.94,
+      "end": 294.18,
+      "text": "لكي بعز من واحد نعترف مقرين",
+      "words": [
+        {
+          "text": "لكي",
+          "start": 285.94,
+          "end": 287.2,
+          "probability": 0.8959
+        },
+        {
+          "text": "بعز",
+          "start": 287.2,
+          "end": 287.72,
+          "probability": 0.8975
+        },
+        {
+          "text": "من",
+          "start": 287.72,
+          "end": 287.98,
+          "probability": 0.9052
+        },
+        {
+          "text": "واحد",
+          "start": 287.98,
+          "end": 290.12,
+          "probability": 0.9484
+        },
+        {
+          "text": "نعترف",
+          "start": 290.12,
+          "end": 291.24,
+          "probability": 0.8735
+        },
+        {
+          "text": "مقرين",
+          "start": 291.24,
+          "end": 294.18,
+          "probability": 0.8656
+        }
+      ]
+    },
+    {
+      "index": 52,
+      "start": 296.02,
+      "end": 300.36,
+      "text": "أخبك يا رب",
+      "words": [
+        {
+          "text": "أخبك",
+          "start": 296.02,
+          "end": 297.42,
+          "probability": 0.2611
+        },
+        {
+          "text": "يا",
+          "start": 297.42,
+          "end": 298.48,
+          "probability": 0.9746
+        },
+        {
+          "text": "رب",
+          "start": 298.48,
+          "end": 300.36,
+          "probability": 0.8243
+        }
+      ]
+    },
+    {
+      "index": 53,
+      "start": 301.18,
+      "end": 305.52,
+      "text": "يا طوات",
+      "words": [
+        {
+          "text": "يا",
+          "start": 300.84,
+          "end": 301.54,
+          "probability": 0.0525
+        },
+        {
+          "text": "طوات",
+          "start": 301.54,
+          "end": 305.52,
+          "probability": 0.5088
+        }
+      ]
+    },
+    {
+      "index": 54,
+      "start": 310.08,
+      "end": 312.88,
+      "text": "أرواب ثبات",
+      "words": [
+        {
+          "text": "أرواب",
+          "start": 310.08,
+          "end": 311.48,
+          "probability": 0.4997
+        },
+        {
+          "text": "ثبات",
+          "start": 311.48,
+          "end": 312.88,
+          "probability": 0.4716
+        }
+      ]
+    },
+    {
+      "index": 55,
+      "start": 315.68,
+      "end": 317.08,
+      "text": "ومالجا",
+      "words": [
+        {
+          "text": "ومالجا",
+          "start": 315.68,
+          "end": 317.08,
+          "probability": 0.4791
+        }
+      ]
+    },
+    {
+      "index": 56,
+      "start": 324.38,
+      "end": 325.78,
+      "text": "ومخالص",
+      "words": [
+        {
+          "text": "ومخالص",
+          "start": 324.38,
+          "end": 325.78,
+          "probability": 0.3559
+        }
+      ]
+    },
+    {
+      "index": 57,
+      "start": 329.34,
+      "end": 332.14,
+      "text": "بآب ولم",
+      "words": [
+        {
+          "text": "بآب",
+          "start": 329.34,
+          "end": 330.74,
+          "probability": 0.69
+        },
+        {
+          "text": "ولم",
+          "start": 330.74,
+          "end": 332.14,
+          "probability": 0.3227
+        }
+      ]
+    },
+    {
+      "index": 58,
+      "start": 332.14,
+      "end": 336.42,
+      "text": "وروح قدس",
+      "words": [
+        {
+          "text": "وروح",
+          "start": 332.14,
+          "end": 334.4,
+          "probability": 0.6416
+        },
+        {
+          "text": "قدس",
+          "start": 334.4,
+          "end": 336.42,
+          "probability": 0.691
+        }
+      ]
+    },
+    {
+      "index": 59,
+      "start": 338.78,
+      "end": 341.58,
+      "text": "ثالوث متسا",
+      "words": [
+        {
+          "text": "ثالوث",
+          "start": 338.78,
+          "end": 340.18,
+          "probability": 0.7006
+        },
+        {
+          "text": "متسا",
+          "start": 340.18,
+          "end": 341.58,
+          "probability": 0.6673
+        }
+      ]
+    },
+    {
+      "index": 60,
+      "start": 341.58,
+      "end": 346.78,
+      "text": "في الجوهر",
+      "words": [
+        {
+          "text": "في",
+          "start": 341.58,
+          "end": 343.84,
+          "probability": 0.2458
+        },
+        {
+          "text": "الجوهر",
+          "start": 343.84,
+          "end": 346.78,
+          "probability": 0.5983
+        }
+      ]
+    },
+    {
+      "index": 61,
+      "start": 346.78,
+      "end": 348.78,
+      "text": "ومعير",
+      "words": [
+        {
+          "text": "ومعير",
+          "start": 346.78,
+          "end": 348.78,
+          "probability": 0.5499
+        }
+      ]
+    },
+    {
+      "index": 62,
+      "start": 355.34,
+      "end": 356.74,
+      "text": "ونفاصل",
+      "words": [
+        {
+          "text": "ونفاصل",
+          "start": 355.34,
+          "end": 356.74,
+          "probability": 0.5084
+        }
+      ]
+    }
+  ]
+}

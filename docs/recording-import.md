@@ -101,3 +101,35 @@ npm run import:recording:transcribe -- recordings/inbox/example/recording.genera
 ```
 
 The importer writes generated recording output and ASR output next to the manifest. Commit the manifest and `.asr.json`; do not commit `recording.generated.json` or downloaded media. Future steps will add fuller caption track import, segment matching, and alignment refinement.
+
+## Playlist Import
+
+Use the playlist importer when every video in a YouTube playlist belongs to the same service text:
+
+```bash
+npm run import:playlist -- PLAYLIST_ID --service-text-id divine-liturgy-john-chrysostom
+```
+
+That command expands the playlist with `yt-dlp`, creates one `recordings/inbox/<video>/manifest.json` per video, and runs the normal single-recording metadata import for each manifest.
+
+Download each video's local M4A as part of the batch:
+
+```bash
+npm run import:playlist -- PLAYLIST_ID --service-text-id divine-liturgy-john-chrysostom --download-audio
+```
+
+Download and generate ASR word timestamps:
+
+```bash
+npm run import:playlist -- PLAYLIST_ID --service-text-id divine-liturgy-john-chrysostom --transcribe --model small
+```
+
+Useful range and safety options:
+
+```bash
+npm run import:playlist -- PLAYLIST_ID --service-text-id divine-liturgy-john-chrysostom --dry-run
+npm run import:playlist -- PLAYLIST_ID --service-text-id divine-liturgy-john-chrysostom --start-index 5 --limit 3
+npm run import:playlist -- PLAYLIST_ID --service-text-id divine-liturgy-john-chrysostom --force
+```
+
+`--transcribe` implies `--download-audio`. Existing manifests are preserved unless `--force` is passed. Playlist id, title, and index are copied into each generated recording so later curation can keep the source order.

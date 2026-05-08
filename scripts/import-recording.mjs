@@ -72,6 +72,7 @@ if (!manifest.service_text_id) {
 }
 
 const metadata = getYoutubeMetadata(manifest.youtube_url);
+const manifestPlaylist = manifest.youtube?.playlist || manifest.playlist || {};
 const videoId = metadata.id;
 const title = metadata.title;
 const titleSlug = slugify(title);
@@ -90,9 +91,9 @@ const derivedManifest = {
   youtube: {
     video_id: videoId,
     url: metadata.webpage_url || manifest.youtube_url,
-    playlist_id: metadata.playlist_id || null,
-    playlist_title: metadata.playlist_title || null,
-    playlist_index: metadata.playlist_index || null,
+    playlist_id: metadata.playlist_id || manifestPlaylist.id || manifest.playlist_id || null,
+    playlist_title: metadata.playlist_title || manifestPlaylist.title || manifest.playlist_title || null,
+    playlist_index: metadata.playlist_index || manifestPlaylist.index || manifest.playlist_index || null,
     channel: metadata.channel || metadata.uploader || null,
     duration_seconds: metadata.duration || null,
     upload_date: metadata.upload_date || null

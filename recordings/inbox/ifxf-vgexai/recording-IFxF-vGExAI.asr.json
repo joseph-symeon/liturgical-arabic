@@ -1,0 +1,1027 @@
+{
+  "engine": "faster-whisper",
+  "model": "small",
+  "language": "ar",
+  "language_probability": 1.0,
+  "duration_seconds": 251.435,
+  "words": [
+    {
+      "text": "إلى",
+      "start": 0.0,
+      "end": 0.56,
+      "probability": 0.752
+    },
+    {
+      "text": "الرب",
+      "start": 0.56,
+      "end": 1.06,
+      "probability": 0.6957
+    },
+    {
+      "text": "نطلوب",
+      "start": 1.06,
+      "end": 2.94,
+      "probability": 0.751
+    },
+    {
+      "text": "كريا",
+      "start": 2.94,
+      "end": 4.0,
+      "probability": 0.4757
+    },
+    {
+      "text": "ليصوم",
+      "start": 4.0,
+      "end": 6.84,
+      "probability": 0.6458
+    },
+    {
+      "text": "لأنك",
+      "start": 6.84,
+      "end": 7.88,
+      "probability": 0.9398
+    },
+    {
+      "text": "قدوس",
+      "start": 7.88,
+      "end": 9.12,
+      "probability": 0.8251
+    },
+    {
+      "text": "أنت",
+      "start": 9.12,
+      "end": 9.9,
+      "probability": 0.9424
+    },
+    {
+      "text": "يا",
+      "start": 9.9,
+      "end": 10.3,
+      "probability": 0.9594
+    },
+    {
+      "text": "إله",
+      "start": 10.3,
+      "end": 11.0,
+      "probability": 0.8991
+    },
+    {
+      "text": "نام",
+      "start": 11.0,
+      "end": 13.1,
+      "probability": 0.6268
+    },
+    {
+      "text": "وإليك",
+      "start": 13.1,
+      "end": 14.28,
+      "probability": 0.9252
+    },
+    {
+      "text": "نرفع",
+      "start": 14.28,
+      "end": 15.08,
+      "probability": 0.9318
+    },
+    {
+      "text": "المجدام",
+      "start": 15.08,
+      "end": 16.48,
+      "probability": 0.9321
+    },
+    {
+      "text": "أيها",
+      "start": 16.48,
+      "end": 17.4,
+      "probability": 0.6838
+    },
+    {
+      "text": "اللاب",
+      "start": 17.4,
+      "end": 18.48,
+      "probability": 0.7295
+    },
+    {
+      "text": "والبن",
+      "start": 18.48,
+      "end": 19.14,
+      "probability": 0.7167
+    },
+    {
+      "text": "والروح",
+      "start": 19.14,
+      "end": 20.2,
+      "probability": 0.9223
+    },
+    {
+      "text": "القدس",
+      "start": 20.2,
+      "end": 21.4,
+      "probability": 0.8923
+    },
+    {
+      "text": "الآن",
+      "start": 21.4,
+      "end": 22.34,
+      "probability": 0.7634
+    },
+    {
+      "text": "وكل",
+      "start": 22.34,
+      "end": 23.34,
+      "probability": 0.9819
+    },
+    {
+      "text": "وان",
+      "start": 23.34,
+      "end": 25.78,
+      "probability": 0.548
+    },
+    {
+      "text": "وإلى",
+      "start": 25.78,
+      "end": 27.2,
+      "probability": 0.7099
+    },
+    {
+      "text": "دهر",
+      "start": 27.2,
+      "end": 27.94,
+      "probability": 0.9443
+    },
+    {
+      "text": "الدهرين",
+      "start": 27.94,
+      "end": 31.24,
+      "probability": 0.832
+    },
+    {
+      "text": "قاري",
+      "start": 37.46,
+      "end": 38.86,
+      "probability": 0.4024
+    },
+    {
+      "text": "قدوسني",
+      "start": 38.86,
+      "end": 40.26,
+      "probability": 0.3386
+    },
+    {
+      "text": "الله",
+      "start": 40.26,
+      "end": 40.98,
+      "probability": 0.7451
+    },
+    {
+      "text": "قدوسني",
+      "start": 40.98,
+      "end": 45.0,
+      "probability": 0.9436
+    },
+    {
+      "text": "القاري",
+      "start": 45.0,
+      "end": 47.02,
+      "probability": 0.9796
+    },
+    {
+      "text": "قدوسني",
+      "start": 47.02,
+      "end": 49.42,
+      "probability": 0.9918
+    },
+    {
+      "text": "الذي",
+      "start": 49.42,
+      "end": 50.4,
+      "probability": 0.9712
+    },
+    {
+      "text": "لا",
+      "start": 50.4,
+      "end": 51.96,
+      "probability": 0.2745
+    },
+    {
+      "text": "يهود",
+      "start": 51.96,
+      "end": 54.32,
+      "probability": 0.801
+    },
+    {
+      "text": "رحمنا",
+      "start": 54.32,
+      "end": 56.96,
+      "probability": 0.7135
+    },
+    {
+      "text": "أيها",
+      "start": 60.64,
+      "end": 62.04,
+      "probability": 0.0256
+    },
+    {
+      "text": "اللاب",
+      "start": 62.04,
+      "end": 63.44,
+      "probability": 0.005
+    },
+    {
+      "text": "والبن",
+      "start": 63.44,
+      "end": 65.98,
+      "probability": 0.0669
+    },
+    {
+      "text": "والروح",
+      "start": 65.98,
+      "end": 67.44,
+      "probability": 0.1898
+    },
+    {
+      "text": "قدوسني",
+      "start": 67.44,
+      "end": 83.84,
+      "probability": 0.057
+    },
+    {
+      "text": "الله",
+      "start": 83.84,
+      "end": 85.0,
+      "probability": 0.4675
+    },
+    {
+      "text": "قدوسني",
+      "start": 95.04,
+      "end": 96.44,
+      "probability": 0.3998
+    },
+    {
+      "text": "القاري",
+      "start": 96.44,
+      "end": 97.84,
+      "probability": 0.5369
+    },
+    {
+      "text": "قدوسني",
+      "start": 97.84,
+      "end": 101.2,
+      "probability": 0.8578
+    },
+    {
+      "text": "الذي",
+      "start": 101.2,
+      "end": 102.24,
+      "probability": 0.9305
+    },
+    {
+      "text": "لا",
+      "start": 102.24,
+      "end": 103.02,
+      "probability": 0.0274
+    },
+    {
+      "text": "يهود",
+      "start": 103.02,
+      "end": 107.44,
+      "probability": 0.2878
+    },
+    {
+      "text": "رحمنا",
+      "start": 107.44,
+      "end": 115.04,
+      "probability": 0.3622
+    },
+    {
+      "text": "أيها",
+      "start": 116.04,
+      "end": 116.98,
+      "probability": 0.1488
+    },
+    {
+      "text": "اللاب",
+      "start": 116.98,
+      "end": 118.74,
+      "probability": 0.0153
+    },
+    {
+      "text": "والبن",
+      "start": 118.74,
+      "end": 121.04,
+      "probability": 0.0547
+    },
+    {
+      "text": "والروح",
+      "start": 121.04,
+      "end": 122.86,
+      "probability": 0.7296
+    },
+    {
+      "text": "القدوس",
+      "start": 122.86,
+      "end": 124.72,
+      "probability": 0.5854
+    },
+    {
+      "text": "الآن",
+      "start": 124.72,
+      "end": 125.78,
+      "probability": 0.3387
+    },
+    {
+      "text": "وكل",
+      "start": 125.78,
+      "end": 126.72,
+      "probability": 0.017
+    },
+    {
+      "text": "وان",
+      "start": 126.72,
+      "end": 128.3,
+      "probability": 0.4728
+    },
+    {
+      "text": "وإلى",
+      "start": 128.3,
+      "end": 129.9,
+      "probability": 0.371
+    },
+    {
+      "text": "دهر",
+      "start": 129.9,
+      "end": 130.78,
+      "probability": 0.1488
+    },
+    {
+      "text": "الدهرين",
+      "start": 130.78,
+      "end": 132.82,
+      "probability": 0.2516
+    },
+    {
+      "text": "قدوسني",
+      "start": 136.46,
+      "end": 137.86,
+      "probability": 0.2228
+    },
+    {
+      "text": "الذي",
+      "start": 137.86,
+      "end": 139.04,
+      "probability": 0.9266
+    },
+    {
+      "text": "لا",
+      "start": 139.04,
+      "end": 140.88,
+      "probability": 0.868
+    },
+    {
+      "text": "يهود",
+      "start": 140.88,
+      "end": 143.38,
+      "probability": 0.3618
+    },
+    {
+      "text": "رحمنا",
+      "start": 143.38,
+      "end": 146.08,
+      "probability": 0.662
+    },
+    {
+      "text": "ديناميس",
+      "start": 160.46,
+      "end": 161.86,
+      "probability": 0.6155
+    },
+    {
+      "text": "قدوسني",
+      "start": 176.88,
+      "end": 178.28,
+      "probability": 0.0851
+    },
+    {
+      "text": "الله",
+      "start": 178.28,
+      "end": 179.44,
+      "probability": 0.5837
+    },
+    {
+      "text": "قدوسني",
+      "start": 201.92,
+      "end": 203.32,
+      "probability": 0.0265
+    },
+    {
+      "text": "الله",
+      "start": 203.32,
+      "end": 204.72,
+      "probability": 0.0035
+    },
+    {
+      "text": "قدوسني",
+      "start": 231.06,
+      "end": 232.46,
+      "probability": 0.0108
+    },
+    {
+      "text": "الذي",
+      "start": 232.46,
+      "end": 232.46,
+      "probability": 0.0043
+    },
+    {
+      "text": "لا",
+      "start": 232.46,
+      "end": 235.1,
+      "probability": 0.085
+    },
+    {
+      "text": "يهود",
+      "start": 235.1,
+      "end": 237.52,
+      "probability": 0.2456
+    },
+    {
+      "text": "رحمنا",
+      "start": 237.52,
+      "end": 243.96,
+      "probability": 0.3413
+    }
+  ],
+  "segments": [
+    {
+      "index": 1,
+      "start": 0.0,
+      "end": 6.84,
+      "text": "إلى الرب نطلوب كريا ليصوم",
+      "words": [
+        {
+          "text": "إلى",
+          "start": 0.0,
+          "end": 0.56,
+          "probability": 0.752
+        },
+        {
+          "text": "الرب",
+          "start": 0.56,
+          "end": 1.06,
+          "probability": 0.6957
+        },
+        {
+          "text": "نطلوب",
+          "start": 1.06,
+          "end": 2.94,
+          "probability": 0.751
+        },
+        {
+          "text": "كريا",
+          "start": 2.94,
+          "end": 4.0,
+          "probability": 0.4757
+        },
+        {
+          "text": "ليصوم",
+          "start": 4.0,
+          "end": 6.84,
+          "probability": 0.6458
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "start": 6.84,
+      "end": 16.48,
+      "text": "لأنك قدوس أنت يا إله نام وإليك نرفع المجدام",
+      "words": [
+        {
+          "text": "لأنك",
+          "start": 6.84,
+          "end": 7.88,
+          "probability": 0.9398
+        },
+        {
+          "text": "قدوس",
+          "start": 7.88,
+          "end": 9.12,
+          "probability": 0.8251
+        },
+        {
+          "text": "أنت",
+          "start": 9.12,
+          "end": 9.9,
+          "probability": 0.9424
+        },
+        {
+          "text": "يا",
+          "start": 9.9,
+          "end": 10.3,
+          "probability": 0.9594
+        },
+        {
+          "text": "إله",
+          "start": 10.3,
+          "end": 11.0,
+          "probability": 0.8991
+        },
+        {
+          "text": "نام",
+          "start": 11.0,
+          "end": 13.1,
+          "probability": 0.6268
+        },
+        {
+          "text": "وإليك",
+          "start": 13.1,
+          "end": 14.28,
+          "probability": 0.9252
+        },
+        {
+          "text": "نرفع",
+          "start": 14.28,
+          "end": 15.08,
+          "probability": 0.9318
+        },
+        {
+          "text": "المجدام",
+          "start": 15.08,
+          "end": 16.48,
+          "probability": 0.9321
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "start": 16.48,
+      "end": 25.78,
+      "text": "أيها اللاب والبن والروح القدس الآن وكل وان",
+      "words": [
+        {
+          "text": "أيها",
+          "start": 16.48,
+          "end": 17.4,
+          "probability": 0.6838
+        },
+        {
+          "text": "اللاب",
+          "start": 17.4,
+          "end": 18.48,
+          "probability": 0.7295
+        },
+        {
+          "text": "والبن",
+          "start": 18.48,
+          "end": 19.14,
+          "probability": 0.7167
+        },
+        {
+          "text": "والروح",
+          "start": 19.14,
+          "end": 20.2,
+          "probability": 0.9223
+        },
+        {
+          "text": "القدس",
+          "start": 20.2,
+          "end": 21.4,
+          "probability": 0.8923
+        },
+        {
+          "text": "الآن",
+          "start": 21.4,
+          "end": 22.34,
+          "probability": 0.7634
+        },
+        {
+          "text": "وكل",
+          "start": 22.34,
+          "end": 23.34,
+          "probability": 0.9819
+        },
+        {
+          "text": "وان",
+          "start": 23.34,
+          "end": 25.78,
+          "probability": 0.548
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "start": 25.78,
+      "end": 31.24,
+      "text": "وإلى دهر الدهرين",
+      "words": [
+        {
+          "text": "وإلى",
+          "start": 25.78,
+          "end": 27.2,
+          "probability": 0.7099
+        },
+        {
+          "text": "دهر",
+          "start": 27.2,
+          "end": 27.94,
+          "probability": 0.9443
+        },
+        {
+          "text": "الدهرين",
+          "start": 27.94,
+          "end": 31.24,
+          "probability": 0.832
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "start": 37.46,
+      "end": 50.4,
+      "text": "قاري قدوسني الله قدوسني القاري قدوسني الذي",
+      "words": [
+        {
+          "text": "قاري",
+          "start": 37.46,
+          "end": 38.86,
+          "probability": 0.4024
+        },
+        {
+          "text": "قدوسني",
+          "start": 38.86,
+          "end": 40.26,
+          "probability": 0.3386
+        },
+        {
+          "text": "الله",
+          "start": 40.26,
+          "end": 40.98,
+          "probability": 0.7451
+        },
+        {
+          "text": "قدوسني",
+          "start": 40.98,
+          "end": 45.0,
+          "probability": 0.9436
+        },
+        {
+          "text": "القاري",
+          "start": 45.0,
+          "end": 47.02,
+          "probability": 0.9796
+        },
+        {
+          "text": "قدوسني",
+          "start": 47.02,
+          "end": 49.42,
+          "probability": 0.9918
+        },
+        {
+          "text": "الذي",
+          "start": 49.42,
+          "end": 50.4,
+          "probability": 0.9712
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "start": 50.4,
+      "end": 56.96,
+      "text": "لا يهود رحمنا",
+      "words": [
+        {
+          "text": "لا",
+          "start": 50.4,
+          "end": 51.96,
+          "probability": 0.2745
+        },
+        {
+          "text": "يهود",
+          "start": 51.96,
+          "end": 54.32,
+          "probability": 0.801
+        },
+        {
+          "text": "رحمنا",
+          "start": 54.32,
+          "end": 56.96,
+          "probability": 0.7135
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "start": 60.64,
+      "end": 85.0,
+      "text": "أيها اللاب والبن والروح قدوسني الله",
+      "words": [
+        {
+          "text": "أيها",
+          "start": 60.64,
+          "end": 62.04,
+          "probability": 0.0256
+        },
+        {
+          "text": "اللاب",
+          "start": 62.04,
+          "end": 63.44,
+          "probability": 0.005
+        },
+        {
+          "text": "والبن",
+          "start": 63.44,
+          "end": 65.98,
+          "probability": 0.0669
+        },
+        {
+          "text": "والروح",
+          "start": 65.98,
+          "end": 67.44,
+          "probability": 0.1898
+        },
+        {
+          "text": "قدوسني",
+          "start": 67.44,
+          "end": 83.84,
+          "probability": 0.057
+        },
+        {
+          "text": "الله",
+          "start": 83.84,
+          "end": 85.0,
+          "probability": 0.4675
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "start": 95.04,
+      "end": 102.24,
+      "text": "قدوسني القاري قدوسني الذي",
+      "words": [
+        {
+          "text": "قدوسني",
+          "start": 95.04,
+          "end": 96.44,
+          "probability": 0.3998
+        },
+        {
+          "text": "القاري",
+          "start": 96.44,
+          "end": 97.84,
+          "probability": 0.5369
+        },
+        {
+          "text": "قدوسني",
+          "start": 97.84,
+          "end": 101.2,
+          "probability": 0.8578
+        },
+        {
+          "text": "الذي",
+          "start": 101.2,
+          "end": 102.24,
+          "probability": 0.9305
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "start": 102.24,
+      "end": 115.04,
+      "text": "لا يهود رحمنا",
+      "words": [
+        {
+          "text": "لا",
+          "start": 102.24,
+          "end": 103.02,
+          "probability": 0.0274
+        },
+        {
+          "text": "يهود",
+          "start": 103.02,
+          "end": 107.44,
+          "probability": 0.2878
+        },
+        {
+          "text": "رحمنا",
+          "start": 107.44,
+          "end": 115.04,
+          "probability": 0.3622
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "start": 116.04,
+      "end": 124.72,
+      "text": "أيها اللاب والبن والروح القدوس",
+      "words": [
+        {
+          "text": "أيها",
+          "start": 116.04,
+          "end": 116.98,
+          "probability": 0.1488
+        },
+        {
+          "text": "اللاب",
+          "start": 116.98,
+          "end": 118.74,
+          "probability": 0.0153
+        },
+        {
+          "text": "والبن",
+          "start": 118.74,
+          "end": 121.04,
+          "probability": 0.0547
+        },
+        {
+          "text": "والروح",
+          "start": 121.04,
+          "end": 122.86,
+          "probability": 0.7296
+        },
+        {
+          "text": "القدوس",
+          "start": 122.86,
+          "end": 124.72,
+          "probability": 0.5854
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "start": 124.72,
+      "end": 132.82,
+      "text": "الآن وكل وان وإلى دهر الدهرين",
+      "words": [
+        {
+          "text": "الآن",
+          "start": 124.72,
+          "end": 125.78,
+          "probability": 0.3387
+        },
+        {
+          "text": "وكل",
+          "start": 125.78,
+          "end": 126.72,
+          "probability": 0.017
+        },
+        {
+          "text": "وان",
+          "start": 126.72,
+          "end": 128.3,
+          "probability": 0.4728
+        },
+        {
+          "text": "وإلى",
+          "start": 128.3,
+          "end": 129.9,
+          "probability": 0.371
+        },
+        {
+          "text": "دهر",
+          "start": 129.9,
+          "end": 130.78,
+          "probability": 0.1488
+        },
+        {
+          "text": "الدهرين",
+          "start": 130.78,
+          "end": 132.82,
+          "probability": 0.2516
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "start": 136.46,
+      "end": 146.08,
+      "text": "قدوسني الذي لا يهود رحمنا",
+      "words": [
+        {
+          "text": "قدوسني",
+          "start": 136.46,
+          "end": 137.86,
+          "probability": 0.2228
+        },
+        {
+          "text": "الذي",
+          "start": 137.86,
+          "end": 139.04,
+          "probability": 0.9266
+        },
+        {
+          "text": "لا",
+          "start": 139.04,
+          "end": 140.88,
+          "probability": 0.868
+        },
+        {
+          "text": "يهود",
+          "start": 140.88,
+          "end": 143.38,
+          "probability": 0.3618
+        },
+        {
+          "text": "رحمنا",
+          "start": 143.38,
+          "end": 146.08,
+          "probability": 0.662
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "start": 160.46,
+      "end": 161.86,
+      "text": "ديناميس",
+      "words": [
+        {
+          "text": "ديناميس",
+          "start": 160.46,
+          "end": 161.86,
+          "probability": 0.6155
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "start": 176.88,
+      "end": 179.44,
+      "text": "قدوسني الله",
+      "words": [
+        {
+          "text": "قدوسني",
+          "start": 176.88,
+          "end": 178.28,
+          "probability": 0.0851
+        },
+        {
+          "text": "الله",
+          "start": 178.28,
+          "end": 179.44,
+          "probability": 0.5837
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "start": 201.92,
+      "end": 204.72,
+      "text": "قدوسني الله",
+      "words": [
+        {
+          "text": "قدوسني",
+          "start": 201.92,
+          "end": 203.32,
+          "probability": 0.0265
+        },
+        {
+          "text": "الله",
+          "start": 203.32,
+          "end": 204.72,
+          "probability": 0.0035
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "start": 231.06,
+      "end": 243.96,
+      "text": "قدوسني الذي لا يهود رحمنا",
+      "words": [
+        {
+          "text": "قدوسني",
+          "start": 231.06,
+          "end": 232.46,
+          "probability": 0.0108
+        },
+        {
+          "text": "الذي",
+          "start": 232.46,
+          "end": 232.46,
+          "probability": 0.0043
+        },
+        {
+          "text": "لا",
+          "start": 232.46,
+          "end": 235.1,
+          "probability": 0.085
+        },
+        {
+          "text": "يهود",
+          "start": 235.1,
+          "end": 237.52,
+          "probability": 0.2456
+        },
+        {
+          "text": "رحمنا",
+          "start": 237.52,
+          "end": 243.96,
+          "probability": 0.3413
+        }
+      ]
+    }
+  ]
+}

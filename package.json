@@ -10,6 +10,7 @@
     "phrases:pull": "node scripts/sync-notion-phrases.mjs --force",
     "phrases:push": "node scripts/push-notion-phrases.mjs --apply",
     "import:recording": "node scripts/import-recording.mjs",
+    "import:playlist": "node scripts/import-playlist.mjs",
     "import:recording:check": "node scripts/check-recording-import-deps.mjs",
     "import:recording:transcribe": "node scripts/transcribe-recording.mjs",
     "dev": "vite",
