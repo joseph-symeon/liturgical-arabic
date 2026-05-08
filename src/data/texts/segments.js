@@ -401,7 +401,13 @@ const sourceSegments = {
         "phrase_id": "father-holy-spirit-001"
       },
       {
-        "text": "،"
+        "text": "، "
+      },
+      {
+        "phrase_id": "save-us-001"
+      },
+      {
+        "text": "."
       }
     ]
   },

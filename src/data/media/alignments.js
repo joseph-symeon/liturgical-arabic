@@ -551,8 +551,7 @@ export const alignmentDefinitions = [
       },
       {
         "segment_ids": [
-          "antiphon-glorified-with-father",
-          "antiphon-save-us"
+          "antiphon-glorified-with-father"
         ],
         "start_seconds": 204.22,
         "end_seconds": 218.22,
@@ -584,8 +583,7 @@ export const alignmentDefinitions = [
           "antiphon-crucified",
           "antiphon-trampled-death",
           "antiphon-one-of-trinity",
-          "antiphon-glorified-with-father",
-          "antiphon-save-us"
+          "antiphon-glorified-with-father"
         ],
         "start_seconds": 150.77,
         "end_seconds": 218.22,

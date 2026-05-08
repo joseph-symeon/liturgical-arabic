@@ -54,8 +54,8 @@ export function runTests() {
     "Reader should include a Second Antiphon section."
   );
   console.assert(
-    readerSections.find(function findSecondAntiphon(section) { return section.section === "The Second Antiphon"; }).segment_ids.length === 16,
-    "The Second Antiphon should have 16 segments."
+    readerSections.find(function findSecondAntiphon(section) { return section.section === "The Second Antiphon"; }).segment_ids.length === 15,
+    "The Second Antiphon should have 15 segments."
   );
   console.assert(readerSections[0].section === "The Preparation for the Divine Liturgy", "First reader section should be titled The Preparation for the Divine Liturgy.");
   console.assert(defaultServiceText.id === "divine-liturgy-john-chrysostom", "Default service text should be the Divine Liturgy.");

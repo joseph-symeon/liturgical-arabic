@@ -141,8 +141,7 @@ export const serviceTextDefinitions = [
           "antiphon-crucified",
           "antiphon-trampled-death",
           "antiphon-one-of-trinity",
-          "antiphon-glorified-with-father",
-          "antiphon-save-us"
+          "antiphon-glorified-with-father"
         ]
       },
       {

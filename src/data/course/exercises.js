@@ -79,8 +79,7 @@ export const exerciseDefinitions = [
   {
     "id": "antiphon-glorified-with-father",
     "segment_ids": [
-      "antiphon-glorified-with-father",
-      "antiphon-save-us"
+      "antiphon-glorified-with-father"
     ],
     "audio_clip": {
       "recording_id": "recording--dufaXx7Hm0",
@@ -100,8 +99,7 @@ export const exerciseDefinitions = [
       "antiphon-crucified",
       "antiphon-trampled-death",
       "antiphon-one-of-trinity",
-      "antiphon-glorified-with-father",
-      "antiphon-save-us"
+      "antiphon-glorified-with-father"
     ],
     "audio_clip": {
       "recording_id": "recording--dufaXx7Hm0",
