@@ -87,12 +87,6 @@
   padding: 8px 10px;
 }
 
-.lp-activity-option-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 .lp-activity-option {
   border: 1px solid #d6d3d1;
   border-radius: 999px;
@@ -864,11 +858,28 @@
   .lp-loop-button,
   .lp-speed-button,
   .lp-speed-adjust,
-  .lp-activity-select,
   .lp-activity-static,
   .lp-activity-option {
     background: var(--dark-surface);
     border-color: var(--dark-border);
+    color: var(--dark-text);
+  }
+
+  .lp-activity-select {
+    color-scheme: dark;
+    background: var(--dark-active);
+    border-color: #6b7280;
+    color: var(--dark-text);
+  }
+
+  .lp-activity-select:focus {
+    border-color: #d6d3d1;
+    outline: 2px solid rgba(214, 211, 209, 0.32);
+    outline-offset: 2px;
+  }
+
+  .lp-activity-select option {
+    background: var(--dark-surface);
     color: var(--dark-text);
   }
 

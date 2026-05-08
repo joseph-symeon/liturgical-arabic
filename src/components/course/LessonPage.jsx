@@ -111,26 +111,25 @@ export default function LessonPage({
         <div className="lp-activity-controls">
           {selectedActivityLabel && (
             <>
-              <div className="lp-activity-control-label">Activity</div>
+              <label className="lp-activity-control-label" htmlFor="lp-activity-select">Activity</label>
               <div className="lp-activity-card">
                 <div className="lp-activity-field">
                   {activityOptions.length > 1 ? (
-                    <div className="lp-activity-option-list" role="group" aria-label="Activity">
+                    <select
+                      id="lp-activity-select"
+                      className="lp-activity-select"
+                      value={selectedActivityOption?.exercise_id || selectedExerciseItem.exercise_id}
+                      onChange={event => {
+                        setSelectedActivityOptionId(event.target.value);
+                        setSyncedTime(null);
+                      }}
+                    >
                       {activityOptions.map(option => (
-                        <button
-                          key={option.exercise_id}
-                          type="button"
-                          className={`lp-activity-option${option.exercise_id === selectedActivityOption?.exercise_id ? ' active' : ''}`}
-                          aria-pressed={option.exercise_id === selectedActivityOption?.exercise_id}
-                          onClick={() => {
-                            setSelectedActivityOptionId(option.exercise_id);
-                            setSyncedTime(null);
-                          }}
-                        >
+                        <option key={option.exercise_id} value={option.exercise_id}>
                           {option.label}
-                        </button>
+                        </option>
                       ))}
-                    </div>
+                    </select>
                   ) : (
                     <span className="lp-activity-static">{selectedActivityLabel}</span>
                   )}
