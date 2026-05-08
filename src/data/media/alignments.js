@@ -584,10 +584,11 @@ export const alignmentDefinitions = [
           "antiphon-crucified",
           "antiphon-trampled-death",
           "antiphon-one-of-trinity",
-          "antiphon-glorified-with-father"
+          "antiphon-glorified-with-father",
+          "antiphon-save-us"
         ],
         "start_seconds": 150.77,
-        "end_seconds": 210.02,
+        "end_seconds": 218.22,
         "phrase_timings": [
           {
             "phrase_id": "word-of-god-001",
@@ -653,6 +654,11 @@ export const alignmentDefinitions = [
             "phrase_id": "father-holy-spirit-001",
             "start_seconds": 206.4,
             "end_seconds": 210.02
+          },
+          {
+            "phrase_id": "save-us-001",
+            "start_seconds": 210.02,
+            "end_seconds": 218.22
           }
         ]
       }

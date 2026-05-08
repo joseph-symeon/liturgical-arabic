@@ -100,12 +100,13 @@ export const exerciseDefinitions = [
       "antiphon-crucified",
       "antiphon-trampled-death",
       "antiphon-one-of-trinity",
-      "antiphon-glorified-with-father"
+      "antiphon-glorified-with-father",
+      "antiphon-save-us"
     ],
     "audio_clip": {
       "recording_id": "recording--dufaXx7Hm0",
       "start_seconds": 150.77,
-      "end_seconds": 210.02,
+      "end_seconds": 218.22,
       "default_playback_rate": 1
     }
   },
