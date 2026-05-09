@@ -2,6 +2,7 @@ import alignments from '../data/media/alignments.js';
 import recordings from '../data/media/recordings.js';
 import segments from '../data/texts/segments.js';
 import { getServiceText } from '../data/texts/serviceTexts.js';
+import { getRangeBounds } from './alignmentTiming.js';
 import { getIndexedServiceRangeKey, resolveServiceRange } from './serviceRanges.js';
 
 function getAlignmentRanges(alignment) {
@@ -51,13 +52,16 @@ function getSegmentTimingFromPhraseTimings(segmentIds, phraseTimings, segmentsMa
 function getEvenSegmentTimings(range, segmentIds) {
   if (segmentIds.length === 0) return {};
 
-  const duration = range.end_seconds - range.start_seconds;
+  const bounds = getRangeBounds(range);
+  if (!bounds) return {};
+
+  const duration = bounds.end_seconds - bounds.start_seconds;
   const segmentDuration = duration / segmentIds.length;
   return Object.fromEntries(segmentIds.map((segmentId, index) => [
     segmentId,
     {
-      start_seconds: Math.round((range.start_seconds + segmentDuration * index) * 1000) / 1000,
-      end_seconds: Math.round((range.start_seconds + segmentDuration * (index + 1)) * 1000) / 1000,
+      start_seconds: Math.round((bounds.start_seconds + segmentDuration * index) * 1000) / 1000,
+      end_seconds: Math.round((bounds.start_seconds + segmentDuration * (index + 1)) * 1000) / 1000,
       phrase_timings: []
     }
   ]));
@@ -95,6 +99,8 @@ export function getServiceSectionPlayback({
       .map(range => {
         const resolvedRange = resolveServiceRange(serviceText, range.service_range);
         if (!rangesOverlapSection(resolvedRange, section_index)) return null;
+        const bounds = getRangeBounds(range);
+        if (!bounds) return null;
         const segmentIds = resolvedRange.segment_ids;
         return {
           alignment_id: alignment.id,
@@ -107,8 +113,8 @@ export function getServiceSectionPlayback({
             key: getIndexedServiceRangeKey(resolvedRange)
           },
           segment_ids: segmentIds,
-          start_seconds: range.start_seconds,
-          end_seconds: range.end_seconds,
+          start_seconds: bounds.start_seconds,
+          end_seconds: bounds.end_seconds,
           phrase_timings: range.phrase_timings?.map(timing => ({ ...timing })) || [],
           segment_timings: getSegmentTimings(range, segmentIds, segmentsMap)
         };

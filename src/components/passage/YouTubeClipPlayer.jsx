@@ -27,12 +27,14 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
   const [loopEnabled, setLoopEnabled] = useState(true);
   const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
   const [playerError, setPlayerError] = useState(null);
+  const [currentSeconds, setCurrentSeconds] = useState(startSeconds);
 
   useEffect(() => {
     onTimeUpdateRef.current = onTimeUpdate;
   }, [onTimeUpdate]);
 
   function emitTimeUpdate(time) {
+    setCurrentSeconds(time);
     onTimeUpdateRef.current?.(time);
   }
 
@@ -101,6 +103,7 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
     setIsReady(false);
     setIsPlaying(false);
     setPlayerError(null);
+    setCurrentSeconds(startSeconds);
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
@@ -231,6 +234,37 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
     }
   }
 
+  function handleStartOver() {
+    const player = playerRef.current;
+    if (!player || !isReady) return;
+    const state = player.getPlayerState();
+    const shouldResume = state === window.YT.PlayerState.PLAYING || state === window.YT.PlayerState.BUFFERING;
+    userStartedRef.current = shouldResume || userStartedRef.current;
+    playRequestedRef.current = shouldResume;
+    player.seekTo(startSeconds, true);
+    playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+    emitTimeUpdate(startSeconds);
+    if (shouldResume) {
+      startLoop(player);
+      player.playVideo();
+    }
+  }
+
+  function handleProgressChange(event) {
+    const player = playerRef.current;
+    if (!player || !isReady) return;
+    const nextTime = Number(event.target.value);
+    const state = player.getPlayerState();
+    const shouldResume = state === window.YT.PlayerState.PLAYING || state === window.YT.PlayerState.BUFFERING;
+    playRequestedRef.current = shouldResume;
+    player.seekTo(nextTime, true);
+    playClockRef.current = { mediaTime: nextTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+    emitTimeUpdate(nextTime);
+    if (shouldResume) {
+      startLoop(player);
+    }
+  }
+
   function adjustSpeed(delta) {
     const next = Math.max(0.5, Math.min(2, Math.round((playbackRateRef.current + delta) * 10) / 10));
     playbackRateRef.current = next;
@@ -254,6 +288,9 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
   }
 
   const speedDisplay = `${playbackRate.toFixed(1)}×`;
+  const showExtendedControls = endSeconds - startSeconds > 30;
+  const progressValue = Math.max(startSeconds, Math.min(endSeconds, currentSeconds));
+  const progressPercent = ((progressValue - startSeconds) / Math.max(0.001, endSeconds - startSeconds)) * 100;
 
   return (
     <>
@@ -299,6 +336,21 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
               </svg>
             </button>
 
+            {showExtendedControls && (
+              <button
+                type="button"
+                className="lp-restart-button"
+                onClick={handleStartOver}
+                disabled={!isReady}
+                aria-label="Start over"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="4" y="4" width="4" height="16" rx="1" />
+                  <polygon points="21,4 8,12 21,20" />
+                </svg>
+              </button>
+            )}
+
             <div className="lp-speed-wrapper" onClick={e => e.stopPropagation()}>
               <button
                 className="lp-speed-button"
@@ -319,6 +371,20 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
               )}
             </div>
           </div>
+          {showExtendedControls && (
+            <input
+              className="lp-progress-bar"
+              type="range"
+              min={startSeconds}
+              max={endSeconds}
+              step="0.05"
+              value={progressValue}
+              onChange={handleProgressChange}
+              disabled={!isReady}
+              aria-label="Chant progress"
+              style={{ '--progress-percent': `${progressPercent}%` }}
+            />
+          )}
         </div>
       </div>
     </>

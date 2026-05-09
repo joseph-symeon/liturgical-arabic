@@ -8,12 +8,12 @@ function getLinesForSegmentIds(segmentIds, {
   showQuietPrayers = true
 } = {}) {
   return (segmentIds || [])
-    .map(segmentId => ({ segment_id: segmentId, segment: segmentsMap[segmentId] }))
+    .map((segmentId, index) => ({ segment_id: segmentId, segment_index: index, segment: segmentsMap[segmentId] }))
     .filter(({ segment }) => segment && (showQuietPrayers || !segment.tags?.includes("quiet")))
-    .map(({ segment_id, segment }, index) => ({
+    .map(({ segment_id, segment_index, segment }, index) => ({
       ...segment,
       source_segment_id: segment_id,
-      segment_id: `${segment_id}@${index}`,
+      segment_id: `${segment_id}@${segment_index}`,
       line_order: index + 1,
       phrases: segment.phrases.map(part => ({ ...part }))
     }));
@@ -27,7 +27,7 @@ export function createServiceSectionPassage({
   const section = serviceText?.sections?.[sectionIndex] || null;
   if (!serviceText || !section) return null;
 
-  const sectionAudio = getServiceSectionAudio(serviceText.id, section);
+  const sectionAudio = getServiceSectionAudio(serviceText.id, section, sectionIndex);
   const playback = sectionAudio
     ? getServiceSectionPlayback({
         service_text_id: serviceText.id,

@@ -159,8 +159,8 @@
 }
 
 .lp-mode-toggle input:checked + .lp-mode-switch {
-  border-color: var(--liturgical-red-control);
-  background: var(--liturgical-red-control-fill);
+  border-color: var(--liturgical-red-highlight-ring);
+  background: var(--liturgical-red-highlight-fill);
 }
 
 .lp-mode-toggle input:checked + .lp-mode-switch::after {
@@ -692,7 +692,8 @@
 
 .lp-clip-player {
   align-self: stretch;
-  display: inline-block;
+  display: inline-grid;
+  gap: 8px;
   max-width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -701,6 +702,74 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   background: #fff;
+}
+
+.lp-progress-bar {
+  --progress-track: #d6d3d1;
+  --progress-fill: var(--liturgical-red);
+  --progress-thumb: var(--liturgical-red);
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--progress-thumb);
+  background: transparent;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.lp-progress-bar:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.lp-progress-bar::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--progress-fill) 0%,
+    var(--progress-fill) var(--progress-percent, 0%),
+    var(--progress-track) var(--progress-percent, 0%),
+    var(--progress-track) 100%
+  );
+  border: 0;
+}
+
+.lp-progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--progress-thumb);
+}
+
+.lp-progress-bar::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--progress-track);
+  border: 0;
+}
+
+.lp-progress-bar::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--progress-fill);
+}
+
+.lp-progress-bar::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--progress-thumb);
 }
 
 .lp-toolbar-player {
@@ -786,7 +855,8 @@
   fill: currentColor;
 }
 
-.lp-loop-button {
+.lp-loop-button,
+.lp-restart-button {
   flex: 0 0 auto;
   width: 36px;
   height: 36px;
@@ -801,12 +871,22 @@
   cursor: pointer;
 }
 
+.lp-loop-button:not(.active) {
+  color: #d6d3d1;
+}
+
+.lp-restart-button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
 .lp-loop-button.active {
   color: #333;
   border-color: #ccc;
 }
 
-.lp-loop-button svg {
+.lp-loop-button svg,
+.lp-restart-button svg {
   width: 16px;
   height: 16px;
   fill: none;
@@ -814,6 +894,12 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
+}
+
+.lp-restart-button rect,
+.lp-restart-button polygon {
+  fill: currentColor;
+  stroke: none;
 }
 
 .lp-speed-wrapper {
@@ -900,6 +986,7 @@
 
   .lp-icon-button,
   .lp-loop-button,
+  .lp-restart-button,
   .lp-speed-button,
   .lp-speed-adjust,
   .lp-activity-static,
@@ -987,6 +1074,11 @@
     opacity: 0.56;
   }
 
+  .lp-progress-bar {
+    --progress-track: var(--dark-active);
+    --progress-thumb: #d6d3d1;
+  }
+
   .lp-mode-switch {
     background: var(--dark-active);
     border-color: var(--dark-border);
@@ -1001,6 +1093,10 @@
   .lp-activity-option.active {
     color: var(--dark-text);
     border-color: var(--dark-muted);
+  }
+
+  .lp-loop-button:not(.active) {
+    color: var(--dark-border);
   }
 
   .lp-activity-option:hover,

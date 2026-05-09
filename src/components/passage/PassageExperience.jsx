@@ -9,7 +9,13 @@ import PassageActivityToolbar from "./PassageActivityToolbar.jsx";
 import PassageSyncedCaption from "./PassageSyncedCaption.jsx";
 
 const CAPTION_TEXT_MODE_STORAGE_KEY = "liturgical-arabic:phrase-captions-text-mode";
+const KARAOKE_MODE_STORAGE_KEY = "liturgical-arabic:karaoke-mode";
 const CAPTION_TEXT_MODES = ["none", "translation", "literal"];
+
+function getStoredKaraokeMode() {
+  if (typeof window === "undefined") return false;
+  return window.localStorage.getItem(KARAOKE_MODE_STORAGE_KEY) === "true";
+}
 
 function getStoredCaptionTextMode() {
   if (typeof window === "undefined") return "none";
@@ -39,7 +45,7 @@ export default function PassageExperience({
   const resolvedCaptions = passage?.captions || [];
   const resolvedLeadSeconds = passage?.lead_seconds ?? 0;
   const resolvedExercise = passage?.exercise || null;
-  const [karaokeMode, setKaraokeMode] = useState(false);
+  const [karaokeMode, setKaraokeMode] = useState(getStoredKaraokeMode);
   const [captionTextMode, setCaptionTextMode] = useState(getStoredCaptionTextMode);
   const [currentTime, setCurrentTime] = useState(null);
   const listenActivity = isReadListenActivity(resolvedActivityType);
@@ -62,6 +68,11 @@ export default function PassageExperience({
     if (typeof window === "undefined") return;
     window.localStorage.setItem(CAPTION_TEXT_MODE_STORAGE_KEY, captionTextMode);
   }, [captionTextMode]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(KARAOKE_MODE_STORAGE_KEY, String(karaokeMode));
+  }, [karaokeMode]);
 
   function renderPlayer() {
     if (!resolvedClip) return null;

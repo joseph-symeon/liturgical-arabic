@@ -1,3 +1,6 @@
+import { getRangeBounds } from "./alignmentTiming.js";
+import segments from "../data/texts/segments.js";
+
 export function getActiveCaption(captions, currentTime, {
   leadSeconds = 0,
   clipEndSeconds = null
@@ -40,8 +43,9 @@ export function getPlaybackCaptions(playback) {
 
   [...ranges]
     .sort((first, second) => (
-      (second.resolved_service_range.end.segment_index - second.resolved_service_range.start.segment_index)
-        - (first.resolved_service_range.end.segment_index - first.resolved_service_range.start.segment_index)
+      (first.resolved_service_range.end.segment_index - first.resolved_service_range.start.segment_index)
+        - (second.resolved_service_range.end.segment_index - second.resolved_service_range.start.segment_index)
+        || first.resolved_service_range.start.segment_index - second.resolved_service_range.start.segment_index
     ))
     .forEach(range => {
       const indexes = [];
@@ -87,17 +91,18 @@ export function getPlaybackCaptions(playback) {
 }
 
 export function getPlaybackClip(playback) {
-  const ranges = playback?.aligned_ranges || [];
+  const ranges = (playback?.aligned_ranges || [])
+    .map(range => ({ ...range, bounds: getRangeBounds(range) }))
+    .filter(range => range.bounds);
   if (ranges.length === 0) return null;
 
   return ranges.reduce((clip, range) => ({
     recording_id: range.recording_id,
-    start_seconds: Math.min(clip.start_seconds, range.start_seconds),
-    end_seconds: Math.max(clip.end_seconds, range.end_seconds)
+    start_seconds: Math.min(clip.start_seconds, range.bounds.start_seconds),
+    end_seconds: Math.max(clip.end_seconds, range.bounds.end_seconds)
   }), {
     recording_id: ranges[0].recording_id,
-    start_seconds: ranges[0].start_seconds,
-    end_seconds: ranges[0].end_seconds
+    start_seconds: ranges[0].bounds.start_seconds,
+    end_seconds: ranges[0].bounds.end_seconds
   });
 }
-import segments from "../data/texts/segments.js";

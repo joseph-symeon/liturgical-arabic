@@ -9,6 +9,7 @@ import {
   findServiceAlignmentRange,
   getAlignmentPhraseTimings
 } from '../../utils/alignmentRanges.js';
+import { getRangeBounds } from '../../utils/alignmentTiming.js';
 import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 
 const GREAT_COMPLINE_MEDIA = {
@@ -20,6 +21,12 @@ const GREAT_COMPLINE_MEDIA = {
 const PARAKLESIS_ST_MARINA_MEDIA = {
   recording_id: "recording-oLdHO28NWuM",
   alignment_id: "alignment-paraklesis-st-marina-oLdHO28NWuM-v1",
+  default_playback_rate: 1
+};
+
+const SECOND_ANTIPHON_MEDIA = {
+  recording_id: "recording--dufaXx7Hm0",
+  alignment_id: "alignment-divine-liturgy--dufaXx7Hm0-antiphons-v1",
   default_playback_rate: 1
 };
 
@@ -43,7 +50,8 @@ export const exerciseDefinitions = [
       "course-entrance-hymn-risen-sundays",
       "course-entrance-hymn-wondrous-weekdays",
       "entrance-hymn-risen-alleluia"
-    ]
+    ],
+    "media": SECOND_ANTIPHON_MEDIA
   },
   {
     "id": "antiphon-accepted-incarnate",
@@ -275,37 +283,97 @@ export const exerciseDefinitions = [
     "id": "first-antiphon-through-theotokos",
     "segment_ids": [
       "first-antiphon-through-theotokos-1"
-    ]
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start_segment_id": "first-antiphon-through-theotokos-1",
+      "end_segment_id": "first-antiphon-through-theotokos-1"
+    }
   },
   {
     "id": "little-litany-again",
     "segment_ids": [
       "little-litany-again"
-    ]
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start": {
+        "section_index": 4,
+        "segment_index": 0
+      },
+      "end": {
+        "section_index": 4,
+        "segment_index": 0
+      }
+    }
   },
   {
     "id": "little-litany-help-save",
     "segment_ids": [
       "little-litany-help-save"
-    ]
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start": {
+        "section_index": 4,
+        "segment_index": 2
+      },
+      "end": {
+        "section_index": 4,
+        "segment_index": 2
+      }
+    }
   },
   {
     "id": "little-litany-calling-remembrance",
     "segment_ids": [
       "little-litany-calling-remembrance"
-    ]
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start": {
+        "section_index": 4,
+        "segment_index": 4
+      },
+      "end": {
+        "section_index": 4,
+        "segment_index": 4
+      }
+    }
   },
   {
     "id": "little-litany-for-thine-might",
     "segment_ids": [
       "little-litany-for-thine-might"
-    ]
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start": {
+        "section_index": 4,
+        "segment_index": 8
+      },
+      "end": {
+        "section_index": 4,
+        "segment_index": 8
+      }
+    }
   },
   {
     "id": "little-litany-good-god",
     "segment_ids": [
       "little-litany-good-god-doxology"
-    ]
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start": {
+        "section_index": 6,
+        "segment_index": 8
+      },
+      "end": {
+        "section_index": 6,
+        "segment_index": 8
+      }
+    }
   },
   {
     "id": "little-litanies-summary",
@@ -541,11 +609,13 @@ function getServiceAudioClip(definition) {
     alignments
   );
   if (!serviceRange) return null;
+  const bounds = getRangeBounds(serviceRange.range);
+  if (!bounds) return null;
 
   return {
     recording_id: serviceRange.alignment.recording_id,
-    start_seconds: serviceRange.range.start_seconds,
-    end_seconds: serviceRange.range.end_seconds,
+    start_seconds: bounds.start_seconds,
+    end_seconds: bounds.end_seconds,
     default_playback_rate: serviceRange.range.default_playback_rate ?? 1
   };
 }
@@ -559,11 +629,13 @@ function getMediaAudioClip(definition) {
     alignments
   );
   if (!range) return null;
+  const bounds = getRangeBounds(range);
+  if (!bounds) return null;
 
   return {
     recording_id: definition.media.recording_id,
-    start_seconds: range.start_seconds,
-    end_seconds: range.end_seconds,
+    start_seconds: bounds.start_seconds,
+    end_seconds: bounds.end_seconds,
     default_playback_rate: definition.media.default_playback_rate ?? range.default_playback_rate ?? 1
   };
 }

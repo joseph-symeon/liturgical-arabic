@@ -6,6 +6,7 @@ import units from '../data/course/units.js';
 import { serviceTextDefinitions } from '../data/texts/serviceTexts.js';
 import recordings from '../data/media/recordings.js';
 import { alignmentDefinitions } from '../data/media/alignments.js';
+import { getRangeBounds } from './alignmentTiming.js';
 import { resolveServiceRange } from './serviceRanges.js';
 
 function assertUnique(ids, label, errors) {
@@ -206,9 +207,10 @@ export function validateData() {
           }
         });
       }
-      if (typeof range.start_seconds !== 'number' || typeof range.end_seconds !== 'number') {
-        errors.push(`Alignment "${alignment.id}" range ${index + 1} must define numeric start_seconds and end_seconds.`);
-      } else if (range.end_seconds <= range.start_seconds) {
+      const rangeBounds = getRangeBounds(range);
+      if (!rangeBounds) {
+        errors.push(`Alignment "${alignment.id}" range ${index + 1} must define numeric phrase timings or explicit start_seconds and end_seconds.`);
+      } else if (rangeBounds.end_seconds <= rangeBounds.start_seconds) {
         errors.push(`Alignment "${alignment.id}" range ${index + 1} must end after it starts.`);
       }
       if (range.service_range) {
@@ -234,7 +236,7 @@ export function validateData() {
               errors.push(`Alignment "${alignment.id}" range ${index + 1} phrase timing ${timingIndex + 1} must define numeric start_seconds and end_seconds.`);
             } else if (timing.end_seconds <= timing.start_seconds) {
               errors.push(`Alignment "${alignment.id}" range ${index + 1} phrase timing ${timingIndex + 1} must end after it starts.`);
-            } else if (typeof range.start_seconds === 'number' && typeof range.end_seconds === 'number' && (timing.start_seconds < range.start_seconds || timing.end_seconds > range.end_seconds)) {
+            } else if (rangeBounds && (timing.start_seconds < rangeBounds.start_seconds || timing.end_seconds > rangeBounds.end_seconds)) {
               errors.push(`Alignment "${alignment.id}" range ${index + 1} phrase timing ${timingIndex + 1} must stay inside the range time range.`);
             }
           });
@@ -287,8 +289,6 @@ export function validateData() {
           errors.push(`Lesson "${lesson.id}" audio sequence "${item.audio_sequence}" requires clips on "${previousAudioSequenceItem.exercise_id}" and "${item.exercise_id}".`);
         } else if (previousRecording !== currentRecording) {
           errors.push(`Lesson "${lesson.id}" audio sequence "${item.audio_sequence}" changes recording between "${previousAudioSequenceItem.exercise_id}" and "${item.exercise_id}".`);
-        } else if (Math.abs(previousClip.end_seconds - currentClip.start_seconds) > 0.01) {
-          errors.push(`Lesson "${lesson.id}" audio sequence "${item.audio_sequence}" must join "${previousAudioSequenceItem.exercise_id}" end_seconds (${previousClip.end_seconds}) to "${item.exercise_id}" start_seconds (${currentClip.start_seconds}).`);
         }
       }
       previousAudioSequenceItem = item.audio_sequence ? item : null;

@@ -12,8 +12,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "course-lord-have-mercy-split"
         ],
-        "start_seconds": 33.9,
-        "end_seconds": 37.34,
         "phrase_timings": [
           {
             "phrase_id": "vocative-o-lord-001",
@@ -59,8 +57,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "course-glory-beginner"
         ],
-        "start_seconds": 15.42,
-        "end_seconds": 18.355,
         "phrase_timings": [
           {
             "phrase_id": "glory-001",
@@ -88,8 +84,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "course-both-now-beginner"
         ],
-        "start_seconds": 18.28,
-        "end_seconds": 23.095,
         "phrase_timings": [
           {
             "phrase_id": "beginner-both-now-001",
@@ -118,8 +112,6 @@ export const alignmentDefinitions = [
           "course-glory-beginner",
           "course-both-now-beginner"
         ],
-        "start_seconds": 15.42,
-        "end_seconds": 23.095,
         "phrase_timings": [
           {
             "phrase_id": "glory-001",
@@ -170,8 +162,6 @@ export const alignmentDefinitions = [
           "course-trisagion-holy-immortal",
           "course-trisagion-have-mercy"
         ],
-        "start_seconds": 0,
-        "end_seconds": 5.14,
         "phrase_timings": [
           {
             "phrase_id": "holy-god-001",
@@ -199,8 +189,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "course-lord-have-mercy-split"
         ],
-        "start_seconds": 37.62,
-        "end_seconds": 38.9,
         "phrase_timings": [
           {
             "phrase_id": "vocative-o-lord-001",
@@ -218,8 +206,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "course-all-holy-trinity-address"
         ],
-        "start_seconds": 23,
-        "end_seconds": 25.725,
         "phrase_timings": [
           {
             "phrase_id": "all-holy-trinity-001",
@@ -237,8 +223,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "course-all-holy-trinity-lord"
         ],
-        "start_seconds": 25.66,
-        "end_seconds": 27.92,
         "phrase_timings": [
           {
             "phrase_id": "vocative-o-lord-001",
@@ -256,8 +240,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "course-all-holy-trinity-master"
         ],
-        "start_seconds": 27.92,
-        "end_seconds": 31.045,
         "phrase_timings": [
           {
             "phrase_id": "vocative-o-master-001",
@@ -275,8 +257,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "course-all-holy-trinity-holy-one"
         ],
-        "start_seconds": 30.98,
-        "end_seconds": 35.615,
         "phrase_timings": [
           {
             "phrase_id": "vocative-o-holy-one-001",
@@ -302,8 +282,6 @@ export const alignmentDefinitions = [
           "course-all-holy-trinity-master",
           "course-all-holy-trinity-holy-one"
         ],
-        "start_seconds": 23,
-        "end_seconds": 35.615,
         "phrase_timings": [
           {
             "phrase_id": "all-holy-trinity-001",
@@ -370,8 +348,6 @@ export const alignmentDefinitions = [
           "opening-blessed-kingdom",
           "opening-amen"
         ],
-        "start_seconds": 64.07,
-        "end_seconds": 92.27,
         "phrase_timings": [
           {
             "phrase_id": "opening-bless-master-001",
@@ -445,8 +421,6 @@ export const alignmentDefinitions = [
           "litany-peace-priest-doxology",
           "litany-peace-choir-amen"
         ],
-        "start_seconds": 92.7,
-        "end_seconds": 397.86,
         "phrase_timings": [
           {
             "phrase_id": "peace-001",
@@ -796,11 +770,19 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start": {
+            "section_index": 3,
+            "segment_index": 0
+          },
+          "end": {
+            "section_index": 3,
+            "segment_index": 0
+          }
+        },
         "segment_ids": [
           "first-antiphon-through-theotokos-1"
         ],
-        "start_seconds": 399.45,
-        "end_seconds": 409.38,
         "phrase_timings": [
           {
             "phrase_id": "through-intercessions-001",
@@ -815,7 +797,39 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "o-savior-save-us-001",
             "start_seconds": 403.6,
-            "end_seconds": 407.7
+            "end_seconds": 409.35
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "start": {
+            "section_index": 3,
+            "segment_index": 4
+          },
+          "end": {
+            "section_index": 3,
+            "segment_index": 4
+          }
+        },
+        "segment_ids": [
+          "first-antiphon-through-theotokos-3"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "through-intercessions-001",
+            "start_seconds": 418.76,
+            "end_seconds": 420.24
+          },
+          {
+            "phrase_id": "theotokos-001",
+            "start_seconds": 420.24,
+            "end_seconds": 423.94
+          },
+          {
+            "phrase_id": "o-savior-save-us-001",
+            "start_seconds": 423.94,
+            "end_seconds": 433.9
           }
         ]
       }
@@ -828,18 +842,186 @@ export const alignmentDefinitions = [
     "method": "faster-whisper-small-pinned-phrase-timings",
     "ranges": [
       {
+        "service_range": {
+          "start": {
+            "section_index": 4,
+            "segment_index": 0
+          },
+          "end": {
+            "section_index": 4,
+            "segment_index": 5
+          }
+        },
+        "segment_ids": [
+          "little-litany-again",
+          "little-litany-lord-have-mercy-1",
+          "little-litany-help-save",
+          "little-litany-lord-have-mercy-2",
+          "little-litany-calling-remembrance",
+          "little-litany-to-thee-o-lord"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "again-and-again",
+            "start_seconds": 0,
+            "end_seconds": 1.6
+          },
+          {
+            "phrase_id": "peace-001",
+            "start_seconds": 1.6,
+            "end_seconds": 2.38
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 2.38,
+            "end_seconds": 5.24
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 5.24,
+            "end_seconds": 9.5
+          },
+          {
+            "phrase_id": "help-save-have-mercy-001",
+            "start_seconds": 9.5,
+            "end_seconds": 12.54
+          },
+          {
+            "phrase_id": "preserve-us-001",
+            "start_seconds": 12.54,
+            "end_seconds": 13.44
+          },
+          {
+            "phrase_id": "o-god-001",
+            "start_seconds": 13.44,
+            "end_seconds": 14.3
+          },
+          {
+            "phrase_id": "by-your-grace-001",
+            "start_seconds": 14.3,
+            "end_seconds": 17.24
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 17.24,
+            "end_seconds": 21.68
+          },
+          {
+            "phrase_id": "calling-remembrance-001",
+            "start_seconds": 21.68,
+            "end_seconds": 23.2
+          },
+          {
+            "phrase_id": "all-holy-immaculate-001",
+            "start_seconds": 23.2,
+            "end_seconds": 25.66
+          },
+          {
+            "phrase_id": "most-blessed-glorious-lady-001",
+            "start_seconds": 25.66,
+            "end_seconds": 30.58
+          },
+          {
+            "phrase_id": "theotokos-001",
+            "start_seconds": 30.58,
+            "end_seconds": 32.18
+          },
+          {
+            "phrase_id": "ever-virgin-mary-002",
+            "start_seconds": 32.42,
+            "end_seconds": 35.7
+          },
+          {
+            "phrase_id": "with-all-saints-001",
+            "start_seconds": 36.4,
+            "end_seconds": 38.7
+          },
+          {
+            "phrase_id": "commend-ourselves-001",
+            "start_seconds": 39.6,
+            "end_seconds": 41.56
+          },
+          {
+            "phrase_id": "and-each-other-001",
+            "start_seconds": 41.56,
+            "end_seconds": 43.14
+          },
+          {
+            "phrase_id": "and-all-our-life-001",
+            "start_seconds": 43.14,
+            "end_seconds": 45.86
+          },
+          {
+            "phrase_id": "unto-christ-our-god-001",
+            "start_seconds": 45.86,
+            "end_seconds": 48.8
+          },
+          {
+            "phrase_id": "to-thee-o-lord",
+            "start_seconds": 48.8,
+            "end_seconds": 52.94
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "start": {
+            "section_index": 4,
+            "segment_index": 8
+          },
+          "end": {
+            "section_index": 4,
+            "segment_index": 9
+          }
+        },
+        "segment_ids": [
+          "little-litany-for-thine-might",
+          "little-litany-amen"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "for-thine-might-001",
+            "start_seconds": 53.7,
+            "end_seconds": 56.86
+          },
+          {
+            "phrase_id": "for-thine-kingdom-001",
+            "start_seconds": 56.86,
+            "end_seconds": 59.28
+          },
+          {
+            "phrase_id": "power-and-glory-001",
+            "start_seconds": 59.28,
+            "end_seconds": 61.82
+          },
+          {
+            "phrase_id": "doxology-of-father-son-spirit-001",
+            "start_seconds": 61.82,
+            "end_seconds": 67.32
+          },
+          {
+            "phrase_id": "doxology-now-ever-ages-001",
+            "start_seconds": 67.86,
+            "end_seconds": 76.56
+          },
+          {
+            "phrase_id": "amen-001",
+            "start_seconds": 79.1,
+            "end_seconds": 80.5
+          }
+        ]
+      },
+      {
         "segment_ids": [
           "entrance-hymn-save-us-son-of-god",
           "course-entrance-hymn-risen-sundays",
           "course-entrance-hymn-wondrous-weekdays",
           "entrance-hymn-risen-alleluia"
         ],
-        "start_seconds": 80.7,
-        "end_seconds": 99.78,
         "phrase_timings": [
           {
             "phrase_id": "save-us-001",
-            "start_seconds": 80.7,
+            "start_seconds": 81,
             "end_seconds": 82.9
           },
           {
@@ -860,7 +1042,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "alleluia-001",
             "start_seconds": 96.02,
-            "end_seconds": 98.64
+            "end_seconds": 99.78
           }
         ]
       },
@@ -872,8 +1054,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "second-antiphon-save-us-risen-1"
         ],
-        "start_seconds": 80.5,
-        "end_seconds": 100.2,
         "phrase_timings": [
           {
             "phrase_id": "save-us-001",
@@ -898,7 +1078,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "alleluia-001",
             "start_seconds": 96.02,
-            "end_seconds": 99.99
+            "end_seconds": 100.2
           }
         ]
       },
@@ -910,8 +1090,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "second-antiphon-glory"
         ],
-        "start_seconds": 118.06,
-        "end_seconds": 122.86,
         "phrase_timings": [
           {
             "phrase_id": "glory-001",
@@ -933,8 +1111,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "second-antiphon-save-us-risen-2"
         ],
-        "start_seconds": 122.86,
-        "end_seconds": 141.9,
         "phrase_timings": [
           {
             "phrase_id": "save-us-001",
@@ -971,8 +1147,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "second-antiphon-both-now"
         ],
-        "start_seconds": 141.96,
-        "end_seconds": 150.74,
         "phrase_timings": [
           {
             "phrase_id": "doxology-now-ever-ages-001",
@@ -995,12 +1169,10 @@ export const alignmentDefinitions = [
           "antiphon-word-of-god-only-begotten",
           "antiphon-deathless"
         ],
-        "start_seconds": 150.74,
-        "end_seconds": 162.68,
         "phrase_timings": [
           {
             "phrase_id": "word-of-god-001",
-            "start_seconds": 150.74,
+            "start_seconds": 150.8,
             "end_seconds": 153.78
           },
           {
@@ -1011,7 +1183,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "deathless-001",
             "start_seconds": 156.14,
-            "end_seconds": 162.68
+            "end_seconds": 162.35
           }
         ]
       },
@@ -1024,28 +1196,26 @@ export const alignmentDefinitions = [
           "antiphon-accepted-incarnate",
           "antiphon-from-theotokos"
         ],
-        "start_seconds": 162.68,
-        "end_seconds": 180.3,
         "phrase_timings": [
           {
             "phrase_id": "accepted-incarnate-001",
-            "start_seconds": 162.68,
+            "start_seconds": 162.5,
             "end_seconds": 165.88
           },
           {
             "phrase_id": "for-our-salvation-001",
             "start_seconds": 165.88,
-            "end_seconds": 170.54
+            "end_seconds": 169
           },
           {
             "phrase_id": "from-theotokos-001",
-            "start_seconds": 170.54,
-            "end_seconds": 175.28
+            "start_seconds": 169.1,
+            "end_seconds": 174
           },
           {
             "phrase_id": "ever-virgin-mary-001",
-            "start_seconds": 175.8,
-            "end_seconds": 180.2
+            "start_seconds": 174.1,
+            "end_seconds": 180
           }
         ]
       },
@@ -1058,8 +1228,6 @@ export const alignmentDefinitions = [
           "antiphon-became-man",
           "antiphon-crucified"
         ],
-        "start_seconds": 180.3,
-        "end_seconds": 193.35,
         "phrase_timings": [
           {
             "phrase_id": "became-man-001",
@@ -1082,8 +1250,6 @@ export const alignmentDefinitions = [
           "antiphon-trampled-death",
           "antiphon-one-of-trinity"
         ],
-        "start_seconds": 193.35,
-        "end_seconds": 204.22,
         "phrase_timings": [
           {
             "phrase_id": "trampled-death-001",
@@ -1105,8 +1271,6 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "antiphon-glorified-with-father"
         ],
-        "start_seconds": 204.22,
-        "end_seconds": 218.22,
         "phrase_timings": [
           {
             "phrase_id": "glorified-with-001",
@@ -1141,8 +1305,6 @@ export const alignmentDefinitions = [
           "antiphon-one-of-trinity",
           "antiphon-glorified-with-father"
         ],
-        "start_seconds": 150.74,
-        "end_seconds": 218.22,
         "phrase_timings": [
           {
             "phrase_id": "word-of-god-001",
@@ -1213,6 +1375,509 @@ export const alignmentDefinitions = [
             "phrase_id": "save-us-001",
             "start_seconds": 210.02,
             "end_seconds": 218.22
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "alignment-divine-liturgy-fzQ4dmF-1Bg-little-litany-v1",
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "recording_id": "recording-fzQ4dmF-1Bg",
+    "method": "faster-whisper-small-pinned-phrase-timings",
+    "ranges": [
+      {
+        "service_range": {
+          "start": {
+            "section_index": 6,
+            "segment_index": 0
+          },
+          "end": {
+            "section_index": 6,
+            "segment_index": 5
+          }
+        },
+        "segment_ids": [
+          "little-litany-again",
+          "little-litany-lord-have-mercy-1",
+          "little-litany-help-save",
+          "little-litany-lord-have-mercy-2",
+          "little-litany-calling-remembrance",
+          "little-litany-to-thee-o-lord"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "again-and-again",
+            "start_seconds": 0,
+            "end_seconds": 1.58
+          },
+          {
+            "phrase_id": "peace-001",
+            "start_seconds": 1.58,
+            "end_seconds": 2.38
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 2.38,
+            "end_seconds": 5.22
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 5.22,
+            "end_seconds": 14.24
+          },
+          {
+            "phrase_id": "help-save-have-mercy-001",
+            "start_seconds": 14.24,
+            "end_seconds": 17.28
+          },
+          {
+            "phrase_id": "preserve-us-001",
+            "start_seconds": 17.28,
+            "end_seconds": 18.4
+          },
+          {
+            "phrase_id": "o-god-001",
+            "start_seconds": 18.4,
+            "end_seconds": 19.52
+          },
+          {
+            "phrase_id": "by-your-grace-001",
+            "start_seconds": 19.52,
+            "end_seconds": 22.28
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 22.28,
+            "end_seconds": 30.56
+          },
+          {
+            "phrase_id": "calling-remembrance-001",
+            "start_seconds": 30.56,
+            "end_seconds": 32.18
+          },
+          {
+            "phrase_id": "all-holy-immaculate-001",
+            "start_seconds": 32.18,
+            "end_seconds": 34.58
+          },
+          {
+            "phrase_id": "most-blessed-glorious-lady-001",
+            "start_seconds": 34.58,
+            "end_seconds": 39.62
+          },
+          {
+            "phrase_id": "theotokos-001",
+            "start_seconds": 39.62,
+            "end_seconds": 41.16
+          },
+          {
+            "phrase_id": "ever-virgin-mary-002",
+            "start_seconds": 41.16,
+            "end_seconds": 44.52
+          },
+          {
+            "phrase_id": "with-all-saints-001",
+            "start_seconds": 44.52,
+            "end_seconds": 47.72
+          },
+          {
+            "phrase_id": "commend-ourselves-001",
+            "start_seconds": 47.72,
+            "end_seconds": 49.72
+          },
+          {
+            "phrase_id": "and-each-other-001",
+            "start_seconds": 49.72,
+            "end_seconds": 51.14
+          },
+          {
+            "phrase_id": "and-all-our-life-001",
+            "start_seconds": 51.14,
+            "end_seconds": 54.16
+          },
+          {
+            "phrase_id": "unto-christ-our-god-001",
+            "start_seconds": 54.16,
+            "end_seconds": 56.62
+          },
+          {
+            "phrase_id": "to-thee-o-lord",
+            "start_seconds": 57.12,
+            "end_seconds": 61.36
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "start": {
+            "section_index": 6,
+            "segment_index": 8
+          },
+          "end": {
+            "section_index": 6,
+            "segment_index": 9
+          }
+        },
+        "segment_ids": [
+          "little-litany-good-god-doxology",
+          "little-litany-amen"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "good-god-lovest-mankind-001",
+            "start_seconds": 63.24,
+            "end_seconds": 67.68
+          },
+          {
+            "phrase_id": "little-litany-ascribe-glory-001",
+            "start_seconds": 67.68,
+            "end_seconds": 71.24
+          },
+          {
+            "phrase_id": "doxology-father-son-spirit-001",
+            "start_seconds": 71.24,
+            "end_seconds": 75.86
+          },
+          {
+            "phrase_id": "doxology-now-ever-ages-001",
+            "start_seconds": 75.86,
+            "end_seconds": 85.64
+          },
+          {
+            "phrase_id": "amen-001",
+            "start_seconds": 89.7,
+            "end_seconds": 91.1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "alignment-divine-liturgy-fzQ4dmF-1Bg-entrance-hymn-v1",
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "recording_id": "recording-fzQ4dmF-1Bg",
+    "method": "faster-whisper-small-pinned-phrase-timings",
+    "ranges": [
+      {
+        "service_range": {
+          "start": {
+            "section_index": 8,
+            "segment_index": 0
+          },
+          "end": {
+            "section_index": 8,
+            "segment_index": 4
+          }
+        },
+        "segment_ids": [
+          "entrance-hymn-come-worship",
+          "entrance-hymn-save-us-son-of-god",
+          "entrance-hymn-risen-label",
+          "entrance-hymn-risen-sundays",
+          "entrance-hymn-risen-alleluia"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "entrance-come-001",
+            "start_seconds": 172.68,
+            "end_seconds": 176.62
+          },
+          {
+            "phrase_id": "entrance-worship-bow-001",
+            "start_seconds": 176.62,
+            "end_seconds": 180.88
+          },
+          {
+            "phrase_id": "entrance-christ-king-god-001",
+            "start_seconds": 180.88,
+            "end_seconds": 187.3
+          },
+          {
+            "phrase_id": "save-us-001",
+            "start_seconds": 187.78,
+            "end_seconds": 190.7
+          },
+          {
+            "phrase_id": "son-of-god-001",
+            "start_seconds": 190.7,
+            "end_seconds": 194.86
+          },
+          {
+            "phrase_id": "entrance-risen-dead-001",
+            "start_seconds": 194.86,
+            "end_seconds": 205
+          },
+          {
+            "phrase_id": "entrance-we-sing-to-you-001",
+            "start_seconds": 205.22,
+            "end_seconds": 210.84
+          },
+          {
+            "phrase_id": "alleluia-001",
+            "start_seconds": 210.84,
+            "end_seconds": 215.46
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "alignment-divine-liturgy-IFxF-vGExAI-trisagion-v1",
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "recording_id": "recording-IFxF-vGExAI",
+    "method": "faster-whisper-small-pinned-phrase-timings",
+    "ranges": [
+      {
+        "service_range": {
+          "start": {
+            "section_index": 9,
+            "segment_index": 0
+          },
+          "end": {
+            "section_index": 9,
+            "segment_index": 4
+          }
+        },
+        "segment_ids": [
+          "trisagion-hymn-holy-god-1",
+          "trisagion-hymn-glory",
+          "trisagion-hymn-holy-immortal",
+          "trisagion-with-strength",
+          "trisagion-hymn-holy-god-2"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "holy-god-001",
+            "start_seconds": 37.46,
+            "end_seconds": 41.12
+          },
+          {
+            "phrase_id": "holy-mighty-001",
+            "start_seconds": 41.12,
+            "end_seconds": 46.88
+          },
+          {
+            "phrase_id": "holy-immortal-001",
+            "start_seconds": 46.88,
+            "end_seconds": 54.32
+          },
+          {
+            "phrase_id": "have-mercy-on-us-001",
+            "start_seconds": 54.32,
+            "end_seconds": 57.74
+          },
+          {
+            "phrase_id": "glory-001",
+            "start_seconds": 60.64,
+            "end_seconds": 61.86
+          },
+          {
+            "phrase_id": "to-father-son-holy-spirit-001",
+            "start_seconds": 61.86,
+            "end_seconds": 67.44
+          },
+          {
+            "phrase_id": "doxology-now-ever-ages-001",
+            "start_seconds": 124.72,
+            "end_seconds": 132.82
+          },
+          {
+            "phrase_id": "holy-immortal-001",
+            "start_seconds": 136.46,
+            "end_seconds": 143.32
+          },
+          {
+            "phrase_id": "have-mercy-on-us-001",
+            "start_seconds": 143.32,
+            "end_seconds": 146.08
+          },
+          {
+            "phrase_id": "dynamis-001",
+            "start_seconds": 160.46,
+            "end_seconds": 162.28
+          },
+          {
+            "phrase_id": "holy-god-001",
+            "start_seconds": 176.88,
+            "end_seconds": 179.44
+          },
+          {
+            "phrase_id": "holy-mighty-001",
+            "start_seconds": 201.92,
+            "end_seconds": 204.72
+          },
+          {
+            "phrase_id": "holy-immortal-001",
+            "start_seconds": 231.06,
+            "end_seconds": 237.64
+          },
+          {
+            "phrase_id": "have-mercy-on-us-001",
+            "start_seconds": 237.64,
+            "end_seconds": 243.96
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "alignment-divine-liturgy-JFawm57lics-epistle-v1",
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "recording_id": "recording-JFawm57lics",
+    "method": "faster-whisper-small-pinned-phrase-timings",
+    "ranges": [
+      {
+        "service_range": {
+          "start": {
+            "section_index": 10,
+            "segment_index": 2
+          },
+          "end": {
+            "section_index": 10,
+            "segment_index": 7
+          }
+        },
+        "segment_ids": [
+          "epistle-wisdom",
+          "epistle-reader-title",
+          "epistle-let-us-attend-2",
+          "epistle-reader-reads",
+          "epistle-peace-reader",
+          "epistle-alleluia"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "wisdom-001",
+            "start_seconds": 18.72,
+            "end_seconds": 20.3
+          },
+          {
+            "phrase_id": "reader-announces-epistle-title-001",
+            "start_seconds": 20.3,
+            "end_seconds": 32.46
+          },
+          {
+            "phrase_id": "let-us-attend-001",
+            "start_seconds": 33.76,
+            "end_seconds": 35.64
+          },
+          {
+            "phrase_id": "reader-reads-epistle-001",
+            "start_seconds": 36.12,
+            "end_seconds": 188.76
+          },
+          {
+            "phrase_id": "peace-reader-001",
+            "start_seconds": 188.76,
+            "end_seconds": 202.76
+          },
+          {
+            "phrase_id": "alleluia-001",
+            "start_seconds": 202.76,
+            "end_seconds": 211.28
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "alignment-divine-liturgy-xfUZh8ENiIQ-gospel-v1",
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "recording_id": "recording-xfUZh8ENiIQ",
+    "method": "faster-whisper-small-pinned-phrase-timings",
+    "ranges": [
+      {
+        "service_range": {
+          "start": {
+            "section_index": 12,
+            "segment_index": 0
+          },
+          "end": {
+            "section_index": 12,
+            "segment_index": 7
+          }
+        },
+        "segment_ids": [
+          "gospel-wisdom-stand",
+          "gospel-peace-all",
+          "gospel-and-spirit",
+          "gospel-reading-from",
+          "gospel-glory-before",
+          "gospel-let-us-attend",
+          "gospel-appointed-reading-rubric",
+          "gospel-glory-after"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "wisdom-001",
+            "start_seconds": 0,
+            "end_seconds": 1.7
+          },
+          {
+            "phrase_id": "stand-upright-001",
+            "start_seconds": 1.7,
+            "end_seconds": 2.62
+          },
+          {
+            "phrase_id": "hear-holy-gospel-001",
+            "start_seconds": 2.62,
+            "end_seconds": 6.9
+          },
+          {
+            "phrase_id": "peace-be-to-all-001",
+            "start_seconds": 6.9,
+            "end_seconds": 12.08
+          },
+          {
+            "phrase_id": "and-to-thy-spirit-001",
+            "start_seconds": 14.3,
+            "end_seconds": 15.7
+          },
+          {
+            "phrase_id": "reading-holy-gospel-001",
+            "start_seconds": 16.9,
+            "end_seconds": 21.06
+          },
+          {
+            "phrase_id": "reading-holy-gospel-002",
+            "start_seconds": 21.06,
+            "end_seconds": 21.86
+          },
+          {
+            "phrase_id": "placeholder-so-and-so-001",
+            "start_seconds": 21.86,
+            "end_seconds": 22.28
+          },
+          {
+            "phrase_id": "reading-holy-gospel-003",
+            "start_seconds": 22.28,
+            "end_seconds": 24.88
+          },
+          {
+            "phrase_id": "reading-holy-gospel-004",
+            "start_seconds": 24.88,
+            "end_seconds": 29.14
+          },
+          {
+            "phrase_id": "glory-to-thee-lord-001",
+            "start_seconds": 29.14,
+            "end_seconds": 35.9
+          },
+          {
+            "phrase_id": "let-us-attend-001",
+            "start_seconds": 35.9,
+            "end_seconds": 38.08
+          },
+          {
+            "phrase_id": "rubric-appointed-gospel-001",
+            "start_seconds": 38.08,
+            "end_seconds": 205.12
+          },
+          {
+            "phrase_id": "glory-to-thee-lord-001",
+            "start_seconds": 214.82,
+            "end_seconds": 220.72
           }
         ]
       }
