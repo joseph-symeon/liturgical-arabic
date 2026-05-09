@@ -14,7 +14,13 @@ export default function SpeakerBlock(props) {
       .map(part =>
         part.text
           ? { text: part.text, isRubric: line.tags?.includes("rubric") || part.tags?.includes("rubric") }
-          : { id: part.phrase_id }
+          : {
+              id: part.phrase_id,
+              className: props.activeCaption?.segment_id === line.segment_id
+                && props.activeCaption?.phrase_id === part.phrase_id
+                ? "lp-karaoke-active"
+                : undefined
+            }
       );
   }
 
@@ -39,6 +45,7 @@ export default function SpeakerBlock(props) {
         arabicFontFamily: props.arabicFontFamily,
         arabicFontWeight: props.arabicFontWeight,
         arabicFontSize: props.arabicFontSize,
+        activePhraseId: props.activePhraseId,
         showSpeaker: true
       });
     });
@@ -58,6 +65,7 @@ export default function SpeakerBlock(props) {
         arabicFontFamily: props.arabicFontFamily,
         arabicFontWeight: props.arabicFontWeight,
         arabicFontSize: props.arabicFontSize,
+        activePhraseId: props.activePhraseId,
         showSpeaker
       });
     });

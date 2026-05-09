@@ -1,4 +1,6 @@
 import { stripArabicDiacritics } from './arabic.js';
+import { serviceTextDefinitions } from '../data/texts/serviceTexts.js';
+import { getServiceRangeKey } from './serviceRanges.js';
 
 const ARABIC_PUNCTUATION = /[،؛؟.,!:"'()[\]{}ـ]/g;
 
@@ -174,20 +176,48 @@ export function getAlignmentMatch(alignmentId, segmentIds, recordingId, alignmen
   if (!alignment || alignment.recording_id !== recordingId) return null;
 
   const segmentKey = getSegmentKey(segmentIds);
-  return alignment.matches.find(item => getSegmentKey(item.segment_ids) === segmentKey) || null;
+  const ranges = alignment.ranges || alignment.matches || [];
+  return ranges.find(item => getSegmentKey(item.segment_ids) === segmentKey) || null;
 }
 
-export function findAlignmentMatch(recordingId, segmentIds, alignments) {
+export function findAlignmentRange(recordingId, segmentIds, alignments) {
   if (!recordingId) return null;
 
   const segmentKey = getSegmentKey(segmentIds);
   const alignment = Object.values(alignments || {}).find(item => (
     item.recording_id === recordingId
-      && item.matches?.some(match => getSegmentKey(match.segment_ids) === segmentKey)
+      && (item.ranges || item.matches || []).some(range => getSegmentKey(range.segment_ids) === segmentKey)
   ));
-  const match = alignment?.matches?.find(item => getSegmentKey(item.segment_ids) === segmentKey);
+  const range = (alignment?.ranges || alignment?.matches || []).find(item => getSegmentKey(item.segment_ids) === segmentKey);
 
-  return alignment && match ? { alignment, match } : null;
+  return alignment && range ? { alignment, range } : null;
+}
+
+export function findAlignmentMatch(recordingId, segmentIds, alignments) {
+  const result = findAlignmentRange(recordingId, segmentIds, alignments);
+  return result ? { alignment: result.alignment, match: result.range } : null;
+}
+
+export function findServiceAlignmentRange(serviceTextId, serviceRange, recordingId, alignments) {
+  if (!serviceTextId || !serviceRange) return null;
+
+  const serviceText = serviceTextDefinitions.find(item => item.id === serviceTextId);
+  const serviceRangeKey = getServiceRangeKey(serviceText, serviceRange);
+  if (!serviceRangeKey) return null;
+
+  const alignment = Object.values(alignments || {}).find(item => (
+    item.service_text_id === serviceTextId
+      && (!recordingId || item.recording_id === recordingId)
+      && (item.ranges || item.matches || []).some(range => getServiceRangeKey(serviceText, range.service_range) === serviceRangeKey)
+  ));
+  const range = (alignment?.ranges || alignment?.matches || []).find(item => getServiceRangeKey(serviceText, item.service_range) === serviceRangeKey);
+
+  return alignment && range ? { alignment, range } : null;
+}
+
+export function findServiceAlignmentMatch(serviceTextId, serviceRange, recordingId, alignments) {
+  const result = findServiceAlignmentRange(serviceTextId, serviceRange, recordingId, alignments);
+  return result ? { alignment: result.alignment, match: result.range } : null;
 }
 
 export function getAlignmentClip(alignmentId, segmentIds, recordingId, alignments) {

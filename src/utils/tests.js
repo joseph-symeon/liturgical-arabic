@@ -11,6 +11,7 @@ import {
 } from "./arabic.js";
 import { csvEscape, rowsToCsv, buildFlashcardCsv, buildAnnotationsCsv } from "./csv.js";
 import { getFlashcards } from "./flashcards.js";
+import { getServiceSectionPlayback } from "./servicePlayback.js";
 
 function segmentLineParts(line) {
   return line.phrases.map(function mapPart(part) {
@@ -56,6 +57,19 @@ export function runTests() {
   console.assert(
     readerSections.find(function findSecondAntiphon(section) { return section.section === "The Second Antiphon"; }).segment_ids.length === 15,
     "The Second Antiphon should have 15 segments."
+  );
+  const secondAntiphonPlayback = getServiceSectionPlayback({
+    service_text_id: defaultServiceText.id,
+    section_index: readerSections.findIndex(function findSecondAntiphon(section) { return section.section === "The Second Antiphon"; }),
+    recording_id: "recording--dufaXx7Hm0"
+  });
+  console.assert(
+    secondAntiphonPlayback.aligned_ranges.length >= 6,
+    "Second Antiphon playback should include aligned audio ranges."
+  );
+  console.assert(
+    secondAntiphonPlayback.timed_segments["antiphon-glorified-with-father@5:14-5:14"]?.end_seconds === 218.22,
+    "Second Antiphon playback should expose timed service segments."
   );
   console.assert(readerSections[0].section === "The Preparation for the Divine Liturgy", "First reader section should be titled The Preparation for the Divine Liturgy.");
   console.assert(defaultServiceText.id === "divine-liturgy-john-chrysostom", "Default service text should be the Divine Liturgy.");

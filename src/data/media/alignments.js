@@ -7,7 +7,7 @@ export const alignmentDefinitions = [
     "service_text_id": "paraklesis-st-marina",
     "recording_id": "recording-oLdHO28NWuM",
     "method": "faster-whisper-medium-word-timestamps",
-    "matches": [
+    "ranges": [
       {
         "segment_ids": [
           "course-lord-have-mercy-split"
@@ -59,7 +59,7 @@ export const alignmentDefinitions = [
     "service_text_id": "great-compline",
     "recording_id": "recording-g_4r4wzt2Vg",
     "method": "faster-whisper-medium-word-timestamps",
-    "matches": [
+    "ranges": [
       {
         "segment_ids": [
           "course-glory-beginner"
@@ -384,7 +384,47 @@ export const alignmentDefinitions = [
     "service_text_id": "divine-liturgy-john-chrysostom",
     "recording_id": "recording-KJKt0V4zJjY",
     "method": "faster-whisper-small-pinned-phrase-timings",
-    "matches": [
+    "ranges": [
+      {
+        "service_range": {
+          "start_segment_id": "opening-bless-master",
+          "end_segment_id": "opening-amen"
+        },
+        "segment_ids": [
+          "opening-bless-master",
+          "opening-blessed-kingdom",
+          "opening-amen"
+        ],
+        "start_seconds": 64.07,
+        "end_seconds": 92.27,
+        "phrase_timings": [
+          {
+            "phrase_id": "opening-bless-master-001",
+            "start_seconds": 64.07,
+            "end_seconds": 67.51
+          },
+          {
+            "phrase_id": "opening-blessed-kingdom-001",
+            "start_seconds": 68.46,
+            "end_seconds": 71.94
+          },
+          {
+            "phrase_id": "father-son-holy-spirit-001",
+            "start_seconds": 71.94,
+            "end_seconds": 78.12
+          },
+          {
+            "phrase_id": "doxology-now-ever-ages-001",
+            "start_seconds": 79.1,
+            "end_seconds": 87.66
+          },
+          {
+            "phrase_id": "amen-001",
+            "start_seconds": 88.3,
+            "end_seconds": 92.27
+          }
+        ]
+      },
       {
         "segment_ids": [
           "first-antiphon-through-theotokos-1"
@@ -416,7 +456,7 @@ export const alignmentDefinitions = [
     "service_text_id": "divine-liturgy-john-chrysostom",
     "recording_id": "recording--dufaXx7Hm0",
     "method": "faster-whisper-small-pinned-phrase-timings",
-    "matches": [
+    "ranges": [
       {
         "segment_ids": [
           "entrance-hymn-save-us-son-of-god",
@@ -455,16 +495,142 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "second-antiphon-save-us-risen-1",
+          "end_segment_id": "second-antiphon-save-us-risen-1"
+        },
+        "segment_ids": [
+          "second-antiphon-save-us-risen-1"
+        ],
+        "start_seconds": 80.5,
+        "end_seconds": 100.2,
+        "phrase_timings": [
+          {
+            "phrase_id": "save-us-001",
+            "start_seconds": 80.5,
+            "end_seconds": 82.9
+          },
+          {
+            "phrase_id": "son-of-god-001",
+            "start_seconds": 82.9,
+            "end_seconds": 84.96
+          },
+          {
+            "phrase_id": "entrance-risen-dead-001",
+            "start_seconds": 85.5,
+            "end_seconds": 91.64
+          },
+          {
+            "phrase_id": "entrance-we-sing-to-you-001",
+            "start_seconds": 91.64,
+            "end_seconds": 96.02
+          },
+          {
+            "phrase_id": "alleluia-001",
+            "start_seconds": 96.02,
+            "end_seconds": 99.99
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "start_segment_id": "second-antiphon-glory",
+          "end_segment_id": "second-antiphon-glory"
+        },
+        "segment_ids": [
+          "second-antiphon-glory"
+        ],
+        "start_seconds": 118.06,
+        "end_seconds": 122.86,
+        "phrase_timings": [
+          {
+            "phrase_id": "glory-001",
+            "start_seconds": 118.06,
+            "end_seconds": 118.96
+          },
+          {
+            "phrase_id": "to-father-son-holy-spirit-001",
+            "start_seconds": 118.96,
+            "end_seconds": 122.86
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "start_segment_id": "second-antiphon-save-us-risen-2",
+          "end_segment_id": "second-antiphon-save-us-risen-2"
+        },
+        "segment_ids": [
+          "second-antiphon-save-us-risen-2"
+        ],
+        "start_seconds": 122.86,
+        "end_seconds": 141.9,
+        "phrase_timings": [
+          {
+            "phrase_id": "save-us-001",
+            "start_seconds": 122.86,
+            "end_seconds": 125.04
+          },
+          {
+            "phrase_id": "son-of-god-001",
+            "start_seconds": 125.04,
+            "end_seconds": 126.74
+          },
+          {
+            "phrase_id": "entrance-risen-dead-001",
+            "start_seconds": 127.56,
+            "end_seconds": 133.6
+          },
+          {
+            "phrase_id": "entrance-we-sing-to-you-001",
+            "start_seconds": 133.6,
+            "end_seconds": 137.96
+          },
+          {
+            "phrase_id": "alleluia-001",
+            "start_seconds": 137.96,
+            "end_seconds": 141.9
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "start_segment_id": "second-antiphon-both-now",
+          "end_segment_id": "second-antiphon-both-now"
+        },
+        "segment_ids": [
+          "second-antiphon-both-now"
+        ],
+        "start_seconds": 141.96,
+        "end_seconds": 150.74,
+        "phrase_timings": [
+          {
+            "phrase_id": "doxology-now-ever-ages-001",
+            "start_seconds": 141.96,
+            "end_seconds": 148.6
+          },
+          {
+            "phrase_id": "amen-001",
+            "start_seconds": 149.16,
+            "end_seconds": 150.74
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "start_segment_id": "antiphon-word-of-god-only-begotten",
+          "end_segment_id": "antiphon-deathless"
+        },
         "segment_ids": [
           "antiphon-word-of-god-only-begotten",
           "antiphon-deathless"
         ],
-        "start_seconds": 150.77,
+        "start_seconds": 150.74,
         "end_seconds": 162.68,
         "phrase_timings": [
           {
             "phrase_id": "word-of-god-001",
-            "start_seconds": 150.77,
+            "start_seconds": 150.74,
             "end_seconds": 153.78
           },
           {
@@ -480,6 +646,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "antiphon-accepted-incarnate",
+          "end_segment_id": "antiphon-from-theotokos"
+        },
         "segment_ids": [
           "antiphon-accepted-incarnate",
           "antiphon-from-theotokos"
@@ -510,6 +680,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "antiphon-became-man",
+          "end_segment_id": "antiphon-crucified"
+        },
         "segment_ids": [
           "antiphon-became-man",
           "antiphon-crucified"
@@ -530,6 +704,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "antiphon-trampled-death",
+          "end_segment_id": "antiphon-one-of-trinity"
+        },
         "segment_ids": [
           "antiphon-trampled-death",
           "antiphon-one-of-trinity"
@@ -550,6 +728,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "antiphon-glorified-with-father",
+          "end_segment_id": "antiphon-glorified-with-father"
+        },
         "segment_ids": [
           "antiphon-glorified-with-father"
         ],
@@ -574,6 +756,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "antiphon-word-of-god-only-begotten",
+          "end_segment_id": "antiphon-glorified-with-father"
+        },
         "segment_ids": [
           "antiphon-word-of-god-only-begotten",
           "antiphon-deathless",
@@ -585,12 +771,12 @@ export const alignmentDefinitions = [
           "antiphon-one-of-trinity",
           "antiphon-glorified-with-father"
         ],
-        "start_seconds": 150.77,
+        "start_seconds": 150.74,
         "end_seconds": 218.22,
         "phrase_timings": [
           {
             "phrase_id": "word-of-god-001",
-            "start_seconds": 150.77,
+            "start_seconds": 150.74,
             "end_seconds": 153.78
           },
           {

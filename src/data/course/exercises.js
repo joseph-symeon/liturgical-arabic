@@ -6,7 +6,12 @@ import phrases from '../texts/phrases.js';
 import captionTracks from '../media/captionTracks.js';
 import alignments from '../media/alignments.js';
 import activities from './activities.js';
-import { deriveCaptionClip, findAlignmentMatch, getAlignmentPhraseTimings } from '../../utils/captionClips.js';
+import {
+  deriveCaptionClip,
+  findAlignmentRange,
+  findServiceAlignmentRange,
+  getAlignmentPhraseTimings
+} from '../../utils/captionClips.js';
 
 export const exerciseDefinitions = [
   {
@@ -15,6 +20,11 @@ export const exerciseDefinitions = [
       "antiphon-word-of-god-only-begotten",
       "antiphon-deathless"
     ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start_segment_id": "antiphon-word-of-god-only-begotten",
+      "end_segment_id": "antiphon-deathless"
+    },
     "audio_clip": {
       "recording_id": "recording--dufaXx7Hm0",
       "start_seconds": 150.77,
@@ -43,6 +53,11 @@ export const exerciseDefinitions = [
       "antiphon-accepted-incarnate",
       "antiphon-from-theotokos"
     ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start_segment_id": "antiphon-accepted-incarnate",
+      "end_segment_id": "antiphon-from-theotokos"
+    },
     "audio_clip": {
       "recording_id": "recording--dufaXx7Hm0",
       "start_seconds": 162.68,
@@ -56,6 +71,11 @@ export const exerciseDefinitions = [
       "antiphon-became-man",
       "antiphon-crucified"
     ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start_segment_id": "antiphon-became-man",
+      "end_segment_id": "antiphon-crucified"
+    },
     "audio_clip": {
       "recording_id": "recording--dufaXx7Hm0",
       "start_seconds": 180.3,
@@ -69,6 +89,11 @@ export const exerciseDefinitions = [
       "antiphon-trampled-death",
       "antiphon-one-of-trinity"
     ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start_segment_id": "antiphon-trampled-death",
+      "end_segment_id": "antiphon-one-of-trinity"
+    },
     "audio_clip": {
       "recording_id": "recording--dufaXx7Hm0",
       "start_seconds": 193.35,
@@ -81,6 +106,11 @@ export const exerciseDefinitions = [
     "segment_ids": [
       "antiphon-glorified-with-father"
     ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start_segment_id": "antiphon-glorified-with-father",
+      "end_segment_id": "antiphon-glorified-with-father"
+    },
     "audio_clip": {
       "recording_id": "recording--dufaXx7Hm0",
       "start_seconds": 204.22,
@@ -101,6 +131,11 @@ export const exerciseDefinitions = [
       "antiphon-one-of-trinity",
       "antiphon-glorified-with-father"
     ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "start_segment_id": "antiphon-word-of-god-only-begotten",
+      "end_segment_id": "antiphon-glorified-with-father"
+    },
     "audio_clip": {
       "recording_id": "recording--dufaXx7Hm0",
       "start_seconds": 150.77,
@@ -749,7 +784,8 @@ export function resolveExercise(definition, segmentsMap = segments) {
   }
 
   const lines = getLinesForSegmentIds(segmentIds);
-  const audioClip = definition.audio_clip || deriveCaptionClip(resolvedDefinition, phrases, segmentsMap, captionTracks, alignments);
+  const serviceAudioClip = getServiceAudioClip(definition);
+  const audioClip = serviceAudioClip || definition.audio_clip || deriveCaptionClip(resolvedDefinition, phrases, segmentsMap, captionTracks, alignments);
 
   return {
     ...resolvedDefinition,
@@ -793,9 +829,36 @@ function buildEvenCaptions(audioClip, phraseIds) {
   }));
 }
 
+function getServiceAudioClip(definition) {
+  const serviceRange = findServiceAlignmentRange(
+    definition.service_text_id,
+    definition.service_range,
+    definition.audio_clip?.recording_id,
+    alignments
+  );
+  if (!serviceRange) return null;
+
+  return {
+    recording_id: serviceRange.alignment.recording_id,
+    start_seconds: serviceRange.range.start_seconds,
+    end_seconds: serviceRange.range.end_seconds,
+    default_playback_rate: definition.audio_clip?.default_playback_rate ?? 1
+  };
+}
+
 function getAlignedCaptions(exercise) {
-  const match = findAlignmentMatch(exercise.audio_clip?.recording_id, exercise.segment_ids, alignments);
-  return match?.match?.phrase_timings?.map(timing => ({ ...timing })) || [];
+  const serviceRange = findServiceAlignmentRange(
+    exercise.service_text_id,
+    exercise.service_range,
+    exercise.audio_clip?.recording_id,
+    alignments
+  );
+  if (serviceRange?.range?.phrase_timings) {
+    return serviceRange.range.phrase_timings.map(timing => ({ ...timing }));
+  }
+
+  const alignmentRange = findAlignmentRange(exercise.audio_clip?.recording_id, exercise.segment_ids, alignments);
+  return alignmentRange?.range?.phrase_timings?.map(timing => ({ ...timing })) || [];
 }
 
 export function getExercisePhraseCount(exerciseId) {
@@ -819,7 +882,12 @@ function getDerivedActivity(exercise, activityType) {
   const phraseIds = getPhraseIdsForLines(exercise.lines);
   const alignedCaptions = getAlignedCaptions(exercise);
   const captions = alignedCaptions.length ? alignedCaptions : buildEvenCaptions(exercise.audio_clip, phraseIds);
-  const alignmentMatch = findAlignmentMatch(exercise.audio_clip?.recording_id, exercise.segment_ids, alignments);
+  const alignmentRange = findServiceAlignmentRange(
+    exercise.service_text_id,
+    exercise.service_range,
+    exercise.audio_clip?.recording_id,
+    alignments
+  ) || findAlignmentRange(exercise.audio_clip?.recording_id, exercise.segment_ids, alignments);
   const commonActivity = {
     id: `${exercise.id}:${activityType}`,
     target: {
@@ -828,7 +896,7 @@ function getDerivedActivity(exercise, activityType) {
     media: exercise.audio_clip?.recording_id
       ? {
           recording_id: exercise.audio_clip.recording_id,
-          alignment_id: alignmentMatch?.alignment?.id,
+          alignment_id: alignmentRange?.alignment?.id,
           default_playback_rate: exercise.audio_clip.default_playback_rate
         }
       : null
