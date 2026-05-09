@@ -231,22 +231,28 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "exercise_id": "little-litany-again"
+        "exercise_id": "little-litany-again",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "little-litany-help-save"
+        "exercise_id": "little-litany-help-save",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "little-litany-calling-remembrance"
+        "exercise_id": "little-litany-calling-remembrance",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "little-litany-for-thine-might"
+        "exercise_id": "little-litany-for-thine-might",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "little-litany-good-god"
+        "exercise_id": "little-litany-good-god",
+        "activity_policy": "standard"
       },
       {
-        "exercise_id": "little-litanies-summary"
+        "exercise_id": "little-litanies-summary",
+        "activity_policy": "standard"
       }
     ]
   },
