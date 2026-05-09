@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import recordings from "../../data/media/recordings.js";
 import phrases from "../../data/texts/phrases.js";
 import { isPhraseCaptionsActivity, isReadListenActivity } from "../../utils/passageActivities.js";
@@ -49,6 +49,7 @@ export default function PassageExperience({
   const [karaokeMode, setKaraokeMode] = useState(getStoredKaraokeMode);
   const [captionTextMode, setCaptionTextMode] = useState(getStoredCaptionTextMode);
   const [currentTime, setCurrentTime] = useState(null);
+  const playerRef = useRef(null);
   const listenActivity = isReadListenActivity(resolvedActivityType);
   const captionActivity = isPhraseCaptionsActivity(resolvedActivityType);
   const canUseKaraoke = listenActivity && resolvedCaptions.length > 0;
@@ -86,6 +87,7 @@ export default function PassageExperience({
 
     return (
       <YouTubeClipPlayer
+        ref={playerRef}
         key={clipKey}
         videoId={videoId}
         recordingId={resolvedClip.recording_id}
@@ -98,23 +100,22 @@ export default function PassageExperience({
   }
 
   return (
-    <>
-      {showPracticeToolbar && (
-        <PassageActivityToolbar
-          activityLabel={activityLabel}
-          activitySelectId={activitySelectId}
-          activityOptions={activityOptions}
-          selectedActivityValue={selectedActivityValue}
-          onSelectActivity={onSelectActivity}
-          player={renderPlayer()}
-          showKaraokeToggle={canUseKaraoke}
-          karaokeMode={karaokeMode}
-          onKaraokeModeChange={setKaraokeMode}
-          showTextModeControls={captionActivity}
-          textMode={captionTextMode}
-          onTextModeChange={setCaptionTextMode}
-        />
-      )}
+    <div className={`lp-passage-experience${!showPracticeToolbar ? " focus-mode" : ""}`}>
+      <PassageActivityToolbar
+        activityLabel={activityLabel}
+        activitySelectId={activitySelectId}
+        activityOptions={activityOptions}
+        selectedActivityValue={selectedActivityValue}
+        onSelectActivity={onSelectActivity}
+        player={renderPlayer()}
+        showKaraokeToggle={canUseKaraoke}
+        karaokeMode={karaokeMode}
+        onKaraokeModeChange={setKaraokeMode}
+        showTextModeControls={captionActivity}
+        textMode={captionTextMode}
+        onTextModeChange={setCaptionTextMode}
+        hidden={!showPracticeToolbar}
+      />
 
       {captionActivity && (
         <PassageSyncedCaption
@@ -124,10 +125,11 @@ export default function PassageExperience({
           arabicMode={arabicMode}
           arabicFontFamily={arabicFontFamily}
           arabicFontWeight={arabicFontWeight}
+          onTogglePlayback={resolvedClip ? () => playerRef.current?.togglePlayPause() : undefined}
         />
       )}
 
-      {renderPassage
+      {!captionActivity && renderPassage
         ? renderPassage({
             activeCaption,
             activePhrase,
@@ -150,6 +152,6 @@ export default function PassageExperience({
               />
             )
           : null}
-    </>
+    </div>
   );
 }

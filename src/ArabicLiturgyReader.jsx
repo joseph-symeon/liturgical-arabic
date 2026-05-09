@@ -19,14 +19,11 @@ const READER_ACTIVITY_OPTIONS = [
   { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.readListen], value: PASSAGE_ACTIVITY_TYPES.readListen },
   { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions], value: PASSAGE_ACTIVITY_TYPES.phraseCaptions }
 ];
+const READER_ACTIVITY_SELECTION_KEY = `${defaultServiceText.id}:reader:activity`;
 
-function getReaderActivitySelectionKey(sectionIndex) {
-  return `${defaultServiceText.id}:section:${sectionIndex}`;
-}
-
-function getReaderActivity(sectionIndex) {
+function getReaderActivity() {
   return getStoredActivitySelection(
-    getReaderActivitySelectionKey(sectionIndex),
+    READER_ACTIVITY_SELECTION_KEY,
     READER_ACTIVITY_OPTIONS.map(option => option.value)
   ) || PASSAGE_ACTIVITY_TYPES.readListen;
 }
@@ -52,7 +49,7 @@ export default function ArabicLiturgyReader({
 }) {
   const isTableOfContents = selectedSectionIndex === null;
   const [readerActivity, setReaderActivity] = useState(() => (
-    isTableOfContents ? PASSAGE_ACTIVITY_TYPES.readListen : getReaderActivity(selectedSectionIndex)
+    isTableOfContents ? PASSAGE_ACTIVITY_TYPES.readListen : getReaderActivity()
   ));
   const selectedSection = isTableOfContents ? null : readerSections[selectedSectionIndex] || readerSections[0];
   const passage = isTableOfContents
@@ -65,8 +62,8 @@ export default function ArabicLiturgyReader({
 
   useEffect(() => {
     if (isTableOfContents) return;
-    setReaderActivity(getReaderActivity(selectedSectionIndex));
-  }, [isTableOfContents, selectedSectionIndex]);
+    setReaderActivity(getReaderActivity());
+  }, [isTableOfContents]);
 
   function renderArabicTitle(phrase) {
     if (!phrase) return null;
@@ -255,7 +252,7 @@ export default function ArabicLiturgyReader({
       selectedActivityValue: readerActivity,
       onSelectActivity: value => {
         setReaderActivity(value);
-        storeActivitySelection(getReaderActivitySelectionKey(selectedSectionIndex), value);
+        storeActivitySelection(READER_ACTIVITY_SELECTION_KEY, value);
       },
       activityType: readerActivity,
       resetKey: selectedSectionIndex,

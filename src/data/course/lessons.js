@@ -143,11 +143,11 @@ const lessons = [
         "exercise_id": "glory-beginner",
         "activity_options": [
           {
-            "label": "Read & Listen",
+            "label": "Read",
             "activity_type": "read-listen"
           },
           {
-            "label": "Phrase Captions",
+            "label": "Captions",
             "activity_type": "phrase-captions"
           },
           {
@@ -161,11 +161,11 @@ const lessons = [
         "exercise_id": "both-now-beginner",
         "activity_options": [
           {
-            "label": "Read & Listen",
+            "label": "Read",
             "activity_type": "read-listen"
           },
           {
-            "label": "Phrase Captions",
+            "label": "Captions",
             "activity_type": "phrase-captions"
           },
           {
@@ -179,11 +179,11 @@ const lessons = [
         "exercise_id": "glory-both-now-beginner",
         "activity_options": [
           {
-            "label": "Read & Listen",
+            "label": "Read",
             "activity_type": "read-listen"
           },
           {
-            "label": "Phrase Captions",
+            "label": "Captions",
             "activity_type": "phrase-captions"
           },
           {
@@ -207,11 +207,11 @@ const lessons = [
         "exercise_id": "trisagion-hymn-core",
         "activity_options": [
           {
-            "label": "Read & Listen",
+            "label": "Read",
             "activity_type": "read-listen"
           },
           {
-            "label": "Phrase Captions",
+            "label": "Captions",
             "activity_type": "phrase-captions"
           },
           {
@@ -288,11 +288,11 @@ const lessons = [
         "exercise_id": "lord-have-mercy",
         "activity_options": [
           {
-            "label": "Read & Listen",
+            "label": "Read",
             "activity_type": "read-listen"
           },
           {
-            "label": "Phrase Captions",
+            "label": "Captions",
             "activity_type": "phrase-captions"
           },
           {
@@ -345,11 +345,11 @@ const lessons = [
         "exercise_id": "all-holy-trinity",
         "activity_options": [
           {
-            "label": "Read & Listen",
+            "label": "Read",
             "activity_type": "read-listen"
           },
           {
-            "label": "Phrase Captions",
+            "label": "Captions",
             "activity_type": "phrase-captions"
           },
           {

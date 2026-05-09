@@ -8,8 +8,8 @@ export const PASSAGE_ACTIVITY_TYPES = {
 };
 
 export const PASSAGE_ACTIVITY_LABELS = {
-  [PASSAGE_ACTIVITY_TYPES.readListen]: "Read & Listen",
-  [PASSAGE_ACTIVITY_TYPES.phraseCaptions]: "Phrase Captions",
+  [PASSAGE_ACTIVITY_TYPES.readListen]: "Read",
+  [PASSAGE_ACTIVITY_TYPES.phraseCaptions]: "Captions",
   [PASSAGE_ACTIVITY_TYPES.arrange]: "Arrange",
   [PASSAGE_ACTIVITY_TYPES.typeArabic]: "Type",
   [PASSAGE_ACTIVITY_TYPES.matching]: "Matching",

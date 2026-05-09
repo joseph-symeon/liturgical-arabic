@@ -31,6 +31,10 @@
   margin: 0 0 10px;
 }
 
+.lp-activity-toolbar-shell.hidden {
+  display: none;
+}
+
 .lp-activity-controls {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -652,6 +656,20 @@
   text-align: center;
 }
 
+.lp-passage-experience.focus-mode .lp-synced-stage {
+  min-height: min(420px, 46svh);
+}
+
+.lp-synced-stage.interactive {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lp-synced-stage.interactive:focus-visible {
+  outline: 2px solid var(--liturgical-red-highlight-ring);
+  outline-offset: 6px;
+}
+
 .lp-synced-line {
   display: grid;
   grid-template-rows: auto 0;
@@ -872,7 +890,7 @@
 
 .lp-progress-bar {
   --progress-track: #d6d3d1;
-  --progress-fill: var(--liturgical-red);
+  --progress-fill: var(--liturgical-red-highlight-fill);
   --progress-thumb: var(--liturgical-red);
   -webkit-appearance: none;
   appearance: none;
@@ -1356,12 +1374,16 @@
 
   .lp-progress-bar {
     --progress-track: var(--dark-active);
-    --progress-thumb: #d6d3d1;
+    --progress-thumb: #a8a29e;
   }
 
   .lp-mode-switch {
     background: var(--dark-active);
     border-color: var(--dark-border);
+  }
+
+  .lp-mode-switch::after {
+    background: #a8a29e;
   }
 
   .lp-icon-button svg {

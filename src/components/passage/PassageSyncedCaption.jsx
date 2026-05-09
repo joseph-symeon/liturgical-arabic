@@ -7,7 +7,8 @@ export default function PassageSyncedCaption({
   textMode = "none",
   arabicMode = "vocalized",
   arabicFontFamily,
-  arabicFontWeight
+  arabicFontWeight,
+  onTogglePlayback
 }) {
   const secondaryText = textMode === "translation"
     ? activePhrase?.translation
@@ -16,7 +17,20 @@ export default function PassageSyncedCaption({
       : null;
 
   return (
-    <div className="lp-synced-stage" dir="rtl">
+    <div
+      className={onTogglePlayback ? "lp-synced-stage interactive" : "lp-synced-stage"}
+      dir="rtl"
+      role={onTogglePlayback ? "button" : undefined}
+      tabIndex={onTogglePlayback ? 0 : undefined}
+      aria-label={onTogglePlayback ? "Play or pause caption audio" : undefined}
+      onClick={onTogglePlayback}
+      onKeyDown={event => {
+        if (!onTogglePlayback) return;
+        if (event.key !== "Enter" && event.key !== " ") return;
+        event.preventDefault();
+        onTogglePlayback();
+      }}
+    >
       {activePhrase && (
         <div
           className="lp-synced-line active"

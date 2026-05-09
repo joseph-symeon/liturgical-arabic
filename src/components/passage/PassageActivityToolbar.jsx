@@ -12,7 +12,8 @@ export default function PassageActivityToolbar({
   onKaraokeModeChange,
   showTextModeControls = false,
   textMode = "none",
-  onTextModeChange
+  onTextModeChange,
+  hidden = false
 }) {
   const hasActivity = Boolean(activityLabel);
   const hasModes = showKaraokeToggle || showTextModeControls;
@@ -20,7 +21,7 @@ export default function PassageActivityToolbar({
   if (!hasActivity && !player && !hasModes) return null;
 
   return (
-    <>
+    <div className={hidden ? "lp-activity-toolbar-shell hidden" : "lp-activity-toolbar-shell"}>
       <div className="lp-activity-toolbar">
         <div className="lp-activity-controls">
           {hasActivity && (
@@ -72,7 +73,6 @@ export default function PassageActivityToolbar({
           {showTextModeControls && (
             <div className="lp-segmented-control" role="group" aria-label="Phrase caption text">
               {[
-                ["none", "Arabic"],
                 ["translation", "Translation"],
                 ["literal", "Literal"]
               ].map(([mode, label]) => (
@@ -80,7 +80,8 @@ export default function PassageActivityToolbar({
                   key={mode}
                   type="button"
                   className={textMode === mode ? "active" : ""}
-                  onClick={() => onTextModeChange?.(mode)}
+                  aria-pressed={textMode === mode}
+                  onClick={() => onTextModeChange?.(textMode === mode ? "none" : mode)}
                 >
                   {label}
                 </button>
@@ -89,6 +90,6 @@ export default function PassageActivityToolbar({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }

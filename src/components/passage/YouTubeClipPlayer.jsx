@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { onYouTubeReady } from '../../utils/youtube.js';
 
 let playerCount = 0;
 
-export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, endSeconds, defaultPlaybackRate = 1.0, onTimeUpdate }) {
+const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recordingId, startSeconds, endSeconds, defaultPlaybackRate = 1.0, onTimeUpdate }, ref) {
   const playerIdRef = useRef(null);
   if (playerIdRef.current === null) {
     playerIdRef.current = `yt-clip-${++playerCount}`;
@@ -234,6 +234,10 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
     }
   }
 
+  useImperativeHandle(ref, () => ({
+    togglePlayPause: handlePlayPause
+  }));
+
   function handleStartOver() {
     const player = playerRef.current;
     if (!player || !isReady) return;
@@ -389,4 +393,6 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
       </div>
     </>
   );
-}
+});
+
+export default YouTubeClipPlayer;
