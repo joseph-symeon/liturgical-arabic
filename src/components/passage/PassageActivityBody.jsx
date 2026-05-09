@@ -161,15 +161,23 @@ function normalizeArabicTypingValue(value) {
 }
 
 function getTypingPromptLines(lines, arabicMode) {
-  return (lines || []).filter(line => !line.tags?.includes('rubric')).map(line => ({
-    ...line,
-    arabicText: (line.phrases || []).map(part => {
+  return (lines || []).filter(line => !line.tags?.includes('rubric')).map(line => {
+    const parts = (line.phrases || []).flatMap((part, index) => {
+      if (isPracticeExemptPart(part)) return [];
+      if (part.text) return [{ text: part.text, display_order: index }];
+      const phrase = phrases[part.phrase_id];
+      if (!phrase) return [];
+      const phrasePart = { phrase_id: part.phrase_id, display_order: index };
+      return index === 0 ? [phrasePart] : [{ text: ' ', display_order: index - 0.5 }, phrasePart];
+    });
+    const arabicText = (line.phrases || []).map(part => {
       if (isPracticeExemptPart(part)) return '';
       if (part.text) return part.text;
       const phrase = phrases[part.phrase_id];
       return phrase ? getArabicText(phrase, arabicMode) : '';
-    }).join('')
-  })).filter(line => line.arabicText.trim());
+    }).join('');
+    return { ...line, arabicText, parts };
+  }).filter(line => line.arabicText.trim());
 }
 
 function getUniquePhraseIds(phraseIds) {
@@ -523,22 +531,19 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     return (
       <div className="lp-type-arabic-activity" dir="ltr">
         <div className="lp-type-arabic-model" dir="rtl">
-          {typingPromptLines.map(line => (
-            <div
-              className="lp-type-arabic-line"
-              key={line.line_order}
-              style={{
-                fontFamily: arabicFontFamily,
-                fontWeight: arabicFontWeight,
-                fontSize: `${arabicFontSize}px`
-              }}
-            >
-              {line.arabicText}
-            </div>
-          ))}
+          <PassageTextRenderer
+            lines={typingPromptLines.map(line => ({ ...line, phrases: line.parts }))}
+            arabicMode={arabicMode}
+            readerLayout={readerLayout}
+            speechRate={speechRate}
+            arabicFontFamily={arabicFontFamily}
+            arabicFontWeight={arabicFontWeight}
+            arabicFontSize={arabicFontSize}
+            showSpeakers={exercise.show_speakers}
+          />
         </div>
         <label className="lp-type-arabic-label" htmlFor={`type-arabic-${exercise.id}`}>
-          Type the Arabic
+          Copy the Arabic
         </label>
         <textarea
           id={`type-arabic-${exercise.id}`}

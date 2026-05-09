@@ -508,14 +508,7 @@
 }
 
 .lp-type-arabic-model {
-  display: grid;
-  gap: 8px;
   color: #1c1917;
-  text-align: right;
-}
-
-.lp-type-arabic-line {
-  line-height: 1.8;
 }
 
 .lp-type-arabic-label {

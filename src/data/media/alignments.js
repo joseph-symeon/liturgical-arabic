@@ -15,33 +15,33 @@ export const alignmentDefinitions = [
         "phrase_timings": [
           {
             "phrase_id": "vocative-o-lord-001",
-            "start_seconds": 33.9,
-            "end_seconds": 34.66
+            "start_seconds": 34,
+            "end_seconds": 34.25
           },
           {
             "phrase_id": "have-mercy-001",
-            "start_seconds": 34.66,
-            "end_seconds": 34.96
+            "start_seconds": 34.25,
+            "end_seconds": 34.8
           },
           {
             "phrase_id": "vocative-o-lord-001",
-            "start_seconds": 34.96,
-            "end_seconds": 35.44
+            "start_seconds": 34.8,
+            "end_seconds": 35.05
           },
           {
             "phrase_id": "have-mercy-001",
-            "start_seconds": 35.44,
-            "end_seconds": 35.76
+            "start_seconds": 35.05,
+            "end_seconds": 35.6
           },
           {
             "phrase_id": "vocative-o-lord-001",
-            "start_seconds": 35.76,
-            "end_seconds": 36.22
+            "start_seconds": 35.6,
+            "end_seconds": 35.9
           },
           {
             "phrase_id": "have-mercy-001",
-            "start_seconds": 36.22,
-            "end_seconds": 37.34
+            "start_seconds": 35.9,
+            "end_seconds": 36.56
           }
         ]
       }
@@ -203,6 +203,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "course-all-holy-trinity-address",
+          "end_segment_id": "course-all-holy-trinity-address"
+        },
         "segment_ids": [
           "course-all-holy-trinity-address"
         ],
@@ -220,6 +224,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "course-all-holy-trinity-lord",
+          "end_segment_id": "course-all-holy-trinity-lord"
+        },
         "segment_ids": [
           "course-all-holy-trinity-lord"
         ],
@@ -237,6 +245,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "course-all-holy-trinity-master",
+          "end_segment_id": "course-all-holy-trinity-master"
+        },
         "segment_ids": [
           "course-all-holy-trinity-master"
         ],
@@ -254,6 +266,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "course-all-holy-trinity-holy-one",
+          "end_segment_id": "course-all-holy-trinity-holy-one"
+        },
         "segment_ids": [
           "course-all-holy-trinity-holy-one"
         ],
@@ -276,6 +292,10 @@ export const alignmentDefinitions = [
         ]
       },
       {
+        "service_range": {
+          "start_segment_id": "course-all-holy-trinity-address",
+          "end_segment_id": "course-all-holy-trinity-holy-one"
+        },
         "segment_ids": [
           "course-all-holy-trinity-address",
           "course-all-holy-trinity-lord",

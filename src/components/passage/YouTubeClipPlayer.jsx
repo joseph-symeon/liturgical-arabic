@@ -2,8 +2,23 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } f
 import { onYouTubeReady } from '../../utils/youtube.js';
 
 let playerCount = 0;
+const PLAYBACK_RATE_STORAGE_KEY = 'liturgical-arabic:chant-playback-rate';
+const LOOP_RESTART_LEAD_SECONDS = 0.05;
+
+function normalizePlaybackRate(value, fallback = 1.0) {
+  const numericValue = Number.parseFloat(value);
+  if (!Number.isFinite(numericValue)) return fallback;
+  return Math.max(0.5, Math.min(2, Math.round(numericValue * 10) / 10));
+}
+
+function getStoredPlaybackRate(fallback = 1.0) {
+  if (typeof window === 'undefined') return normalizePlaybackRate(fallback);
+  const stored = window.localStorage.getItem(PLAYBACK_RATE_STORAGE_KEY);
+  return normalizePlaybackRate(stored, normalizePlaybackRate(fallback));
+}
 
 const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recordingId, startSeconds, endSeconds, defaultPlaybackRate = 1.0, onTimeUpdate }, ref) {
+  const initialPlaybackRate = getStoredPlaybackRate(defaultPlaybackRate);
   const playerIdRef = useRef(null);
   if (playerIdRef.current === null) {
     playerIdRef.current = `yt-clip-${++playerCount}`;
@@ -14,16 +29,16 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   const playerHostRef = useRef(null);
   const intervalRef = useRef(null);
   const endTimerRef = useRef(null);
-  const playbackRateRef = useRef(defaultPlaybackRate);
+  const playbackRateRef = useRef(initialPlaybackRate);
   const userStartedRef = useRef(false);
   const loopEnabledRef = useRef(true);
-  const playClockRef = useRef({ mediaTime: startSeconds, wallTime: 0, playbackRate: defaultPlaybackRate });
+  const playClockRef = useRef({ mediaTime: startSeconds, wallTime: 0, playbackRate: initialPlaybackRate });
   const playRequestedRef = useRef(false);
   const onTimeUpdateRef = useRef(onTimeUpdate);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const [playbackRate, setPlaybackRate] = useState(defaultPlaybackRate);
+  const [playbackRate, setPlaybackRate] = useState(initialPlaybackRate);
   const [loopEnabled, setLoopEnabled] = useState(true);
   const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
   const [playerError, setPlayerError] = useState(null);
@@ -32,6 +47,11 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   useEffect(() => {
     onTimeUpdateRef.current = onTimeUpdate;
   }, [onTimeUpdate]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(PLAYBACK_RATE_STORAGE_KEY, String(playbackRate));
+  }, [playbackRate]);
 
   function emitTimeUpdate(time) {
     setCurrentSeconds(time);
@@ -45,36 +65,58 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     }
   }
 
-  function finishClip(player) {
-    if (!player) return;
+  function clearLoopTimers() {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
     clearEndTimer();
+  }
+
+  function cueClip(player, startAt = startSeconds) {
+    player.cueVideoById({ videoId, startSeconds: startAt, endSeconds });
+    player.setPlaybackRate(playbackRateRef.current);
+  }
+
+  function loadClip(player, startAt = startSeconds) {
+    player.loadVideoById({ videoId, startSeconds: startAt, endSeconds });
+    player.setPlaybackRate(playbackRateRef.current);
+  }
+
+  function finishClip(player) {
+    if (!player) return;
+    clearLoopTimers();
     if (!loopEnabledRef.current) {
+      playRequestedRef.current = false;
       player.pauseVideo();
-      player.seekTo(startSeconds, true);
+      cueClip(player, startSeconds);
       playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
       emitTimeUpdate(startSeconds);
       return;
     }
+    playRequestedRef.current = true;
+    userStartedRef.current = true;
     player.seekTo(startSeconds, true);
     playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
     emitTimeUpdate(startSeconds);
-    endTimerRef.current = setTimeout(() => {
-      startLoop(player);
-    }, 180);
+    startLoop(player, startSeconds);
+    player.playVideo();
   }
 
-  function startLoop(player) {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    clearEndTimer();
-    const currentTime = player.getCurrentTime();
+  function startLoop(player, fromSeconds = null) {
+    clearLoopTimers();
+    const rawCurrentTime = fromSeconds ?? player.getCurrentTime();
+    const currentTime = rawCurrentTime < startSeconds || rawCurrentTime >= endSeconds ? startSeconds : rawCurrentTime;
+    if (fromSeconds === null && currentTime !== rawCurrentTime) {
+      player.seekTo(startSeconds, true);
+    }
     if (!playRequestedRef.current) {
       playClockRef.current = { mediaTime: currentTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
     }
-    const remainingSeconds = Math.max(0, endSeconds - currentTime);
+    const boundarySeconds = loopEnabledRef.current
+      ? Math.max(startSeconds, endSeconds - LOOP_RESTART_LEAD_SECONDS)
+      : endSeconds;
+    const remainingSeconds = Math.max(0, boundarySeconds - currentTime);
     const playbackRate = playbackRateRef.current || 1;
     endTimerRef.current = setTimeout(() => {
       finishClip(player);
@@ -88,7 +130,10 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
         playbackRate: playbackRateRef.current || 1
       };
       emitTimeUpdate(currentTime);
-      if (currentTime >= endSeconds) {
+      const boundarySeconds = loopEnabledRef.current
+        ? Math.max(startSeconds, endSeconds - LOOP_RESTART_LEAD_SECONDS)
+        : endSeconds;
+      if (currentTime >= boundarySeconds) {
         finishClip(player);
         return;
       }
@@ -104,11 +149,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     setIsPlaying(false);
     setPlayerError(null);
     setCurrentSeconds(startSeconds);
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-    clearEndTimer();
+    clearLoopTimers();
 
     if (!videoId) {
       setPlayerError(recordingId ? `Recording "${recordingId}" is missing a YouTube video ID.` : 'Missing YouTube video ID.');
@@ -142,19 +183,26 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
             onReady(event) {
               if (destroyed) return;
               playerRef.current = event.target;
-              event.target.seekTo(startSeconds, true);
-              event.target.pauseVideo();
-              event.target.setPlaybackRate(playbackRateRef.current);
+              cueClip(event.target, startSeconds);
               playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
               setIsReady(true);
             },
             onStateChange(event) {
               const { PlayerState } = window.YT;
               const state = event.data;
+              if (state === PlayerState.ENDED) {
+                if (userStartedRef.current && playRequestedRef.current && loopEnabledRef.current) {
+                  finishClip(event.target);
+                  return;
+                }
+                setIsPlaying(false);
+                clearLoopTimers();
+                return;
+              }
               if (state === PlayerState.PLAYING || state === PlayerState.BUFFERING) {
                 if (!userStartedRef.current) {
                   event.target.pauseVideo();
-                  event.target.seekTo(startSeconds, true);
+                  cueClip(event.target, startSeconds);
                   playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
                   setIsPlaying(false);
                   return;
@@ -164,13 +212,9 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
                   startLoop(event.target);
                 }
               }
-              if (state === PlayerState.PAUSED || state === PlayerState.ENDED) {
+              if (state === PlayerState.PAUSED) {
                 setIsPlaying(false);
-                if (intervalRef.current) {
-                  clearInterval(intervalRef.current);
-                  intervalRef.current = null;
-                }
-                clearEndTimer();
+                clearLoopTimers();
               }
             }
           }
@@ -184,11 +228,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
       destroyed = true;
       userStartedRef.current = false;
       playRequestedRef.current = false;
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-      clearEndTimer();
+      clearLoopTimers();
       if (playerRef.current) {
         try { playerRef.current.pauseVideo(); } catch (_) {}
         try { playerRef.current.destroy(); } catch (_) {}
@@ -222,15 +262,15 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
       userStartedRef.current = true;
       playRequestedRef.current = true;
       if (currentTime < startSeconds || currentTime >= endSeconds) {
-        player.seekTo(startSeconds, true);
+        loadClip(player, startSeconds);
         playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
         emitTimeUpdate(startSeconds);
       } else {
         playClockRef.current = { mediaTime: currentTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
         emitTimeUpdate(currentTime);
+        player.playVideo();
+        startLoop(player, currentTime);
       }
-      startLoop(player);
-      player.playVideo();
     }
   }
 
@@ -245,13 +285,13 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     const shouldResume = state === window.YT.PlayerState.PLAYING || state === window.YT.PlayerState.BUFFERING;
     userStartedRef.current = shouldResume || userStartedRef.current;
     playRequestedRef.current = shouldResume;
-    player.seekTo(startSeconds, true);
+    if (shouldResume) {
+      loadClip(player, startSeconds);
+    } else {
+      cueClip(player, startSeconds);
+    }
     playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
     emitTimeUpdate(startSeconds);
-    if (shouldResume) {
-      startLoop(player);
-      player.playVideo();
-    }
   }
 
   function handleProgressChange(event) {
@@ -270,7 +310,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   }
 
   function adjustSpeed(delta) {
-    const next = Math.max(0.5, Math.min(2, Math.round((playbackRateRef.current + delta) * 10) / 10));
+    const next = normalizePlaybackRate(playbackRateRef.current + delta, playbackRateRef.current);
     playbackRateRef.current = next;
     playClockRef.current = {
       mediaTime: playerRef.current?.getCurrentTime?.() ?? playClockRef.current.mediaTime,
@@ -287,6 +327,10 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     setLoopEnabled(value => {
       const next = !value;
       loopEnabledRef.current = next;
+      const player = playerRef.current;
+      if (player && playRequestedRef.current) {
+        startLoop(player);
+      }
       return next;
     });
   }

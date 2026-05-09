@@ -326,19 +326,107 @@ const lessons = [
     "exercises": [
       {
         "title": "All Holy Trinity",
-        "exercise_id": "all-holy-trinity-address"
+        "exercise_id": "all-holy-trinity-address",
+        "activity_options": [
+          {
+            "label": "Read",
+            "activity_type": "read-listen"
+          },
+          {
+            "label": "Captions",
+            "activity_type": "phrase-captions"
+          },
+          {
+            "label": "Matching",
+            "activity_type": "matching"
+          },
+          {
+            "label": "Arrange",
+            "activity_type": "arrange"
+          },
+          {
+            "label": "Type",
+            "activity_type": "type-arabic"
+          }
+        ]
       },
       {
         "title": "O Lord",
-        "exercise_id": "all-holy-trinity-lord"
+        "exercise_id": "all-holy-trinity-lord",
+        "activity_options": [
+          {
+            "label": "Read",
+            "activity_type": "read-listen"
+          },
+          {
+            "label": "Captions",
+            "activity_type": "phrase-captions"
+          },
+          {
+            "label": "Matching",
+            "activity_type": "matching"
+          },
+          {
+            "label": "Arrange",
+            "activity_type": "arrange"
+          },
+          {
+            "label": "Type",
+            "activity_type": "type-arabic"
+          }
+        ]
       },
       {
         "title": "O Master",
-        "exercise_id": "all-holy-trinity-master"
+        "exercise_id": "all-holy-trinity-master",
+        "activity_options": [
+          {
+            "label": "Read",
+            "activity_type": "read-listen"
+          },
+          {
+            "label": "Captions",
+            "activity_type": "phrase-captions"
+          },
+          {
+            "label": "Matching",
+            "activity_type": "matching"
+          },
+          {
+            "label": "Arrange",
+            "activity_type": "arrange"
+          },
+          {
+            "label": "Type",
+            "activity_type": "type-arabic"
+          }
+        ]
       },
       {
         "title": "O Holy One",
-        "exercise_id": "all-holy-trinity-holy-one"
+        "exercise_id": "all-holy-trinity-holy-one",
+        "activity_options": [
+          {
+            "label": "Read",
+            "activity_type": "read-listen"
+          },
+          {
+            "label": "Captions",
+            "activity_type": "phrase-captions"
+          },
+          {
+            "label": "Matching",
+            "activity_type": "matching"
+          },
+          {
+            "label": "Arrange",
+            "activity_type": "arrange"
+          },
+          {
+            "label": "Type",
+            "activity_type": "type-arabic"
+          }
+        ]
       },
       {
         "title": "All Holy Trinity",
@@ -355,6 +443,10 @@ const lessons = [
           {
             "label": "Arrange",
             "activity_type": "arrange"
+          },
+          {
+            "label": "Type",
+            "activity_type": "type-arabic"
           }
         ]
       }
