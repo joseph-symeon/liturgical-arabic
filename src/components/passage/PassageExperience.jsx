@@ -38,6 +38,7 @@ export default function PassageExperience({
   arabicFontFamily,
   arabicFontWeight,
   arabicFontSize,
+  showPracticeToolbar = true,
   renderPassage
 }) {
   const resolvedActivityType = activityType || passage?.activity_type || null;
@@ -98,20 +99,22 @@ export default function PassageExperience({
 
   return (
     <>
-      <PassageActivityToolbar
-        activityLabel={activityLabel}
-        activitySelectId={activitySelectId}
-        activityOptions={activityOptions}
-        selectedActivityValue={selectedActivityValue}
-        onSelectActivity={onSelectActivity}
-        player={renderPlayer()}
-        showKaraokeToggle={canUseKaraoke}
-        karaokeMode={karaokeMode}
-        onKaraokeModeChange={setKaraokeMode}
-        showTextModeControls={captionActivity}
-        textMode={captionTextMode}
-        onTextModeChange={setCaptionTextMode}
-      />
+      {showPracticeToolbar && (
+        <PassageActivityToolbar
+          activityLabel={activityLabel}
+          activitySelectId={activitySelectId}
+          activityOptions={activityOptions}
+          selectedActivityValue={selectedActivityValue}
+          onSelectActivity={onSelectActivity}
+          player={renderPlayer()}
+          showKaraokeToggle={canUseKaraoke}
+          karaokeMode={karaokeMode}
+          onKaraokeModeChange={setKaraokeMode}
+          showTextModeControls={captionActivity}
+          textMode={captionTextMode}
+          onTextModeChange={setCaptionTextMode}
+        />
+      )}
 
       {captionActivity && (
         <PassageSyncedCaption

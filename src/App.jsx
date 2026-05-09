@@ -153,7 +153,8 @@ function getStoredDisplaySettings() {
     arabicFontFamily: SYSTEM_SANS_FONT,
     arabicFontWeight: "300",
     arabicFontSize: DEFAULT_ARABIC_FONT_SIZE,
-    speechRate: 0.8
+    speechRate: 0.8,
+    showPracticeToolbar: true
   };
 
   if (typeof window === "undefined") return defaults;
@@ -169,7 +170,8 @@ function getStoredDisplaySettings() {
       arabicFontFamily: ARABIC_FONTS.some(font => font.value === settings.arabicFontFamily) ? settings.arabicFontFamily : defaults.arabicFontFamily,
       arabicFontWeight: ARABIC_WEIGHTS.some(weight => weight.value === settings.arabicFontWeight) ? settings.arabicFontWeight : defaults.arabicFontWeight,
       arabicFontSize: typeof settings.arabicFontSize === "number" ? Math.max(18, Math.min(36, settings.arabicFontSize)) : defaults.arabicFontSize,
-      speechRate: typeof settings.speechRate === "number" ? Math.max(0.5, Math.min(1.2, settings.speechRate)) : defaults.speechRate
+      speechRate: typeof settings.speechRate === "number" ? Math.max(0.5, Math.min(1.2, settings.speechRate)) : defaults.speechRate,
+      showPracticeToolbar: typeof settings.showPracticeToolbar === "boolean" ? settings.showPracticeToolbar : defaults.showPracticeToolbar
     };
   } catch {
     return defaults;
@@ -198,6 +200,7 @@ export default function App() {
   const [arabicFontWeight, setArabicFontWeight] = useState(initialDisplaySettings.arabicFontWeight);
   const [arabicFontSize, setArabicFontSize] = useState(initialDisplaySettings.arabicFontSize);
   const [speechRate, setSpeechRate] = useState(initialDisplaySettings.speechRate);
+  const [showPracticeToolbar, setShowPracticeToolbar] = useState(initialDisplaySettings.showPracticeToolbar);
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
   const [isCompactChrome, setIsCompactChrome] = useState(false);
   const [showCompactTitle, setShowCompactTitle] = useState(false);
@@ -243,9 +246,10 @@ export default function App() {
       arabicFontFamily,
       arabicFontWeight,
       arabicFontSize,
-      speechRate
+      speechRate,
+      showPracticeToolbar
     }));
-  }, [arabicMode, readerLayout, showQuietPrayers, arabicFontFamily, arabicFontWeight, arabicFontSize, speechRate]);
+  }, [arabicMode, readerLayout, showQuietPrayers, arabicFontFamily, arabicFontWeight, arabicFontSize, speechRate, showPracticeToolbar]);
 
   useEffect(() => {
     if (!isCompactChrome) {
@@ -562,15 +566,32 @@ export default function App() {
 
     function renderField(label, children) {
       return (
-        <div>
-          <div className="mb-1 text-xs text-stone-500 dark:text-[var(--dark-muted)]">{label}</div>
-          {children}
+        <div className="lp-display-field">
+          <div className="lp-display-field-label text-xs text-stone-500 dark:text-[var(--dark-muted)]">{label}</div>
+          <div className="lp-display-field-control">{children}</div>
         </div>
       );
     }
 
-    function renderButtonRow(children) {
-      return <div className="flex flex-wrap items-center gap-2">{children}</div>;
+    function renderButtonRow(children, className = "") {
+      return <div className={["flex flex-wrap items-center gap-2", className].filter(Boolean).join(" ")}>{children}</div>;
+    }
+
+    function renderToggleField(label, checked, onChange) {
+      return (
+        <div className="flex items-center justify-between gap-4">
+          <div className="text-xs text-stone-500 dark:text-[var(--dark-muted)]">{label}</div>
+          <label className="lp-mode-toggle" dir="ltr">
+            <span>{checked ? "On" : "Off"}</span>
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={event => onChange(event.target.checked)}
+            />
+            <span className="lp-mode-switch" aria-hidden="true" />
+          </label>
+        </div>
+      );
     }
 
     return (
@@ -584,14 +605,49 @@ export default function App() {
         <div className="text-stone-400 dark:text-[var(--dark-muted)]" style={{ ...MENU_LABEL_STYLE, padding: "0 0 12px" }}>
           Display
         </div>
+        {renderDisplaySection("Reading", (
+          <>
+            {renderToggleField("Focus mode", !showPracticeToolbar, checked => {
+              setShowPracticeToolbar(!checked);
+            })}
+            {renderToggleField("Diacritics", arabicMode === "vocalized", checked => {
+              setArabicMode(checked ? "vocalized" : "unvocalized");
+            })}
+            {renderToggleField("Silent prayers", showQuietPrayers, setShowQuietPrayers)}
+            {renderField("Layout", (
+              renderButtonRow(
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setReaderLayout("line")}
+                    className={readerLayout === "line" ? "lp-setting-option active font-semibold" : "lp-setting-option"}
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Line
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setReaderLayout("paragraph")}
+                    className={readerLayout === "paragraph" ? "lp-setting-option active font-semibold" : "lp-setting-option"}
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Paragraph
+                  </button>
+                </>
+              )
+            ))}
+          </>
+        ))}
         {renderDisplaySection("Text", (
           <>
             {renderField("Size", (
               renderButtonRow(
                 <>
-                  <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(-1)}>−</button>
-                  <div className="lp-speed-value">{arabicFontSize}px</div>
-                  <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(1)}>+</button>
+                  <div className="lp-setting-control-box">
+                    <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(-1)}>−</button>
+                    <div className="lp-speed-value">{arabicFontSize}px</div>
+                    <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(1)}>+</button>
+                  </div>
                   <button
                     type="button"
                     onClick={() => setArabicFontSize(DEFAULT_ARABIC_FONT_SIZE)}
@@ -633,83 +689,15 @@ export default function App() {
             ))}
           </>
         ))}
-        {renderDisplaySection("Reading", (
-          <>
-            {renderField("Vowels", (
-              renderButtonRow(
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setArabicMode("vocalized")}
-                    className={arabicMode === "vocalized" ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
-                    style={SETTING_BUTTON_STYLE}
-                  >
-                    Vocalized
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setArabicMode("unvocalized")}
-                    className={arabicMode === "unvocalized" ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
-                    style={SETTING_BUTTON_STYLE}
-                  >
-                    Unvocalized
-                  </button>
-                </>
-              )
-            ))}
-            {renderField("Layout", (
-              renderButtonRow(
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setReaderLayout("line")}
-                    className={readerLayout === "line" ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
-                    style={SETTING_BUTTON_STYLE}
-                  >
-                    Line
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setReaderLayout("paragraph")}
-                    className={readerLayout === "paragraph" ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
-                    style={SETTING_BUTTON_STYLE}
-                  >
-                    Paragraph
-                  </button>
-                </>
-              )
-            ))}
-            {renderField("Silent prayers", (
-              renderButtonRow(
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setShowQuietPrayers(false)}
-                    className={!showQuietPrayers ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
-                    style={SETTING_BUTTON_STYLE}
-                  >
-                    Hide
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowQuietPrayers(true)}
-                    className={showQuietPrayers ? "bg-stone-200 dark:bg-[var(--dark-active)] font-semibold" : "bg-stone-100 dark:bg-[var(--dark-surface)]"}
-                    style={SETTING_BUTTON_STYLE}
-                  >
-                    Show
-                  </button>
-                </>
-              )
-            ))}
-          </>
-        ))}
         {renderDisplaySection("Audio", (
           renderField("Reader speed", (
             renderButtonRow(
               <>
-                <button type="button" className="lp-speed-adjust" onClick={() => adjustSpeechRate(-0.05)}>−</button>
-                <div className="lp-speed-value">{speechRateDisplay}</div>
-                <button type="button" className="lp-speed-adjust" onClick={() => adjustSpeechRate(0.05)}>+</button>
+                <div className="lp-setting-control-box">
+                  <button type="button" className="lp-speed-adjust" onClick={() => adjustSpeechRate(-0.05)}>−</button>
+                  <div className="lp-speed-value">{speechRateDisplay}</div>
+                  <button type="button" className="lp-speed-adjust" onClick={() => adjustSpeechRate(0.05)}>+</button>
+                </div>
                 <button
                   type="button"
                   onClick={() => speakArabic("بِسَلامٍ", speechRate)}
@@ -718,7 +706,8 @@ export default function App() {
                 >
                   Preview
                 </button>
-              </>
+              </>,
+              "lp-reader-speed-control"
             )
           ))
         ))}
@@ -869,7 +858,7 @@ export default function App() {
 
       {menuOpen && (
       <aside
-        className="bg-white dark:bg-[var(--dark-bg)] border-r border-stone-200 dark:border-[var(--dark-border)]"
+        className="lp-navigation-panel bg-white dark:bg-[var(--dark-bg)] border-r border-stone-200 dark:border-[var(--dark-border)]"
         dir="ltr"
         style={{
           position: isNarrowViewport ? "fixed" : "sticky",
@@ -1076,6 +1065,7 @@ export default function App() {
             arabicFontFamily={arabicFontFamily}
             arabicFontWeight={arabicFontWeight}
             arabicFontSize={arabicFontSize}
+            showPracticeToolbar={showPracticeToolbar}
             hasPreviousSection={hasPreviousSection}
             hasNextSection={hasNextSection}
             previousSectionTitle={previousSectionTitle}
@@ -1104,6 +1094,7 @@ export default function App() {
             arabicFontFamily={arabicFontFamily}
             arabicFontWeight={arabicFontWeight}
             arabicFontSize={arabicFontSize}
+            showPracticeToolbar={showPracticeToolbar}
             selectedExerciseIndex={clampedExerciseIndex}
             hasPreviousExercise={hasPreviousExercise}
             hasNextExercise={hasNextExercise}

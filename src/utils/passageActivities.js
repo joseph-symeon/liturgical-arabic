@@ -2,6 +2,8 @@ export const PASSAGE_ACTIVITY_TYPES = {
   readListen: "read-listen",
   phraseCaptions: "phrase-captions",
   arrange: "arrange",
+  typeArabic: "type-arabic",
+  matching: "matching",
   cloze: "cloze"
 };
 
@@ -9,6 +11,8 @@ export const PASSAGE_ACTIVITY_LABELS = {
   [PASSAGE_ACTIVITY_TYPES.readListen]: "Read & Listen",
   [PASSAGE_ACTIVITY_TYPES.phraseCaptions]: "Phrase Captions",
   [PASSAGE_ACTIVITY_TYPES.arrange]: "Arrange",
+  [PASSAGE_ACTIVITY_TYPES.typeArabic]: "Type",
+  [PASSAGE_ACTIVITY_TYPES.matching]: "Matching",
   [PASSAGE_ACTIVITY_TYPES.cloze]: "Cloze"
 };
 

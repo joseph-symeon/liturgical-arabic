@@ -4,7 +4,7 @@ import PageHeader from '../PageHeader.jsx';
 import PassageExperience from '../passage/PassageExperience.jsx';
 import exercises, { getExerciseWithActivity, getStandardActivityOptions } from '../../data/course/exercises.js';
 import { getExerciseTitle } from './exerciseTitles.js';
-import { getPassageActivityLabel } from '../../utils/passageActivities.js';
+import { getPassageActivityLabel, PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 import { createExercisePassage } from '../../utils/passages.js';
 import {
   getStoredActivitySelection,
@@ -12,9 +12,28 @@ import {
 } from '../../utils/activitySelectionStorage.js';
 
 function getActivityOptions(item) {
-  if (item?.activity_options) return item.activity_options;
+  if (item?.activity_options) return augmentSmallExerciseActivityOptions(item.exercise_id, item.activity_options);
   if (item?.activity_policy === 'standard') return getStandardActivityOptions(item.exercise_id);
   return [];
+}
+
+function augmentSmallExerciseActivityOptions(exerciseId, activityOptions) {
+  const options = activityOptions || [];
+  if (!exerciseId || !exercises[exerciseId]) return options;
+  const standardOptions = getStandardActivityOptions(exerciseId);
+  return standardOptions.reduce((augmentedOptions, standardOption) => {
+    if (
+      ![PASSAGE_ACTIVITY_TYPES.matching, PASSAGE_ACTIVITY_TYPES.typeArabic].includes(standardOption.activity_type)
+        || augmentedOptions.some(option => option.activity_type === standardOption.activity_type)
+    ) {
+      return augmentedOptions;
+    }
+
+    return augmentedOptions.concat({
+      label: PASSAGE_ACTIVITY_LABELS[standardOption.activity_type],
+      activity_type: standardOption.activity_type
+    });
+  }, options);
 }
 
 function getActivityOptionValue(option) {
@@ -42,6 +61,7 @@ export default function LessonPage({
   arabicFontFamily,
   arabicFontWeight,
   arabicFontSize,
+  showPracticeToolbar = true,
   selectedExerciseIndex,
   hasPreviousExercise,
   hasNextExercise,
@@ -131,6 +151,7 @@ export default function LessonPage({
           arabicFontFamily={arabicFontFamily}
           arabicFontWeight={arabicFontWeight}
           arabicFontSize={arabicFontSize}
+          showPracticeToolbar={showPracticeToolbar}
         />
       )}
 

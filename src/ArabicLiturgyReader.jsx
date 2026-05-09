@@ -40,6 +40,7 @@ export default function ArabicLiturgyReader({
   arabicFontFamily,
   arabicFontWeight,
   arabicFontSize,
+  showPracticeToolbar = true,
   hasPreviousSection = false,
   hasNextSection = false,
   previousSectionTitle,
@@ -261,6 +262,7 @@ export default function ArabicLiturgyReader({
       arabicMode,
       arabicFontFamily,
       arabicFontWeight,
+      showPracticeToolbar,
       renderPassage: ({ karaokeActiveCaption }) => renderPassage(karaokeActiveCaption)
     });
   }

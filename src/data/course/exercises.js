@@ -593,12 +593,35 @@ const STANDARD_ACTIVITY_OPTIONS = [
   }
 ];
 
+function isPracticeExemptPart(part) {
+  return part.tags?.includes('rubric') || phrases[part.phrase_id]?.tags?.includes('rubric');
+}
+
 function getPhraseIdsForLines(lines) {
   return (lines || []).flatMap(line => (
-    (line.phrases || [])
-      .filter(part => part.phrase_id)
-      .map(part => part.phrase_id)
+    line.tags?.includes('rubric')
+      ? []
+      : (line.phrases || [])
+        .filter(part => part.phrase_id && !isPracticeExemptPart(part))
+        .map(part => part.phrase_id)
   ));
+}
+
+function getPracticeLines(lines) {
+  return (lines || []).flatMap(line => {
+    if (line.tags?.includes('rubric')) return [];
+    const phrasesForPractice = (line.phrases || []).filter(part => !isPracticeExemptPart(part));
+    return phrasesForPractice.some(part => part.phrase_id)
+      ? [{ ...line, phrases: phrasesForPractice }]
+      : [];
+  });
+}
+
+function getPracticeExercise(exercise) {
+  return {
+    ...exercise,
+    lines: getPracticeLines(exercise.lines)
+  };
 }
 
 function getServiceAudioClip(definition) {
@@ -660,10 +683,21 @@ export function getExercisePhraseCount(exerciseId) {
 
 export function getStandardActivityOptions(exerciseId) {
   const activityOptions = [...STANDARD_ACTIVITY_OPTIONS];
-  if (getExercisePhraseCount(exerciseId) <= 12) {
+  const phraseCount = getExercisePhraseCount(exerciseId);
+  if (phraseCount <= 6) {
+    activityOptions.push({
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.matching],
+      activity_type: PASSAGE_ACTIVITY_TYPES.matching
+    });
+  }
+  if (phraseCount <= 12) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.arrange],
       activity_type: PASSAGE_ACTIVITY_TYPES.arrange
+    });
+    activityOptions.push({
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeArabic],
+      activity_type: PASSAGE_ACTIVITY_TYPES.typeArabic
     });
   }
   return activityOptions;
@@ -736,15 +770,45 @@ function getDerivedActivity(exercise, activityType) {
     };
   }
 
+  if (activityType === PASSAGE_ACTIVITY_TYPES.typeArabic) {
+    return {
+      ...commonActivity,
+      type: PASSAGE_ACTIVITY_TYPES.typeArabic,
+      title: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeArabic],
+      practice: {
+        phrase_ids: phraseIds
+      }
+    };
+  }
+
+  if (activityType === PASSAGE_ACTIVITY_TYPES.matching) {
+    return {
+      ...commonActivity,
+      type: PASSAGE_ACTIVITY_TYPES.matching,
+      title: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.matching],
+      matching: {
+        phrase_ids: phraseIds
+      }
+    };
+  }
+
   return exercise.activity;
 }
 
 export function getExerciseWithActivity(exerciseId, activityType = null) {
   const exercise = exercises[exerciseId];
   if (!exercise || !activityType) return exercise;
+  const practiceActivityTypes = new Set([
+    PASSAGE_ACTIVITY_TYPES.arrange,
+    PASSAGE_ACTIVITY_TYPES.typeArabic,
+    PASSAGE_ACTIVITY_TYPES.matching
+  ]);
+  const resolvedExercise = practiceActivityTypes.has(activityType)
+    ? getPracticeExercise(exercise)
+    : exercise;
 
   return {
-    ...exercise,
+    ...resolvedExercise,
     id: `${exercise.id}:${activityType}`,
     activity: getDerivedActivity(exercise, activityType)
   };

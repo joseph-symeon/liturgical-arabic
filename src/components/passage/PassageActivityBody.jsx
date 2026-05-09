@@ -147,16 +147,70 @@ function getArrangeRows(arrangedPhraseIds, lineCounts) {
   });
 }
 
+function normalizeArabicTypingValue(value) {
+  return String(value || '')
+    .normalize('NFKD')
+    .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, '')
+    .replace(/\u0640/g, '')
+    .replace(/[إأآٱ]/g, 'ا')
+    .replace(/ى/g, 'ي')
+    .replace(/ة/g, 'ه')
+    .replace(/[^\u0621-\u064A\s]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function getTypingPromptLines(lines, arabicMode) {
+  return (lines || []).filter(line => !line.tags?.includes('rubric')).map(line => ({
+    ...line,
+    arabicText: (line.phrases || []).map(part => {
+      if (isPracticeExemptPart(part)) return '';
+      if (part.text) return part.text;
+      const phrase = phrases[part.phrase_id];
+      return phrase ? getArabicText(phrase, arabicMode) : '';
+    }).join('')
+  })).filter(line => line.arabicText.trim());
+}
+
+function getUniquePhraseIds(phraseIds) {
+  return [...new Set(phraseIds || [])];
+}
+
+function getPhraseIdsForLines(lines) {
+  return (lines || []).flatMap(line => (
+    line.tags?.includes('rubric')
+      ? []
+      : (line.phrases || [])
+        .filter(part => part.phrase_id && !isPracticeExemptPart(part))
+        .map(part => part.phrase_id)
+  ));
+}
+
+function isPracticeExemptPart(part) {
+  return part.tags?.includes('rubric') || phrases[part.phrase_id]?.tags?.includes('rubric');
+}
+
 export default function PassageActivityBody({ exercise, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight, arabicFontSize, karaokeActiveCaption = null }) {
   const isReadListen = isReadListenActivity(exercise.activity?.type);
   const isArrangeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.arrange;
+  const isTypeArabicActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.typeArabic;
+  const isMatchingActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.matching;
   const isClozeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.cloze || isArrangeActivity;
   const isPhraseCaptions = isPhraseCaptionsActivity(exercise.activity?.type);
   const [clozeRevealed, setClozeRevealed] = useState(false);
   const [arrangedPhraseIds, setArrangedPhraseIds] = useState([]);
   const [arrangeChecked, setArrangeChecked] = useState(false);
   const [arrangeFeedback, setArrangeFeedback] = useState(null);
+  const [typedArabic, setTypedArabic] = useState('');
+  const [typingFeedback, setTypingFeedback] = useState(null);
+  const [matchingSelection, setMatchingSelection] = useState(null);
+  const [matchedPhraseIds, setMatchedPhraseIds] = useState([]);
+  const [matchingFeedback, setMatchingFeedback] = useState(null);
+  const [matchingCardHeight, setMatchingCardHeight] = useState(null);
+  const matchingGridRef = useRef(null);
   const arrangeFeedbackTimerRef = useRef(null);
+  const typingFeedbackTimerRef = useRef(null);
+  const matchingFeedbackTimerRef = useRef(null);
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -182,6 +236,21 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   );
   const arrangeAnswerLineCount = arrangeLineCounts.reduce((sum, count) => sum + Math.max(1, Math.ceil(count / 2)), 0);
   const arrangeRows = getArrangeRows(arrangedPhraseIds, arrangeLineCounts);
+  const typingPromptLines = useMemo(
+    () => getTypingPromptLines(exercise.lines, arabicMode),
+    [exercise.lines, arabicMode]
+  );
+  const typingTarget = typingPromptLines.map(line => line.arabicText).join(' ');
+  const typedArabicCorrect = normalizeArabicTypingValue(typedArabic) === normalizeArabicTypingValue(typingTarget);
+  const matchingPhraseIds = useMemo(
+    () => getUniquePhraseIds(exercise.activity?.matching?.phrase_ids || getPhraseIdsForLines(exercise.lines)),
+    [exercise.activity?.matching?.phrase_ids?.join('|'), exercise.lines]
+  );
+  const shuffledMatchingTranslations = useMemo(
+    () => getShuffledPhraseIds(matchingPhraseIds, `${exercise.id}:matching`),
+    [matchingPhraseIds.join('|'), exercise.id]
+  );
+  const matchedPhraseIdSet = new Set(matchedPhraseIds);
   const activeCaption = isReadListen ? karaokeActiveCaption : null;
 
   useEffect(() => {
@@ -193,13 +262,47 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     setArrangedPhraseIds([]);
     setArrangeChecked(false);
     setArrangeFeedback(null);
+    setTypedArabic('');
+    setTypingFeedback(null);
+    setMatchingSelection(null);
+    setMatchedPhraseIds([]);
+    setMatchingFeedback(null);
     return () => {
       if (arrangeFeedbackTimerRef.current) {
         clearTimeout(arrangeFeedbackTimerRef.current);
         arrangeFeedbackTimerRef.current = null;
       }
+      if (typingFeedbackTimerRef.current) {
+        clearTimeout(typingFeedbackTimerRef.current);
+        typingFeedbackTimerRef.current = null;
+      }
+      if (matchingFeedbackTimerRef.current) {
+        clearTimeout(matchingFeedbackTimerRef.current);
+        matchingFeedbackTimerRef.current = null;
+      }
     };
   }, [exercise.id]);
+
+  useEffect(() => {
+    if (!isMatchingActivity || !matchingGridRef.current) return undefined;
+
+    function updateMatchingCardHeight() {
+      const cards = Array.from(matchingGridRef.current?.querySelectorAll('.lp-matching-card') || []);
+      if (cards.length === 0) {
+        setMatchingCardHeight(null);
+        return;
+      }
+      cards.forEach(card => {
+        card.style.removeProperty('height');
+      });
+      const maxHeight = Math.ceil(Math.max(...cards.map(card => card.getBoundingClientRect().height)));
+      setMatchingCardHeight(maxHeight);
+    }
+
+    updateMatchingCardHeight();
+    window.addEventListener('resize', updateMatchingCardHeight);
+    return () => window.removeEventListener('resize', updateMatchingCardHeight);
+  }, [isMatchingActivity, matchingPhraseIds.join('|'), shuffledMatchingTranslations.join('|'), arabicFontFamily, arabicFontWeight, arabicMode]);
 
   function clearArrangeFeedback() {
     if (arrangeFeedbackTimerRef.current) {
@@ -207,6 +310,22 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
       arrangeFeedbackTimerRef.current = null;
     }
     setArrangeFeedback(null);
+  }
+
+  function clearTypingFeedback() {
+    if (typingFeedbackTimerRef.current) {
+      clearTimeout(typingFeedbackTimerRef.current);
+      typingFeedbackTimerRef.current = null;
+    }
+    setTypingFeedback(null);
+  }
+
+  function clearMatchingFeedback() {
+    if (matchingFeedbackTimerRef.current) {
+      clearTimeout(matchingFeedbackTimerRef.current);
+      matchingFeedbackTimerRef.current = null;
+    }
+    setMatchingFeedback(null);
   }
 
   function renderPhraseLines(lines) {
@@ -400,11 +519,184 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     );
   }
 
+  function renderTypeArabicActivity() {
+    return (
+      <div className="lp-type-arabic-activity" dir="ltr">
+        <div className="lp-type-arabic-model" dir="rtl">
+          {typingPromptLines.map(line => (
+            <div
+              className="lp-type-arabic-line"
+              key={line.line_order}
+              style={{
+                fontFamily: arabicFontFamily,
+                fontWeight: arabicFontWeight,
+                fontSize: `${arabicFontSize}px`
+              }}
+            >
+              {line.arabicText}
+            </div>
+          ))}
+        </div>
+        <label className="lp-type-arabic-label" htmlFor={`type-arabic-${exercise.id}`}>
+          Type the Arabic
+        </label>
+        <textarea
+          id={`type-arabic-${exercise.id}`}
+          className={`lp-type-arabic-input${typingFeedback ? ` ${typingFeedback}` : ''}`}
+          value={typedArabic}
+          onChange={event => {
+            setTypedArabic(event.target.value);
+            clearTypingFeedback();
+          }}
+          dir="rtl"
+          lang="ar"
+          spellCheck={false}
+          autoCapitalize="none"
+          autoCorrect="off"
+          rows={Math.max(2, typingPromptLines.length)}
+          style={{
+            fontFamily: arabicFontFamily,
+            fontWeight: arabicFontWeight
+          }}
+        />
+        <div className="lp-activity-actions lp-type-arabic-actions">
+          <button
+            type="button"
+            className="lp-activity-button lp-type-arabic-submit"
+            onClick={() => {
+              clearTypingFeedback();
+              setTypingFeedback(typedArabicCorrect ? 'correct' : 'incorrect');
+              typingFeedbackTimerRef.current = setTimeout(() => {
+                setTypingFeedback(null);
+                typingFeedbackTimerRef.current = null;
+              }, 1400);
+            }}
+            disabled={!typedArabic.trim()}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  function renderMatchingActivity() {
+    function getCardClass(side, phraseId) {
+      const isMatched = matchedPhraseIdSet.has(phraseId);
+      const isSelected = matchingSelection?.side === side && matchingSelection?.phraseId === phraseId;
+      const isFeedback = matchingFeedback
+        && matchingFeedback.cards.some(card => card.side === side && card.phraseId === phraseId)
+        && (!isMatched || matchingFeedback.state === 'correct');
+      return [
+        'lp-matching-card',
+        side === 'arabic' ? 'arabic' : 'translation',
+        isSelected ? 'selected' : '',
+        isMatched ? 'matched' : '',
+        isFeedback ? matchingFeedback.state : ''
+      ].filter(Boolean).join(' ');
+    }
+
+    function chooseMatch(side, phraseId) {
+      if (matchedPhraseIdSet.has(phraseId) || matchingFeedback) return;
+      if (matchingSelection?.side === side && matchingSelection?.phraseId === phraseId) {
+        setMatchingSelection(null);
+        return;
+      }
+      if (!matchingSelection) {
+        setMatchingSelection({ side, phraseId });
+        return;
+      }
+      if (matchingSelection.side === side) {
+        setMatchingSelection({ side, phraseId });
+        return;
+      }
+
+      const correct = matchingSelection.phraseId === phraseId;
+      setMatchingFeedback({
+        state: correct ? 'correct' : 'incorrect',
+        cards: [
+          matchingSelection,
+          { side, phraseId }
+        ]
+      });
+      setMatchingSelection(null);
+      matchingFeedbackTimerRef.current = setTimeout(() => {
+        if (correct) {
+          setMatchedPhraseIds(ids => ids.includes(phraseId) ? ids : ids.concat(phraseId));
+        }
+        setMatchingFeedback(null);
+        matchingFeedbackTimerRef.current = null;
+      }, 700);
+    }
+
+    return (
+      <div
+        className="lp-matching-activity"
+        dir="ltr"
+        onPointerDown={event => {
+          if (event.target.closest('.lp-matching-card')) return;
+          setMatchingSelection(null);
+        }}
+      >
+        <div
+          className="lp-matching-grid"
+          ref={matchingGridRef}
+          style={{
+            '--matching-card-height': matchingCardHeight ? `${matchingCardHeight}px` : undefined
+          }}
+        >
+          <div className="lp-matching-column arabic" dir="rtl">
+            {matchingPhraseIds.map(phraseId => {
+              const phrase = phrases[phraseId];
+              if (!phrase) return null;
+              return (
+                <button
+                  type="button"
+                  className={getCardClass('arabic', phraseId)}
+                  key={`matching-arabic-${phraseId}`}
+                  onClick={() => chooseMatch('arabic', phraseId)}
+                  disabled={matchedPhraseIdSet.has(phraseId)}
+                  style={{
+                    fontFamily: arabicFontFamily,
+                    fontWeight: arabicFontWeight
+                  }}
+                >
+                  {getArabicText(phrase, arabicMode)}
+                </button>
+              );
+            })}
+          </div>
+          <div className="lp-matching-column translation">
+            {shuffledMatchingTranslations.map(phraseId => {
+              const phrase = phrases[phraseId];
+              if (!phrase) return null;
+              return (
+                <button
+                  type="button"
+                  className={getCardClass('translation', phraseId)}
+                  key={`matching-translation-${phraseId}`}
+                  onClick={() => chooseMatch('translation', phraseId)}
+                  disabled={matchedPhraseIdSet.has(phraseId)}
+                >
+                  {phrase.literal || phrase.translation || phraseId}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (isPhraseCaptions) return null;
 
   return (
     <div className="lp-exercise">
-      {isArrangeActivity ? (
+      {isMatchingActivity ? (
+        renderMatchingActivity()
+      ) : isTypeArabicActivity ? (
+        renderTypeArabicActivity()
+      ) : isArrangeActivity ? (
         renderArrangeActivity()
       ) : isClozeActivity ? (
         <div className="lp-cloze-activity" dir="ltr">
