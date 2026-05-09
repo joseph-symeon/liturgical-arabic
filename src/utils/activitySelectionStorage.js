@@ -1,4 +1,5 @@
 const ACTIVITY_SELECTION_STORAGE_KEY = "liturgical-arabic:activity-selection";
+export const SHARED_ACTIVITY_SELECTION_KEY = "shared:passage-activity";
 
 export function getStoredActivitySelections() {
   if (typeof window === "undefined") return {};
@@ -24,4 +25,22 @@ export function storeActivitySelection(selectionKey, activityValue) {
     ...getStoredActivitySelections(),
     [selectionKey]: activityValue
   }));
+}
+
+export function resolveStoredActivitySelection(selectionKey, allowedValues, fallbackValue) {
+  const allowed = (allowedValues || []).filter(Boolean);
+  if (allowed.length === 0) return null;
+
+  const storedValue = getStoredActivitySelection(selectionKey, allowed);
+  const resolvedValue = storedValue || (
+    fallbackValue && allowed.includes(fallbackValue)
+      ? fallbackValue
+      : allowed[0]
+  );
+
+  if (resolvedValue && resolvedValue !== storedValue) {
+    storeActivitySelection(selectionKey, resolvedValue);
+  }
+
+  return resolvedValue;
 }

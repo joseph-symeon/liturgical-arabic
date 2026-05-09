@@ -7,7 +7,8 @@ import { getExerciseTitle } from './exerciseTitles.js';
 import { getPassageActivityLabel, PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 import { createExercisePassage } from '../../utils/passages.js';
 import {
-  getStoredActivitySelection,
+  resolveStoredActivitySelection,
+  SHARED_ACTIVITY_SELECTION_KEY,
   storeActivitySelection
 } from '../../utils/activitySelectionStorage.js';
 
@@ -40,17 +41,12 @@ function getActivityOptionValue(option) {
   return option?.exercise_id || option?.activity_type || null;
 }
 
-function getActivitySelectionKey(lessonId, exerciseItem, exerciseIndex) {
-  return `${lessonId}:${exerciseItem?.exercise_id || exerciseIndex}`;
-}
-
-function getStoredActivityOptionId(lessonId, exerciseItem, exerciseIndex, activityOptions) {
-  const selectionKey = getActivitySelectionKey(lessonId, exerciseItem, exerciseIndex);
-  return getStoredActivitySelection(selectionKey, activityOptions.map(getActivityOptionValue).filter(Boolean));
-}
-
-function storeActivityOptionId(lessonId, exerciseItem, exerciseIndex, activityOptionId) {
-  storeActivitySelection(getActivitySelectionKey(lessonId, exerciseItem, exerciseIndex), activityOptionId);
+function getResolvedActivityOptionId(activityOptions) {
+  return resolveStoredActivitySelection(
+    SHARED_ACTIVITY_SELECTION_KEY,
+    activityOptions.map(getActivityOptionValue).filter(Boolean),
+    PASSAGE_ACTIVITY_TYPES.readListen
+  );
 }
 
 export default function LessonPage({
@@ -75,14 +71,14 @@ export default function LessonPage({
   const selectedExerciseItem = exerciseItems[selectedExerciseIndex] ?? exerciseItems[0];
   const activityOptions = getActivityOptions(selectedExerciseItem);
   const [selectedActivityOptionId, setSelectedActivityOptionId] = useState(() => (
-    getStoredActivityOptionId(lesson.id, selectedExerciseItem, selectedExerciseIndex, activityOptions)
+    getResolvedActivityOptionId(activityOptions)
   ));
   const selectedActivityOption = activityOptions.find(option => (
     getActivityOptionValue(option) === selectedActivityOptionId
   )) || activityOptions[0] || null;
 
   useEffect(() => {
-    setSelectedActivityOptionId(getStoredActivityOptionId(lesson.id, selectedExerciseItem, selectedExerciseIndex, activityOptions));
+    setSelectedActivityOptionId(getResolvedActivityOptionId(activityOptions));
   }, [lesson.id, selectedExerciseIndex]);
 
   const resolvedExercises = exerciseItems
@@ -141,7 +137,7 @@ export default function LessonPage({
           selectedActivityValue={selectedActivityValue}
           onSelectActivity={value => {
             setSelectedActivityOptionId(value);
-            storeActivityOptionId(lesson.id, selectedExerciseItem, selectedExerciseIndex, value);
+            storeActivitySelection(SHARED_ACTIVITY_SELECTION_KEY, value);
           }}
           activityType={selectedActivityType}
           resetKey={`${lesson.id}:${selectedExerciseIndex}`}

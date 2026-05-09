@@ -8,7 +8,8 @@ import { getArabicText } from "./utils/arabic.js";
 import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from "./utils/passageActivities.js";
 import { createServiceSectionPassage } from "./utils/passages.js";
 import {
-  getStoredActivitySelection,
+  resolveStoredActivitySelection,
+  SHARED_ACTIVITY_SELECTION_KEY,
   storeActivitySelection
 } from "./utils/activitySelectionStorage.js";
 import "./components/course/course.css";
@@ -19,12 +20,12 @@ const READER_ACTIVITY_OPTIONS = [
   { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.readListen], value: PASSAGE_ACTIVITY_TYPES.readListen },
   { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions], value: PASSAGE_ACTIVITY_TYPES.phraseCaptions }
 ];
-const READER_ACTIVITY_SELECTION_KEY = `${defaultServiceText.id}:reader:activity`;
 
 function getReaderActivity() {
-  return getStoredActivitySelection(
-    READER_ACTIVITY_SELECTION_KEY,
-    READER_ACTIVITY_OPTIONS.map(option => option.value)
+  return resolveStoredActivitySelection(
+    SHARED_ACTIVITY_SELECTION_KEY,
+    READER_ACTIVITY_OPTIONS.map(option => option.value),
+    PASSAGE_ACTIVITY_TYPES.readListen
   ) || PASSAGE_ACTIVITY_TYPES.readListen;
 }
 
@@ -252,7 +253,7 @@ export default function ArabicLiturgyReader({
       selectedActivityValue: readerActivity,
       onSelectActivity: value => {
         setReaderActivity(value);
-        storeActivitySelection(READER_ACTIVITY_SELECTION_KEY, value);
+        storeActivitySelection(SHARED_ACTIVITY_SELECTION_KEY, value);
       },
       activityType: readerActivity,
       resetKey: selectedSectionIndex,
