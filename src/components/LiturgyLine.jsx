@@ -32,7 +32,7 @@ export default function LiturgyLine(props) {
         part: part,
         arabicMode: props.arabicMode,
         speechRate: props.speechRate,
-        className: part.className || (part.id === props.activePhraseId ? "lp-karaoke-active" : undefined)
+        className: part.className
       });
     })
   );

@@ -44,7 +44,7 @@ Plain VTT captions can help, but word-level timing data is better for reliable p
 
 Commit:
 
-- curated runtime data in `src/data/media/recordings.js`, `src/data/media/captionTracks.js`, and `src/data/media/alignments.js`
+- curated runtime data in `src/data/media/recordings.js` and `src/data/media/alignments.js`
 
 Do not commit:
 
@@ -54,7 +54,7 @@ Do not commit:
 - `.asr.json` raw ASR output
 - `recording.generated.json`
 
-Raw manifests and ASR JSON are processing artifacts. Promote useful recording metadata and word timings into `src/data/media/recordings.js` and `src/data/media/captionTracks.js`, then leave raw import files ignored/local.
+Raw manifests and ASR JSON are processing artifacts. Promote useful recording metadata into `src/data/media/recordings.js`; promote curated text/audio ranges into `src/data/media/alignments.js`; then leave raw import files ignored/local.
 
 ## Local Media Cache
 

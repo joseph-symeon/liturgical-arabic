@@ -3,7 +3,7 @@
 
 export const alignmentDefinitions = [
   {
-    "id": "alignment-paraklesis-st-marina-oLdHO28NWuM-poc-v1",
+    "id": "alignment-paraklesis-st-marina-oLdHO28NWuM-v1",
     "service_text_id": "paraklesis-st-marina",
     "recording_id": "recording-oLdHO28NWuM",
     "method": "faster-whisper-medium-word-timestamps",
@@ -18,32 +18,27 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "vocative-o-lord-001",
             "start_seconds": 33.9,
-            "end_seconds": 34.66,
-            "display_end_seconds": 34.625
+            "end_seconds": 34.66
           },
           {
             "phrase_id": "have-mercy-001",
             "start_seconds": 34.66,
-            "end_seconds": 34.96,
-            "display_end_seconds": 34.925
+            "end_seconds": 34.96
           },
           {
             "phrase_id": "vocative-o-lord-001",
             "start_seconds": 34.96,
-            "end_seconds": 35.44,
-            "display_end_seconds": 35.405
+            "end_seconds": 35.44
           },
           {
             "phrase_id": "have-mercy-001",
             "start_seconds": 35.44,
-            "end_seconds": 35.76,
-            "display_end_seconds": 35.725
+            "end_seconds": 35.76
           },
           {
             "phrase_id": "vocative-o-lord-001",
             "start_seconds": 35.76,
-            "end_seconds": 36.22,
-            "display_end_seconds": 36.185
+            "end_seconds": 36.22
           },
           {
             "phrase_id": "have-mercy-001",
@@ -55,7 +50,7 @@ export const alignmentDefinitions = [
     ]
   },
   {
-    "id": "alignment-great-compline-g_4r4wzt2Vg-poc-v1",
+    "id": "alignment-great-compline-g_4r4wzt2Vg-v1",
     "service_text_id": "great-compline",
     "recording_id": "recording-g_4r4wzt2Vg",
     "method": "faster-whisper-medium-word-timestamps",
@@ -99,14 +94,12 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "beginner-both-now-001",
             "start_seconds": 18.28,
-            "end_seconds": 18.88,
-            "display_end_seconds": 18.805
+            "end_seconds": 18.88
           },
           {
             "phrase_id": "beginner-and-ever-001",
             "start_seconds": 18.88,
-            "end_seconds": 20.16,
-            "display_end_seconds": 20.145
+            "end_seconds": 20.16
           },
           {
             "phrase_id": "beginner-unto-ages-001",
@@ -131,20 +124,17 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "glory-001",
             "start_seconds": 15.42,
-            "end_seconds": 16.1,
-            "display_end_seconds": 16.055
+            "end_seconds": 16.1
           },
           {
             "phrase_id": "to-father-001",
             "start_seconds": 16.1,
-            "end_seconds": 16.56,
-            "display_end_seconds": 16.475
+            "end_seconds": 16.56
           },
           {
             "phrase_id": "beginner-and-to-son-001",
             "start_seconds": 16.56,
-            "end_seconds": 16.92,
-            "display_end_seconds": 16.875
+            "end_seconds": 16.92
           },
           {
             "phrase_id": "beginner-and-to-holy-spirit-001",
@@ -154,20 +144,17 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "beginner-both-now-001",
             "start_seconds": 18.28,
-            "end_seconds": 18.88,
-            "display_end_seconds": 18.805
+            "end_seconds": 18.88
           },
           {
             "phrase_id": "beginner-and-ever-001",
             "start_seconds": 18.88,
-            "end_seconds": 20.16,
-            "display_end_seconds": 20.145
+            "end_seconds": 20.16
           },
           {
             "phrase_id": "beginner-unto-ages-001",
             "start_seconds": 20.16,
-            "end_seconds": 21.86,
-            "display_end_seconds": 21.825
+            "end_seconds": 21.86
           },
           {
             "phrase_id": "amen-001",
@@ -189,20 +176,17 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "holy-god-001",
             "start_seconds": 0,
-            "end_seconds": 1.28,
-            "display_end_seconds": 1.245
+            "end_seconds": 1.28
           },
           {
             "phrase_id": "holy-mighty-001",
             "start_seconds": 1.28,
-            "end_seconds": 2.46,
-            "display_end_seconds": 2.375
+            "end_seconds": 2.46
           },
           {
             "phrase_id": "holy-immortal-001",
             "start_seconds": 2.46,
-            "end_seconds": 4.26,
-            "display_end_seconds": 4.225
+            "end_seconds": 4.26
           },
           {
             "phrase_id": "have-mercy-on-us-001",
@@ -221,8 +205,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "vocative-o-lord-001",
             "start_seconds": 37.62,
-            "end_seconds": 38.16,
-            "display_end_seconds": 38.125
+            "end_seconds": 38.16
           },
           {
             "phrase_id": "have-mercy-001",
@@ -325,50 +308,42 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "all-holy-trinity-001",
             "start_seconds": 23,
-            "end_seconds": 24.94,
-            "display_end_seconds": 24.905
+            "end_seconds": 24.94
           },
           {
             "phrase_id": "all-holy-trinity-have-mercy-001",
             "start_seconds": 24.94,
-            "end_seconds": 25.66,
-            "display_end_seconds": 25.615
+            "end_seconds": 25.66
           },
           {
             "phrase_id": "vocative-o-lord-001",
             "start_seconds": 25.66,
-            "end_seconds": 26.58,
-            "display_end_seconds": 26.545
+            "end_seconds": 26.58
           },
           {
             "phrase_id": "all-holy-trinity-cleanse-sins-001",
             "start_seconds": 26.58,
-            "end_seconds": 27.92,
-            "display_end_seconds": 27.895
+            "end_seconds": 27.92
           },
           {
             "phrase_id": "vocative-o-master-001",
             "start_seconds": 27.92,
-            "end_seconds": 28.96,
-            "display_end_seconds": 28.935
+            "end_seconds": 28.96
           },
           {
             "phrase_id": "all-holy-trinity-pardon-iniquities-001",
             "start_seconds": 28.96,
-            "end_seconds": 30.98,
-            "display_end_seconds": 30.965
+            "end_seconds": 30.98
           },
           {
             "phrase_id": "vocative-o-holy-one-001",
             "start_seconds": 30.98,
-            "end_seconds": 31.98,
-            "display_end_seconds": 31.915
+            "end_seconds": 31.98
           },
           {
             "phrase_id": "all-holy-trinity-visit-heal-001",
             "start_seconds": 31.98,
-            "end_seconds": 33.98,
-            "display_end_seconds": 33.895
+            "end_seconds": 33.98
           },
           {
             "phrase_id": "all-holy-trinity-name-sake-001",
@@ -422,6 +397,401 @@ export const alignmentDefinitions = [
             "phrase_id": "amen-001",
             "start_seconds": 88.3,
             "end_seconds": 92.27
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "start_segment_id": "litany-peace-in-peace",
+          "end_segment_id": "litany-peace-choir-amen"
+        },
+        "segment_ids": [
+          "litany-peace-in-peace",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-from-above",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-whole-world",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-holy-house",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-father-metropolitan",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-country-authorities",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-this-city",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-healthful-seasons",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-travelers",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-deliverance",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-help-save",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-calling-remembrance",
+          "litany-peace-to-thee-o-lord",
+          "litany-peace-priest-might-quiet",
+          "litany-peace-priest-look-quiet",
+          "litany-peace-priest-doxology",
+          "litany-peace-choir-amen"
+        ],
+        "start_seconds": 92.7,
+        "end_seconds": 397.86,
+        "phrase_timings": [
+          {
+            "phrase_id": "peace-001",
+            "start_seconds": 93,
+            "end_seconds": 93.94
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 93.94,
+            "end_seconds": 97.2
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 97.67,
+            "end_seconds": 104.36
+          },
+          {
+            "phrase_id": "peace-from-above-001",
+            "start_seconds": 104.36,
+            "end_seconds": 107.6
+          },
+          {
+            "phrase_id": "salvation-001",
+            "start_seconds": 107.6,
+            "end_seconds": 110.62
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 110.62,
+            "end_seconds": 113.52
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 113.7,
+            "end_seconds": 119.8
+          },
+          {
+            "phrase_id": "whole-world-001",
+            "start_seconds": 119.8,
+            "end_seconds": 123.82
+          },
+          {
+            "phrase_id": "holy-churches-001",
+            "start_seconds": 123.82,
+            "end_seconds": 128.1
+          },
+          {
+            "phrase_id": "union-001",
+            "start_seconds": 128.82,
+            "end_seconds": 131.94
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 131.94,
+            "end_seconds": 134.86
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 134.86,
+            "end_seconds": 141.52
+          },
+          {
+            "phrase_id": "holy-house-001",
+            "start_seconds": 141.52,
+            "end_seconds": 146.68
+          },
+          {
+            "phrase_id": "those-who-enter-001",
+            "start_seconds": 146.68,
+            "end_seconds": 150.92
+          },
+          {
+            "phrase_id": "with-faith-reverence-fear-001",
+            "start_seconds": 150.92,
+            "end_seconds": 156.56
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 156.56,
+            "end_seconds": 160.42
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 160.93,
+            "end_seconds": 166.1
+          },
+          {
+            "phrase_id": "father-metropolitan-001",
+            "start_seconds": 183.64,
+            "end_seconds": 189.84
+          },
+          {
+            "phrase_id": "honorable-presbytery-001",
+            "start_seconds": 189.84,
+            "end_seconds": 193.16
+          },
+          {
+            "phrase_id": "diaconate-in-christ-001",
+            "start_seconds": 193.55,
+            "end_seconds": 197.46
+          },
+          {
+            "phrase_id": "clergy-people-001",
+            "start_seconds": 197.92,
+            "end_seconds": 201.72
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 201.72,
+            "end_seconds": 203.3
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 203.3,
+            "end_seconds": 209.96
+          },
+          {
+            "phrase_id": "country-president-001",
+            "start_seconds": 209.96,
+            "end_seconds": 214.16
+          },
+          {
+            "phrase_id": "support-good-work-001",
+            "start_seconds": 214.16,
+            "end_seconds": 219.34
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 219.34,
+            "end_seconds": 222.3
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 223.5,
+            "end_seconds": 229.46
+          },
+          {
+            "phrase_id": "this-city-001",
+            "start_seconds": 230.46,
+            "end_seconds": 233.46
+          },
+          {
+            "phrase_id": "monasteries-cities-villages-001",
+            "start_seconds": 233.6,
+            "end_seconds": 239.11
+          },
+          {
+            "phrase_id": "faithful-dwell-therein-001",
+            "start_seconds": 239.45,
+            "end_seconds": 242.48
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 242.48,
+            "end_seconds": 245.2
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 245.56,
+            "end_seconds": 248.36
+          },
+          {
+            "phrase_id": "healthful-seasons-001",
+            "start_seconds": 251.46,
+            "end_seconds": 254.66
+          },
+          {
+            "phrase_id": "abundance-fruits-earth-001",
+            "start_seconds": 254.66,
+            "end_seconds": 257.7
+          },
+          {
+            "phrase_id": "peaceful-times-001",
+            "start_seconds": 257.7,
+            "end_seconds": 260.88
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 260.88,
+            "end_seconds": 263.68
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 263.68,
+            "end_seconds": 271.2
+          },
+          {
+            "phrase_id": "travelers-001",
+            "start_seconds": 271.2,
+            "end_seconds": 274.16
+          },
+          {
+            "phrase_id": "sea-land-air-001",
+            "start_seconds": 274.16,
+            "end_seconds": 276.64
+          },
+          {
+            "phrase_id": "sick-suffering-captive-001",
+            "start_seconds": 276.64,
+            "end_seconds": 281.86
+          },
+          {
+            "phrase_id": "their-salvation-001",
+            "start_seconds": 281.86,
+            "end_seconds": 284.38
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 284.74,
+            "end_seconds": 287.08
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 287.08,
+            "end_seconds": 294.08
+          },
+          {
+            "phrase_id": "deliverance-tribulation-001",
+            "start_seconds": 294.08,
+            "end_seconds": 296.24
+          },
+          {
+            "phrase_id": "from-all-tribulation-001",
+            "start_seconds": 296.24,
+            "end_seconds": 297.78
+          },
+          {
+            "phrase_id": "wrath-danger-necessity-001",
+            "start_seconds": 297.78,
+            "end_seconds": 300.68
+          },
+          {
+            "phrase_id": "petition-001",
+            "start_seconds": 300.68,
+            "end_seconds": 303.58
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 304.07,
+            "end_seconds": 314.08
+          },
+          {
+            "phrase_id": "help-save-have-mercy-001",
+            "start_seconds": 314.08,
+            "end_seconds": 317.46
+          },
+          {
+            "phrase_id": "preserve-us-001",
+            "start_seconds": 317.46,
+            "end_seconds": 318.7
+          },
+          {
+            "phrase_id": "o-god-001",
+            "start_seconds": 318.7,
+            "end_seconds": 320.44
+          },
+          {
+            "phrase_id": "by-your-grace-001",
+            "start_seconds": 322.04,
+            "end_seconds": 323.44
+          },
+          {
+            "phrase_id": "lord-have-mercy-001",
+            "start_seconds": 323.73,
+            "end_seconds": 331.9
+          },
+          {
+            "phrase_id": "calling-remembrance-001",
+            "start_seconds": 333.08,
+            "end_seconds": 334.88
+          },
+          {
+            "phrase_id": "all-holy-immaculate-001",
+            "start_seconds": 334.88,
+            "end_seconds": 337.72
+          },
+          {
+            "phrase_id": "most-blessed-glorious-lady-001",
+            "start_seconds": 337.72,
+            "end_seconds": 343.22
+          },
+          {
+            "phrase_id": "theotokos-001",
+            "start_seconds": 343.22,
+            "end_seconds": 345.1
+          },
+          {
+            "phrase_id": "ever-virgin-mary-002",
+            "start_seconds": 345.1,
+            "end_seconds": 349.3
+          },
+          {
+            "phrase_id": "with-all-saints-001",
+            "start_seconds": 349.3,
+            "end_seconds": 352.98
+          },
+          {
+            "phrase_id": "commend-ourselves-001",
+            "start_seconds": 352.98,
+            "end_seconds": 355.74
+          },
+          {
+            "phrase_id": "and-each-other-001",
+            "start_seconds": 355.74,
+            "end_seconds": 358.22
+          },
+          {
+            "phrase_id": "and-all-our-life-001",
+            "start_seconds": 358.72,
+            "end_seconds": 360.62
+          },
+          {
+            "phrase_id": "unto-christ-our-god-001",
+            "start_seconds": 360.62,
+            "end_seconds": 363.84
+          },
+          {
+            "phrase_id": "to-thee-o-lord",
+            "start_seconds": 363.84,
+            "end_seconds": 368.44
+          },
+          {
+            "phrase_id": "doxology-for-fitting-001",
+            "start_seconds": 369.44,
+            "end_seconds": 373.1
+          },
+          {
+            "phrase_id": "doxology-glory-honor-worship-001",
+            "start_seconds": 373.1,
+            "end_seconds": 378.82
+          },
+          {
+            "phrase_id": "doxology-father-son-spirit-001",
+            "start_seconds": 378.82,
+            "end_seconds": 384.44
+          },
+          {
+            "phrase_id": "doxology-now-ever-ages-001",
+            "start_seconds": 385.46,
+            "end_seconds": 394.61
+          },
+          {
+            "phrase_id": "amen-001",
+            "start_seconds": 396.46,
+            "end_seconds": 397.86
           }
         ]
       },

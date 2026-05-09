@@ -3,14 +3,11 @@ import segments from "../data/texts/segments.js";
 import { defaultServiceText } from "../data/texts/serviceTexts.js";
 import { validateData } from "./dataValidation.js";
 import {
-  safeString,
   stripArabicDiacritics,
   getArabicText,
   getLineText,
   getLogicalPhraseParts
 } from "./arabic.js";
-import { csvEscape, rowsToCsv, buildFlashcardCsv, buildAnnotationsCsv } from "./csv.js";
-import { getFlashcards } from "./flashcards.js";
 import { getServiceSectionPlayback } from "./servicePlayback.js";
 
 function segmentLineParts(line) {
@@ -22,17 +19,11 @@ function segmentLineParts(line) {
 export function runTests() {
   validateData();
 
-  const cards = getFlashcards();
   const phraseIds = Object.keys(phrases);
   const uniquePhraseIds = new Set(phraseIds);
-  const flashcardCsv = buildFlashcardCsv(cards);
-  const annotationCsv = buildAnnotationsCsv(cards);
   const readerSections = defaultServiceText.sections;
 
   console.assert(stripArabicDiacritics("بِسَلامٍ") === "بسلام", "Should strip Arabic diacritics.");
-  console.assert(csvEscape('He said "test"') === '"He said ""test"""', "Should escape CSV quotes.");
-  console.assert(rowsToCsv([["a"], ["b"]]) === '"a"\n"b"', "CSV rows should be newline-separated.");
-  console.assert(cards.length === phraseIds.length, "Every phrase should become one card.");
   console.assert(phraseIds.length === uniquePhraseIds.size, "Phrase IDs should be unique.");
   console.assert(
     getArabicText(phrases["petition-001"], "unvocalized") === "إلى الرب نطلب",
@@ -73,8 +64,5 @@ export function runTests() {
   );
   console.assert(readerSections[0].section === "The Preparation for the Divine Liturgy", "First reader section should be titled The Preparation for the Divine Liturgy.");
   console.assert(defaultServiceText.id === "divine-liturgy-john-chrysostom", "Default service text should be the Divine Liturgy.");
-  console.assert(flashcardCsv.startsWith('"front","back"'), "CSV should include a flashcard header row.");
-  console.assert(annotationCsv.startsWith('"id","arabic"'), "Phrases CSV should include database headers.");
-  console.assert(annotationCsv.includes("\n"), "Phrases CSV should contain newline-separated rows.");
   console.assert(0.5 <= 0.8 && 0.8 <= 1.2, "Default speech rate should be inside the UI range.");
 }

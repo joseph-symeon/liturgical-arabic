@@ -3,15 +3,25 @@
 
 import segments from '../texts/segments.js';
 import phrases from '../texts/phrases.js';
-import captionTracks from '../media/captionTracks.js';
 import alignments from '../media/alignments.js';
-import activities from './activities.js';
 import {
-  deriveCaptionClip,
-  findAlignmentRange,
+  getAlignmentRange,
   findServiceAlignmentRange,
   getAlignmentPhraseTimings
-} from '../../utils/captionClips.js';
+} from '../../utils/alignmentRanges.js';
+import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
+
+const GREAT_COMPLINE_MEDIA = {
+  recording_id: "recording-g_4r4wzt2Vg",
+  alignment_id: "alignment-great-compline-g_4r4wzt2Vg-v1",
+  default_playback_rate: 1
+};
+
+const PARAKLESIS_ST_MARINA_MEDIA = {
+  recording_id: "recording-oLdHO28NWuM",
+  alignment_id: "alignment-paraklesis-st-marina-oLdHO28NWuM-v1",
+  default_playback_rate: 1
+};
 
 export const exerciseDefinitions = [
   {
@@ -24,12 +34,6 @@ export const exerciseDefinitions = [
     "service_range": {
       "start_segment_id": "antiphon-word-of-god-only-begotten",
       "end_segment_id": "antiphon-deathless"
-    },
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 150.77,
-      "end_seconds": 162.68,
-      "default_playback_rate": 1
     }
   },
   {
@@ -39,13 +43,7 @@ export const exerciseDefinitions = [
       "course-entrance-hymn-risen-sundays",
       "course-entrance-hymn-wondrous-weekdays",
       "entrance-hymn-risen-alleluia"
-    ],
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 80.7,
-      "end_seconds": 99.78,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "antiphon-accepted-incarnate",
@@ -57,12 +55,6 @@ export const exerciseDefinitions = [
     "service_range": {
       "start_segment_id": "antiphon-accepted-incarnate",
       "end_segment_id": "antiphon-from-theotokos"
-    },
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 162.68,
-      "end_seconds": 180.3,
-      "default_playback_rate": 1
     }
   },
   {
@@ -75,12 +67,6 @@ export const exerciseDefinitions = [
     "service_range": {
       "start_segment_id": "antiphon-became-man",
       "end_segment_id": "antiphon-crucified"
-    },
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 180.3,
-      "end_seconds": 193.35,
-      "default_playback_rate": 1
     }
   },
   {
@@ -93,12 +79,6 @@ export const exerciseDefinitions = [
     "service_range": {
       "start_segment_id": "antiphon-trampled-death",
       "end_segment_id": "antiphon-one-of-trinity"
-    },
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 193.35,
-      "end_seconds": 204.22,
-      "default_playback_rate": 1
     }
   },
   {
@@ -110,12 +90,6 @@ export const exerciseDefinitions = [
     "service_range": {
       "start_segment_id": "antiphon-glorified-with-father",
       "end_segment_id": "antiphon-glorified-with-father"
-    },
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 204.22,
-      "end_seconds": 218.22,
-      "default_playback_rate": 1
     }
   },
   {
@@ -135,145 +109,73 @@ export const exerciseDefinitions = [
     "service_range": {
       "start_segment_id": "antiphon-word-of-god-only-begotten",
       "end_segment_id": "antiphon-glorified-with-father"
-    },
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 150.77,
-      "end_seconds": 218.22,
-      "default_playback_rate": 1
     }
   },
   {
     "id": "litany-peace-peace-from-above",
     "segment_ids": [
       "litany-peace-from-above"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-whole-world",
     "segment_ids": [
       "litany-peace-whole-world"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-holy-house",
     "segment_ids": [
       "litany-peace-holy-house"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-father-metropolitan",
     "segment_ids": [
       "litany-peace-father-metropolitan"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-country-authorities",
     "segment_ids": [
       "litany-peace-country-authorities"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-this-city",
     "segment_ids": [
       "litany-peace-this-city"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-healthful-seasons",
     "segment_ids": [
       "litany-peace-healthful-seasons"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-travelers",
     "segment_ids": [
       "litany-peace-travelers"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-deliverance",
     "segment_ids": [
       "litany-peace-deliverance"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-help-save",
     "segment_ids": [
       "litany-peace-help-save"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-peace-priest-doxology",
     "segment_ids": [
       "litany-peace-priest-doxology"
-    ],
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "litany-of-peace",
@@ -293,35 +195,26 @@ export const exerciseDefinitions = [
       "litany-peace-priest-doxology",
       "litany-peace-choir-amen"
     ],
-    "show_speakers": true,
-    "audio_clip": {
-      "video_id": "KJKt0V4zJjY",
-      "start_seconds": 92.75,
-      "end_seconds": 160,
-      "default_playback_rate": 1
-    }
+    "show_speakers": true
   },
   {
     "id": "entrance-bless-master",
     "segment_ids": [
       "entrance-bless-master"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "entrance-blessed-entrance",
     "segment_ids": [
       "entrance-blessed-entrance"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "entrance-wisdom-stand-upright",
     "segment_ids": [
       "entrance-wisdom-stand-upright",
       "entrance-hymn-come-worship"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "entrance-save-us-son-of-god",
@@ -330,8 +223,7 @@ export const exerciseDefinitions = [
       "course-entrance-hymn-risen-sundays",
       "course-entrance-hymn-wondrous-weekdays",
       "entrance-hymn-risen-alleluia"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "entrance-holy-art-benediction",
@@ -339,8 +231,7 @@ export const exerciseDefinitions = [
       "entrance-hymn-holy-art-benediction",
       "entrance-hymn-deacon-ages",
       "entrance-hymn-final-amen"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "entrance-summary",
@@ -358,22 +249,19 @@ export const exerciseDefinitions = [
       "entrance-hymn-deacon-ages",
       "entrance-hymn-final-amen"
     ],
-    "show_speakers": true,
-    "audio_clip": null
+    "show_speakers": true
   },
   {
     "id": "preparation-glory",
     "segment_ids": [
       "preparation-glory-highest"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "preparation-open-my-lips",
     "segment_ids": [
       "preparation-open-my-lips"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "come-let-us-worship",
@@ -381,80 +269,43 @@ export const exerciseDefinitions = [
       "course-come-worship-god-king",
       "course-come-worship-christ-king",
       "course-come-worship-christ-himself"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "first-antiphon-through-theotokos",
     "segment_ids": [
       "first-antiphon-through-theotokos-1"
-    ],
-    "audio_clip": {
-      "recording_id": "recording-KJKt0V4zJjY",
-      "start_seconds": 399.45,
-      "end_seconds": 409.38,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "little-litany-again",
     "segment_ids": [
       "little-litany-again"
-    ],
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 0.3,
-      "end_seconds": 5.275,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "little-litany-help-save",
     "segment_ids": [
       "little-litany-help-save"
-    ],
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 9.9,
-      "end_seconds": 17.3,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "little-litany-calling-remembrance",
     "segment_ids": [
       "little-litany-calling-remembrance"
-    ],
-    "audio_clip": {
-      "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 21.925,
-      "end_seconds": 49.225,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "little-litany-for-thine-might",
     "segment_ids": [
       "little-litany-for-thine-might"
-    ],
-      "audio_clip": {
-        "recording_id": "recording--dufaXx7Hm0",
-      "start_seconds": 54.9,
-      "end_seconds": 76.75,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "little-litany-good-god",
     "segment_ids": [
       "little-litany-good-god-doxology"
-    ],
-    "audio_clip": {
-      "recording_id": "recording-fzQ4dmF-1Bg",
-      "start_seconds": 63.415,
-      "end_seconds": 85.7,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "little-litanies-summary",
@@ -465,8 +316,7 @@ export const exerciseDefinitions = [
       "little-litany-for-thine-might",
       "little-litany-good-god-doxology"
     ],
-    "show_speakers": true,
-    "audio_clip": null
+    "show_speakers": true
   },
   {
     "id": "trisagion-hymn-main",
@@ -476,8 +326,7 @@ export const exerciseDefinitions = [
       "trisagion-hymn-holy-immortal",
       "trisagion-with-strength",
       "trisagion-hymn-holy-god-2"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "word-epistle-reading",
@@ -490,8 +339,7 @@ export const exerciseDefinitions = [
       "epistle-reader-reads",
       "epistle-peace-reader",
       "epistle-alleluia"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "word-gospel-reading",
@@ -504,8 +352,7 @@ export const exerciseDefinitions = [
       "gospel-let-us-attend",
       "gospel-appointed-reading-rubric",
       "gospel-glory-after"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "liturgy-word-summary",
@@ -527,60 +374,41 @@ export const exerciseDefinitions = [
       "gospel-appointed-reading-rubric",
       "gospel-glory-after"
     ],
-    "show_speakers": true,
-    "audio_clip": null
+    "show_speakers": true
   },
   {
     "id": "lord-have-mercy",
-    "activity_id": "activity-caption-poc-lord-have-mercy"
-  },
-  {
-    "id": "activity-demo-arrange-lord-have-mercy",
-    "activity_id": "activity-demo-arrange-lord-have-mercy"
+    "segment_ids": [
+      "course-lord-have-mercy-split"
+    ],
+    "media": PARAKLESIS_ST_MARINA_MEDIA
   },
   {
     "id": "jesus-prayer",
     "segment_ids": [
       "course-jesus-prayer"
-    ],
-    "audio_clip": {
-      "video_id": "f-DJruJ0HRs",
-      "start_seconds": 0,
-      "end_seconds": 3.3,
-      "default_playback_rate": 1
-    }
+    ]
   },
   {
     "id": "glory-both-now",
     "segment_ids": [
       "first-antiphon-glory",
       "first-antiphon-both-now"
-    ],
-    "audio_clip": null
+    ]
   },
   {
     "id": "glory-beginner",
     "segment_ids": [
       "course-glory-beginner"
     ],
-    "audio_clip": {
-      "video_id": "oLdHO28NWuM",
-      "start_seconds": 15.45,
-      "end_seconds": 18.4,
-      "default_playback_rate": 1
-    }
+    "media": GREAT_COMPLINE_MEDIA
   },
   {
     "id": "both-now-beginner",
     "segment_ids": [
       "course-both-now-beginner"
     ],
-    "audio_clip": {
-      "video_id": "oLdHO28NWuM",
-      "start_seconds": 18.75,
-      "end_seconds": 22.25,
-      "default_playback_rate": 1
-    }
+    "media": GREAT_COMPLINE_MEDIA
   },
   {
     "id": "glory-both-now-beginner",
@@ -588,12 +416,7 @@ export const exerciseDefinitions = [
       "course-glory-beginner",
       "course-both-now-beginner"
     ],
-    "audio_clip": {
-      "video_id": "oLdHO28NWuM",
-      "start_seconds": 15.5,
-      "end_seconds": 22.25,
-      "default_playback_rate": 1
-    }
+    "media": GREAT_COMPLINE_MEDIA
   },
   {
     "id": "trisagion-hymn-core",
@@ -603,108 +426,35 @@ export const exerciseDefinitions = [
       "course-trisagion-holy-immortal",
       "course-trisagion-have-mercy"
     ],
-    "audio_clip": {
-      "video_id": "oLdHO28NWuM",
-      "start_seconds": 0,
-      "end_seconds": 15.25,
-      "default_playback_rate": 1
-    }
-  },
-  {
-    "id": "caption-poc-glory-beginner",
-    "activity_id": "activity-caption-poc-glory-beginner"
-  },
-  {
-    "id": "activity-demo-synced-caption-glory-beginner",
-    "activity_id": "activity-demo-synced-caption-glory-beginner"
-  },
-  {
-    "id": "activity-demo-synced-caption-lord-have-mercy",
-    "activity_id": "activity-demo-synced-caption-lord-have-mercy"
-  },
-  {
-    "id": "caption-poc-both-now-beginner",
-    "activity_id": "activity-caption-poc-both-now-beginner"
-  },
-  {
-    "id": "activity-demo-synced-caption-both-now-beginner",
-    "activity_id": "activity-demo-synced-caption-both-now-beginner"
-  },
-  {
-    "id": "caption-poc-glory-both-now-beginner",
-    "activity_id": "activity-caption-poc-glory-both-now-beginner"
-  },
-  {
-    "id": "activity-demo-synced-caption-glory-both-now",
-    "activity_id": "activity-demo-synced-caption-glory-both-now"
-  },
-  {
-    "id": "activity-demo-listen-repeat-holy-god",
-    "activity_id": "activity-demo-listen-repeat-holy-god"
-  },
-  {
-    "id": "activity-demo-cloze-holy-god",
-    "activity_id": "activity-demo-cloze-holy-god"
-  },
-  {
-    "id": "activity-demo-synced-caption-holy-god",
-    "activity_id": "activity-demo-synced-caption-holy-god"
-  },
-  {
-    "id": "activity-demo-synced-caption-all-holy-trinity",
-    "activity_id": "activity-demo-synced-caption-all-holy-trinity"
-  },
-  {
-    "id": "activity-demo-arrange-all-holy-trinity",
-    "activity_id": "activity-demo-arrange-all-holy-trinity"
+    "media": GREAT_COMPLINE_MEDIA
   },
   {
     "id": "all-holy-trinity-address",
     "segment_ids": [
       "course-all-holy-trinity-address"
     ],
-    "audio_clip": {
-      "video_id": "oLdHO28NWuM",
-      "start_seconds": 22.65,
-      "end_seconds": 24.75,
-      "default_playback_rate": 1
-    }
+    "media": GREAT_COMPLINE_MEDIA
   },
   {
     "id": "all-holy-trinity-lord",
     "segment_ids": [
       "course-all-holy-trinity-lord"
     ],
-    "audio_clip": {
-      "video_id": "oLdHO28NWuM",
-      "start_seconds": 25.25,
-      "end_seconds": 27,
-      "default_playback_rate": 1
-    }
+    "media": GREAT_COMPLINE_MEDIA
   },
   {
     "id": "all-holy-trinity-master",
     "segment_ids": [
       "course-all-holy-trinity-master"
     ],
-    "audio_clip": {
-      "video_id": "oLdHO28NWuM",
-      "start_seconds": 27.5,
-      "end_seconds": 30,
-      "default_playback_rate": 1
-    }
+    "media": GREAT_COMPLINE_MEDIA
   },
   {
     "id": "all-holy-trinity-holy-one",
     "segment_ids": [
       "course-all-holy-trinity-holy-one"
     ],
-    "audio_clip": {
-      "video_id": "oLdHO28NWuM",
-      "start_seconds": 30.25,
-      "end_seconds": 33.5,
-      "default_playback_rate": 1
-    }
+    "media": GREAT_COMPLINE_MEDIA
   },
   {
     "id": "all-holy-trinity",
@@ -714,59 +464,27 @@ export const exerciseDefinitions = [
       "course-all-holy-trinity-master",
       "course-all-holy-trinity-holy-one"
     ],
-    "audio_clip": {
-      "video_id": "oLdHO28NWuM",
-      "start_seconds": 22.65,
-      "end_seconds": 33.5,
-      "default_playback_rate": 1
-    }
-  },
-  {
-    "id": "caption-poc-all-holy-trinity-address",
-    "activity_id": "activity-caption-poc-all-holy-trinity-address"
-  },
-  {
-    "id": "caption-poc-all-holy-trinity-lord",
-    "activity_id": "activity-caption-poc-all-holy-trinity-lord"
-  },
-  {
-    "id": "caption-poc-all-holy-trinity-master",
-    "activity_id": "activity-caption-poc-all-holy-trinity-master"
-  },
-  {
-    "id": "caption-poc-all-holy-trinity-holy-one",
-    "activity_id": "activity-caption-poc-all-holy-trinity-holy-one"
-  },
-  {
-    "id": "caption-poc-all-holy-trinity",
-    "activity_id": "activity-caption-poc-all-holy-trinity"
+    "media": GREAT_COMPLINE_MEDIA
   }
 ];
-
 export function resolveExercise(definition, segmentsMap = segments) {
-  const activity = definition.activity_id ? activities[definition.activity_id] : null;
-  const segmentIds = definition.segment_ids || activity?.target?.segment_ids || [];
+  const segmentIds = definition.segment_ids || [];
   const captionClip = definition.caption_clip || (
-    activity?.media
+    definition.media
       ? {
-          recording_id: activity.media.recording_id,
-          alignment_id: activity.media.alignment_id,
-          default_playback_rate: activity.media.default_playback_rate
+          recording_id: definition.media.recording_id,
+          alignment_id: definition.media.alignment_id,
+          default_playback_rate: definition.media.default_playback_rate
         }
       : null
   );
-  const alignedPhraseTimings = activity?.media?.alignment_id
-    ? getAlignmentPhraseTimings(activity.media.alignment_id, segmentIds, activity.media.recording_id, alignments)
+  const alignedPhraseTimings = definition.media?.alignment_id
+    ? getAlignmentPhraseTimings(definition.media.alignment_id, segmentIds, definition.media.recording_id, alignments)
     : [];
-  const resolvedActivity = activity
-    ? {
-        ...activity,
-        captions: activity.captions || alignedPhraseTimings
-      }
-    : null;
   const resolvedDefinition = {
     ...definition,
-    activity: resolvedActivity,
+    activity: null,
+    captions: alignedPhraseTimings,
     segment_ids: segmentIds,
     caption_clip: captionClip
   };
@@ -784,12 +502,10 @@ export function resolveExercise(definition, segmentsMap = segments) {
   }
 
   const lines = getLinesForSegmentIds(segmentIds);
-  const serviceAudioClip = getServiceAudioClip(definition);
-  const audioClip = serviceAudioClip || definition.audio_clip || deriveCaptionClip(resolvedDefinition, phrases, segmentsMap, captionTracks, alignments);
 
   return {
     ...resolvedDefinition,
-    audio_clip: audioClip,
+    audio_clip: getServiceAudioClip(definition) || getMediaAudioClip(definition),
     lines
   };
 }
@@ -800,12 +516,12 @@ const exercises = Object.fromEntries(
 
 const STANDARD_ACTIVITY_OPTIONS = [
   {
-    label: 'Listen & Repeat',
-    activity_type: 'listen-repeat'
+    label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.readListen],
+    activity_type: PASSAGE_ACTIVITY_TYPES.readListen
   },
   {
-    label: 'Phrase Captions',
-    activity_type: 'synced-caption'
+    label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions],
+    activity_type: PASSAGE_ACTIVITY_TYPES.phraseCaptions
   }
 ];
 
@@ -817,23 +533,11 @@ function getPhraseIdsForLines(lines) {
   ));
 }
 
-function buildEvenCaptions(audioClip, phraseIds) {
-  if (!audioClip || phraseIds.length === 0) return [];
-
-  const duration = audioClip.end_seconds - audioClip.start_seconds;
-  const phraseDuration = duration / phraseIds.length;
-  return phraseIds.map((phraseId, index) => ({
-    phrase_id: phraseId,
-    start_seconds: Math.round((audioClip.start_seconds + phraseDuration * index) * 1000) / 1000,
-    end_seconds: Math.round((audioClip.start_seconds + phraseDuration * (index + 1)) * 1000) / 1000
-  }));
-}
-
 function getServiceAudioClip(definition) {
   const serviceRange = findServiceAlignmentRange(
     definition.service_text_id,
     definition.service_range,
-    definition.audio_clip?.recording_id,
+    null,
     alignments
   );
   if (!serviceRange) return null;
@@ -842,7 +546,25 @@ function getServiceAudioClip(definition) {
     recording_id: serviceRange.alignment.recording_id,
     start_seconds: serviceRange.range.start_seconds,
     end_seconds: serviceRange.range.end_seconds,
-    default_playback_rate: definition.audio_clip?.default_playback_rate ?? 1
+    default_playback_rate: serviceRange.range.default_playback_rate ?? 1
+  };
+}
+
+function getMediaAudioClip(definition) {
+  if (!definition.media?.alignment_id) return null;
+  const range = getAlignmentRange(
+    definition.media.alignment_id,
+    definition.segment_ids,
+    definition.media.recording_id,
+    alignments
+  );
+  if (!range) return null;
+
+  return {
+    recording_id: definition.media.recording_id,
+    start_seconds: range.start_seconds,
+    end_seconds: range.end_seconds,
+    default_playback_rate: definition.media.default_playback_rate ?? range.default_playback_rate ?? 1
   };
 }
 
@@ -857,8 +579,7 @@ function getAlignedCaptions(exercise) {
     return serviceRange.range.phrase_timings.map(timing => ({ ...timing }));
   }
 
-  const alignmentRange = findAlignmentRange(exercise.audio_clip?.recording_id, exercise.segment_ids, alignments);
-  return alignmentRange?.range?.phrase_timings?.map(timing => ({ ...timing })) || [];
+  return exercise.captions?.map(timing => ({ ...timing })) || [];
 }
 
 export function getExercisePhraseCount(exerciseId) {
@@ -869,8 +590,8 @@ export function getStandardActivityOptions(exerciseId) {
   const activityOptions = [...STANDARD_ACTIVITY_OPTIONS];
   if (getExercisePhraseCount(exerciseId) <= 12) {
     activityOptions.push({
-      label: 'Arrange',
-      activity_type: 'arrange-cloze'
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.arrange],
+      activity_type: PASSAGE_ACTIVITY_TYPES.arrange
     });
   }
   return activityOptions;
@@ -881,13 +602,25 @@ function getDerivedActivity(exercise, activityType) {
 
   const phraseIds = getPhraseIdsForLines(exercise.lines);
   const alignedCaptions = getAlignedCaptions(exercise);
-  const captions = alignedCaptions.length ? alignedCaptions : buildEvenCaptions(exercise.audio_clip, phraseIds);
-  const alignmentRange = findServiceAlignmentRange(
+  const captions = alignedCaptions;
+  const serviceAlignmentRange = findServiceAlignmentRange(
     exercise.service_text_id,
     exercise.service_range,
     exercise.audio_clip?.recording_id,
     alignments
-  ) || findAlignmentRange(exercise.audio_clip?.recording_id, exercise.segment_ids, alignments);
+  );
+  const mediaRange = exercise.media?.alignment_id
+    ? getAlignmentRange(
+        exercise.media.alignment_id,
+        exercise.segment_ids,
+        exercise.media.recording_id,
+        alignments
+      )
+    : null;
+  const mediaAlignmentRange = mediaRange
+    ? { alignment: alignments[exercise.media.alignment_id], range: mediaRange }
+    : null;
+  const alignmentRange = serviceAlignmentRange || mediaAlignmentRange;
   const commonActivity = {
     id: `${exercise.id}:${activityType}`,
     target: {
@@ -902,29 +635,29 @@ function getDerivedActivity(exercise, activityType) {
       : null
   };
 
-  if (activityType === 'listen-repeat') {
+  if (activityType === PASSAGE_ACTIVITY_TYPES.readListen) {
     return {
       ...commonActivity,
-      type: 'listen-repeat',
-      title: 'Listen & Repeat',
+      type: PASSAGE_ACTIVITY_TYPES.readListen,
+      title: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.readListen],
       captions
     };
   }
 
-  if (activityType === 'synced-caption') {
+  if (activityType === PASSAGE_ACTIVITY_TYPES.phraseCaptions) {
     return {
       ...commonActivity,
-      type: 'synced-caption',
-      title: 'Phrase Captions',
+      type: PASSAGE_ACTIVITY_TYPES.phraseCaptions,
+      title: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions],
       captions
     };
   }
 
-  if (activityType === 'arrange-cloze') {
+  if (activityType === PASSAGE_ACTIVITY_TYPES.arrange) {
     return {
       ...commonActivity,
-      type: 'arrange-cloze',
-      title: 'Arrange',
+      type: PASSAGE_ACTIVITY_TYPES.arrange,
+      title: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.arrange],
       cloze: {
         phrase_ids: phraseIds
       }

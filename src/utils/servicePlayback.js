@@ -5,7 +5,7 @@ import { getServiceText } from '../data/texts/serviceTexts.js';
 import { getIndexedServiceRangeKey, resolveServiceRange } from './serviceRanges.js';
 
 function getAlignmentRanges(alignment) {
-  return alignment?.ranges || alignment?.matches || [];
+  return alignment?.ranges || [];
 }
 
 function rangesOverlapSection(resolvedRange, sectionIndex) {

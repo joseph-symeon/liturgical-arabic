@@ -45,7 +45,6 @@ export default function SpeakerBlock(props) {
         arabicFontFamily: props.arabicFontFamily,
         arabicFontWeight: props.arabicFontWeight,
         arabicFontSize: props.arabicFontSize,
-        activePhraseId: props.activePhraseId,
         showSpeaker: true
       });
     });
@@ -65,7 +64,6 @@ export default function SpeakerBlock(props) {
         arabicFontFamily: props.arabicFontFamily,
         arabicFontWeight: props.arabicFontWeight,
         arabicFontSize: props.arabicFontSize,
-        activePhraseId: props.activePhraseId,
         showSpeaker
       });
     });

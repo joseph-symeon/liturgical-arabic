@@ -11,14 +11,12 @@ These files are hand-edited directly so course structure, phrase composition, se
 
 - `src/data/course/units.js`
 - `src/data/course/lessons.js`
-- `src/data/course/activities.js`
 - `src/data/course/exercises.js`
 - `src/data/texts/phrases.js`
 - `src/data/texts/segments.js`
 - `src/data/texts/serviceTexts.js`
 - `src/data/media/recordings.js`
 - `src/data/media/alignments.js`
-- `src/data/media/captionTracks.js`
 
 ## Notion Sync For Phrases
 

@@ -1,12 +1,11 @@
 import phrases from '../data/texts/phrases.js';
 import segments from '../data/texts/segments.js';
-import { exerciseDefinitions } from '../data/course/exercises.js';
+import exercises, { exerciseDefinitions } from '../data/course/exercises.js';
 import lessons from '../data/course/lessons.js';
 import units from '../data/course/units.js';
 import { serviceTextDefinitions } from '../data/texts/serviceTexts.js';
 import recordings from '../data/media/recordings.js';
 import { alignmentDefinitions } from '../data/media/alignments.js';
-import { activityDefinitions } from '../data/course/activities.js';
 import { resolveServiceRange } from './serviceRanges.js';
 
 function assertUnique(ids, label, errors) {
@@ -28,7 +27,7 @@ function getSegmentKey(segmentIds) {
 }
 
 function getAlignmentRanges(alignment) {
-  return alignment?.ranges || alignment?.matches || [];
+  return alignment?.ranges || [];
 }
 
 function findAlignmentRange(alignment, segmentIds) {
@@ -54,7 +53,6 @@ export function validateData() {
   const recordingIds = new Set(Object.keys(recordings));
   const alignmentIds = new Set(alignmentDefinitions.map(alignment => alignment.id));
   const alignmentsById = Object.fromEntries(alignmentDefinitions.map(alignment => [alignment.id, alignment]));
-  const activityIds = new Set(activityDefinitions.map(activity => activity.id));
   const serviceTextIds = new Set(serviceTextDefinitions.map(serviceText => serviceText.id));
   const serviceTextsById = Object.fromEntries(serviceTextDefinitions.map(serviceText => [serviceText.id, serviceText]));
   const activityPolicies = new Set(['standard']);
@@ -66,7 +64,6 @@ export function validateData() {
   assertUnique(units.map(unit => unit.id), 'units', errors);
   assertUnique(alignmentDefinitions.map(alignment => alignment.id), 'alignments', errors);
   assertUnique(serviceTextDefinitions.map(serviceText => serviceText.id), 'serviceTexts', errors);
-  assertUnique(activityDefinitions.map(activity => activity.id), 'activities', errors);
 
   Object.entries(segments).forEach(([segmentId, segment]) => {
     if (segment.speaker && !phraseIds.has(segment.speaker)) {
@@ -121,65 +118,8 @@ export function validateData() {
     });
   });
 
-  activityDefinitions.forEach(activity => {
-    if (!activity.type) {
-      errors.push(`Activity "${activity.id}" is missing "type".`);
-    }
-    if (!Array.isArray(activity.target?.segment_ids) || activity.target.segment_ids.length === 0) {
-      errors.push(`Activity "${activity.id}" must define target.segment_ids.`);
-    } else {
-      activity.target.segment_ids.forEach(segmentId => {
-        if (!segmentIds.has(segmentId)) {
-          errors.push(`Activity "${activity.id}" references missing segment "${segmentId}".`);
-        }
-      });
-    }
-    if (activity.media) {
-      const alignment = activity.media.alignment_id ? alignmentsById[activity.media.alignment_id] : null;
-      if (!activity.media.recording_id) {
-        errors.push(`Activity "${activity.id}" media is missing "recording_id".`);
-      } else if (!recordingIds.has(activity.media.recording_id)) {
-        errors.push(`Activity "${activity.id}" media references missing recording "${activity.media.recording_id}".`);
-      }
-      if (activity.media.alignment_id && !alignmentIds.has(activity.media.alignment_id)) {
-        errors.push(`Activity "${activity.id}" media references missing alignment "${activity.media.alignment_id}".`);
-      }
-      if (alignment && activity.media.recording_id && alignment.recording_id !== activity.media.recording_id) {
-        errors.push(`Activity "${activity.id}" media recording does not match alignment "${activity.media.alignment_id}".`);
-      }
-      if (alignment && !findAlignmentRange(alignment, activity.target?.segment_ids)) {
-        errors.push(`Activity "${activity.id}" target.segment_ids do not match alignment "${activity.media.alignment_id}".`);
-      }
-      if (activity.type === 'synced-caption' && alignment) {
-        const range = findAlignmentRange(alignment, activity.target?.segment_ids);
-        if (!Array.isArray(range?.phrase_timings) || range.phrase_timings.length === 0) {
-          errors.push(`Activity "${activity.id}" requires phrase_timings on alignment "${activity.media.alignment_id}".`);
-        }
-      }
-    }
-    if (activity.captions) {
-      if (!Array.isArray(activity.captions) || activity.captions.length === 0) {
-        errors.push(`Activity "${activity.id}" captions must be a non-empty array when present.`);
-      } else {
-        activity.captions.forEach((caption, index) => {
-          if (!caption.phrase_id || !phraseIds.has(caption.phrase_id)) {
-            errors.push(`Activity "${activity.id}" caption ${index + 1} references missing phrase "${caption.phrase_id}".`);
-          }
-          if (typeof caption.start_seconds !== 'number' || typeof caption.end_seconds !== 'number') {
-            errors.push(`Activity "${activity.id}" caption ${index + 1} must define numeric start_seconds and end_seconds.`);
-          } else if (caption.end_seconds <= caption.start_seconds) {
-            errors.push(`Activity "${activity.id}" caption ${index + 1} must end after it starts.`);
-          }
-        });
-      }
-    }
-  });
-
   exerciseDefinitions.forEach(exercise => {
-    if (exercise.activity_id && !activityIds.has(exercise.activity_id)) {
-      errors.push(`Exercise "${exercise.id}" references missing activity "${exercise.activity_id}".`);
-    }
-    if (!exercise.activity_id && (!Array.isArray(exercise.segment_ids) || exercise.segment_ids.length === 0)) {
+    if (!Array.isArray(exercise.segment_ids) || exercise.segment_ids.length === 0) {
       errors.push(`Exercise "${exercise.id}" must define a non-empty segment_ids array.`);
     } else if (exercise.segment_ids) {
       exercise.segment_ids.forEach(segmentId => {
@@ -209,6 +149,23 @@ export function validateData() {
       }
       if (exercise.caption_clip.alignment_id && !alignmentIds.has(exercise.caption_clip.alignment_id)) {
         errors.push(`Exercise "${exercise.id}" caption_clip references missing alignment "${exercise.caption_clip.alignment_id}".`);
+      }
+    }
+    if (exercise.media) {
+      const alignment = exercise.media.alignment_id ? alignmentsById[exercise.media.alignment_id] : null;
+      if (!exercise.media.recording_id) {
+        errors.push(`Exercise "${exercise.id}" media is missing "recording_id".`);
+      } else if (!recordingIds.has(exercise.media.recording_id)) {
+        errors.push(`Exercise "${exercise.id}" media references missing recording "${exercise.media.recording_id}".`);
+      }
+      if (exercise.media.alignment_id && !alignmentIds.has(exercise.media.alignment_id)) {
+        errors.push(`Exercise "${exercise.id}" media references missing alignment "${exercise.media.alignment_id}".`);
+      }
+      if (alignment && exercise.media.recording_id && alignment.recording_id !== exercise.media.recording_id) {
+        errors.push(`Exercise "${exercise.id}" media recording does not match alignment "${exercise.media.alignment_id}".`);
+      }
+      if (alignment && !findAlignmentRange(alignment, exercise.segment_ids)) {
+        errors.push(`Exercise "${exercise.id}" segment_ids do not match alignment "${exercise.media.alignment_id}".`);
       }
     }
     if (exercise.service_range && !exercise.service_text_id) {
@@ -320,8 +277,8 @@ export function validateData() {
       }
 
       if (item.audio_sequence && previousAudioSequenceItem?.audio_sequence === item.audio_sequence) {
-        const previousExercise = exerciseDefinitions.find(exercise => exercise.id === previousAudioSequenceItem.exercise_id);
-        const currentExercise = exerciseDefinitions.find(exercise => exercise.id === item.exercise_id);
+        const previousExercise = exercises[previousAudioSequenceItem.exercise_id];
+        const currentExercise = exercises[item.exercise_id];
         const previousClip = previousExercise?.audio_clip;
         const currentClip = currentExercise?.audio_clip;
         const previousRecording = previousClip?.recording_id || previousClip?.video_id;

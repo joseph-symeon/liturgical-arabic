@@ -17,23 +17,10 @@ import {
   useSortable
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import ArabicPhraseRenderer from './ArabicPhraseRenderer.jsx';
+import PassageTextRenderer from './PassageTextRenderer.jsx';
 import phrases from '../../data/texts/phrases.js';
 import { getArabicText } from '../../utils/arabic.js';
-
-function getActiveCaption(captions, currentTime, leadSeconds = 0, clipEndSeconds = null) {
-  if (typeof currentTime !== 'number') return null;
-  return captions.find((caption, index) => {
-    const nextCaption = captions[index + 1];
-    const isFinalCaption = index === captions.length - 1;
-    const displayStart = caption.start_seconds - leadSeconds;
-    const displayEnd = caption.display_end_seconds ?? (nextCaption
-      ? Math.min(caption.end_seconds, nextCaption.start_seconds - 0.01)
-      : Math.max(caption.end_seconds, clipEndSeconds ?? caption.end_seconds));
-    if (isFinalCaption) return currentTime >= displayStart && currentTime <= displayEnd;
-    return currentTime >= displayStart && currentTime < displayEnd;
-  }) || null;
-}
+import { isPhraseCaptionsActivity, isReadListenActivity, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 
 function getShuffledPhraseIds(phraseIds, seed = '') {
   return [...phraseIds].sort((first, second) => {
@@ -160,11 +147,11 @@ function getArrangeRows(arrangedPhraseIds, lineCounts) {
   });
 }
 
-export default function ExerciseBlock({ exercise, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight, arabicFontSize, karaokeMode = false, syncedCaptionTextMode = 'none', syncedTime = null }) {
-  const isListenRepeatActivity = exercise.activity?.type === 'listen-repeat';
-  const isClozeActivity = exercise.activity?.type === 'cloze' || exercise.activity?.type === 'arrange-cloze';
-  const isArrangeClozeActivity = exercise.activity?.type === 'arrange-cloze';
-  const isSyncedCaptionActivity = exercise.activity?.type === 'synced-caption';
+export default function PassageActivityBody({ exercise, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight, arabicFontSize, karaokeActiveCaption = null }) {
+  const isReadListen = isReadListenActivity(exercise.activity?.type);
+  const isArrangeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.arrange;
+  const isClozeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.cloze || isArrangeActivity;
+  const isPhraseCaptions = isPhraseCaptionsActivity(exercise.activity?.type);
   const [clozeRevealed, setClozeRevealed] = useState(false);
   const [arrangedPhraseIds, setArrangedPhraseIds] = useState([]);
   const [arrangeChecked, setArrangeChecked] = useState(false);
@@ -195,12 +182,7 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
   );
   const arrangeAnswerLineCount = arrangeLineCounts.reduce((sum, count) => sum + Math.max(1, Math.ceil(count / 2)), 0);
   const arrangeRows = getArrangeRows(arrangedPhraseIds, arrangeLineCounts);
-  const captions = exercise.activity?.captions || [];
-  const leadSeconds = exercise.activity?.sync_lead_seconds ?? 0;
-  const initialSyncedCaption = isSyncedCaptionActivity && typeof syncedTime !== 'number' ? captions[0] : null;
-  const activeCaption = getActiveCaption(captions, syncedTime, leadSeconds, exercise.audio_clip?.end_seconds) || initialSyncedCaption;
-  const activePhrase = activeCaption ? phrases[activeCaption.phrase_id] : null;
-  const karaokeActivePhraseId = isListenRepeatActivity && karaokeMode ? activeCaption?.phrase_id : null;
+  const activeCaption = isReadListen ? karaokeActiveCaption : null;
 
   useEffect(() => {
     if (arrangeFeedbackTimerRef.current) {
@@ -229,7 +211,7 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
 
   function renderPhraseLines(lines) {
     return (
-      <ArabicPhraseRenderer
+      <PassageTextRenderer
         lines={lines}
         arabicMode={arabicMode}
         readerLayout={readerLayout}
@@ -238,40 +220,8 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
         arabicFontWeight={arabicFontWeight}
         arabicFontSize={arabicFontSize}
         showSpeakers={exercise.show_speakers}
-        activePhraseId={karaokeActivePhraseId}
+        activeCaption={activeCaption}
       />
-    );
-  }
-
-  function renderSyncedCaptionActivity() {
-    const syncedCaptionSecondaryText = syncedCaptionTextMode === 'translation'
-      ? activePhrase?.translation
-      : syncedCaptionTextMode === 'literal'
-        ? activePhrase?.literal
-        : null;
-
-    return (
-      <>
-        <div className="lp-synced-stage" dir="rtl">
-          {activePhrase && (
-            <div
-              className="lp-synced-line active"
-              key={activeCaption.phrase_id}
-              style={{
-                fontFamily: arabicFontFamily,
-                fontWeight: arabicFontWeight
-              }}
-            >
-              <div className="lp-synced-arabic">{getArabicText(activePhrase, arabicMode)}</div>
-              {syncedCaptionSecondaryText && (
-                <div className="lp-synced-translation" dir="ltr">
-                  {syncedCaptionSecondaryText}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </>
     );
   }
 
@@ -298,7 +248,7 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
           const currentBlankIndex = isBlank ? getNextBlankIndex() : -1;
           const arrangedPhraseId = arrangedPhraseIds[currentBlankIndex];
           const arrangedPhrase = arrangedPhraseId ? phrases[arrangedPhraseId] : null;
-          const showClozeAnswer = clozeRevealed || (isArrangeClozeActivity && arrangedPhrase);
+          const showClozeAnswer = clozeRevealed || (isArrangeActivity && arrangedPhrase);
           if (!isBlank || clozeRevealed) {
             return (
               <span className={isBlank ? 'lp-cloze-answer' : undefined} key={`${line.line_order}-${part.phrase_id}-${index}`}>
@@ -313,7 +263,7 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
                 className="lp-cloze-filled"
                 key={`${line.line_order}-${part.phrase_id}-${index}`}
                 onClick={() => {
-                  if (!isArrangeClozeActivity) return;
+                  if (!isArrangeActivity) return;
                   setArrangeChecked(false);
                   setArrangedPhraseIds(ids => ids.filter((_, phraseIndex) => phraseIndex !== currentBlankIndex));
                 }}
@@ -450,14 +400,16 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
     );
   }
 
+  if (isPhraseCaptions) return null;
+
   return (
     <div className="lp-exercise">
-      {isArrangeClozeActivity ? (
+      {isArrangeActivity ? (
         renderArrangeActivity()
       ) : isClozeActivity ? (
         <div className="lp-cloze-activity" dir="ltr">
           <div className="lp-cloze-prompt">
-            {isArrangeClozeActivity ? 'Arrange the missing phrases in the correct order while listening.' : 'Fill in the missing repeated phrases while listening.'}
+            {isArrangeActivity ? 'Arrange the missing phrases in the correct order while listening.' : 'Fill in the missing repeated phrases while listening.'}
           </div>
           <div className="lp-cloze-lines">
             {(() => {
@@ -469,7 +421,7 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
               ));
             })()}
           </div>
-          {isArrangeClozeActivity && (
+          {isArrangeActivity && (
             <div className="lp-arrange-bank">
               {clozePhraseIds.map(phraseId => {
                 const phrase = phrases[phraseId];
@@ -497,7 +449,7 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
             </div>
           )}
           <div className="lp-activity-actions">
-            {isArrangeClozeActivity ? (
+            {isArrangeActivity ? (
               <>
                 <button
                   type="button"
@@ -525,14 +477,14 @@ export default function ExerciseBlock({ exercise, arabicMode, readerLayout, spee
               </button>
             )}
           </div>
-          {isArrangeClozeActivity && arrangeChecked && (
+          {isArrangeActivity && arrangeChecked && (
             <div className={`lp-arrange-result${arrangementCorrect ? ' correct' : ' incorrect'}`}>
               {arrangementCorrect ? 'Correct order' : 'Not quite yet'}
             </div>
           )}
         </div>
-      ) : isSyncedCaptionActivity ? (
-        renderSyncedCaptionActivity()
+      ) : isPhraseCaptions ? (
+        null
       ) : (
         renderPhraseLines(exercise.lines)
       )}

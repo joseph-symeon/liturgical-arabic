@@ -140,55 +140,55 @@ const lessons = [
     "exercises": [
       {
         "title": "Glory",
-        "exercise_id": "caption-poc-glory-beginner",
+        "exercise_id": "glory-beginner",
         "activity_options": [
           {
-            "label": "Listen & Repeat",
-            "exercise_id": "caption-poc-glory-beginner"
+            "label": "Read & Listen",
+            "activity_type": "read-listen"
           },
           {
             "label": "Phrase Captions",
-            "exercise_id": "activity-demo-synced-caption-glory-beginner"
+            "activity_type": "phrase-captions"
           },
           {
             "label": "Arrange",
-            "activity_type": "arrange-cloze"
+            "activity_type": "arrange"
           }
         ]
       },
       {
         "title": "Both now",
-        "exercise_id": "caption-poc-both-now-beginner",
+        "exercise_id": "both-now-beginner",
         "activity_options": [
           {
-            "label": "Listen & Repeat",
-            "exercise_id": "caption-poc-both-now-beginner"
+            "label": "Read & Listen",
+            "activity_type": "read-listen"
           },
           {
             "label": "Phrase Captions",
-            "exercise_id": "activity-demo-synced-caption-both-now-beginner"
+            "activity_type": "phrase-captions"
           },
           {
             "label": "Arrange",
-            "activity_type": "arrange-cloze"
+            "activity_type": "arrange"
           }
         ]
       },
       {
         "title": "Glory. Both now.",
-        "exercise_id": "caption-poc-glory-both-now-beginner",
+        "exercise_id": "glory-both-now-beginner",
         "activity_options": [
           {
-            "label": "Listen & Repeat",
-            "exercise_id": "caption-poc-glory-both-now-beginner"
+            "label": "Read & Listen",
+            "activity_type": "read-listen"
           },
           {
             "label": "Phrase Captions",
-            "exercise_id": "activity-demo-synced-caption-glory-both-now"
+            "activity_type": "phrase-captions"
           },
           {
             "label": "Arrange",
-            "activity_type": "arrange-cloze"
+            "activity_type": "arrange"
           }
         ]
       }
@@ -204,19 +204,19 @@ const lessons = [
     "exercises": [
       {
         "title": "Thrice Holy Hymn",
-        "exercise_id": "activity-demo-listen-repeat-holy-god",
+        "exercise_id": "trisagion-hymn-core",
         "activity_options": [
           {
-            "label": "Listen & Repeat",
-            "exercise_id": "activity-demo-listen-repeat-holy-god"
+            "label": "Read & Listen",
+            "activity_type": "read-listen"
           },
           {
             "label": "Phrase Captions",
-            "exercise_id": "activity-demo-synced-caption-holy-god"
+            "activity_type": "phrase-captions"
           },
           {
             "label": "Arrange",
-            "exercise_id": "activity-demo-cloze-holy-god"
+            "activity_type": "arrange"
           }
         ]
       }
@@ -282,16 +282,16 @@ const lessons = [
         "exercise_id": "lord-have-mercy",
         "activity_options": [
           {
-            "label": "Listen & Repeat",
-            "exercise_id": "lord-have-mercy"
+            "label": "Read & Listen",
+            "activity_type": "read-listen"
           },
           {
             "label": "Phrase Captions",
-            "exercise_id": "activity-demo-synced-caption-lord-have-mercy"
+            "activity_type": "phrase-captions"
           },
           {
             "label": "Arrange",
-            "exercise_id": "activity-demo-arrange-lord-have-mercy"
+            "activity_type": "arrange"
           }
         ]
       }
@@ -320,35 +320,35 @@ const lessons = [
     "exercises": [
       {
         "title": "All Holy Trinity",
-        "exercise_id": "caption-poc-all-holy-trinity-address"
+        "exercise_id": "all-holy-trinity-address"
       },
       {
         "title": "O Lord",
-        "exercise_id": "caption-poc-all-holy-trinity-lord"
+        "exercise_id": "all-holy-trinity-lord"
       },
       {
         "title": "O Master",
-        "exercise_id": "caption-poc-all-holy-trinity-master"
+        "exercise_id": "all-holy-trinity-master"
       },
       {
         "title": "O Holy One",
-        "exercise_id": "caption-poc-all-holy-trinity-holy-one"
+        "exercise_id": "all-holy-trinity-holy-one"
       },
       {
         "title": "All Holy Trinity",
-        "exercise_id": "caption-poc-all-holy-trinity",
+        "exercise_id": "all-holy-trinity",
         "activity_options": [
           {
-            "label": "Listen & Repeat",
-            "exercise_id": "caption-poc-all-holy-trinity"
+            "label": "Read & Listen",
+            "activity_type": "read-listen"
           },
           {
             "label": "Phrase Captions",
-            "exercise_id": "activity-demo-synced-caption-all-holy-trinity"
+            "activity_type": "phrase-captions"
           },
           {
             "label": "Arrange",
-            "exercise_id": "activity-demo-arrange-all-holy-trinity"
+            "activity_type": "arrange"
           }
         ]
       }

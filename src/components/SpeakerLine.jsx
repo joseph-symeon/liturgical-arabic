@@ -93,8 +93,7 @@ export default function SpeakerLine(props) {
         speechRate: props.speechRate,
         arabicFontFamily: props.arabicFontFamily,
         arabicFontWeight: props.arabicFontWeight,
-        arabicFontSize: props.arabicFontSize,
-        activePhraseId: props.activePhraseId
+        arabicFontSize: props.arabicFontSize
       })
     )
   );

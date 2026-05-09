@@ -79,10 +79,14 @@ export default function YouTubeClipPlayer({ videoId, recordingId, startSeconds, 
     }, Math.max(0, (remainingSeconds / playbackRate) * 1000));
     intervalRef.current = setInterval(() => {
       if (!player) return;
-      const clock = playClockRef.current;
-      const estimatedTime = clock.mediaTime + ((performance.now() - clock.wallTime) / 1000) * clock.playbackRate;
-      emitTimeUpdate(estimatedTime);
-      if (estimatedTime >= endSeconds) {
+      const currentTime = player.getCurrentTime();
+      playClockRef.current = {
+        mediaTime: currentTime,
+        wallTime: performance.now(),
+        playbackRate: playbackRateRef.current || 1
+      };
+      emitTimeUpdate(currentTime);
+      if (currentTime >= endSeconds) {
         finishClip(player);
         return;
       }

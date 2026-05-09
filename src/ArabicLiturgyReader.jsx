@@ -1,89 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { defaultServiceText } from "./data/texts/serviceTexts.js";
 import phrases from "./data/texts/phrases.js";
-import segments from "./data/texts/segments.js";
-import recordings from "./data/media/recordings.js";
-import SpeakerBlock from "./components/SpeakerBlock.jsx";
 import PageHeader from "./components/PageHeader.jsx";
+import PassageExperience from "./components/passage/PassageExperience.jsx";
+import PassageRenderer from "./components/passage/PassageRenderer.jsx";
 import { getArabicText } from "./utils/arabic.js";
-import { getServiceSectionPlayback } from "./utils/servicePlayback.js";
-import YouTubeClipPlayer from "./components/course/YouTubeClipPlayer.jsx";
+import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from "./utils/passageActivities.js";
+import { createServiceSectionPassage } from "./utils/passages.js";
+import {
+  getStoredActivitySelection,
+  storeActivitySelection
+} from "./utils/activitySelectionStorage.js";
 import "./components/course/course.css";
 
 const h = React.createElement;
 const readerSections = defaultServiceText.sections;
-const READER_SECTION_AUDIO = {
-  [readerSections.findIndex(section => section.section === "Blessed is the Kingdom")]: {
-    recording_id: "recording-KJKt0V4zJjY"
-  },
-  [readerSections.findIndex(section => section.section === "The Second Antiphon")]: {
-    recording_id: "recording--dufaXx7Hm0"
-  }
-};
+const READER_ACTIVITY_OPTIONS = [
+  { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.readListen], value: PASSAGE_ACTIVITY_TYPES.readListen },
+  { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions], value: PASSAGE_ACTIVITY_TYPES.phraseCaptions }
+];
 
-function getActiveCaption(captions, currentTime, clipEndSeconds = null) {
-  if (typeof currentTime !== "number") return null;
-  return captions.find((caption, index) => {
-    const nextCaption = captions[index + 1];
-    const isFinalCaption = index === captions.length - 1;
-    const displayEnd = caption.display_end_seconds ?? (nextCaption
-      ? Math.min(caption.end_seconds, nextCaption.start_seconds - 0.01)
-      : Math.max(caption.end_seconds, clipEndSeconds ?? caption.end_seconds));
-    return isFinalCaption
-      ? currentTime >= caption.start_seconds && currentTime <= displayEnd
-      : currentTime >= caption.start_seconds && currentTime < displayEnd;
-  }) || null;
+function getReaderActivitySelectionKey(sectionIndex) {
+  return `${defaultServiceText.id}:section:${sectionIndex}`;
 }
 
-function getCaptionsForPlayback(playback) {
-  const ranges = playback?.aligned_ranges || [];
-  const selectedRanges = [];
-  const usedSegmentIndexes = new Set();
-
-  [...ranges]
-    .sort((first, second) => (
-      (second.resolved_service_range.end.segment_index - second.resolved_service_range.start.segment_index)
-        - (first.resolved_service_range.end.segment_index - first.resolved_service_range.start.segment_index)
-    ))
-    .forEach(range => {
-      const indexes = [];
-      for (
-        let index = range.resolved_service_range.start.segment_index;
-        index <= range.resolved_service_range.end.segment_index;
-        index += 1
-      ) {
-        indexes.push(index);
-      }
-      if (indexes.some(index => usedSegmentIndexes.has(index))) return;
-      indexes.forEach(index => usedSegmentIndexes.add(index));
-      selectedRanges.push(range);
-    });
-
-  return selectedRanges
-    .flatMap(range => Object.entries(range.segment_timings || {}).flatMap(([segmentId, timing]) => (
-      (timing.phrase_timings || []).map(phraseTiming => ({
-        ...phraseTiming,
-        segment_id: segmentId,
-        range_key: range.resolved_service_range.key
-      }))
-    )))
-    .filter(Boolean)
-    .sort((first, second) => first.start_seconds - second.start_seconds);
-}
-
-function getPlaybackClip(playback) {
-  const ranges = playback?.aligned_ranges || [];
-  if (ranges.length === 0) return null;
-
-  return ranges.reduce((clip, range) => ({
-    recording_id: range.recording_id,
-    start_seconds: Math.min(clip.start_seconds, range.start_seconds),
-    end_seconds: Math.max(clip.end_seconds, range.end_seconds)
-  }), {
-    recording_id: ranges[0].recording_id,
-    start_seconds: ranges[0].start_seconds,
-    end_seconds: ranges[0].end_seconds
-  });
+function getReaderActivity(sectionIndex) {
+  return getStoredActivitySelection(
+    getReaderActivitySelectionKey(sectionIndex),
+    READER_ACTIVITY_OPTIONS.map(option => option.value)
+  ) || PASSAGE_ACTIVITY_TYPES.readListen;
 }
 
 export default function ArabicLiturgyReader({
@@ -104,40 +49,23 @@ export default function ArabicLiturgyReader({
   onTableOfContents,
   onSelectSection
 }) {
-  const [readerActivity, setReaderActivity] = useState("read-listen");
-  const [syncedTime, setSyncedTime] = useState(null);
   const isTableOfContents = selectedSectionIndex === null;
+  const [readerActivity, setReaderActivity] = useState(() => (
+    isTableOfContents ? PASSAGE_ACTIVITY_TYPES.readListen : getReaderActivity(selectedSectionIndex)
+  ));
   const selectedSection = isTableOfContents ? null : readerSections[selectedSectionIndex] || readerSections[0];
-  const selectedSectionSegments = selectedSection
-    ? selectedSection.segment_ids.map(segmentId => segments[segmentId]).filter(Boolean)
-      .filter(segment => showQuietPrayers || !segment.tags?.includes("quiet"))
-    : [];
-  const selectedSectionLines = selectedSectionSegments
-    .map((segment, index) => ({
-      ...segment,
-      segment_id: selectedSection.segment_ids[index],
-      line_order: index + 1,
-      phrases: segment.phrases.map(part => ({ ...part }))
-    }));
-  const sectionAudio = isTableOfContents ? null : READER_SECTION_AUDIO[selectedSectionIndex] || null;
-  const sectionPlayback = sectionAudio
-    ? getServiceSectionPlayback({
-        service_text_id: defaultServiceText.id,
-        section_index: selectedSectionIndex,
-        recording_id: sectionAudio.recording_id
-      })
-    : null;
-  const playbackClip = getPlaybackClip(sectionPlayback);
-  const captions = getCaptionsForPlayback(sectionPlayback);
-  const activeCaption = getActiveCaption(captions, syncedTime, playbackClip?.end_seconds) || (
-    readerActivity === "phrase-captions" ? captions[0] : null
-  );
-  const activePhrase = activeCaption ? phrases[activeCaption.phrase_id] : null;
-  const activePhraseId = activeCaption?.phrase_id || null;
+  const passage = isTableOfContents
+    ? null
+    : createServiceSectionPassage({
+        serviceText: defaultServiceText,
+        sectionIndex: selectedSectionIndex,
+        showQuietPrayers
+      });
 
   useEffect(() => {
-    setSyncedTime(null);
-  }, [selectedSectionIndex, readerActivity]);
+    if (isTableOfContents) return;
+    setReaderActivity(getReaderActivity(selectedSectionIndex));
+  }, [isTableOfContents, selectedSectionIndex]);
 
   function renderArabicTitle(phrase) {
     if (!phrase) return null;
@@ -297,85 +225,44 @@ export default function ArabicLiturgyReader({
     );
   }
 
-  function renderSectionPlayer() {
-    if (!playbackClip) return null;
-    const recording = recordings[playbackClip.recording_id];
-    const videoId = recording?.youtube?.video_id;
-    const clipKey = [
-      playbackClip.recording_id,
-      playbackClip.start_seconds,
-      playbackClip.end_seconds,
-      readerActivity
-    ].join(":");
+  function renderSectionPassageExperience() {
+    function renderPassage(karaokeActiveCaption = null) {
+      return h(PassageRenderer, {
+        key: passage.segment_ids.join(":") + selectedSectionIndex,
+        section: {
+          lines: passage.lines,
+          section: passage.section.section,
+          section_title_phrase: passage.section.section_title_phrase
+        },
+        arabicMode,
+        speechRate,
+        arabicFontFamily,
+        arabicFontWeight,
+        arabicFontSize,
+        readerLayout,
+        activeCaption: karaokeActiveCaption,
+        showSectionHeading: false
+      });
+    }
 
-    return h(YouTubeClipPlayer, {
-      key: clipKey,
-      videoId,
-      recordingId: playbackClip.recording_id,
-      startSeconds: playbackClip.start_seconds,
-      endSeconds: playbackClip.end_seconds,
-      defaultPlaybackRate: 1,
-      onTimeUpdate: setSyncedTime
+    if (!passage?.playback) return renderPassage();
+    return h(PassageExperience, {
+      passage,
+      activityLabel: PASSAGE_ACTIVITY_LABELS[readerActivity],
+      activitySelectId: "reader-activity-select",
+      activityOptions: READER_ACTIVITY_OPTIONS,
+      selectedActivityValue: readerActivity,
+      onSelectActivity: value => {
+        setReaderActivity(value);
+        storeActivitySelection(getReaderActivitySelectionKey(selectedSectionIndex), value);
+      },
+      activityType: readerActivity,
+      resetKey: selectedSectionIndex,
+      arabicMode,
+      arabicFontFamily,
+      arabicFontWeight,
+      renderPassage: ({ karaokeActiveCaption }) => renderPassage(karaokeActiveCaption)
     });
-  }
-
-  function renderSectionActivityToolbar() {
-    if (!sectionPlayback) return null;
-    return h(
-      React.Fragment,
-      null,
-      h(
-        "div",
-        { className: "lp-activity-toolbar" },
-        h(
-          "div",
-          { className: "lp-activity-controls" },
-          h("label", { className: "lp-activity-control-label", htmlFor: "reader-activity-select" }, "Activity"),
-          h(
-            "div",
-            { className: "lp-activity-card" },
-            h(
-              "div",
-              { className: "lp-activity-field" },
-              h(
-                "select",
-                {
-                  id: "reader-activity-select",
-                  className: "lp-activity-select",
-                  value: readerActivity,
-                  onChange: event => setReaderActivity(event.target.value)
-                },
-                h("option", { value: "read-listen" }, "Read & Listen"),
-                h("option", { value: "phrase-captions" }, "Phrase Captions")
-              )
-            )
-          )
-        ),
-        h("div", { className: "lp-toolbar-player" }, renderSectionPlayer())
-      )
-    );
-  }
-
-  function renderPhraseCaptionStage() {
-    if (!sectionPlayback || readerActivity !== "phrase-captions") return null;
-    return h(
-      "div",
-      { className: "lp-synced-stage", dir: "rtl" },
-      activePhrase
-        ? h(
-            "div",
-            {
-              className: "lp-synced-line active",
-              key: activeCaption.phrase_id,
-              style: {
-                fontFamily: arabicFontFamily,
-                fontWeight: arabicFontWeight
-              }
-            },
-            h("div", { className: "lp-synced-arabic" }, getArabicText(activePhrase, arabicMode))
-          )
-        : null
-    );
   }
 
   return h(
@@ -403,24 +290,7 @@ export default function ArabicLiturgyReader({
       : h(
           React.Fragment,
           null,
-          renderSectionActivityToolbar(),
-          renderPhraseCaptionStage(),
-          h(SpeakerBlock, {
-            key: selectedSection.segment_ids.join(":") + selectedSectionIndex,
-            section: {
-              lines: selectedSectionLines,
-              section: selectedSection.section,
-              section_title_phrase: selectedSection.section_title_phrase
-            },
-            arabicMode,
-            speechRate,
-            arabicFontFamily,
-            arabicFontWeight,
-            arabicFontSize,
-            readerLayout,
-            activeCaption: readerActivity === "read-listen" ? activeCaption : null,
-            showSectionHeading: false
-          })
+          renderSectionPassageExperience()
         ),
     renderSectionNav("bottom-page-nav grid gap-2")
   );

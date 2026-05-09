@@ -17,17 +17,14 @@ src/data/texts/serviceTexts.js
 src/data/media/recordings.js
   Media source metadata, usually YouTube-hosted audio/video.
 
-src/data/media/captionTracks.js
-  Runtime word timing data used for matching and fallback clip derivation.
-
 src/data/media/alignments.js
   Curated mappings from service text segments to seconds in a recording.
 
-src/data/course/activities.js
-  Learning interactions over target segment ids and recording alignments.
+src/data/course/exercises.js
+  Pedagogical passage selections over segment ids, with optional media.
 
 src/data/course/lessons.js
-  Pedagogical sequences of activities/exercises for the course.
+  Pedagogical ordering and activity-mode choices for the course.
 ```
 
 ## Important Relationships
@@ -46,17 +43,15 @@ This lets the same phrase appear in many services and many recordings without du
 
 ## Runtime Audio And Caption Flow
 
-Activities choose what to practice:
+Exercises choose what to practice:
 
 ```js
 {
-  type: "synced-caption",
-  target: {
-    segment_ids: ["course-glory-beginner", "course-both-now-beginner"]
-  },
+  id: "glory-both-now-beginner",
+  segment_ids: ["course-glory-beginner", "course-both-now-beginner"],
   media: {
     recording_id: "recording-g_4r4wzt2Vg",
-    alignment_id: "alignment-great-compline-g_4r4wzt2Vg-poc-v1"
+    alignment_id: "alignment-great-compline-g_4r4wzt2Vg-v1"
   }
 }
 ```
@@ -78,9 +73,7 @@ Alignments provide the actual timings:
 }
 ```
 
-The player uses `recording_id` to find the hosted YouTube source, then uses `start_seconds` and `end_seconds` for audio. Synced-caption activities use `phrase_timings` for text display.
-
-Legacy course clips can still provide a direct `video_id` until that audio has been imported as a first-class recording. New clips should prefer `recording_id` plus alignment data.
+The player uses `recording_id` to find the hosted YouTube source, then uses `start_seconds` and `end_seconds` for audio. Read & Listen and Phrase Captions use `phrase_timings` for synchronized text display.
 
 Alignment timings should be refined against the cached audio waveform before they become first-class data. ASR/CC timings locate the text, but the committed `start_seconds` and `end_seconds` represent the musical/textual boundary heard in the recording.
 
@@ -89,9 +82,8 @@ Alignment timings should be refined against the cached audio waveform before the
 Commit:
 
 - service text definitions
-- phrase/segment/activity/lesson data
+- phrase/segment/exercise/lesson data
 - recording manifests
-- ASR word timestamp JSON
 - curated alignments
 
 Do not commit:

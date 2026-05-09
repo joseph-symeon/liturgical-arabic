@@ -4,9 +4,7 @@ import { pathToFileURL } from 'node:url';
 
 const inboxRoot = resolve(process.argv[2] || '.recording-cache/imports');
 const recordingsOutputPath = resolve('src/data/media/recordings.js');
-const captionTracksOutputPath = resolve('src/data/media/captionTracks.js');
 const existingRecordingDefinitions = await loadExistingRecordingDefinitions();
-const existingCaptionTracks = await loadExistingCaptionTracks();
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, 'utf8'));
@@ -34,15 +32,6 @@ async function loadExistingRecordingDefinitions() {
   }
 }
 
-async function loadExistingCaptionTracks() {
-  try {
-    const module = await import(`${pathToFileURL(captionTracksOutputPath).href}?t=${Date.now()}`);
-    return module.default || {};
-  } catch {
-    return {};
-  }
-}
-
 function getRecordingSortKey(recording, dir = '') {
   const service = recording.service_text_id || '';
   const playlist = recording.youtube?.playlist_id || '';
@@ -67,18 +56,7 @@ for (const dir of getInboxDirs(inboxRoot)) {
     continue;
   }
 
-  const asrPath = recording.captions?.local_path
-    ? resolve(recording.captions.local_path)
-    : join(dir, recording.captions?.source_file_name || `${recording.id}.asr.json`);
-
-  let asr = null;
-  try {
-    asr = readJson(asrPath);
-  } catch {
-    // Recordings can still be promoted without caption tracks.
-  }
-
-  promoted.push({ dir, recording, asr });
+  promoted.push({ dir, recording });
 }
 
 promoted.sort((first, second) => (
@@ -138,53 +116,19 @@ promotedRecordingDefinitions.forEach(recording => {
 const recordingDefinitions = [...recordingDefinitionsById.values()]
   .sort((first, second) => getRecordingSortKey(first).localeCompare(getRecordingSortKey(second)));
 
-const captionTracks = { ...existingCaptionTracks };
-
-for (const { recording, asr } of promoted) {
-  if (Array.isArray(asr?.words)) {
-    captionTracks[recording.id] = {
-      recording_id: recording.id,
-      video_id: recording.youtube?.video_id,
-      source: [asr.engine || 'faster-whisper', asr.model].filter(Boolean).join('-'),
-      language: asr.language || recording.language || 'ar',
-      duration_seconds: asr.duration_seconds || recording.youtube?.duration_seconds || null,
-      words: asr.words.map(word => ({
-        text: word.text,
-        start: word.start,
-        end: word.end
-      }))
-    };
-    continue;
-  }
-
-  if (existingCaptionTracks[recording.id]) {
-    captionTracks[recording.id] = existingCaptionTracks[recording.id];
-  }
-}
-
 writeJsModule(
   recordingsOutputPath,
-  '// First-class recording source definitions.\n// Recordings are reusable media sources that activities and alignments can reference.',
+  '// First-class recording source definitions.\n// Recordings are reusable media sources that passages and alignments can reference.',
   'recordingDefinitions',
   recordingDefinitions,
   'const recordings = Object.fromEntries(\n  recordingDefinitions.map(recording => [recording.id, recording])\n);\n\nexport { recordingDefinitions };\nexport default recordings;'
-);
-
-writeJsModule(
-  captionTracksOutputPath,
-  '// Curated caption timing data promoted from local recording imports.\n// Raw ASR segment/probability data stays in the local recording cache, not in runtime data.',
-  'captionTracks',
-  captionTracks,
-  'export default captionTracks;'
 );
 
 console.log(JSON.stringify({
   inbox_root: relative(process.cwd(), inboxRoot),
   promoted_recordings: promotedRecordingDefinitions.length,
   recordings: recordingDefinitions.length,
-  caption_tracks: Object.keys(captionTracks).length,
   wrote: [
-    relative(process.cwd(), recordingsOutputPath),
-    relative(process.cwd(), captionTracksOutputPath)
+    relative(process.cwd(), recordingsOutputPath)
   ]
 }, null, 2));
