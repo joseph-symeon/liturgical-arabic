@@ -165,7 +165,7 @@
 
 .lp-mode-toggle input:checked + .lp-mode-switch {
   border-color: var(--liturgical-red-highlight-ring);
-  background: var(--liturgical-red-highlight-fill);
+  background: var(--liturgical-red-toggle-fill);
 }
 
 .lp-mode-toggle input:checked + .lp-mode-switch::after {
@@ -178,7 +178,15 @@
 
 .lp-setting-option.active {
   border-color: var(--liturgical-red-highlight-ring);
-  background: var(--liturgical-red-highlight-fill);
+  background: var(--liturgical-red-toggle-fill);
+}
+
+.lp-reset-display-button {
+  border: 1px solid var(--liturgical-red);
+  background: color-mix(in srgb, var(--liturgical-red) 10%, transparent);
+  color: var(--liturgical-red);
+  font-size: 14px !important;
+  padding: 8px 12px !important;
 }
 
 .lp-segmented-control {
@@ -508,10 +516,6 @@
   margin: 18px 0 0;
 }
 
-.lp-type-arabic-model {
-  color: #1c1917;
-}
-
 .lp-type-arabic-label {
   color: #57534e;
   font-size: 14px;
@@ -519,37 +523,87 @@
   line-height: 1.2;
 }
 
-.lp-type-arabic-input {
+.lp-type-arabic-copybox {
   box-sizing: border-box;
+  position: relative;
   width: 100%;
   min-height: 56px;
-  max-height: 22svh;
   border: 1px solid #d6d3d1;
   border-radius: 8px;
   background: #fff;
-  color: #1c1917;
-  font-size: 22px;
-  line-height: 1.45;
-  padding: 8px 12px;
-  resize: vertical;
+  --trace-input-font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --trace-input-font-size: 22px;
+  --trace-input-font-weight: 400;
+  --trace-input-line-height: 1.45;
+  overflow: hidden;
   transition: background-color 700ms ease, border-color 700ms ease, color 700ms ease;
 }
 
+.lp-type-arabic-trace {
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  background: transparent;
+  color: #1c1917;
+  font-family: var(--trace-input-font-family);
+  font-size: var(--trace-input-font-size);
+  font-weight: var(--trace-input-font-weight);
+  line-height: var(--trace-input-line-height);
+  opacity: 0.24;
+  overflow: hidden;
+  padding: 8px 12px;
+  pointer-events: none;
+  resize: none;
+  text-align: right;
+}
+
+.lp-type-arabic-input {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  background: transparent;
+  color: #1c1917;
+  font-family: var(--trace-input-font-family);
+  font-size: var(--trace-input-font-size);
+  font-weight: var(--trace-input-font-weight);
+  line-height: var(--trace-input-line-height);
+  overflow: hidden;
+  padding: 8px 12px;
+  resize: none;
+}
+
 .lp-type-arabic-input:focus {
+  outline: none;
+}
+
+.lp-type-arabic-copybox:focus-within {
   border-color: #a8a29e;
   outline: 2px solid rgba(168, 162, 158, 0.28);
   outline-offset: 2px;
 }
 
-.lp-type-arabic-input.correct {
+.lp-type-arabic-copybox.correct {
   border-color: #166534;
   background: color-mix(in srgb, #166534 14%, transparent);
+}
+
+.lp-type-arabic-copybox.correct .lp-type-arabic-input {
   color: #166534;
 }
 
-.lp-type-arabic-input.incorrect {
+.lp-type-arabic-copybox.incorrect {
   border-color: var(--liturgical-red);
   background: color-mix(in srgb, var(--liturgical-red) 12%, transparent);
+}
+
+.lp-type-arabic-copybox.incorrect .lp-type-arabic-input {
   color: var(--liturgical-red);
 }
 
@@ -884,7 +938,7 @@
 
 .lp-progress-bar {
   --progress-track: #d6d3d1;
-  --progress-fill: var(--liturgical-red-highlight-fill);
+  --progress-fill: var(--liturgical-red-toggle-fill);
   --progress-thumb: var(--liturgical-red);
   -webkit-appearance: none;
   appearance: none;
@@ -1198,7 +1252,7 @@
   .lp-speed-menu,
   .lp-arrange-tile,
   .lp-arrange-answer-tile,
-  .lp-type-arabic-input,
+  .lp-type-arabic-copybox,
   .lp-matching-card {
     background: var(--dark-surface);
     border-color: var(--dark-border);
@@ -1240,7 +1294,7 @@
   }
 
   .lp-setting-option.active {
-    background: var(--liturgical-red-highlight-fill);
+    background: var(--liturgical-red-toggle-fill);
   }
 
   .lp-setting-control-box {
@@ -1273,28 +1327,43 @@
 
   .lp-arrange-prompt,
   .lp-arrange-translation,
-  .lp-type-arabic-model {
+  .lp-type-arabic-trace {
     color: var(--dark-text);
+  }
+
+  .lp-type-arabic-trace {
+    opacity: 0.5;
+  }
+
+  .lp-type-arabic-input {
+    color: var(--dark-text);
+    caret-color: var(--dark-text);
   }
 
   .lp-type-arabic-label {
     color: var(--dark-muted);
   }
 
-  .lp-type-arabic-input:focus {
+  .lp-type-arabic-copybox:focus-within {
     border-color: var(--dark-muted);
     outline-color: rgba(214, 211, 209, 0.24);
   }
 
-  .lp-type-arabic-input.correct {
+  .lp-type-arabic-copybox.correct {
     border-color: #86efac;
     background: color-mix(in srgb, #22c55e 18%, transparent);
+  }
+
+  .lp-type-arabic-copybox.correct .lp-type-arabic-input {
     color: #86efac;
   }
 
-  .lp-type-arabic-input.incorrect {
+  .lp-type-arabic-copybox.incorrect {
     border-color: var(--liturgical-red);
     background: color-mix(in srgb, var(--liturgical-red) 18%, transparent);
+  }
+
+  .lp-type-arabic-copybox.incorrect .lp-type-arabic-input {
     color: var(--liturgical-red);
   }
 

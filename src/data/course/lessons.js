@@ -345,7 +345,7 @@ const lessons = [
             "activity_type": "arrange"
           },
           {
-            "label": "Type",
+            "label": "Trace",
             "activity_type": "type-arabic"
           }
         ]
@@ -371,7 +371,7 @@ const lessons = [
             "activity_type": "arrange"
           },
           {
-            "label": "Type",
+            "label": "Trace",
             "activity_type": "type-arabic"
           }
         ]
@@ -397,7 +397,7 @@ const lessons = [
             "activity_type": "arrange"
           },
           {
-            "label": "Type",
+            "label": "Trace",
             "activity_type": "type-arabic"
           }
         ]
@@ -423,7 +423,7 @@ const lessons = [
             "activity_type": "arrange"
           },
           {
-            "label": "Type",
+            "label": "Trace",
             "activity_type": "type-arabic"
           }
         ]
@@ -445,7 +445,7 @@ const lessons = [
             "activity_type": "arrange"
           },
           {
-            "label": "Type",
+            "label": "Trace",
             "activity_type": "type-arabic"
           }
         ]

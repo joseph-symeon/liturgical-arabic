@@ -53,8 +53,17 @@ const ARABIC_WEIGHTS = [
   { label: "Semibold", value: "600" }
 ];
 const SIDE_PANEL_WIDTH = 320;
-const DEFAULT_ARABIC_FONT_SIZE = 20;
+const DEFAULT_ARABIC_FONT_SIZE = 22;
 const DEFAULT_SPEECH_RATE = 0.8;
+const DEFAULT_DISPLAY_SETTINGS = {
+  arabicMode: "vocalized",
+  readerLayout: "line",
+  showQuietPrayers: false,
+  arabicFontFamily: SYSTEM_SANS_FONT,
+  arabicFontWeight: "300",
+  arabicFontSize: DEFAULT_ARABIC_FONT_SIZE,
+  showPracticeToolbar: true
+};
 const NARROW_VIEWPORT_WIDTH = 700;
 const COMPACT_CHROME_WIDTH = 900;
 const NAV_MENU_STORAGE_KEY = "liturgical-arabic:navigation-menu-open";
@@ -136,33 +145,23 @@ function getStoredNavDetailsOpen() {
 }
 
 function getStoredDisplaySettings() {
-  const defaults = {
-    arabicMode: "vocalized",
-    readerLayout: "line",
-    showQuietPrayers: false,
-    arabicFontFamily: SYSTEM_SANS_FONT,
-    arabicFontWeight: "300",
-    arabicFontSize: DEFAULT_ARABIC_FONT_SIZE,
-    showPracticeToolbar: true
-  };
-
-  if (typeof window === "undefined") return defaults;
+  if (typeof window === "undefined") return DEFAULT_DISPLAY_SETTINGS;
 
   try {
     const stored = window.localStorage.getItem(DISPLAY_SETTINGS_STORAGE_KEY);
     const parsed = stored ? JSON.parse(stored) : {};
     const settings = parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
     return {
-      arabicMode: ["vocalized", "unvocalized"].includes(settings.arabicMode) ? settings.arabicMode : defaults.arabicMode,
-      readerLayout: ["line", "paragraph"].includes(settings.readerLayout) ? settings.readerLayout : defaults.readerLayout,
-      showQuietPrayers: typeof settings.showQuietPrayers === "boolean" ? settings.showQuietPrayers : defaults.showQuietPrayers,
-      arabicFontFamily: ARABIC_FONTS.some(font => font.value === settings.arabicFontFamily) ? settings.arabicFontFamily : defaults.arabicFontFamily,
-      arabicFontWeight: ARABIC_WEIGHTS.some(weight => weight.value === settings.arabicFontWeight) ? settings.arabicFontWeight : defaults.arabicFontWeight,
-      arabicFontSize: typeof settings.arabicFontSize === "number" ? Math.max(18, Math.min(36, settings.arabicFontSize)) : defaults.arabicFontSize,
-      showPracticeToolbar: typeof settings.showPracticeToolbar === "boolean" ? settings.showPracticeToolbar : defaults.showPracticeToolbar
+      arabicMode: ["vocalized", "unvocalized"].includes(settings.arabicMode) ? settings.arabicMode : DEFAULT_DISPLAY_SETTINGS.arabicMode,
+      readerLayout: ["line", "paragraph"].includes(settings.readerLayout) ? settings.readerLayout : DEFAULT_DISPLAY_SETTINGS.readerLayout,
+      showQuietPrayers: typeof settings.showQuietPrayers === "boolean" ? settings.showQuietPrayers : DEFAULT_DISPLAY_SETTINGS.showQuietPrayers,
+      arabicFontFamily: ARABIC_FONTS.some(font => font.value === settings.arabicFontFamily) ? settings.arabicFontFamily : DEFAULT_DISPLAY_SETTINGS.arabicFontFamily,
+      arabicFontWeight: ARABIC_WEIGHTS.some(weight => weight.value === settings.arabicFontWeight) ? settings.arabicFontWeight : DEFAULT_DISPLAY_SETTINGS.arabicFontWeight,
+      arabicFontSize: typeof settings.arabicFontSize === "number" ? Math.max(18, Math.min(36, settings.arabicFontSize)) : DEFAULT_DISPLAY_SETTINGS.arabicFontSize,
+      showPracticeToolbar: typeof settings.showPracticeToolbar === "boolean" ? settings.showPracticeToolbar : DEFAULT_DISPLAY_SETTINGS.showPracticeToolbar
     };
   } catch {
-    return defaults;
+    return DEFAULT_DISPLAY_SETTINGS;
   }
 }
 
@@ -368,6 +367,15 @@ export default function App() {
 
   function adjustArabicFontSize(delta) {
     setArabicFontSize(size => Math.max(18, Math.min(36, size + delta)));
+  }
+
+  function resetDisplaySettings() {
+    setArabicMode(DEFAULT_DISPLAY_SETTINGS.arabicMode);
+    setReaderLayout(DEFAULT_DISPLAY_SETTINGS.readerLayout);
+    setShowQuietPrayers(DEFAULT_DISPLAY_SETTINGS.showQuietPrayers);
+    setArabicFontFamily(DEFAULT_DISPLAY_SETTINGS.arabicFontFamily);
+    setArabicFontWeight(DEFAULT_DISPLAY_SETTINGS.arabicFontWeight);
+    setArabicFontSize(DEFAULT_DISPLAY_SETTINGS.arabicFontSize);
   }
 
   function isNavDetailOpen(id, defaultOpen = false) {
@@ -595,21 +603,11 @@ export default function App() {
             ))}
             {renderField("Size", (
               renderButtonRow(
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setArabicFontSize(DEFAULT_ARABIC_FONT_SIZE)}
-                    className="bg-stone-100 dark:bg-[var(--dark-surface)]"
-                    style={SETTING_BUTTON_STYLE}
-                  >
-                    Reset
-                  </button>
-                  <div className="lp-setting-control-box">
-                    <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(-1)}>−</button>
-                    <div className="lp-speed-value">{arabicFontSize}px</div>
-                    <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(1)}>+</button>
-                  </div>
-                </>
+                <div className="lp-setting-control-box">
+                  <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(-1)}>−</button>
+                  <div className="lp-speed-value">{arabicFontSize}px</div>
+                  <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(1)}>+</button>
+                </div>
               )
             ))}
           </>
@@ -617,6 +615,16 @@ export default function App() {
         {renderDisplaySection("Content", (
           renderToggleField("Silent prayers", showQuietPrayers, setShowQuietPrayers)
         ))}
+        <section className="flex justify-start border-t border-stone-200 py-4 dark:border-[var(--dark-border)]">
+          <button
+            type="button"
+            onClick={resetDisplaySettings}
+            className="lp-setting-option lp-reset-display-button"
+            style={SETTING_BUTTON_STYLE}
+          >
+            Reset all
+          </button>
+        </section>
       </div>
     );
   }
@@ -651,14 +659,14 @@ export default function App() {
     return (
       <button
         type="button"
-        onClick={() => setShowPracticeToolbar(value => !value)}
+        onClick={event => {
+          setShowPracticeToolbar(value => !value);
+          event.currentTarget.blur();
+        }}
         aria-label={focusMode ? "Exit focus mode" : "Enter focus mode"}
         aria-pressed={focusMode}
         title={focusMode ? "Exit focus mode" : "Focus mode"}
-        className={focusMode
-          ? "rounded bg-stone-100 text-stone-900 dark:bg-[var(--dark-surface)] dark:text-[var(--dark-text)]"
-          : "rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
-        }
+        className="rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
         style={{
           position: "fixed",
           top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
@@ -766,36 +774,19 @@ export default function App() {
               aria-hidden="true"
               dir="rtl"
               style={{
-                position: "relative",
-                display: "block",
+                display: "inline-flex",
+                alignItems: "baseline",
+                gap: "1px",
                 width: "22px",
                 height: "22px",
                 fontFamily: arabicFontFamily,
-                fontSize: "19px",
+                fontSize: "18px",
                 fontWeight: 400,
                 lineHeight: "22px",
-                textAlign: "center"
+                justifyContent: "center"
               }}
             >
-              ع
-              <svg
-                viewBox="0 0 24 24"
-                width="10"
-                height="10"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{
-                  position: "absolute",
-                  right: "-3px",
-                  bottom: "0"
-                }}
-              >
-                <path d="M2 12s3.5-5 10-5 10 5 10 5-3.5 5-10 5S2 12 2 12Z" />
-                <circle cx="12" cy="12" r="2.5" />
-              </svg>
+              <span>ع</span><span>A</span>
             </span>
           )
         })}

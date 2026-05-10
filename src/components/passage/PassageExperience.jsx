@@ -141,6 +141,7 @@ export default function PassageExperience({
         : resolvedExercise
           ? (
               <PassageActivityBody
+                key={`${resolvedExercise.id}:${resolvedActivityType || "activity"}`}
                 exercise={resolvedExercise}
                 arabicMode={arabicMode}
                 readerLayout={readerLayout}

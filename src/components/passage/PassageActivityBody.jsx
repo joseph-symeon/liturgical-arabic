@@ -215,7 +215,11 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const [matchedPhraseIds, setMatchedPhraseIds] = useState([]);
   const [matchingFeedback, setMatchingFeedback] = useState(null);
   const [matchingCardHeight, setMatchingCardHeight] = useState(null);
+  const [typingBoxHeight, setTypingBoxHeight] = useState(null);
   const matchingGridRef = useRef(null);
+  const typingBoxRef = useRef(null);
+  const typingInputRef = useRef(null);
+  const typingTraceRef = useRef(null);
   const arrangeFeedbackTimerRef = useRef(null);
   const typingFeedbackTimerRef = useRef(null);
   const matchingFeedbackTimerRef = useRef(null);
@@ -249,6 +253,10 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     [exercise.lines, arabicMode]
   );
   const typingTarget = typingPromptLines.map(line => line.arabicText).join(' ');
+  const typingTraceText = typingPromptLines
+    .map(line => line.arabicText.trim())
+    .filter(Boolean)
+    .join(readerLayout === 'line' ? '\n' : ' ');
   const typedArabicCorrect = normalizeArabicTypingValue(typedArabic) === normalizeArabicTypingValue(typingTarget);
   const matchingPhraseIds = useMemo(
     () => getUniquePhraseIds(exercise.activity?.matching?.phrase_ids || getPhraseIdsForLines(exercise.lines)),
@@ -275,6 +283,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     setMatchingSelection(null);
     setMatchedPhraseIds([]);
     setMatchingFeedback(null);
+    setTypingBoxHeight(null);
     return () => {
       if (arrangeFeedbackTimerRef.current) {
         clearTimeout(arrangeFeedbackTimerRef.current);
@@ -290,6 +299,39 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
       }
     };
   }, [exercise.id]);
+
+  useEffect(() => {
+    if (!isTypeArabicActivity || !typingTraceRef.current) return undefined;
+    let frameId = null;
+    let secondFrameId = null;
+
+    function updateTypingBoxHeight() {
+      if (!typingTraceRef.current) return;
+      typingTraceRef.current.style.height = 'auto';
+      if (typingInputRef.current) {
+        typingInputRef.current.style.height = 'auto';
+      }
+      const lineHeight = Number.parseFloat(window.getComputedStyle(typingTraceRef.current).lineHeight) || 32;
+      setTypingBoxHeight(Math.ceil(typingTraceRef.current.scrollHeight + lineHeight) + 2);
+    }
+
+    function scheduleTypingBoxHeightUpdate() {
+      if (frameId) cancelAnimationFrame(frameId);
+      if (secondFrameId) cancelAnimationFrame(secondFrameId);
+      frameId = requestAnimationFrame(() => {
+        secondFrameId = requestAnimationFrame(updateTypingBoxHeight);
+      });
+    }
+
+    setTypingBoxHeight(null);
+    scheduleTypingBoxHeightUpdate();
+    window.addEventListener('resize', scheduleTypingBoxHeightUpdate);
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId);
+      if (secondFrameId) cancelAnimationFrame(secondFrameId);
+      window.removeEventListener('resize', scheduleTypingBoxHeightUpdate);
+    };
+  }, [isTypeArabicActivity, typingTraceText, readerLayout]);
 
   useEffect(() => {
     if (!isMatchingActivity || !matchingGridRef.current) return undefined;
@@ -530,40 +572,53 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   function renderTypeArabicActivity() {
     return (
       <div className="lp-type-arabic-activity" dir="ltr">
-        <div className="lp-type-arabic-model" dir="rtl">
-          <PassageTextRenderer
-            lines={typingPromptLines.map(line => ({ ...line, phrases: line.parts }))}
-            arabicMode={arabicMode}
-            readerLayout={readerLayout}
-            speechRate={speechRate}
-            arabicFontFamily={arabicFontFamily}
-            arabicFontWeight={arabicFontWeight}
-            arabicFontSize={arabicFontSize}
-            showSpeakers={exercise.show_speakers}
+        <label className="lp-type-arabic-label" htmlFor={`type-arabic-${exercise.id}`}>
+          Trace the Arabic
+        </label>
+        <div
+          className={`lp-type-arabic-copybox${typingFeedback ? ` ${typingFeedback}` : ''}`}
+          ref={typingBoxRef}
+          style={typingBoxHeight ? { height: `${typingBoxHeight}px` } : undefined}
+        >
+          <textarea
+            className="lp-type-arabic-trace"
+            value={typingTraceText}
+            dir="rtl"
+            lang="ar"
+            readOnly
+            aria-hidden="true"
+            tabIndex={-1}
+            ref={typingTraceRef}
+            rows={Math.max(1, typingPromptLines.length)}
+            style={typingBoxHeight ? { height: `${typingBoxHeight}px` } : undefined}
+          />
+          <textarea
+            id={`type-arabic-${exercise.id}`}
+            className="lp-type-arabic-input"
+            value={typedArabic}
+            ref={typingInputRef}
+            onChange={event => {
+              setTypedArabic(event.target.value);
+              clearTypingFeedback();
+              requestAnimationFrame(() => {
+                if (typingInputRef.current) typingInputRef.current.scrollTop = 0;
+                if (typingTraceRef.current) typingTraceRef.current.scrollTop = 0;
+              });
+            }}
+            onScroll={() => {
+              if (!typingInputRef.current || !typingTraceRef.current) return;
+              typingInputRef.current.scrollTop = 0;
+              typingTraceRef.current.scrollTop = 0;
+            }}
+            dir="rtl"
+            lang="ar"
+            spellCheck={false}
+            autoCapitalize="none"
+            autoCorrect="off"
+            rows={Math.max(1, typingPromptLines.length)}
+            style={typingBoxHeight ? { height: `${typingBoxHeight}px` } : undefined}
           />
         </div>
-        <label className="lp-type-arabic-label" htmlFor={`type-arabic-${exercise.id}`}>
-          Copy the Arabic
-        </label>
-        <textarea
-          id={`type-arabic-${exercise.id}`}
-          className={`lp-type-arabic-input${typingFeedback ? ` ${typingFeedback}` : ''}`}
-          value={typedArabic}
-          onChange={event => {
-            setTypedArabic(event.target.value);
-            clearTypingFeedback();
-          }}
-          dir="rtl"
-          lang="ar"
-          spellCheck={false}
-          autoCapitalize="none"
-          autoCorrect="off"
-          rows={Math.max(2, typingPromptLines.length)}
-          style={{
-            fontFamily: arabicFontFamily,
-            fontWeight: arabicFontWeight
-          }}
-        />
         <div className="lp-activity-actions lp-type-arabic-actions">
           <button
             type="button"
