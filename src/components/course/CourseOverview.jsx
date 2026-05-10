@@ -6,34 +6,6 @@ function hasMultipleExercises(lesson) {
   return (lesson.exercises || []).length > 1;
 }
 
-const CURRICULUM_OUTLINE_NOTES = `
-Unit 1: Foundations for Participation
-1. Lord, have mercy
-2. The Jesus Prayer
-3. Glory. Both now.
-4. Thrice Holy Hymn
-5. All Holy Trinity
-
-Unit 2: Entering the Liturgy
-1. Come, let us worship
-2. The Antiphons
-3. Little Litanies
-4. The Entrance
-5. Liturgy of the Word
-
-Unit 3: Petitions and Responses
-1. Litany of Peace
-2. Future: Litany of Supplication
-3. Future: The Creed
-4. Future: The Holy Anaphora
-
-Unit 4: Receiving and Dismissal
-1. Future: The Elevation
-2. Future: Pre-Communion Prayers
-3. Future: Communion Hymns
-4. Future: Thanksgiving and Dismissal
-`;
-
 export default function CourseOverview({ units, lessons, selectedLessonId, selectedExerciseIndex, onSelectExercise }) {
   return (
     <main className="lp-page" dir="ltr">
@@ -102,12 +74,6 @@ export default function CourseOverview({ units, lessons, selectedLessonId, selec
         })}
       </div>
 
-      <section className="mt-10 border-t border-stone-200 pt-8 dark:border-[var(--dark-border)]">
-        <h2 className="mb-4 text-xl font-medium leading-tight">Curriculum Outline</h2>
-        <pre className="whitespace-pre-wrap font-sans text-sm leading-7 text-stone-700 dark:text-[var(--dark-muted)]">
-          {CURRICULUM_OUTLINE_NOTES.trim()}
-        </pre>
-      </section>
     </main>
   );
 }
