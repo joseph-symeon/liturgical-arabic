@@ -43,14 +43,8 @@ const SETTING_BUTTON_STYLE = {
 };
 const SYSTEM_SANS_FONT = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 const ARABIC_FONTS = [
-  { label: "System sans", value: SYSTEM_SANS_FONT },
-  { label: "System serif", value: "serif" }
-];
-const ARABIC_WEIGHTS = [
-  { label: "Light", value: "300" },
-  { label: "Regular", value: "400" },
-  { label: "Medium", value: "500" },
-  { label: "Semibold", value: "600" }
+  { label: "Sans", value: SYSTEM_SANS_FONT },
+  { label: "Serif", value: "serif" }
 ];
 const SIDE_PANEL_WIDTH = 320;
 const DEFAULT_ARABIC_FONT_SIZE = 22;
@@ -156,7 +150,7 @@ function getStoredDisplaySettings() {
       readerLayout: ["line", "paragraph"].includes(settings.readerLayout) ? settings.readerLayout : DEFAULT_DISPLAY_SETTINGS.readerLayout,
       showQuietPrayers: typeof settings.showQuietPrayers === "boolean" ? settings.showQuietPrayers : DEFAULT_DISPLAY_SETTINGS.showQuietPrayers,
       arabicFontFamily: ARABIC_FONTS.some(font => font.value === settings.arabicFontFamily) ? settings.arabicFontFamily : DEFAULT_DISPLAY_SETTINGS.arabicFontFamily,
-      arabicFontWeight: ARABIC_WEIGHTS.some(weight => weight.value === settings.arabicFontWeight) ? settings.arabicFontWeight : DEFAULT_DISPLAY_SETTINGS.arabicFontWeight,
+      arabicFontWeight: DEFAULT_DISPLAY_SETTINGS.arabicFontWeight,
       arabicFontSize: typeof settings.arabicFontSize === "number" ? Math.max(18, Math.min(36, settings.arabicFontSize)) : DEFAULT_DISPLAY_SETTINGS.arabicFontSize,
       showPracticeToolbar: typeof settings.showPracticeToolbar === "boolean" ? settings.showPracticeToolbar : DEFAULT_DISPLAY_SETTINGS.showPracticeToolbar
     };
@@ -184,7 +178,7 @@ export default function App() {
   const [readerLayout, setReaderLayout] = useState(initialDisplaySettings.readerLayout);
   const [showQuietPrayers, setShowQuietPrayers] = useState(initialDisplaySettings.showQuietPrayers);
   const [arabicFontFamily, setArabicFontFamily] = useState(initialDisplaySettings.arabicFontFamily);
-  const [arabicFontWeight, setArabicFontWeight] = useState(initialDisplaySettings.arabicFontWeight);
+  const arabicFontWeight = DEFAULT_DISPLAY_SETTINGS.arabicFontWeight;
   const [arabicFontSize, setArabicFontSize] = useState(initialDisplaySettings.arabicFontSize);
   const speechRate = DEFAULT_SPEECH_RATE;
   const [showPracticeToolbar, setShowPracticeToolbar] = useState(initialDisplaySettings.showPracticeToolbar);
@@ -235,7 +229,7 @@ export default function App() {
       arabicFontSize,
       showPracticeToolbar
     }));
-  }, [arabicMode, readerLayout, showQuietPrayers, arabicFontFamily, arabicFontWeight, arabicFontSize, showPracticeToolbar]);
+  }, [arabicMode, readerLayout, showQuietPrayers, arabicFontFamily, arabicFontSize, showPracticeToolbar]);
 
   useEffect(() => {
     if (!isCompactChrome) {
@@ -374,7 +368,6 @@ export default function App() {
     setReaderLayout(DEFAULT_DISPLAY_SETTINGS.readerLayout);
     setShowQuietPrayers(DEFAULT_DISPLAY_SETTINGS.showQuietPrayers);
     setArabicFontFamily(DEFAULT_DISPLAY_SETTINGS.arabicFontFamily);
-    setArabicFontWeight(DEFAULT_DISPLAY_SETTINGS.arabicFontWeight);
     setArabicFontSize(DEFAULT_DISPLAY_SETTINGS.arabicFontSize);
   }
 
@@ -571,35 +564,26 @@ export default function App() {
             ))}
           </>
         ))}
-        {renderDisplaySection("Text", (
+        {renderDisplaySection("Arabic Text", (
           <>
-            {renderField("Arabic font", (
-              <select
-                id="arabic-font-select"
-                value={arabicFontFamily}
-                onChange={(event) => setArabicFontFamily(event.target.value)}
-                className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-[var(--dark-border)] dark:bg-[var(--dark-surface)]"
-              >
-                {ARABIC_FONTS.map(font => (
-                  <option key={font.value} value={font.value}>
-                    {font.label}
-                  </option>
-                ))}
-              </select>
-            ))}
-            {renderField("Arabic weight", (
-              <select
-                id="arabic-weight-select"
-                value={arabicFontWeight}
-                onChange={(event) => setArabicFontWeight(event.target.value)}
-                className="w-full rounded border border-stone-300 bg-white px-2 py-1 text-sm dark:border-[var(--dark-border)] dark:bg-[var(--dark-surface)]"
-              >
-                {ARABIC_WEIGHTS.map(weight => (
-                  <option key={weight.value} value={weight.value}>
-                    {weight.label}
-                  </option>
-                ))}
-              </select>
+            {renderField("Font", (
+              renderButtonRow(
+                <>
+                  {ARABIC_FONTS.map(font => (
+                    <button
+                      key={font.value}
+                      type="button"
+                      role="radio"
+                      aria-checked={arabicFontFamily === font.value}
+                      onClick={() => setArabicFontFamily(font.value)}
+                      className={arabicFontFamily === font.value ? "lp-setting-option active font-semibold" : "lp-setting-option"}
+                      style={SETTING_BUTTON_STYLE}
+                    >
+                      {font.label}
+                    </button>
+                  ))}
+                </>
+              )
             ))}
             {renderField("Size", (
               renderButtonRow(
@@ -779,7 +763,7 @@ export default function App() {
                 gap: "1px",
                 width: "22px",
                 height: "22px",
-                fontFamily: arabicFontFamily,
+                fontFamily: SYSTEM_SANS_FONT,
                 fontSize: "18px",
                 fontWeight: 400,
                 lineHeight: "22px",

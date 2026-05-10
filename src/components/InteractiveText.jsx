@@ -135,6 +135,7 @@ export default function InteractiveText(props) {
               visibility: tooltipPosition ? "visible" : "hidden",
               textTransform: "none",
               letterSpacing: 0,
+              fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
               width: "fit-content",
               maxWidth: tooltipPosition?.maxWidth ? `${tooltipPosition.maxWidth}px` : `calc(100vw - ${VIEWPORT_PADDING * 2}px)`
             }
