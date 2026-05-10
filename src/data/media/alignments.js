@@ -219,7 +219,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "all-holy-trinity-have-mercy-001",
             "start_seconds": 24.94,
-            "end_seconds": 25.725
+            "end_seconds": 25.44
           }
         ]
       },
@@ -240,7 +240,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "all-holy-trinity-cleanse-sins-001",
             "start_seconds": 26.58,
-            "end_seconds": 27.92
+            "end_seconds": 27.68
           }
         ]
       },
@@ -255,13 +255,13 @@ export const alignmentDefinitions = [
         "phrase_timings": [
           {
             "phrase_id": "vocative-o-master-001",
-            "start_seconds": 27.92,
+            "start_seconds": 28,
             "end_seconds": 28.96
           },
           {
             "phrase_id": "all-holy-trinity-pardon-iniquities-001",
             "start_seconds": 28.96,
-            "end_seconds": 31.045
+            "end_seconds": 30.8
           }
         ]
       },
@@ -287,7 +287,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "all-holy-trinity-name-sake-001",
             "start_seconds": 33.98,
-            "end_seconds": 35.615
+            "end_seconds": 35.25
           }
         ]
       },
