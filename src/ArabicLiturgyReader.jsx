@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { defaultServiceText } from "./data/texts/serviceTexts.js";
 import phrases from "./data/texts/phrases.js";
 import PageHeader from "./components/PageHeader.jsx";
+import InteractiveText from "./components/InteractiveText.jsx";
+import PhraseTooltip from "./components/PhraseTooltip.jsx";
 import PassageExperience from "./components/passage/PassageExperience.jsx";
 import PassageRenderer from "./components/passage/PassageRenderer.jsx";
 import { getArabicText } from "./utils/arabic.js";
@@ -12,10 +14,17 @@ import {
   SHARED_ACTIVITY_SELECTION_KEY,
   storeActivitySelection
 } from "./utils/activitySelectionStorage.js";
+import appIcons from "./assets/icons/index.js";
 import "./components/course/course.css";
 
 const h = React.createElement;
 const readerSections = defaultServiceText.sections;
+const SERVICE_TITLE_PHRASE_IDS = {
+  divineLiturgy: "homepage-divine-liturgy-001",
+  johnChrysostom: "homepage-john-chrysostom-001",
+  prayersAnaphora: "homepage-prayers-anaphora-001",
+  basilGreat: "homepage-basil-great-001"
+};
 const READER_ACTIVITY_OPTIONS = [
   { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.readListen], value: PASSAGE_ACTIVITY_TYPES.readListen },
   { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions], value: PASSAGE_ACTIVITY_TYPES.phraseCaptions }
@@ -123,6 +132,29 @@ export default function ArabicLiturgyReader({
 
   function renderTableOfContents() {
     const items = [];
+    function renderTitleArabicPhrase(phraseId, className = "") {
+      const phrase = phrases[phraseId];
+      if (!phrase) return null;
+
+      return h(
+        InteractiveText,
+        {
+          spokenText: phrase.arabic,
+          speechRate,
+          tooltip: h(PhraseTooltip, { phrase }),
+          className
+        },
+        getArabicText(phrase, arabicMode)
+      );
+    }
+
+    const titleArabicStyle = {
+      fontFamily: arabicFontFamily,
+      fontWeight: arabicFontWeight,
+      fontSize: `${Math.max(arabicFontSize + 1, 21)}px`
+    };
+    const titleFontSize = `${Math.max(arabicFontSize + 1, 21)}px`;
+
     readerSections.forEach(function collectSection(section, sectionIndex) {
       if (!section.section_group) {
         items.push({ type: "section", section, sectionIndex });
@@ -180,6 +212,38 @@ export default function ArabicLiturgyReader({
     return h(
       "div",
       { dir: "ltr" },
+      h(
+        "header",
+        { className: "mb-10 text-center" },
+        h(
+          "div",
+          {
+            className: "mx-auto mb-5 grid max-w-[560px] gap-1.5 leading-relaxed",
+            dir: "rtl",
+            style: titleArabicStyle
+          },
+          h("div", null, renderTitleArabicPhrase(SERVICE_TITLE_PHRASE_IDS.divineLiturgy)),
+          h("div", null, renderTitleArabicPhrase(SERVICE_TITLE_PHRASE_IDS.johnChrysostom, "liturgical-red")),
+          h("div", null, renderTitleArabicPhrase(SERVICE_TITLE_PHRASE_IDS.prayersAnaphora)),
+          h("div", null, renderTitleArabicPhrase(SERVICE_TITLE_PHRASE_IDS.basilGreat, "liturgical-red"))
+        ),
+        h("img", {
+          src: appIcons.serviceBookTitleIcon.src,
+          alt: appIcons.serviceBookTitleIcon.title,
+          className: "mx-auto mb-6 h-auto max-h-[220px] w-auto max-w-[68vw] opacity-90 dark:opacity-95"
+        }),
+        h(
+          "div",
+          {
+            className: "mx-auto max-w-[460px] text-center text-stone-800 dark:text-[var(--dark-text)]",
+            style: { fontSize: titleFontSize }
+          },
+          h("p", { className: "leading-tight" }, "The Divine Liturgy of"),
+          h("h1", { className: "liturgical-red mt-1 font-medium leading-tight" }, "Saint John Chrysostom"),
+          h("p", { className: "mx-auto mt-3 max-w-[420px] leading-tight" }, "with the Prayers and Anaphora of the Divine Liturgy of"),
+          h("p", { className: "liturgical-red mt-1 font-medium leading-tight" }, "Saint Basil the Great")
+        )
+      ),
       h(
         "div",
         { className: "lp-course-overview" },

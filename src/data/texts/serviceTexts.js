@@ -4,8 +4,8 @@
 export const serviceTextDefinitions = [
   {
     "id": "divine-liturgy-john-chrysostom",
-    "title": "Divine Liturgy of St. John Chrysostom",
-    "short_title": "Divine Liturgy",
+    "title": "The Divine Liturgy",
+    "short_title": "The Divine Liturgy",
     "tradition": "antiochian",
     "language": "ar",
     "sections": [

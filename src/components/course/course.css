@@ -115,6 +115,7 @@
 
 .lp-mode-toggle-row {
   display: flex;
+  justify-content: flex-end;
   margin: 0;
 }
 
@@ -653,12 +654,12 @@
   min-height: min(420px, 46svh);
 }
 
-.lp-synced-stage.interactive {
+.lp-synced-line.interactive {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 
-.lp-synced-stage.interactive:focus-visible {
+.lp-synced-line.interactive:focus-visible {
   outline: 2px solid var(--liturgical-red-highlight-ring);
   outline-offset: 6px;
 }
@@ -1160,11 +1161,12 @@
   display: flex;
   justify-content: flex-end;
   min-width: 0;
-  max-width: 190px;
+  max-width: 166px;
 }
 
 .lp-display-field-control > select {
-  min-width: 150px;
+  width: 166px;
+  min-width: 0;
 }
 
 .lp-display-field-control > .flex {

@@ -135,7 +135,7 @@ const lessons = [
     "unit_id": "unit-1",
     "title": "Glory. Both now.",
     "title_phrase": "glory-001",
-    "display_order": 3,
+    "display_order": 4,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -199,7 +199,7 @@ const lessons = [
     "unit_id": "unit-1",
     "title": "Thrice Holy Hymn",
     "title_phrase": "section-trisagion-hymn",
-    "display_order": 4,
+    "display_order": 3,
     "quizlet_deck_url": null,
     "exercises": [
       {

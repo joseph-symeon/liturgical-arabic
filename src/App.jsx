@@ -2,15 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import ArabicLiturgyReader from "./ArabicLiturgyReader.jsx";
 import CourseOverview from "./components/course/CourseOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
-import InteractiveText from "./components/InteractiveText.jsx";
-import PhraseTooltip from "./components/PhraseTooltip.jsx";
 import { defaultServiceText } from "./data/texts/serviceTexts.js";
-import phrases from "./data/texts/phrases.js";
 import units from "./data/course/units.js";
 import lessons from "./data/course/lessons.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
-import { getArabicText, speakArabic } from "./utils/arabic.js";
-import appIcons from "./assets/icons/index.js";
 
 const NAV_ITEM_STYLE = {
   display: "block",
@@ -59,17 +54,12 @@ const ARABIC_WEIGHTS = [
 ];
 const SIDE_PANEL_WIDTH = 320;
 const DEFAULT_ARABIC_FONT_SIZE = 20;
+const DEFAULT_SPEECH_RATE = 0.8;
 const NARROW_VIEWPORT_WIDTH = 700;
 const COMPACT_CHROME_WIDTH = 900;
 const NAV_MENU_STORAGE_KEY = "liturgical-arabic:navigation-menu-open";
 const NAV_DETAILS_STORAGE_KEY = "liturgical-arabic:navigation-details-open";
 const DISPLAY_SETTINGS_STORAGE_KEY = "liturgical-arabic:display-settings";
-const HOME_TITLE_PHRASE_IDS = {
-  divineLiturgy: "homepage-divine-liturgy-001",
-  johnChrysostom: "homepage-john-chrysostom-001",
-  prayersAnaphora: "homepage-prayers-anaphora-001",
-  basilGreat: "homepage-basil-great-001"
-};
 
 const ORDERED_UNITS = [...units].sort((a, b) => a.display_order - b.display_order);
 const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
@@ -153,7 +143,6 @@ function getStoredDisplaySettings() {
     arabicFontFamily: SYSTEM_SANS_FONT,
     arabicFontWeight: "300",
     arabicFontSize: DEFAULT_ARABIC_FONT_SIZE,
-    speechRate: 0.8,
     showPracticeToolbar: true
   };
 
@@ -170,7 +159,6 @@ function getStoredDisplaySettings() {
       arabicFontFamily: ARABIC_FONTS.some(font => font.value === settings.arabicFontFamily) ? settings.arabicFontFamily : defaults.arabicFontFamily,
       arabicFontWeight: ARABIC_WEIGHTS.some(weight => weight.value === settings.arabicFontWeight) ? settings.arabicFontWeight : defaults.arabicFontWeight,
       arabicFontSize: typeof settings.arabicFontSize === "number" ? Math.max(18, Math.min(36, settings.arabicFontSize)) : defaults.arabicFontSize,
-      speechRate: typeof settings.speechRate === "number" ? Math.max(0.5, Math.min(1.2, settings.speechRate)) : defaults.speechRate,
       showPracticeToolbar: typeof settings.showPracticeToolbar === "boolean" ? settings.showPracticeToolbar : defaults.showPracticeToolbar
     };
   } catch {
@@ -199,7 +187,7 @@ export default function App() {
   const [arabicFontFamily, setArabicFontFamily] = useState(initialDisplaySettings.arabicFontFamily);
   const [arabicFontWeight, setArabicFontWeight] = useState(initialDisplaySettings.arabicFontWeight);
   const [arabicFontSize, setArabicFontSize] = useState(initialDisplaySettings.arabicFontSize);
-  const [speechRate, setSpeechRate] = useState(initialDisplaySettings.speechRate);
+  const speechRate = DEFAULT_SPEECH_RATE;
   const [showPracticeToolbar, setShowPracticeToolbar] = useState(initialDisplaySettings.showPracticeToolbar);
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
   const [isCompactChrome, setIsCompactChrome] = useState(false);
@@ -246,10 +234,9 @@ export default function App() {
       arabicFontFamily,
       arabicFontWeight,
       arabicFontSize,
-      speechRate,
       showPracticeToolbar
     }));
-  }, [arabicMode, readerLayout, showQuietPrayers, arabicFontFamily, arabicFontWeight, arabicFontSize, speechRate, showPracticeToolbar]);
+  }, [arabicMode, readerLayout, showQuietPrayers, arabicFontFamily, arabicFontWeight, arabicFontSize, showPracticeToolbar]);
 
   useEffect(() => {
     if (!isCompactChrome) {
@@ -379,10 +366,6 @@ export default function App() {
     goToNextLesson();
   }
 
-  function adjustSpeechRate(delta) {
-    setSpeechRate(rate => Math.max(0.5, Math.min(1.2, Math.round((rate + delta) * 100) / 100)));
-  }
-
   function adjustArabicFontSize(delta) {
     setArabicFontSize(size => Math.max(18, Math.min(36, size + delta)));
   }
@@ -445,7 +428,6 @@ export default function App() {
           : view === "home"
             ? "Liturgical Arabic"
             : "";
-  const speechRateDisplay = `${Number(speechRate.toFixed(2))}×`;
   const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
   const shouldShowCompactTitle =
     isCompactChrome &&
@@ -473,61 +455,8 @@ export default function App() {
   }, []);
 
   function renderHome() {
-    function renderHomeArabicPhrase(phraseId, className = "") {
-      const phrase = phrases[phraseId];
-      if (!phrase) return null;
-
-      return (
-        <InteractiveText
-          spokenText={phrase.arabic}
-          speechRate={speechRate}
-          tooltip={<PhraseTooltip phrase={phrase} />}
-          className={className}
-        >
-          {getArabicText(phrase, arabicMode)}
-        </InteractiveText>
-      );
-    }
-
-    const homeArabicStyle = {
-      fontFamily: arabicFontFamily,
-      fontWeight: arabicFontWeight,
-      fontSize: `${Math.max(arabicFontSize + 1, 21)}px`
-    };
-    const homeTitleFontSize = `${Math.max(arabicFontSize + 1, 21)}px`;
-
     return (
       <main className="mx-auto flex min-h-[calc(100vh-120px)] max-w-[640px] flex-col justify-center px-6 py-10" dir="ltr">
-        <header className="mb-9 text-center">
-          <div
-            className="mx-auto mb-5 grid max-w-[560px] gap-1.5 leading-relaxed"
-            dir="rtl"
-            style={homeArabicStyle}
-          >
-            <div>{renderHomeArabicPhrase(HOME_TITLE_PHRASE_IDS.divineLiturgy)}</div>
-            <div>{renderHomeArabicPhrase(HOME_TITLE_PHRASE_IDS.johnChrysostom, "liturgical-red")}</div>
-            <div>{renderHomeArabicPhrase(HOME_TITLE_PHRASE_IDS.prayersAnaphora)}</div>
-            <div>{renderHomeArabicPhrase(HOME_TITLE_PHRASE_IDS.basilGreat, "liturgical-red")}</div>
-          </div>
-          <img
-            src={appIcons.serviceBookTitleIcon.src}
-            alt={appIcons.serviceBookTitleIcon.title}
-            className="mx-auto mb-6 h-auto max-h-[220px] w-auto max-w-[68vw] opacity-90 dark:opacity-95"
-          />
-          <div
-            className="mx-auto max-w-[460px] text-center text-stone-800 dark:text-[var(--dark-text)]"
-            style={{ fontSize: homeTitleFontSize }}
-          >
-            <p className="leading-tight">The Divine Liturgy of</p>
-            <h1 className="liturgical-red mt-1 font-medium leading-tight">
-              Saint John Chrysostom
-            </h1>
-            <p className="mx-auto mt-3 max-w-[420px] leading-tight">
-              with the Prayers and Anaphora of the Divine Liturgy of
-            </p>
-            <p className="liturgical-red mt-1 font-medium leading-tight">Saint Basil the Great</p>
-          </div>
-        </header>
         <div className="grid gap-3">
           <button
             type="button"
@@ -607,13 +536,9 @@ export default function App() {
         </div>
         {renderDisplaySection("Reading", (
           <>
-            {renderToggleField("Focus mode", !showPracticeToolbar, checked => {
-              setShowPracticeToolbar(!checked);
-            })}
             {renderToggleField("Diacritics", arabicMode === "vocalized", checked => {
               setArabicMode(checked ? "vocalized" : "unvocalized");
             })}
-            {renderToggleField("Silent prayers", showQuietPrayers, setShowQuietPrayers)}
             {renderField("Layout", (
               renderButtonRow(
                 <>
@@ -640,25 +565,6 @@ export default function App() {
         ))}
         {renderDisplaySection("Text", (
           <>
-            {renderField("Size", (
-              renderButtonRow(
-                <>
-                  <div className="lp-setting-control-box">
-                    <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(-1)}>−</button>
-                    <div className="lp-speed-value">{arabicFontSize}px</div>
-                    <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(1)}>+</button>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setArabicFontSize(DEFAULT_ARABIC_FONT_SIZE)}
-                    className="bg-stone-100 dark:bg-[var(--dark-surface)]"
-                    style={SETTING_BUTTON_STYLE}
-                  >
-                    Reset
-                  </button>
-                </>
-              )
-            ))}
             {renderField("Arabic font", (
               <select
                 id="arabic-font-select"
@@ -687,29 +593,29 @@ export default function App() {
                 ))}
               </select>
             ))}
+            {renderField("Size", (
+              renderButtonRow(
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setArabicFontSize(DEFAULT_ARABIC_FONT_SIZE)}
+                    className="bg-stone-100 dark:bg-[var(--dark-surface)]"
+                    style={SETTING_BUTTON_STYLE}
+                  >
+                    Reset
+                  </button>
+                  <div className="lp-setting-control-box">
+                    <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(-1)}>−</button>
+                    <div className="lp-speed-value">{arabicFontSize}px</div>
+                    <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(1)}>+</button>
+                  </div>
+                </>
+              )
+            ))}
           </>
         ))}
-        {renderDisplaySection("Audio", (
-          renderField("Reader speed", (
-            renderButtonRow(
-              <>
-                <div className="lp-setting-control-box">
-                  <button type="button" className="lp-speed-adjust" onClick={() => adjustSpeechRate(-0.05)}>−</button>
-                  <div className="lp-speed-value">{speechRateDisplay}</div>
-                  <button type="button" className="lp-speed-adjust" onClick={() => adjustSpeechRate(0.05)}>+</button>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => speakArabic("بِسَلامٍ", speechRate)}
-                  className="bg-stone-100 dark:bg-[var(--dark-surface)]"
-                  style={SETTING_BUTTON_STYLE}
-                >
-                  Preview
-                </button>
-              </>,
-              "lp-reader-speed-control"
-            )
-          ))
+        {renderDisplaySection("Content", (
+          renderToggleField("Silent prayers", showQuietPrayers, setShowQuietPrayers)
         ))}
       </div>
     );
@@ -736,6 +642,49 @@ export default function App() {
         }}
       >
         {children}
+      </button>
+    );
+  }
+
+  function renderFocusModeToggle() {
+    const focusMode = !showPracticeToolbar;
+    return (
+      <button
+        type="button"
+        onClick={() => setShowPracticeToolbar(value => !value)}
+        aria-label={focusMode ? "Exit focus mode" : "Enter focus mode"}
+        aria-pressed={focusMode}
+        title={focusMode ? "Exit focus mode" : "Focus mode"}
+        className={focusMode
+          ? "rounded bg-stone-100 text-stone-900 dark:bg-[var(--dark-surface)] dark:text-[var(--dark-text)]"
+          : "rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
+        }
+        style={{
+          position: "fixed",
+          top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
+          right: "52px",
+          zIndex: 40,
+          border: "none",
+          cursor: "pointer",
+          padding: "6px",
+          color: "inherit"
+        }}
+      >
+        {focusMode ? (
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 4v5H4" />
+            <path d="M15 4v5h5" />
+            <path d="M9 20v-5H4" />
+            <path d="M15 20v-5h5" />
+          </svg>
+        ) : (
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 9V4h5" />
+            <path d="M20 9V4h-5" />
+            <path d="M4 15v5h5" />
+            <path d="M20 15v5h-5" />
+          </svg>
+        )}
       </button>
     );
   }
@@ -813,16 +762,45 @@ export default function App() {
             if (isNarrowViewport) setMenuOpen(false);
           },
           children: (
-            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="4" y1="6" x2="20" y2="6" />
-              <circle cx="9" cy="6" r="2" fill="currentColor" stroke="none" />
-              <line x1="4" y1="12" x2="20" y2="12" />
-              <circle cx="15" cy="12" r="2" fill="currentColor" stroke="none" />
-              <line x1="4" y1="18" x2="20" y2="18" />
-              <circle cx="11" cy="18" r="2" fill="currentColor" stroke="none" />
-            </svg>
+            <span
+              aria-hidden="true"
+              dir="rtl"
+              style={{
+                position: "relative",
+                display: "block",
+                width: "22px",
+                height: "22px",
+                fontFamily: arabicFontFamily,
+                fontSize: "19px",
+                fontWeight: 400,
+                lineHeight: "22px",
+                textAlign: "center"
+              }}
+            >
+              ع
+              <svg
+                viewBox="0 0 24 24"
+                width="10"
+                height="10"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{
+                  position: "absolute",
+                  right: "-3px",
+                  bottom: "0"
+                }}
+              >
+                <path d="M2 12s3.5-5 10-5 10 5 10 5-3.5 5-10 5S2 12 2 12Z" />
+                <circle cx="12" cy="12" r="2.5" />
+              </svg>
+            </span>
           )
         })}
+
+      {!(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderFocusModeToggle()}
 
       {isNarrowViewport && menuOpen && (
         <button
@@ -879,7 +857,7 @@ export default function App() {
             className="text-stone-900 dark:text-[var(--dark-text)]"
             style={{ display: "flex", flexDirection: "column", gap: "14px", alignItems: "stretch", margin: 0, padding: 0, listStyle: "none", fontFamily: "Arial, sans-serif", fontSize: "14px" }}
           >
-              <div role="group" aria-label="Liturgy Text" style={MENU_GROUP_STYLE}>
+              <div role="group" aria-label="Liturgical Texts" style={MENU_GROUP_STYLE}>
                 <div className="text-stone-400 dark:text-[var(--dark-muted)]" style={{ ...MENU_LABEL_STYLE, padding: "0 2px 12px" }}>
                   Navigation
                 </div>
@@ -893,63 +871,74 @@ export default function App() {
                   Home
                 </button>
                 <div className="mt-3 text-stone-400 dark:text-[var(--dark-muted)]" style={MENU_LABEL_STYLE}>
-                  Liturgy Text
+                  Liturgical Texts
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                <button
-                  role="menuitem"
-                  type="button"
-                  onClick={goToTableOfContents}
-                  className={view === "reader" && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
-                  style={SECTION_ITEM_STYLE}
-                >
-                  Table of Contents
-                </button>
-                {liturgyMenuItems.map(item => {
-                  if (item.type === "section") {
-                    return (
+                  <details
+                    className="lp-course-lesson"
+                    open={isNavDetailOpen("liturgy-text:divine-liturgy", view === "reader")}
+                    onToggle={event => setNavDetailOpen("liturgy-text:divine-liturgy", event.currentTarget.open)}
+                  >
+                    <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+                      {defaultServiceText.title}
+                    </summary>
+                    <div className="lp-course-exercise-list">
                       <button
-                        key={item.section.section || item.sectionIndex}
                         role="menuitem"
                         type="button"
-                        onClick={() => goToLiturgySection(item.sectionIndex)}
-                        className={view === "reader" && selectedSectionIndex === item.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                        onClick={goToTableOfContents}
+                        className={view === "reader" && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
                         style={SECTION_ITEM_STYLE}
                       >
-                        {item.section.section || `Section ${item.sectionIndex + 1}`}
+                        Table of Contents
                       </button>
-                    );
-                  }
+                      {liturgyMenuItems.map(item => {
+                        if (item.type === "section") {
+                          return (
+                            <button
+                              key={item.section.section || item.sectionIndex}
+                              role="menuitem"
+                              type="button"
+                              onClick={() => goToLiturgySection(item.sectionIndex)}
+                              className={view === "reader" && selectedSectionIndex === item.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                              style={SECTION_ITEM_STYLE}
+                            >
+                              {item.section.section || `Section ${item.sectionIndex + 1}`}
+                            </button>
+                          );
+                        }
 
-                  const isCurrentGroup = item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex);
-                  const detailId = `liturgy:${item.group}`;
-                  return (
-                    <details
-                      className="lp-course-lesson"
-                      key={item.group}
-                      open={isNavDetailOpen(detailId, isCurrentGroup || selectedSectionIndex === null)}
-                      onToggle={event => setNavDetailOpen(detailId, event.currentTarget.open)}
-                    >
-                      <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
-                        {item.group}
-                      </summary>
-                      <div className="lp-course-exercise-list">
-                        {item.sections.map(sectionItem => (
-                          <button
-                            key={sectionItem.section.section || sectionItem.sectionIndex}
-                            role="menuitem"
-                            type="button"
-                            onClick={() => goToLiturgySection(sectionItem.sectionIndex)}
-                            className={view === "reader" && selectedSectionIndex === sectionItem.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
-                            style={SECTION_ITEM_STYLE}
+                        const isCurrentGroup = item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex);
+                        const detailId = `liturgy:${item.group}`;
+                        return (
+                          <details
+                            className="lp-course-lesson"
+                            key={item.group}
+                            open={isNavDetailOpen(detailId, isCurrentGroup || selectedSectionIndex === null)}
+                            onToggle={event => setNavDetailOpen(detailId, event.currentTarget.open)}
                           >
-                            {sectionItem.section.section || `Section ${sectionItem.sectionIndex + 1}`}
-                          </button>
-                        ))}
-                      </div>
-                    </details>
-                  );
-                })}
+                            <summary className="lp-course-lesson-summary">
+                              {item.group}
+                            </summary>
+                            <div className="lp-course-exercise-list">
+                              {item.sections.map(sectionItem => (
+                                <button
+                                  key={sectionItem.section.section || sectionItem.sectionIndex}
+                                  role="menuitem"
+                                  type="button"
+                                  onClick={() => goToLiturgySection(sectionItem.sectionIndex)}
+                                  className={view === "reader" && selectedSectionIndex === sectionItem.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                                  style={SECTION_ITEM_STYLE}
+                                >
+                                  {sectionItem.section.section || `Section ${sectionItem.sectionIndex + 1}`}
+                                </button>
+                              ))}
+                            </div>
+                          </details>
+                        );
+                      })}
+                    </div>
+                  </details>
                 </div>
               </div>
 

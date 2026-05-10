@@ -18,23 +18,23 @@ export default function PassageSyncedCaption({
 
   return (
     <div
-      className={onTogglePlayback ? "lp-synced-stage interactive" : "lp-synced-stage"}
+      className="lp-synced-stage"
       dir="rtl"
-      role={onTogglePlayback ? "button" : undefined}
-      tabIndex={onTogglePlayback ? 0 : undefined}
-      aria-label={onTogglePlayback ? "Play or pause caption audio" : undefined}
-      onClick={onTogglePlayback}
-      onKeyDown={event => {
-        if (!onTogglePlayback) return;
-        if (event.key !== "Enter" && event.key !== " ") return;
-        event.preventDefault();
-        onTogglePlayback();
-      }}
     >
       {activePhrase && (
         <div
-          className="lp-synced-line active"
+          className={onTogglePlayback ? "lp-synced-line active interactive" : "lp-synced-line active"}
           key={activeCaption?.phrase_id}
+          role={onTogglePlayback ? "button" : undefined}
+          tabIndex={onTogglePlayback ? 0 : undefined}
+          aria-label={onTogglePlayback ? "Play or pause caption audio" : undefined}
+          onClick={onTogglePlayback}
+          onKeyDown={event => {
+            if (!onTogglePlayback) return;
+            if (event.key !== "Enter" && event.key !== " ") return;
+            event.preventDefault();
+            onTogglePlayback();
+          }}
           style={{
             fontFamily: arabicFontFamily,
             fontWeight: arabicFontWeight
