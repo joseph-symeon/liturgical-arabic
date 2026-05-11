@@ -46,11 +46,17 @@ const ARABIC_FONTS = [
   { label: "Sans", value: SYSTEM_SANS_FONT },
   { label: "Serif", value: "serif" }
 ];
+const ARABIC_MODES = ["vocalized", "light", "unvocalized"];
+const ARABIC_MODE_OPTIONS = [
+  { label: "Full", value: "vocalized" },
+  { label: "Light", value: "light" },
+  { label: "None", value: "unvocalized" }
+];
 const SIDE_PANEL_WIDTH = 320;
 const DEFAULT_ARABIC_FONT_SIZE = 22;
 const DEFAULT_SPEECH_RATE = 0.8;
 const DEFAULT_DISPLAY_SETTINGS = {
-  arabicMode: "vocalized",
+  arabicMode: "light",
   readerLayout: "line",
   showQuietPrayers: false,
   arabicFontFamily: SYSTEM_SANS_FONT,
@@ -146,7 +152,7 @@ function getStoredDisplaySettings() {
     const parsed = stored ? JSON.parse(stored) : {};
     const settings = parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
     return {
-      arabicMode: ["vocalized", "unvocalized"].includes(settings.arabicMode) ? settings.arabicMode : DEFAULT_DISPLAY_SETTINGS.arabicMode,
+      arabicMode: ARABIC_MODES.includes(settings.arabicMode) ? settings.arabicMode : DEFAULT_DISPLAY_SETTINGS.arabicMode,
       readerLayout: ["line", "paragraph"].includes(settings.readerLayout) ? settings.readerLayout : DEFAULT_DISPLAY_SETTINGS.readerLayout,
       showQuietPrayers: typeof settings.showQuietPrayers === "boolean" ? settings.showQuietPrayers : DEFAULT_DISPLAY_SETTINGS.showQuietPrayers,
       arabicFontFamily: ARABIC_FONTS.some(font => font.value === settings.arabicFontFamily) ? settings.arabicFontFamily : DEFAULT_DISPLAY_SETTINGS.arabicFontFamily,
@@ -537,9 +543,23 @@ export default function App() {
         </div>
         {renderDisplaySection("Reading", (
           <>
-            {renderToggleField("Diacritics", arabicMode === "vocalized", checked => {
-              setArabicMode(checked ? "vocalized" : "unvocalized");
-            })}
+            {renderField("Diacritics", (
+              renderButtonRow(
+                <>
+                  {ARABIC_MODE_OPTIONS.map(option => (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => setArabicMode(option.value)}
+                      className={arabicMode === option.value ? "lp-setting-option active font-semibold" : "lp-setting-option"}
+                      style={SETTING_BUTTON_STYLE}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </>
+              )
+            ))}
             {renderField("Layout", (
               renderButtonRow(
                 <>

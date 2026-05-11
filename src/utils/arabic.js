@@ -7,8 +7,29 @@ export function stripArabicDiacritics(text) {
   return safeString(text).replace(/[ً-ٰٟۖ-ۭ]/g, "");
 }
 
+function isArabicScriptCharacter(character) {
+  return Boolean(character && /\p{Script=Arabic}/u.test(character));
+}
+
+export function applyLightDiacritics(text) {
+  return safeString(text)
+    .replace(/\u064E(?=[اى])/gu, function removeFathaBeforeLongA(mark, index, source) {
+      if (source[index + 1] !== "ا") return "";
+
+      const previousCharacter = source[index - 1];
+      if (previousCharacter !== "و") return "";
+
+      const characterBeforeWaw = source[index - 2];
+      return isArabicScriptCharacter(characterBeforeWaw) ? "" : mark;
+    })
+    .replace(/\u064F(?=و)/g, "")
+    .replace(/\u0650(?=ي)/g, "")
+    .replace(/\u0652(?!\p{Script=Arabic})/gu, "");
+}
+
 export function getArabicText(phrase, arabicMode) {
   const vocalized = phrase.arabic;
+  if (arabicMode === "light") return applyLightDiacritics(vocalized);
   if (arabicMode === "unvocalized") return stripArabicDiacritics(vocalized);
   return vocalized;
 }

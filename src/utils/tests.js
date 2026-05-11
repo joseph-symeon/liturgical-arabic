@@ -3,6 +3,7 @@ import segments from "../data/texts/segments.js";
 import { defaultServiceText } from "../data/texts/serviceTexts.js";
 import { validateData } from "./dataValidation.js";
 import {
+  applyLightDiacritics,
   stripArabicDiacritics,
   getArabicText,
   getLineText,
@@ -24,10 +25,18 @@ export function runTests() {
   const readerSections = defaultServiceText.sections;
 
   console.assert(stripArabicDiacritics("بِسَلامٍ") === "بسلام", "Should strip Arabic diacritics.");
+  console.assert(
+    applyLightDiacritics("بُو بِيت بَاب عَلَى وَافْتَحْ نَوَافِذْ لِلّٰهِ") === "بو بيت باب عَلى وَافْتَح نَوَافِذ لِلّٰهِ",
+    "Light diacritics should remove redundant matres-vowel marks and final sukun while preserving word-initial wa before alif, internal sukun, shadda, and dagger alif."
+  );
   console.assert(phraseIds.length === uniquePhraseIds.size, "Phrase IDs should be unique.");
   console.assert(
     getArabicText(phrases["petition-001"], "unvocalized") === "إلى الرب نطلب",
     "Unvocalized Arabic should display without diacritics."
+  );
+  console.assert(
+    getArabicText({ arabic: "وَافْتَقِدْنَا" }, "light") === "وَافْتَقِدْنا",
+    "Light Arabic should be available through getArabicText."
   );
   console.assert(
     getArabicText(phrases["petition-001"], "vocalized") === "إِلَى الرَّبِّ نَطْلُب",
