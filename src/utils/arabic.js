@@ -13,8 +13,9 @@ function isArabicScriptCharacter(character) {
 
 export function applyLightDiacritics(text) {
   return safeString(text)
-    .replace(/\u064E(?=[اى])/gu, function removeFathaBeforeLongA(mark, index, source) {
-      if (source[index + 1] !== "ا") return "";
+    .replace(/\u064E(?=\u0651?[اى])/gu, function removeFathaBeforeLongA(mark, index, source) {
+      const longA = source[index + 1] === "\u0651" ? source[index + 2] : source[index + 1];
+      if (longA !== "ا") return "";
 
       const previousCharacter = source[index - 1];
       if (previousCharacter !== "و") return "";
@@ -22,8 +23,8 @@ export function applyLightDiacritics(text) {
       const characterBeforeWaw = source[index - 2];
       return isArabicScriptCharacter(characterBeforeWaw) ? "" : mark;
     })
-    .replace(/\u064F(?=و)/g, "")
-    .replace(/\u0650(?=ي)/g, "")
+    .replace(/\u064F(?=\u0651?و)/g, "")
+    .replace(/\u0650(?=\u0651?ي)/g, "")
     .replace(/\u0652(?!\p{Script=Arabic})/gu, "");
 }
 

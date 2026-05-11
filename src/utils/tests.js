@@ -26,8 +26,8 @@ export function runTests() {
 
   console.assert(stripArabicDiacritics("بِسَلامٍ") === "بسلام", "Should strip Arabic diacritics.");
   console.assert(
-    applyLightDiacritics("بُو بِيت بَاب عَلَى وَافْتَحْ نَوَافِذْ لِلّٰهِ") === "بو بيت باب عَلى وَافْتَح نَوَافِذ لِلّٰهِ",
-    "Light diacritics should remove redundant matres-vowel marks and final sukun while preserving word-initial wa before alif, internal sukun, shadda, and dagger alif."
+    applyLightDiacritics("بُو بِيت قُدُّوسٌ الضَّالّين بَاب عَلَى وَافْتَحْ نَوَافِذْ لِلّٰهِ") === "بو بيت قُدّوسٌ الضّالّين باب عَلى وَافْتَح نَوَافِذ لِلّٰهِ",
+    "Light diacritics should remove redundant matres-vowel marks, including before shadda plus long letters, and final sukun while preserving word-initial wa before alif, internal sukun, shadda, and dagger alif."
   );
   console.assert(phraseIds.length === uniquePhraseIds.size, "Phrase IDs should be unique.");
   console.assert(
