@@ -52,8 +52,8 @@ export default function ArabicLiturgyReader({
   onTableOfContents,
   onSelectSection
 }) {
-  const isTableOfContents = selectedSectionIndex === null;
   const readerSections = serviceText.sections || [];
+  const isTableOfContents = selectedSectionIndex === null || readerSections.length === 0;
   const readerServiceNavigation = getServiceNavigation(serviceText);
   const readerServiceHomeTitle = readerServiceNavigation[0]?.title || serviceText.short_title || serviceText.title;
   const [readerActivity, setReaderActivity] = useState(() => (

@@ -419,7 +419,10 @@ export default function App() {
 
   function goToNextSection() {
     const sectionCount = getReaderServiceText(selectedServiceTextId).sections.length;
-    setSelectedSectionIndex(index => (index === null ? 0 : Math.min(sectionCount - 1, index + 1)));
+    setSelectedSectionIndex(index => {
+      if (sectionCount === 0) return null;
+      return index === null ? 0 : Math.min(sectionCount - 1, index + 1);
+    });
     setView("reader");
   }
 
@@ -511,14 +514,35 @@ export default function App() {
 
   const selectedServiceText = getReaderServiceText(selectedServiceTextId);
   const readerSections = selectedServiceText.sections || [];
+  useEffect(() => {
+    if (
+      view === "reader" &&
+      selectedSectionIndex !== null &&
+      (selectedSectionIndex < 0 || selectedSectionIndex >= readerSections.length)
+    ) {
+      setSelectedSectionIndex(null);
+    }
+  }, [view, selectedSectionIndex, readerSections.length]);
+
   const readerServiceNavigation = getServiceNavigation(selectedServiceText);
   const readerServiceHomeTitle = readerServiceNavigation[0]?.title || selectedServiceText.short_title || selectedServiceText.title;
-  const readerNavigationGroups = READER_SERVICE_TEXTS.map(serviceText => ({
-    serviceText,
-    navigation: getServiceNavigation(serviceText)
-  }));
+  const readerNavigationGroups = READER_SERVICE_TEXTS.reduce((groups, serviceText) => {
+    const groupTitle = serviceText.title || serviceText.short_title || serviceText.id;
+    let group = groups.find(item => item.title === groupTitle);
+    if (!group) {
+      group = { title: groupTitle, services: [] };
+      groups.push(group);
+    }
+    group.services.push({
+      serviceText,
+      navigation: getServiceNavigation(serviceText)
+    });
+    return groups;
+  }, []);
   const hasPreviousSection = selectedSectionIndex !== null && selectedSectionIndex > 0;
-  const hasNextSection = selectedSectionIndex === null || selectedSectionIndex < readerSections.length - 1;
+  const hasNextSection = selectedSectionIndex === null
+    ? readerSections.length > 0
+    : selectedSectionIndex < readerSections.length - 1;
   const previousSectionTitle = hasPreviousSection ? readerSections[selectedSectionIndex - 1]?.section : null;
   const nextSectionTitle = hasNextSection
     ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
@@ -878,6 +902,125 @@ export default function App() {
     });
   }
 
+  function renderReaderServiceNavigation(serviceText, navigation, isCurrentServiceText) {
+    return navigation.map(serviceItem => {
+      const serviceHasCurrentSection = isCurrentServiceText && serviceItem.items.some(item => (
+        item.type === "section"
+          ? selectedSectionIndex === item.sectionIndex
+          : item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex)
+      ));
+      const serviceDetailId = `liturgy-service:${serviceText.id}:${serviceItem.title}`;
+      const serviceButton = (
+        <button
+          role="menuitem"
+          type="button"
+          onClick={event => {
+            event.preventDefault();
+            event.stopPropagation();
+            goToTableOfContents(serviceText.id);
+          }}
+          className={isCurrentServiceText && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+          style={{ ...SECTION_ITEM_STYLE, padding: "4px 6px" }}
+        >
+          {serviceItem.title}
+        </button>
+      );
+
+      if (serviceItem.items.length === 0) {
+        return (
+          <div key={serviceItem.title}>
+            {serviceButton}
+          </div>
+        );
+      }
+
+      return (
+        <details
+          className="lp-course-lesson"
+          key={serviceItem.title}
+          open={isNavDetailOpen(serviceDetailId, serviceHasCurrentSection || (isCurrentServiceText && selectedSectionIndex === null))}
+          onToggle={event => setNavDetailOpen(serviceDetailId, event.currentTarget.open)}
+        >
+          <summary className="lp-course-lesson-summary">
+            {serviceButton}
+          </summary>
+          <div className="lp-course-exercise-list">
+            {renderReaderNavigationItems(serviceText, serviceItem, isCurrentServiceText)}
+          </div>
+        </details>
+      );
+    });
+  }
+
+  function renderReaderNavigationGroup(group) {
+    const isCurrentGroup = view === "reader" && group.services.some(({ serviceText }) => selectedServiceText.id === serviceText.id);
+    const groupDetailId = `liturgy-text:${group.title}`;
+
+    if (group.services.length === 1) {
+      const { serviceText, navigation } = group.services[0];
+      const isCurrentServiceText = view === "reader" && selectedServiceText.id === serviceText.id;
+      return (
+        <details
+          className="lp-course-lesson"
+          key={serviceText.id}
+          open={isNavDetailOpen(groupDetailId, isCurrentServiceText)}
+          onToggle={event => setNavDetailOpen(groupDetailId, event.currentTarget.open)}
+        >
+          <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+            {serviceText.nav_landing_at_root ? (
+              <button
+                role="menuitem"
+                type="button"
+                onClick={event => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  goToTableOfContents(serviceText.id);
+                }}
+                className={isCurrentServiceText && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)]" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                style={{
+                  ...SECTION_ITEM_STYLE,
+                  padding: "4px 6px",
+                  color: "inherit",
+                  fontSize: "inherit",
+                  fontWeight: "inherit",
+                  letterSpacing: "inherit",
+                  lineHeight: "inherit",
+                  textTransform: "inherit"
+                }}
+              >
+                {serviceText.title}
+              </button>
+            ) : serviceText.title}
+          </summary>
+          <div className="lp-course-exercise-list">
+            {serviceText.nav_landing_at_root
+              ? navigation.flatMap(serviceItem => renderReaderNavigationItems(serviceText, serviceItem, isCurrentServiceText))
+              : renderReaderServiceNavigation(serviceText, navigation, isCurrentServiceText)}
+          </div>
+        </details>
+      );
+    }
+
+    return (
+      <details
+        className="lp-course-lesson"
+        key={group.title}
+        open={isNavDetailOpen(groupDetailId, isCurrentGroup)}
+        onToggle={event => setNavDetailOpen(groupDetailId, event.currentTarget.open)}
+      >
+        <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+          {group.title}
+        </summary>
+        <div className="lp-course-exercise-list">
+          {group.services.flatMap(({ serviceText, navigation }) => {
+            const isCurrentServiceText = view === "reader" && selectedServiceText.id === serviceText.id;
+            return renderReaderServiceNavigation(serviceText, navigation, isCurrentServiceText);
+          })}
+        </div>
+      </details>
+    );
+  }
+
   return (
     <div
       className="min-h-screen bg-white dark:bg-[var(--dark-bg)] font-sans text-stone-900 dark:text-[var(--dark-text)]"
@@ -1046,84 +1189,7 @@ export default function App() {
                   Liturgical Texts
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  {readerNavigationGroups.map(({ serviceText, navigation }) => {
-                    const isCurrentServiceText = view === "reader" && selectedServiceText.id === serviceText.id;
-                    const serviceTextDetailId = `liturgy-text:${serviceText.id}`;
-                    return (
-                      <details
-                        className="lp-course-lesson"
-                        key={serviceText.id}
-                        open={isNavDetailOpen(serviceTextDetailId, isCurrentServiceText)}
-                        onToggle={event => setNavDetailOpen(serviceTextDetailId, event.currentTarget.open)}
-                      >
-                        <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
-                          {serviceText.nav_landing_at_root ? (
-                            <button
-                              role="menuitem"
-                              type="button"
-                              onClick={event => {
-                                event.preventDefault();
-                                event.stopPropagation();
-                                goToTableOfContents(serviceText.id);
-                              }}
-                              className={isCurrentServiceText && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)]" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
-                              style={{
-                                ...SECTION_ITEM_STYLE,
-                                padding: "4px 6px",
-                                color: "inherit",
-                                fontSize: "inherit",
-                                fontWeight: "inherit",
-                                letterSpacing: "inherit",
-                                lineHeight: "inherit",
-                                textTransform: "inherit"
-                              }}
-                            >
-                              {serviceText.title}
-                            </button>
-                          ) : serviceText.title}
-                        </summary>
-                        <div className="lp-course-exercise-list">
-                          {serviceText.nav_landing_at_root
-                            ? navigation.flatMap(serviceItem => renderReaderNavigationItems(serviceText, serviceItem, isCurrentServiceText))
-                            : navigation.map(serviceItem => {
-                            const serviceHasCurrentSection = isCurrentServiceText && serviceItem.items.some(item => (
-                              item.type === "section"
-                                ? selectedSectionIndex === item.sectionIndex
-                                : item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex)
-                            ));
-                            const serviceDetailId = `liturgy-service:${serviceText.id}:${serviceItem.title}`;
-                            return (
-                              <details
-                                className="lp-course-lesson"
-                                key={serviceItem.title}
-                                open={isNavDetailOpen(serviceDetailId, serviceHasCurrentSection || (isCurrentServiceText && selectedSectionIndex === null))}
-                                onToggle={event => setNavDetailOpen(serviceDetailId, event.currentTarget.open)}
-                              >
-                                <summary className="lp-course-lesson-summary">
-                                  <button
-                                    role="menuitem"
-                                    type="button"
-                                    onClick={event => {
-                                      event.preventDefault();
-                                      event.stopPropagation();
-                                      goToTableOfContents(serviceText.id);
-                                    }}
-                                    className={isCurrentServiceText && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
-                                    style={{ ...SECTION_ITEM_STYLE, padding: "4px 6px" }}
-                                  >
-                                    {serviceItem.title}
-                                  </button>
-                                </summary>
-                                <div className="lp-course-exercise-list">
-                                  {renderReaderNavigationItems(serviceText, serviceItem, isCurrentServiceText)}
-                                </div>
-                              </details>
-                            );
-                          })}
-                        </div>
-                      </details>
-                    );
-                  })}
+                  {readerNavigationGroups.map(renderReaderNavigationGroup)}
                 </div>
               </div>
 

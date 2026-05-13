@@ -3647,6 +3647,174 @@ const phrases = {
       "section: The Prayer of the Litany for the Catechumens"
     ]
   },
+  "basil-catechumens-dwellest-heavens-001": {
+    "arabic": "الساكنُ في السماوات",
+    "translation": "who dwellest in the heavens",
+    "literal": "dwelling in the heavens",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-looking-upon-001": {
+    "arabic": "والمُطَّلِعُ",
+    "translation": "and lookest down",
+    "literal": "and looking",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-all-works-001": {
+    "arabic": "على جميعِ أعمالِكَ",
+    "translation": "upon all thy works",
+    "literal": "upon all your works",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-look-servants-001": {
+    "arabic": "تطلَّعْ إلى عبيدِكَ الموعوظين",
+    "translation": "Look upon thy servants the catechumens",
+    "literal": "Look upon your servants the catechumens",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-bowed-before-001": {
+    "arabic": "الذين حَنَوْا أمامَكَ",
+    "translation": "who have bowed before thee",
+    "literal": "who have bowed before you",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-necks-001": {
+    "arabic": "أعناقَهُم",
+    "translation": "their necks",
+    "literal": "their necks",
+    "tags": [
+      "basil",
+      "catechumens",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-grant-them-001": {
+    "arabic": "وامنَحْهُم",
+    "translation": "and grant them",
+    "literal": "and grant them",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-light-yoke-001": {
+    "arabic": "النِّيرَ الخفيف",
+    "translation": "the light yoke",
+    "literal": "the light yoke",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-honorable-members-001": {
+    "arabic": "واجعلْهُم أعضاءً كريمة",
+    "translation": "Make them honorable members",
+    "literal": "and make them honorable members",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-holy-church-001": {
+    "arabic": "لكنيستِكَ المقدّسة",
+    "translation": "of thy holy Church",
+    "literal": "for your holy Church",
+    "tags": [
+      "basil",
+      "catechumens",
+      "church",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-make-worthy-001": {
+    "arabic": "وأهِّلْهُم",
+    "translation": "and make them worthy",
+    "literal": "and make them worthy",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-laver-regeneration-001": {
+    "arabic": "لحميمِ الولادةِ الجديدة",
+    "translation": "of the laver of regeneration",
+    "literal": "for the washing of the new birth",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-may-know-thee-001": {
+    "arabic": "ليعرفوكَ",
+    "translation": "unto knowledge of thee",
+    "literal": "so that they may know you",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "basil-catechumens-true-god-001": {
+    "arabic": "أنتَ الإلهَ الحقيقي",
+    "translation": "our true God",
+    "literal": "you the true God",
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
   "section-first-litany-faithful-prayer": {
     "arabic": "إِفْشِينُ المُؤْمِنِينَ الأَوَّلُ",
     "translation": "The Prayer of the First Litany of the Faithful",
@@ -3655,6 +3823,270 @@ const phrases = {
       "faithful",
       "prayer",
       "section-title",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-o-lord-001": {
+    "arabic": "أيُّها الرَبُّ",
+    "translation": "Thou, O Lord",
+    "literal": "O Lord",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-shown-us-001": {
+    "arabic": "أنتَ أظهرتَ لنا",
+    "translation": "hast shown us",
+    "literal": "you have shown us",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-mystery-salvation-001": {
+    "arabic": "سرَّ الخلاصِ هذا العظيم",
+    "translation": "this great mystery of salvation",
+    "literal": "this great mystery of salvation",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-made-us-worthy-001": {
+    "arabic": "أنتَ أهَّلتَنا",
+    "translation": "thou hast made us",
+    "literal": "you have made us worthy",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-humble-servants-001": {
+    "arabic": "نحنُ عبيدَكَ الأذلّاءَ",
+    "translation": "thy humble servants",
+    "literal": "we your humble servants",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-unworthy-001": {
+    "arabic": "غيرَ المستحقّين",
+    "translation": "and unworthy",
+    "literal": "unworthy",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-be-ministrants-001": {
+    "arabic": "لأن نصيرَ خدّاماً",
+    "translation": "to be ministrants",
+    "literal": "to become servants",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-holy-altar-001": {
+    "arabic": "لمذبحِكَ المقدّس",
+    "translation": "of thy holy altar",
+    "literal": "of your holy altar",
+    "tags": [
+      "altar",
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-enable-us-001": {
+    "arabic": "فاجعلْنا",
+    "translation": "Do thou enable us",
+    "literal": "so make us",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-power-spirit-001": {
+    "arabic": "بقوّةِ روحِكَ القدّوس",
+    "translation": "by the power of thy Holy Spirit",
+    "literal": "by the power of your Holy Spirit",
+    "tags": [
+      "basil",
+      "faithful",
+      "holy-spirit",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-stand-service-001": {
+    "arabic": "أن نقفَ في هذه الخدمة",
+    "translation": "for this service",
+    "literal": "to stand in this service",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "ministry",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-uncondemned-001": {
+    "arabic": "غيرَ مَدينينَ",
+    "translation": "standing uncondemned",
+    "literal": "uncondemned",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-before-glory-001": {
+    "arabic": "أمامَ مجدِكَ المقدّس",
+    "translation": "before thy holy glory",
+    "literal": "before your holy glory",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-offer-thee-001": {
+    "arabic": "ونقدّمَ لكَ",
+    "translation": "we may offer unto thee",
+    "literal": "and offer to you",
+    "tags": [
+      "basil",
+      "faithful",
+      "offering",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-sacrifice-praise-001": {
+    "arabic": "ذبيحةَ التسبيح",
+    "translation": "a sacrifice of praise",
+    "literal": "the sacrifice of praise",
+    "tags": [
+      "basil",
+      "faithful",
+      "offering",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-thou-worketh-001": {
+    "arabic": "فإنكَ أنتَ الفاعلُ",
+    "translation": "for thou art he who worketh",
+    "literal": "for you are the one working",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-all-in-all-001": {
+    "arabic": "كلَّ شيءٍ في الكل",
+    "translation": "all things in all men",
+    "literal": "everything in all",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-grant-lord-001": {
+    "arabic": "هَبْ يا ربُّ",
+    "translation": "grant, O Lord",
+    "literal": "grant, O Lord",
+    "tags": [
+      "basil",
+      "faithful",
+      "petition",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-sacrifice-this-001": {
+    "arabic": "أن تكونَ ذبيحتُنا هذه",
+    "translation": "that our sacrifice",
+    "literal": "that this our sacrifice",
+    "tags": [
+      "basil",
+      "faithful",
+      "offering",
+      "petition",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-offered-sins-001": {
+    "arabic": "المقدَّمةُ عن خطايانا",
+    "translation": "offered for our own sins",
+    "literal": "offered for our sins",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "repentance",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-ignorance-people-001": {
+    "arabic": "وجهالاتِ الشعب",
+    "translation": "and for the ignorance of the people",
+    "literal": "and the ignorances of the people",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "repentance",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-acceptable-001": {
+    "arabic": "مرضيّةً وحسنةَ القَبول",
+    "translation": "may be acceptable and well-pleasing",
+    "literal": "pleasing and good of acceptance",
+    "tags": [
+      "basil",
+      "faithful",
+      "offering",
+      "priest-prayer",
+      "section: The Prayer of the First Litany of the Faithful"
+    ]
+  },
+  "basil-first-faithful-before-thee-001": {
+    "arabic": "أمامَكَ",
+    "translation": "in thy sight",
+    "literal": "before you",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
       "section: The Prayer of the First Litany of the Faithful"
     ]
   },
@@ -3944,6 +4376,190 @@ const phrases = {
       "faithful",
       "prayer",
       "section-title",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-o-god-001": {
+    "arabic": "أَيُّها الإِلَه",
+    "translation": "O God",
+    "literal": "O God",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-visited-lowliness-001": {
+    "arabic": "يا مَنِ افْتَقَدَ ضِعَتَنا",
+    "translation": "who hast visited our lowliness",
+    "literal": "O you who visited our lowliness",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-mercy-compassions-001": {
+    "arabic": "بِالرَّحْمَةِ والرَّأَفات",
+    "translation": "in mercy and compassions",
+    "literal": "with mercy and compassions",
+    "tags": [
+      "basil",
+      "faithful",
+      "mercy",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-set-us-001": {
+    "arabic": "وأَقامَنا",
+    "translation": "who hast set us",
+    "literal": "and has set us",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-humble-servants-001": {
+    "arabic": "نَحْنُ عَبيدَهُ الذَّليلين",
+    "translation": "thy humble servants",
+    "literal": "we his humble servants",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-sinful-unworthy-001": {
+    "arabic": "الخُطاةَ غَيْرَ المُسْتَحِقِّين",
+    "translation": "sinful and unworthy",
+    "literal": "sinners, unworthy",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "repentance",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-before-glory-001": {
+    "arabic": "أمامَ مَجْدِهِ المُقَدَّس",
+    "translation": "before thy holy glory",
+    "literal": "before his holy glory",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-minister-altar-001": {
+    "arabic": "لِنَخْدُمَ مَذْبَحَهُ المُقَدَّس",
+    "translation": "to minister at thy holy altar",
+    "literal": "to serve his holy altar",
+    "tags": [
+      "altar",
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-strengthen-us-001": {
+    "arabic": "أَنْتَ أَيِّدْنا",
+    "translation": "Strengthen us",
+    "literal": "you strengthen us",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-power-spirit-001": {
+    "arabic": "بِقُوَّةِ رُوحِكَ القُدُّوس",
+    "translation": "by the power of thy Holy Spirit",
+    "literal": "by the power of your Holy Spirit",
+    "tags": [
+      "basil",
+      "faithful",
+      "holy-spirit",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-this-ministry-001": {
+    "arabic": "في هذِهِ الخِدْمَة",
+    "translation": "for this ministry",
+    "literal": "in this service",
+    "tags": [
+      "basil",
+      "faithful",
+      "ministry",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-grant-utterance-001": {
+    "arabic": "وأَعْطِنا كَلاماً",
+    "translation": "and grant us utterance",
+    "literal": "and give us speech",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-opening-mouth-001": {
+    "arabic": "عِنْدَ فَتْحِ أَفْواهِنا",
+    "translation": "in the opening of our mouth",
+    "literal": "at the opening of our mouths",
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-invoke-grace-001": {
+    "arabic": "لِنَسْتَدْعِيَ نِعْمَةَ رُوحِكَ القُدُّوس",
+    "translation": "to invoke the grace of thy Holy Spirit",
+    "literal": "to call upon the grace of your Holy Spirit",
+    "tags": [
+      "basil",
+      "faithful",
+      "holy-spirit",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-upon-gifts-001": {
+    "arabic": "عَلَى القَرابِينِ المُزْمَعَةِ أنْ تُقَدَّم",
+    "translation": "upon the gifts about to be set forth",
+    "literal": "upon the gifts about to be offered",
+    "tags": [
+      "basil",
+      "faithful",
+      "offering",
+      "priest-prayer",
+      "section: The Prayer of the Second Litany of the Faithful"
+    ]
+  },
+  "basil-second-faithful-guarded-might-001": {
+    "arabic": "حَتَّى إذا كُنّا مَحْفُوظِينَ بِعِزَّتِكَ",
+    "translation": "That guarded by thy might",
+    "literal": "so that when we are preserved by your might",
+    "tags": [
+      "basil",
+      "doxology",
+      "faithful",
+      "priest-prayer",
       "section: The Prayer of the Second Litany of the Faithful"
     ]
   },
@@ -6865,6 +7481,396 @@ const phrases = {
       "section: The Litany of Supplication"
     ]
   },
+  "basil-supplication-created-us-001": {
+    "arabic": "أَيُّها الرَّبُّ إِلَهُنا",
+    "translation": "O Lord, our God",
+    "literal": "O Lord our God",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-brought-life-001": {
+    "arabic": "يا مَنْ خَلَقَنا",
+    "translation": "who hast created us",
+    "literal": "O you who created us",
+    "tags": [
+      "basil",
+      "creation",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-brought-this-life-001": {
+    "arabic": "وأَتَى بِنا إِلَى هذِهِ الحَيَاةِ",
+    "translation": "and hast brought us into this life",
+    "literal": "and brought us to this life",
+    "tags": [
+      "basil",
+      "creation",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-ways-salvation-001": {
+    "arabic": "وأَرَانَا سُبُلَ الخَلاصِ",
+    "translation": "who hast shown us ways of salvation",
+    "literal": "and showed us the ways of salvation",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "salvation",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-heavenly-mysteries-001": {
+    "arabic": "وَوَهَبَنا كَشْفَ أَسْرَارٍ سَمَاوِيَّة",
+    "translation": "graciously bestowing upon us the revelation of heavenly mysteries",
+    "literal": "and granted us the unveiling of heavenly mysteries",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "mystery",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-appointed-ministry-001": {
+    "arabic": "أَنْتَ الَّذي جَعَلْتَنا في هذِهِ الخِدْمَةِ",
+    "translation": "Thou art he who hath appointed us to this ministry",
+    "literal": "You are the one who placed us in this service",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "ministry",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-power-spirit-001": {
+    "arabic": "بِقُوَّةِ رُوحِكَ القُدُس",
+    "translation": "by the power of thy Holy Spirit",
+    "literal": "by the power of your Holy Spirit",
+    "tags": [
+      "basil",
+      "holy-spirit",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-grant-servitors-001": {
+    "arabic": "فارْضَ إِذًا يا رَبُّ",
+    "translation": "graciously grant us, therefore, O Lord",
+    "literal": "be pleased then, O Lord",
+    "tags": [
+      "basil",
+      "covenant",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-servitors-covenant-001": {
+    "arabic": "أنْ نَكُونَ خُدَّامًا لِعَهْدِكَ الجَدِيد",
+    "translation": "to be servitors of thy new covenant",
+    "literal": "that we may be servants of your new covenant",
+    "tags": [
+      "basil",
+      "covenant",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-ministers-mysteries-001": {
+    "arabic": "مُكَمِّلِينَ أَسْرَارَكَ المُقَدَّسَة",
+    "translation": "ministers of thy holy mysteries",
+    "literal": "fulfilling your holy mysteries",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "mystery",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-receive-near-001": {
+    "arabic": "واقْبَلْنا بِحَسَبِ كَثْرَةِ رَحْمَتِكَ",
+    "translation": "Receive us according to the fullness of thy mercy",
+    "literal": "and receive us according to the abundance of your mercy",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "mercy",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-draw-altar-001": {
+    "arabic": "نَحْنُ المُقَرَّبينَ إِلَى مَذْبَحِكَ المُقَدَّسِ",
+    "translation": "who draw near to thy holy altar",
+    "literal": "we who draw near to your holy altar",
+    "tags": [
+      "altar",
+      "basil",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-worthy-offer-001": {
+    "arabic": "لِنَصيرَ أَهْلًا لأنْ نُقَدِّمَ لَكَ",
+    "translation": "that we may be worthy to offer unto thee",
+    "literal": "that we may become worthy to offer to you",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-rational-bloodless-001": {
+    "arabic": "هذِهِ الذَّبِيحَةَ النَّاطِقَةَ غَيْرَ الدَّمَوِيَّة",
+    "translation": "this rational and bloodless sacrifice",
+    "literal": "this rational, bloodless sacrifice",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-own-sins-001": {
+    "arabic": "عَنْ خَطَايانا وجَهَالاتِ الشَّعْب",
+    "translation": "for our own sins, and for the ignorance of the people",
+    "literal": "for our sins and the ignorances of the people",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "repentance",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-receive-altar-001": {
+    "arabic": "حَتَّى إذا قَبِلْتَها عَلَى مَذْبَحِكَ المُقَدَّسِ",
+    "translation": "which do thou receive upon thy holy altar",
+    "literal": "so when you receive it upon your holy altar",
+    "tags": [
+      "altar",
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-heavenly-spiritual-001": {
+    "arabic": "السَّمَاوِيِّ العَقْلِيِّ رَائِحَةَ طِيب",
+    "translation": "most heavenly and spiritual altar as an aroma of sweetness",
+    "literal": "the heavenly, noetic one, as an aroma of sweetness",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-send-grace-001": {
+    "arabic": "تُرْسِلُ لَنا عِوَضًا مِنْها نِعْمَةَ رُوحِكَ القُدُس",
+    "translation": "and send down upon us in return the grace of thy Holy Spirit",
+    "literal": "you send us in return for it the grace of your Holy Spirit",
+    "tags": [
+      "basil",
+      "holy-spirit",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-look-worship-001": {
+    "arabic": "تَطَلَّعْ عَلَيْنَا يا اللهُ وانْظُرْ إِلَى عِبَادَتِنا هذِهِ",
+    "translation": "Look upon us, O God, and behold this our worship",
+    "literal": "look upon us, O God, and look at this our worship",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-receive-abel-001": {
+    "arabic": "واقْبَلْها كَمَا قَبِلْتَ قَرَابينَ هَابِيل",
+    "translation": "and receive it as thou didst receive the gifts of Abel",
+    "literal": "and receive it as you received the offerings of Abel",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-noah-abraham-001": {
+    "arabic": "وذَبَائِحَ نُوحٍ ومُحْرَقَاتِ إِبْرَاهِيم",
+    "translation": "the sacrifices of Noah, the burnt-offerings of Abraham",
+    "literal": "and the sacrifices of Noah and the burnt-offerings of Abraham",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-moses-aaron-001": {
+    "arabic": "وخِدَمَ مُوسَى وهَارُونَ الكَهَنُوتِيَّة",
+    "translation": "the priestly offices of Moses and Aaron",
+    "literal": "and the priestly services of Moses and Aaron",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-samuel-001": {
+    "arabic": "وتَقْدِمَاتِ صَمُوئِيلَ السَّلَامِيَّة",
+    "translation": "the peace-offerings of Samuel",
+    "literal": "and the peaceful offerings of Samuel",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-apostles-worship-001": {
+    "arabic": "وكَمَا قَبِلْتَ مِنْ رُسُلِكَ القِدِّيسِينَ",
+    "translation": "Even as thou didst receive at the hands of thy holy apostles",
+    "literal": "and as you received from your holy apostles",
+    "tags": [
+      "apostles",
+      "basil",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-true-worship-001": {
+    "arabic": "هذِهِ العِبَادَةَ الحَقِيقِيَّة",
+    "translation": "this true worship",
+    "literal": "this true worship",
+    "tags": [
+      "apostles",
+      "basil",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-receive-sinners-gifts-001": {
+    "arabic": "تَقَبَّلْ يا رَبُّ بِصَلاحِكَ هذِهِ القَرَابينَ",
+    "translation": "so also do thou in thy goodness, O Lord, receive these gifts",
+    "literal": "receive, O Lord, in your goodness these offerings",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "repentance",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-from-sinners-hands-001": {
+    "arabic": "مِنْ أَيْدِينا نَحْنُ الخُطَاة",
+    "translation": "from the hands of us sinners",
+    "literal": "from our hands, we sinners",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "offering",
+      "priest-prayer",
+      "quiet",
+      "repentance",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-accounted-worthy-001": {
+    "arabic": "حَتَّى إذا تَأَهَّلْنا لأنْ نَخْدُمَ مَذْبَحَكَ المُقَدَّسَ بِلا لَوْم",
+    "translation": "that, having been accounted worthy to minister at thy holy altar",
+    "literal": "so that when we are made worthy to serve your holy altar without blame",
+    "tags": [
+      "altar",
+      "basil",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-recompense-stewards-001": {
+    "arabic": "نَجِدْ أُجْرَةَ الوُكَلاءِ الأُمَناءِ الحُكَماء",
+    "translation": "we may receive the recompense of wise and faithful stewards",
+    "literal": "we may find the reward of the faithful, wise stewards",
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
+  "basil-supplication-just-requiting-001": {
+    "arabic": "في يَوْمِ مُجَازَاتِكَ العَادِلَةِ المَرْهُوب",
+    "translation": "in the fearful day of thy just requiting",
+    "literal": "on the fearful day of your just recompense",
+    "tags": [
+      "basil",
+      "judgment",
+      "litany-of-supplication",
+      "priest-prayer",
+      "quiet",
+      "section: The Litany of Supplication"
+    ]
+  },
   "supplication-compassions-son-001": {
     "arabic": "بِرَأْفاتِ إبنِكَ الوَحيد",
     "translation": "Through the compassions of thine only-begotten Son",
@@ -8568,6 +9574,594 @@ const phrases = {
       "section: The Holy Anaphora"
     ]
   },
+  "basil-anaphora-existing-one-001": {
+    "arabic": "أَيُّها الكائِنُ، السَّيِّدُ الرَّبُّ، الإِلَهُ الآبُ، الضّابِطُ الكُلّ",
+    "translation": "O Existing One, Master Lord, God, almighty Father",
+    "literal": "O Existing One, Master Lord, God, Father almighty",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-adorable-father-001": {
+    "arabic": "المَسْجُودُ لَهُ",
+    "translation": "and adorable Father",
+    "literal": "worshiped",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-meet-majesty-001": {
+    "arabic": "إِنَّهُ واجِبٌ حَقّاً وعَدْلٌ، ولائِقٌ بِمَجْدِ قُدْسِكَ",
+    "translation": "It is truly meet and right and befitting the majesty of thy holiness",
+    "literal": "it is truly proper, right, and fitting for the glory of your holiness",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-praise-hymn-001": {
+    "arabic": "أنْ نُسَبِّحَكَ ونُرَنِّمَ لَكَ ونُبارِكَكَ ونَسْجُدَ لَكَ",
+    "translation": "that we should praise thee, hymn thee, bless thee, worship thee",
+    "literal": "that we praise you, hymn you, bless you, and worship you",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-thank-glorify-001": {
+    "arabic": "ونَشْكُرَكَ ونُمَجِّدَكَ",
+    "translation": "give thanks unto thee and glorify thee",
+    "literal": "and thank you and glorify you",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-only-existing-god-001": {
+    "arabic": "الإِلَهَ الحَقِيقِيَّ وَحْدَكَ",
+    "translation": "the only truly existing God",
+    "literal": "the true God alone",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-rational-worship-001": {
+    "arabic": "ونُقَرِّبَ لَكَ بِقُلُوبٍ مُنْسَحِقَةٍ وأرْواحٍ مُتَواضِعَةٍ عِبادَتَنا هذِهِ النّاطِقَة",
+    "translation": "and offer unto thee with contrite heart and spirit of humility this our rational worship",
+    "literal": "and we offer to you with contrite hearts and humble spirits this rational worship",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-knowledge-truth-001": {
+    "arabic": "لأنَّكَ أنْتَ الَّذي أنْعَمْتَ عَلَيْنا بِمَعْرِفَةِ حَقِّكَ",
+    "translation": "for thou art he that hath graciously bestowed upon us the knowledge of thy truth",
+    "literal": "for you are the one who gave us knowledge of your truth",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-who-sufficient-001": {
+    "arabic": "ومَنْ يَسْتَطِيعُ أنْ يَنْطِقَ بِجَبَرُوتِكَ أو يُسْمِعَ تَسابِيحَكَ",
+    "translation": "And who is sufficient to speak of thy mighty acts, to make all thy praises to be heard",
+    "literal": "and who is able to speak of your might or make your praises heard",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-wonders-season-001": {
+    "arabic": "أو يُذِيعَ جَمِيعَ مُعْجِزاتِكَ في كُلِّ حِين",
+    "translation": "or to tell of all thy wonders at every season",
+    "literal": "or proclaim all your wonders at every time",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-master-creation-001": {
+    "arabic": "يا سَيِّدَ الكُلّ، رَبَّ السَّماءِ والأرْضِ وكُلِّ الخَلِيقَةِ المَنْظُورَةِ وغَيْرِ المَنْظُورَة",
+    "translation": "O Master of all, Lord of heaven and earth, and of all creation both visible and invisible",
+    "literal": "O Master of all, Lord of heaven and earth and all visible and invisible creation",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-throne-depths-001": {
+    "arabic": "الجالِسَ عَلَى عَرْشِ المَجْدِ والنّاظِرَ إلى اللُّجَج",
+    "translation": "who sittest upon the throne of glory and beholdest the depths",
+    "literal": "sitting on the throne of glory and looking into the depths",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-unoriginated-001": {
+    "arabic": "الَّذي لا ابْتِداءَ لَهُ، ولا يُرَى، ولا يُوصَفُ، ولا يُدْرَك",
+    "translation": "who art unoriginated, invisible, incomprehensible",
+    "literal": "who has no beginning, is unseen, indescribable, and incomprehensible",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-father-christ-001": {
+    "arabic": "أنْتَ أبُو رَبِّنا، الإِلَهِ العَظِيمِ والمُخَلِّصِ يَسُوعَ المَسِيح",
+    "translation": "the Father of our Lord, the great God and Saviour Jesus Christ",
+    "literal": "the Father of our Lord, the great God and Savior Jesus Christ",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-image-word-001": {
+    "arabic": "هُوَ صُورَةُ صَلاحِكَ وخَتْمُ مُساواتِكَ والكَلِمَةُ الحَيُّ، الإِلَهُ الحَقِيقِيّ",
+    "translation": "who is the Image of thy goodness, the Seal of equal type, the living Word, the true God",
+    "literal": "the image of your goodness, the seal of your equality, the living Word, the true God",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-wisdom-life-light-001": {
+    "arabic": "الحِكْمَةُ الَّتي قَبْلَ الدُّهُور، والحَياةُ، والتَّقْدِيسُ، والقُوَّةُ، والنُّورُ الحَقِيقِيّ",
+    "translation": "the Wisdom before all ages, the Life, Sanctification, Power, the true Light",
+    "literal": "the pre-eternal wisdom, life, sanctification, power, and true light",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-spirit-manifested-001": {
+    "arabic": "الَّذي مِنْهُ ظَهَرَ الرُّوحُ القُدُس، رُوحُ الحَقّ",
+    "translation": "through whom the Holy Spirit was manifested, the Spirit of truth",
+    "literal": "through whom the Holy Spirit appeared, the Spirit of truth",
+    "tags": ["basil", "anaphora", "holy-spirit", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-spirit-gifts-001": {
+    "arabic": "مَوْهِبَةُ التَّبَنِّي، وعَرَبُونُ المِيراثِ الآتي، وباكُورَةُ الخَيْراتِ الأبَدِيَّة",
+    "translation": "the Gift of adoption, the Pledge of the inheritance to come, the First-fruits of eternal good things",
+    "literal": "the gift of adoption, pledge of the coming inheritance, first-fruit of eternal good things",
+    "tags": ["basil", "anaphora", "holy-spirit", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-life-fountain-001": {
+    "arabic": "القُوَّةُ المُحْيِيَة، ويَنْبُوعُ التَّقْدِيس",
+    "translation": "the life-giving Power, the Fountain of sanctification",
+    "literal": "life-giving power and fountain of sanctification",
+    "tags": ["basil", "anaphora", "holy-spirit", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-rational-creature-001": {
+    "arabic": "الَّذي بِتَأْيِيدِهِ تَعْبُدُكَ كُلُّ الخَلائِقِ النّاطِقَةِ والعَقْلِيَّة",
+    "translation": "by whom enabled every rational and intelligent creature doth serve thee",
+    "literal": "by whose strengthening every rational and intellectual creature worships you",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-angelic-orders-001": {
+    "arabic": "فَالمَلائِكَةُ ورُؤَساءُ المَلائِكَةِ والعُرُوشُ والسِّياداتُ والرِّئاساتُ والسَّلاطِينُ والقُوّاتُ يُسَبِّحُونَكَ",
+    "translation": "for angels, archangels, thrones, dominions, principalities, authorities and powers praise thee",
+    "literal": "angels, archangels, thrones, dominions, principalities, authorities, and powers praise you",
+    "tags": ["basil", "anaphora", "angels", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-cherubim-seraphim-001": {
+    "arabic": "والشِّيرُوبِيمُ الكَثِيرُو العُيُون، وحَوْلَكَ السِّيرافِيمُ ذَوُو الأجْنِحَةِ السِّتَّة",
+    "translation": "the many-eyed cherubim praise thee; round about thee stand the six-winged seraphim",
+    "literal": "the many-eyed cherubim, and around you the six-winged seraphim",
+    "tags": ["basil", "anaphora", "angels", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-covering-praises-001": {
+    "arabic": "بِاثْنَيْنِ يُغَطُّونَ وُجُوهَهُم، وبِاثْنَيْنِ أرْجُلَهُم، وبِاثْنَيْنِ يَطِيرُونَ ويُنادُونَ بَعْضُهُم بَعْضاً",
+    "translation": "with two they cover their faces, with two their feet, and with two they fly, crying one to another",
+    "literal": "with two they cover their faces, with two their feet, and with two they fly and call to one another",
+    "tags": ["basil", "anaphora", "angels", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-with-blessed-powers-001": {
+    "arabic": "مَعَ هذِهِ القُوّاتِ المَغْبُوطَة",
+    "translation": "With these blessed powers",
+    "literal": "with these blessed powers",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-righteous-judgment-001": {
+    "arabic": "لَمّا خالَفَ الإِنْسانُ وَصِيَّتَكَ، أخْرَجْتَهُ بِحُكْمِكَ العادِلِ مِنَ الفِرْدَوْسِ إلى هذا العالَم",
+    "translation": "when man disobeyed thy commandment, by thy righteous judgment thou didst cast him from paradise into this world",
+    "literal": "when man transgressed your commandment, by your just judgment you brought him from paradise to this world",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-regeneration-001": {
+    "arabic": "وأعْدَدْتَ لَهُ الخَلاصَ بِالوِلادَةِ الجَدِيدَة، الَّتي بِمَسِيحِكَ نَفْسِه",
+    "translation": "providing for him the salvation of regeneration, which is in thy Christ himself",
+    "literal": "preparing for him salvation by the new birth in your Christ himself",
+    "tags": ["basil", "anaphora", "salvation", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-not-forget-001": {
+    "arabic": "فَإِنَّكَ لَمْ تُعْرِضْ إلى الأبَدِ عَنْ جِبْلَتِكَ الَّتي صَنَعْتَها، ولَمْ تَنْسَ عَمَلَ يَدَيْكَ",
+    "translation": "thou didst not turn thyself away forever from thy creature, neither didst thou forget the work of thy hands",
+    "literal": "you did not turn away forever from your creature, nor forget the work of your hands",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-prophets-law-angels-001": {
+    "arabic": "أرْسَلْتَ الأنْبِياءَ، وأعْطَيْتَنا نامُوساً يُحْيِينا، وأقَمْتَ مَلائِكَةً يَحْرُسُونَنا",
+    "translation": "Thou didst send forth prophets, give us the Law as an aid, and appoint guardian angels",
+    "literal": "you sent prophets, gave us a law to enliven us, and appointed angels to guard us",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-fullness-son-001": {
+    "arabic": "ولَمّا حانَ كَمالُ الأزْمِنَة، كَلَّمْتَنا بِابْنِكَ نَفْسِهِ، الَّذي بِهِ صَنَعْتَ الدُّهُور",
+    "translation": "when the fulness of time was come, thou didst speak unto us through thy Son himself, by whom also thou madest the ages",
+    "literal": "when the fullness of times came, you spoke to us by your Son himself, through whom you made the ages",
+    "tags": ["basil", "anaphora", "christology", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-brightness-image-001": {
+    "arabic": "وهُوَ ضِياءُ مَجْدِكَ، وصُورَةُ أقْنُومِكَ، وحامِلُ الجَمِيعِ بِكَلِمَةِ قُدْرَتِهِ",
+    "translation": "who, being the Brightness of thy glory and the express Image of thy person and upholding all things by the word of his power",
+    "literal": "the radiance of your glory, image of your hypostasis, bearing all by the word of his power",
+    "tags": ["basil", "anaphora", "christology", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-incarnate-virgin-001": {
+    "arabic": "ظَهَرَ عَلَى الأرْضِ، وخالَطَ النّاسَ، وتَجَسَّدَ مِنَ البَتُولِ القِدِّيسَة",
+    "translation": "he appeared upon earth and dwelt among men and was incarnate of a holy virgin",
+    "literal": "he appeared on earth, lived among men, and was incarnate of the holy virgin",
+    "tags": ["basil", "anaphora", "christology", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-empty-servant-001": {
+    "arabic": "وأخْلَى ذاتَهُ، آخِذاً صُورَةَ عَبْد",
+    "translation": "and emptied himself, taking on the form of a servant",
+    "literal": "and emptied himself, taking the form of a servant",
+    "tags": ["basil", "anaphora", "christology", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-born-law-001": {
+    "arabic": "وُلِدَ مِنِ امْرَأةٍ، والِدَةِ الإِلَهِ الدّائِمَةِ البَتُولِيَّةِ مَرْيَم، ووُلِدَ تَحْتَ النّامُوس",
+    "translation": "to be born of a woman, the holy Theotokos and ever-virgin Mary; to be born under the Law",
+    "literal": "born of a woman, the Theotokos and ever-virgin Mary, born under the law",
+    "tags": ["basil", "anaphora", "theotokos", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-alive-christ-001": {
+    "arabic": "حَتّى إنَّ المائِتِينَ بِآدَمَ يَحْيَوْنَ في مَسِيحِكَ نَفْسِه",
+    "translation": "that they who were dead in Adam might be made alive in him thy Christ",
+    "literal": "so that those dead in Adam may live in your Christ himself",
+    "tags": ["basil", "anaphora", "salvation", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-commandments-knowledge-001": {
+    "arabic": "وأعْطانا أوامِرَ الخَلاص، وأبْعَدَنا عَنْ ضَلالِ الأوْثان، وهَدانا إلى مَعْرِفَتِكَ",
+    "translation": "giving commandments of salvation, he released us from the delusion of idols and brought us into a knowledge of thee",
+    "literal": "he gave us commandments of salvation, removed us from idol-delusion, and guided us to your knowledge",
+    "tags": ["basil", "anaphora", "salvation", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-people-priesthood-001": {
+    "arabic": "مُقْتَنِياً إيّانا لِذاتِهِ شَعْباً خاصّاً، وكَهَنُوتاً مُلُوكِيّاً، وأُمَّةً مُقَدَّسَة",
+    "translation": "having won us unto himself for his own people, a royal priesthood, a holy nation",
+    "literal": "acquiring us for himself as a special people, royal priesthood, and holy nation",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-ransom-death-001": {
+    "arabic": "وأعْطَى ذاتَهُ فِدْيَةً لِلْمَوْتِ، الَّذي كُنّا فِيهِ مَضْبُوطِينَ أرِقّاءَ لِلْخَطِيئَة",
+    "translation": "he gave himself a ransom to death, whereby we were held, sold into bondage under sin",
+    "literal": "he gave himself as ransom to death, in which we were held as slaves to sin",
+    "tags": ["basil", "anaphora", "salvation", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-hades-resurrection-001": {
+    "arabic": "وانْحَدَرَ بِالصَّلِيبِ إلى الجَحِيم، وحَلَّ أوْجاعَ المَوْت، وقامَ في اليَوْمِ الثّالِث",
+    "translation": "having descended into hades through the cross, he loosed the pains of death and rose again on the third day",
+    "literal": "descending by the cross to hades, he loosed death's pains and rose on the third day",
+    "tags": ["basil", "anaphora", "resurrection", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-firstfruits-001": {
+    "arabic": "صارَ باكُورَةً لِلرّاقِدِينَ، وبِكْراً مِنَ الأمْوات، لِيَكُونَ هُوَ الأوَّلَ في كُلِّ شَيْء",
+    "translation": "that he might be the First-fruits of those who have fallen asleep, the First-born from the dead",
+    "literal": "he became first-fruit of the sleepers and firstborn from the dead, first in all things",
+    "tags": ["basil", "anaphora", "resurrection", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-ascended-return-001": {
+    "arabic": "وصَعِدَ إلى السَّماوات، وجَلَسَ عَنْ يَمِينِ عَظَمَتِكَ، وسَيَأْتِي لِيَدِينَ كُلَّ واحِدٍ بِحَسَبِ أعْمالِه",
+    "translation": "Ascending into heaven, he sat down at the right hand of thy majesty and shall come again to render unto every man according to his works",
+    "literal": "he ascended to heaven, sat at your right hand, and will come to repay each according to works",
+    "tags": ["basil", "anaphora", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-saving-memorials-001": {
+    "arabic": "وتَرَكَ لَنا تَذْكاراتِ آلامِهِ الخَلاصِيَّةِ هذِهِ، الَّتي وَضَعْناها بِحَسَبِ وَصاياه",
+    "translation": "he hath left with us, as memorials of his saving passion, these things which we have set forth according to his commandments",
+    "literal": "he left us these memorials of his saving passion, set forth according to his commandments",
+    "tags": ["basil", "anaphora", "institution", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-voluntary-death-001": {
+    "arabic": "في اللَّيْلَةِ الَّتي أسْلَمَ فِيها ذاتَهُ لأجْلِ حَياةِ العالَم",
+    "translation": "in the night in which he gave himself up for the life of the world",
+    "literal": "in the night he handed himself over for the life of the world",
+    "tags": ["basil", "anaphora", "institution", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-shown-father-001": {
+    "arabic": "وأخَذَ خُبْزاً بِيَدَيْهِ المُقَدَّسَتَيْن، ورَفَعَهُ إلَيْكَ أيُّها الإِلَهُ الآب",
+    "translation": "he took bread in his holy hands; and when he had shown it unto thee, the God and Father",
+    "literal": "he took bread in his holy hands and lifted it to you, O God the Father",
+    "tags": ["basil", "anaphora", "institution", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-thanked-hallowed-001": {
+    "arabic": "وشَكَرَ وبارَكَ وقَدَّسَ وكَسَر",
+    "translation": "and given thanks and blessed it and hallowed it and broken it",
+    "literal": "and he thanked, blessed, sanctified, and broke",
+    "tags": ["basil", "anaphora", "institution", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-gave-disciples-001": {
+    "arabic": "أعْطَى تَلامِيذَهُ الرُّسُلَ القِدِّيسِينَ قائِلاً",
+    "translation": "He gave it to his holy disciples and apostles, saying",
+    "literal": "he gave it to his holy disciples, the apostles, saying",
+    "tags": ["basil", "anaphora", "institution", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-cup-vine-001": {
+    "arabic": "وكَذلِكَ أخَذَ الكَأْسَ مِنْ نِتاجِ الكَرْمَة، ومَزَجَ وشَكَرَ وبارَكَ وقَدَّسَها",
+    "translation": "In like manner, having taken the cup of the fruit of the vine and mingled it and given thanks and blessed it and hallowed it",
+    "literal": "likewise he took the cup from the fruit of the vine, mixed, thanked, blessed, and sanctified it",
+    "tags": ["basil", "anaphora", "institution", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-new-covenant-001": {
+    "arabic": "هذا هُوَ دَمِي لِلْعَهْدِ الجَدِيد",
+    "translation": "This is my Blood of the new covenant",
+    "literal": "this is my blood of the new covenant",
+    "tags": ["basil", "anaphora", "institution", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-do-remembrance-001": {
+    "arabic": "هذا اصْنَعُوهُ لِذِكْرِي",
+    "translation": "Do this in remembrance of me",
+    "literal": "do this for my remembrance",
+    "tags": ["basil", "anaphora", "institution", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-proclaim-death-001": {
+    "arabic": "فَإِنَّكُمْ كُلَّ مَرَّةٍ تَأْكُلُونَ هذا الخُبْزَ وتَشْرَبُونَ هذِهِ الكَأْسَ، تُخْبِرُونَ بِمَوْتِي وتَعْتَرِفُونَ بِقِيامَتِي",
+    "translation": "for as often as you shall eat this bread and drink this cup, you proclaim my death and confess my resurrection",
+    "literal": "whenever you eat this bread and drink this cup, you proclaim my death and confess my resurrection",
+    "tags": ["basil", "anaphora", "institution", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-remembering-passion-001": {
+    "arabic": "فَإِذْ نَحْنُ ذاكِرُونَ آلامَهُ الخَلاصِيَّة، وصَلِيبَهُ المُحْيِي، ودَفْنَهُ لِثَلاثَةِ أيّام",
+    "translation": "Wherefore, O Master, we also, having in remembrance his saving passion and life-giving cross, his three day entombment",
+    "literal": "therefore, remembering his saving passion, life-giving cross, and three-day burial",
+    "tags": ["basil", "anaphora", "anamnesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-remembering-glory-001": {
+    "arabic": "وقِيامَتَهُ مِنْ بَيْنِ الأمْوات، وصُعُودَهُ، وجُلُوسَهُ عَنْ يَمِينِكَ، ومَجِيئَهُ الثّانِيَ المَجِيدَ المَرْهُوب",
+    "translation": "his resurrection from the dead, his ascension into heaven, his sitting at thy right hand, and his glorious and fearful second coming",
+    "literal": "his resurrection, ascension, sitting at your right hand, and glorious fearful second coming",
+    "tags": ["basil", "anaphora", "anamnesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-wherefore-master-001": {
+    "arabic": "فَإِذْ نَحْنُ أيضاً، يا سَيِّد، عَبِيدُكَ الخَطَأَةُ غَيْرُ المُسْتَحِقِّين",
+    "translation": "Wherefore, O all-holy Master, we also, thy sinful and unworthy servants",
+    "literal": "therefore, O Master, we also, your sinful unworthy servants",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-worthy-minister-001": {
+    "arabic": "المُؤَهَّلِينَ لِخِدْمَةِ مَذْبَحِكَ المُقَدَّس، لا مِنْ أجْلِ بِرِّنا",
+    "translation": "who have been made worthy to minister at thy holy altar, not through our own righteousness",
+    "literal": "made worthy to serve your holy altar, not because of our righteousness",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-mercies-boldness-001": {
+    "arabic": "بَلْ بِسَبَبِ مَراحِمِكَ ورَأْفاتِكَ الَّتي أفَضْتَها عَلَيْنا، فَصِرْنا بِدالَّةٍ نَدْنُو إلى مَذْبَحِكَ",
+    "translation": "but because of thy mercies and compassions which thou hast richly poured out upon us, have now boldness to draw near unto thy holy altar",
+    "literal": "but because of your mercies and compassions poured on us, we boldly draw near to your altar",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-antitypes-001": {
+    "arabic": "ونُقَدِّمُ لَكَ مِثالَ جَسَدِ ودَمِ مَسِيحِكَ المُقَدَّسَيْن",
+    "translation": "and presenting unto thee the antitypes of the holy Body and Blood of thy Christ",
+    "literal": "and we present to you the antitypes of the holy body and blood of your Christ",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-spirit-descend-001": {
+    "arabic": "نَسْألُكَ أنْ يَحِلَّ رُوحُكَ القُدُسُ عَلَيْنا، وعَلَى هذِهِ القَرابِينِ المَوْضُوعَة",
+    "translation": "that thy Holy Spirit may descend upon us and upon these gifts here spread forth",
+    "literal": "we ask that your Holy Spirit descend upon us and these gifts set forth",
+    "tags": ["basil", "anaphora", "epiclesis", "holy-spirit", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-bless-hallow-show-001": {
+    "arabic": "ويُبارِكَها ويُقَدِّسَها ويُظْهِرَها",
+    "translation": "and bless them and hallow them and show",
+    "literal": "and bless, sanctify, and show them",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-bread-body-001": {
+    "arabic": "أمّا هذا الخُبْزَ كَجَسَدِ رَبِّنا وإِلَهِنا ومُخَلِّصِنا يَسُوعَ المَسِيحِ الكَرِيمِ نَفْسِه",
+    "translation": "This bread to be itself the precious Body of our Lord and God and Saviour Jesus Christ",
+    "literal": "this bread as the precious body itself of our Lord, God, and Savior Jesus Christ",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-cup-blood-001": {
+    "arabic": "وأمّا ما في هذِهِ الكَأْسِ كَدَمِ رَبِّنا وإِلَهِنا ومُخَلِّصِنا يَسُوعَ المَسِيحِ الكَرِيمِ نَفْسِه",
+    "translation": "And this cup to be itself the precious Blood of our Lord and God and Saviour Jesus Christ",
+    "literal": "and what is in this cup as the precious blood itself of our Lord, God, and Savior Jesus Christ",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-life-world-001": {
+    "arabic": "المُهْراقَ لأجْلِ حَياةِ العالَمِ وخَلاصِه",
+    "translation": "Which was shed for the life of the world and its salvation",
+    "literal": "poured out for the life of the world and its salvation",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-partakers-001": {
+    "arabic": "أمّا نَحْنُ المُشْتَرِكِينَ في الخُبْزِ الواحِدِ والكَأْسِ الواحِدَة",
+    "translation": "And as for us, partakers of the one bread and of the cup",
+    "literal": "as for us who share in the one bread and the one cup",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-unite-communion-001": {
+    "arabic": "فاجْعَلْنا مُتَّحِدِينَ بَعْضُنا بِبَعْضٍ في شَرِكَةِ رُوحِ قُدُسٍ واحِد",
+    "translation": "do thou unite all to one another unto communion of the one Holy Spirit",
+    "literal": "make us united to one another in communion of one Holy Spirit",
+    "tags": ["basil", "anaphora", "epiclesis", "holy-spirit", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-not-judgment-001": {
+    "arabic": "ولا تَجْعَلِ اشْتِراكَنا في جَسَدِ ودَمِ مَسِيحِكَ المُقَدَّسَيْنِ لِحُكْمٍ ولا لِدَيْنُونَة",
+    "translation": "and grant that no one may partake of the holy Body and Blood of thy Christ unto judgment or condemnation",
+    "literal": "do not make our communion in Christ's body and blood for judgment or condemnation",
+    "tags": ["basil", "anaphora", "epiclesis", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-mercy-saints-001": {
+    "arabic": "بَلْ لِكَيْ نَجِدَ رَحْمَةً ونِعْمَةً مَعَ جَمِيعِ القِدِّيسِينَ الَّذِينَ أرْضَوْكَ مُنْذُ الدَّهْر",
+    "translation": "but rather that we may find mercy and grace with all the holy ones who through the ages have been well pleasing unto thee",
+    "literal": "but that we may find mercy and grace with all the saints who pleased you from the age",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-righteous-list-001": {
+    "arabic": "الأجْداد، والآباء، ورُؤَساءُ الآباء، والأنْبِياء، والرُّسُل، والمُبَشِّرِين، والشُّهَداء، والمُعْتَرِفِين، والمُعَلِّمِين، وكُلُّ رُوحِ صِدِّيقٍ تُوُفِّيَ بِإِيمان",
+    "translation": "forefathers, fathers, patriarchs, prophets, apostles, preachers, evangelists, martyrs, confessors, teachers and every righteous spirit made perfect in faith",
+    "literal": "ancestors, fathers, patriarchs, prophets, apostles, evangelists, martyrs, confessors, teachers, and every righteous spirit perfected in faith",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-rubric-all-creation-001": {
+    "arabic": "يُعِيدُ المِبْخَرَةَ إلى الشَّمّاس، وهذا يُبَخِّرُ حَوْلَ المائِدَةِ المُقَدَّسَة، بَيْنَما تُرَنِّمُ الجَوْقَة: «إِنَّ البَرايا»",
+    "translation": "He gives the censer back to the deacon, who censes around the Holy Table while the choir chants “All creation.”",
+    "literal": "he gives the censer to the deacon, who censes around the holy table, while the choir hymns All Creation",
+    "tags": ["basil", "anaphora", "rubric", "section: The Holy Anaphora"]
+  },
+  "theotokos-hymn-rubric-001": {
+    "arabic": "(تَرْنِيمَةٌ لِوَالِدَةِ الإِلٰهِ)",
+    "translation": "A hymn to the Theotokos",
+    "literal": "a hymn to the Mother of God",
+    "tags": ["anaphora", "hymn-to-the-theotokos", "rubric", "theotokos", "section: Hymn to the Theotokos"]
+  },
+  "basil-anaphora-all-creation-rejoices-001": {
+    "arabic": "إِنَّ البَرايا بِأسْرِها تَفْرَحُ بِكِ يا مُمْتَلِئَةً نِعْمَة",
+    "translation": "All creation rejoiceth in thee, O thou who art full of grace",
+    "literal": "all creation rejoices in you, O full of grace",
+    "tags": ["basil", "anaphora", "theotokos", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-angelic-race-001": {
+    "arabic": "مَحافِلُ المَلائِكَةِ وأجْناسُ البَشَر",
+    "translation": "the angelic hosts and the race of men",
+    "literal": "the angelic hosts and races of mankind",
+    "tags": ["basil", "anaphora", "theotokos", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-hallowed-temple-001": {
+    "arabic": "أيَّتُها الهَيْكَلُ المُتَقَدِّسُ والفِرْدَوْسُ النّاطِقُ، فَخْرُ البَتُولِيَّة",
+    "translation": "O hallowed temple and spiritual paradise, glory of virgins",
+    "literal": "O sanctified temple, rational paradise, glory of virginity",
+    "tags": ["basil", "anaphora", "theotokos", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-god-incarnate-001": {
+    "arabic": "الَّتي مِنْها تَجَسَّدَ الإِلَهُ وصارَ طِفْلاً، وهُوَ إِلَهُنا قَبْلَ الدُّهُور",
+    "translation": "of whom God was incarnate and became a little child, even our God who is before all the ages",
+    "literal": "from whom God was incarnate and became a child, our God before the ages",
+    "tags": ["basil", "anaphora", "theotokos", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-womb-throne-001": {
+    "arabic": "لأنَّهُ جَعَلَ مُسْتَوْدَعَكِ عَرْشاً، وبَطْنَكِ أوْسَعَ مِنَ السَّماوات",
+    "translation": "for he made thy womb a throne, and thy body more spacious than the heavens",
+    "literal": "he made your womb a throne and your body wider than the heavens",
+    "tags": ["basil", "anaphora", "theotokos", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-glory-to-thee-001": {
+    "arabic": "المَجْدُ لَكِ",
+    "translation": "Glory to thee",
+    "literal": "glory to you",
+    "tags": ["basil", "anaphora", "theotokos", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-saints-visit-001": {
+    "arabic": "مَعَ القِدِّيسِ النَّبِيِّ السّابِقِ يُوحَنّا المَعْمَدان، والرُّسُل، وجَمِيعِ قِدِّيسِيكَ الَّذِينَ بِطَلِباتِهِم افْتَقِدْنا يا الله",
+    "translation": "The holy Prophet, Forerunner and Baptist John; the holy apostles; and all thy saints, at whose supplications visit us, O God",
+    "literal": "with the holy prophet John the forerunner and baptist, the apostles, and all your saints; by their prayers visit us, O God",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-departed-rest-001": {
+    "arabic": "واذْكُرْ جَمِيعَ الَّذِينَ سَبَقَ رُقادُهُم عَلَى رَجاءِ قِيامَةِ الحَياةِ الأبَدِيَّة، وأرِحْهُم حَيْثُ يُشْرِقُ نُورُ وَجْهِكَ",
+    "translation": "And be mindful of all those who have fallen asleep before us in the hope of resurrection unto life eternal, and grant them rest where the light of thy countenance watcheth over them",
+    "literal": "remember all who have fallen asleep in hope of resurrection to eternal life, and rest them where your face's light shines",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-church-peace-001": {
+    "arabic": "اذْكُرْ كَنِيسَتَكَ المُقَدَّسَةَ الجامِعَةَ الرَّسُولِيَّةَ المُنْتَشِرَةَ إلى أقاصِي المَسْكُونَة، وأعْطِها السَّلام",
+    "translation": "Be mindful of thy holy, catholic and apostolic Church, which is to the ends of the world; and give peace unto her",
+    "literal": "remember your holy catholic apostolic Church spread to the ends of the world and give her peace",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-gifts-benefactors-001": {
+    "arabic": "اذْكُرْ يا رَبُّ الَّذِينَ قَدَّمُوا لَكَ هذِهِ القَرابِين، والَّذِينَ لأجْلِهِم وبِواسِطَتِهِم وعَنْهُم قَدَّمُوها",
+    "translation": "Be mindful, O Lord, of those who have set before thee these gifts, and those for whom and through whom and in behalf of whom they have offered them",
+    "literal": "remember those who set forth these gifts, and those for whom, through whom, and on whose behalf they offered",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-good-works-poor-001": {
+    "arabic": "اذْكُرِ الَّذِينَ يُثْمِرُونَ ويَصْنَعُونَ الخَيْرَ في كَنائِسِكَ المُقَدَّسَة، ويَذْكُرُونَ الفُقَراء",
+    "translation": "Be mindful of those who bear fruit and do good works in thy holy churches and who remember the poor",
+    "literal": "remember those bearing fruit and doing good works in your holy churches and remembering the poor",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-heavenly-gifts-001": {
+    "arabic": "جازِهِم بِمَواهِبِكَ الغَنِيَّةِ السَّماوِيَّة، عِوَضَ الأرْضِيّاتِ سَماوِيّات، وعِوَضَ الوَقْتِيّاتِ أبَدِيّات",
+    "translation": "requite them with thy rich and heavenly gifts; give them things heavenly for things earthly, things eternal for things temporal",
+    "literal": "reward them with your rich heavenly gifts: heavenly for earthly, eternal for temporal",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-ascetics-authorities-001": {
+    "arabic": "اذْكُرِ العائِشِينَ في البَتُولِيَّةِ والوَرَعِ والنُّسْك، واذْكُرِ الحُكّامَ والجُنْد",
+    "translation": "Be mindful of those who live in virginity and reverence, in asceticism; be mindful of all civil authorities and of our armed forces",
+    "literal": "remember those living in virginity, reverence, and asceticism; remember authorities and soldiers",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-present-absent-001": {
+    "arabic": "اذْكُرِ الشَّعْبَ الحاضِرَ والغائِبِينَ بِسَبَبٍ مَعْقُول، وارْحَمْهُم حَسَبَ كَثْرَةِ رَحْمَتِكَ",
+    "translation": "Be mindful of the people here present and of those who are absent for seasonable cause, and have mercy upon them according to the multitude of thy mercy",
+    "literal": "remember the present people and those absent for proper cause, and have mercy according to your great mercy",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-households-001": {
+    "arabic": "امْلأْ خَزائِنَهُم مِنْ كُلِّ خَيْر، واحْفَظْ زَواجَهُم بِسَلامٍ ووِفاق",
+    "translation": "Fill their treasuries with every good thing; preserve their marriage-bonds in peace and concord",
+    "literal": "fill their treasuries with every good, preserve marriages in peace and concord",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-ages-conditions-001": {
+    "arabic": "رَبِّ الأطْفال، وهَذِّبِ الأحْداث، وشَدِّدِ الشُّيُوخ، وشَجِّعِ الخائِرِي القُلُوب",
+    "translation": "rear the infants; guide the young; support the aged; encourage the faint-hearted",
+    "literal": "raise infants, guide youth, strengthen elders, encourage the faint-hearted",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-scattered-afflicted-001": {
+    "arabic": "اجْمَعِ المُتَفَرِّقِين، وأعْتِقِ المُعَذَّبِينَ بالأرْواحِ النَّجِسَة، ورافِقِ المُسافِرِين، واحْمِ الأراملَ والأيتامَ والأسْرَى والمَرْضَى",
+    "translation": "Collect the scattered; set at liberty those vexed by unclean spirits; travel with those who journey; defend widows, protect orphans, free captives, heal the sick",
+    "literal": "gather the scattered, free the afflicted, accompany travelers, defend widows, orphans, captives, and sick",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-tribulation-001": {
+    "arabic": "واذْكُرِ الَّذِينَ في المَحاكِمِ والمَناجِمِ والمَنافِي والعُبُودِيَّةِ المُرَّة، وكُلِّ حُزْنٍ وشِدَّةٍ وضِيق",
+    "translation": "be mindful of those under judgment, in the mines, in exile, in bitter servitude, in every tribulation, necessity and danger",
+    "literal": "remember those in courts, mines, exiles, bitter slavery, and every grief, hardship, and distress",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-loved-hated-001": {
+    "arabic": "واذْكُرِ الَّذِينَ يُحِبُّونَنا والَّذِينَ يُبْغِضُونَنا، والَّذِينَ أوْصَوْنا نَحْنُ غَيْرَ المُسْتَحِقِّين أنْ نُصَلِّيَ مِنْ أجْلِهِم",
+    "translation": "be mindful of those who love us and those who hate us and those who have enjoined us, unworthy though we be, to pray for them",
+    "literal": "remember those who love us, hate us, and charged us, unworthy, to pray for them",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-unknown-names-001": {
+    "arabic": "والَّذِينَ لَمْ نَذْكُرْهُم عَنْ جَهْلٍ أو نِسْيانٍ أو لِكَثْرَةِ الأسْماء، فاذْكُرْهُم أنْتَ يا الله",
+    "translation": "And those whom we through ignorance or forgetfulness or the multitude of names have not remembered, do thou thyself remember, O God",
+    "literal": "those we have not remembered through ignorance, forgetfulness, or many names, remember them yourself, O God",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-helper-all-001": {
+    "arabic": "فَإِنَّكَ عَوْنُ الَّذِينَ لا عَوْنَ لَهُم، ورَجاءُ اليائِسِين، ومُخَلِّصُ المُضْطَرِبِين، وطَبِيبُ المَرْضَى",
+    "translation": "For thou art the Helper of the helpless, the Hope of the hopeless, the Saviour of the storm-tossed, the Physician of the sick",
+    "literal": "you are help of the helpless, hope of the hopeless, savior of the troubled, physician of the sick",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-deliver-city-001": {
+    "arabic": "نَجِّ هذِهِ المَدِينَةَ وكُلَّ مَدِينَةٍ وقَرْيَة، مِنَ المَجاعَةِ والوَباءِ والزَّلْزَلَةِ والطُّوفانِ والنّارِ والسَّيْف، وغاراتِ الغُرَباءِ والحَرْبِ الأهْلِيَّة",
+    "translation": "Deliver this city and every city and countryside from famine, plague, earthquake, flood, fire, the sword, foreign invasion and civil war",
+    "literal": "deliver this city and every city and countryside from famine, plague, earthquake, flood, fire, sword, invasion, and civil war",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-every-bishop-001": {
+    "arabic": "اذْكُرْ يا رَبُّ كُلَّ أُسْقُفٍ مِنَ الأرْثُوذُكْسِيِّين، المُفَصِّلِينَ كَلِمَةَ حَقِّكَ بِاسْتِقامَة",
+    "translation": "Be mindful, O Lord, of every bishop of the Orthodox, who rightly divideth the word of thy truth",
+    "literal": "remember every Orthodox bishop rightly dividing the word of your truth",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-my-unworthiness-001": {
+    "arabic": "اذْكُرْ يا رَبُّ عَدَمَ اسْتِحْقاقِي حَسَبَ كَثْرَةِ رَأْفاتِكَ، واغْفِرْ لي كُلَّ خَطِيئَةٍ طَوْعِيَّةٍ وكَرْهِيَّة",
+    "translation": "Be mindful also, O Lord, of my unworthiness, according to the multitude of thy compassions; pardon me every transgression, voluntary and involuntary",
+    "literal": "remember my unworthiness by your compassions and forgive every voluntary and involuntary sin",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-withhold-not-spirit-001": {
+    "arabic": "ولا تَمْنَعْ بِسَبَبِ خَطايايَ نِعْمَةَ رُوحِكَ القُدُوسِ عَنْ هذِهِ القَرابِينِ المَوْضُوعَة",
+    "translation": "and withhold not, because of my sins, the grace of thy Holy Spirit from these gifts here spread forth",
+    "literal": "do not withhold, because of my sins, your Holy Spirit's grace from these gifts set forth",
+    "tags": ["basil", "anaphora", "holy-spirit", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-presbytery-001": {
+    "arabic": "اذْكُرِ الكَهَنَةَ والشَّمامِسَةَ في المَسِيح، وكُلَّ رُتْبَةٍ كَهَنُوتِيَّة",
+    "translation": "Be mindful of the presbytery, the diaconate in Christ and every priestly order",
+    "literal": "remember the priests, deacons in Christ, and every priestly order",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-visit-seasons-001": {
+    "arabic": "افْتَقِدْنا بِصَلاحِكَ، وتَجَلَّ لَنا بِرَأْفاتِكَ الغَزِيرَة، وهَبْنا الأهْوِيَةَ المُعْتَدِلَةَ النّافِعَة",
+    "translation": "Visit us with thy benevolence; manifest thyself unto us in thy rich compassions; grant us temperate and healthful seasons",
+    "literal": "visit us in goodness, reveal yourself in compassions, grant moderate and beneficial weather",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-rains-year-001": {
+    "arabic": "جُدْ عَلَى الأرْضِ بِأمْطارٍ هادِئَةٍ لِلثَّمَر، وبارِكْ إكْلِيلَ السَّنَةِ بِصَلاحِكَ",
+    "translation": "give gentle showers upon the earth unto fruitfulness; bless the crown of the year of thy goodness",
+    "literal": "give gentle rains to the earth for fruit and bless the crown of the year",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-schisms-heresies-001": {
+    "arabic": "أوْقِفِ انْشِقاقاتِ الكَنائِس، وأخْمِدْ ثَوْراتِ الأُمَم، وأفْنِ بِدَعَ الهَرْطَقاتِ بِقُوَّةِ رُوحِكَ القُدُوس",
+    "translation": "make the schisms of the Churches to cease; quench the ragings of hostile nations; destroy uprisings of heresies by the power of thy Holy Spirit",
+    "literal": "stop church schisms, quench nations' rage, destroy heresies by your Holy Spirit",
+    "tags": ["basil", "anaphora", "holy-spirit", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-sons-light-001": {
+    "arabic": "اقْبَلْنا جَمِيعاً في مَلَكُوتِكَ، مُظْهِراً إيّانا بَنِي النُّورِ وبَنِي النَّهار",
+    "translation": "receive us all into thy kingdom, showing us to be sons of the light and sons of the day",
+    "literal": "receive us into your kingdom, showing us as sons of light and day",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
+  "basil-anaphora-peace-love-001": {
+    "arabic": "وهَبْنا سَلامَكَ ومَحَبَّتَكَ أيُّها الرَّبُّ إِلَهُنا، فَإِنَّكَ قَدْ أعْطَيْتَنا كُلَّ شَيْء",
+    "translation": "and grant unto us thy peace and thy love, O Lord our God, for all things hast thou given unto us",
+    "literal": "grant us your peace and love, O Lord our God, for you have given us all things",
+    "tags": ["basil", "anaphora", "commemoration", "section: The Holy Anaphora"]
+  },
   "role-clergy": {
     "arabic": "الإكليروس",
     "translation": "Clergy",
@@ -9577,6 +11171,156 @@ const phrases = {
       "quiet",
       "section: The Litany Before the Lord's Prayer"
     ]
+  },
+  "basil-before-lords-prayer-god-salvation-001": {
+    "arabic": "يا إِلَهَنا، إِلَهَ الخَلاصِ",
+    "translation": "O our God, the God of salvation",
+    "literal": "O our God, God of salvation",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-teach-thanks-001": {
+    "arabic": "أَنْتَ عَلَّمْنا أنْ نَشْكُرَكَ حَقَّ الشُّكْرِ",
+    "translation": "teach us to thank thee worthily",
+    "literal": "you taught us to thank you truly with thanks",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "thanksgiving", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-benefits-001": {
+    "arabic": "عَلَى إِحْساناتِكَ الَّتي صَنَعْتَها وتَصْنَعُها مَعَنا",
+    "translation": "for thy benefits, which thou hast ever bestowed and dost yet bestow among us",
+    "literal": "for your benefits which you made and make with us",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "thanksgiving", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-receiver-gifts-001": {
+    "arabic": "أَنْتَ يا إِلَهَنا، يا مَنْ قَبِلَ هذِهِ القَرابِينَ",
+    "translation": "Do thou, O our God who receivest these gifts",
+    "literal": "you, O our God, who received these offerings",
+    "tags": ["basil", "litany-before-lords-prayer", "offering", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-purify-us-001": {
+    "arabic": "طَهِّرْنا مِنْ كُلِّ دَنَسِ الجَسَدِ والرُّوحِ",
+    "translation": "purify us from every defilement of flesh and spirit",
+    "literal": "purify us from every defilement of body and spirit",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "purification", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-perfect-holiness-001": {
+    "arabic": "وعَلِّمْنا أنْ نُتِمَّ القَداسَةَ بِمَخافَتِكَ",
+    "translation": "teach us to perfect holiness in fear of thee",
+    "literal": "teach us to complete holiness in your fear",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-portion-holy-001": {
+    "arabic": "حَتَّى إِذا نِلْنا نَصيبًا مِنْ قُدْساتِكَ",
+    "translation": "that we, receiving a portion of thy holy things",
+    "literal": "so that when we receive a portion of your holy things",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-good-conscience-001": {
+    "arabic": "بِشَهادَةٍ صالِحَةٍ مِنْ ضَميرِنا",
+    "translation": "in the witness of a pure conscience",
+    "literal": "with a good testimony from our conscience",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-united-body-blood-001": {
+    "arabic": "نَتَّحِدُ بِجَسَدِ مَسيحِكَ ودَمِهِ المُقَدَّسَيْن",
+    "translation": "may be united with the holy Body and Blood of thy Christ",
+    "literal": "we are united with the holy body and blood of your Christ",
+    "tags": ["basil", "communion", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-received-worthily-001": {
+    "arabic": "وإِذا قَبِلْناهُما عَنْ اسْتِحْقاقٍ",
+    "translation": "and that, having received them worthily",
+    "literal": "and when we receive them worthily",
+    "tags": ["basil", "communion", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-christ-hearts-001": {
+    "arabic": "نَحْوِيَ المَسيحَ ساكِنًا في قُلُوبِنا",
+    "translation": "we may have Christ abiding in our hearts",
+    "literal": "we may contain Christ dwelling in our hearts",
+    "tags": ["basil", "christ", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-temple-spirit-001": {
+    "arabic": "ونَصيرَ هَيْكَلًا لِرُوحِكَ القُدُسِ",
+    "translation": "and may become a temple of thy Holy Spirit",
+    "literal": "and become a temple of your Holy Spirit",
+    "tags": ["basil", "holy-spirit", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-yea-god-001": {
+    "arabic": "نَعَمْ يا إِلَهَنا",
+    "translation": "Yea, O our God",
+    "literal": "yes, O our God",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-not-stranger-001": {
+    "arabic": "لا تَجْعَلْ أَحَدًا مِنّا غَريبًا لأَسْرارِكَ هذِهِ المَرْهُوبَةِ السَّماوِيَّةِ",
+    "translation": "cause also that none of us may be guilty of these thy dread and heavenly mysteries",
+    "literal": "do not make any of us a stranger to these your dread heavenly mysteries",
+    "tags": ["basil", "litany-before-lords-prayer", "mystery", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-not-infirm-001": {
+    "arabic": "ولا ضَعيفًا لا نَفْسًا ولا جَسَدًا",
+    "translation": "or infirm in soul or in body",
+    "literal": "nor weak, neither soul nor body",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-unworthy-partaking-001": {
+    "arabic": "لِتَناوُلِهِ إِيّاها بِغَيْرِ اسْتِحْقاقٍ",
+    "translation": "through an unworthy partaking",
+    "literal": "through partaking of them unworthily",
+    "tags": ["basil", "communion", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-receive-worthily-001": {
+    "arabic": "بَلْ أَعْطِنا أنْ نَقْبَلَ بِاسْتِحْقاقٍ",
+    "translation": "but enable us worthily to receive",
+    "literal": "but give us to receive worthily",
+    "tags": ["basil", "communion", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-last-breath-001": {
+    "arabic": "حَتَّى النَّسَمَةِ الأَخيرَةِ مِنْ حَياتِنا",
+    "translation": "even unto our last breath",
+    "literal": "until the last breath of our life",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-portion-again-001": {
+    "arabic": "نَصيبًا مِنْ قُدْساتِكَ",
+    "translation": "a portion of thy holy things",
+    "literal": "a portion of your holy things",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-provision-life-001": {
+    "arabic": "زادًا لِلْحَياةِ الأَبَدِيَّةِ",
+    "translation": "as a support upon the road to life eternal",
+    "literal": "as provision for eternal life",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-defense-001": {
+    "arabic": "وجَوابًا مَقْبُولًا لَدَى مِنْبَرِ مَسيحِكَ المَرْهُوبِ",
+    "translation": "and as an acceptable defense at the fearful judgment seat of thy Christ",
+    "literal": "and an acceptable answer before the dread tribunal of your Christ",
+    "tags": ["basil", "judgment", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-also-saints-001": {
+    "arabic": "حَتَّى نَصيرَ نَحْنُ أَيْضًا",
+    "translation": "That we also may be made",
+    "literal": "so that we also become",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-pleasing-saints-001": {
+    "arabic": "مَعَ جَميعِ القِدِّيسِينَ الَّذينَ أَرْضَوْكَ مُنْذُ الدَّهْرِ",
+    "translation": "together with all the saints who in all ages have been well-pleasing unto thee",
+    "literal": "with all the saints who pleased you from the age",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "saints", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-partakers-good-001": {
+    "arabic": "شُرَكاءَ في خَيْراتِكَ الأَبَدِيَّةِ",
+    "translation": "partakers of thine everlasting good things",
+    "literal": "partners in your eternal good things",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
+  },
+  "basil-before-lords-prayer-prepared-love-001": {
+    "arabic": "الَّتي أَعْدَدْتَها لِلَّذينَ يُحِبُّونَكَ يا رَبّ",
+    "translation": "which thou hast prepared for those who love thee, O Lord",
+    "literal": "which you prepared for those who love you, O Lord",
+    "tags": ["basil", "litany-before-lords-prayer", "quiet", "section: The Litany Before the Lord's Prayer"]
   },
   "before-lords-prayer-vouchsafe-master-001": {
     "arabic": "وأهِّلْنا، أيُّها السَّيِّد",

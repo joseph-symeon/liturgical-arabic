@@ -102,7 +102,9 @@ export function validateData() {
 
   serviceTextDefinitions.forEach(serviceText => {
     if (!Array.isArray(serviceText.sections) || serviceText.sections.length === 0) {
-      errors.push(`Service text "${serviceText.id}" must define a non-empty sections array.`);
+      if (!serviceText.allow_empty_sections) {
+        errors.push(`Service text "${serviceText.id}" must define a non-empty sections array.`);
+      }
       return;
     }
     assertUnique(serviceText.sections.map(section => section.section_id), `service text "${serviceText.id}" section IDs`, errors);

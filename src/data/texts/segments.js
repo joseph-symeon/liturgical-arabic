@@ -4001,6 +4001,150 @@ const sourceSegments = {
       }
     ]
   },
+  "basil-catechumens-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "basil",
+      "catechumens",
+      "faithful",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "catechumens-lord-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-catechumens-dwellest-heavens-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-catechumens-looking-upon-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-catechumens-all-works-001"
+      },
+      {
+        "text": ": "
+      },
+      {
+        "phrase_id": "basil-catechumens-look-servants-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-catechumens-bowed-before-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-catechumens-necks-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-catechumens-grant-them-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-catechumens-light-yoke-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-catechumens-honorable-members-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-catechumens-holy-church-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-catechumens-make-worthy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-catechumens-laver-regeneration-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-remission-sins-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-robe-incorruption-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-catechumens-may-know-thee-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-catechumens-true-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-glorify-with-us-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "catechumens-honorable-majestic-name-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-now-ever-ages-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "catechumens-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
   "first-faithful-prayer": {
     "speaker": "role-priest",
     "break_before": true,
@@ -4161,6 +4305,328 @@ const sourceSegments = {
       },
       {
         "phrase_id": "first-faithful-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "basil-first-faithful-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "basil-first-faithful-o-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-first-faithful-shown-us-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-mystery-salvation-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-first-faithful-made-us-worthy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-humble-servants-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-unworthy-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-first-faithful-be-ministrants-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-holy-altar-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-first-faithful-enable-us-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-power-spirit-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-stand-service-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-first-faithful-uncondemned-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-before-glory-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-first-faithful-offer-thee-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-sacrifice-praise-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-first-faithful-thou-worketh-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-all-in-all-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-first-faithful-grant-lord-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-sacrifice-this-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-first-faithful-offered-sins-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-ignorance-people-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-first-faithful-acceptable-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-first-faithful-before-thee-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-unto-thee-due-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-glory-honor-worship-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-now-ever-ages-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "first-faithful-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "basil-second-faithful-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "basil",
+      "faithful",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "basil-second-faithful-o-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-second-faithful-visited-lowliness-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-second-faithful-mercy-compassions-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-second-faithful-set-us-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-second-faithful-humble-servants-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-second-faithful-sinful-unworthy-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-second-faithful-before-glory-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-second-faithful-minister-altar-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-second-faithful-strengthen-us-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-second-faithful-power-spirit-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-second-faithful-this-ministry-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-second-faithful-grant-utterance-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-second-faithful-opening-mouth-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-second-faithful-invoke-grace-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-second-faithful-upon-gifts-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "basil-second-faithful-priest-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "basil",
+      "doxology",
+      "faithful",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "basil-second-faithful-guarded-might-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-lift-glory-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-now-ever-ages-001"
       },
       {
         "text": "."
@@ -6774,6 +7240,197 @@ const sourceSegments = {
       }
     ]
   },
+  "basil-supplication-priest-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "basil",
+      "litany-of-supplication",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "basil-supplication-created-us-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-brought-life-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-supplication-brought-this-life-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-ways-salvation-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-heavenly-mysteries-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-supplication-appointed-ministry-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-supplication-power-spirit-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-supplication-grant-servitors-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-supplication-servitors-covenant-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-ministers-mysteries-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-supplication-receive-near-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-draw-altar-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-worthy-offer-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-supplication-rational-bloodless-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-supplication-own-sins-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-supplication-receive-altar-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-supplication-heavenly-spiritual-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-send-grace-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-supplication-look-worship-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-receive-abel-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-noah-abraham-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-moses-aaron-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-samuel-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "basil-supplication-apostles-worship-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-supplication-true-worship-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-receive-sinners-gifts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "basil-supplication-from-sinners-hands-001"
+      },
+      {
+        "text": ": "
+      },
+      {
+        "phrase_id": "basil-supplication-accounted-worthy-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-recompense-stewards-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "basil-supplication-just-requiting-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
   "supplication-priest-doxology": {
     "speaker": "role-priest",
     "break_before": true,
@@ -8440,6 +9097,405 @@ const sourceSegments = {
       }
     ]
   },
+  "basil-anaphora-prayer-existing-one": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora", "quiet"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-existing-one-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-adorable-father-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-meet-majesty-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-praise-hymn-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-thank-glorify-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-only-existing-god-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-rational-worship-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-knowledge-truth-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-who-sufficient-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-wonders-season-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-master-creation-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-throne-depths-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-unoriginated-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-father-christ-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-image-word-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-wisdom-life-light-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-spirit-manifested-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-spirit-gifts-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-life-fountain-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-rational-creature-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-angelic-orders-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-cherubim-seraphim-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-covering-praises-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-prayer-with-blessed-powers": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora", "quiet"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-with-blessed-powers-001"},
+      {"text": ": "},
+      {"phrase_id": "basil-anaphora-righteous-judgment-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-regeneration-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-not-forget-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-prophets-law-angels-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-fullness-son-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-brightness-image-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-incarnate-virgin-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-empty-servant-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-born-law-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-alive-christ-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-commandments-knowledge-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-people-priesthood-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-ransom-death-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-hades-resurrection-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-firstfruits-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-ascended-return-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-saving-memorials-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-voluntary-death-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-shown-father-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-thanked-hallowed-001"},
+      {"text": "، "}
+    ]
+  },
+  "basil-anaphora-gave-disciples": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-gave-disciples-001"},
+      {"text": ":"}
+    ]
+  },
+  "basil-anaphora-cup-after-supper": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-cup-vine-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-gave-disciples-001"},
+      {"text": ":"}
+    ]
+  },
+  "basil-anaphora-drink-all": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "holy-anaphora-drink-all-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-new-covenant-001"},
+      {"text": "، "},
+      {"phrase_id": "holy-anaphora-shed-you-many-001"},
+      {"text": "، "},
+      {"phrase_id": "holy-anaphora-remission-sins-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-remembrance": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora", "quiet"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-do-remembrance-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-proclaim-death-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-remembering-passion-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-remembering-glory-001"},
+      {"text": ":"}
+    ]
+  },
+  "basil-anaphora-epiclesis-offer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora", "quiet"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-wherefore-master-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-worthy-minister-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-mercies-boldness-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-antitypes-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-spirit-descend-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-bless-hallow-show-001"},
+      {"text": ":"}
+    ]
+  },
+  "basil-anaphora-make-bread-body": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-bread-body-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-cup-blood": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-cup-blood-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-changing-spirit": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-life-world-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-partakers": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora", "quiet"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-partakers-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-unite-communion-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-not-judgment-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-mercy-saints-001"},
+      {"text": ": "},
+      {"phrase_id": "basil-anaphora-righteous-list-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-rubric-all-creation": {
+    "break_before": true,
+    "tags": ["basil", "anaphora", "rubric"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-rubric-all-creation-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-theotokos-hymn-rubric": {
+    "break_before": true,
+    "tags": ["basil", "anaphora", "rubric", "theotokos"],
+    "phrases": [
+      {"phrase_id": "theotokos-hymn-rubric-001"}
+    ]
+  },
+  "theotokos-hymn-rubric": {
+    "break_before": true,
+    "tags": ["hymn-to-the-theotokos", "rubric", "theotokos"],
+    "phrases": [
+      {"phrase_id": "theotokos-hymn-rubric-001"}
+    ]
+  },
+  "basil-anaphora-all-creation-hymn": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["basil", "anaphora", "theotokos"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-all-creation-rejoices-001"},
+      {"text": ": "},
+      {"phrase_id": "basil-anaphora-angelic-race-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-hallowed-temple-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-god-incarnate-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-womb-throne-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-all-creation-rejoices-001"},
+      {"text": ": "},
+      {"phrase_id": "basil-anaphora-glory-to-thee-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-saints": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-saints-visit-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-departed": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-departed-rest-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-church": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-church-peace-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-gifts": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-gifts-benefactors-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-good-works": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-good-works-poor-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-heavenly-gifts": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-heavenly-gifts-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-ascetics-authorities": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-ascetics-authorities-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-present-households": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-present-absent-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-households-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-needs-helper": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-ages-conditions-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-scattered-afflicted-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-tribulation-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-loved-hated-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-unknown-names-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-helper-all-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-supplication-deliver-city": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-deliver-city-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-bishop-petition-orthodox": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-every-bishop-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-bishop-petition-unworthiness": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-my-unworthiness-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-withhold-not-spirit-001"},
+      {"text": "."}
+    ]
+  },
+  "basil-anaphora-bishop-petition-presbytery": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "anaphora"],
+    "phrases": [
+      {"phrase_id": "basil-anaphora-presbytery-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-visit-seasons-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-rains-year-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-schisms-heresies-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-anaphora-sons-light-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-anaphora-peace-love-001"},
+      {"text": "."}
+    ]
+  },
   "theotokos-hymn-choir": {
     "speaker": "role-choir",
     "break_before": true,
@@ -9283,6 +10339,63 @@ const sourceSegments = {
       {
         "text": "."
       }
+    ]
+  },
+  "basil-before-lords-prayer-priest-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["basil", "litany-before-lords-prayer", "quiet"],
+    "phrases": [
+      {"phrase_id": "basil-before-lords-prayer-god-salvation-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-teach-thanks-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-benefits-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-before-lords-prayer-receiver-gifts-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-purify-us-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-before-lords-prayer-perfect-holiness-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-before-lords-prayer-portion-holy-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-good-conscience-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-united-body-blood-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-before-lords-prayer-received-worthily-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-christ-hearts-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-temple-spirit-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-before-lords-prayer-yea-god-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-before-lords-prayer-not-stranger-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-not-infirm-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-unworthy-partaking-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-before-lords-prayer-receive-worthily-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-last-breath-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-portion-again-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-provision-life-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-defense-001"},
+      {"text": ". "},
+      {"phrase_id": "basil-before-lords-prayer-also-saints-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-pleasing-saints-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-partakers-good-001"},
+      {"text": "، "},
+      {"phrase_id": "basil-before-lords-prayer-prepared-love-001"},
+      {"text": "."}
     ]
   },
   "before-lords-prayer-priest-vouchsafe": {
