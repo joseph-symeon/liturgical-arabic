@@ -204,6 +204,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "opening-prayers",
           "start_segment_id": "course-all-holy-trinity-address",
           "end_segment_id": "course-all-holy-trinity-address"
         },
@@ -225,6 +226,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "opening-prayers",
           "start_segment_id": "course-all-holy-trinity-lord",
           "end_segment_id": "course-all-holy-trinity-lord"
         },
@@ -246,6 +248,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "opening-prayers",
           "start_segment_id": "course-all-holy-trinity-master",
           "end_segment_id": "course-all-holy-trinity-master"
         },
@@ -267,6 +270,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "opening-prayers",
           "start_segment_id": "course-all-holy-trinity-holy-one",
           "end_segment_id": "course-all-holy-trinity-holy-one"
         },
@@ -293,6 +297,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "opening-prayers",
           "start_segment_id": "course-all-holy-trinity-address",
           "end_segment_id": "course-all-holy-trinity-holy-one"
         },
@@ -360,6 +365,7 @@ export const alignmentDefinitions = [
     "ranges": [
       {
         "service_range": {
+          "section_id": "blessed-is-the-kingdom",
           "start_segment_id": "opening-bless-master",
           "end_segment_id": "opening-amen"
         },
@@ -398,6 +404,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "litany-of-peace",
           "start_segment_id": "litany-peace-in-peace",
           "end_segment_id": "litany-peace-choir-amen"
         },
@@ -791,14 +798,9 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
-          "start": {
-            "section_index": 3,
-            "segment_index": 0
-          },
-          "end": {
-            "section_index": 3,
-            "segment_index": 0
-          }
+          "section_id": "first-antiphon",
+          "start_segment_id": "first-antiphon-through-theotokos-1",
+          "end_segment_id": "first-antiphon-through-theotokos-1"
         },
         "segment_ids": [
           "first-antiphon-through-theotokos-1"
@@ -823,14 +825,9 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
-          "start": {
-            "section_index": 3,
-            "segment_index": 4
-          },
-          "end": {
-            "section_index": 3,
-            "segment_index": 4
-          }
+          "section_id": "first-antiphon",
+          "start_segment_id": "first-antiphon-through-theotokos-3",
+          "end_segment_id": "first-antiphon-through-theotokos-3"
         },
         "segment_ids": [
           "first-antiphon-through-theotokos-3"
@@ -863,14 +860,9 @@ export const alignmentDefinitions = [
     "ranges": [
       {
         "service_range": {
-          "start": {
-            "section_index": 4,
-            "segment_index": 0
-          },
-          "end": {
-            "section_index": 4,
-            "segment_index": 5
-          }
+          "section_id": "little-litany-after-first-antiphon",
+          "start_segment_id": "little-litany-again",
+          "end_segment_id": "little-litany-to-thee-o-lord"
         },
         "segment_ids": [
           "little-litany-again",
@@ -985,14 +977,9 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
-          "start": {
-            "section_index": 4,
-            "segment_index": 8
-          },
-          "end": {
-            "section_index": 4,
-            "segment_index": 9
-          }
+          "section_id": "little-litany-after-first-antiphon",
+          "start_segment_id": "little-litany-for-thine-might",
+          "end_segment_id": "little-litany-amen"
         },
         "segment_ids": [
           "little-litany-for-thine-might",
@@ -1068,6 +1055,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "second-antiphon-save-us-risen-1",
           "end_segment_id": "second-antiphon-save-us-risen-1"
         },
@@ -1104,6 +1092,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "second-antiphon-glory",
           "end_segment_id": "second-antiphon-glory"
         },
@@ -1125,6 +1114,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "second-antiphon-save-us-risen-2",
           "end_segment_id": "second-antiphon-save-us-risen-2"
         },
@@ -1161,6 +1151,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "second-antiphon-both-now",
           "end_segment_id": "second-antiphon-both-now"
         },
@@ -1182,6 +1173,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "antiphon-word-of-god-only-begotten",
           "end_segment_id": "antiphon-deathless"
         },
@@ -1209,6 +1201,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "antiphon-accepted-incarnate",
           "end_segment_id": "antiphon-from-theotokos"
         },
@@ -1241,6 +1234,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "antiphon-became-man",
           "end_segment_id": "antiphon-crucified"
         },
@@ -1263,6 +1257,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "antiphon-trampled-death",
           "end_segment_id": "antiphon-one-of-trinity"
         },
@@ -1285,6 +1280,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "antiphon-glorified-with-father",
           "end_segment_id": "antiphon-glorified-with-father"
         },
@@ -1311,6 +1307,7 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
+          "section_id": "second-antiphon",
           "start_segment_id": "antiphon-word-of-god-only-begotten",
           "end_segment_id": "antiphon-glorified-with-father"
         },
@@ -1408,14 +1405,9 @@ export const alignmentDefinitions = [
     "ranges": [
       {
         "service_range": {
-          "start": {
-            "section_index": 6,
-            "segment_index": 0
-          },
-          "end": {
-            "section_index": 6,
-            "segment_index": 5
-          }
+          "section_id": "little-litany-after-second-antiphon",
+          "start_segment_id": "little-litany-again",
+          "end_segment_id": "little-litany-to-thee-o-lord"
         },
         "segment_ids": [
           "little-litany-again",
@@ -1530,14 +1522,9 @@ export const alignmentDefinitions = [
       },
       {
         "service_range": {
-          "start": {
-            "section_index": 6,
-            "segment_index": 8
-          },
-          "end": {
-            "section_index": 6,
-            "segment_index": 9
-          }
+          "section_id": "little-litany-after-second-antiphon",
+          "start_segment_id": "little-litany-good-god-doxology",
+          "end_segment_id": "little-litany-amen"
         },
         "segment_ids": [
           "little-litany-good-god-doxology",
@@ -1581,14 +1568,9 @@ export const alignmentDefinitions = [
     "ranges": [
       {
         "service_range": {
-          "start": {
-            "section_index": 8,
-            "segment_index": 0
-          },
-          "end": {
-            "section_index": 8,
-            "segment_index": 4
-          }
+          "section_id": "entrance-hymn",
+          "start_segment_id": "entrance-hymn-come-worship",
+          "end_segment_id": "entrance-hymn-risen-alleluia"
         },
         "segment_ids": [
           "entrance-hymn-come-worship",
@@ -1650,14 +1632,9 @@ export const alignmentDefinitions = [
     "ranges": [
       {
         "service_range": {
-          "start": {
-            "section_index": 9,
-            "segment_index": 0
-          },
-          "end": {
-            "section_index": 9,
-            "segment_index": 4
-          }
+          "section_id": "trisagion-hymn",
+          "start_segment_id": "trisagion-hymn-holy-god-1",
+          "end_segment_id": "trisagion-hymn-holy-god-2"
         },
         "segment_ids": [
           "trisagion-hymn-holy-god-1",
@@ -1749,14 +1726,9 @@ export const alignmentDefinitions = [
     "ranges": [
       {
         "service_range": {
-          "start": {
-            "section_index": 10,
-            "segment_index": 2
-          },
-          "end": {
-            "section_index": 10,
-            "segment_index": 7
-          }
+          "section_id": "reading-epistle",
+          "start_segment_id": "epistle-wisdom",
+          "end_segment_id": "epistle-alleluia"
         },
         "segment_ids": [
           "epistle-wisdom",
@@ -1809,14 +1781,9 @@ export const alignmentDefinitions = [
     "ranges": [
       {
         "service_range": {
-          "start": {
-            "section_index": 12,
-            "segment_index": 0
-          },
-          "end": {
-            "section_index": 12,
-            "segment_index": 7
-          }
+          "section_id": "reading-gospel",
+          "start_segment_id": "gospel-wisdom-stand",
+          "end_segment_id": "gospel-glory-after"
         },
         "segment_ids": [
           "gospel-wisdom-stand",

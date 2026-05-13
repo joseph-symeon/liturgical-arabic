@@ -18,6 +18,19 @@ These files are hand-edited directly so course structure, phrase composition, se
 - `src/data/media/recordings.js`
 - `src/data/media/alignments.js`
 
+## Service Text Sources
+
+Raw, unprocessed service books belong in `src/data/source/service-texts-raw/`.
+This is the home for source PDFs, RTFs, and similar files that should remain
+available as the textual authority.
+
+PDF processing manifests belong in `src/data/source/service-text-manifests/`.
+These JSON manifests can be committed because they record page, column, heading,
+and section metadata without storing the generated review images. The generated
+page renders, column crops, contact sheets, and section packet images remain
+temporary workspace files under `/private/tmp/liturgy-pdf-workspaces/` and should
+not be committed.
+
 ## Notion Sync For Phrases
 
 Create a local `.env.local` file:

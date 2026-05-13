@@ -4,54 +4,52 @@
 export const serviceSectionAudioDefinitions = [
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "Blessed is the Kingdom",
+    section_id: "blessed-is-the-kingdom",
     recording_id: "recording-KJKt0V4zJjY"
   },
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "Litany of Peace",
+    section_id: "litany-of-peace",
     recording_id: "recording-KJKt0V4zJjY"
   },
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "The First Antiphon",
+    section_id: "first-antiphon",
     recording_id: "recording-KJKt0V4zJjY"
   },
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "The Little Litany",
-    section_index: 4,
+    section_id: "little-litany-after-first-antiphon",
     recording_id: "recording--dufaXx7Hm0"
   },
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "The Second Antiphon",
+    section_id: "second-antiphon",
     recording_id: "recording--dufaXx7Hm0"
   },
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "The Little Litany",
-    section_index: 6,
+    section_id: "little-litany-after-second-antiphon",
     recording_id: "recording-fzQ4dmF-1Bg"
   },
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "The Entrance Hymn",
+    section_id: "entrance-hymn",
     recording_id: "recording-fzQ4dmF-1Bg"
   },
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "Thrice-Holy Hymn",
+    section_id: "trisagion-hymn",
     recording_id: "recording-IFxF-vGExAI"
   },
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "The Reading of the Epistle",
+    section_id: "reading-epistle",
     recording_id: "recording-JFawm57lics"
   },
   {
     service_text_id: "divine-liturgy-john-chrysostom",
-    section: "The Reading of the Gospel",
+    section_id: "reading-gospel",
     recording_id: "recording-xfUZh8ENiIQ"
   }
 ];
@@ -60,7 +58,11 @@ export function getServiceSectionAudio(serviceTextId, section, sectionIndex = nu
   if (!serviceTextId || !section) return null;
   return serviceSectionAudioDefinitions.find(item => (
     item.service_text_id === serviceTextId
-      && item.section === section.section
-      && (item.section_index === undefined || item.section_index === sectionIndex)
+      && (
+        item.section_id
+          ? item.section_id === section.section_id
+          : item.section === section.section
+            && (item.section_index === undefined || item.section_index === sectionIndex)
+      )
   )) || null;
 }

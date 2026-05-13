@@ -37,6 +37,12 @@ function findAlignmentRange(alignment, segmentIds) {
 }
 
 function validateServiceRange(serviceText, range, label, errors) {
+  if (range?.start || range?.end) {
+    errors.push(`${label} uses index-based service_range; use section_id, start_segment_id, and end_segment_id.`);
+  } else if (range && (!range.section_id || !range.start_segment_id || !range.end_segment_id)) {
+    errors.push(`${label} must define section_id, start_segment_id, and end_segment_id.`);
+  }
+
   const resolvedRange = resolveServiceRange(serviceText, range);
   if (!resolvedRange) {
     errors.push(`${label} does not match a valid service text range.`);
@@ -99,9 +105,13 @@ export function validateData() {
       errors.push(`Service text "${serviceText.id}" must define a non-empty sections array.`);
       return;
     }
+    assertUnique(serviceText.sections.map(section => section.section_id), `service text "${serviceText.id}" section IDs`, errors);
     serviceText.sections.forEach(section => {
       const sectionLabel = `${serviceText.id}:${section.section}`;
-      if (!Array.isArray(section.segment_ids) || section.segment_ids.length === 0) {
+      if (!section.section_id) {
+        errors.push(`Service text section "${sectionLabel}" must define section_id.`);
+      }
+      if (!Array.isArray(section.segment_ids) || (!section.placeholder && section.segment_ids.length === 0)) {
         errors.push(`Service text section "${sectionLabel}" must define a non-empty segment_ids array.`);
       } else {
         section.segment_ids.forEach(segmentId => {

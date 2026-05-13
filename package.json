@@ -12,6 +12,7 @@
     "import:recording": "node scripts/import-recording.mjs",
     "import:playlist": "node scripts/import-playlist.mjs",
     "promote:recordings": "node scripts/promote-recording-imports.mjs",
+    "process:service-pdf": "node scripts/process-service-pdf.mjs",
     "align:refine-boundaries": "node scripts/refine-audio-boundaries.mjs",
     "import:recording:check": "node scripts/check-recording-import-deps.mjs",
     "import:recording:transcribe": "node scripts/transcribe-recording.mjs",

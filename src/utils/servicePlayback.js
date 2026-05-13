@@ -108,8 +108,11 @@ export function getServiceSectionPlayback({
           recording: recordingsMap[alignment.recording_id] || null,
           service_range: range.service_range,
           resolved_service_range: {
+            section_id: resolvedRange.section_id,
             start: resolvedRange.start,
             end: resolvedRange.end,
+            start_segment_id: resolvedRange.start_segment_id,
+            end_segment_id: resolvedRange.end_segment_id,
             key: getIndexedServiceRangeKey(resolvedRange)
           },
           segment_ids: segmentIds,

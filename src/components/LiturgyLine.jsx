@@ -22,6 +22,9 @@ export default function LiturgyLine(props) {
       }
     },
     props.line.map(function renderPart(part, partIndex) {
+      if (part.break) {
+        return h("br", { key: `break-${partIndex}` });
+      }
       if (part.text) {
         const className = part.isRubric ? "liturgical-red" : undefined;
         const text = ARABIC_LEADING_PUNCTUATION.test(part.text) ? `\u2060${part.text}` : part.text;

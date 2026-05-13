@@ -24,6 +24,9 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "petition-001"
+      },
+      {
+        "text": "."
       }
     ]
   },
@@ -221,13 +224,13 @@ const sourceSegments = {
         "phrase_id": "help-save-have-mercy-001"
       },
       {
-        "text": "، "
+        "text": " "
       },
       {
         "phrase_id": "preserve-us-001"
       },
       {
-        "text": "، "
+        "text": " "
       },
       {
         "phrase_id": "o-god-001"
@@ -347,7 +350,7 @@ const sourceSegments = {
         "phrase_id": "became-man-001"
       },
       {
-        "text": "."
+        "text": "،"
       }
     ]
   },
@@ -459,7 +462,7 @@ const sourceSegments = {
         "phrase_id": "alleluia-001"
       },
       {
-        "text": "."
+        "text": ". (مرتين)"
       }
     ]
   },
@@ -474,13 +477,10 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "text": "("
-      },
-      {
         "phrase_id": "weekdays-label-001"
       },
       {
-        "text": ")"
+        "text": ":"
       }
     ]
   },
@@ -680,7 +680,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "doxology-for-fitting-001"
+        "phrase_id": "entrance-doxology-fitting-001"
       },
       {
         "text": " "
@@ -728,6 +728,12 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "entrance-bless-master-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "entrance-master-vocative-001"
       },
       {
         "text": "، "
@@ -805,7 +811,7 @@ const sourceSegments = {
         "phrase_id": "stand-upright-001"
       },
       {
-        "text": "."
+        "text": " (صوفيا أورثي)."
       }
     ]
   },
@@ -872,7 +878,7 @@ const sourceSegments = {
         "text": "("
       },
       {
-        "phrase_id": "ordinary-sundays-label-001"
+        "phrase_id": "entrance-ordinary-sundays-label-001"
       },
       {
         "text": ")"
@@ -939,7 +945,7 @@ const sourceSegments = {
         "phrase_id": "entrance-we-sing-to-you-001"
       },
       {
-        "text": " "
+        "text": ": "
       },
       {
         "phrase_id": "alleluia-001"
@@ -963,7 +969,7 @@ const sourceSegments = {
         "text": "("
       },
       {
-        "phrase_id": "weekdays-label-001"
+        "phrase_id": "entrance-weekdays-label-001"
       },
       {
         "text": ")"
@@ -1030,7 +1036,7 @@ const sourceSegments = {
         "phrase_id": "entrance-we-sing-to-you-001"
       },
       {
-        "text": " "
+        "text": ": "
       },
       {
         "phrase_id": "alleluia-001"
@@ -1052,13 +1058,13 @@ const sourceSegments = {
         "phrase_id": "entrance-rubric-chant-hymns-001"
       },
       {
-        "text": " ("
+        "text": ". ("
       },
       {
         "phrase_id": "entrance-rubric-refer-bulletin-001"
       },
       {
-        "text": ") "
+        "text": ")، "
       },
       {
         "phrase_id": "entrance-rubric-priest-prayer-001"
@@ -1144,6 +1150,19 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "trisagion-created-humanity-001"
+      }
+    ]
+  },
+  "trisagion-adorned-gifts-quiet": {
+    "speaker": "role-priest",
+    "tags": [
+      "quiet",
+      "priest-prayer",
+      "trisagion"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "trisagion-adorned-gifts-001"
       }
     ]
   },
@@ -1396,7 +1415,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "doxology-father-son-spirit-001"
+        "phrase_id": "entrance-hymn-father-son-spirit-001"
       },
       {
         "text": "، "
@@ -1405,7 +1424,7 @@ const sourceSegments = {
         "phrase_id": "now-and-ever-001"
       },
       {
-        "text": " ..."
+        "text": "..."
       }
     ]
   },
@@ -1860,7 +1879,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "theotokos-001"
+        "phrase_id": "glorious-lady-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-genitive-001"
       },
       {
         "text": " "
@@ -2086,10 +2111,10 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "theotokos-001"
+        "phrase_id": "theotokos-genitive-001"
       },
       {
-        "text": "، "
+        "text": " "
       },
       {
         "phrase_id": "o-savior-save-us-001"
@@ -2133,10 +2158,10 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "theotokos-001"
+        "phrase_id": "theotokos-genitive-001"
       },
       {
-        "text": "، "
+        "text": " "
       },
       {
         "phrase_id": "o-savior-save-us-001"
@@ -2180,10 +2205,10 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "theotokos-001"
+        "phrase_id": "theotokos-genitive-001"
       },
       {
-        "text": "، "
+        "text": " "
       },
       {
         "phrase_id": "o-savior-save-us-001"
@@ -2194,6 +2219,21 @@ const sourceSegments = {
     ]
   },
   "first-antiphon-rubric-little-litany": {
+    "speaker": "",
+    "break_before": true,
+    "tags": [
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "rubric-deacon-holy-doors-little-litany-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "little-litany-rubric-holy-doors": {
     "speaker": "",
     "break_before": true,
     "tags": [
@@ -2258,13 +2298,13 @@ const sourceSegments = {
         "phrase_id": "help-save-have-mercy-001"
       },
       {
-        "text": "، "
+        "text": " "
       },
       {
         "phrase_id": "preserve-us-001"
       },
       {
-        "text": "، "
+        "text": " "
       },
       {
         "phrase_id": "o-god-001"
@@ -2320,10 +2360,16 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "theotokos-001"
+        "phrase_id": "glorious-lady-001"
       },
       {
         "text": " "
+      },
+      {
+        "phrase_id": "theotokos-001"
+      },
+      {
+        "text": "، "
       },
       {
         "phrase_id": "ever-virgin-mary-002"
@@ -2506,7 +2552,7 @@ const sourceSegments = {
         "phrase_id": "grant-their-requests-001"
       },
       {
-        "text": ":"
+        "text": "."
       }
     ]
   },
@@ -2535,7 +2581,7 @@ const sourceSegments = {
         "phrase_id": "grant-knowledge-truth-001"
       },
       {
-        "text": " "
+        "text": "، "
       },
       {
         "phrase_id": "age-to-come-life-everlasting-001"
@@ -2558,7 +2604,7 @@ const sourceSegments = {
         "phrase_id": "good-god-lovest-mankind-001"
       },
       {
-        "text": " "
+        "text": "، "
       },
       {
         "phrase_id": "little-litany-ascribe-glory-001"
@@ -2644,7 +2690,7 @@ const sourceSegments = {
         ]
       },
       {
-        "phrase_id": "thrice-001"
+        "phrase_id": "trisagion-thrice-001"
       },
       {
         "text": ")",
@@ -2669,13 +2715,13 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "to-father-son-holy-spirit-001"
+        "phrase_id": "trisagion-to-father-son-holy-spirit-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "doxology-now-ever-ages-001"
+        "phrase_id": "trisagion-now-ever-ages-001"
       },
       {
         "text": ". "
@@ -2736,9 +2782,6 @@ const sourceSegments = {
         "tags": [
           "rubric"
         ]
-      },
-      {
-        "text": "."
       }
     ]
   },
@@ -2968,7 +3011,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "wisdom-001"
+        "phrase_id": "epistle-wisdom-001"
       },
       {
         "text": "."
@@ -3056,7 +3099,7 @@ const sourceSegments = {
         ]
       },
       {
-        "phrase_id": "thrice-001"
+        "phrase_id": "epistle-thrice-001"
       },
       {
         "text": ")",
@@ -3073,13 +3116,21 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "petition-001"
+        "phrase_id": "gospel-petition-001"
       },
       {
-        "text": ". "
-      },
+        "text": "."
+      }
+    ]
+  },
+  "gospel-prayer-lord-have-mercy": {
+    "speaker": "role-choir",
+    "tags": [
+      "gospel"
+    ],
+    "phrases": [
       {
-        "phrase_id": "lord-have-mercy-001"
+        "phrase_id": "gospel-lord-have-mercy-001"
       },
       {
         "text": "."
@@ -3109,6 +3160,12 @@ const sourceSegments = {
       },
       {
         "phrase_id": "illumine-hearts-003"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "gospel-unfading-light-001"
       },
       {
         "text": "، "
@@ -3148,10 +3205,16 @@ const sourceSegments = {
         "text": "، "
       },
       {
+        "phrase_id": "gospel-trample-passions-001"
+      },
+      {
+        "text": "، "
+      },
+      {
         "phrase_id": "spiritual-living-001"
       },
       {
-        "text": " "
+        "text": "، "
       },
       {
         "phrase_id": "spiritual-living-002"
@@ -3196,25 +3259,25 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "unoriginate-father-spirit-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "unoriginate-father-spirit-002"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "unoriginate-father-spirit-003"
+        "phrase_id": "gospel-unto-thee-glory-raised-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "doxology-now-ever-ages-001"
+        "phrase_id": "unoriginate-father-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "unoriginate-father-spirit-002"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "unoriginate-father-spirit-003"
       },
       {
         "text": ". "
@@ -3238,7 +3301,7 @@ const sourceSegments = {
         "phrase_id": "bless-proclaimer-gospel-001"
       },
       {
-        "text": " "
+        "text": "، "
       },
       {
         "phrase_id": "bless-proclaimer-gospel-002"
@@ -3258,22 +3321,22 @@ const sourceSegments = {
         "phrase_id": "may-god-enable-gospel-001"
       },
       {
-        "text": " "
+        "text": "، "
       },
       {
-        "phrase_id": "may-god-enable-gospel-002"
+        "phrase_id": "may-god-enable-gospel-004"
       },
       {
-        "text": " "
+        "text": "، "
       },
       {
         "phrase_id": "may-god-enable-gospel-003"
       },
       {
-        "text": " "
+        "text": ". "
       },
       {
-        "phrase_id": "may-god-enable-gospel-004"
+        "phrase_id": "may-god-enable-gospel-002"
       },
       {
         "text": "."
@@ -3302,16 +3365,16 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "wisdom-001"
+        "phrase_id": "gospel-wisdom-001"
       },
       {
         "text": ". "
       },
       {
-        "phrase_id": "stand-upright-001"
+        "phrase_id": "gospel-stand-upright-001"
       },
       {
-        "text": ". "
+        "text": "، "
       },
       {
         "phrase_id": "hear-holy-gospel-001"
@@ -3383,7 +3446,7 @@ const sourceSegments = {
         "phrase_id": "reading-holy-gospel-003"
       },
       {
-        "text": " "
+        "text": "، "
       },
       {
         "phrase_id": "reading-holy-gospel-004"
@@ -3801,6 +3864,8025 @@ const sourceSegments = {
       },
       {
         "phrase_id": "our-king-lord-god-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "catechumens-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "catechumens",
+      "faithful",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "catechumens-lord-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-dwellest-high-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "catechumens-regardest-below-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-sent-only-son-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "catechumens-our-lord-god-jesus-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "catechumens-salvation-human-race-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-look-servants-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "catechumens-bowed-necks-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-make-worthy-season-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "catechumens-laver-regeneration-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-remission-sins-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-robe-incorruption-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "catechumens-make-united-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "catechumens-holy-catholic-apostolic-church-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-number-flock-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "catechumens-glorify-with-us-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "catechumens-honorable-majestic-name-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "catechumens-now-ever-ages-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "catechumens-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "first-faithful-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "faithful",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "first-faithful-we-thank-you-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-lord-hosts-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-made-worthy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-stand-now-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-before-altar-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-fall-compassions-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-sins-ignorance-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "first-faithful-receive-supplication-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-make-worthy-offer-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-prayers-supplications-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-bloodless-sacrifices-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-all-people-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "first-faithful-enable-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-placed-ministry-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-worthy-call-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-all-times-places-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-without-condemnation-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-pure-witness-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-hear-us-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-show-mercy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-fullness-goodness-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-unto-thee-due-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "first-faithful-glory-honor-worship-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "first-faithful-now-ever-ages-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "first-faithful-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "second-faithful-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "faithful",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "second-faithful-bow-again-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-often-beseech-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-good-lover-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-look-petitions-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-cleanse-souls-bodies-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-every-defilement-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-grant-stand-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-before-altar-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-blameless-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "second-faithful-grant-those-praying-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-growth-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "second-faithful-grant-worship-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-fear-love-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-partake-mysteries-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-without-blame-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "second-faithful-make-worthy-kingdom-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "second-faithful-deacon-petition": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "faithful"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "second-faithful-deacon-help-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-by-grace-wisdom-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "second-faithful-wisdom-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "second-faithful-priest-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "doxology",
+      "faithful",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "second-faithful-preserved-might-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "second-faithful-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-lift-glory-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "second-faithful-now-ever-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "second-faithful-choir-amen": {
+    "speaker": "role-choir",
+    "tags": [
+      "faithful",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "second-faithful-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-choir": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-represent-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-sing-thrice-holy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-life-giving-trinity-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-lay-aside-now-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-earthly-care-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-about-to-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-receive-king-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-priest-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-none-bound-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-bound-passions-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-worthy-approach-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-draw-near-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-serve-king-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-service-fearful-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-heavenly-powers-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-love-mankind-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-love-boundless-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-became-man-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-without-change-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-high-priest-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-master-all-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-deliver-ministry-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-bloodless-sacrifice-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-alone-lord-god-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-o-lord-god-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-rule-heaven-earth-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-throne-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-seraphim-king-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-king-kings-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-alone-holy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-resting-saints-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-implore-good-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-o-good-one-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-good-hearer-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-look-servant-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-sinful-servant-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-cleanse-soul-heart-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-evil-intention-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-make-worthy-spirit-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-clothed-priesthood-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-stand-table-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-this-holy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-serve-body-blood-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-precious-blood-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-draw-near-bowed-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-bowing-neck-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-beseech-face-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-turn-not-face-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-not-cast-out-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-vouchsafe-gifts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-these-gifts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-by-me-sinner-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-offer-offered-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-accept-distributed-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-christ-god-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-lift-glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-unoriginate-father-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-all-holy-spirit-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-good-life-giving-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-now-ever-amen-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-priest-repetition": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-represent-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-sing-thrice-holy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-life-giving-trinity-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-lay-aside-now-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-earthly-care-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-deacon-completion": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-about-to-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-receive-king-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-angelic-hosts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-invisibly-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-alleluia-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-priest-resurrection": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-beheld-resurrection-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-worship-holy-lord-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-jesus-sinless-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-adore-cross-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-praise-resurrection-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-thou-art-god-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-know-none-other-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-call-name-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-come-faithful-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-adore-resurrection-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-through-cross-joy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-to-all-world-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-ever-blessing-lord-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-sing-resurrection-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-endured-cross-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-destroyed-death-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-rubric-feast-replacement": {
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-rubric-feast-replacement-001"
+      }
+    ]
+  },
+  "cherubic-hymn-psalm-50": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet",
+      "psalm"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-psalm50-title-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-have-mercy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-blot-out-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-wash-cleanse-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-cleanse-sin-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-know-iniquity-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-sin-before-me-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-against-thee-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-evil-before-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-justified-words-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-prevail-judged-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-conceived-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-mother-bore-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-loved-truth-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-wisdom-secrets-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-hyssop-clean-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-wash-white-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-hear-joy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-bones-rejoice-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-turn-face-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-blot-iniquities-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-clean-heart-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-renew-spirit-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-cast-not-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-take-not-spirit-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-restore-joy-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-governing-spirit-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-teach-transgressors-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-ungodly-return-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-deliver-blood-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-god-salvation-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-tongue-rejoice-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-open-lips-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-mouth-praise-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-sacrifice-not-desired-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-i-would-give-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-not-pleased-burnt-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-sacrifice-broken-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "cherubic-psalm50-heart-not-despise-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-priest-forgive-sinner": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-god-forgive-me-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-i-sinner-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-have-mercy-me-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "cherubic-thrice-001"
+      }
+    ]
+  },
+  "cherubic-hymn-priest-forgive-brother": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-forgive-brother-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-concelebrant-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-priest-forgive-all": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-forgive-hate-love-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-those-love-us-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-deacon-lift": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-lift-up-master-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "cherubic-hymn-priest-lift-hands": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-lift-hands-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "cherubic-bless-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-deacon-all": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "great-entrance"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-all-of-you-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-lord-remember-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-in-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-now-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-choir-amen-1": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "great-entrance",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-priest-hierarch": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "great-entrance"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-father-metropolitan-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-so-and-so-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-let-lord-remember-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-in-kingdom-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-now-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-choir-amen-2": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "great-entrance",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-priest-rulers": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "great-entrance"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-rulers-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-support-good-work-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-let-lord-remember-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-in-kingdom-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-now-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-choir-amen-3": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "great-entrance",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-priest-living": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "great-entrance"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-servants-of-god-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-offerings-offered-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-health-welfare-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-welfare-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-remission-sins-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-names-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-let-lord-remember-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-in-kingdom-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-now-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-choir-amen-4": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "great-entrance",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-priest-departed": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "great-entrance"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-servants-of-god-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-departed-servants-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-hope-resurrection-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-eternal-life-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-names-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-let-lord-remember-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-in-kingdom-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-now-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-choir-cherubic-completion": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "great-entrance",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-amen-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "great-entrance-angelic-hosts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-invisibly-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-alleluia-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-deacon-priesthood": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-thy-priesthood-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-lord-remember-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-in-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-now-ever-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-priest-diaconate": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-thy-diaconate-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-lord-remember-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-in-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-now-ever-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-deacon-do-good": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-do-good-master-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-priest-psalm-zion": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "great-entrance",
+      "psalm",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-do-good-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-goodwill-zion-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-build-walls-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "great-entrance-pleased-sacrifice-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-oblations-burnt-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "great-entrance-offer-bullocks-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-rubric-censer-east": {
+    "break_before": true,
+    "tags": [
+      "great-entrance",
+      "rubric",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-rubric-censer-east-001"
+      }
+    ]
+  },
+  "great-entrance-priest-remember-me": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-remember-me-brother-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-partner-service-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-deacon-priesthood-again": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-thy-priesthood-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-lord-remember-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-in-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-now-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-rubric-deacon-bows": {
+    "break_before": true,
+    "tags": [
+      "great-entrance",
+      "rubric",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-rubric-deacon-bows-001"
+      }
+    ]
+  },
+  "great-entrance-deacon-pray-for-me": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-pray-for-me-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-holy-master-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-priest-spirit": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-holy-spirit-descend-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-most-high-overshadow-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-deacon-spirit": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-same-spirit-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-assist-service-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-all-days-life-001"
+      },
+      {
+        "text": "؛ "
+      },
+      {
+        "phrase_id": "great-entrance-pray-for-me-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-holy-master-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-priest-diaconate-final": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-thy-diaconate-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-lord-remember-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-in-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "great-entrance-now-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "great-entrance-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "great-entrance-deacon-amen-final": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "clergy-dialogue",
+      "great-entrance",
+      "quiet",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "great-entrance-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-complete-prayer": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-complete-prayer-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-lord-have-mercy-repeat": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-lord-have-mercy-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "supplication-rubric-repeat-mercy-001"
+      }
+    ]
+  },
+  "supplication-precious-gifts": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-precious-gifts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-precious-gifts-set-forth-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-let-us-pray-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-holy-house": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-holy-house-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-enter-house-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-faith-reverence-fear-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-let-us-pray-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-deliverance": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-deliverance-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-tribulation-danger-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-let-us-pray-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-help-save": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-help-save-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-preserve-grace-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-whole-day": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-whole-day-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-perfect-day-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-ask-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-grant-this-repeat": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-grant-this-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "supplication-rubric-repeat-grant-001"
+      }
+    ]
+  },
+  "supplication-angel-peace": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-angel-peace-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-faithful-guide-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-guardian-souls-bodies-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-ask-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-pardon-remission": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-pardon-sins-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-remission-transgressions-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-ask-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-good-profitable": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-good-profitable-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-peace-world-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-ask-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-remaining-life": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-remaining-life-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-peace-repentance-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-ask-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-christian-ending": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-christian-ending-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-christian-peaceful-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-painless-blameless-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-good-defense-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-judgment-seat-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-ask-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-calling-remembrance": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-calling-remembrance-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-theotokos-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-ever-virgin-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-with-saints-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-commend-ourselves-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-all-life-christ-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-to-thee-o-lord": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "to-thee-o-lord"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-priest-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-priest-almighty-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-priest-sacrifice-praise-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-priest-call-whole-hearts-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "supplication-priest-receive-sinners-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-priest-holy-altar-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-priest-offer-gifts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-priest-spiritual-sacrifices-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-priest-sins-ignorance-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-priest-find-grace-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-priest-sacrifice-acceptable-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-priest-good-spirit-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-priest-offered-gifts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-priest-all-people-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-priest-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "doxology",
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-compassions-son-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-blessed-with-him-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-all-holy-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-now-ever-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-choir-amen": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-priest-peace": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "peace-be-to-all-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-choir-and-spirit": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "and-to-thy-spirit-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-deacon-love": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-love-one-another-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-confess-one-accord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-choir-trinity": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication",
+      "hymn",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-trinity-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-one-essence-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-undivided-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-priest-before-creed": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication",
+      "psalm"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-priest-love-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-priest-strength-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "supplication-priest-foundation-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-priest-refuge-deliverer-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "supplication-deacon-before-creed": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-supplication"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-deacon-doors-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-deacon-wisdom-attend-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "creed-father-maker": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "creed"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "creed-believe-one-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-father-almighty-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-maker-heaven-earth-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-visible-invisible-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "creed-son-begotten": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "creed"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "creed-one-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-son-only-begotten-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-begotten-father-001"
+      },
+      {
+        "text": ": "
+      },
+      {
+        "phrase_id": "creed-light-of-light-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-true-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-begotten-not-made-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-one-essence-father-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-all-things-made-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "creed-incarnation-passion": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "creed"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "creed-for-us-humans-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-for-salvation-came-down-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-incarnate-holy-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-virgin-mary-became-man-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "creed-crucified-pilate-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-suffered-buried-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "creed-resurrection-ascension": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "creed"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "creed-rose-third-day-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-according-scriptures-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "creed-ascended-heaven-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-sits-right-hand-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "creed-coming-kingdom": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "creed"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "creed-coming-glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "creed-judge-living-dead-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-kingdom-no-end-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "creed-holy-spirit": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "creed"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "creed-holy-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-lord-life-giver-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-proceeds-father-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-worshipped-glorified-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "creed-worshipped-glorified-002"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-spoke-prophets-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "creed-church-baptism": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "creed"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "creed-one-church-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "creed-catholic-apostolic-church-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "creed-baptism": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "creed"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "creed-one-baptism-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "creed-remission-sins-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "creed-resurrection-life": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "creed"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "creed-look-resurrection-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "creed-life-age-amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-offering-subtitle": {
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-offering-subtitle-001"
+      }
+    ]
+  },
+  "holy-anaphora-stand-aright": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-stand-aright-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-stand-fear-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-attend-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-offer-peace-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-holy-oblation-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-mercy-peace": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-mercy-peace-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-sacrifice-praise-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-grace": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-grace-christ-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-love-father-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-communion-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-be-with-all-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-and-with-spirit": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-and-with-spirit-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-lift-hearts": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-lift-hearts-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-with-lord": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-with-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-thank-lord": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-thank-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-meet-right": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-meet-right-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-prayer-thanks": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-meet-right-praise-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-bless-thank-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-worship-dominion-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-prayer-god-beyond": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-god-ineffable-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-inconceivable-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-invisible-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-incomprehensible-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-ever-existing-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-same-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-prayer-creation": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-thou-son-spirit-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-brought-nothingness-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-raised-fallen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-prayer-kingdom": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-didst-not-cease-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-heaven-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-bestowed-kingdom-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-prayer-benefits": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-thank-for-all-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-son-spirit-acc-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-benefits-known-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-known-unknown-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-manifest-unseen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-prayer-service": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-thank-service-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-accept-hands-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-angels-stand-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-myriad-angels-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-cherubim-seraphim-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-six-winged-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-soaring-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-rubric-star": {
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "rubric",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-rubric-star-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-triumphal-hymn": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-triumphal-hymn-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-shouting-crying-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "holy-anaphora-sanctus": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-holy-holy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-lord-sabaoth-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-heaven-earth-full-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-hosanna-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-blessed-comes-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-hosanna-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-prayer-holy-god": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-blessed-powers-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-cry-say-001"
+      },
+      {
+        "text": ": "
+      },
+      {
+        "phrase_id": "holy-anaphora-holy-thou-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-thou-son-spirit-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-prayer-loved-world": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-holy-thou-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-great-glory-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-loved-world-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-gave-son-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-not-perish-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-eternal-life-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-prayer-institution-intro": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-completed-dispensation-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-night-betrayed-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-gave-self-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-took-bread-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-pure-hands-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-thanked-blessed-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-gave-disciples-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "holy-anaphora-take-eat": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-take-eat-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-this-body-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-broken-for-you-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-remission-sins-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-amen-body": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-cup-after-supper": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-cup-after-supper-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "holy-anaphora-drink-all": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-drink-all-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-this-blood-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-shed-you-many-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-remission-sins-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-amen-blood": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-remembrance": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-remember-commandment-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-all-for-us-001"
+      },
+      {
+        "text": ": "
+      },
+      {
+        "phrase_id": "holy-anaphora-cross-tomb-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-third-day-resurrection-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-ascension-heavens-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-sitting-right-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-second-coming-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-thine-own": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-thine-own-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-offer-all-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-on-behalf-all-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-for-all-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-we-praise": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-praise-bless-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-bless-thee-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-thank-ask-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-ask-of-thee-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-epiclesis-offer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-rational-worship-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-ask-beseech-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "holy-anaphora-send-spirit-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-upon-gifts-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "holy-anaphora-bless-bread": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-bless-master-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-holy-bread-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-make-bread-body": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-make-bread-body-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-body-christ-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-amen-bread": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-bless-cup": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-bless-master-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-holy-cup-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-cup-blood": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-cup-blood-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-blood-christ-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-amen-cup": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-bless-both": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-bless-both-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-changing-spirit": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-changing-spirit-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-amen-three": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-amen-three-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-fruits-communion": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-vigilance-soul-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-forgiveness-communion-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-kingdom-boldness-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-not-judgment-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-departed": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-offer-departed-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "holy-anaphora-departed-faith-001"
+      },
+      {
+        "text": ": "
+      },
+      {
+        "phrase_id": "holy-anaphora-ancestors-fathers-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-prophets-apostles-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-martyrs-confessors-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-righteous-faith-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "holy-anaphora-rubric-censes": {
+    "break_before": true,
+    "tags": [
+      "anaphora",
+      "rubric",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-rubric-censes-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "holy-anaphora-especially-theotokos": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "anaphora"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-especially-theotokos-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-pure-blessed-glorious-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-lady-theotokos-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-ever-virgin-mary-001"
+      },
+      {
+        "text": "؛"
+      }
+    ]
+  },
+  "theotokos-hymn-choir": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-hymn-meet-bless-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-hymn-bless-theotokos-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-hymn-ever-blessed-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-hymn-blameless-mother-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-hymn-mother-our-god-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "theotokos-hymn-more-honorable-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-hymn-more-glorious-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "theotokos-hymn-without-corruption-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-hymn-truly-magnify-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-hymn-we-magnify-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-priest-saints": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-prophet-forerunner-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-apostles-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-saint-of-day-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-so-and-so-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-memory-today-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-all-saints-supplications-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-supplications-look-down-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-priest-departed": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-remember-departed-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-hope-resurrection-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-names-departed-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-grant-rest-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-light-countenance-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-priest-bishops": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-remember-bishops-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-remember-all-bishops-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-rightly-dividing-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-dividing-word-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-clergy-orders-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-priestly-monastic-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-priest-world": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-rational-service-world-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-for-whole-world-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-church-offering-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-chaste-life-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-civil-authorities-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "theotokos-peaceful-times-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-quiet-life-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-calm-peaceful-life-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-reverence-godliness-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-clergy-hierarch": {
+    "speaker": "role-clergy",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-among-first-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-father-metropolitan-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-so-and-so-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-grant-churches-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-health-honor-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-length-days-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-rightly-word-truth-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-deacon-present": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-present-remembered-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-of-present-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-all-men-women-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-choir-all": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-all-men-women-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-priest-city": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-remember-city-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-every-city-countryside-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-faithful-dwelling-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "theotokos-travelers-sick-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-land-sea-air-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-sick-captive-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-grant-salvation-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-priest-benefactors": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-bear-fruit-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-good-works-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-remember-poor-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-send-mercies-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-priest-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-one-mouth-heart-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-one-mouth-one-heart-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-all-honorable-name-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-majestic-name-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "theotokos-now-ever-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-choir-amen": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-priest-mercies": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "theotokos-mercies-god-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-savior-christ-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-be-with-all-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "theotokos-choir-and-spirit": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "hymn-to-the-theotokos",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-and-with-spirit-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "before-lords-prayer-remember-saints": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "before-lords-prayer-remember-saints-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-again-peace-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "supplication-let-us-pray-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "before-lords-prayer-lord-have-mercy-1": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-lord-have-mercy-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "before-lords-prayer-precious-gifts": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "before-lords-prayer-gifts-precious-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-gifts-sanctified-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "supplication-let-us-pray-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "before-lords-prayer-lord-have-mercy-2": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-lord-have-mercy-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "before-lords-prayer-receive-gifts": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "before-lords-prayer-god-loves-mankind-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-received-gifts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-lords-prayer-holy-altar-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-aroma-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-send-grace-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-lords-prayer-divine-grace-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-lords-prayer-gift-spirit-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-lords-prayer-let-us-pray-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "before-lords-prayer-lord-have-mercy-3": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "supplication-lord-have-mercy-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "before-lords-prayer-unity": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "before-lords-prayer-unity-faith-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-lords-prayer-communion-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-commend-ourselves-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-lords-prayer-all-life-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "before-lords-prayer-to-thee": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "to-thee-o-lord"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "before-lords-prayer-priest-commend": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "before-lords-prayer-unto-thee-life-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-lords-prayer-hopes-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-beseech-pray-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-lords-prayer-vouchsafe-partake-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-lords-prayer-heavenly-mysteries-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-sacred-table-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-remission-sins-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-pardon-transgressions-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-communion-holy-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-inheritance-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-boldness-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-not-judgment-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "before-lords-prayer-priest-vouchsafe": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "litany-before-lords-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "before-lords-prayer-vouchsafe-master-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-dare-call-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-call-father-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-heavenly-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "before-lords-prayer-and-say-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "lords-prayer-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-our-father-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-in-heavens-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-hallowed-name-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "lords-prayer-kingdom": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer",
+      "paragraph-join"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-kingdom-come-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-will-done-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-heaven-earth-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-on-earth-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-daily-bread": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer",
+      "paragraph-join"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-daily-bread-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-give-today-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "lords-prayer-forgive": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer",
+      "paragraph-join"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-forgive-debts-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-forgive-debtors-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-who-owes-us-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "lords-prayer-temptation": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer",
+      "paragraph-join"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-not-temptation-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-deliver-evil-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-priest-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-thine-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-now-ever-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-choir-amen": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-priest-peace": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "peace-be-to-all-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-choir-spirit": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-and-to-spirit-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-deacon-bow-heads": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-bow-heads-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-choir-to-thee": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "to-thee-o-lord"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-priest-bowing-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-thank-king-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-boundless-power-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-made-all-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-mercy-brought-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "lords-prayer-look-down-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-bowed-heads-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-not-flesh-blood-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-to-fearful-god-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "lords-prayer-distribute-gifts-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-according-need-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "lords-prayer-travelers-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-heal-sick-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-physician-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-priest-bowing-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "lords-prayer-grace-compassions-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-love-mankind-son-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-blessed-with-him-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-all-holy-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-now-ever-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "lords-prayer-choir-bowing-amen": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "lord's-prayer",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "elevation-priest-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "elevation",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "elevation-hear-us-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-holy-dwelling-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-throne-glory-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-sanctify-us-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-seated-high-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-present-invisibly-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-vouchsafe-hand-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-body-blood-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-through-us-people-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "elevation-priest-private": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "elevation",
+      "quiet",
+      "paragraph-break"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "elevation-god-forgive-me-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "elevation-have-mercy-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "elevation-rubric-twice-001"
+      }
+    ]
+  },
+  "elevation-priest-private-exalt": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "elevation",
+      "quiet",
+      "paragraph-break"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "elevation-exalt-thee-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "elevation-rubric-once-001"
+      }
+    ]
+  },
+  "elevation-deacon-attend": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "elevation"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "elevation-let-us-attend-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "elevation-rubric-proschoomen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "elevation-priest-holy-things": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "elevation"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "elevation-holy-things-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "elevation-choir-one-holy": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "elevation",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "elevation-one-holy-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-one-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-jesus-christ-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "elevation-glory-father-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "communion-deacon-divide-bread": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "communion",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "communion-divide-master-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-holy-bread-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "communion-priest-lamb": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "communion",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "communion-lamb-divided-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "communion-divided-not-disunited-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "communion-ever-eaten-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "communion-never-consumed-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "communion-sanctifies-partakers-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "communion-deacon-fill-cup": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "communion",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "communion-fill-master-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-holy-cup-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "communion-priest-fullness-spirit": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "communion",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "communion-fullness-spirit-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "communion-deacon-amen-1": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "communion",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "communion-deacon-bless-water": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "communion",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "communion-bless-master-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "communion-warm-water-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "communion-priest-warmth-blessing": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "communion",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "communion-blessed-warmth-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "communion-every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "lords-prayer-now-ever-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "communion-deacon-amen-2": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "communion",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "communion-deacon-warmth-spirit": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "communion",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "communion-warmth-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-publican-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-stand-before-doors-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-terrible-thoughts-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-christ-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-justified-publican-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-mercy-canaanite-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-open-paradise-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-open-compassion-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-receive-approach-touch-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-like-harlot-issue-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-one-healing-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-other-feet-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-forgiveness-sins-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-pitiful-dare-body-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-dare-receive-body-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-let-not-burn-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-receive-like-them-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-enlighten-senses-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-burning-accusations-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-intercessions-seedless-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-heavenly-powers-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-blessed-ages-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-confession-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-believe-confess-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-truly-christ-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-came-save-sinners-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-first-sinners-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-own-body-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-own-blood-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-pray-mercy-forgive-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-transgressions-voluntary-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-word-deed-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-knowledge-ignorance-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-worthy-without-condemnation-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-partake-mysteries-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-remission-life-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-behold-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-behold-approach-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-maker-burn-not-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-fire-unworthy-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-purify-stain-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-mystic-supper-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-mystic-supper-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-o-son-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-not-speak-enemies-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-not-kiss-judas-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-like-thief-confess-001"
+      },
+      {
+        "text": ": "
+      },
+      {
+        "phrase_id": "pre-communion-remember-kingdom-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-tremble-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-tremble-man-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-deifying-blood-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-burning-coal-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-body-deifies-nourishes-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-deifies-spirit-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-yearning-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-smitten-yearning-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-divine-love-changed-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-longing-transform-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-burn-sins-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-filled-delight-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-magnify-comings-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-splendour-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-splendour-saints-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-bridal-chamber-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-vesture-betrays-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-not-wedding-garment-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-cast-out-angels-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-cleanse-defilement-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-save-friend-man-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-master-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-manbefriending-master-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-lord-jesus-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-not-judgment-gifts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-unworthiness-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-purification-soul-body-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-earnest-life-kingdom-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-cleave-god-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-hope-salvation-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-mystic-supper-repeat": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-mystic-supper-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-o-son-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-not-speak-enemies-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-not-kiss-judas-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-like-thief-confess-001"
+      },
+      {
+        "text": ": "
+      },
+      {
+        "phrase_id": "pre-communion-remember-kingdom-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-not-judgment-prayer": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-not-judgment-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-judgment-condemnation-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-healing-soul-body-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-rubric-koinonikon": {
+    "speaker": "role-rubric",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-rubric-koinonikon-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-choir-begins-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-ordinary-sunday-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "pre-communion-choir-koinonikon": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-praise-lord-heavens-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-praise-highest-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-deacon-draw-near": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-fear-faith-love-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-draw-near-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-choir-blessed-coming": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "holy-anaphora-blessed-comes-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-lord-appeared-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-rubric-people-communion": {
+    "speaker": "role-rubric",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-rubric-people-communion-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-priest-communes-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-rubric-following-hymn": {
+    "speaker": "role-rubric",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-rubric-following-hymn-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "pre-communion-choir-mystic-supper": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-mystic-supper-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-o-son-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-choir-not-speak-enemies-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-choir-not-kiss-judas-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-like-thief-confess-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-remember-kingdom-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-rubric-hymn-changes": {
+    "speaker": "role-rubric",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-rubric-hymn-changes-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-rubric-thanksgiving-page": {
+    "speaker": "role-rubric",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-rubric-thanksgiving-page-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-priest-save-people": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-save-people-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-bless-inheritance-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-choir-seen-light": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-seen-light-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-received-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-found-faith-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-worship-trinity-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-he-saved-us-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-rubric-enter-sanctuary": {
+    "speaker": "role-rubric",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-rubric-enter-sanctuary-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-place-chalice-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-wipe-particles-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-sponge-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "pre-communion-deacon-wash-blood": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-wash-blood-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-sins-servants-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-intercessions-theotokos-saints-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-rubric-cover-holies": {
+    "speaker": "role-rubric",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-rubric-cover-chalice-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-covers-star-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-censes-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-deacon-says-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "pre-communion-deacon-exalt-master": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-exalt-master-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-priest-be-exalted": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-be-exalted-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-glory-earth-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-rubric-diskos-prothesis": {
+    "speaker": "role-rubric",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-rubric-diskos-deacon-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-prothesis-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-rubric-priest-lifts-chalice-001"
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  "pre-communion-priest-always": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "pre-communion-every-time-now-ever-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "pre-communion-choir-mouths-filled": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "pre-communion-prayers",
+      "hymn"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-mouths-filled-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-sing-glory-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-made-worthy-mysteries-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "pre-communion-keep-sanctification-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-meditate-righteousness-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-deacon-partaken": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-stand-upright-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "thanksgiving-mysteries-divine-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-mysteries-holy-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-mysteries-life-giving-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-give-thanks-worthily-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-choir-lord-have-mercy-1": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-lord-have-mercy-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-deacon-help-save": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-help-save-have-mercy-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "thanksgiving-keep-us-grace-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-choir-lord-have-mercy-2": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-lord-have-mercy-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-deacon-commend": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-whole-day-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "thanksgiving-peaceful-sinless-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-commend-ourselves-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "thanksgiving-all-life-christ-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-choir-to-thee": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-to-thee-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-priest-prayer-quiet": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-priest-we-thank-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-benefactor-souls-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-vouchsafed-feed-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "thanksgiving-heavenly-immortal-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "thanksgiving-make-path-straight-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "thanksgiving-establish-fear-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-guard-life-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-make-steps-firm-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-prayers-theotokos-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "thanksgiving-ever-virgin-saints-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-priest-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-sanctification-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "thanksgiving-ascribe-glory-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-now-ever-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-choir-amen": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-priest-go-forth": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-go-forth-peace-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-choir-in-name": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-in-name-lord-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-deacon-pray": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-to-lord-pray-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "thanksgiving-choir-lord-have-mercy-3": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "litany-of-thanksgiving",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-lord-have-mercy-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "amvon-priest-prayer": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amvon-lord-blesses-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-sanctifies-trust-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-save-people-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "amvon-bless-inheritance-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-preserve-fullness-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-sanctify-love-beauty-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-glorify-recompense-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-forsake-us-not-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-give-peace-world-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-peace-churches-priests-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-peace-authorities-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-good-giving-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-perfect-gift-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-from-above-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-father-lights-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-ascribe-glory-thanks-worship-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-now-ever-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "amvon-choir-blessed-name": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-blessed-name-lord-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "amvon-henceforth-forever-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-rubric-thrice-001"
+      }
+    ]
+  },
+  "amvon-priest-fulfillment-quiet": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon",
+      "quiet"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amvon-christ-our-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-fulfillment-law-prophets-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
+  "amvon-priest-fulfillment-aloud": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amvon-dispensation-father-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-fill-hearts-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "amvon-every-time-now-ever-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "amvon-deacon-pray": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amvon-to-lord-pray-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "amvon-choir-lord-have-mercy": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amvon-lord-have-mercy-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "amvon-priest-blessing": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amvon-blessing-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-by-grace-love-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "amvon-every-time-now-ever-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "amvon-choir-amen": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "amvon-priest-glory": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amvon-glory-christ-hope-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-our-hope-glory-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "amvon-choir-glory-father": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "prayer-behind-amvon",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amvon-glory-father-son-spirit-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amvon-now-ever-amen-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-lord-have-mercy-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amvon-rubric-thrice-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "amvon-father-bless-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "dismissal-priest-main": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "dismissal"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "dismissal-christ-true-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-rubric-appointed-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-mother-intercessions-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-mother-pure-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-cross-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-heavenly-powers-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-bodiless-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-forerunner-prophet-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-john-baptist-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-apostles-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-all-laudable-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-martyrs-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-victorious-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-godbearing-fathers-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-john-chrysostom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-constantinople-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-author-service-001"
+      },
+      {
+        "text": "، ("
+      },
+      {
+        "phrase_id": "dismissal-rubric-and-saint-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-rubric-so-and-so-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-rubric-patron-001"
+      },
+      {
+        "text": ") "
+      },
+      {
+        "phrase_id": "dismissal-joachim-anna-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-grandparents-001"
+      },
+      {
+        "text": "، ("
+      },
+      {
+        "phrase_id": "dismissal-rubric-and-day-saint-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-rubric-so-and-so-001"
+      },
+      {
+        "text": ") "
+      },
+      {
+        "phrase_id": "dismissal-day-memory-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-all-saints-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-have-mercy-save-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-good-lover-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "dismissal-priest-fathers": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "dismissal"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "dismissal-prayers-fathers-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-lord-jesus-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "dismissal-have-mercy-save-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "dismissal-choir-amen": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": [
+      "dismissal",
+      "response"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
       },
       {
         "text": "."

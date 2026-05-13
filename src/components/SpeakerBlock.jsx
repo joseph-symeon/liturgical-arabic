@@ -28,10 +28,24 @@ export default function SpeakerBlock(props) {
     const groups = [];
     lines.forEach(function (line) {
       const last = groups[groups.length - 1];
-      if (last && last.speaker === line.speaker && !line.break_before) {
-        last.phrases = last.phrases.concat([{ text: " " }], getLineParts(line));
+      if (last && last.speaker === line.speaker) {
+        const joinsQuietPrayer =
+          line.tags?.includes("quiet")
+          && last.lastLineTags?.includes("quiet")
+          && !line.tags?.includes("paragraph-break");
+        const joinsParagraphOnly = line.tags?.includes("paragraph-join");
+        last.phrases = last.phrases.concat(
+          [line.break_before && !joinsQuietPrayer && !joinsParagraphOnly ? { break: true } : { text: " " }],
+          getLineParts(line)
+        );
+        last.lastLineTags = line.tags || [];
       } else {
-        groups.push({ speaker: line.speaker, key: line.line_order, phrases: getLineParts(line) });
+        groups.push({
+          speaker: line.speaker,
+          key: line.line_order,
+          phrases: getLineParts(line),
+          lastLineTags: line.tags || []
+        });
       }
     });
 

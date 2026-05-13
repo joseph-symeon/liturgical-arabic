@@ -39,6 +39,7 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
+      "section_id": "second-antiphon",
       "start_segment_id": "antiphon-word-of-god-only-begotten",
       "end_segment_id": "antiphon-deathless"
     }
@@ -61,6 +62,7 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
+      "section_id": "second-antiphon",
       "start_segment_id": "antiphon-accepted-incarnate",
       "end_segment_id": "antiphon-from-theotokos"
     }
@@ -73,6 +75,7 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
+      "section_id": "second-antiphon",
       "start_segment_id": "antiphon-became-man",
       "end_segment_id": "antiphon-crucified"
     }
@@ -85,6 +88,7 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
+      "section_id": "second-antiphon",
       "start_segment_id": "antiphon-trampled-death",
       "end_segment_id": "antiphon-one-of-trinity"
     }
@@ -96,6 +100,7 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
+      "section_id": "second-antiphon",
       "start_segment_id": "antiphon-glorified-with-father",
       "end_segment_id": "antiphon-glorified-with-father"
     }
@@ -115,6 +120,7 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
+      "section_id": "second-antiphon",
       "start_segment_id": "antiphon-word-of-god-only-begotten",
       "end_segment_id": "antiphon-glorified-with-father"
     }
@@ -286,6 +292,7 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
+      "section_id": "first-antiphon",
       "start_segment_id": "first-antiphon-through-theotokos-1",
       "end_segment_id": "first-antiphon-through-theotokos-1"
     }
@@ -297,14 +304,9 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
-      "start": {
-        "section_index": 4,
-        "segment_index": 0
-      },
-      "end": {
-        "section_index": 4,
-        "segment_index": 0
-      }
+      "section_id": "little-litany-after-first-antiphon",
+      "start_segment_id": "little-litany-again",
+      "end_segment_id": "little-litany-again"
     }
   },
   {
@@ -314,14 +316,9 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
-      "start": {
-        "section_index": 4,
-        "segment_index": 2
-      },
-      "end": {
-        "section_index": 4,
-        "segment_index": 2
-      }
+      "section_id": "little-litany-after-first-antiphon",
+      "start_segment_id": "little-litany-help-save",
+      "end_segment_id": "little-litany-help-save"
     }
   },
   {
@@ -331,14 +328,9 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
-      "start": {
-        "section_index": 4,
-        "segment_index": 4
-      },
-      "end": {
-        "section_index": 4,
-        "segment_index": 4
-      }
+      "section_id": "little-litany-after-first-antiphon",
+      "start_segment_id": "little-litany-calling-remembrance",
+      "end_segment_id": "little-litany-calling-remembrance"
     }
   },
   {
@@ -348,14 +340,9 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
-      "start": {
-        "section_index": 4,
-        "segment_index": 8
-      },
-      "end": {
-        "section_index": 4,
-        "segment_index": 8
-      }
+      "section_id": "little-litany-after-first-antiphon",
+      "start_segment_id": "little-litany-for-thine-might",
+      "end_segment_id": "little-litany-for-thine-might"
     }
   },
   {
@@ -365,14 +352,9 @@ export const exerciseDefinitions = [
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
-      "start": {
-        "section_index": 6,
-        "segment_index": 8
-      },
-      "end": {
-        "section_index": 6,
-        "segment_index": 8
-      }
+      "section_id": "little-litany-after-second-antiphon",
+      "start_segment_id": "little-litany-good-god-doxology",
+      "end_segment_id": "little-litany-good-god-doxology"
     }
   },
   {

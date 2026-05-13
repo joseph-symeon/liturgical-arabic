@@ -1,10 +1,43 @@
 export function getIndexedServiceRangeKey(range) {
+  if (range?.section_id && range?.start_segment_id && range?.end_segment_id) {
+    return `${range.section_id}:${range.start_segment_id}-${range.end_segment_id}`;
+  }
   if (!range?.start || !range?.end) return '';
   return `${range.start.section_index}:${range.start.segment_index}-${range.end.section_index}:${range.end.segment_index}`;
 }
 
+function findSectionIndexById(serviceText, sectionId) {
+  if (!sectionId) return -1;
+  return (serviceText.sections || []).findIndex(section => section.section_id === sectionId);
+}
+
 export function resolveServiceRange(serviceText, range) {
   if (!serviceText || !range) return null;
+
+  if (range.section_id && range.start_segment_id && range.end_segment_id) {
+    const sectionIndex = findSectionIndexById(serviceText, range.section_id);
+    const section = serviceText.sections?.[sectionIndex];
+    const ids = section?.segment_ids || [];
+    const startIndex = ids.indexOf(range.start_segment_id);
+    const endIndex = ids.indexOf(range.end_segment_id);
+
+    if (
+      sectionIndex < 0
+      || startIndex < 0
+      || endIndex < startIndex
+    ) {
+      return null;
+    }
+
+    return {
+      section_id: section.section_id,
+      start: { section_index: sectionIndex, segment_index: startIndex },
+      end: { section_index: sectionIndex, segment_index: endIndex },
+      start_segment_id: range.start_segment_id,
+      end_segment_id: range.end_segment_id,
+      segment_ids: ids.slice(startIndex, endIndex + 1)
+    };
+  }
 
   if (range.start && range.end) {
     const { start, end } = range;
@@ -29,8 +62,11 @@ export function resolveServiceRange(serviceText, range) {
     }
 
     return {
+      section_id: section.section_id,
       start: { ...start },
       end: { ...end },
+      start_segment_id: section.segment_ids[start.segment_index],
+      end_segment_id: section.segment_ids[end.segment_index],
       segment_ids: section.segment_ids.slice(start.segment_index, end.segment_index + 1)
     };
   }
@@ -51,8 +87,11 @@ export function resolveServiceRange(serviceText, range) {
         if (ids[endIndex] !== range.end_segment_id) continue;
         if (currentOccurrence === occurrenceIndex) {
           return {
+            section_id: section.section_id,
             start: { section_index: sectionIndex, segment_index: startIndex },
             end: { section_index: sectionIndex, segment_index: endIndex },
+            start_segment_id: range.start_segment_id,
+            end_segment_id: range.end_segment_id,
             segment_ids: ids.slice(startIndex, endIndex + 1)
           };
         }
