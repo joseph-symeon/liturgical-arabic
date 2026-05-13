@@ -106,6 +106,13 @@ export function validateData() {
       return;
     }
     assertUnique(serviceText.sections.map(section => section.section_id), `service text "${serviceText.id}" section IDs`, errors);
+    if (Array.isArray(serviceText.display_title?.arabic_phrase_ids)) {
+      serviceText.display_title.arabic_phrase_ids.forEach(phraseId => {
+        if (!phraseIds.has(phraseId)) {
+          errors.push(`Service text "${serviceText.id}" display title references missing phrase "${phraseId}".`);
+        }
+      });
+    }
     serviceText.sections.forEach(section => {
       const sectionLabel = `${serviceText.id}:${section.section}`;
       if (!section.section_id) {

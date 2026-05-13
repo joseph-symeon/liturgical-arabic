@@ -55,8 +55,8 @@ export function runTests() {
     "Reader should include a Second Antiphon section."
   );
   console.assert(
-    readerSections.find(function findSecondAntiphon(section) { return section.section === "The Second Antiphon"; }).segment_ids.length === 15,
-    "The Second Antiphon should have 15 segments."
+    readerSections.find(function findSecondAntiphon(section) { return section.section === "The Second Antiphon"; }).segment_ids.length === 16,
+    "The Second Antiphon should have 16 segments."
   );
   const secondAntiphonPlayback = getServiceSectionPlayback({
     service_text_id: defaultServiceText.id,

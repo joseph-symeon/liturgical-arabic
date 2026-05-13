@@ -4943,250 +4943,426 @@ const sourceSegments = {
       }
     ]
   },
-  "cherubic-hymn-psalm-50": {
+  "cherubic-hymn-psalm-50-title": {
     "speaker": "role-priest",
     "break_before": true,
     "tags": [
       "cherubic-hymn",
       "faithful",
       "quiet",
-      "psalm"
+      "psalm",
+      "rubric"
     ],
     "phrases": [
-      {
-        "phrase_id": "cherubic-psalm50-title-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-have-mercy-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-blot-out-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-wash-cleanse-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-cleanse-sin-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-know-iniquity-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-sin-before-me-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-against-thee-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-evil-before-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-justified-words-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-prevail-judged-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-conceived-001"
-      },
-      {
-        "text": "، "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-mother-bore-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-loved-truth-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-wisdom-secrets-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-hyssop-clean-001"
-      },
-      {
-        "text": "، "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-wash-white-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-hear-joy-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-bones-rejoice-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-turn-face-001"
-      },
-      {
-        "text": "، "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-blot-iniquities-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-clean-heart-001"
-      },
-      {
-        "text": "، "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-renew-spirit-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-cast-not-001"
-      },
-      {
-        "text": "، "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-take-not-spirit-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-restore-joy-001"
-      },
-      {
-        "text": "، "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-governing-spirit-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-teach-transgressors-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-ungodly-return-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-deliver-blood-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-god-salvation-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-tongue-rejoice-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-open-lips-001"
-      },
-      {
-        "text": " "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-mouth-praise-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-sacrifice-not-desired-001"
-      },
-      {
-        "text": "، "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-i-would-give-001"
-      },
-      {
-        "text": "، "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-not-pleased-burnt-001"
-      },
-      {
-        "text": ". "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-sacrifice-broken-spirit-001"
-      },
-      {
-        "text": "، "
-      },
-      {
-        "phrase_id": "cherubic-psalm50-heart-not-despise-001"
-      },
-      {
-        "text": "."
-      }
+      { "phrase_id": "cherubic-psalm50-title-001" }
+    ]
+  },
+  "psalm-50-verse-001": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": [
+      "cherubic-hymn",
+      "faithful",
+      "quiet",
+      "psalm",
+      "psalm-50"
+    ],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-have-mercy-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-blot-out-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-002": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-wash-cleanse-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-cleanse-sin-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-003": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-know-iniquity-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-sin-before-me-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-004": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-against-thee-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-evil-before-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-justified-words-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-prevail-judged-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-005": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-conceived-001" },
+      { "text": "، " },
+      { "phrase_id": "cherubic-psalm50-mother-bore-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-006": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-loved-truth-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-wisdom-secrets-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-007": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-hyssop-clean-001" },
+      { "text": "، " },
+      { "phrase_id": "cherubic-psalm50-wash-white-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-008": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-hear-joy-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-bones-rejoice-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-009": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-turn-face-001" },
+      { "text": "، " },
+      { "phrase_id": "cherubic-psalm50-blot-iniquities-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-010": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-clean-heart-001" },
+      { "text": "، " },
+      { "phrase_id": "cherubic-psalm50-renew-spirit-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-011": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-cast-not-001" },
+      { "text": "، " },
+      { "phrase_id": "cherubic-psalm50-take-not-spirit-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-012": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-restore-joy-001" },
+      { "text": "، " },
+      { "phrase_id": "cherubic-psalm50-governing-spirit-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-013": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-teach-transgressors-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-ungodly-return-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-014": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-deliver-blood-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-god-salvation-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-tongue-rejoice-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-015": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-open-lips-001" },
+      { "text": " " },
+      { "phrase_id": "cherubic-psalm50-mouth-praise-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-016": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-sacrifice-not-desired-001" },
+      { "text": "، " },
+      { "phrase_id": "cherubic-psalm50-i-would-give-001" },
+      { "text": "، " },
+      { "phrase_id": "cherubic-psalm50-not-pleased-burnt-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-017": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "cherubic-psalm50-sacrifice-broken-spirit-001" },
+      { "text": "، " },
+      { "phrase_id": "cherubic-psalm50-heart-not-despise-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-018": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["psalter", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "psalter-psalm50-zion-good-001" },
+      { "text": " " },
+      { "phrase_id": "psalter-psalm50-jerusalem-walls-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-019": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["psalter", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "psalter-psalm50-sacrifice-righteousness-001" },
+      { "text": " " },
+      { "phrase_id": "psalter-psalm50-oblation-burnt-001" },
+      { "text": "." }
+    ]
+  },
+  "psalm-50-verse-020": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["psalter", "psalm", "psalm-50"],
+    "phrases": [
+      { "phrase_id": "psalter-psalm50-offer-bullocks-001" },
+      { "text": "." }
+    ]
+  },
+  "psalter-psalm-103": {
+    "speaker": "",
+    "break_before": true,
+    "split_phrases_by_line_breaks": true,
+    "tags": [
+      "psalter",
+      "psalm",
+      "psalm-103"
+    ],
+    "phrases": [
+      { "phrase_id": "psalm103-bless-lord-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-magnified-exceedingly-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-confession-majesty-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-cover-light-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-stretch-heaven-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-chambers-waters-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-clouds-ascent-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-wings-winds-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-angels-spirits-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-ministers-fire-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-earth-foundations-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-not-moved-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-abyss-garment-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-waters-mountains-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-rebuke-flee-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-thunder-afraid-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-rise-mountains-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-sink-plains-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-bound-set-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-not-cover-earth-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-springs-valleys-001" },
+      { "text": ". " },
+      { "phrase_id": "psalm103-waters-pass-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-beasts-drink-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-wild-asses-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-birds-dwell-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-birds-sing-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-water-mountains-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-earth-satisfied-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-grass-cattle-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-green-for-men-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-bread-earth-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-wine-heart-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-oil-face-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-bread-strengthens-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-trees-watered-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-cedars-lebanon-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-sparrows-nest-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-heron-house-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-high-mountains-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-rocks-hares-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-moon-seasons-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-sun-setting-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-darkness-night-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-beasts-go-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-lions-roar-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-seek-food-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-sun-arose-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-dens-lie-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-man-work-001" },
+      { "text": " " },
+      { "phrase_id": "psalm103-labor-evening-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-how-great-works-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-wisdom-made-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-earth-filled-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-great-sea-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-creeping-innumerable-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-small-great-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-ships-go-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-leviathan-plays-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-all-wait-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-food-season-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-give-gather-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-open-hand-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-turn-face-troubled-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-take-spirit-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-return-dust-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-send-spirit-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-renew-earth-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-glory-ages-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-lord-rejoice-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-earth-trembles-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-mountains-smoke-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-sing-life-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-chant-being-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-meditation-sweet-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-rejoice-lord-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-sinners-cease-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-lawless-no-more-001" },
+      { "text": ". " },
+      { "phrase_id": "psalm103-bless-lord-end-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-sun-setting-repeat-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-darkness-repeat-001" },
+      { "text": ". ", "line_break_after": true },
+      { "phrase_id": "psalm103-how-great-repeat-001" },
+      { "text": "، " },
+      { "phrase_id": "psalm103-wisdom-repeat-001" },
+      { "text": ". ", "line_break_after": true }
     ]
   },
   "cherubic-hymn-priest-forgive-sinner": {
@@ -10496,7 +10672,7 @@ const sourceSegments = {
     ]
   },
   "pre-communion-rubric-koinonikon": {
-    "speaker": "role-rubric",
+    "speaker": "",
     "break_before": true,
     "tags": [
       "pre-communion-prayers",
@@ -10595,7 +10771,7 @@ const sourceSegments = {
     ]
   },
   "pre-communion-rubric-people-communion": {
-    "speaker": "role-rubric",
+    "speaker": "",
     "break_before": true,
     "tags": [
       "pre-communion-prayers",
@@ -10617,7 +10793,7 @@ const sourceSegments = {
     ]
   },
   "pre-communion-rubric-following-hymn": {
-    "speaker": "role-rubric",
+    "speaker": "",
     "break_before": true,
     "tags": [
       "pre-communion-prayers",
@@ -10679,7 +10855,7 @@ const sourceSegments = {
     ]
   },
   "pre-communion-rubric-hymn-changes": {
-    "speaker": "role-rubric",
+    "speaker": "",
     "break_before": true,
     "tags": [
       "pre-communion-prayers",
@@ -10695,7 +10871,7 @@ const sourceSegments = {
     ]
   },
   "pre-communion-rubric-thanksgiving-page": {
-    "speaker": "role-rubric",
+    "speaker": "",
     "break_before": true,
     "tags": [
       "pre-communion-prayers",
@@ -10772,7 +10948,7 @@ const sourceSegments = {
     ]
   },
   "pre-communion-rubric-enter-sanctuary": {
-    "speaker": "role-rubric",
+    "speaker": "",
     "break_before": true,
     "tags": [
       "pre-communion-prayers",
@@ -10833,7 +11009,7 @@ const sourceSegments = {
     ]
   },
   "pre-communion-rubric-cover-holies": {
-    "speaker": "role-rubric",
+    "speaker": "",
     "break_before": true,
     "tags": [
       "pre-communion-prayers",
@@ -10903,7 +11079,7 @@ const sourceSegments = {
     ]
   },
   "pre-communion-rubric-diskos-prothesis": {
-    "speaker": "role-rubric",
+    "speaker": "",
     "break_before": true,
     "tags": [
       "pre-communion-prayers",

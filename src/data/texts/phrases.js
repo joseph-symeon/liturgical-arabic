@@ -78,7 +78,7 @@ const phrases = {
     ]
   },
   "section-entrance-hymn": {
-    "arabic": "ترنيمة الدخول",
+    "arabic": "تَرْنِيمَةُ الدُّخُولِ",
     "translation": "The Entrance Hymn",
     "literal": "Hymn of the entrance",
     "tags": [
@@ -167,7 +167,7 @@ const phrases = {
     ]
   },
   "section-second-antiphon": {
-    "arabic": "الأندِيفونة الثانِية",
+    "arabic": "الأَنْدِيفُونَةُ الثَّانِيَةُ",
     "translation": "The Second Antiphon",
     "literal": "The second antiphon",
     "tags": [
@@ -466,7 +466,7 @@ const phrases = {
     ]
   },
   "section-prayer-before-gospel": {
-    "arabic": "إفشين ما قبل الإنجيل",
+    "arabic": "إِفْشِينُ مَا قَبْلَ الإِنْجِيلِ",
     "translation": "Prayer Before the Gospel",
     "literal": "Prayer before the Gospel",
     "tags": [
@@ -685,7 +685,7 @@ const phrases = {
     ]
   },
   "section-antiphons": {
-    "arabic": "الأَنْدِيفُونَات",
+    "arabic": "الأَنْدِيفُونَاتُ",
     "translation": "Antiphons",
     "literal": "Antiphons",
     "tags": [
@@ -778,7 +778,7 @@ const phrases = {
     ]
   },
   "section-reading-epistle": {
-    "arabic": "قراءة الرسالة",
+    "arabic": "قِرَاءَةُ الرِّسَالَةِ",
     "translation": "The Reading of the Epistle",
     "literal": "The reading of the epistle",
     "tags": [
@@ -851,7 +851,7 @@ const phrases = {
     ]
   },
   "section-first-antiphon": {
-    "arabic": "الأندِيفونا الأُولى",
+    "arabic": "الأَنْدِيفُونَا الأُولَى",
     "translation": "The First Antiphon",
     "literal": "The first antiphon",
     "tags": [
@@ -871,7 +871,7 @@ const phrases = {
     ]
   },
   "section-entrance": {
-    "arabic": "الدخول",
+    "arabic": "الدُّخُولُ",
     "translation": "The Entrance",
     "literal": "The entrance",
     "tags": [
@@ -903,7 +903,7 @@ const phrases = {
     ]
   },
   "section-trisagion-hymn": {
-    "arabic": "التسبيح المثلث التقديس",
+    "arabic": "التَّسْبِيحُ المُثَلَّثُ التَّقْدِيسِ",
     "translation": "Thrice Holy Hymn",
     "literal": "The thrice holy hymn",
     "tags": [
@@ -1117,7 +1117,7 @@ const phrases = {
     ]
   },
   "section-reading-gospel": {
-    "arabic": "قراءة الإنجيل المقدس",
+    "arabic": "قِرَاءَةُ الإِنْجِيلِ المُقَدَّسِ",
     "translation": "The Reading of the Gospel",
     "literal": "The reading of the holy Gospel",
     "tags": [
@@ -1402,7 +1402,7 @@ const phrases = {
     ]
   },
   "section-liturgy-word": {
-    "arabic": "قُدَّاسُ الكَلِمَة",
+    "arabic": "قُدَّاسُ الكَلِمَةِ",
     "translation": "The Liturgy of the Word",
     "literal": "The liturgy of the word",
     "tags": [
@@ -1881,7 +1881,7 @@ const phrases = {
     ]
   },
   "section-little-litany": {
-    "arabic": "الطلبة الصغرى",
+    "arabic": "الطِّلْبَةُ الصُّغْرَى",
     "translation": "The Little Litany",
     "literal": "The small petition",
     "tags": [
@@ -2491,7 +2491,7 @@ const phrases = {
   },
   "section-liturgy-catechumen": {
     "arabic": "قُدَّاسُ المَوْعُوظِينَ",
-    "translation": "Liturgy of the Catechumen",
+    "translation": "Liturgy of the Catechumens",
     "literal": "Liturgy of the catechumens",
     "tags": [
       "catechumen",
@@ -2920,7 +2920,7 @@ const phrases = {
     ]
   },
   "section-preparation-divine-liturgy": {
-    "arabic": "التَّهْيِئَةُ لِخِدْمَةِ القُدَّاسِ الإِلَهِي",
+    "arabic": "التَّهْيِئَةُ لِخِدْمَةِ القُدَّاسِ الإِلٰهِيِّ",
     "translation": "The Preparation for the Divine Liturgy",
     "literal": "The preparation for the service of the Divine Liturgy",
     "tags": [
@@ -2996,7 +2996,7 @@ const phrases = {
     ]
   },
   "section-prothesis": {
-    "arabic": "البْرُوثِيسِيس",
+    "arabic": "البْرُوثِيسِيسُ",
     "translation": "Prothesis",
     "literal": "Prothesis",
     "tags": [
@@ -3318,13 +3318,42 @@ const phrases = {
       "title"
     ]
   },
+  "homepage-liturgical-arabic-001": {
+    "arabic": "العَرَبِيَّةُ اللِّيتُورْجِيَّة",
+    "translation": "Liturgical Arabic",
+    "literal": "Liturgical Arabic",
+    "tags": [
+      "homepage",
+      "title"
+    ]
+  },
   "homepage-john-chrysostom-001": {
     "arabic": "لِلْقِدّيسِ يُوحَنّا الذَّهَبِيِّ الفَمِ",
-    "translation": "of Saint John Chrysostom",
+    "translation": "of St John Chrysostom",
     "literal": "of Saint John Chrysostom",
     "tags": [
       "homepage",
       "title"
+    ]
+  },
+  "homepage-psalter-001": {
+    "arabic": "المَزَامِيرُ",
+    "translation": "The Psalter",
+    "literal": "The Psalms",
+    "tags": [
+      "homepage",
+      "title",
+      "psalm"
+    ]
+  },
+  "homepage-psalter-seventy-001": {
+    "arabic": "حَسَبَ السَّبْعِينَ",
+    "translation": "According to the Seventy",
+    "literal": "according to the Seventy",
+    "tags": [
+      "homepage",
+      "title",
+      "psalm"
     ]
   },
   "homepage-prayers-anaphora-001": {
@@ -3347,7 +3376,7 @@ const phrases = {
   },
   "section-liturgy-faithful": {
     "arabic": "قُدَّاسُ المُؤْمِنِينَ",
-    "translation": "The Liturgy of the Faithful",
+    "translation": "Liturgy of the Faithful",
     "literal": "Liturgy of the faithful",
     "tags": [
       "faithful",
@@ -3356,7 +3385,7 @@ const phrases = {
     ]
   },
   "section-prayer-litany-catechumens": {
-    "arabic": "إفشين الموعوظين",
+    "arabic": "إِفْشِينُ المَوْعُوظِينَ",
     "translation": "The Prayer of the Litany for the Catechumens",
     "literal": "Prayer of the catechumens",
     "tags": [
@@ -3599,7 +3628,7 @@ const phrases = {
     ]
   },
   "section-first-litany-faithful-prayer": {
-    "arabic": "إفشين المؤمنين الأول",
+    "arabic": "إِفْشِينُ المُؤْمِنِينَ الأَوَّلُ",
     "translation": "The Prayer of the First Litany of the Faithful",
     "literal": "The first prayer of the faithful",
     "tags": [
@@ -3888,7 +3917,7 @@ const phrases = {
     ]
   },
   "section-second-litany-faithful-prayer": {
-    "arabic": "إفشين المؤمنين الثاني",
+    "arabic": "إِفْشِينُ المُؤْمِنِينَ الثَّانِي",
     "translation": "The Prayer of the Second Litany of the Faithful",
     "literal": "The second prayer of the faithful",
     "tags": [
@@ -4171,7 +4200,7 @@ const phrases = {
     ]
   },
   "section-cherubic-hymn": {
-    "arabic": "التسبيح الشيروبيمي",
+    "arabic": "التَّسْبِيحُ الشِّيرُوبِيمِيُّ",
     "translation": "The Cherubic Hymn",
     "literal": "The Cherubic Hymn",
     "tags": [
@@ -5137,6 +5166,115 @@ const phrases = {
       "section: The Cherubic Hymn"
     ]
   },
+  "section-psalter": {
+    "arabic": "المَزَامِيرُ",
+    "translation": "The Psalter",
+    "literal": "The Psalms",
+    "tags": [
+      "section-title",
+      "psalm"
+    ]
+  },
+  "section-psalm-50": {
+    "arabic": "المَزْمُورُ الخَمْسُونَ",
+    "translation": "Psalm 50",
+    "literal": "The fiftieth psalm",
+    "tags": [
+      "section-title",
+      "psalm"
+    ]
+  },
+  "section-psalm-103": {
+    "arabic": "المَزْمُورُ المِئَةُ وَالثَّالِثُ",
+    "translation": "Psalm 103",
+    "literal": "The one-hundred-and-third psalm",
+    "tags": [
+      "section-title",
+      "psalm"
+    ]
+  },
+  "psalm103-bless-lord-001": { "arabic": "بارِكِي يا نَفْسِيَ الرَّبَّ", "translation": "Bless the Lord, O my soul", "literal": "Bless the Lord, O my soul", "tags": ["psalm", "psalm-103"] },
+  "psalm103-magnified-exceedingly-001": { "arabic": "أَيُّها الرَّبُّ إِلٰهِي لَقَدْ عَظُمْتَ جِدّاً", "translation": "O Lord my God, Thou hast been magnified exceedingly", "literal": "O Lord my God, you have become very great", "tags": ["psalm", "psalm-103"] },
+  "psalm103-confession-majesty-001": { "arabic": "الاعْتِرافَ وَعِظَمَ الجَلالِ تَسَرْبَلْتَ", "translation": "Confession and majesty hast Thou put on", "literal": "You have clothed yourself with praise and great majesty", "tags": ["psalm", "psalm-103"] },
+  "psalm103-cover-light-001": { "arabic": "أَنْتَ اللّابِسُ النُّورَ مِثْلَ الثَّوْبِ", "translation": "Who coverest Thyself with light as with a garment", "literal": "You are the one wearing light like a garment", "tags": ["psalm", "psalm-103", "light"] },
+  "psalm103-stretch-heaven-001": { "arabic": "الباسِطُ السَّماءَ كالخَيْمَةِ", "translation": "Who stretchest out the heaven as it were a curtain", "literal": "The one stretching out heaven like a tent", "tags": ["psalm", "psalm-103"] },
+  "psalm103-chambers-waters-001": { "arabic": "المُسَقِّفُ بِالمِياهِ عَلالِيَّهُ", "translation": "Who supporteth His chambers in the waters", "literal": "The one roofing his upper chambers with waters", "tags": ["psalm", "psalm-103"] },
+  "psalm103-clouds-ascent-001": { "arabic": "الجاعِلُ السَّحابَ مَرْكَبَةً لَهُ", "translation": "Who appointeth the clouds for His ascent", "literal": "The one making the clouds his chariot", "tags": ["psalm", "psalm-103"] },
+  "psalm103-wings-winds-001": { "arabic": "الماشِي على أَجْنِحَةِ الرِّياحِ", "translation": "Who walketh upon the wings of the winds", "literal": "The one walking on the wings of the winds", "tags": ["psalm", "psalm-103"] },
+  "psalm103-angels-spirits-001": { "arabic": "الصَّانِعُ مَلائِكَتَهُ أَرْواحاً", "translation": "Who maketh His angels spirits", "literal": "The one making his angels spirits", "tags": ["psalm", "psalm-103", "angels"] },
+  "psalm103-ministers-fire-001": { "arabic": "وَخُدّامَهُ لَهِيبَ نارٍ", "translation": "and His ministers a flame of fire", "literal": "and his ministers a flame of fire", "tags": ["psalm", "psalm-103", "fire"] },
+  "psalm103-earth-foundations-001": { "arabic": "المُؤَسِّسُ الأَرْضَ على قَواعِدِها", "translation": "Who establisheth the earth in the sureness thereof", "literal": "The one establishing the earth upon its foundations", "tags": ["psalm", "psalm-103", "creation"] },
+  "psalm103-not-moved-001": { "arabic": "فَلا تَتَزَعْزَعُ إِلى دَهْرِ الدّاهِرِينَ", "translation": "it shall not be turned back forever and ever", "literal": "so it shall not be shaken unto ages of ages", "tags": ["psalm", "psalm-103"] },
+  "psalm103-abyss-garment-001": { "arabic": "رِداؤُهُ اللُّجَّةُ كالثَّوْبِ", "translation": "The abyss like a garment is His mantle", "literal": "His cloak is the deep like a garment", "tags": ["psalm", "psalm-103"] },
+  "psalm103-waters-mountains-001": { "arabic": "على الجِبالِ تَقِفُ المِياهُ", "translation": "upon the mountains shall the waters stand", "literal": "upon the mountains the waters stand", "tags": ["psalm", "psalm-103"] },
+  "psalm103-rebuke-flee-001": { "arabic": "مِنِ انْتِهارِكَ تَهْرُبُ", "translation": "At Thy rebuke they will flee", "literal": "From your rebuke they flee", "tags": ["psalm", "psalm-103"] },
+  "psalm103-thunder-afraid-001": { "arabic": "وَمِنْ صَوْتِ رَعْدِكَ تَجْزَعُ", "translation": "at the voice of Thy thunder shall they be afraid", "literal": "and from the sound of your thunder they are startled", "tags": ["psalm", "psalm-103"] },
+  "psalm103-rise-mountains-001": { "arabic": "تَرْتَفِعُ إلى الجِبالِ", "translation": "The mountains rise up", "literal": "They rise to the mountains", "tags": ["psalm", "psalm-103"] },
+  "psalm103-sink-plains-001": { "arabic": "وَتَنْخَفِضُ إلى البِقاعِ إلى المَوْضِعِ الذي أَسَّسْتَهُ لَها", "translation": "and the plains sink down, unto the place where Thou hast established them", "literal": "and they descend to the valleys, to the place you established for them", "tags": ["psalm", "psalm-103"] },
+  "psalm103-bound-set-001": { "arabic": "وَضَعْتَ لَها حَدّاً فَلا تَتَعَدّاهُ", "translation": "Thou appointedst a bound that they shall not pass", "literal": "You set a boundary for them so they do not cross it", "tags": ["psalm", "psalm-103"] },
+  "psalm103-not-cover-earth-001": { "arabic": "وَلا تَرْجِعُ فَتُغَطِّي وَجْهَ الأَرْضِ", "translation": "neither return to cover the earth", "literal": "and they do not return to cover the face of the earth", "tags": ["psalm", "psalm-103"] },
+  "psalm103-springs-valleys-001": { "arabic": "أَنْتَ المُرْسِلُ العُيُونَ في الشِّعابِ", "translation": "He sendeth forth springs in the valleys", "literal": "You are the sender of springs in the ravines", "tags": ["psalm", "psalm-103"] },
+  "psalm103-waters-pass-001": { "arabic": "وَفي وَسَطِ الجِبالِ تَعْبُرُ المِياهُ", "translation": "between the mountains will the waters run", "literal": "and in the midst of the mountains the waters pass", "tags": ["psalm", "psalm-103"] },
+  "psalm103-beasts-drink-001": { "arabic": "تَسْقِي كُلَّ وُحوشِ الغِياضِ", "translation": "They shall give drink to all the beasts of the field", "literal": "They give drink to all the beasts of the woods", "tags": ["psalm", "psalm-103"] },
+  "psalm103-wild-asses-001": { "arabic": "تُقْبِلُ حَمِيرُ الوَحْشِ عِنْدَ عَطَشِها", "translation": "the wild asses will wait to quench their thirst", "literal": "the wild donkeys come at their thirst", "tags": ["psalm", "psalm-103"] },
+  "psalm103-birds-dwell-001": { "arabic": "عَلَيْها طُيُورُ السَّماءِ تَسْكُنُ", "translation": "Beside them will the birds of the heaven lodge", "literal": "upon them the birds of heaven dwell", "tags": ["psalm", "psalm-103"] },
+  "psalm103-birds-sing-001": { "arabic": "مِنْ بَيْنِ الصُّخُورِ تُغَرِّدُ بِأَصْواتِها", "translation": "from the midst of the rocks will they give voice", "literal": "from among the rocks they sing with their voices", "tags": ["psalm", "psalm-103"] },
+  "psalm103-water-mountains-001": { "arabic": "أَنْتَ الذي يَسْقِي الجِبالَ مِنْ عَلالِيِّهِ", "translation": "He watereth the mountains from His chambers", "literal": "You are the one who waters the mountains from his upper chambers", "tags": ["psalm", "psalm-103"] },
+  "psalm103-earth-satisfied-001": { "arabic": "مِنْ ثَمَرَةِ أَعْمالِكَ تَشْبَعُ الأَرْضُ", "translation": "the earth shall be satisfied with the fruit of Thy works", "literal": "from the fruit of your works the earth is satisfied", "tags": ["psalm", "psalm-103"] },
+  "psalm103-grass-cattle-001": { "arabic": "أَنْتَ الذي يُنْبِتُ العُشْبَ لِلْبَهائِمِ", "translation": "He causeth the grass to grow for the cattle", "literal": "You are the one who makes grass sprout for cattle", "tags": ["psalm", "psalm-103"] },
+  "psalm103-green-for-men-001": { "arabic": "وَالخُضْرَةَ لِخِدْمَةِ البَشَرِ", "translation": "and green herb for the service of men", "literal": "and vegetation for the service of humans", "tags": ["psalm", "psalm-103"] },
+  "psalm103-bread-earth-001": { "arabic": "لِيُخْرِجَ خُبْزاً مِنَ الأَرْضِ", "translation": "to bring forth bread out of the earth", "literal": "to bring out bread from the earth", "tags": ["psalm", "psalm-103"] },
+  "psalm103-wine-heart-001": { "arabic": "وَالخَمْرُ تُفَرِّحُ قَلْبَ الإِنْسانِ", "translation": "and wine maketh glad the heart of man", "literal": "and wine gladdens the heart of man", "tags": ["psalm", "psalm-103"] },
+  "psalm103-oil-face-001": { "arabic": "لِيَبْتَهِجَ الوَجْهُ بِالزَّيْتِ", "translation": "To make his face cheerful with oil", "literal": "so the face may rejoice with oil", "tags": ["psalm", "psalm-103"] },
+  "psalm103-bread-strengthens-001": { "arabic": "وَالخُبْزُ يُشَدِّدُ قَلْبَ الإِنْسانِ", "translation": "and bread strengtheneth man's heart", "literal": "and bread strengthens the heart of man", "tags": ["psalm", "psalm-103"] },
+  "psalm103-trees-watered-001": { "arabic": "تُرْوَى أَشْجارُ الغابِ", "translation": "The trees of the plain shall be satisfied", "literal": "The trees of the forest are watered", "tags": ["psalm", "psalm-103"] },
+  "psalm103-cedars-lebanon-001": { "arabic": "وَأَرْزُ لُبْنانَ الذي نَصَبْتَهُ", "translation": "the cedars of Lebanon, which Thou hast planted", "literal": "and the cedar of Lebanon which you planted", "tags": ["psalm", "psalm-103"] },
+  "psalm103-sparrows-nest-001": { "arabic": "هُناكَ تُعَشِّشُ العَصافِيرُ", "translation": "There will the sparrows make their nests", "literal": "There the sparrows nest", "tags": ["psalm", "psalm-103"] },
+  "psalm103-heron-house-001": { "arabic": "وَمَساكِنُ الهيرودي تَتَقَدَّمُها", "translation": "the house of the heron is chief among them", "literal": "and the dwellings of the heron are foremost among them", "tags": ["psalm", "psalm-103"] },
+  "psalm103-high-mountains-001": { "arabic": "الجِبالُ العالِيَةُ لِلأَيِلَةِ", "translation": "The high mountains are a refuge for the harts", "literal": "The high mountains are for the deer", "tags": ["psalm", "psalm-103"] },
+  "psalm103-rocks-hares-001": { "arabic": "وَالصُّخُورُ مَلْجَأٌ لِلأَرانِبِ", "translation": "and so is the rock for the hares", "literal": "and the rocks are a refuge for the hares", "tags": ["psalm", "psalm-103"] },
+  "psalm103-moon-seasons-001": { "arabic": "صَنَعَ القَمَرَ لِلأَوْقاتِ", "translation": "He hath made the moon for seasons", "literal": "He made the moon for times", "tags": ["psalm", "psalm-103"] },
+  "psalm103-sun-setting-001": { "arabic": "وَالشَّمْسُ عَرَفَتْ غُرُوبَها", "translation": "the sun knoweth his going down", "literal": "and the sun knew its setting", "tags": ["psalm", "psalm-103"] },
+  "psalm103-darkness-night-001": { "arabic": "جَعَلَ الظُّلْمَةَ فَكانَ لَيْلٌ", "translation": "Thou appointedst the darkness, and there was the night", "literal": "He made darkness and it was night", "tags": ["psalm", "psalm-103"] },
+  "psalm103-beasts-go-001": { "arabic": "فِيهِ تَعْبُرُ جَمِيعُ وُحوشِ الغابِ", "translation": "wherein all the beasts of the forest will go abroad", "literal": "in it all the beasts of the forest pass through", "tags": ["psalm", "psalm-103"] },
+  "psalm103-lions-roar-001": { "arabic": "أَشْبالٌ تَزْأَرُ لِتَخْطُفَ", "translation": "young lions roaring after their prey", "literal": "young lions roar to seize prey", "tags": ["psalm", "psalm-103"] },
+  "psalm103-seek-food-001": { "arabic": "وَتَطْلُبَ مِنَ اللهِ طَعامَها", "translation": "and seeking their food from God", "literal": "and seek their food from God", "tags": ["psalm", "psalm-103"] },
+  "psalm103-sun-arose-001": { "arabic": "أَشْرَقَتِ الشَّمْسُ فَاجْتَمَعَتْ", "translation": "The sun ariseth, and they are gathered together", "literal": "The sun rose, so they gathered", "tags": ["psalm", "psalm-103"] },
+  "psalm103-dens-lie-001": { "arabic": "وَفي صِيَرِها رَبَضَتْ", "translation": "and they lay them down in their dens", "literal": "and in their lairs they lie down", "tags": ["psalm", "psalm-103"] },
+  "psalm103-man-work-001": { "arabic": "يَخْرُجُ الإِنْسانُ إلى عَمَلِهِ", "translation": "Man shall go forth unto his work", "literal": "Man goes out to his work", "tags": ["psalm", "psalm-103"] },
+  "psalm103-labor-evening-001": { "arabic": "وَإلى صِناعَتِهِ حَتّى المَساءِ", "translation": "and to his labor until the evening", "literal": "and to his craft until evening", "tags": ["psalm", "psalm-103"] },
+  "psalm103-how-great-works-001": { "arabic": "ما أَعْظَمَ أَعْمالَكَ يا رَبُّ", "translation": "How magnified are Thy works, O Lord", "literal": "How great are your works, O Lord", "tags": ["psalm", "psalm-103"] },
+  "psalm103-wisdom-made-001": { "arabic": "كُلَّها بِحِكْمَةٍ صَنَعْتَ", "translation": "In wisdom hast Thou made them all", "literal": "All of them you made with wisdom", "tags": ["psalm", "psalm-103", "wisdom"] },
+  "psalm103-earth-filled-001": { "arabic": "قَدِ امْتَلأَتِ الأَرْضُ مِنْ خَلِيقَتِكَ", "translation": "The earth is filled with Thy creation", "literal": "The earth has been filled with your creation", "tags": ["psalm", "psalm-103", "creation"] },
+  "psalm103-great-sea-001": { "arabic": "هذا البَحْرُ الكَبِيرُ الواسِعُ", "translation": "So is this great and spacious sea", "literal": "This great wide sea", "tags": ["psalm", "psalm-103"] },
+  "psalm103-creeping-innumerable-001": { "arabic": "هُناكَ دَبّاباتٌ لا عَدَدَ لَها", "translation": "wherein are things creeping innumerable", "literal": "there are creeping things without number", "tags": ["psalm", "psalm-103"] },
+  "psalm103-small-great-001": { "arabic": "حَيَواناتٌ صِغارٌ مَعَ كِبارٍ", "translation": "small living creatures with the great", "literal": "living things small with great", "tags": ["psalm", "psalm-103"] },
+  "psalm103-ships-go-001": { "arabic": "هُناكَ تَجْرِي السُّفُنُ", "translation": "There go the ships", "literal": "There the ships sail", "tags": ["psalm", "psalm-103"] },
+  "psalm103-leviathan-plays-001": { "arabic": "هذا التِّنِّينُ الذي خَلَقْتَهُ يَلْعَبُ فيهِ", "translation": "there this leviathan, whom Thou hast made to play therein", "literal": "this dragon which you created plays in it", "tags": ["psalm", "psalm-103"] },
+  "psalm103-all-wait-001": { "arabic": "وَكُلُّها إِيّاكَ تَتَرَجّى", "translation": "All things wait on Thee", "literal": "and all of them hope in you", "tags": ["psalm", "psalm-103"] },
+  "psalm103-food-season-001": { "arabic": "لِتُعْطِيَها طَعامَها في حِينِهِ", "translation": "to give them their food in due season", "literal": "that you may give them their food in its time", "tags": ["psalm", "psalm-103"] },
+  "psalm103-give-gather-001": { "arabic": "وَإِذا أَنْتَ أَعْطَيْتَها جَمَعَتْ", "translation": "when Thou givest it them, they will gather it", "literal": "and when you give to them, they gather", "tags": ["psalm", "psalm-103"] },
+  "psalm103-open-hand-001": { "arabic": "تَفْتَحُ يَدَكَ فَيَمْتَلِئُ الكُلُّ خَيْراً", "translation": "When Thou openest Thy hand, all things shall be filled with goodness", "literal": "You open your hand and all are filled with good", "tags": ["psalm", "psalm-103"] },
+  "psalm103-turn-face-troubled-001": { "arabic": "تَصْرِفُ وَجْهَكَ فَيَضْطَرِبُونَ", "translation": "when Thou turnest away Thy face, they shall be troubled", "literal": "You turn away your face and they are troubled", "tags": ["psalm", "psalm-103"] },
+  "psalm103-take-spirit-001": { "arabic": "تَنْزِعُ أَرْواحَهُمْ فَيَفْنَوْنَ", "translation": "Thou wilt take their spirit, and they shall cease", "literal": "You take away their spirits and they perish", "tags": ["psalm", "psalm-103"] },
+  "psalm103-return-dust-001": { "arabic": "وَإلى تُرابِهِمْ يَرْجِعُونَ", "translation": "and unto their dust shall they return", "literal": "and to their dust they return", "tags": ["psalm", "psalm-103"] },
+  "psalm103-send-spirit-001": { "arabic": "تُرْسِلُ رُوحَكَ فَيُخْلَقُونَ", "translation": "Thou wilt send forth Thy Spirit, and they shall be created", "literal": "You send your Spirit and they are created", "tags": ["psalm", "psalm-103", "holy-spirit"] },
+  "psalm103-renew-earth-001": { "arabic": "وَتُجَدِّدُ وَجْهَ الأَرْضِ", "translation": "and Thou shalt renew the face of the earth", "literal": "and you renew the face of the earth", "tags": ["psalm", "psalm-103"] },
+  "psalm103-glory-ages-001": { "arabic": "لِيَكُنْ مَجْدُ الرَّبِّ إلى الدَّهْرِ", "translation": "Let the glory of the Lord be unto the ages", "literal": "Let the glory of the Lord be forever", "tags": ["psalm", "psalm-103", "glory"] },
+  "psalm103-lord-rejoice-001": { "arabic": "يَفْرَحُ الرَّبُّ بِأَعْمالِهِ", "translation": "the Lord will rejoice in His works", "literal": "the Lord rejoices in his works", "tags": ["psalm", "psalm-103", "joy"] },
+  "psalm103-earth-trembles-001": { "arabic": "الذي يَنْظُرُ إلى الأَرْضِ فَيَجْعَلُها تَرْتَعِدُ", "translation": "Who looketh on the earth and maketh it tremble", "literal": "the one who looks to the earth and makes it tremble", "tags": ["psalm", "psalm-103"] },
+  "psalm103-mountains-smoke-001": { "arabic": "وَيَمَسُّ الجِبالَ فَتُدَخِّنُ", "translation": "Who toucheth the mountains and they smoke", "literal": "and touches the mountains and they smoke", "tags": ["psalm", "psalm-103"] },
+  "psalm103-sing-life-001": { "arabic": "أُسَبِّحُ الرَّبَّ في حَياتِي", "translation": "I will sing unto the Lord throughout my life", "literal": "I praise the Lord in my life", "tags": ["psalm", "psalm-103", "worship"] },
+  "psalm103-chant-being-001": { "arabic": "وَأُرَتِّلُ لِإِلٰهِي ما دُمْتُ مَوْجُوداً", "translation": "I will chant to my God for as long as I have my being", "literal": "and I chant to my God as long as I exist", "tags": ["psalm", "psalm-103", "worship"] },
+  "psalm103-meditation-sweet-001": { "arabic": "يَلَذُّ لَهُ تَأَمُّلِي", "translation": "May my words be sweet unto Him", "literal": "my meditation is pleasing to him", "tags": ["psalm", "psalm-103"] },
+  "psalm103-rejoice-lord-001": { "arabic": "وَأَنا أَفْرَحُ بِالرَّبِّ", "translation": "I will rejoice in the Lord", "literal": "and I rejoice in the Lord", "tags": ["psalm", "psalm-103", "joy"] },
+  "psalm103-sinners-cease-001": { "arabic": "لِتَبِدِ الخَطَأَةُ مِنَ الأَرْضِ", "translation": "O that sinners would cease from the earth", "literal": "Let sinners perish from the earth", "tags": ["psalm", "psalm-103"] },
+  "psalm103-lawless-no-more-001": { "arabic": "وَلا يَبْقَ فيها الأَثَمَةُ", "translation": "and they that work iniquity, that they should be no more", "literal": "and let the wicked not remain in it", "tags": ["psalm", "psalm-103"] },
+  "psalm103-bless-lord-end-001": { "arabic": "بارِكِي يا نَفْسِيَ الرَّبَّ", "translation": "Bless the Lord, O my soul", "literal": "Bless the Lord, O my soul", "tags": ["psalm", "psalm-103"] },
+  "psalm103-sun-setting-repeat-001": { "arabic": "الشَّمْسُ عَرَفَتْ غُرُوبَها", "translation": "The sun knoweth his going down", "literal": "The sun knew its setting", "tags": ["psalm", "psalm-103"] },
+  "psalm103-darkness-repeat-001": { "arabic": "جَعَلَ الظُّلْمَةَ فَكانَ لَيْلٌ", "translation": "Thou appointedst the darkness, and there was the night", "literal": "He made darkness and it was night", "tags": ["psalm", "psalm-103"] },
+  "psalm103-how-great-repeat-001": { "arabic": "ما أَعْظَمَ أَعْمالَكَ يا رَبُّ", "translation": "How magnified are Thy works, O Lord", "literal": "How great are your works, O Lord", "tags": ["psalm", "psalm-103"] },
+  "psalm103-wisdom-repeat-001": { "arabic": "كُلَّها بِحِكْمَةٍ صَنَعْتَ", "translation": "In wisdom hast Thou made them all", "literal": "All of them you made with wisdom", "tags": ["psalm", "psalm-103", "wisdom"] },
   "cherubic-psalm50-have-mercy-001": {
     "arabic": "ارْحَمْنِي يَا اللهُ كَعَظِيمِ رَحْمَتِكَ",
     "translation": "Have mercy upon me, O God, according to thy great mercy",
@@ -5550,6 +5688,54 @@ const phrases = {
       "section: The Cherubic Hymn"
     ]
   },
+  "psalter-psalm50-zion-good-001": {
+    "arabic": "أَصْلِحْ يا رَبُّ بِمَسَرَّتِكَ صِهْيَوْنَ",
+    "translation": "Do good, O Lord, in Thy good pleasure unto Zion",
+    "literal": "Make good, O Lord, by your good pleasure, Zion",
+    "tags": [
+      "psalm",
+      "psalm-50"
+    ]
+  },
+  "psalter-psalm50-jerusalem-walls-001": {
+    "arabic": "وَلْتُبْنَ أَسْوارُ أُورَشَلِيمَ",
+    "translation": "and let the walls of Jerusalem be built up",
+    "literal": "and let the walls of Jerusalem be built",
+    "tags": [
+      "psalm",
+      "psalm-50"
+    ]
+  },
+  "psalter-psalm50-sacrifice-righteousness-001": {
+    "arabic": "حِينَئِذٍ تُسَرُّ بِذَبِيحَةِ العَدْلِ",
+    "translation": "Then shalt Thou be pleased with a sacrifice of righteousness",
+    "literal": "Then you will be pleased with a sacrifice of righteousness",
+    "tags": [
+      "psalm",
+      "psalm-50",
+      "offering"
+    ]
+  },
+  "psalter-psalm50-oblation-burnt-001": {
+    "arabic": "قُرْباناً وَمُحْرَقاتٍ",
+    "translation": "with oblation and whole-burnt offerings",
+    "literal": "an oblation and burnt offerings",
+    "tags": [
+      "psalm",
+      "psalm-50",
+      "offering"
+    ]
+  },
+  "psalter-psalm50-offer-bullocks-001": {
+    "arabic": "حِينَئِذٍ يُقَرِّبُونَ على مَذْبَحِكَ العُجُولَ",
+    "translation": "Then shall they offer bullocks upon Thine altar",
+    "literal": "Then they will offer bullocks upon your altar",
+    "tags": [
+      "psalm",
+      "psalm-50",
+      "offering"
+    ]
+  },
   "cherubic-god-forgive-me-001": {
     "arabic": "يَا اللهُ اغْفِرْ لِي",
     "translation": "O God, be gracious unto me",
@@ -5666,7 +5852,7 @@ const phrases = {
     ]
   },
   "section-great-entrance": {
-    "arabic": "الدخول الكبير",
+    "arabic": "الدُّخُولُ الكَبِيرُ",
     "translation": "The Great Entrance",
     "literal": "The Great Entrance",
     "tags": [
@@ -6122,7 +6308,7 @@ const phrases = {
     ]
   },
   "section-litany-of-supplication": {
-    "arabic": "طلبات التقدمة",
+    "arabic": "طَلَبَاتُ التَّقْدِمَةِ",
     "translation": "The Litany of Supplication",
     "literal": "Supplications of the offering",
     "tags": [
@@ -6807,7 +6993,7 @@ const phrases = {
     ]
   },
   "section-creed": {
-    "arabic": "قانون الإيمان",
+    "arabic": "قَانُونُ الإِيمَانِ",
     "translation": "The Creed",
     "literal": "Canon of faith",
     "tags": [
@@ -7188,7 +7374,7 @@ const phrases = {
     ]
   },
   "section-holy-anaphora": {
-    "arabic": "الأنافورا المقدسة",
+    "arabic": "الأَنَافُورَا المُقَدَّسَةُ",
     "translation": "The Holy Anaphora",
     "literal": "the holy anaphora",
     "tags": [
@@ -8371,7 +8557,7 @@ const phrases = {
     ]
   },
   "section-hymn-to-the-theotokos": {
-    "arabic": "ترنيمة لوالدة الإله",
+    "arabic": "تَرْنِيمَةٌ لِوَالِدَةِ الإِلٰهِ",
     "translation": "Hymn to the Theotokos",
     "literal": "hymn to the Birthgiver of God",
     "tags": [
@@ -9079,7 +9265,7 @@ const phrases = {
     ]
   },
   "section-litany-before-lords-prayer": {
-    "arabic": "الطلبات قبل الصلاة الربانية",
+    "arabic": "الطَّلَبَاتُ قَبْلَ الصَّلَاةِ الرَّبَّانِيَّةِ",
     "translation": "The Litany Before the Lord's Prayer",
     "literal": "the petitions before the Lord's Prayer",
     "tags": [
@@ -9418,7 +9604,7 @@ const phrases = {
     ]
   },
   "section-lords-prayer": {
-    "arabic": "الصلاة الربانية",
+    "arabic": "الصَّلَاةُ الرَّبَّانِيَّةُ",
     "translation": "The Lord's Prayer",
     "literal": "the Lord's Prayer",
     "tags": [
@@ -9774,7 +9960,7 @@ const phrases = {
     ]
   },
   "section-elevation": {
-    "arabic": "الرفع",
+    "arabic": "الرَّفْعُ",
     "translation": "The Elevation",
     "literal": "the elevation",
     "tags": [
@@ -9994,7 +10180,7 @@ const phrases = {
     ]
   },
   "section-communion": {
-    "arabic": "المناولة",
+    "arabic": "المُنَاوَلَةُ",
     "translation": "The Communion",
     "literal": "the communion",
     "tags": [
@@ -10134,7 +10320,7 @@ const phrases = {
     ]
   },
   "section-pre-communion-prayers": {
-    "arabic": "أفاشين قبل المناولة",
+    "arabic": "أَفَاشِينُ قَبْلَ المُنَاوَلَةِ",
     "translation": "The Pre-Communion Prayers",
     "literal": "prayers before communion",
     "tags": [
@@ -11240,7 +11426,7 @@ const phrases = {
     ]
   },
   "section-litany-of-thanksgiving": {
-    "arabic": "طلبة الشكر",
+    "arabic": "طِلْبَةُ الشُّكْرِ",
     "translation": "The Litany of Thanksgiving",
     "literal": "the litany of thanksgiving",
     "tags": [
@@ -11527,7 +11713,7 @@ const phrases = {
     ]
   },
   "section-prayer-behind-amvon": {
-    "arabic": "أفاشين وراء المنبر",
+    "arabic": "أَفَاشِينُ وَرَاءَ المِنْبَرِ",
     "translation": "The Prayer Behind the Amvon",
     "literal": "prayers behind the amvon",
     "tags": [
@@ -11862,7 +12048,7 @@ const phrases = {
     ]
   },
   "section-dismissal": {
-    "arabic": "الحل",
+    "arabic": "الحَلُّ",
     "translation": "The Dismissal",
     "literal": "the dismissal",
     "tags": [

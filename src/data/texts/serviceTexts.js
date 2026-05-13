@@ -6,6 +6,23 @@ export const serviceTextDefinitions = [
     "id": "divine-liturgy-john-chrysostom",
     "title": "The Divine Liturgy",
     "short_title": "The Divine Liturgy",
+    "nav_title": "of St John Chrysostom",
+    "show_in_reader_nav": true,
+    "display_title": {
+      "english": [
+        {
+          "text": "The Divine Liturgy"
+        },
+        {
+          "text": "of St John Chrysostom",
+          "tone": "red"
+        }
+      ],
+      "arabic_phrase_ids": [
+        "homepage-divine-liturgy-001",
+        "homepage-john-chrysostom-001"
+      ]
+    },
     "tradition": "antiochian",
     "language": "ar",
     "sections": [
@@ -35,7 +52,7 @@ export const serviceTextDefinitions = [
         "section_id": "blessed-is-the-kingdom",
         "section": "Blessed is the Kingdom",
         "section_title_phrase": "section-introductory-blessing",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "opening-bless-master",
@@ -47,7 +64,7 @@ export const serviceTextDefinitions = [
         "section_id": "litany-of-peace",
         "section": "Litany of Peace",
         "section_title_phrase": "section-litany-of-peace",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "litany-peace-in-peace",
@@ -95,7 +112,7 @@ export const serviceTextDefinitions = [
         "section_id": "first-antiphon",
         "section": "The First Antiphon",
         "section_title_phrase": "section-first-antiphon",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "first-antiphon-through-theotokos-1",
@@ -110,7 +127,7 @@ export const serviceTextDefinitions = [
         "section_id": "little-litany-after-first-antiphon",
         "section": "The Little Litany",
         "section_title_phrase": "section-little-litany",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "little-litany-again",
@@ -130,7 +147,7 @@ export const serviceTextDefinitions = [
         "section_id": "second-antiphon",
         "section": "The Second Antiphon",
         "section_title_phrase": "section-second-antiphon",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "second-antiphon-save-us-risen-1",
@@ -147,17 +164,17 @@ export const serviceTextDefinitions = [
           "antiphon-crucified",
           "antiphon-trampled-death",
           "antiphon-one-of-trinity",
-          "antiphon-glorified-with-father"
+          "antiphon-glorified-with-father",
+          "little-litany-rubric-holy-doors"
         ]
       },
       {
         "section_id": "little-litany-after-second-antiphon",
         "section": "The Little Litany",
         "section_title_phrase": "section-little-litany",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
-          "little-litany-rubric-holy-doors",
           "little-litany-again",
           "little-litany-lord-have-mercy-1",
           "little-litany-help-save",
@@ -174,7 +191,7 @@ export const serviceTextDefinitions = [
         "section_id": "entrance",
         "section": "The Entrance",
         "section_title_phrase": "section-entrance",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "entrance-let-us-pray",
@@ -191,7 +208,7 @@ export const serviceTextDefinitions = [
         "section_id": "entrance-hymn",
         "section": "The Entrance Hymn",
         "section_title_phrase": "section-entrance-hymn",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "entrance-hymn-come-worship",
@@ -236,7 +253,7 @@ export const serviceTextDefinitions = [
         "section_id": "trisagion-hymn",
         "section": "Thrice-Holy Hymn",
         "section_title_phrase": "section-trisagion-hymn",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "trisagion-hymn-holy-god-1",
@@ -257,7 +274,7 @@ export const serviceTextDefinitions = [
         "section_id": "reading-epistle",
         "section": "The Reading of the Epistle",
         "section_title_phrase": "section-reading-epistle",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "epistle-let-us-attend-1",
@@ -274,7 +291,7 @@ export const serviceTextDefinitions = [
         "section_id": "prayer-before-gospel",
         "section": "Prayer Before the Gospel",
         "section_title_phrase": "section-prayer-before-gospel",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "gospel-prayer-let-us-pray",
@@ -291,7 +308,7 @@ export const serviceTextDefinitions = [
         "section_id": "reading-gospel",
         "section": "The Reading of the Gospel",
         "section_title_phrase": "section-reading-gospel",
-        "section_group": "Liturgy of the Catechumen",
+        "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "gospel-wisdom-stand",
@@ -308,7 +325,7 @@ export const serviceTextDefinitions = [
         "section_id": "prayer-litany-catechumens",
         "section": "The Prayer of the Litany for the Catechumens",
         "section_title_phrase": "section-prayer-litany-catechumens",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "segment_ids": [
           "catechumens-prayer"
@@ -318,7 +335,7 @@ export const serviceTextDefinitions = [
         "section_id": "first-litany-faithful-prayer",
         "section": "The Prayer of the First Litany of the Faithful",
         "section_title_phrase": "section-first-litany-faithful-prayer",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "segment_ids": [
           "first-faithful-prayer"
@@ -328,7 +345,7 @@ export const serviceTextDefinitions = [
         "section_id": "second-litany-faithful-prayer",
         "section": "The Prayer of the Second Litany of the Faithful",
         "section_title_phrase": "section-second-litany-faithful-prayer",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "segment_ids": [
           "second-faithful-prayer",
@@ -341,7 +358,7 @@ export const serviceTextDefinitions = [
         "section_id": "cherubic-hymn",
         "section": "The Cherubic Hymn",
         "section_title_phrase": "section-cherubic-hymn",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "segment_ids": [
           "cherubic-hymn-choir",
@@ -350,7 +367,24 @@ export const serviceTextDefinitions = [
           "cherubic-hymn-deacon-completion",
           "cherubic-hymn-priest-resurrection",
           "cherubic-hymn-rubric-feast-replacement",
-          "cherubic-hymn-psalm-50",
+          "cherubic-hymn-psalm-50-title",
+          "psalm-50-verse-001",
+          "psalm-50-verse-002",
+          "psalm-50-verse-003",
+          "psalm-50-verse-004",
+          "psalm-50-verse-005",
+          "psalm-50-verse-006",
+          "psalm-50-verse-007",
+          "psalm-50-verse-008",
+          "psalm-50-verse-009",
+          "psalm-50-verse-010",
+          "psalm-50-verse-011",
+          "psalm-50-verse-012",
+          "psalm-50-verse-013",
+          "psalm-50-verse-014",
+          "psalm-50-verse-015",
+          "psalm-50-verse-016",
+          "psalm-50-verse-017",
           "cherubic-hymn-priest-forgive-sinner",
           "cherubic-hymn-priest-forgive-brother",
           "cherubic-hymn-priest-forgive-all",
@@ -362,7 +396,7 @@ export const serviceTextDefinitions = [
         "section_id": "great-entrance",
         "section": "The Great Entrance",
         "section_title_phrase": "section-great-entrance",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "segment_ids": [
           "great-entrance-deacon-all",
@@ -394,7 +428,7 @@ export const serviceTextDefinitions = [
         "section_id": "litany-of-supplication",
         "section": "The Litany of Supplication",
         "section_title_phrase": "section-litany-of-supplication",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "093-the-litany-of-supplication-8",
         "segment_ids": [
@@ -428,7 +462,7 @@ export const serviceTextDefinitions = [
         "section_id": "creed",
         "section": "The Creed",
         "section_title_phrase": "section-creed",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "104-8-people-i-believe-in-one-god-the-father-almighty",
         "segment_ids": [
@@ -447,7 +481,7 @@ export const serviceTextDefinitions = [
         "section_id": "anaphora",
         "section": "The Holy Anaphora",
         "section_title_phrase": "section-holy-anaphora",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "112-the-holy-anaphora-8",
         "segment_ids": [
@@ -500,7 +534,7 @@ export const serviceTextDefinitions = [
         "section_id": "hymn-to-the-theotokos",
         "section": "Hymn to the Theotokos",
         "section_title_phrase": "section-hymn-to-the-theotokos",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "123-hymn-to-the-theotokos",
         "segment_ids": [
@@ -524,7 +558,7 @@ export const serviceTextDefinitions = [
         "section_id": "litany-before-lords-prayer",
         "section": "The Litany Before the Lord's Prayer",
         "section_title_phrase": "section-litany-before-lords-prayer",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "128-the-litany-before-the-lord-s-prayer",
         "segment_ids": [
@@ -544,7 +578,7 @@ export const serviceTextDefinitions = [
         "section_id": "lords-prayer",
         "section": "The Lord's Prayer",
         "section_title_phrase": "section-lords-prayer",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "131-the-lord-s-prayer",
         "segment_ids": [
@@ -568,7 +602,7 @@ export const serviceTextDefinitions = [
         "section_id": "elevation",
         "section": "The Elevation",
         "section_title_phrase": "section-elevation",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "136-hear-us-o-lord-jesus-christ-our-god",
         "segment_ids": [
@@ -584,7 +618,7 @@ export const serviceTextDefinitions = [
         "section_id": "communion",
         "section": "The Communion",
         "section_title_phrase": "section-communion",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "141-2-priest-the-fullness-of-the-holy-spirit",
         "segment_ids": [
@@ -603,7 +637,7 @@ export const serviceTextDefinitions = [
         "section_id": "pre-communion-prayers",
         "section": "The Pre-Communion Prayers",
         "section_title_phrase": "section-pre-communion-prayers",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "144-the-pre-communion-prayers-g",
         "segment_ids": [
@@ -642,7 +676,7 @@ export const serviceTextDefinitions = [
         "section_id": "litany-of-thanksgiving",
         "section": "The Litany of Thanksgiving",
         "section_title_phrase": "section-litany-of-thanksgiving",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "155-7-the-litany-of-thanksgiving",
         "segment_ids": [
@@ -665,7 +699,7 @@ export const serviceTextDefinitions = [
         "section_id": "prayer-behind-amvon",
         "section": "The Prayer Behind the Amvon",
         "section_title_phrase": "section-prayer-behind-amvon",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "157-the-prayer-behind-the-amvon-3",
         "segment_ids": [
@@ -685,13 +719,79 @@ export const serviceTextDefinitions = [
         "section_id": "dismissal",
         "section": "The Dismissal",
         "section_title_phrase": "section-dismissal",
-        "section_group": "The Liturgy of the Faithful",
+        "section_group": "Liturgy of the Faithful",
         "section_group_title_phrase": "section-liturgy-faithful",
         "source_manifest_hint": "159-fulfillment-of-the-law-and-the-prophets",
         "segment_ids": [
           "dismissal-priest-main",
           "dismissal-priest-fathers",
           "dismissal-choir-amen"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "psalter-psalm-50",
+    "title": "The Psalter",
+    "short_title": "The Psalter",
+    "show_in_reader_nav": true,
+    "nav_landing_at_root": true,
+    "display_title": {
+      "english": [
+        {
+          "text": "The Psalter"
+        },
+        {
+          "text": "According to the Seventy",
+          "tone": "red"
+        }
+      ],
+      "arabic_phrase_ids": [
+        "homepage-psalter-001",
+        "homepage-psalter-seventy-001"
+      ],
+      "icon": "davidPsalterIcon",
+      "icon_max_height": 300
+    },
+    "tradition": "antiochian",
+    "language": "ar",
+    "sections": [
+      {
+        "section_id": "psalm-50",
+        "section": "Psalm 50",
+        "section_title_phrase": "section-psalm-50",
+        "include_quiet_segments": true,
+        "speaker_override": "",
+        "segment_ids": [
+          "psalm-50-verse-001",
+          "psalm-50-verse-002",
+          "psalm-50-verse-003",
+          "psalm-50-verse-004",
+          "psalm-50-verse-005",
+          "psalm-50-verse-006",
+          "psalm-50-verse-007",
+          "psalm-50-verse-008",
+          "psalm-50-verse-009",
+          "psalm-50-verse-010",
+          "psalm-50-verse-011",
+          "psalm-50-verse-012",
+          "psalm-50-verse-013",
+          "psalm-50-verse-014",
+          "psalm-50-verse-015",
+          "psalm-50-verse-016",
+          "psalm-50-verse-017",
+          "psalm-50-verse-018",
+          "psalm-50-verse-019",
+          "psalm-50-verse-020"
+        ]
+      },
+      {
+        "section_id": "psalm-103",
+        "section": "Psalm 103",
+        "section_title_phrase": "section-psalm-103",
+        "include_quiet_segments": true,
+        "segment_ids": [
+          "psalter-psalm-103"
         ]
       }
     ]
@@ -761,5 +861,6 @@ export function getServiceText(serviceTextId) {
 
 export const defaultServiceTextId = "divine-liturgy-john-chrysostom";
 export const defaultServiceText = serviceTexts[defaultServiceTextId];
+export const readerServiceTexts = serviceTextDefinitions.filter(serviceText => serviceText.show_in_reader_nav);
 
 export default serviceTexts;

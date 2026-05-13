@@ -2,10 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import ArabicLiturgyReader from "./ArabicLiturgyReader.jsx";
 import CourseOverview from "./components/course/CourseOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
-import { defaultServiceText } from "./data/texts/serviceTexts.js";
+import InteractiveText from "./components/InteractiveText.jsx";
+import PhraseTooltip from "./components/PhraseTooltip.jsx";
+import { getServiceSectionAudio } from "./data/media/serviceSectionAudio.js";
+import { defaultServiceText, defaultServiceTextId, getServiceText, readerServiceTexts } from "./data/texts/serviceTexts.js";
+import phrases from "./data/texts/phrases.js";
 import units from "./data/course/units.js";
 import lessons from "./data/course/lessons.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
+import { getServiceNavigation } from "./utils/serviceNavigation.js";
+import { getArabicText } from "./utils/arabic.js";
+import appIcons from "./assets/icons/index.js";
 
 const NAV_ITEM_STYLE = {
   display: "block",
@@ -77,28 +84,86 @@ const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
     .sort((a, b) => a.display_order - b.display_order)
 );
 const DEFAULT_LESSON_ID = COURSE_LESSONS[0]?.id ?? lessons[0]?.id ?? null;
-const readerSections = defaultServiceText.sections;
+const READER_SERVICE_TEXTS = readerServiceTexts.length > 0 ? readerServiceTexts : [defaultServiceText];
+const DEFAULT_READER_SERVICE_TEXT_ID = defaultServiceTextId;
+const HOME_TITLE_PHRASE_ID = "homepage-liturgical-arabic-001";
 
 function hasMultipleExercises(lesson) {
   return (lesson?.exercises?.length ?? 0) > 1;
 }
 
+function getReaderServiceText(serviceTextId) {
+  return READER_SERVICE_TEXTS.find(serviceText => serviceText.id === serviceTextId)
+    || getServiceText(serviceTextId)
+    || defaultServiceText;
+}
+
 function parseNavigationHash() {
   if (typeof window === "undefined") {
-    return { view: "home", selectedSectionIndex: null, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+    return {
+      view: "home",
+      selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
+      selectedSectionIndex: null,
+      selectedLessonId: DEFAULT_LESSON_ID,
+      selectedExerciseIndex: 0
+    };
   }
 
   const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
   if (hash === "course") {
-    return { view: "course-overview", selectedSectionIndex: null, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+    return {
+      view: "course-overview",
+      selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
+      selectedSectionIndex: null,
+      selectedLessonId: DEFAULT_LESSON_ID,
+      selectedExerciseIndex: 0
+    };
   }
   if (hash === "reader/toc") {
-    return { view: "reader", selectedSectionIndex: null, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+    return {
+      view: "reader",
+      selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
+      selectedSectionIndex: null,
+      selectedLessonId: DEFAULT_LESSON_ID,
+      selectedExerciseIndex: 0
+    };
   }
   if (hash.startsWith("reader/section/")) {
     const sectionIndex = Number(hash.replace("reader/section/", ""));
-    if (Number.isInteger(sectionIndex) && sectionIndex >= 0 && sectionIndex < readerSections.length) {
-      return { view: "reader", selectedSectionIndex: sectionIndex, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+    if (Number.isInteger(sectionIndex) && sectionIndex >= 0 && sectionIndex < defaultServiceText.sections.length) {
+      return {
+        view: "reader",
+        selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
+        selectedSectionIndex: sectionIndex,
+        selectedLessonId: DEFAULT_LESSON_ID,
+        selectedExerciseIndex: 0
+      };
+    }
+  }
+  if (hash.startsWith("reader/")) {
+    const parts = hash.split("/");
+    const serviceTextId = parts[1] || DEFAULT_READER_SERVICE_TEXT_ID;
+    const serviceText = getReaderServiceText(serviceTextId);
+    if (parts[2] === "toc") {
+      return {
+        view: "reader",
+        selectedServiceTextId: serviceText.id,
+        selectedSectionIndex: null,
+        selectedLessonId: DEFAULT_LESSON_ID,
+        selectedExerciseIndex: 0
+      };
+    }
+    if (parts[2] === "section") {
+      const sectionIndex = Number(parts[3]);
+      if (Number.isInteger(sectionIndex) && sectionIndex >= 0 && sectionIndex < serviceText.sections.length) {
+        return {
+          view: "reader",
+          selectedServiceTextId: serviceText.id,
+          selectedSectionIndex: sectionIndex,
+          selectedLessonId: DEFAULT_LESSON_ID,
+          selectedExerciseIndex: 0
+        };
+      }
     }
   }
   if (hash.startsWith("course/")) {
@@ -107,6 +172,7 @@ function parseNavigationHash() {
     if (parts[2] !== "exercise") {
       return {
         view: "lessons",
+        selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
         selectedSectionIndex: null,
         selectedLessonId: lessonId,
         selectedExerciseIndex: 0
@@ -114,14 +180,33 @@ function parseNavigationHash() {
     }
     const exerciseNumber = parts[2] === "exercise" ? Number(parts[3]) : 1;
     const selectedExerciseIndex = Number.isInteger(exerciseNumber) && exerciseNumber > 0 ? exerciseNumber - 1 : 0;
-    return { view: "lessons", selectedSectionIndex: null, selectedLessonId: lessonId, selectedExerciseIndex };
+    return {
+      view: "lessons",
+      selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
+      selectedSectionIndex: null,
+      selectedLessonId: lessonId,
+      selectedExerciseIndex
+    };
   }
-  return { view: "home", selectedSectionIndex: null, selectedLessonId: DEFAULT_LESSON_ID, selectedExerciseIndex: 0 };
+  return {
+    view: "home",
+    selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
+    selectedSectionIndex: null,
+    selectedLessonId: DEFAULT_LESSON_ID,
+    selectedExerciseIndex: 0
+  };
 }
 
-function getNavigationHash(view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex) {
+function getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedLessonId, selectedExerciseIndex) {
   if (view === "reader") {
-    return selectedSectionIndex === null ? "#reader/toc" : `#reader/section/${selectedSectionIndex}`;
+    const serviceTextId = selectedServiceTextId || DEFAULT_READER_SERVICE_TEXT_ID;
+    if (serviceTextId === DEFAULT_READER_SERVICE_TEXT_ID) {
+      return selectedSectionIndex === null ? "#reader/toc" : `#reader/section/${selectedSectionIndex}`;
+    }
+    const encodedServiceTextId = encodeURIComponent(serviceTextId);
+    return selectedSectionIndex === null
+      ? `#reader/${encodedServiceTextId}/toc`
+      : `#reader/${encodedServiceTextId}/section/${selectedSectionIndex}`;
   }
   if (view === "lessons") {
     return `#course/${encodeURIComponent(selectedLessonId ?? "")}/exercise/${selectedExerciseIndex + 1}`;
@@ -169,6 +254,7 @@ export default function App() {
   const [initialNavigation] = useState(() => parseNavigationHash());
   const [initialDisplaySettings] = useState(() => getStoredDisplaySettings());
   const [view, setView] = useState(initialNavigation.view);
+  const [selectedServiceTextId, setSelectedServiceTextId] = useState(initialNavigation.selectedServiceTextId);
   const [selectedSectionIndex, setSelectedSectionIndex] = useState(initialNavigation.selectedSectionIndex);
   const [selectedLessonId, setSelectedLessonId] = useState(initialNavigation.selectedLessonId);
   const [selectedExerciseIndex, setSelectedExerciseIndex] = useState(initialNavigation.selectedExerciseIndex);
@@ -256,6 +342,7 @@ export default function App() {
     function updateNavigationFromHash() {
       const nextNavigation = parseNavigationHash();
       setView(nextNavigation.view);
+      setSelectedServiceTextId(nextNavigation.selectedServiceTextId);
       setSelectedSectionIndex(nextNavigation.selectedSectionIndex);
       setSelectedLessonId(nextNavigation.selectedLessonId);
       setSelectedExerciseIndex(nextNavigation.selectedExerciseIndex);
@@ -268,14 +355,14 @@ export default function App() {
   }, [isNarrowViewport]);
 
   useEffect(() => {
-    const nextHash = getNavigationHash(view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex);
+    const nextHash = getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedLessonId, selectedExerciseIndex);
     if (window.location.hash !== nextHash) {
       window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${nextHash}`);
     }
-  }, [view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex]);
+  }, [view, selectedServiceTextId, selectedSectionIndex, selectedLessonId, selectedExerciseIndex]);
 
   useEffect(() => {
-    const navigationKey = `${view}:${selectedSectionIndex ?? "toc"}:${selectedLessonId ?? ""}:${selectedExerciseIndex}`;
+    const navigationKey = `${view}:${selectedServiceTextId}:${selectedSectionIndex ?? "toc"}:${selectedLessonId ?? ""}:${selectedExerciseIndex}`;
     if (previousNavigationKeyRef.current === null) {
       previousNavigationKeyRef.current = navigationKey;
       return;
@@ -286,7 +373,7 @@ export default function App() {
     window.requestAnimationFrame(() => {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     });
-  }, [view, selectedSectionIndex, selectedLessonId, selectedExerciseIndex]);
+  }, [view, selectedServiceTextId, selectedSectionIndex, selectedLessonId, selectedExerciseIndex]);
 
   function goHome() {
     setView("home");
@@ -294,14 +381,16 @@ export default function App() {
     setDisplayMenuOpen(false);
   }
 
-  function goToLiturgySection(sectionIndex) {
+  function goToLiturgySection(sectionIndex, serviceTextId = selectedServiceTextId) {
+    setSelectedServiceTextId(serviceTextId);
     setSelectedSectionIndex(sectionIndex);
     setView("reader");
     if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
 
-  function goToTableOfContents() {
+  function goToTableOfContents(serviceTextId = selectedServiceTextId) {
+    setSelectedServiceTextId(serviceTextId);
     setSelectedSectionIndex(null);
     setView("reader");
     if (isNarrowViewport) setMenuOpen(false);
@@ -328,7 +417,8 @@ export default function App() {
   }
 
   function goToNextSection() {
-    setSelectedSectionIndex(index => (index === null ? 0 : Math.min(readerSections.length - 1, index + 1)));
+    const sectionCount = getReaderServiceText(selectedServiceTextId).sections.length;
+    setSelectedSectionIndex(index => (index === null ? 0 : Math.min(sectionCount - 1, index + 1)));
     setView("reader");
   }
 
@@ -418,6 +508,14 @@ export default function App() {
     }
   }, [view, selectedExerciseIndex, clampedExerciseIndex]);
 
+  const selectedServiceText = getReaderServiceText(selectedServiceTextId);
+  const readerSections = selectedServiceText.sections || [];
+  const readerServiceNavigation = getServiceNavigation(selectedServiceText);
+  const readerServiceHomeTitle = readerServiceNavigation[0]?.title || selectedServiceText.short_title || selectedServiceText.title;
+  const readerNavigationGroups = READER_SERVICE_TEXTS.map(serviceText => ({
+    serviceText,
+    navigation: getServiceNavigation(serviceText)
+  }));
   const hasPreviousSection = selectedSectionIndex !== null && selectedSectionIndex > 0;
   const hasNextSection = selectedSectionIndex === null || selectedSectionIndex < readerSections.length - 1;
   const previousSectionTitle = hasPreviousSection ? readerSections[selectedSectionIndex - 1]?.section : null;
@@ -425,9 +523,12 @@ export default function App() {
     ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
   const selectedLiturgySection = selectedSectionIndex === null ? null : readerSections[selectedSectionIndex];
+  const selectedLiturgySectionHasPracticeToolbar = Boolean(
+    selectedLiturgySection && getServiceSectionAudio(selectedServiceText.id, selectedLiturgySection, selectedSectionIndex)
+  );
   const compactPageTitle =
     view === "reader"
-      ? (selectedLiturgySection?.section ?? "Table of Contents")
+      ? (selectedLiturgySection?.section ?? readerServiceHomeTitle)
       : view === "course-overview"
         ? "Course Overview"
         : view === "lessons"
@@ -442,46 +543,76 @@ export default function App() {
     !menuOpen &&
     !displayMenuOpen &&
     Boolean(compactPageTitle);
-  const liturgyMenuItems = readerSections.reduce((items, section, sectionIndex) => {
-    if (!section.section_group) {
-      items.push({ type: "section", section, sectionIndex });
-      return items;
-    }
-
-    const last = items[items.length - 1];
-    if (last && last.type === "group" && last.group === section.section_group) {
-      last.sections.push({ section, sectionIndex });
-    } else {
-      items.push({
-        type: "group",
-        group: section.section_group,
-        sections: [{ section, sectionIndex }]
-      });
-    }
-    return items;
-  }, []);
+  const pageHasPracticeToolbar =
+    (view === "reader" && selectedLiturgySectionHasPracticeToolbar)
+    || (view === "lessons" && Boolean(selectedLessonWithUnit));
 
   function renderHome() {
+    const homeTitlePhrase = phrases[HOME_TITLE_PHRASE_ID];
+    function getServiceHomeTitle(serviceText) {
+      const englishLines = serviceText.display_title?.english || [];
+      if (englishLines.length > 0) {
+        return englishLines.map(line => line.text).join(" ");
+      }
+      return serviceText.short_title || serviceText.title;
+    }
+
     return (
-      <main className="mx-auto flex min-h-[calc(100vh-120px)] max-w-[640px] flex-col justify-center px-6 py-10" dir="ltr">
-        <div className="grid gap-3">
-          <button
-            type="button"
-            onClick={goToTableOfContents}
-            className="rounded-md border border-stone-300 px-4 py-3 text-center text-base font-medium transition hover:bg-stone-50 dark:border-[var(--dark-border)] dark:hover:bg-[var(--dark-hover)]"
-          >
-            Read the Liturgy
-          </button>
+      <main className="app-home-page" dir="ltr">
+        <section className="app-home-hero" aria-labelledby="home-title">
+          <div className="app-home-title-stack app-home-title-stack-arabic" dir="rtl">
+            {homeTitlePhrase && (
+              <InteractiveText
+                spokenText={homeTitlePhrase.arabic}
+                speechRate={speechRate}
+                tooltip={<PhraseTooltip phrase={homeTitlePhrase} />}
+                className="app-home-arabic-title"
+              >
+                {getArabicText(homeTitlePhrase, arabicMode)}
+              </InteractiveText>
+            )}
+          </div>
+          <img
+            src={appIcons.homeAltarIcon.src}
+            alt={appIcons.homeAltarIcon.title}
+            className="app-home-icon"
+          />
+          <div className="app-home-title-stack">
+            <h1 id="home-title" className="app-home-title">Liturgical Arabic</h1>
+          </div>
+        </section>
+
+        <nav className="app-home-actions" aria-label="Home">
+          <section className="app-home-action-section" aria-labelledby="home-read-title">
+            <h2 id="home-read-title" className="app-home-section-title">Read</h2>
+            <div className="app-home-action-grid">
+              {READER_SERVICE_TEXTS.map(serviceText => (
+                <button
+                  key={serviceText.id}
+                  type="button"
+                  onClick={() => goToTableOfContents(serviceText.id)}
+                  className="app-home-action"
+                >
+                  <span className="app-home-action-kicker">{serviceText.title}</span>
+                  <span className="app-home-action-title">{getServiceHomeTitle(serviceText)}</span>
+                </button>
+              ))}
+            </div>
+          </section>
           {COURSE_LESSONS.length > 0 && (
-            <button
-              type="button"
-              onClick={goToCourseOverview}
-              className="rounded-md border border-stone-300 px-4 py-3 text-center text-base font-medium transition hover:bg-stone-50 dark:border-[var(--dark-border)] dark:hover:bg-[var(--dark-hover)]"
-            >
-              Learn Liturgical Arabic
-            </button>
+            <section className="app-home-action-section" aria-labelledby="home-learn-title">
+              <h2 id="home-learn-title" className="app-home-section-title">Learn</h2>
+              <button
+                type="button"
+                onClick={goToCourseOverview}
+                className="app-home-action app-home-action-course"
+              >
+                <span className="app-home-action-kicker">Course</span>
+                <span className="app-home-action-title">Liturgical Arabic</span>
+              </button>
+            </section>
           )}
-        </div>
+        </nav>
       </main>
     );
   }
@@ -701,6 +832,54 @@ export default function App() {
     );
   }
 
+  function renderReaderNavigationItems(serviceText, serviceItem, isCurrentServiceText) {
+    return serviceItem.items.map(item => {
+      if (item.type === "section") {
+        return (
+          <button
+            key={item.section.section || item.sectionIndex}
+            role="menuitem"
+            type="button"
+            onClick={() => goToLiturgySection(item.sectionIndex, serviceText.id)}
+            className={isCurrentServiceText && selectedSectionIndex === item.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+            style={SECTION_ITEM_STYLE}
+          >
+            {item.section.section || `Section ${item.sectionIndex + 1}`}
+          </button>
+        );
+      }
+
+      const isCurrentGroup = isCurrentServiceText && item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex);
+      const detailId = `liturgy:${serviceText.id}:${serviceItem.title}:${item.group}`;
+      return (
+        <details
+          className="lp-course-lesson"
+          key={item.group}
+          open={isNavDetailOpen(detailId, isCurrentGroup || isCurrentServiceText)}
+          onToggle={event => setNavDetailOpen(detailId, event.currentTarget.open)}
+        >
+          <summary className="lp-course-lesson-summary">
+            {item.group}
+          </summary>
+          <div className="lp-course-exercise-list">
+            {item.sections.map(sectionItem => (
+              <button
+                key={sectionItem.section.section || sectionItem.sectionIndex}
+                role="menuitem"
+                type="button"
+                onClick={() => goToLiturgySection(sectionItem.sectionIndex, serviceText.id)}
+                className={isCurrentServiceText && selectedSectionIndex === sectionItem.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                style={SECTION_ITEM_STYLE}
+              >
+                {sectionItem.section.section || `Section ${sectionItem.sectionIndex + 1}`}
+              </button>
+            ))}
+          </div>
+        </details>
+      );
+    });
+  }
+
   return (
     <div
       className="min-h-screen bg-white dark:bg-[var(--dark-bg)] font-sans text-stone-900 dark:text-[var(--dark-text)]"
@@ -795,7 +974,7 @@ export default function App() {
           )
         })}
 
-      {!(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderFocusModeToggle()}
+      {pageHasPracticeToolbar && !(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderFocusModeToggle()}
 
       {isNarrowViewport && menuOpen && (
         <button
@@ -869,71 +1048,84 @@ export default function App() {
                   Liturgical Texts
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                  <details
-                    className="lp-course-lesson"
-                    open={isNavDetailOpen("liturgy-text:divine-liturgy", view === "reader")}
-                    onToggle={event => setNavDetailOpen("liturgy-text:divine-liturgy", event.currentTarget.open)}
-                  >
-                    <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
-                      {defaultServiceText.title}
-                    </summary>
-                    <div className="lp-course-exercise-list">
-                      <button
-                        role="menuitem"
-                        type="button"
-                        onClick={goToTableOfContents}
-                        className={view === "reader" && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
-                        style={SECTION_ITEM_STYLE}
+                  {readerNavigationGroups.map(({ serviceText, navigation }) => {
+                    const isCurrentServiceText = view === "reader" && selectedServiceText.id === serviceText.id;
+                    const serviceTextDetailId = `liturgy-text:${serviceText.id}`;
+                    return (
+                      <details
+                        className="lp-course-lesson"
+                        key={serviceText.id}
+                        open={isNavDetailOpen(serviceTextDetailId, isCurrentServiceText)}
+                        onToggle={event => setNavDetailOpen(serviceTextDetailId, event.currentTarget.open)}
                       >
-                        Table of Contents
-                      </button>
-                      {liturgyMenuItems.map(item => {
-                        if (item.type === "section") {
-                          return (
+                        <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+                          {serviceText.nav_landing_at_root ? (
                             <button
-                              key={item.section.section || item.sectionIndex}
                               role="menuitem"
                               type="button"
-                              onClick={() => goToLiturgySection(item.sectionIndex)}
-                              className={view === "reader" && selectedSectionIndex === item.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
-                              style={SECTION_ITEM_STYLE}
+                              onClick={event => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                goToTableOfContents(serviceText.id);
+                              }}
+                              className={isCurrentServiceText && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)]" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                              style={{
+                                ...SECTION_ITEM_STYLE,
+                                padding: "4px 6px",
+                                color: "inherit",
+                                fontSize: "inherit",
+                                fontWeight: "inherit",
+                                letterSpacing: "inherit",
+                                lineHeight: "inherit",
+                                textTransform: "inherit"
+                              }}
                             >
-                              {item.section.section || `Section ${item.sectionIndex + 1}`}
+                              {serviceText.title}
                             </button>
-                          );
-                        }
-
-                        const isCurrentGroup = item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex);
-                        const detailId = `liturgy:${item.group}`;
-                        return (
-                          <details
-                            className="lp-course-lesson"
-                            key={item.group}
-                            open={isNavDetailOpen(detailId, isCurrentGroup || selectedSectionIndex === null)}
-                            onToggle={event => setNavDetailOpen(detailId, event.currentTarget.open)}
-                          >
-                            <summary className="lp-course-lesson-summary">
-                              {item.group}
-                            </summary>
-                            <div className="lp-course-exercise-list">
-                              {item.sections.map(sectionItem => (
-                                <button
-                                  key={sectionItem.section.section || sectionItem.sectionIndex}
-                                  role="menuitem"
-                                  type="button"
-                                  onClick={() => goToLiturgySection(sectionItem.sectionIndex)}
-                                  className={view === "reader" && selectedSectionIndex === sectionItem.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
-                                  style={SECTION_ITEM_STYLE}
-                                >
-                                  {sectionItem.section.section || `Section ${sectionItem.sectionIndex + 1}`}
-                                </button>
-                              ))}
-                            </div>
-                          </details>
-                        );
-                      })}
-                    </div>
-                  </details>
+                          ) : serviceText.title}
+                        </summary>
+                        <div className="lp-course-exercise-list">
+                          {serviceText.nav_landing_at_root
+                            ? navigation.flatMap(serviceItem => renderReaderNavigationItems(serviceText, serviceItem, isCurrentServiceText))
+                            : navigation.map(serviceItem => {
+                            const serviceHasCurrentSection = isCurrentServiceText && serviceItem.items.some(item => (
+                              item.type === "section"
+                                ? selectedSectionIndex === item.sectionIndex
+                                : item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex)
+                            ));
+                            const serviceDetailId = `liturgy-service:${serviceText.id}:${serviceItem.title}`;
+                            return (
+                              <details
+                                className="lp-course-lesson"
+                                key={serviceItem.title}
+                                open={isNavDetailOpen(serviceDetailId, serviceHasCurrentSection || (isCurrentServiceText && selectedSectionIndex === null))}
+                                onToggle={event => setNavDetailOpen(serviceDetailId, event.currentTarget.open)}
+                              >
+                                <summary className="lp-course-lesson-summary">
+                                  <button
+                                    role="menuitem"
+                                    type="button"
+                                    onClick={event => {
+                                      event.preventDefault();
+                                      event.stopPropagation();
+                                      goToTableOfContents(serviceText.id);
+                                    }}
+                                    className={isCurrentServiceText && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                                    style={{ ...SECTION_ITEM_STYLE, padding: "4px 6px" }}
+                                  >
+                                    {serviceItem.title}
+                                  </button>
+                                </summary>
+                                <div className="lp-course-exercise-list">
+                                  {renderReaderNavigationItems(serviceText, serviceItem, isCurrentServiceText)}
+                                </div>
+                              </details>
+                            );
+                          })}
+                        </div>
+                      </details>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -1041,6 +1233,7 @@ export default function App() {
         {view === "home" && renderHome()}
         {view === "reader" && (
           <ArabicLiturgyReader
+            serviceText={selectedServiceText}
             arabicMode={arabicMode}
             readerLayout={readerLayout}
             showQuietPrayers={showQuietPrayers}
@@ -1056,7 +1249,7 @@ export default function App() {
             nextSectionTitle={nextSectionTitle}
             onPreviousSection={goToPreviousSection}
             onNextSection={goToNextSection}
-            onTableOfContents={goToTableOfContents}
+            onTableOfContents={() => goToTableOfContents(selectedServiceText.id)}
             onSelectSection={goToLiturgySection}
           />
         )}
