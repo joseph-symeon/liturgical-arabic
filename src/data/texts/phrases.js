@@ -3327,6 +3327,26 @@ const phrases = {
       "title"
     ]
   },
+  "homepage-lisan-001": {
+    "arabic": "لِسَان",
+    "translation": "Lisan",
+    "literal": "language, tongue",
+    "tags": [
+      "homepage",
+      "title",
+      "brand"
+    ]
+  },
+  "homepage-al-quddas-001": {
+    "arabic": "القُدَّاس",
+    "translation": "al-Quddas",
+    "literal": "the Liturgy",
+    "tags": [
+      "homepage",
+      "title",
+      "brand"
+    ]
+  },
   "homepage-john-chrysostom-001": {
     "arabic": "لِلْقِدّيسِ يُوحَنّا الذَّهَبِيِّ الفَمِ",
     "translation": "of St John Chrysostom",

@@ -13,6 +13,7 @@ import { getExerciseTitle } from "./components/course/exerciseTitles.js";
 import { getServiceNavigation } from "./utils/serviceNavigation.js";
 import { getArabicText } from "./utils/arabic.js";
 import appIcons from "./assets/icons/index.js";
+import "./App.css";
 
 const NAV_ITEM_STYLE = {
   display: "block",
@@ -86,7 +87,7 @@ const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
 const DEFAULT_LESSON_ID = COURSE_LESSONS[0]?.id ?? lessons[0]?.id ?? null;
 const READER_SERVICE_TEXTS = readerServiceTexts.length > 0 ? readerServiceTexts : [defaultServiceText];
 const DEFAULT_READER_SERVICE_TEXT_ID = defaultServiceTextId;
-const HOME_TITLE_PHRASE_ID = "homepage-liturgical-arabic-001";
+const HOME_TITLE_PHRASE_IDS = ["homepage-lisan-001", "homepage-al-quddas-001"];
 
 function hasMultipleExercises(lesson) {
   return (lesson?.exercises?.length ?? 0) > 1;
@@ -534,7 +535,7 @@ export default function App() {
         : view === "lessons"
           ? selectedLesson?.title
           : view === "home"
-            ? "Liturgical Arabic"
+            ? "Lisan al-Quddas"
             : "";
   const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
   const shouldShowCompactTitle =
@@ -548,12 +549,9 @@ export default function App() {
     || (view === "lessons" && Boolean(selectedLessonWithUnit));
 
   function renderHome() {
-    const homeTitlePhrase = phrases[HOME_TITLE_PHRASE_ID];
+    const homeTitlePhrases = HOME_TITLE_PHRASE_IDS.map(phraseId => phrases[phraseId]).filter(Boolean);
     function getServiceHomeTitle(serviceText) {
-      const englishLines = serviceText.display_title?.english || [];
-      if (englishLines.length > 0) {
-        return englishLines.map(line => line.text).join(" ");
-      }
+      if (serviceText.id === DEFAULT_READER_SERVICE_TEXT_ID) return "The Divine Liturgy of St John Chrysostom";
       return serviceText.short_title || serviceText.title;
     }
 
@@ -561,16 +559,17 @@ export default function App() {
       <main className="app-home-page" dir="ltr">
         <section className="app-home-hero" aria-labelledby="home-title">
           <div className="app-home-title-stack app-home-title-stack-arabic" dir="rtl">
-            {homeTitlePhrase && (
+            {homeTitlePhrases.map((phrase, phraseIndex) => (
               <InteractiveText
-                spokenText={homeTitlePhrase.arabic}
+                key={HOME_TITLE_PHRASE_IDS[phraseIndex]}
+                spokenText={phrase.arabic}
                 speechRate={speechRate}
-                tooltip={<PhraseTooltip phrase={homeTitlePhrase} />}
-                className="app-home-arabic-title"
+                tooltip={<PhraseTooltip phrase={phrase} />}
+                className={phraseIndex === 0 ? "app-home-arabic-title" : "app-home-arabic-subtitle"}
               >
-                {getArabicText(homeTitlePhrase, arabicMode)}
+                {getArabicText(phrase, arabicMode)}
               </InteractiveText>
-            )}
+            ))}
           </div>
           <img
             src={appIcons.homeAltarIcon.src}
@@ -578,7 +577,8 @@ export default function App() {
             className="app-home-icon"
           />
           <div className="app-home-title-stack">
-            <h1 id="home-title" className="app-home-title">Liturgical Arabic</h1>
+            <h1 id="home-title" className="app-home-title">Lisan</h1>
+            <div className="app-home-subtitle">al-Quddas</div>
           </div>
         </section>
 
@@ -593,7 +593,6 @@ export default function App() {
                   onClick={() => goToTableOfContents(serviceText.id)}
                   className="app-home-action"
                 >
-                  <span className="app-home-action-kicker">{serviceText.title}</span>
                   <span className="app-home-action-title">{getServiceHomeTitle(serviceText)}</span>
                 </button>
               ))}
@@ -607,7 +606,6 @@ export default function App() {
                 onClick={goToCourseOverview}
                 className="app-home-action app-home-action-course"
               >
-                <span className="app-home-action-kicker">Course</span>
                 <span className="app-home-action-title">Liturgical Arabic</span>
               </button>
             </section>

@@ -60,6 +60,7 @@ export default function ArabicLiturgyReader({
     isTableOfContents ? PASSAGE_ACTIVITY_TYPES.readListen : getReaderActivity()
   ));
   const selectedSection = isTableOfContents ? null : readerSections[selectedSectionIndex] || readerSections[0];
+  const selectedSectionEyebrow = selectedSection?.section_group || serviceText.title;
   const passage = isTableOfContents
     ? null
     : createServiceSectionPassage({
@@ -376,7 +377,7 @@ export default function ArabicLiturgyReader({
       : h(
           PageHeader,
           {
-            eyebrow: selectedSection.section_group,
+            eyebrow: selectedSectionEyebrow,
             title: selectedSection.section,
             titlePhrase: selectedSection.section_title_phrase,
             arabicMode,
