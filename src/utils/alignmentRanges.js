@@ -24,18 +24,24 @@ function composeSegmentAlignmentRange(alignment, segmentIds) {
   if (!Array.isArray(segmentIds) || segmentIds.length === 0) return null;
 
   const ranges = segmentIds.map(segmentId => getExactAlignmentRange(alignment, [segmentId]));
-  if (ranges.some(range => !range)) return null;
-  const firstBounds = getRangeBounds(ranges[0]);
-  const lastBounds = getRangeBounds(ranges[ranges.length - 1]);
+  return composeAlignmentRanges(segmentIds, ranges);
+}
+
+function composeAlignmentRanges(segmentIds, ranges, serviceRange = null) {
+  const timedRanges = ranges.filter(Boolean);
+  if (timedRanges.length === 0) return null;
+  const firstBounds = getRangeBounds(timedRanges[0]);
+  const lastBounds = getRangeBounds(timedRanges[timedRanges.length - 1]);
 
   return {
+    ...(serviceRange ? { service_range: serviceRange } : {}),
     segment_ids: [...segmentIds],
     start_seconds: firstBounds?.start_seconds,
     end_seconds: lastBounds?.end_seconds,
-    phrase_timings: ranges.flatMap(range => (
+    phrase_timings: timedRanges.flatMap(range => (
       range.phrase_timings?.map(timing => ({ ...timing })) || []
     )),
-    default_playback_rate: ranges.find(range => typeof range.default_playback_rate === "number")?.default_playback_rate
+    default_playback_rate: timedRanges.find(range => typeof range.default_playback_rate === "number")?.default_playback_rate
   };
 }
 
@@ -47,19 +53,33 @@ export function findServiceAlignmentRange(serviceTextId, serviceRange, recording
   const serviceRangeKey = requestedRange ? getServiceRangeKey(serviceText, serviceRange) : '';
   if (!requestedRange || !serviceRangeKey) return null;
 
-  const alignment = Object.values(alignments || {}).find(item => (
+  const candidateAlignments = Object.values(alignments || {}).filter(item => (
     item.service_text_id === serviceTextId
       && (!recordingId || item.recording_id === recordingId)
-      && (item.ranges || []).some(range => {
-        const rangeServiceRange = resolveServiceRange(serviceText, range.service_range);
-        return rangeServiceRange && rangeContains(rangeServiceRange, requestedRange);
-      })
   ));
-  const exactRange = (alignment?.ranges || []).find(item => getServiceRangeKey(serviceText, item.service_range) === serviceRangeKey);
-  if (alignment && exactRange) return { alignment, range: exactRange };
+
+  const exactAlignment = candidateAlignments.find(alignment => (
+    (alignment.ranges || []).some(item => getServiceRangeKey(serviceText, item.service_range) === serviceRangeKey)
+  ));
+  const exactRange = (exactAlignment?.ranges || []).find(item => getServiceRangeKey(serviceText, item.service_range) === serviceRangeKey);
+  if (exactAlignment && exactRange) return { alignment: exactAlignment, range: exactRange };
+
+  const composedAlignment = candidateAlignments.find(alignment => (
+    composeServiceAlignmentRange(alignment, requestedRange, serviceRange, serviceText)
+  ));
+  const composedRange = composedAlignment
+    ? composeServiceAlignmentRange(composedAlignment, requestedRange, serviceRange, serviceText)
+    : null;
+  if (composedAlignment && composedRange) return { alignment: composedAlignment, range: composedRange };
 
   let containingResolvedRange = null;
-  const containingRange = (alignment?.ranges || []).find(item => {
+  const containingAlignment = candidateAlignments.find(alignment => (
+    (alignment.ranges || []).some(item => {
+      const rangeServiceRange = resolveServiceRange(serviceText, item.service_range);
+      return rangeServiceRange && rangeContains(rangeServiceRange, requestedRange);
+    })
+  ));
+  const containingRange = (containingAlignment?.ranges || []).find(item => {
     const rangeServiceRange = resolveServiceRange(serviceText, item.service_range);
     const contains = rangeServiceRange && rangeContains(rangeServiceRange, requestedRange);
     if (contains) containingResolvedRange = rangeServiceRange;
@@ -69,7 +89,23 @@ export function findServiceAlignmentRange(serviceTextId, serviceRange, recording
     ? deriveContainedRange(containingRange, containingResolvedRange, requestedRange, serviceRange)
     : null;
 
-  return alignment && derivedRange ? { alignment, range: derivedRange } : null;
+  return containingAlignment && derivedRange ? { alignment: containingAlignment, range: derivedRange } : null;
+}
+
+function composeServiceAlignmentRange(alignment, requestedRange, serviceRange, serviceText) {
+  const ranges = requestedRange.segment_ids.map((segmentId, segmentOffset) => {
+    const segmentIndex = requestedRange.start.segment_index + segmentOffset;
+    return (alignment.ranges || []).find(range => {
+      const rangeServiceRange = resolveServiceRange(serviceText, range.service_range);
+      return rangeServiceRange
+        && rangeServiceRange.start.section_index === requestedRange.start.section_index
+        && rangeServiceRange.start.segment_index === segmentIndex
+        && rangeServiceRange.end.segment_index === segmentIndex
+        && range.segment_ids?.length === 1
+        && range.segment_ids[0] === segmentId;
+    });
+  });
+  return composeAlignmentRanges(requestedRange.segment_ids, ranges, serviceRange);
 }
 
 function rangeContains(container, requested) {

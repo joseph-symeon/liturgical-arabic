@@ -49,6 +49,7 @@ export default function PassageExperience({
   const [karaokeMode, setKaraokeMode] = useState(getStoredKaraokeMode);
   const [captionTextMode, setCaptionTextMode] = useState(getStoredCaptionTextMode);
   const [currentTime, setCurrentTime] = useState(null);
+  const [playbackActive, setPlaybackActive] = useState(false);
   const playerRef = useRef(null);
   const listenActivity = isReadListenActivity(resolvedActivityType);
   const captionActivity = isPhraseCaptionsActivity(resolvedActivityType);
@@ -60,10 +61,11 @@ export default function PassageExperience({
     primeInitialCaption: captionActivity
   });
   const activePhrase = activeCaption ? phrases[activeCaption.phrase_id] : null;
-  const karaokeActiveCaption = canUseKaraoke && karaokeMode ? activeCaption : null;
+  const karaokeActiveCaption = canUseKaraoke && karaokeMode && playbackActive ? activeCaption : null;
 
   useEffect(() => {
     setCurrentTime(null);
+    setPlaybackActive(false);
   }, [resetKey, passage?.id, resolvedClip?.recording_id, resolvedClip?.video_id, resolvedClip?.start_seconds, resolvedClip?.end_seconds]);
 
   useEffect(() => {
@@ -95,6 +97,7 @@ export default function PassageExperience({
         endSeconds={resolvedClip.end_seconds}
         defaultPlaybackRate={resolvedClip.default_playback_rate}
         onTimeUpdate={shouldTrackPlayerTime ? setCurrentTime : undefined}
+        onPlaybackActiveChange={shouldTrackPlayerTime ? setPlaybackActive : undefined}
       />
     );
   }

@@ -17,7 +17,7 @@ function getStoredPlaybackRate(fallback = 1.0) {
   return normalizePlaybackRate(stored, normalizePlaybackRate(fallback));
 }
 
-const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recordingId, startSeconds, endSeconds, defaultPlaybackRate = 1.0, onTimeUpdate }, ref) {
+const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recordingId, startSeconds, endSeconds, defaultPlaybackRate = 1.0, onTimeUpdate, onPlaybackActiveChange }, ref) {
   const initialPlaybackRate = getStoredPlaybackRate(defaultPlaybackRate);
   const playerIdRef = useRef(null);
   if (playerIdRef.current === null) {
@@ -34,6 +34,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   const playClockRef = useRef({ mediaTime: startSeconds, wallTime: 0, playbackRate: initialPlaybackRate });
   const playRequestedRef = useRef(false);
   const onTimeUpdateRef = useRef(onTimeUpdate);
+  const onPlaybackActiveChangeRef = useRef(onPlaybackActiveChange);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
@@ -48,6 +49,10 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   }, [onTimeUpdate]);
 
   useEffect(() => {
+    onPlaybackActiveChangeRef.current = onPlaybackActiveChange;
+  }, [onPlaybackActiveChange]);
+
+  useEffect(() => {
     if (typeof window === 'undefined') return;
     window.localStorage.setItem(PLAYBACK_RATE_STORAGE_KEY, String(playbackRate));
   }, [playbackRate]);
@@ -55,6 +60,10 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   function emitTimeUpdate(time) {
     setCurrentSeconds(time);
     onTimeUpdateRef.current?.(time);
+  }
+
+  function emitPlaybackActiveChange(active) {
+    onPlaybackActiveChangeRef.current?.(active);
   }
 
   function clearLoopTimers() {
@@ -81,6 +90,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     player.pauseVideo();
     cueClip(player, startSeconds);
     playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+    emitPlaybackActiveChange(false);
     emitTimeUpdate(startSeconds);
   }
 
@@ -90,6 +100,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     playRequestedRef.current = true;
     userStartedRef.current = true;
     playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+    emitPlaybackActiveChange(false);
     emitTimeUpdate(startSeconds);
     player.playVideo();
   }
@@ -136,6 +147,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     setIsPlaying(false);
     setPlayerError(null);
     setCurrentSeconds(startSeconds);
+    emitPlaybackActiveChange(false);
     clearLoopTimers();
 
     if (!videoId) {
@@ -184,6 +196,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
                 }
                 setIsPlaying(false);
                 clearLoopTimers();
+                emitPlaybackActiveChange(false);
                 return;
               }
               if (state === PlayerState.PLAYING || state === PlayerState.BUFFERING) {
@@ -192,16 +205,19 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
                   cueClip(event.target, startSeconds);
                   playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
                   setIsPlaying(false);
+                  emitPlaybackActiveChange(false);
                   return;
                 }
                 setIsPlaying(true);
                 if (state === PlayerState.PLAYING) {
+                  emitPlaybackActiveChange(true);
                   startLoop(event.target);
                 }
               }
               if (state === PlayerState.PAUSED) {
                 setIsPlaying(false);
                 clearLoopTimers();
+                emitPlaybackActiveChange(false);
               }
             }
           }
@@ -215,6 +231,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
       destroyed = true;
       userStartedRef.current = false;
       playRequestedRef.current = false;
+      emitPlaybackActiveChange(false);
       clearLoopTimers();
       if (playerRef.current) {
         try { playerRef.current.pauseVideo(); } catch (_) {}
@@ -243,6 +260,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     const state = player.getPlayerState();
     if (state === window.YT.PlayerState.PLAYING) {
       playRequestedRef.current = false;
+      emitPlaybackActiveChange(false);
       player.pauseVideo();
     } else {
       const currentTime = player.getCurrentTime();
@@ -251,9 +269,11 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
       if (currentTime < startSeconds || currentTime >= endSeconds) {
         loadClip(player, startSeconds);
         playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+        emitPlaybackActiveChange(false);
         emitTimeUpdate(startSeconds);
       } else {
         playClockRef.current = { mediaTime: currentTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+        emitPlaybackActiveChange(false);
         emitTimeUpdate(currentTime);
         player.playVideo();
         startLoop(player, currentTime);
@@ -278,6 +298,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
       cueClip(player, startSeconds);
     }
     playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+    emitPlaybackActiveChange(false);
     emitTimeUpdate(startSeconds);
   }
 
@@ -292,6 +313,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     playClockRef.current = { mediaTime: nextTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
     emitTimeUpdate(nextTime);
     if (shouldResume) {
+      emitPlaybackActiveChange(false);
       startLoop(player);
     }
   }

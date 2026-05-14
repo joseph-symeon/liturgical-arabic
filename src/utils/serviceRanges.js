@@ -1,9 +1,12 @@
 export function getIndexedServiceRangeKey(range) {
-  if (range?.section_id && range?.start_segment_id && range?.end_segment_id) {
-    return `${range.section_id}:${range.start_segment_id}-${range.end_segment_id}`;
+  if (range?.start && range?.end) {
+    return `${range.start.section_index}:${range.start.segment_index}-${range.end.section_index}:${range.end.segment_index}`;
   }
-  if (!range?.start || !range?.end) return '';
-  return `${range.start.section_index}:${range.start.segment_index}-${range.end.section_index}:${range.end.segment_index}`;
+  if (!range?.section_id || !range?.start_segment_id || !range?.end_segment_id) return '';
+  const occurrenceSuffix = Number.isInteger(range.occurrence_index)
+    ? `:${range.occurrence_index}`
+    : '';
+  return `${range.section_id}:${range.start_segment_id}-${range.end_segment_id}${occurrenceSuffix}`;
 }
 
 function findSectionIndexById(serviceText, sectionId) {
@@ -18,8 +21,33 @@ export function resolveServiceRange(serviceText, range) {
     const sectionIndex = findSectionIndexById(serviceText, range.section_id);
     const section = serviceText.sections?.[sectionIndex];
     const ids = section?.segment_ids || [];
-    const startIndex = ids.indexOf(range.start_segment_id);
-    const endIndex = ids.indexOf(range.end_segment_id);
+    const occurrenceIndex = range.occurrence_index ?? 0;
+    let currentOccurrence = 0;
+    let startIndex = -1;
+    let endIndex = -1;
+
+    for (let candidateStart = 0; candidateStart < ids.length; candidateStart += 1) {
+      if (ids[candidateStart] !== range.start_segment_id) continue;
+      if (range.start_segment_id === range.end_segment_id) {
+        if (currentOccurrence === occurrenceIndex) {
+          startIndex = candidateStart;
+          endIndex = candidateStart;
+          break;
+        }
+        currentOccurrence += 1;
+        continue;
+      }
+      for (let candidateEnd = candidateStart; candidateEnd < ids.length; candidateEnd += 1) {
+        if (ids[candidateEnd] !== range.end_segment_id) continue;
+        if (currentOccurrence === occurrenceIndex) {
+          startIndex = candidateStart;
+          endIndex = candidateEnd;
+          break;
+        }
+        currentOccurrence += 1;
+      }
+      if (startIndex >= 0) break;
+    }
 
     if (
       sectionIndex < 0

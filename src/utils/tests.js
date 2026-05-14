@@ -68,7 +68,7 @@ export function runTests() {
     "Second Antiphon playback should include aligned audio ranges."
   );
   console.assert(
-    secondAntiphonPlayback.timed_segments["antiphon-glorified-with-father@second-antiphon:antiphon-glorified-with-father-antiphon-glorified-with-father"]?.end_seconds === 218.22,
+    secondAntiphonPlayback.timed_segments["antiphon-glorified-with-father@5:14-5:14"]?.end_seconds === 218.22,
     "Second Antiphon playback should expose timed service segments."
   );
   console.assert(readerSections[0].section === "The Preparation for the Divine Liturgy", "First reader section should be titled The Preparation for the Divine Liturgy.");
