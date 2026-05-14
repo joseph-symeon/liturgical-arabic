@@ -4,6 +4,7 @@ import basilLandingIconSrc from "./basil-landing-icon.png";
 import davidPsalterIconSrc from "./david-psalter-icon.png";
 import homeAltarIconSrc from "./home-altar-icon.png";
 import psalterStarIconSrc from "./psalter-star-icon.png";
+import thanksgivingPrayersIconSrc from "./thanksgiving-prayers-icon.png";
 
 const appIcons = {
   chrysostom: {
@@ -35,6 +36,11 @@ const appIcons = {
     id: "psalter-star-icon",
     title: "Psalter star icon",
     src: psalterStarIconSrc
+  },
+  thanksgivingPrayersIcon: {
+    id: "thanksgiving-prayers-icon",
+    title: "Thanksgiving Prayers icon",
+    src: thanksgivingPrayersIconSrc
   }
 };
 

@@ -1514,6 +1514,142 @@ export const serviceTextDefinitions = [
     ]
   },
   {
+    "id": "thanksgiving-prayers",
+    "title": "Various Prayers",
+    "short_title": "Thanksgiving Prayers",
+    "show_in_reader_nav": true,
+    "nav_landing_at_root": true,
+    "display_title": {
+      "english": [
+        {
+          "text": "Thanksgiving Prayers"
+        },
+        {
+          "text": "after Holy Communion",
+          "tone": "red"
+        }
+      ],
+      "arabic_phrase_ids": [
+        "homepage-thanksgiving-prayers-001",
+        "homepage-after-holy-communion-001"
+      ],
+      "icon": "thanksgivingPrayersIcon",
+      "icon_max_height": 300
+    },
+    "tradition": "antiochian",
+    "language": "ar",
+    "sections": [
+      {
+        "section_id": "thanksgiving-first-prayer",
+        "section": "First Prayer",
+        "section_title_phrase": "section-thanksgiving-first-prayer",
+        "source_manifest_hint": "261-after-holy-communion;262-thanksgiving-prayers-after-holy-communion",
+        "segment_ids": [
+          "thanksgiving-first-prayer-glory",
+          "thanksgiving-first-prayer-author",
+          "thanksgiving-first-prayer"
+        ]
+      },
+      {
+        "section_id": "thanksgiving-second-prayer",
+        "section": "Second Prayer",
+        "section_title_phrase": "section-thanksgiving-second-prayer",
+        "source_manifest_hint": "262-thanksgiving-prayers-after-holy-communion;263-saint-basil-the-great;264-o-master-christ-our-god-king-of-the",
+        "segment_ids": [
+          "thanksgiving-second-prayer-author",
+          "thanksgiving-second-prayer"
+        ]
+      },
+      {
+        "section_id": "thanksgiving-third-prayer",
+        "section": "Third Prayer",
+        "section_title_phrase": "section-thanksgiving-third-prayer",
+        "source_manifest_hint": "265-thanksgiving-prayers-after-holy-communion-ps;266-saint-symeon-the-translator-8",
+        "segment_ids": [
+          "thanksgiving-third-prayer-author",
+          "thanksgiving-third-prayer"
+        ]
+      },
+      {
+        "section_id": "thanksgiving-fourth-prayer",
+        "section": "Fourth Prayer",
+        "section_title_phrase": "section-thanksgiving-fourth-prayer",
+        "source_manifest_hint": "267-thanksgiving-prayers-after-holy-communion;268-may-thy-holy-body-o-lord-jesus-christ-our",
+        "segment_ids": [
+          "thanksgiving-fourth-prayer-author",
+          "thanksgiving-fourth-prayer"
+        ]
+      },
+      {
+        "section_id": "thanksgiving-fifth-prayer",
+        "section": "Fifth Prayer",
+        "section_title_phrase": "section-thanksgiving-fifth-prayer",
+        "source_manifest_hint": "269-the-most-holy-theotokos;270-thanksgiving-prayers-after-holy-communion",
+        "segment_ids": [
+          "thanksgiving-fifth-prayer-author",
+          "thanksgiving-fifth-prayer"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "departed-trisagion-prayers",
+    "title": "Various Prayers",
+    "short_title": "Trisagion Prayers for the Departed",
+    "show_in_reader_nav": true,
+    "nav_single_section_direct": true,
+    "display_title": {
+      "english": [
+        {
+          "text": "The Trisagion Prayers"
+        },
+        {
+          "text": "for the Departed",
+          "tone": "red"
+        }
+      ],
+      "arabic_phrase_ids": [
+        "homepage-departed-trisagion-001",
+        "homepage-for-departed-001"
+      ],
+      "icon": "homeAltarIcon",
+      "icon_max_height": 300
+    },
+    "tradition": "antiochian",
+    "language": "ar",
+    "sections": [
+      {
+        "section_id": "departed-trisagion",
+        "section": "The Trisagion Prayers for the Departed",
+        "section_title_phrase": "section-departed-trisagion",
+        "source_manifest_hint": "271-the-trisagion-prayers-for-the-departed;272-glory-to-the-father-and-to-the-son-and-to-the;273-4-the-trisagion-prayers-for-the-departed;274-the-trisagion-prayers-for-the-departed;275-n-nn-o-christ-our-god",
+        "segment_ids": [
+          "departed-trisagion-troparia-rubric",
+          "departed-trisagion-troparion-savior",
+          "departed-trisagion-troparion-rest",
+          "departed-trisagion-glory",
+          "departed-trisagion-troparion-hades",
+          "departed-trisagion-both-now",
+          "departed-trisagion-theotokos",
+          "departed-trisagion-censer-rubric",
+          "departed-trisagion-deacon-mercy",
+          "departed-trisagion-choir-lord-have-mercy-thrice",
+          "departed-trisagion-deacon-again",
+          "departed-trisagion-choir-lord-have-mercy-thrice",
+          "departed-trisagion-deacon-establish",
+          "departed-trisagion-choir-lord-have-mercy-thrice",
+          "departed-trisagion-deacon-mercies",
+          "departed-trisagion-choir-grant-this",
+          "departed-trisagion-deacon-let-us-pray",
+          "departed-trisagion-choir-lord-have-mercy",
+          "departed-trisagion-priest-prayer",
+          "departed-trisagion-choir-amen",
+          "departed-trisagion-memory-eternal"
+        ]
+      }
+    ]
+  },
+  {
     "id": "great-compline",
     "title": "Great Compline",
     "short_title": "Great Compline",

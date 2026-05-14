@@ -912,6 +912,20 @@ export default function App() {
           : item.sections.some(sectionItem => selectedSectionIndex === sectionItem.sectionIndex)
       ));
       const serviceDetailId = `liturgy-service:${serviceText.id}:${serviceItem.title}`;
+      if (serviceText.nav_single_section_direct && serviceText.sections.length === 1) {
+        return (
+          <button
+            key={serviceItem.title}
+            role="menuitem"
+            type="button"
+            onClick={() => goToLiturgySection(0, serviceText.id)}
+            className={isCurrentServiceText ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+            style={SECTION_ITEM_STYLE}
+          >
+            {serviceItem.title}
+          </button>
+        );
+      }
       const serviceButton = (
         <button
           role="menuitem"
@@ -961,6 +975,28 @@ export default function App() {
     if (group.services.length === 1) {
       const { serviceText, navigation } = group.services[0];
       const isCurrentServiceText = view === "reader" && selectedServiceText.id === serviceText.id;
+      if (serviceText.nav_single_section_direct && serviceText.sections.length === 1) {
+        return (
+          <button
+            key={serviceText.id}
+            role="menuitem"
+            type="button"
+            onClick={() => goToLiturgySection(0, serviceText.id)}
+            className={isCurrentServiceText ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+            style={{
+              ...SECTION_ITEM_STYLE,
+              color: "inherit",
+              fontSize: "12px",
+              fontWeight: 600,
+              letterSpacing: "0.08em",
+              lineHeight: 1.3,
+              textTransform: "uppercase"
+            }}
+          >
+            {serviceText.title}
+          </button>
+        );
+      }
       return (
         <details
           className="lp-course-lesson"

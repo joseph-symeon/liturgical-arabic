@@ -3394,6 +3394,47 @@ const phrases = {
       "title"
     ]
   },
+  "homepage-thanksgiving-prayers-001": {
+    "arabic": "صَلاةُ الشُّكْرِ",
+    "translation": "Thanksgiving Prayers",
+    "literal": "Prayer of thanksgiving",
+    "tags": [
+      "homepage",
+      "title",
+      "thanksgiving"
+    ]
+  },
+  "homepage-after-holy-communion-001": {
+    "arabic": "بَعْدَ المُنَاوَلَةِ المُقَدَّسَة",
+    "translation": "after Holy Communion",
+    "literal": "after the holy communion",
+    "tags": [
+      "communion",
+      "homepage",
+      "title",
+      "thanksgiving"
+    ]
+  },
+  "homepage-departed-trisagion-001": {
+    "arabic": "صَلاةُ التِّرِيصاجِيُون",
+    "translation": "The Trisagion Prayers",
+    "literal": "Prayer of the Trisagion",
+    "tags": [
+      "departed",
+      "homepage",
+      "title"
+    ]
+  },
+  "homepage-for-departed-001": {
+    "arabic": "لِلرَّاقِدِينَ",
+    "translation": "for the Departed",
+    "literal": "for the departed",
+    "tags": [
+      "departed",
+      "homepage",
+      "title"
+    ]
+  },
   "section-liturgy-faithful": {
     "arabic": "قُدَّاسُ المُؤْمِنِينَ",
     "translation": "Liturgy of the Faithful",
@@ -14086,6 +14127,1745 @@ const phrases = {
     "tags": [
       "dismissal",
       "section: The Dismissal"
+    ]
+  },
+  "section-thanksgiving-first-prayer": {
+    "arabic": "الإِفْشِينُ الأَوَّلُ",
+    "translation": "First Prayer",
+    "literal": "The first prayer",
+    "tags": [
+      "section-title",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-after-communion-glory-001": {
+    "arabic": "المَجْدُ لَكَ يا الله",
+    "translation": "Glory to thee, O God",
+    "literal": "glory to you, O God",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-after-communion-thrice-001": {
+    "arabic": "(ثَلاثاً)",
+    "translation": "(thrice)",
+    "literal": "(three times)",
+    "tags": [
+      "rubric",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-prayer-author-001": {
+    "arabic": "(مَجْهُولُ الكَاتِب)",
+    "translation": "(Anonymous)",
+    "literal": "(unknown writer)",
+    "tags": [
+      "rubric",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-thank-lord-001": {
+    "arabic": "أَشْكُرُكَ أَيُّها الرَّبُّ إِلَهِي",
+    "translation": "I thank thee, O Lord my God",
+    "literal": "I thank you, O Lord my God",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-not-rejected-001": {
+    "arabic": "لأَنَّكَ لَمْ تُقْصِني أَنا الخاطِئ",
+    "translation": "that thou hast not rejected me, a sinner",
+    "literal": "because you did not exclude me, I the sinner",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-made-communicant-001": {
+    "arabic": "بَلْ أَهَّلْتَني لأَنْ أَصيرَ شَرِيكاً لِقُدْساتِكَ",
+    "translation": "but hast vouchsafed me to become a communicant of thy holy things",
+    "literal": "but you made me worthy to become a sharer of your holy things",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-thank-worthy-001": {
+    "arabic": "أَشْكُرُكَ لأَنَّكَ أَهَّلْتَني",
+    "translation": "I thank thee that thou hast vouchsafed me",
+    "literal": "I thank you because you made me worthy",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-unworthy-001": {
+    "arabic": "أَنا غَيْرَ المُسْتَحِقّ",
+    "translation": "the unworthy",
+    "literal": "I, the unworthy",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-partake-gifts-001": {
+    "arabic": "لِتَناوُلِ قَرابِينِكَ الطّاهِرَةِ السَّماوِيَّةِ",
+    "translation": "to partake of thine immaculate and heavenly gifts",
+    "literal": "to partake of your pure heavenly offerings",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-master-lover-001": {
+    "arabic": "فَيا أَيُّها السَّيِّدُ المُحِبُّ البَشَرِ",
+    "translation": "But, O Master who lovest mankind",
+    "literal": "so, O Master lover of mankind",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-died-risen-001": {
+    "arabic": "الَّذي ماتَ مِنْ أَجْلِنا وَقام",
+    "translation": "who didst both die for us and rise again",
+    "literal": "who died for us and rose",
+    "tags": [
+      "christ",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-gave-mysteries-001": {
+    "arabic": "ومَنَحَنا أَسْرارَهُ المَرْهُوبَةَ المُحْيِيَةَ هذِهِ",
+    "translation": "and didst bestow upon us these thy dread and life-giving mysteries",
+    "literal": "and granted us these dread life-giving mysteries",
+    "tags": [
+      "communion",
+      "mystery",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-benefit-sanctification-001": {
+    "arabic": "إِحْساناً وتَقْدِيساً لِنُفُوسِنا وأَجْسادِنا",
+    "translation": "for the benefit and sanctification of our souls and bodies",
+    "literal": "as benefaction and sanctification for our souls and bodies",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-grant-healing-001": {
+    "arabic": "هَبْ أَنْ تَكُونَ هِيَ لي أَنا أَيْضاً لِشِفاءِ النَّفْسِ والجَسَدِ",
+    "translation": "Grant that they may be for me also unto healing of soul and body",
+    "literal": "grant that they may be for me also for healing of soul and body",
+    "tags": [
+      "healing",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-avert-adverse-001": {
+    "arabic": "ولِدَحْضِ كُلِّ مُضادٍّ",
+    "translation": "unto the averting of everything contrary thereto",
+    "literal": "and for the refuting of every opposing thing",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-enlighten-heart-001": {
+    "arabic": "ولِإِنارَةِ عَيْنَيْ قَلْبي",
+    "translation": "unto the enlightenment of the eyes of my heart",
+    "literal": "and for the illumination of the eyes of my heart",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-peace-powers-001": {
+    "arabic": "وسَلامَةِ قُوايَ النَّفْسِيَّةِ",
+    "translation": "unto the peace of my spiritual powers",
+    "literal": "and the peace of my psychic powers",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-faith-unashamed-001": {
+    "arabic": "ولِإِيمانٍ غَيْرِ مَخْذُولٍ",
+    "translation": "unto faith unashamed",
+    "literal": "and for faith not put to shame",
+    "tags": [
+      "faith",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-love-unfeigned-001": {
+    "arabic": "ولِمَحَبَّةٍ بِلا رِياءٍ",
+    "translation": "unto love unfeigned",
+    "literal": "and for love without hypocrisy",
+    "tags": [
+      "love",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-wisdom-001": {
+    "arabic": "ولِلامْتِلاءِ مِنَ الحِكْمَةِ",
+    "translation": "unto increase of wisdom",
+    "literal": "and for being filled with wisdom",
+    "tags": [
+      "wisdom",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-commandments-001": {
+    "arabic": "والاقْتِناءِ وَصاياكَ",
+    "translation": "unto the keeping of thy commandments",
+    "literal": "and the acquiring of your commandments",
+    "tags": [
+      "commandments",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-increase-grace-001": {
+    "arabic": "ولازْدِيادِ نِعْمَتِكَ الإِلَهِيَّةِ",
+    "translation": "unto growth in thy divine grace",
+    "literal": "and for the increase of your divine grace",
+    "tags": [
+      "grace",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-kingdom-001": {
+    "arabic": "والتَّأَهُّلِ لِمَلَكُوتِكَ",
+    "translation": "and the attainment of thy kingdom",
+    "literal": "and being made worthy of your kingdom",
+    "tags": [
+      "kingdom",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-preserved-holiness-001": {
+    "arabic": "حَتَّى إِذا بَقِيتُ مَحْفُوظاً بِها في تَقْدِيسِكَ",
+    "translation": "that, preserved by them in thy holiness",
+    "literal": "so that if I remain preserved by them in your sanctification",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-remember-grace-001": {
+    "arabic": "أَذْكُرُ نِعْمَتَكَ عَلَى الدَّوامِ",
+    "translation": "I may ever remember thy grace",
+    "literal": "I remember your grace always",
+    "tags": [
+      "grace",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-not-self-001": {
+    "arabic": "ولا أَعيشُ بَعْدَ الآنَ لِذاتي",
+    "translation": "and henceforth live not unto myself",
+    "literal": "and I no longer live now for myself",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-for-thee-001": {
+    "arabic": "بَلْ لَكَ يا سَيِّدي والمُحْسِنُ إِلَيَّ",
+    "translation": "but unto thee, our Master and Benefactor",
+    "literal": "but for you, my Master and benefactor to me",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-depart-world-001": {
+    "arabic": "فَإِذا ما انْصَرَفْتُ مِنْ هذَا العالَمِ في هذِهِ الحالِ",
+    "translation": "And thus, when this life is ended",
+    "literal": "so when I depart from this world in this state",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-hope-life-001": {
+    "arabic": "عَلَى رَجاءِ الحَياةِ الأَبَدِيَّةِ",
+    "translation": "in the hope of eternal life",
+    "literal": "upon the hope of eternal life",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-attain-rest-001": {
+    "arabic": "أَصِلُ إِلَى الرّاحَةِ السَّرْمَدِيَّةِ",
+    "translation": "I may attain unto everlasting rest",
+    "literal": "I arrive at the everlasting rest",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-festal-sound-001": {
+    "arabic": "حَيْثُ لَحْنُ المُعَيِّدِينَ الَّذي لا يَتَقَطَّع",
+    "translation": "where the sound of those who keep festival is unceasing",
+    "literal": "where the melody of those keeping feast does not cease",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-delight-beholding-001": {
+    "arabic": "واسْتِمْرارُ لَذَّةِ المُشاهِدِينَ جَمالَ وَجْهِكَ الَّذي لا يُوصَف",
+    "translation": "and the delight of those who behold the ineffable beauty of thy countenance is boundless",
+    "literal": "and the continuation of the delight of those beholding the beauty of your indescribable face",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-true-desire-001": {
+    "arabic": "لأَنَّكَ أَنْتَ هُوَ المُشْتَهَى بِالحَقيقَة",
+    "translation": "for thou art the true Desire",
+    "literal": "for you are the desired one in truth",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-joy-lovers-001": {
+    "arabic": "وسُرُورُ مُحِبِّيكَ الَّذي لا يُوصَف",
+    "translation": "and unutterable Joy of those who love thee",
+    "literal": "and the joy of your lovers which cannot be described",
+    "tags": [
+      "love",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-christ-god-001": {
+    "arabic": "أَيُّها المَسيحُ إِلَهُنا",
+    "translation": "O Christ our God",
+    "literal": "O Christ our God",
+    "tags": [
+      "christ",
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "thanksgiving-first-creation-hymns-001": {
+    "arabic": "وإِيّاكَ تُسَبِّحُ كُلُّ الخَليقَةِ مَدَى الدُّهُورِ",
+    "translation": "and all creation hymneth thee forever",
+    "literal": "and you all creation praises unto the ages",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: First Prayer"
+    ]
+  },
+  "section-thanksgiving-second-prayer": {
+    "arabic": "الإِفْشِينُ الثَّانِي",
+    "translation": "Second Prayer",
+    "literal": "The second prayer",
+    "tags": [
+      "section-title",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-prayer-author-001": {
+    "arabic": "(لِلْقِدِّيسِ باسِيلْيُوسَ الكَبِيرِ)",
+    "translation": "(Saint Basil the Great)",
+    "literal": "(of Saint Basil the Great)",
+    "tags": [
+      "rubric",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-master-christ-001": {
+    "arabic": "أَيُّها السَّيِّدُ المَسِيحُ الإِلَهُ",
+    "translation": "O Master, Christ our God",
+    "literal": "O Master, Christ the God",
+    "tags": [
+      "christ",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-king-creator-001": {
+    "arabic": "مَلِكُ الدُّهُورِ وَخالِقُ الكُلِّ",
+    "translation": "King of the ages and Maker of all things",
+    "literal": "King of the ages and creator of all",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-thank-good-things-001": {
+    "arabic": "أَشْكُرُكَ عَلَى كُلِّ الخَيْراتِ",
+    "translation": "I thank thee for all the good things",
+    "literal": "I thank you for all the good things",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-bestowed-partaking-001": {
+    "arabic": "الَّتي مَنَحْتَني إِيّاها وَعَلَى تَناوُلِ",
+    "translation": "which thou hast bestowed upon me and for this partaking of",
+    "literal": "which you granted me and for the partaking of",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-mysteries-001": {
+    "arabic": "أَسْرارِكَ الطّاهِرَةِ المُحْيِيَةِ",
+    "translation": "thine immaculate and life-giving mysteries",
+    "literal": "your pure life-giving mysteries",
+    "tags": [
+      "communion",
+      "mystery",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-pray-good-lover-001": {
+    "arabic": "فَأَتَضَرَّعُ إِلَيْكَ أَيُّها الصّالِحُ المُحِبُّ البَشَرَ",
+    "translation": "Wherefore I pray thee, who art good and lovest mankind",
+    "literal": "so I entreat you, O Good One who loves mankind",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-keep-protection-001": {
+    "arabic": "أَنْ تَحْفَظَني تَحْتَ كَنَفِكَ",
+    "translation": "Keep me under thy protection",
+    "literal": "that you keep me under your protection",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-shadow-wings-001": {
+    "arabic": "وَفي ظِلِّ جَناحَيْكَ",
+    "translation": "and in the shadow of thy wings",
+    "literal": "and in the shadow of your wings",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-pure-conscience-001": {
+    "arabic": "وَامْنَحْني أَنْ أَتَناوَلَ قُدْساتِكَ بِضَميرٍ نَقِيٍّ",
+    "translation": "and grant unto me with a pure conscience to partake of thy holy things",
+    "literal": "and grant me to partake of your holy things with a pure conscience",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-last-breath-001": {
+    "arabic": "حَتَّى آخِرِ نَسَمَةٍ مِنْ حَياتِي",
+    "translation": "even unto my last breath",
+    "literal": "until the last breath of my life",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-worthily-remission-001": {
+    "arabic": "عَنْ اسْتِحْقاقٍ لِغُفْرانِ الخَطايا",
+    "translation": "unto remission of sins",
+    "literal": "worthily for the forgiveness of sins",
+    "tags": [
+      "forgiveness",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-life-everlasting-001": {
+    "arabic": "ولِلحَياةِ الأَبَدِيَّةِ",
+    "translation": "and unto life everlasting",
+    "literal": "and for eternal life",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-bread-life-001": {
+    "arabic": "لأَنَّكَ أَنْتَ هُوَ خُبْزُ الحَياةِ",
+    "translation": "For thou art the Bread of life",
+    "literal": "for you are the bread of life",
+    "tags": [
+      "christ",
+      "communion",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-fount-holiness-001": {
+    "arabic": "وَيَنْبُوعُ التَّقْدِيسِ",
+    "translation": "the Fountain of holiness",
+    "literal": "and the fountain of sanctification",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-giver-good-things-001": {
+    "arabic": "وَالمانِحُ الخَيْراتِ",
+    "translation": "the Giver of good things",
+    "literal": "and the giver of good things",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-ascribe-glory-001": {
+    "arabic": "وَإِلَيْكَ نَرْفَعُ المَجْدَ",
+    "translation": "and unto thee we ascribe glory",
+    "literal": "and to you we raise glory",
+    "tags": [
+      "doxology",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-with-father-spirit-001": {
+    "arabic": "مَعَ أَبِيكَ وَالرُّوحِ القُدُسِ",
+    "translation": "together with the Father and the Holy Spirit",
+    "literal": "with your Father and the Holy Spirit",
+    "tags": [
+      "doxology",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "thanksgiving-second-now-ever-001": {
+    "arabic": "الآنَ وَكُلَّ أَوانٍ وَإلى دَهْرِ الدَّاهِرِينَ",
+    "translation": "now and ever, and unto ages of ages",
+    "literal": "now and at every time and unto the age of ages",
+    "tags": [
+      "doxology",
+      "thanksgiving-prayers",
+      "section: Second Prayer"
+    ]
+  },
+  "section-thanksgiving-third-prayer": {
+    "arabic": "الإِفْشِينُ الثَّالِث",
+    "translation": "Third Prayer",
+    "literal": "The third prayer",
+    "tags": [
+      "section-title",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-prayer-author-001": {
+    "arabic": "(لِلْقِدِّيسِ سِمْعانَ المُتَرْجِمِ)",
+    "translation": "(Saint Symeon the Translator)",
+    "literal": "(of Saint Symeon the Translator)",
+    "tags": [
+      "rubric",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-gives-flesh-001": {
+    "arabic": "يا مَنْ أَعْطى جَسَدَهُ بِاخْتِيارِهِ غِذاءً لِي",
+    "translation": "O thou who willingly dost give thy flesh to me as food",
+    "literal": "O you who gave his body by his choice as food for me",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-fire-unworthy-001": {
+    "arabic": "يا مَنْ هُوَ نارٌ تُحْرِقُ غَيْرَ المُسْتَحِقِّين",
+    "translation": "thou who art a fire consuming the unworthy",
+    "literal": "O you who are a fire burning the unworthy",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-do-not-burn-001": {
+    "arabic": "لا تُحْرِقْنِي يا جابِلي",
+    "translation": "Consume me not, O my Creator",
+    "literal": "do not burn me, O my fashioner",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-pass-through-001": {
+    "arabic": "بَلِ اعْبُرْ مُتَخَلِّلاً مَفاصِلَ أَعْضائِي",
+    "translation": "but rather pass through the right ordering of my members",
+    "literal": "but pass penetrating the joints of my members",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-members-heart-001": {
+    "arabic": "وَجَميعَ أَوْصالِي وَكُلْيَتَيَّ وَقَلْبي",
+    "translation": "into all my joints, my reins, my heart",
+    "literal": "and all my connections, my kidneys, and my heart",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-burn-thorns-001": {
+    "arabic": "أَحْرِقْ أَشْواكَ زَلّاتِي كُلَّها",
+    "translation": "Burn thou the thorns of all my transgressions",
+    "literal": "burn the thorns of all my slips",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-cleanse-soul-001": {
+    "arabic": "طَهِّرْ نَفْسِي",
+    "translation": "Cleanse my soul",
+    "literal": "purify my soul",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-sanctify-mind-001": {
+    "arabic": "وَقَدِّسْ ذِهْنِي",
+    "translation": "and hallow thou my thoughts",
+    "literal": "and sanctify my mind",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-strengthen-bones-001": {
+    "arabic": "وَشَدِّدْ أَعْصابِي وَعِظامِي",
+    "translation": "Make firm my knees and my bones likewise",
+    "literal": "and strengthen my sinews and my bones",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-enlighten-senses-001": {
+    "arabic": "وَأَنِرْ حَواسَّ نَفْسِي الخَمْسِ",
+    "translation": "Enlighten as one my five senses",
+    "literal": "and enlighten the five senses of my soul",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-nail-fear-001": {
+    "arabic": "وَسَمِّرْ خَوْفَكَ فِيَّ",
+    "translation": "Nail down the whole of me in thy fear",
+    "literal": "and nail your fear in me",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-shelter-always-001": {
+    "arabic": "اسْتُرْنِي دائِماً",
+    "translation": "Ever shelter me",
+    "literal": "cover me always",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-guard-keep-001": {
+    "arabic": "وَاحْرُسْنِي وَاحْفَظْنِي",
+    "translation": "guard and keep me",
+    "literal": "guard me and preserve me",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-soul-corrupting-001": {
+    "arabic": "مِنْ كُلِّ فِعْلٍ وَقَوْلٍ مُضِرٍّ لِلنَّفْسِ",
+    "translation": "from every soul-corrupting deed and word",
+    "literal": "from every deed and word harmful to the soul",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-cleanse-purify-001": {
+    "arabic": "نَقِّنِي وَطَهِّرْنِي",
+    "translation": "Cleanse, purify",
+    "literal": "purify me and cleanse me",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-correct-walk-001": {
+    "arabic": "وَأَصْلِحْ سُلُوكِي",
+    "translation": "and rule me",
+    "literal": "and make right my conduct",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-adorn-teach-enlighten-001": {
+    "arabic": "زَيِّنِّي وَفَقِّهْنِي وَأَنِرْنِي",
+    "translation": "Adorn me, teach and enlighten me",
+    "literal": "adorn me, instruct me, and enlighten me",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-dwelling-spirit-001": {
+    "arabic": "وَأَظْهِرْنِي مَسْكِناً لِرُوحِكَ فَقَط",
+    "translation": "Show me to be a dwelling-place of thy Spirit alone",
+    "literal": "and show me as a dwelling for your Spirit only",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-not-dwelling-sin-001": {
+    "arabic": "فَلا أَكُونُ مَسْكَناً لِلْخَطِيئَةِ فِيما بَعْد",
+    "translation": "and in no wise the dwelling-place of sin",
+    "literal": "so that I may not be a dwelling for sin afterward",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-house-for-thee-001": {
+    "arabic": "حَتَّى إذا صِرْتُ بَيْتاً لَكَ",
+    "translation": "that from me, thy habitation",
+    "literal": "so that when I become a house for you",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-entry-communion-001": {
+    "arabic": "بِدُخُولِي في شِرْكَتِكَ",
+    "translation": "through the entrance of thy communion",
+    "literal": "by my entering into your communion",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-evil-flee-001": {
+    "arabic": "يَهْرُبُ مِنِّي كُلُّ شَرٍّ وَكُلُّ هَوًى",
+    "translation": "every evil deed and every passion may flee from me",
+    "literal": "every evil and every passion flees from me",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-as-from-fire-001": {
+    "arabic": "كَما يَهْرُبُ مِنَ النّارِ",
+    "translation": "as from fire",
+    "literal": "as it flees from fire",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-present-intercessors-001": {
+    "arabic": "وَإِنِّي أُقَدِّمُ إِلَيْكَ شُفَعاءَ جَميعِ القِدِّيسِينَ",
+    "translation": "As intercessors I bring to thee all the sanctified",
+    "literal": "and I present to you the intercessors of all the saints",
+    "tags": [
+      "saints",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-bodiless-leaders-001": {
+    "arabic": "وَرُؤَساءَ مَراتِبِ العَدِيمي الأَجْسادِ",
+    "translation": "the leaders of the bodiless powers",
+    "literal": "and the chiefs of the ranks of the bodiless",
+    "tags": [
+      "angels",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-forerunner-apostles-001": {
+    "arabic": "وَسابِقَكَ وَرُسُلَكَ الحُكَماءَ",
+    "translation": "thy Forerunner and thy wise apostles",
+    "literal": "and your Forerunner and your wise apostles",
+    "tags": [
+      "saints",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-pure-mother-001": {
+    "arabic": "مَعَ أُمِّكَ النَّقِيَّةِ الطّاهِرَةِ",
+    "translation": "and, besides these, thine immaculate and pure Mother",
+    "literal": "with your pure immaculate Mother",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-receive-prayers-001": {
+    "arabic": "فَتَقَبَّلْ يا مَسيحِي طِلْباتِهِم",
+    "translation": "Do thou receive their prayers, O my Christ",
+    "literal": "so accept, O my Christ, their requests",
+    "tags": [
+      "christ",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-compassionate-001": {
+    "arabic": "بِما أَنَّكَ مُتَحَنِّنٌ",
+    "translation": "who art compassionate",
+    "literal": "since you are compassionate",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-child-light-001": {
+    "arabic": "وَاجْعَلْنِي أَنا عَبْدَكَ ابْناً لِلنُّور",
+    "translation": "and make thy servant to be a child of the light",
+    "literal": "and make me, I your servant, a son of the light",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-sanctification-001": {
+    "arabic": "لأَنَّكَ أَنْتَ وَحْدَكَ تَقْدِيسُ نُفُوسِنا",
+    "translation": "for thou alone art the Sanctification of our souls",
+    "literal": "for you alone are the sanctification of our souls",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-radiance-001": {
+    "arabic": "وَبَهْجَتُها أَيُّها الصّالِحُ",
+    "translation": "and Radiance of our souls, O good One",
+    "literal": "and their radiance, O Good One",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-ascribe-glory-001": {
+    "arabic": "وَإِلَيْكَ نَرْفَعُ المَجْدَ جَميعاً كُلَّ يَوْمٍ",
+    "translation": "and to thee we all ascribe glory, day by day",
+    "literal": "and to you we all raise glory every day",
+    "tags": [
+      "doxology",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "thanksgiving-third-fitting-master-god-001": {
+    "arabic": "كَما يَليقُ بِكَ كَسَيِّدٍ وَإِلَه",
+    "translation": "as God and Master, as is right",
+    "literal": "as befits you, as Master and God",
+    "tags": [
+      "doxology",
+      "thanksgiving-prayers",
+      "section: Third Prayer"
+    ]
+  },
+  "section-thanksgiving-fourth-prayer": {
+    "arabic": "الإِفْشِينُ الرَّابِع",
+    "translation": "Fourth Prayer",
+    "literal": "The fourth prayer",
+    "tags": [
+      "section-title",
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "thanksgiving-fourth-prayer-author-001": {
+    "arabic": "(مَجْهُولُ الكَاتِب)",
+    "translation": "(Anonymous)",
+    "literal": "(unknown writer)",
+    "tags": [
+      "rubric",
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "thanksgiving-fourth-body-life-001": {
+    "arabic": "أَيُّها الرَّبُّ يَسُوعُ المَسِيحُ إِلَهُنا",
+    "translation": "O Lord Jesus Christ our God",
+    "literal": "O Lord Jesus Christ our God",
+    "tags": [
+      "christ",
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "thanksgiving-fourth-body-life-002": {
+    "arabic": "لِيَصِرْ لِي جَسَدُكَ المُقَدَّسُ لِلْحَياةِ الأَبَدِيَّةِ",
+    "translation": "May thy holy Body be unto me for life eternal",
+    "literal": "may your holy body become for me for eternal life",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "thanksgiving-fourth-blood-remission-001": {
+    "arabic": "وَدَمُكَ الكَرِيمُ لِغُفْرانِ الخَطايا",
+    "translation": "and thy precious Blood unto remission of my sins",
+    "literal": "and your precious blood for the forgiveness of sins",
+    "tags": [
+      "communion",
+      "forgiveness",
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "thanksgiving-fourth-eucharist-joy-001": {
+    "arabic": "وَلْيَكُنْ لِي هذَا القُرْبانُ لِلْفَرَحِ وَالصِّحَّةِ وَالسُّرُورِ",
+    "translation": "May this eucharist be unto me for joy, health and gladness",
+    "literal": "and let this offering be for me for joy and health and gladness",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "thanksgiving-fourth-second-coming-001": {
+    "arabic": "وَأَهِّلْنِي أَنا الخاطِئَ",
+    "translation": "and make me, the sinner, worthy",
+    "literal": "and make me, the sinner, worthy",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "thanksgiving-fourth-right-hand-001": {
+    "arabic": "لأَنْ أَقِفَ عَنْ يَمِينِ مَجْدِكَ",
+    "translation": "to stand at the right hand of thy glory",
+    "literal": "to stand at the right of your glory",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "thanksgiving-fourth-fearful-coming-001": {
+    "arabic": "في مَجِيئِكَ الثَّانِي المَرْهُوبِ",
+    "translation": "at thy fearful second coming",
+    "literal": "in your fearful second coming",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "thanksgiving-fourth-mother-saints-001": {
+    "arabic": "بِشَفاعَةِ والِدَتِكَ الكُلِّيَّةِ الطَّهارَةِ وَجَميعِ القِدِّيسِينَ",
+    "translation": "through the intercessions of thine all-immaculate Mother and of all thy saints",
+    "literal": "by the intercession of your all-pure Mother and all the saints",
+    "tags": [
+      "saints",
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fourth Prayer"
+    ]
+  },
+  "section-thanksgiving-fifth-prayer": {
+    "arabic": "الإِفْشِينُ الخَامِس",
+    "translation": "Fifth Prayer",
+    "literal": "The fifth prayer",
+    "tags": [
+      "section-title",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-prayer-author-001": {
+    "arabic": "(إِلى والِدَةِ الإِلَهِ الكُلِّيَّةِ القَداسَةِ)",
+    "translation": "(To the Most Holy Theotokos)",
+    "literal": "(to the all-holy Mother of God)",
+    "tags": [
+      "rubric",
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-all-holy-lady-001": {
+    "arabic": "أَيَّتُها السَّيِّدَةُ والِدَةُ الإِلَهِ الكُلِّيَّةُ القَداسَةِ",
+    "translation": "O all-holy Lady Theotokos",
+    "literal": "O Lady Mother of God, all-holy",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-light-soul-001": {
+    "arabic": "يا نُورَ نَفْسِي المُظْلِمَةِ",
+    "translation": "light of my darkened soul",
+    "literal": "O light of my darkened soul",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-hope-shelter-001": {
+    "arabic": "وَرَجائِي وَسِتْرِي وَمَلْجَأِي",
+    "translation": "my hope, my shelter, my refuge",
+    "literal": "and my hope, my covering, and my refuge",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-consolation-joy-001": {
+    "arabic": "وَعَزائِي وَبَهْجَتِي",
+    "translation": "my consolation and my joy",
+    "literal": "and my consolation and my gladness",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-thank-worthy-001": {
+    "arabic": "أَشْكُرُكِ لأَنَّكِ أَهَّلْتِنِي",
+    "translation": "I thank thee that thou hast accounted me worthy",
+    "literal": "I thank you because you made me worthy",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-unworthy-partaker-001": {
+    "arabic": "أَنا غَيْرَ المُسْتَحِقِّ",
+    "translation": "although unworthy",
+    "literal": "I, the unworthy",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-partaker-body-blood-001": {
+    "arabic": "لأَنْ أَصِيرَ شَرِيكاً لِجَسَدِ ابْنِكِ الطَّاهِرِ وَدَمِهِ الكَرِيمِ",
+    "translation": "to be a partaker of the immaculate Body and precious Blood of thy Son",
+    "literal": "to become a sharer of the pure body of your Son and his precious blood",
+    "tags": [
+      "communion",
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-bore-light-001": {
+    "arabic": "فَيا مَنْ وَلَدْتِ النُّورَ الحَقِيقِيَّ",
+    "translation": "But do thou, who gavest birth to the true Light",
+    "literal": "so, O you who gave birth to the true Light",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-enlighten-eyes-heart-001": {
+    "arabic": "أَضِيئِي عَيْنَيَّ قَلْبي العَقْلِيَّتَيْن",
+    "translation": "enlighten the spiritual eyes of my heart",
+    "literal": "illumine the two spiritual eyes of my heart",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-bore-fountain-001": {
+    "arabic": "وَيا مَنْ وَسِعَتْ فِي حَشاها يَنْبُوعَ الخُلُودِ",
+    "translation": "O thou who didst bear the Fountain of immortality",
+    "literal": "and O you whose womb contained the fountain of immortality",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-enliven-dead-001": {
+    "arabic": "أَحْيِينِي أَنا المائِتَ بِالخَطِيئَةِ",
+    "translation": "enliven thou me who lie dead in sin",
+    "literal": "give life to me, dead by sin",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-mother-merciful-god-001": {
+    "arabic": "وَيا أُمَّ الإِلَهِ الرَّحِيمِ الوالِدَةَ التَّحَنُّنَ",
+    "translation": "O compassion-loving Mother of the merciful God",
+    "literal": "and O Mother of the merciful God, giver of compassion",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-have-mercy-001": {
+    "arabic": "ارْحَمِينِي وَامْنَحِي قَلْبِي تَخَشُّعاً وَانْسِحاقاً",
+    "translation": "have mercy on me, and grant me compunction and contrition of heart",
+    "literal": "have mercy on me and grant my heart compunction and contrition",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-humble-mind-001": {
+    "arabic": "وَذِهْنِي تَواضُعاً",
+    "translation": "and humility in my thoughts",
+    "literal": "and humility to my mind",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-recall-thoughts-001": {
+    "arabic": "وَأَمَّا أَفْكارِي الهائِمَةَ المَسْبِيَّةَ بِالأَهْواءِ فَاسْتِعادَةً",
+    "translation": "and the recall of my thoughts from captivity",
+    "literal": "and as for my wandering thoughts captive to passions, restoration",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-worthy-without-condemnation-001": {
+    "arabic": "وَأَهِّلِينِي لأَنْ أَقْبَلَ بِلا دَيْنُونَةٍ",
+    "translation": "And account me worthy to receive without condemnation",
+    "literal": "and make me worthy to receive without condemnation",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-last-breath-001": {
+    "arabic": "حَتَّى النَّسَمَةِ الأَخِيرَةِ مِنْ حَياتِي",
+    "translation": "even unto my last breath",
+    "literal": "until the last breath of my life",
+    "tags": [
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-sanctification-mysteries-001": {
+    "arabic": "تَقْدِيسَ الأَسْرارِ الطَّاهِرَةِ",
+    "translation": "the sanctification of the immaculate mysteries",
+    "literal": "the sanctification of the pure mysteries",
+    "tags": [
+      "communion",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-healing-soul-body-001": {
+    "arabic": "لِشِفاءِ النَّفْسِ وَالجَسَدِ",
+    "translation": "unto the healing of both soul and body",
+    "literal": "for the healing of soul and body",
+    "tags": [
+      "healing",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-tears-repentance-001": {
+    "arabic": "وَامْنَحِينِي دُمُوعَ تَوْبَةٍ وَالإِعْتِرافِ",
+    "translation": "And grant unto me tears of repentance and confession",
+    "literal": "and grant me tears of repentance and confession",
+    "tags": [
+      "repentance",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-hymn-glorify-001": {
+    "arabic": "لِكَيْ أُسَبِّحَكِ وَأُمَجِّدَكِ كُلَّ أَيَّامِ حَياتِي",
+    "translation": "that I may hymn thee and glorify thee all the days of my life",
+    "literal": "so that I may praise you and glorify you all the days of my life",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "thanksgiving-fifth-blessed-glorified-001": {
+    "arabic": "فَإِنَّكِ مُبارَكَةٌ وَمُمَجَّدَةٌ مَدَى الدُّهُورِ",
+    "translation": "For blessed and glorified art thou unto all the ages",
+    "literal": "for you are blessed and glorified unto the ages",
+    "tags": [
+      "theotokos",
+      "thanksgiving-prayers",
+      "section: Fifth Prayer"
+    ]
+  },
+  "section-departed-trisagion": {
+    "arabic": "صَلاةُ التِّرِيصاجِيُون لِلرَّاقِدِينَ",
+    "translation": "The Trisagion Prayers for the Departed",
+    "literal": "Prayer of the Trisagion for the departed",
+    "tags": [
+      "departed",
+      "section-title"
+    ]
+  },
+  "departed-troparia-rubric-001": {
+    "arabic": "الطروبارياتُ التالِيَةُ بِاللَّحْنِ الرَّابِعِ",
+    "translation": "The following troparia are chanted in the fourth mode",
+    "literal": "The following troparia in the fourth tone",
+    "tags": [
+      "departed",
+      "rubric"
+    ]
+  },
+  "departed-savior-rest-001": {
+    "arabic": "أَيُّها المُخَلِّصُ",
+    "translation": "O Saviour",
+    "literal": "O Savior",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-savior-rest-002": {
+    "arabic": "أَرِحْ نَفْسَ (نُفُوسَ) عَبْدِكَ (أَمَتِكَ/عَبِيدِكَ)",
+    "translation": "give rest to the soul(s) of thy servant(s)",
+    "literal": "give rest to the soul(s) of your servant(s)",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-righteous-spirits-001": {
+    "arabic": "مَعَ أَرْواحِ الصِّدِّيقِينَ الرَّاقِدِينَ",
+    "translation": "with the spirits of the righteous made perfect",
+    "literal": "with the spirits of the righteous departed",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-preserve-blessed-life-001": {
+    "arabic": "وَاحْفَظْها لِلْحَياةِ السَّعِيدَةِ",
+    "translation": "and preserve it in that life of blessedness",
+    "literal": "and preserve it for the blessed life",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-with-thee-001": {
+    "arabic": "الَّتِي مِنْ قِبَلِكَ",
+    "translation": "which is with thee",
+    "literal": "which is from beside you",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-lover-mankind-001": {
+    "arabic": "يا مُحِبَّ البَشَرِ",
+    "translation": "O thou who lovest mankind",
+    "literal": "O lover of mankind",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-place-rest-001": {
+    "arabic": "أَرِحْ يا رَبُّ نَفْسَ (نُفُوسَ) عَبْدِكَ (أَمَتِكَ/عَبِيدِكَ) في راحَتِكَ",
+    "translation": "In the place of thy rest, O Lord, give rest also to the soul(s) of thy servant(s)",
+    "literal": "give rest, O Lord, to the soul(s) of your servant(s) in your rest",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-saints-repose-001": {
+    "arabic": "حَيْثُ جَميعُ قِدِّيسِيكَ يَسْتَرِيحُونَ",
+    "translation": "where all thy saints repose",
+    "literal": "where all your saints rest",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-only-immortal-001": {
+    "arabic": "لأَنَّكَ أَنْتَ وَحْدَكَ الَّذِي لا يَمُوتُ",
+    "translation": "for thou only lovest mankind",
+    "literal": "for you alone are he who does not die",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-glory-trinity-001": {
+    "arabic": "المَجْدُ لِلآبِ وَالابْنِ وَالرُّوحِ القُدُسِ",
+    "translation": "Glory to the Father and to the Son and to the Holy Spirit",
+    "literal": "glory to the Father and the Son and the Holy Spirit",
+    "tags": [
+      "departed",
+      "doxology"
+    ]
+  },
+  "departed-god-descended-hades-001": {
+    "arabic": "أَنْتَ إِلَهُنا الَّذِي إِنْحَدَرْتَ إِلى الجَحِيمِ",
+    "translation": "Thou art our God, who descended into hades",
+    "literal": "you are our God who descended to hades",
+    "tags": [
+      "departed",
+      "christ"
+    ]
+  },
+  "departed-loosed-bonds-001": {
+    "arabic": "وَحَلَلْتَ أَوْجاعَ المُعْتَقَلِينَ",
+    "translation": "and loosed the bonds of those who were there",
+    "literal": "and you loosed the pains of the imprisoned",
+    "tags": [
+      "departed",
+      "christ"
+    ]
+  },
+  "departed-thyself-rest-001": {
+    "arabic": "أَنْتَ يا مُخَلِّصُ",
+    "translation": "thyself, O Saviour",
+    "literal": "you, O Savior",
+    "tags": [
+      "departed",
+      "christ"
+    ]
+  },
+  "departed-rest-servant-reposed-001": {
+    "arabic": "أَرِحْ نَفْسَ (نُفُوسَ) عَبْدِكَ (أَمَتِكَ/عَبِيدِكَ) السَّابِقِ رُقادُهُ (ها/هم)",
+    "translation": "give rest also to the soul(s) of thy servant(s) who hath reposed",
+    "literal": "give rest to the soul(s) of your servant(s) whose repose has preceded",
+    "tags": [
+      "departed"
+    ]
+  },
+  "departed-both-now-001": {
+    "arabic": "الآنَ وَكُلَّ أَوانٍ وَإِلى دَهْرِ الدَّاهِرِينَ",
+    "translation": "Both now and ever, and unto ages of ages",
+    "literal": "now and every time and unto the age of ages",
+    "tags": [
+      "departed",
+      "doxology"
+    ]
+  },
+  "departed-virgin-pure-001": {
+    "arabic": "أَيَّتُها العَذْراءُ الطَّاهِرَةُ النَّقِيَّةُ وَحْدَكِ",
+    "translation": "O Virgin, alone pure and immaculate",
+    "literal": "O Virgin, alone pure and spotless",
+    "tags": [
+      "departed",
+      "theotokos"
+    ]
+  },
+  "departed-birth-without-seed-001": {
+    "arabic": "يا مَنْ وَلَدْتِ الإِلَهَ بِغَيْرِ زَرْعٍ",
+    "translation": "who without seed didst give birth to God",
+    "literal": "O you who gave birth to God without seed",
+    "tags": [
+      "departed",
+      "theotokos"
+    ]
+  },
+  "departed-intercede-souls-001": {
+    "arabic": "إِلَيْهِ تَوَسَّلي أَنْ يَرْحَمَ وَيُسامِحَ",
+    "translation": "intercede for the salvation of",
+    "literal": "intercede to him that he may have mercy and forgive",
+    "tags": [
+      "departed",
+      "theotokos"
+    ]
+  },
+  "departed-theotokos-servant-001": {
+    "arabic": "نَفْسَ (نُفُوسَ) عَبْدِكَ (أَمَتِكَ/عَبِيدِكَ) السَّابِقِ رُقادُهُ (ها/هم)",
+    "translation": "the soul(s) of thy servant(s) who hath reposed",
+    "literal": "the soul(s) of your servant(s) whose repose has preceded",
+    "tags": [
+      "departed",
+      "theotokos"
+    ]
+  },
+  "departed-censer-rubric-001": {
+    "arabic": "وَيَأْخُذُ الشَّمّاسُ المِبْخَرَةَ وَيُبَخِّرُ قائِلاً الطِّلْبَةَ التالِيَةَ",
+    "translation": "The deacon takes the censer and censes while he says the following litany",
+    "literal": "and the deacon takes the censer and censes saying the following petition",
+    "tags": [
+      "departed",
+      "rubric"
+    ]
+  },
+  "departed-have-mercy-god-001": {
+    "arabic": "إِرْحَمْنا يا اللهُ",
+    "translation": "Have mercy on us, O God",
+    "literal": "have mercy on us, O God",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-great-mercy-001": {
+    "arabic": "بِعَظِيمِ رَحْمَتِكَ",
+    "translation": "according to thy great mercy",
+    "literal": "by your great mercy",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-hearken-mercy-001": {
+    "arabic": "نَطْلُبُ إِلَيْكَ فَاسْتَجِبْ وَارْحَمْ",
+    "translation": "we pray thee, hearken and have mercy",
+    "literal": "we ask you, so respond and have mercy",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-lord-have-mercy-thrice-001": {
+    "arabic": "يا رَبُّ ارْحَمْ",
+    "translation": "Lord, have mercy",
+    "literal": "O Lord, have mercy",
+    "tags": [
+      "departed",
+      "response"
+    ]
+  },
+  "departed-again-repose-001": {
+    "arabic": "وَأَيْضاً نَطْلُبُ مِنْ أَجْلِ راحَةِ نَفْسِ (نُفُوسِ)",
+    "translation": "Again we pray for the repose of the soul(s)",
+    "literal": "and again we ask for the repose of the soul(s)",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-servants-names-001": {
+    "arabic": "عَبْدِ اللهِ (أَمَةِ اللهِ/عَبِيدِ اللهِ) (فُلان)",
+    "translation": "of the servant(s) of God, N. (NN.)",
+    "literal": "of the servant of God, handmaid of God, servants of God, so-and-so",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-pardon-sins-001": {
+    "arabic": "وَمِنْ أَجْلِ غُفْرانِ جَميعِ ذُنُوبِهِ (ها/هم)",
+    "translation": "and that thou wilt pardon his (her, their) every transgression",
+    "literal": "and for the forgiveness of all his/her/their sins",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-voluntary-involuntary-001": {
+    "arabic": "الطَّوْعِيَّةِ وَالكَرْهِيَّةِ",
+    "translation": "both voluntary and involuntary",
+    "literal": "the voluntary and involuntary",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-establish-soul-001": {
+    "arabic": "لِكَيْ يُرَتِّبَ الرَّبُّ الإِلَهُ نَفْسَهُ (ها/هم)",
+    "translation": "That the Lord God will establish his (her, their) soul(s)",
+    "literal": "that the Lord God may establish his/her/their soul",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-where-just-repose-001": {
+    "arabic": "حَيْثُ الصِّدِّيقُونَ يَسْتَرِيحُونَ",
+    "translation": "where the just repose",
+    "literal": "where the righteous rest",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-mercies-kingdom-001": {
+    "arabic": "فَلْنَسْأَلْ لَهُ رَحَماتِ اللهِ وَمَلَكُوتَ السَّماواتِ",
+    "translation": "The mercies of God, the kingdom of heaven",
+    "literal": "let us ask for him the mercies of God and the kingdom of the heavens",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-remission-christ-001": {
+    "arabic": "وَغُفْرانَ خَطاياهُ (ها/هم) مِنَ المَسِيحِ الَّذِي لا يَمُوتُ",
+    "translation": "and remission of his (her, their) sins, let us ask of Christ our immortal King",
+    "literal": "and forgiveness of his/her/their sins from Christ who does not die",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-king-god-001": {
+    "arabic": "مَلِكِنا وَإِلَهِنا",
+    "translation": "our King and our God",
+    "literal": "our King and our God",
+    "tags": [
+      "departed",
+      "litany"
+    ]
+  },
+  "departed-grant-this-001": {
+    "arabic": "إِسْتَجِبْ يا رَبُّ",
+    "translation": "Grant this, O Lord",
+    "literal": "respond, O Lord",
+    "tags": [
+      "departed",
+      "response"
+    ]
+  },
+  "departed-priest-god-spirits-001": {
+    "arabic": "يا إِلَهَ الأَرْواحِ وَالأَجْسادِ كُلِّها",
+    "translation": "O God of spirits and of all flesh",
+    "literal": "O God of spirits and all bodies",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-trampled-death-001": {
+    "arabic": "يا مَنْ وَطِئَ المَوْتَ",
+    "translation": "who hast trampled down death",
+    "literal": "O you who trampled death",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-destroyed-devil-001": {
+    "arabic": "وَنَقَضَ قُوَّةَ الشَّيْطانِ",
+    "translation": "and made powerless the devil",
+    "literal": "and destroyed the power of Satan",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-given-life-world-001": {
+    "arabic": "وَمَنَحَ الحَياةَ لِعالَمِهِ",
+    "translation": "and given life to thy world",
+    "literal": "and granted life to his world",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-priest-rest-servants-001": {
+    "arabic": "أَنْتَ يا رَبُّ أَرِحْ نَفْسَ (نُفُوسَ) عَبْدِكَ (أَمَتِكَ/عَبِيدِكَ) (فُلان)",
+    "translation": "Do thou, thyself Lord, give rest to the soul(s) of thy departed servant(s) N. (NN.)",
+    "literal": "you, O Lord, give rest to the soul(s) of your servant(s), so-and-so",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-formerly-reposed-001": {
+    "arabic": "السَّابِقِ رُقادُهُ (ها/هم)",
+    "translation": "who hath reposed",
+    "literal": "whose repose has preceded",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-place-bright-001": {
+    "arabic": "في مَكانٍ نَيِّرٍ",
+    "translation": "in a place of brightness",
+    "literal": "in a bright place",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-place-green-001": {
+    "arabic": "في مَكانٍ خُضْرَةٍ",
+    "translation": "a place of verdure",
+    "literal": "in a place of greenery",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-place-repose-001": {
+    "arabic": "في مَكانِ انْتِعاشٍ",
+    "translation": "a place of repose",
+    "literal": "in a place of refreshment",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-no-sickness-001": {
+    "arabic": "حَيْثُ لا وَجَعَ وَلا حُزْنَ وَلا تَنَهُّدَ",
+    "translation": "whence all sickness, sorrow and sighing have fled away",
+    "literal": "where there is no pain, no grief, and no sighing",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-good-lover-001": {
+    "arabic": "وَبِما أَنَّكَ إِلَهٌ صالِحٌ وَمُحِبٌّ لِلْبَشَرِ",
+    "translation": "for thou art good and lovest mankind",
+    "literal": "and since you are a good God and lover of mankind",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-pardon-every-sin-001": {
+    "arabic": "إِغْفِرْ لَهُ (لَها/لَهُم) كُلَّ خَطِيئَةٍ",
+    "translation": "Pardon every sin which he (she, they) hath committed",
+    "literal": "forgive him/her/them every sin",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-committed-001": {
+    "arabic": "اقْتَرَفَها (اقْتَرَفَتْها/اقْتَرَفُوها)",
+    "translation": "which he (she, they) hath committed",
+    "literal": "which he/she/they committed",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-word-deed-thought-001": {
+    "arabic": "بِالقَوْلِ أَوْ بِالفِعْلِ أَوْ بِالفِكْرِ",
+    "translation": "whether by word or deed or thought",
+    "literal": "by word, or by deed, or by thought",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-no-man-without-sin-001": {
+    "arabic": "لأَنَّهُ لَيْسَ مِنْ إِنْسانٍ يَحْيا وَلا يُخْطِئُ",
+    "translation": "for there is no man who liveth and sinneth not",
+    "literal": "for there is no human who lives and does not sin",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-only-without-sin-001": {
+    "arabic": "بَلْ أَنْتَ وَحْدَكَ مُنَزَّهٌ عَنِ الخَطِيئَةِ",
+    "translation": "for thou only art beyond sin",
+    "literal": "but you alone are removed from sin",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-righteousness-truth-001": {
+    "arabic": "وَعَدْلُكَ عَدْلٌ إِلى الأَبَدِ وَقَوْلُكَ حَقٌّ",
+    "translation": "and thy righteousness is an everlasting righteousness, and thy word is truth",
+    "literal": "and your justice is justice forever, and your word is truth",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-resurrection-life-repose-001": {
+    "arabic": "لأَنَّكَ أَنْتَ القِيامَةُ وَالحَياةُ وَالرَّاحَةُ",
+    "translation": "For thou art the Resurrection and the Life and the Repose",
+    "literal": "for you are the resurrection and the life and the repose",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-servant-repose-doxology-001": {
+    "arabic": "لِعَبْدِكَ (لأَمَتِكَ/لِعَبِيدِكَ) (فُلان) السَّابِقِ رُقادُهُ (ها/هم)",
+    "translation": "of thy departed servant(s) N. (NN.)",
+    "literal": "for your servant, handmaid, servants, so-and-so, whose repose has preceded",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-christ-doxology-001": {
+    "arabic": "أَيُّها المَسِيحُ إِلَهُنا",
+    "translation": "O Christ our God",
+    "literal": "O Christ our God",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ]
+  },
+  "departed-raise-glory-father-001": {
+    "arabic": "وَإِلَيْكَ نَرْفَعُ المَجْدَ مَعَ أَبِيكَ الَّذِي لا بَدْءَ لَهُ",
+    "translation": "and unto thee we ascribe glory, together with thine unoriginate Father",
+    "literal": "and to you we raise glory with your Father who has no beginning",
+    "tags": [
+      "departed",
+      "doxology",
+      "priest-prayer"
+    ]
+  },
+  "departed-spirit-doxology-001": {
+    "arabic": "وَرُوحِكَ الكُلِّيِّ قُدْسُهُ الصّالِحِ وَالمُحْيِي",
+    "translation": "and thine all-holy and good and life-giving Spirit",
+    "literal": "and your all-holy, good, and life-giving Spirit",
+    "tags": [
+      "departed",
+      "doxology",
+      "priest-prayer"
+    ]
+  },
+  "departed-memory-eternal-001": {
+    "arabic": "فَلْيَكُنْ ذِكْرُهُ (ها/هم) مُؤَبَّداً",
+    "translation": "May his (her, their) memory be eternal",
+    "literal": "let his/her/their memory be eternal",
+    "tags": [
+      "departed",
+      "response"
     ]
   }
 };

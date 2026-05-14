@@ -13177,6 +13177,681 @@ const sourceSegments = {
         "text": "."
       }
     ]
+  },
+  "thanksgiving-first-prayer-glory": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "first-prayer"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-after-communion-glory-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "thanksgiving-after-communion-thrice-001"
+      }
+    ]
+  },
+  "thanksgiving-first-prayer-author": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "first-prayer",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-first-prayer-author-001"
+      }
+    ]
+  },
+  "thanksgiving-first-prayer": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "first-prayer"
+    ],
+    "phrases": [
+      {"phrase_id": "thanksgiving-first-thank-lord-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-not-rejected-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-made-communicant-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-first-thank-worthy-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-unworthy-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-partake-gifts-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-first-master-lover-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-died-risen-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-gave-mysteries-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-benefit-sanctification-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-first-grant-healing-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-avert-adverse-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-enlighten-heart-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-peace-powers-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-faith-unashamed-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-love-unfeigned-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-wisdom-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-commandments-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-increase-grace-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-kingdom-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-first-preserved-holiness-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-remember-grace-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-not-self-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-for-thee-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-first-depart-world-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-hope-life-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-attain-rest-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-festal-sound-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-delight-beholding-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-first-true-desire-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-first-joy-lovers-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-christ-god-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-first-creation-hymns-001"},
+      {"text": ". "},
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "thanksgiving-second-prayer-author": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "second-prayer",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-second-prayer-author-001"
+      }
+    ]
+  },
+  "thanksgiving-second-prayer": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "second-prayer"
+    ],
+    "phrases": [
+      {"phrase_id": "thanksgiving-second-master-christ-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-second-king-creator-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-second-thank-good-things-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-second-bestowed-partaking-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-second-mysteries-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-second-pray-good-lover-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-second-keep-protection-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-second-shadow-wings-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-second-pure-conscience-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-second-last-breath-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-second-worthily-remission-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-second-life-everlasting-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-second-bread-life-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-second-fount-holiness-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-second-giver-good-things-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-second-ascribe-glory-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-second-with-father-spirit-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-second-now-ever-001"},
+      {"text": ". "},
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "thanksgiving-third-prayer-author": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "third-prayer",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-third-prayer-author-001"
+      }
+    ]
+  },
+  "thanksgiving-third-prayer": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "third-prayer"
+    ],
+    "phrases": [
+      {"phrase_id": "thanksgiving-third-gives-flesh-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-fire-unworthy-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-do-not-burn-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-pass-through-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-third-members-heart-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-burn-thorns-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-cleanse-soul-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-sanctify-mind-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-strengthen-bones-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-enlighten-senses-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-nail-fear-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-shelter-always-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-guard-keep-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-third-soul-corrupting-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-cleanse-purify-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-third-correct-walk-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-adorn-teach-enlighten-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-dwelling-spirit-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-not-dwelling-sin-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-house-for-thee-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-entry-communion-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-evil-flee-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-third-as-from-fire-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-present-intercessors-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-bodiless-leaders-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-forerunner-apostles-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-third-pure-mother-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-receive-prayers-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-compassionate-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-child-light-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-sanctification-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-third-radiance-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-third-ascribe-glory-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-third-fitting-master-god-001"},
+      {"text": "."}
+    ]
+  },
+  "thanksgiving-fourth-prayer-author": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "fourth-prayer",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-fourth-prayer-author-001"
+      }
+    ]
+  },
+  "thanksgiving-fourth-prayer": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "fourth-prayer"
+    ],
+    "phrases": [
+      {"phrase_id": "thanksgiving-fourth-body-life-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fourth-body-life-002"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-fourth-blood-remission-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fourth-eucharist-joy-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-fourth-second-coming-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fourth-right-hand-001"},
+      {"text": " "},
+      {"phrase_id": "thanksgiving-fourth-fearful-coming-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fourth-mother-saints-001"},
+      {"text": ". "},
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "thanksgiving-fifth-prayer-author": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "fifth-prayer",
+      "rubric"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "thanksgiving-fifth-prayer-author-001"
+      }
+    ]
+  },
+  "thanksgiving-fifth-prayer": {
+    "break_before": true,
+    "tags": [
+      "thanksgiving-prayers",
+      "fifth-prayer"
+    ],
+    "phrases": [
+      {"phrase_id": "thanksgiving-fifth-all-holy-lady-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-light-soul-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-hope-shelter-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-consolation-joy-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-fifth-thank-worthy-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-unworthy-partaker-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-partaker-body-blood-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-fifth-bore-light-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-enlighten-eyes-heart-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-fifth-bore-fountain-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-enliven-dead-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-fifth-mother-merciful-god-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-have-mercy-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-humble-mind-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-recall-thoughts-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-fifth-worthy-without-condemnation-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-last-breath-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-sanctification-mysteries-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-healing-soul-body-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-fifth-tears-repentance-001"},
+      {"text": "، "},
+      {"phrase_id": "thanksgiving-fifth-hymn-glorify-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-fifth-blessed-glorified-001"},
+      {"text": ". "},
+      {"phrase_id": "amen-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-after-communion-thrice-001"}
+    ]
+  },
+  "departed-trisagion-troparia-rubric": {
+    "break_before": true,
+    "tags": [
+      "departed",
+      "rubric"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-troparia-rubric-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-troparion-savior": {
+    "break_before": true,
+    "speaker": "role-choir",
+    "tags": [
+      "departed"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-savior-rest-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-savior-rest-002"},
+      {"text": " "},
+      {"phrase_id": "departed-righteous-spirits-001"},
+      {"text": ". "},
+      {"phrase_id": "departed-preserve-blessed-life-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-with-thee-001"},
+      {"text": " "},
+      {"phrase_id": "departed-lover-mankind-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-troparion-rest": {
+    "break_before": true,
+    "speaker": "role-choir",
+    "tags": [
+      "departed"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-place-rest-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-saints-repose-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-only-immortal-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-glory": {
+    "break_before": true,
+    "speaker": "role-choir",
+    "tags": [
+      "departed",
+      "doxology"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-glory-trinity-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-troparion-hades": {
+    "break_before": true,
+    "speaker": "role-choir",
+    "tags": [
+      "departed"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-god-descended-hades-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-loosed-bonds-001"},
+      {"text": ". "},
+      {"phrase_id": "departed-thyself-rest-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-rest-servant-reposed-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-both-now": {
+    "break_before": true,
+    "speaker": "role-choir",
+    "tags": [
+      "departed",
+      "doxology"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-both-now-001"},
+      {"text": ". "},
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-theotokos": {
+    "break_before": true,
+    "speaker": "role-choir",
+    "tags": [
+      "departed",
+      "theotokos"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-virgin-pure-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-birth-without-seed-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-intercede-souls-001"},
+      {"text": " "},
+      {"phrase_id": "departed-theotokos-servant-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-censer-rubric": {
+    "break_before": true,
+    "tags": [
+      "departed",
+      "rubric"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-censer-rubric-001"},
+      {"text": ":"}
+    ]
+  },
+  "departed-trisagion-deacon-mercy": {
+    "break_before": true,
+    "speaker": "role-deacon",
+    "tags": [
+      "departed",
+      "litany"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-have-mercy-god-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-great-mercy-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-hearken-mercy-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-choir-lord-have-mercy-thrice": {
+    "speaker": "role-choir",
+    "tags": [
+      "departed",
+      "response"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-lord-have-mercy-thrice-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-after-communion-thrice-001"}
+    ]
+  },
+  "departed-trisagion-deacon-again": {
+    "break_before": true,
+    "speaker": "role-deacon",
+    "tags": [
+      "departed",
+      "litany"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-again-repose-001"},
+      {"text": " "},
+      {"phrase_id": "departed-servants-names-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-pardon-sins-001"},
+      {"text": " "},
+      {"phrase_id": "departed-voluntary-involuntary-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-deacon-establish": {
+    "break_before": true,
+    "speaker": "role-deacon",
+    "tags": [
+      "departed",
+      "litany"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-establish-soul-001"},
+      {"text": " "},
+      {"phrase_id": "departed-where-just-repose-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-deacon-mercies": {
+    "break_before": true,
+    "speaker": "role-deacon",
+    "tags": [
+      "departed",
+      "litany"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-mercies-kingdom-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-remission-christ-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-king-god-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-choir-grant-this": {
+    "speaker": "role-choir",
+    "tags": [
+      "departed",
+      "response"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-grant-this-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-deacon-let-us-pray": {
+    "speaker": "role-deacon",
+    "tags": [
+      "departed",
+      "litany"
+    ],
+    "phrases": [
+      {"phrase_id": "petition-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-choir-lord-have-mercy": {
+    "speaker": "role-choir",
+    "tags": [
+      "departed",
+      "response"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-lord-have-mercy-thrice-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-priest-prayer": {
+    "break_before": true,
+    "speaker": "role-priest",
+    "tags": [
+      "departed",
+      "priest-prayer"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-priest-god-spirits-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-trampled-death-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-destroyed-devil-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-given-life-world-001"},
+      {"text": ". "},
+      {"phrase_id": "departed-priest-rest-servants-001"},
+      {"text": " "},
+      {"phrase_id": "departed-formerly-reposed-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-place-bright-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-place-green-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-place-repose-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-no-sickness-001"},
+      {"text": ". "},
+      {"phrase_id": "departed-good-lover-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-pardon-every-sin-001"},
+      {"text": " "},
+      {"phrase_id": "departed-committed-001"},
+      {"text": " "},
+      {"phrase_id": "departed-word-deed-thought-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-no-man-without-sin-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-only-without-sin-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-righteousness-truth-001"},
+      {"text": ". "},
+      {"phrase_id": "departed-resurrection-life-repose-001"},
+      {"text": " "},
+      {"phrase_id": "departed-servant-repose-doxology-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-christ-doxology-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-raise-glory-father-001"},
+      {"text": " "},
+      {"phrase_id": "departed-spirit-doxology-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-both-now-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-choir-amen": {
+    "speaker": "role-choir",
+    "tags": [
+      "departed",
+      "response"
+    ],
+    "phrases": [
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "departed-trisagion-memory-eternal": {
+    "break_before": true,
+    "speaker": "role-choir",
+    "tags": [
+      "departed",
+      "response"
+    ],
+    "phrases": [
+      {"phrase_id": "departed-memory-eternal-001"},
+      {"text": ". "},
+      {"phrase_id": "thanksgiving-after-communion-thrice-001"}
+    ]
   }
 };
 
