@@ -451,6 +451,46 @@ const lessons = [
         ]
       }
     ]
+  },
+  {
+    "id": "lesson-lords-prayer",
+    "unit_id": "unit-1",
+    "title": "The Lord's Prayer",
+    "title_phrase": "section-lords-prayer",
+    "display_order": 6,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "title": "Our Father",
+        "exercise_id": "lords-prayer-address",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Thy kingdom come",
+        "exercise_id": "lords-prayer-kingdom",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Our daily bread",
+        "exercise_id": "lords-prayer-daily-bread",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Forgive us",
+        "exercise_id": "lords-prayer-forgive",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Deliver us",
+        "exercise_id": "lords-prayer-temptation",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "The Lord's Prayer",
+        "exercise_id": "lords-prayer-summary",
+        "activity_policy": "standard"
+      }
+    ]
   }
 ];
 

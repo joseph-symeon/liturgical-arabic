@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './course.css';
 import PageHeader from '../PageHeader.jsx';
 import PassageExperience from '../passage/PassageExperience.jsx';
-import exercises, { getExerciseWithActivity, getStandardActivityOptions } from '../../data/course/exercises.js';
+import exercises, { getExerciseWithActivity, getStandardActivityOptions, hasLinkedRecording } from '../../data/course/exercises.js';
 import { getExerciseTitle } from './exerciseTitles.js';
 import { getPassageActivityLabel, PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 import { createExercisePassage } from '../../utils/passages.js';
@@ -19,7 +19,9 @@ function getActivityOptions(item) {
 }
 
 function augmentSmallExerciseActivityOptions(exerciseId, activityOptions) {
-  const options = activityOptions || [];
+  const options = (activityOptions || []).filter(option => (
+    option.activity_type !== PASSAGE_ACTIVITY_TYPES.phraseCaptions || hasLinkedRecording(exerciseId)
+  ));
   if (!exerciseId || !exercises[exerciseId]) return options;
   const standardOptions = getStandardActivityOptions(exerciseId);
   return standardOptions.reduce((augmentedOptions, standardOption) => {

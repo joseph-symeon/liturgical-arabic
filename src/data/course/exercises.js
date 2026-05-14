@@ -515,6 +515,52 @@ export const exerciseDefinitions = [
       "course-all-holy-trinity-holy-one"
     ],
     "media": GREAT_COMPLINE_MEDIA
+  },
+  {
+    "id": "lords-prayer-address",
+    "segment_ids": [
+      "lords-prayer-prayer"
+    ],
+    "media": GREAT_COMPLINE_MEDIA
+  },
+  {
+    "id": "lords-prayer-kingdom",
+    "segment_ids": [
+      "lords-prayer-kingdom"
+    ],
+    "media": GREAT_COMPLINE_MEDIA
+  },
+  {
+    "id": "lords-prayer-daily-bread",
+    "segment_ids": [
+      "lords-prayer-daily-bread"
+    ],
+    "media": GREAT_COMPLINE_MEDIA
+  },
+  {
+    "id": "lords-prayer-forgive",
+    "segment_ids": [
+      "lords-prayer-forgive"
+    ],
+    "media": GREAT_COMPLINE_MEDIA
+  },
+  {
+    "id": "lords-prayer-temptation",
+    "segment_ids": [
+      "lords-prayer-temptation"
+    ],
+    "media": GREAT_COMPLINE_MEDIA
+  },
+  {
+    "id": "lords-prayer-summary",
+    "segment_ids": [
+      "lords-prayer-prayer",
+      "lords-prayer-kingdom",
+      "lords-prayer-daily-bread",
+      "lords-prayer-forgive",
+      "lords-prayer-temptation"
+    ],
+    "media": GREAT_COMPLINE_MEDIA
   }
 ];
 export function resolveExercise(definition, segmentsMap = segments) {
@@ -568,10 +614,6 @@ const STANDARD_ACTIVITY_OPTIONS = [
   {
     label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.readListen],
     activity_type: PASSAGE_ACTIVITY_TYPES.readListen
-  },
-  {
-    label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions],
-    activity_type: PASSAGE_ACTIVITY_TYPES.phraseCaptions
   }
 ];
 
@@ -663,9 +705,20 @@ export function getExercisePhraseCount(exerciseId) {
   return getPhraseIdsForLines(exercises[exerciseId]?.lines).length;
 }
 
+export function hasLinkedRecording(exerciseId) {
+  const exercise = exercises[exerciseId];
+  return Boolean(exercise?.audio_clip?.recording_id || exercise?.caption_clip?.recording_id);
+}
+
 export function getStandardActivityOptions(exerciseId) {
   const activityOptions = [...STANDARD_ACTIVITY_OPTIONS];
   const phraseCount = getExercisePhraseCount(exerciseId);
+  if (hasLinkedRecording(exerciseId)) {
+    activityOptions.push({
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions],
+      activity_type: PASSAGE_ACTIVITY_TYPES.phraseCaptions
+    });
+  }
   if (phraseCount <= 6) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.matching],

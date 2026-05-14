@@ -264,6 +264,111 @@ export const alignmentDefinitions = [
             "end_seconds": 35.25
           }
         ]
+      },
+      {
+        "segment_ids": [
+          "lords-prayer-prayer"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "lords-prayer-our-father-001",
+            "start_seconds": 46.54,
+            "end_seconds": 46.92
+          },
+          {
+            "phrase_id": "lords-prayer-in-heavens-001",
+            "start_seconds": 46.92,
+            "end_seconds": 48.22
+          },
+          {
+            "phrase_id": "lords-prayer-hallowed-name-001",
+            "start_seconds": 48.69,
+            "end_seconds": 49.76
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "lords-prayer-kingdom"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "lords-prayer-kingdom-come-001",
+            "start_seconds": 50.32,
+            "end_seconds": 51.67
+          },
+          {
+            "phrase_id": "lords-prayer-will-done-001",
+            "start_seconds": 52.24,
+            "end_seconds": 53.27
+          },
+          {
+            "phrase_id": "lords-prayer-heaven-earth-001",
+            "start_seconds": 53.54,
+            "end_seconds": 54.17
+          },
+          {
+            "phrase_id": "lords-prayer-on-earth-001",
+            "start_seconds": 54.42,
+            "end_seconds": 56.24
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "lords-prayer-daily-bread"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "lords-prayer-daily-bread-001",
+            "start_seconds": 57.01,
+            "end_seconds": 58.14
+          },
+          {
+            "phrase_id": "lords-prayer-give-today-001",
+            "start_seconds": 58.14,
+            "end_seconds": 59.21
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "lords-prayer-forgive"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "lords-prayer-forgive-debts-001",
+            "start_seconds": 59.77,
+            "end_seconds": 61.47
+          },
+          {
+            "phrase_id": "lords-prayer-forgive-debtors-001",
+            "start_seconds": 61.97,
+            "end_seconds": 63.34
+          },
+          {
+            "phrase_id": "lords-prayer-who-owes-us-001",
+            "start_seconds": 63.34,
+            "end_seconds": 64.57
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "lords-prayer-temptation"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "lords-prayer-not-temptation-001",
+            "start_seconds": 65.17,
+            "end_seconds": 67.27
+          },
+          {
+            "phrase_id": "lords-prayer-deliver-evil-001",
+            "start_seconds": 67.77,
+            "end_seconds": 69.84
+          }
+        ]
       }
     ]
   },
