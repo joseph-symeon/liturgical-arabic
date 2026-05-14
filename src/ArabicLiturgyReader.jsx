@@ -56,6 +56,11 @@ export default function ArabicLiturgyReader({
   const isTableOfContents = selectedSectionIndex === null || readerSections.length === 0;
   const readerServiceNavigation = getServiceNavigation(serviceText);
   const readerServiceHomeTitle = readerServiceNavigation[0]?.title || serviceText.short_title || serviceText.title;
+  const readerServiceHomePrimaryTitle = serviceText.short_title || serviceText.title || readerServiceHomeTitle;
+  const readerServiceHomeSubtitle =
+    serviceText.nav_title && serviceText.nav_title !== readerServiceHomePrimaryTitle
+      ? serviceText.nav_title
+      : null;
   const [readerActivity, setReaderActivity] = useState(() => (
     isTableOfContents ? PASSAGE_ACTIVITY_TYPES.readListen : getReaderActivity()
   ));
@@ -113,7 +118,7 @@ export default function ArabicLiturgyReader({
             disabled: isTableOfContents,
             className: "page-nav-button page-nav-button-center"
           },
-          h("span", { className: "page-nav-label" }, readerServiceHomeTitle)
+          renderNavLabel(readerServiceHomePrimaryTitle, readerServiceHomeSubtitle)
         ),
         h(
           "button",

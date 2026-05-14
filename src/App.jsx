@@ -575,7 +575,9 @@ export default function App() {
   function renderHome() {
     const homeTitlePhrases = HOME_TITLE_PHRASE_IDS.map(phraseId => phrases[phraseId]).filter(Boolean);
     function getServiceHomeTitle(serviceText) {
-      if (serviceText.id === DEFAULT_READER_SERVICE_TEXT_ID) return "The Divine Liturgy of St John Chrysostom";
+      if (serviceText.short_title && serviceText.nav_title) {
+        return `${serviceText.short_title} ${serviceText.nav_title}`;
+      }
       return serviceText.short_title || serviceText.title;
     }
 
