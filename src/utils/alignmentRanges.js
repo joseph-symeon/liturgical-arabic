@@ -1,5 +1,6 @@
 import { serviceTextDefinitions } from '../data/texts/serviceTexts.js';
 import segments from '../data/texts/segments.js';
+import { getRangeBounds } from './alignmentTiming.js';
 import { getServiceRangeKey, resolveServiceRange } from './serviceRanges.js';
 
 function getSegmentKey(segmentIds) {
@@ -10,8 +11,32 @@ export function getAlignmentRange(alignmentId, segmentIds, recordingId, alignmen
   const alignment = alignments?.[alignmentId];
   if (!alignment || alignment.recording_id !== recordingId) return null;
 
+  return getExactAlignmentRange(alignment, segmentIds)
+    || composeSegmentAlignmentRange(alignment, segmentIds);
+}
+
+function getExactAlignmentRange(alignment, segmentIds) {
   const segmentKey = getSegmentKey(segmentIds);
   return (alignment.ranges || []).find(item => getSegmentKey(item.segment_ids) === segmentKey) || null;
+}
+
+function composeSegmentAlignmentRange(alignment, segmentIds) {
+  if (!Array.isArray(segmentIds) || segmentIds.length === 0) return null;
+
+  const ranges = segmentIds.map(segmentId => getExactAlignmentRange(alignment, [segmentId]));
+  if (ranges.some(range => !range)) return null;
+  const firstBounds = getRangeBounds(ranges[0]);
+  const lastBounds = getRangeBounds(ranges[ranges.length - 1]);
+
+  return {
+    segment_ids: [...segmentIds],
+    start_seconds: firstBounds?.start_seconds,
+    end_seconds: lastBounds?.end_seconds,
+    phrase_timings: ranges.flatMap(range => (
+      range.phrase_timings?.map(timing => ({ ...timing })) || []
+    )),
+    default_playback_rate: ranges.find(range => typeof range.default_playback_rate === "number")?.default_playback_rate
+  };
 }
 
 export function findServiceAlignmentRange(serviceTextId, serviceRange, recordingId, alignments) {

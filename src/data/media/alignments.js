@@ -76,7 +76,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "beginner-and-to-holy-spirit-001",
             "start_seconds": 16.92,
-            "end_seconds": 18.355
+            "end_seconds": 18.1
           }
         ]
       },
@@ -103,85 +103,55 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "amen-001",
             "start_seconds": 21.86,
-            "end_seconds": 23.095
+            "end_seconds": 22.5
           }
         ]
       },
       {
         "segment_ids": [
-          "course-glory-beginner",
-          "course-both-now-beginner"
-        ],
-        "phrase_timings": [
-          {
-            "phrase_id": "glory-001",
-            "start_seconds": 15.42,
-            "end_seconds": 16.1
-          },
-          {
-            "phrase_id": "to-father-001",
-            "start_seconds": 16.1,
-            "end_seconds": 16.56
-          },
-          {
-            "phrase_id": "beginner-and-to-son-001",
-            "start_seconds": 16.56,
-            "end_seconds": 16.92
-          },
-          {
-            "phrase_id": "beginner-and-to-holy-spirit-001",
-            "start_seconds": 16.92,
-            "end_seconds": 18.355
-          },
-          {
-            "phrase_id": "beginner-both-now-001",
-            "start_seconds": 18.28,
-            "end_seconds": 18.88
-          },
-          {
-            "phrase_id": "beginner-and-ever-001",
-            "start_seconds": 18.88,
-            "end_seconds": 20.16
-          },
-          {
-            "phrase_id": "beginner-unto-ages-001",
-            "start_seconds": 20.16,
-            "end_seconds": 21.86
-          },
-          {
-            "phrase_id": "amen-001",
-            "start_seconds": 21.86,
-            "end_seconds": 23.095
-          }
-        ]
-      },
-      {
-        "segment_ids": [
-          "course-trisagion-holy-god",
-          "course-trisagion-holy-mighty",
-          "course-trisagion-holy-immortal",
-          "course-trisagion-have-mercy"
+          "course-trisagion-holy-god"
         ],
         "phrase_timings": [
           {
             "phrase_id": "holy-god-001",
             "start_seconds": 0,
             "end_seconds": 1.28
-          },
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "course-trisagion-holy-mighty"
+        ],
+        "phrase_timings": [
           {
             "phrase_id": "holy-mighty-001",
             "start_seconds": 1.28,
             "end_seconds": 2.46
-          },
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "course-trisagion-holy-immortal"
+        ],
+        "phrase_timings": [
           {
             "phrase_id": "holy-immortal-001",
             "start_seconds": 2.46,
             "end_seconds": 4.26
-          },
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "course-trisagion-have-mercy"
+        ],
+        "phrase_timings": [
           {
             "phrase_id": "have-mercy-on-us-001",
             "start_seconds": 4.26,
-            "end_seconds": 5.14
+            "end_seconds": 4.88
           }
         ]
       },
@@ -214,7 +184,7 @@ export const alignmentDefinitions = [
         "phrase_timings": [
           {
             "phrase_id": "all-holy-trinity-001",
-            "start_seconds": 23,
+            "start_seconds": 23.1,
             "end_seconds": 24.94
           },
           {
@@ -292,66 +262,6 @@ export const alignmentDefinitions = [
             "phrase_id": "all-holy-trinity-name-sake-001",
             "start_seconds": 33.98,
             "end_seconds": 35.25
-          }
-        ]
-      },
-      {
-        "service_range": {
-          "section_id": "opening-prayers",
-          "start_segment_id": "course-all-holy-trinity-address",
-          "end_segment_id": "course-all-holy-trinity-holy-one"
-        },
-        "segment_ids": [
-          "course-all-holy-trinity-address",
-          "course-all-holy-trinity-lord",
-          "course-all-holy-trinity-master",
-          "course-all-holy-trinity-holy-one"
-        ],
-        "phrase_timings": [
-          {
-            "phrase_id": "all-holy-trinity-001",
-            "start_seconds": 23,
-            "end_seconds": 24.94
-          },
-          {
-            "phrase_id": "all-holy-trinity-have-mercy-001",
-            "start_seconds": 24.94,
-            "end_seconds": 25.66
-          },
-          {
-            "phrase_id": "vocative-o-lord-001",
-            "start_seconds": 25.66,
-            "end_seconds": 26.58
-          },
-          {
-            "phrase_id": "all-holy-trinity-cleanse-sins-001",
-            "start_seconds": 26.58,
-            "end_seconds": 27.92
-          },
-          {
-            "phrase_id": "vocative-o-master-001",
-            "start_seconds": 27.92,
-            "end_seconds": 28.96
-          },
-          {
-            "phrase_id": "all-holy-trinity-pardon-iniquities-001",
-            "start_seconds": 28.96,
-            "end_seconds": 30.98
-          },
-          {
-            "phrase_id": "vocative-o-holy-one-001",
-            "start_seconds": 30.98,
-            "end_seconds": 31.98
-          },
-          {
-            "phrase_id": "all-holy-trinity-visit-heal-001",
-            "start_seconds": 31.98,
-            "end_seconds": 33.98
-          },
-          {
-            "phrase_id": "all-holy-trinity-name-sake-001",
-            "start_seconds": 33.98,
-            "end_seconds": 35.615
           }
         ]
       }

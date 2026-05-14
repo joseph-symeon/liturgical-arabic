@@ -6,6 +6,7 @@ import units from '../data/course/units.js';
 import { serviceTextDefinitions } from '../data/texts/serviceTexts.js';
 import recordings from '../data/media/recordings.js';
 import { alignmentDefinitions } from '../data/media/alignments.js';
+import { getAlignmentRange } from './alignmentRanges.js';
 import { getRangeBounds } from './alignmentTiming.js';
 import { resolveServiceRange } from './serviceRanges.js';
 
@@ -29,11 +30,6 @@ function getSegmentKey(segmentIds) {
 
 function getAlignmentRanges(alignment) {
   return alignment?.ranges || [];
-}
-
-function findAlignmentRange(alignment, segmentIds) {
-  const segmentKey = getSegmentKey(segmentIds);
-  return getAlignmentRanges(alignment).find(range => getSegmentKey(range.segment_ids) === segmentKey);
 }
 
 function validateServiceRange(serviceText, range, label, errors) {
@@ -184,7 +180,7 @@ export function validateData() {
       if (alignment && exercise.media.recording_id && alignment.recording_id !== exercise.media.recording_id) {
         errors.push(`Exercise "${exercise.id}" media recording does not match alignment "${exercise.media.alignment_id}".`);
       }
-      if (alignment && !findAlignmentRange(alignment, exercise.segment_ids)) {
+      if (alignment && !getAlignmentRange(exercise.media.alignment_id, exercise.segment_ids, exercise.media.recording_id, alignmentsById)) {
         errors.push(`Exercise "${exercise.id}" segment_ids do not match alignment "${exercise.media.alignment_id}".`);
       }
     }
