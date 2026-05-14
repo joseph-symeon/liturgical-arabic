@@ -189,6 +189,28 @@ const sourceSegments = {
       }
     ]
   },
+  "vespers-litany-country-authorities": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": [
+      "litany",
+      "vespers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "vespers-country-authorities-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "support-good-work-001"
+      },
+      {
+        "text": "،"
+      }
+    ]
+  },
   "litany-peace-this-city": {
     "speaker": "role-deacon",
     "break_before": true,
@@ -1764,6 +1786,1352 @@ const sourceSegments = {
       {
         "text": "."
       }
+    ]
+  },
+  "vespers-opening-blessed-is-our-god": {
+    "speaker": "role-priest",
+    "tags": [
+      "opening",
+      "vespers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "blessed-is-our-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "always-now-ever-ages-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "vespers-opening-amen": {
+    "speaker": "role-choir",
+    "tags": [
+      "opening",
+      "vespers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "vespers-come-worship-god-king": {
+    "speaker": "role-reader",
+    "tags": [
+      "come-let-us-worship",
+      "opening",
+      "vespers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "come-worship-fall-down-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "before-god-our-king-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "vespers-come-worship-christ-king": {
+    "speaker": "role-reader",
+    "break_before": true,
+    "tags": [
+      "come-let-us-worship",
+      "opening",
+      "vespers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "come-worship-fall-down-001"
+      },
+      {
+        "text": " لِ"
+      },
+      {
+        "phrase_id": "christ-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "our-king-god-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "vespers-come-worship-christ-himself": {
+    "speaker": "role-reader",
+    "break_before": true,
+    "tags": [
+      "come-let-us-worship",
+      "opening",
+      "vespers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "come-worship-fall-down-001"
+      },
+      {
+        "text": " لِ"
+      },
+      {
+        "phrase_id": "christ-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "this-is-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "our-king-lord-god-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "vespers-psalm103-glory-both-now": {
+    "speaker": "role-reader",
+    "break_before": true,
+    "tags": [
+      "doxology",
+      "psalm-103",
+      "vespers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "departed-glory-trinity-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "departed-both-now-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "vespers-psalm103-alleluia-glory": {
+    "speaker": "role-reader",
+    "break_before": true,
+    "tags": [
+      "psalm-103",
+      "vespers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "cherubic-alleluia-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "thanksgiving-after-communion-glory-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "thanksgiving-after-communion-thrice-001"
+      }
+    ]
+  },
+  "vespers-psalm103-our-god-hope": {
+    "speaker": "role-reader",
+    "break_before": true,
+    "tags": [
+      "doxology",
+      "psalm-103",
+      "vespers"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "vespers-our-god-hope-glory-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "vespers-lord-cried-refrain": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-lord-cried-to-thee-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-hear-me-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-hear-me-o-lord-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-lord-cried-to-thee-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-hear-me-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-give-ear-supplication-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-when-i-cry-to-thee-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-hear-me-o-lord-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-prayer-incense": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-prayer-incense-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-lifting-hands-sacrifice-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-hear-me-o-lord-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-set-watch": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-set-watch-mouth-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-door-lips-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-incline-not": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-incline-not-heart-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-excuses-in-sins-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-men-iniquity": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-men-work-iniquity-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-not-join-chosen-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-just-man": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-just-man-correct-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-oil-sinner-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-prayer-pleasures": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-prayer-pleasures-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-judges-swallowed-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-clinging-rock-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-hear-words": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-hear-my-words-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-words-sweet-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-earth-broken-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-bones-scattered-hades-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-eyes-to-thee": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-eyes-to-thee-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-trusted-thee-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-take-not-soul-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-keep-snare": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-keep-me-snare-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-traps-workers-iniquity-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-wicked-fall": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-wicked-fall-nets-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-alone-until-pass-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-voice-cried": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-voice-cried-lord-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-voice-supplicated-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-poured-supplication": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-poured-supplication-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-tell-sorrows-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-spirit-overwhelmed": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-spirit-overwhelmed-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-thou-knewest-paths-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-secret-snare": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-this-way-walked-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-hid-snare-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-looked-right": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-looked-right-hand-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-no-one-knew-me-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-refuge-failed": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-refuge-failed-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-no-one-cared-soul-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-thou-art-refuge": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-cried-to-thee-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-thou-art-refuge-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-portion-living-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-attend-cry": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-attend-cry-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-brought-low-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-deliver-persecutors": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-deliver-persecutors-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-stronger-than-i-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-10": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-10-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-bring-soul-prison-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-praise-thy-name-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-9": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-9-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-righteous-wait-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-until-recompense-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-8": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-8-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-depths-cried-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-lord-hear-voice-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-7": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-7-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-ears-attentive-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-voice-supplication-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-6": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-6-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-mark-iniquities-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-who-shall-stand-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-with-thee-forgiveness-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-5": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-5-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-because-name-waited-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-soul-waited-words-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-soul-hoped-lord-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-4": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-4-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-morning-watch-night-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-israel-trust-lord-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-3": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-3-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-with-lord-mercy-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-abundant-redemption-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-deliver-israel-iniquities-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-2": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-2-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-praise-lord-nations-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-praise-him-peoples-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-lord-cried-verse-1": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["psalm", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-verse-1-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-mercy-great-toward-us-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-truth-endures-forever-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-gladsome-light-wisdom": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-wisdom-001"},
+      {"text": "! "},
+      {"phrase_id": "vespers-stand-upright-001"},
+      {"text": "!"}
+    ]
+  },
+  "vespers-gladsome-light-hymn": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["hymn", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-gladsome-light-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-holy-glory-father-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-heavenly-holy-blessed-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-o-jesus-christ-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-come-sunset-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-beheld-evening-light-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-hymn-trinity-god-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-son-god-giver-life-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-worthy-all-times-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-praised-joyous-voices-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-world-glorifies-thee-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-prokeimenon-saturday": {
+    "speaker": "",
+    "break_before": true,
+    "tags": ["prokeimenon", "rubric", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-prokeimenon-saturday-rubric"}
+    ]
+  },
+  "vespers-prokeimenon-refrain": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["prokeimenon", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-lord-is-king-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-clothed-majesty-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-prokeimenon-once-rubric"}
+    ]
+  },
+  "vespers-prokeimenon-verse-1": {
+    "speaker": "",
+    "break_before": true,
+    "tags": ["prokeimenon", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-prokeimenon-verse-1-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-lord-robed-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-girded-strength-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-prokeimenon-refrain-rubric"}
+    ]
+  },
+  "vespers-prokeimenon-verse-2": {
+    "speaker": "",
+    "break_before": true,
+    "tags": ["prokeimenon", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-prokeimenon-verse-2-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-established-world-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-world-not-moved-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-prokeimenon-refrain-rubric"}
+    ]
+  },
+  "vespers-fervent-let-us-say": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-whole-soul-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-whole-mind-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-lord-have-mercy": {
+    "speaker": "role-choir",
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "lord-have-mercy-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-lord-almighty": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-lord-almighty-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-god-fathers-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-hearken-mercy-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-have-mercy-god": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-have-mercy-god-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-great-mercy-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-hearken-mercy-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-lord-have-mercy-thrice": {
+    "speaker": "role-choir",
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "lord-have-mercy-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-fervent-thrice-rubric"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-repeat-rubric"}
+    ]
+  },
+  "vespers-fervent-pious-orthodox": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-again-pray-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-pious-orthodox-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-hierarchs": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-again-pray-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-father-metropolitan-001"},
+      {"text": " "},
+      {"phrase_id": "rubric-so-and-so-001"},
+      {"text": "، ("},
+      {"phrase_id": "vespers-fervent-archpastor-001"},
+      {"text": " "},
+      {"phrase_id": "rubric-so-and-so-001"},
+      {"text": ")."}
+    ]
+  },
+  "vespers-fervent-clergy-monastics": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-again-pray-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-brethren-clergy-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-monastics-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-brotherhood-christ-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-mercy-life": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-again-pray-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-mercy-life-peace-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-servants-orthodox-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-community-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-gathered-church-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-departed": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-again-pray-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-founders-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-departed-fathers-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-lie-asleep-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-good-works": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-again-pray-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-bear-fruit-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-venerable-temple-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-labor-sing-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-people-present-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-await-mercy-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-priest-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["doxology", "fervent-supplication", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-fervent-merciful-god-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-ascribe-glory-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-fervent-father-son-spirit-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-fervent-now-ever-ages-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-fervent-amen": {
+    "speaker": "role-choir",
+    "tags": ["fervent-supplication", "litany", "vespers"],
+    "phrases": [
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-evening-vouchsafe": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["evening-prayer", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-evening-vouchsafe-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-evening-keep-without-sin-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-evening-blessed-fathers": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["evening-prayer", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-evening-blessed-lord-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-evening-god-fathers-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-evening-praised-name-001"},
+      {"text": "، "},
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-evening-mercy-hope": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["evening-prayer", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-evening-mercy-upon-us-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-evening-hope-on-thee-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-evening-blessed-statutes": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["evening-prayer", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-evening-blessed-lord-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-evening-teach-commandments-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-evening-blessed-master-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-evening-understand-statutes-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-evening-blessed-holy-one-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-evening-enlighten-statutes-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-evening-mercy-works": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["evening-prayer", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-evening-mercy-forever-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-evening-despise-not-works-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-evening-final-doxology": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["doxology", "evening-prayer", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-evening-belongeth-worship-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-evening-belongeth-praise-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-evening-belongeth-glory-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-evening-father-son-spirit-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-evening-now-ever-ages-001"},
+      {"text": ". "},
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-supplication-complete-evening": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["litany-of-supplication", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-supplication-complete-evening-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-supplication-lord-have-mercy": {
+    "speaker": "role-choir",
+    "tags": ["litany-of-supplication", "response", "vespers"],
+    "phrases": [
+      {"phrase_id": "lord-have-mercy-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-supplication-whole-evening": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["litany-of-supplication", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-supplication-whole-evening-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-supplication-perfect-evening-001"},
+      {"text": "، "},
+      {"phrase_id": "supplication-ask-lord-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-supplication-grant-this-repeat": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["litany-of-supplication", "response", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-supplication-grant-this-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-supplication-repeat-grant-rubric"}
+    ]
+  },
+  "vespers-supplication-priest-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["doxology", "litany-of-supplication", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-supplication-good-god-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-supplication-ascribe-glory-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-supplication-father-son-spirit-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-supplication-now-ever-ages-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-supplication-amen": {
+    "speaker": "role-choir",
+    "tags": ["litany-of-supplication", "response", "vespers"],
+    "phrases": [
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-peace-priest-peace": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["peace", "vespers"],
+    "phrases": [
+      {"phrase_id": "peace-be-to-all-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-peace-choir-and-spirit": {
+    "speaker": "role-choir",
+    "tags": ["peace", "response", "vespers"],
+    "phrases": [
+      {"phrase_id": "and-to-thy-spirit-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-peace-bow-heads": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["peace", "vespers"],
+    "phrases": [
+      {"phrase_id": "lords-prayer-bow-heads-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-peace-to-thee": {
+    "speaker": "role-choir",
+    "tags": ["peace", "response", "vespers"],
+    "phrases": [
+      {"phrase_id": "to-thee-o-lord"},
+      {"text": "."}
+    ]
+  },
+  "vespers-peace-priest-bowing-address": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["bowing-prayer", "peace", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-peace-lord-our-god-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-bowed-heavens-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-peace-came-salvation-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-look-servants-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-peace-priest-bowing-servants": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["bowing-prayer", "peace", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-peace-bowed-heads-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-peace-inclined-necks-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-fearful-judge-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-not-help-men-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-awaiting-mercy-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-peace-expecting-salvation-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-peace-priest-bowing-guard": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["bowing-prayer", "peace", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-peace-guard-all-times-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-present-evening-night-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-guarded-adversary-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-vain-thoughts-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-peace-priest-doxology": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["doxology", "peace", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-peace-might-kingdom-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-father-son-spirit-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-peace-now-ever-ages-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-peace-amen": {
+    "speaker": "role-choir",
+    "tags": ["peace", "response", "vespers"],
+    "phrases": [
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-hymn-st-simeon": {
+    "speaker": "",
+    "break_before": true,
+    "tags": ["hymn", "simeon", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-simeon-now-depart-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-simeon-o-master-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-simeon-according-word-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-simeon-eyes-saw-salvation-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-simeon-prepared-peoples-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-simeon-light-gentiles-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-simeon-glory-israel-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-trisagion-holy-god": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["trisagion", "vespers"],
+    "phrases": [
+      {"phrase_id": "holy-god-001"},
+      {"text": "، "},
+      {"phrase_id": "holy-mighty-001"},
+      {"text": "، "},
+      {"phrase_id": "holy-immortal-001"},
+      {"text": "، "},
+      {"phrase_id": "have-mercy-on-us-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-trisagion-thrice-rubric"}
+    ]
+  },
+  "vespers-trisagion-glory-both-now": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["doxology", "trisagion", "vespers"],
+    "phrases": [
+      {"phrase_id": "departed-glory-trinity-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-both-now-001"},
+      {"text": ". "},
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-trisagion-all-holy-trinity-address": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["all-holy-trinity", "trisagion", "vespers"],
+    "phrases": [
+      {"phrase_id": "all-holy-trinity-001"},
+      {"text": "، "},
+      {"phrase_id": "all-holy-trinity-have-mercy-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-trisagion-all-holy-trinity-lord": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["all-holy-trinity", "paragraph-join", "trisagion", "vespers"],
+    "phrases": [
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "all-holy-trinity-cleanse-sins-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-trisagion-all-holy-trinity-master": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["all-holy-trinity", "paragraph-join", "trisagion", "vespers"],
+    "phrases": [
+      {"phrase_id": "vocative-o-master-001"},
+      {"text": " "},
+      {"phrase_id": "all-holy-trinity-pardon-iniquities-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-trisagion-all-holy-trinity-holy-one": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["all-holy-trinity", "paragraph-join", "trisagion", "vespers"],
+    "phrases": [
+      {"phrase_id": "vocative-o-holy-one-001"},
+      {"text": " "},
+      {"phrase_id": "all-holy-trinity-visit-heal-001"},
+      {"text": "، "},
+      {"phrase_id": "all-holy-trinity-name-sake-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-trisagion-lord-have-mercy-thrice": {
+    "speaker": "role-all",
+    "break_before": true,
+    "tags": ["response", "trisagion", "vespers"],
+    "phrases": [
+      {"phrase_id": "lord-have-mercy-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-trisagion-thrice-rubric"}
+    ]
+  },
+  "vespers-dismissal-wisdom": {
+    "speaker": "role-deacon",
+    "break_before": true,
+    "tags": ["dismissal", "vespers"],
+    "phrases": [
+      {"phrase_id": "wisdom-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-dismissal-father-bless": {
+    "speaker": "role-choir",
+    "tags": ["dismissal", "response", "vespers"],
+    "phrases": [
+      {"phrase_id": "amvon-father-bless-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-dismissal-christ-blessed": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["dismissal", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-dismissal-christ-existing-blessed-001"},
+      {"text": "، "},
+      {"phrase_id": "doxology-now-ever-ages-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-dismissal-preserve-faith": {
+    "speaker": "role-choir",
+    "tags": ["dismissal", "response", "vespers"],
+    "phrases": [
+      {"phrase_id": "amen-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-dismissal-preserve-faith-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-dismissal-all-orthodox-001"},
+      {"text": "، "},
+      {"phrase_id": "amen-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-dismissal-theotokos-save": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["dismissal", "theotokos", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-dismissal-most-holy-theotokos-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-dismissal-save-us-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-dismissal-more-honorable": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["dismissal", "hymn", "theotokos", "vespers"],
+    "phrases": [
+      {"phrase_id": "theotokos-hymn-more-honorable-001"},
+      {"text": "، "},
+      {"phrase_id": "theotokos-hymn-more-glorious-001"},
+      {"text": "، "},
+      {"phrase_id": "theotokos-hymn-without-corruption-001"},
+      {"text": "، "},
+      {"phrase_id": "theotokos-hymn-truly-magnify-001"},
+      {"text": " "},
+      {"phrase_id": "theotokos-hymn-we-magnify-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-dismissal-glory-christ": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["dismissal", "doxology", "vespers"],
+    "phrases": [
+      {"phrase_id": "vespers-dismissal-glory-christ-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-dismissal-our-hope-glory-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-dismissal-glory-lord-mercy": {
+    "speaker": "role-choir",
+    "break_before": true,
+    "tags": ["dismissal", "response", "vespers"],
+    "phrases": [
+      {"phrase_id": "departed-glory-trinity-001"},
+      {"text": "، "},
+      {"phrase_id": "departed-both-now-001"},
+      {"text": ". "},
+      {"phrase_id": "amen-001"},
+      {"text": ". "},
+      {"phrase_id": "lord-have-mercy-001"},
+      {"text": ". "},
+      {"phrase_id": "vespers-trisagion-thrice-rubric"},
+      {"text": " "},
+      {"phrase_id": "amvon-father-bless-001"},
+      {"text": "."}
+    ]
+  },
+  "vespers-dismissal-priest-main": {
+    "speaker": "role-priest",
+    "break_before": true,
+    "tags": ["dismissal", "vespers"],
+    "phrases": [
+      {"phrase_id": "dismissal-christ-true-god-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-dismissal-carried-simeon-001"},
+      {"text": "، "},
+      {"phrase_id": "vespers-dismissal-risen-dead-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-mother-intercessions-001"},
+      {"text": " "},
+      {"phrase_id": "dismissal-mother-pure-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-cross-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-heavenly-powers-001"},
+      {"text": " "},
+      {"phrase_id": "dismissal-bodiless-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-forerunner-prophet-001"},
+      {"text": " "},
+      {"phrase_id": "dismissal-john-baptist-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-apostles-001"},
+      {"text": " "},
+      {"phrase_id": "dismissal-all-laudable-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-martyrs-001"},
+      {"text": " "},
+      {"phrase_id": "dismissal-victorious-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-godbearing-fathers-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-rubric-and-saint-001"},
+      {"text": " "},
+      {"phrase_id": "dismissal-rubric-so-and-so-001"},
+      {"text": " "},
+      {"phrase_id": "vespers-dismissal-patron-community-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-joachim-anna-001"},
+      {"text": " "},
+      {"phrase_id": "dismissal-grandparents-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-all-saints-001"},
+      {"text": "، "},
+      {"phrase_id": "dismissal-have-mercy-save-001"},
+      {"text": " "},
+      {"phrase_id": "dismissal-good-lover-001"},
+      {"text": "."}
     ]
   },
   "litany-peace-healthful-seasons": {

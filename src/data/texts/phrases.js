@@ -722,6 +722,7 @@ const phrases = {
     "tags": [
       "repeated",
       "response",
+      "section: Blessed is our God",
       "section: Blessed is the Kingdom",
       "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
@@ -754,6 +755,7 @@ const phrases = {
     "tags": [
       "blessing",
       "gospel",
+      "section: The Peace",
       "section: The Reading of the Gospel"
     ]
   },
@@ -2296,6 +2298,128 @@ const phrases = {
       "section: Litany of Peace"
     ]
   },
+  "section-great-litany": {
+    "arabic": "الطِلْبَةُ السَّلامِيَّةُ الكُبْرَى",
+    "translation": "The Great Litany",
+    "literal": "The Great Litany of Peace",
+    "tags": [
+      "litany",
+      "section-title",
+      "section: The Great Litany",
+      "vespers"
+    ]
+  },
+  "section-o-lord-i-have-cried": {
+    "arabic": "يا ربِّ إليكَ صَرَخت",
+    "translation": "O Lord, I Have Cried",
+    "literal": "O Lord, to you I have cried",
+    "tags": [
+      "section-title",
+      "section: O Lord, I Have Cried",
+      "vespers"
+    ]
+  },
+  "section-o-gladsome-light": {
+    "arabic": "يا نوراً بَهِيّاً",
+    "translation": "O Gladsome Light",
+    "literal": "O radiant light",
+    "tags": [
+      "hymn",
+      "section-title",
+      "section: O Gladsome Light",
+      "vespers"
+    ]
+  },
+  "section-prokeimenon": {
+    "arabic": "بروكيمِنُن",
+    "translation": "Prokeimenon",
+    "literal": "Prokeimenon",
+    "tags": [
+      "prokeimenon",
+      "section-title",
+      "section: Prokeimenon",
+      "vespers"
+    ]
+  },
+  "section-litany-of-fervent-supplication": {
+    "arabic": "الطِلبةُ الإلحاحيَّة",
+    "translation": "The Litany of Fervent Supplication",
+    "literal": "The Insistent Litany",
+    "tags": [
+      "fervent-supplication",
+      "litany",
+      "section-title",
+      "section: The Litany of Fervent Supplication",
+      "vespers"
+    ]
+  },
+  "section-evening-prayer": {
+    "arabic": "صلاةُ المساء",
+    "translation": "The Evening Prayer",
+    "literal": "Prayer of the evening",
+    "tags": [
+      "evening-prayer",
+      "section-title",
+      "section: The Evening Prayer",
+      "vespers"
+    ]
+  },
+  "section-vespers-litany-of-supplication": {
+    "arabic": "الطِلبة الإبتِهاليَّة",
+    "translation": "The Litany of Supplication",
+    "literal": "The Supplicatory Litany",
+    "tags": [
+      "litany-of-supplication",
+      "section-title",
+      "section: The Litany of Supplication",
+      "vespers"
+    ]
+  },
+  "section-the-peace": {
+    "arabic": "السلام",
+    "translation": "The Peace",
+    "literal": "The Peace",
+    "tags": [
+      "peace",
+      "section-title",
+      "section: The Peace",
+      "vespers"
+    ]
+  },
+  "section-hymn-st-simeon": {
+    "arabic": "تَسْبِحةُ القدّيسِ سمعانَ القابِلِ الإله",
+    "translation": "The Hymn of St. Simeon the God-Receiver",
+    "literal": "The hymn of Saint Simeon the God-Receiver",
+    "tags": [
+      "hymn",
+      "section-title",
+      "section: The Hymn of St. Simeon the God-Receiver",
+      "simeon",
+      "vespers"
+    ]
+  },
+  "section-trisagion-prayers": {
+    "arabic": "صلاةُ التريصاجيون",
+    "translation": "The Trisagion Prayers",
+    "literal": "Prayer of the Trisagion",
+    "tags": [
+      "section-title",
+      "section: The Trisagion Prayers",
+      "trisagion",
+      "vespers"
+    ]
+  },
+  "section-vespers-dismissal": {
+    "arabic": "الخَتم",
+    "translation": "The Dismissal",
+    "literal": "The Dismissal",
+    "tags": [
+      "dismissal",
+      "section-title",
+      "section: The Dismissal",
+      "vespers"
+    ]
+  },
   "entrance-bless-master-001": {
     "arabic": "بارِكْ",
     "translation": "Bless master",
@@ -2342,6 +2466,7 @@ const phrases = {
     "literal": "And to your spirit also",
     "tags": [
       "response",
+      "section: The Peace",
       "section: The Reading of the Gospel"
     ]
   },
@@ -2408,6 +2533,7 @@ const phrases = {
     "tags": [
       "doxology",
       "repeated",
+      "section: Blessed is our God",
       "section: The Preparation for the Divine Liturgy",
       "section: Thrice-Holy Hymn"
     ]
@@ -2464,6 +2590,7 @@ const phrases = {
     "tags": [
       "blessing",
       "clergy-dialogue",
+      "section: Blessed is our God",
       "section: The Preparation for the Divine Liturgy"
     ]
   },
@@ -3135,6 +3262,18 @@ const phrases = {
       "section: Litany of Peace"
     ]
   },
+  "vespers-country-authorities-001": {
+    "arabic": "مِنْ أَجْلِ حُكّامِ هَذا البَلَدِ",
+    "translation": "For our country, its president (or appropriate head of state)",
+    "literal": "For the rulers of this country",
+    "tags": [
+      "civil-authorities",
+      "litany",
+      "petition",
+      "section: The Great Litany",
+      "vespers"
+    ]
+  },
   "father-metropolitan-001": {
     "arabic": "مِنْ أَجْلِ أَبِينَا وَمِتْرُوبُولِيتِنَا",
     "translation": "For our father and metropolitan",
@@ -3196,6 +3335,7 @@ const phrases = {
     "tags": [
       "come-let-us-worship",
       "course",
+      "section: Blessed is our God",
       "unit-2",
       "worship"
     ]
@@ -3207,6 +3347,7 @@ const phrases = {
     "tags": [
       "come-let-us-worship",
       "course",
+      "section: Blessed is our God",
       "unit-2",
       "worship"
     ]
@@ -3220,6 +3361,7 @@ const phrases = {
       "come-let-us-worship",
       "course",
       "reusable",
+      "section: Blessed is our God",
       "unit-2"
     ]
   },
@@ -3230,6 +3372,7 @@ const phrases = {
     "tags": [
       "come-let-us-worship",
       "course",
+      "section: Blessed is our God",
       "unit-2",
       "worship"
     ]
@@ -3241,6 +3384,7 @@ const phrases = {
     "tags": [
       "come-let-us-worship",
       "course",
+      "section: Blessed is our God",
       "unit-2",
       "worship"
     ]
@@ -3305,6 +3449,7 @@ const phrases = {
       "come-let-us-worship",
       "course",
       "reusable",
+      "section: Blessed is our God",
       "unit-2",
       "worship"
     ]
@@ -3423,6 +3568,27 @@ const phrases = {
       "departed",
       "homepage",
       "title"
+    ]
+  },
+  "homepage-great-vespers-001": {
+    "arabic": "صَلاةُ الغُرُوبِ الكُبْرَى",
+    "translation": "Great Vespers",
+    "literal": "The Great Sunset Prayer",
+    "tags": [
+      "homepage",
+      "title",
+      "vespers"
+    ]
+  },
+  "section-blessed-is-our-god": {
+    "arabic": "تَبارَكَ اللهُ إِلَهُنا",
+    "translation": "Blessed is our God",
+    "literal": "Blessed is our God",
+    "tags": [
+      "blessing",
+      "section-title",
+      "section: Blessed is our God",
+      "vespers"
     ]
   },
   "homepage-for-departed-001": {
@@ -5606,6 +5772,7 @@ const phrases = {
       "deacon",
       "faithful",
       "hymn",
+      "section: Psalm 103",
       "section: The Cherubic Hymn"
     ]
   },
@@ -5623,7 +5790,7 @@ const phrases = {
     ]
   },
   "cherubic-alleluia-001": {
-    "arabic": "هَلِلُويًا، هَلِلُويًا، هَلِلُويًا",
+    "arabic": "هَلِلُويَا، هَلِلُويَا، هَلِلُويَا",
     "translation": "Alleluia, alleluia, alleluia",
     "literal": "Alleluia, alleluia, alleluia",
     "tags": [
@@ -11590,6 +11757,7 @@ const phrases = {
     "literal": "let us bow our heads to the Lord",
     "tags": [
       "lord's-prayer",
+      "section: The Peace",
       "section: The Lord's Prayer"
     ]
   },
@@ -14111,6 +14279,66 @@ const phrases = {
       "section: The Dismissal"
     ]
   },
+  "vespers-dismissal-christ-existing-blessed-001": {
+    "arabic": "المَسيحُ إلهُنا، الذي هو مُبارَكٌ كُلَّ حينٍ",
+    "translation": "Christ our God, the Existing One, is blessed always",
+    "literal": "Christ our God, who is blessed at every time",
+    "tags": ["dismissal", "section: The Dismissal", "vespers"]
+  },
+  "vespers-dismissal-preserve-faith-001": {
+    "arabic": "لِيُوَطّدِ الرَّبُّ الإلهُ الإيمانَ المُسْتَقيمَ الرأي",
+    "translation": "Preserve, O God, the holy Orthodox faith",
+    "literal": "may the Lord God establish the right-believing faith",
+    "tags": ["dismissal", "orthodoxy", "response", "section: The Dismissal", "vespers"]
+  },
+  "vespers-dismissal-all-orthodox-001": {
+    "arabic": "مَعَ جَميعِ المَسيحيينَ الأُرْثوذُكْسيينَ إلى الأبَد",
+    "translation": "and all Orthodox Christians, unto ages of ages",
+    "literal": "with all Orthodox Christians forever",
+    "tags": ["dismissal", "orthodoxy", "response", "section: The Dismissal", "vespers"]
+  },
+  "vespers-dismissal-most-holy-theotokos-001": {
+    "arabic": "أيّتُها الفائقُ قُدسُها والدةُ الإلهِ",
+    "translation": "Most-holy Theotokos",
+    "literal": "O exceedingly holy Theotokos",
+    "tags": ["dismissal", "section: The Dismissal", "theotokos", "vespers"]
+  },
+  "vespers-dismissal-save-us-001": {
+    "arabic": "خَلِّصينا",
+    "translation": "save us",
+    "literal": "save us",
+    "tags": ["dismissal", "petition", "section: The Dismissal", "theotokos", "vespers"]
+  },
+  "vespers-dismissal-glory-christ-001": {
+    "arabic": "المَجْدُ لَكَ أيُّها المسيحُ الإلهُ",
+    "translation": "Glory to Thee, O Christ our God",
+    "literal": "glory to you, O Christ God",
+    "tags": ["christ", "dismissal", "doxology", "section: The Dismissal", "vespers"]
+  },
+  "vespers-dismissal-our-hope-glory-001": {
+    "arabic": "يا رجاءَنا، المَجْدُ لَك",
+    "translation": "and our Hope, glory to Thee",
+    "literal": "O our hope, glory to you",
+    "tags": ["christ", "dismissal", "doxology", "section: The Dismissal", "vespers"]
+  },
+  "vespers-dismissal-carried-simeon-001": {
+    "arabic": "يا مَنْ ارْتَضى أنْ يُحْمَلَ على ذِراعَيْ سِمْعانَ الصدّيقِ مِنْ أَجْلِ خَلاصِنا",
+    "translation": "who deigned to be carried in the arms of Simeon the Righteous for our salvation",
+    "literal": "who was pleased to be carried on the arms of righteous Simeon for our salvation",
+    "tags": ["dismissal", "presentation", "section: The Dismissal", "simeon", "vespers"]
+  },
+  "vespers-dismissal-risen-dead-001": {
+    "arabic": "ويامن قامَ مِن بينِ الأمواتِ",
+    "translation": "and rose from the dead",
+    "literal": "and who rose from among the dead",
+    "tags": ["dismissal", "resurrection", "section: The Dismissal", "vespers"]
+  },
+  "vespers-dismissal-patron-community-001": {
+    "arabic": "شَفِيْعِ وَحامي هَذِهِ الرَّعِيَّةِ المُقَدَّسة",
+    "translation": "the patron and protector of this holy community",
+    "literal": "intercessor and protector of this holy parish",
+    "tags": ["dismissal", "patron", "section: The Dismissal", "vespers"]
+  },
   "dismissal-prayers-fathers-001": {
     "arabic": "بِصَلَواتِ آبائِنا القِدِّيسين",
     "translation": "Through the prayers of our holy fathers",
@@ -14144,6 +14372,7 @@ const phrases = {
     "translation": "Glory to thee, O God",
     "literal": "glory to you, O God",
     "tags": [
+      "section: Psalm 103",
       "thanksgiving-prayers",
       "section: First Prayer"
     ]
@@ -14154,6 +14383,7 @@ const phrases = {
     "literal": "(three times)",
     "tags": [
       "rubric",
+      "section: Psalm 103",
       "thanksgiving-prayers",
       "section: First Prayer"
     ]
@@ -15441,7 +15671,8 @@ const phrases = {
     "literal": "glory to the Father and the Son and the Holy Spirit",
     "tags": [
       "departed",
-      "doxology"
+      "doxology",
+      "section: Psalm 103"
     ]
   },
   "departed-god-descended-hades-001": {
@@ -15485,9 +15716,210 @@ const phrases = {
     "literal": "now and every time and unto the age of ages",
     "tags": [
       "departed",
-      "doxology"
+      "doxology",
+      "section: Psalm 103"
     ]
   },
+  "vespers-our-god-hope-glory-001": {
+    "arabic": "يا إلهَنا وَرَجاءَنا لَكَ المَجْد",
+    "translation": "O our God and our Hope, glory to Thee",
+    "literal": "O our God and our hope, to you be glory",
+    "tags": [
+      "doxology",
+      "section: Psalm 103",
+      "vespers"
+    ]
+  },
+  "vespers-lord-cried-to-thee-001": { "arabic": "يا ربِّ إليكَ صَرَخْتُ", "translation": "O Lord, I have cried out unto Thee", "literal": "O Lord, to you I cried", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-hear-me-001": { "arabic": "فاسْتَمِعْ لي", "translation": "hear Thou me", "literal": "so hear me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-hear-me-o-lord-001": { "arabic": "إسْتَمِعْ لي يا رب", "translation": "hear Thou me, O Lord", "literal": "hear me, O Lord", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-give-ear-supplication-001": { "arabic": "أنْصِتْ إلى صوتِ تَضَرُّعي", "translation": "Give ear to the voice of my supplication", "literal": "give ear to the voice of my supplication", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-when-i-cry-to-thee-001": { "arabic": "حينَ أصْرُخُ إليك", "translation": "when I cry out unto Thee", "literal": "when I cry to you", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-prayer-incense-001": { "arabic": "لِتَسْتَقِمْ صَلاتي كالبَخورِ أمامَك", "translation": "Let my prayer be set forth before Thee as the incense", "literal": "let my prayer be made straight like incense before you", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-lifting-hands-sacrifice-001": { "arabic": "ولْيَكُنْ رَفْعُ يَدَيَّ كَذَبيحَةٍ مَسائيَّةٍ", "translation": "and the lifting up of my hands as the evening sacrifice", "literal": "and let the lifting of my hands be an evening sacrifice", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-set-watch-mouth-001": { "arabic": "إجْعَلْ يا رَبُّ حارِساً لِفَمي", "translation": "Set a watch, O Lord, before my mouth", "literal": "set, O Lord, a guard for my mouth", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-door-lips-001": { "arabic": "وباباً حَصيناً على شَفَتَيّ", "translation": "and a protecting door round about my lips", "literal": "and a fortified door upon my lips", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-incline-not-heart-001": { "arabic": "لا تُمِلْ قَلْبي إلى كَلامِ الشرِّ", "translation": "Incline not my heart to evil words", "literal": "do not incline my heart to words of evil", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-excuses-in-sins-001": { "arabic": "فَيَتَعَلَّلَ بِعِلَلِ الخطايا", "translation": "to make excuses in sins", "literal": "to excuse itself with excuses for sins", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-men-work-iniquity-001": { "arabic": "مَعَ الناسِ العامِلينَ الإثْمَ", "translation": "With men that work iniquity", "literal": "with people who work iniquity", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-not-join-chosen-001": { "arabic": "ولا أتَّفِقُ مَعَ مُخْتاريهِم", "translation": "and I will not communicate with the choicest of them", "literal": "and I will not agree with their chosen ones", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-just-man-correct-001": { "arabic": "سَيؤَدِّبُني الصدِّيقُ بِرَحْمَةٍ ويوَبِّخُني", "translation": "The just man shall correct me in mercy and shall reprove me", "literal": "the righteous one will discipline me with mercy and rebuke me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-oil-sinner-001": { "arabic": "أمّا زيتُ الخاطِئِ فلا يُدهَنُ به رأسي", "translation": "but let not the oil of the sinner anoint my head", "literal": "but the oil of the sinner shall not anoint my head", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-prayer-pleasures-001": { "arabic": "لأنَّ صَلاتي أيضاً في مَسَرَّتِهِمْ", "translation": "For my prayer also shall still be against the things with which they are well pleased", "literal": "for my prayer also is in their pleasures", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-judges-swallowed-001": { "arabic": "قَدِ ابْتُلِعَتْ قُضاتُهُمْ", "translation": "their judges have been swallowed up", "literal": "their judges have been swallowed", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-clinging-rock-001": { "arabic": "مُلْتَصِقينَ بِصَخْرَة", "translation": "falling upon the rock", "literal": "clinging to a rock", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-hear-my-words-001": { "arabic": "يَسْمَعونَ كَلِماتي", "translation": "They shall hear my words", "literal": "they hear my words", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-words-sweet-001": { "arabic": "فإنّها قَدِ اسْتُلِذَّتْ", "translation": "for they are sweet", "literal": "for they have been found sweet", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-earth-broken-001": { "arabic": "مِثْلَ سَمْنِ الأرْضِ المُنْشَقِّ على الأرْضِ", "translation": "as when the thickness of the earth is broken upon the ground", "literal": "like the fatness of the earth split upon the ground", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-bones-scattered-hades-001": { "arabic": "تَبَدَّدَتْ عِظامُهُمْ حولَ الجَحيم", "translation": "their bones are scattered by the side of hades", "literal": "their bones were scattered around hades", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-eyes-to-thee-001": { "arabic": "لأنَّ يا ربُّ، يا ربُّ إليكَ عَيْنَيَّ", "translation": "But to Thee, O Lord, Lord, are mine eyes", "literal": "for, O Lord, O Lord, my eyes are toward you", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-trusted-thee-001": { "arabic": "وعليكَ تَوَكَّلْتُ", "translation": "in Thee have I put my trust", "literal": "and on you I have relied", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-take-not-soul-001": { "arabic": "فلا تَنْزِعْ نَفسي", "translation": "take not away my soul", "literal": "so do not take away my soul", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-keep-me-snare-001": { "arabic": "إحْفَظْنِي مِنَ الفَخِّ الذي نَصَبوهُ لي", "translation": "Keep me from the snare which they have laid for me", "literal": "keep me from the snare that they set for me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-traps-workers-iniquity-001": { "arabic": "ومِنْ مَعاثِرِ فاعِلي الإثْم", "translation": "and the traps of the workers of iniquity", "literal": "and from the stumbling blocks of those who work iniquity", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-wicked-fall-nets-001": { "arabic": "تَسْقُطُ الخَطَأَةُ في مَصائِدِهِم", "translation": "Let the wicked fall into their own nets", "literal": "sinners fall into their traps", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-alone-until-pass-001": { "arabic": "وأكونُ أنا على انْفِرادٍ إلى أنْ أعْبُر", "translation": "whilst I alone escape", "literal": "and I am alone until I pass through", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-voice-cried-lord-001": { "arabic": "بِصَوْتي إلى الرَّبِّ صَرَخْتُ", "translation": "I cried unto the Lord with my voice", "literal": "with my voice I cried to the Lord", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-voice-supplicated-001": { "arabic": "بِصَوْتي إلى الرَّبِّ تَضَرَّعْت", "translation": "with my voice unto the Lord, did I make my supplication", "literal": "with my voice to the Lord I made supplication", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-poured-supplication-001": { "arabic": "أسْكُبُ أمامَهُ تَضَرُّعي", "translation": "I poured out my supplication before Him", "literal": "I pour out before him my supplication", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-tell-sorrows-001": { "arabic": "وأحْزاني قُدّامَهُ أُخَبِّر", "translation": "I showed before Him my trouble", "literal": "and my sorrows before him I declare", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-spirit-overwhelmed-001": { "arabic": "عند فناءِ روحي منّي", "translation": "When my spirit was overwhelmed within me", "literal": "when my spirit fainted from me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-thou-knewest-paths-001": { "arabic": "أنتَ تعرِفُ سُبُلِي", "translation": "then Thou knewest my paths", "literal": "you know my ways", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-this-way-walked-001": { "arabic": "في هذا الطريقِ الذي كنتُ أسلُكُ فيهِ", "translation": "In the way wherein I walked", "literal": "in this way in which I was walking", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-hid-snare-001": { "arabic": "أخْفَوا ليَ فخاً", "translation": "have they secretly laid a snare for me", "literal": "they hid a snare for me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-looked-right-hand-001": { "arabic": "تأمَّلْتُ في الميامِنِ وأبْصَرْتُ", "translation": "I looked on my right hand, and beheld", "literal": "I looked to the right and saw", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-no-one-knew-me-001": { "arabic": "فلَمْ يَكُنْ مَنْ يَعرِفُني", "translation": "but there was no man that would know me", "literal": "but there was no one who knew me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-refuge-failed-001": { "arabic": "ضاعَ المَهْرَبُ منّي", "translation": "Refuge failed me", "literal": "escape was lost from me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-no-one-cared-soul-001": { "arabic": "ولَمْ يُوجَدْ مَنْ يَطْلُبُ نفسي", "translation": "no one cared for my soul", "literal": "and no one was found seeking my soul", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-cried-to-thee-001": { "arabic": "فصرَخْتُ إليكَ يا ربُّ", "translation": "I cried unto Thee, O Lord", "literal": "so I cried to you, O Lord", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-thou-art-refuge-001": { "arabic": "وقُلْتُ أنتَ هو رجائي", "translation": "I said: Thou art my refuge", "literal": "and I said: you are my hope", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-portion-living-001": { "arabic": "ونَصيبي في أرْضِ الأحياء", "translation": "and my portion in the land of the living", "literal": "and my portion in the land of the living", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-attend-cry-001": { "arabic": "أنْصِتْ إلى طِلْبَتي", "translation": "Attend unto my cry", "literal": "give ear to my petition", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-brought-low-001": { "arabic": "فإنّي قَدْ تَذَلَّلْتُ جداً", "translation": "for I am brought very low", "literal": "for I have been greatly humbled", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-deliver-persecutors-001": { "arabic": "نَجِّني مِنَ الذينَ يَضْطَهِدونَني", "translation": "Deliver me from my persecutors", "literal": "deliver me from those who persecute me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-stronger-than-i-001": { "arabic": "فإنَّهُمْ قد اعْتَزّوا عَلَيّ", "translation": "for they are stronger than I", "literal": "for they have become strong against me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-10-rubric": { "arabic": "استيخن ١٠.", "translation": "Verse 10.", "literal": "Verse 10.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-9-rubric": { "arabic": "استيخن ٩.", "translation": "Verse 9.", "literal": "Verse 9.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-8-rubric": { "arabic": "استيخن ٨.", "translation": "Verse 8.", "literal": "Verse 8.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-7-rubric": { "arabic": "استيخن ٧.", "translation": "Verse 7.", "literal": "Verse 7.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-6-rubric": { "arabic": "استيخن ٦.", "translation": "Verse 6.", "literal": "Verse 6.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-5-rubric": { "arabic": "استيخن ٥.", "translation": "Verse 5.", "literal": "Verse 5.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-4-rubric": { "arabic": "استيخن ٤.", "translation": "Verse 4.", "literal": "Verse 4.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-3-rubric": { "arabic": "استيخن ٣.", "translation": "Verse 3.", "literal": "Verse 3.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-2-rubric": { "arabic": "استيخن ٢.", "translation": "Verse 2.", "literal": "Verse 2.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-verse-1-rubric": { "arabic": "استيخن ١.", "translation": "Verse 1.", "literal": "Verse 1.", "tags": ["rubric", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-bring-soul-prison-001": { "arabic": "أَخرِج مِنَ الحَبسِ نَفسي", "translation": "Bring my soul out of prison", "literal": "bring my soul out from prison", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-praise-thy-name-001": { "arabic": "لِكَي أَشكُرَ اسْمَك", "translation": "that I may praise Thy Name", "literal": "so that I may thank your name", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-righteous-wait-001": { "arabic": "إيايَ يَنْتَظِرُ الصِدّيقونَ", "translation": "The righteous shall wait for me", "literal": "the righteous ones wait for me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-until-recompense-001": { "arabic": "حتى تُجازيَني", "translation": "until Thou recompense me", "literal": "until you reward me", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-depths-cried-001": { "arabic": "مِنَ الأعْماقِ صَرَخْتُ إليكَ يا ربُّ", "translation": "Out of the depths have I cried to Thee, O Lord", "literal": "from the depths I cried to you, O Lord", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-lord-hear-voice-001": { "arabic": "يا ربُّ اسْتَمِعْ صَوْتي", "translation": "Lord hear my voice", "literal": "O Lord, hear my voice", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-ears-attentive-001": { "arabic": "لِتَكُن أُذُناكَ مُصْغِيَتَينِ", "translation": "Let Thine ears be attentive", "literal": "let your ears be listening", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-voice-supplication-001": { "arabic": "إلى صَوتِ تَضَرُّعي", "translation": "to the voice of my supplication", "literal": "to the voice of my supplication", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-mark-iniquities-001": { "arabic": "إنْ كُنتَ لِلآثامِ راصِدًا يا رَبُّ", "translation": "If Thou, O Lord, shouldest mark iniquities", "literal": "if you should watch for iniquities, O Lord", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-who-shall-stand-001": { "arabic": "فَيا رَبُّ مَنْ يَثْبُتُ؟", "translation": "O Lord, who shall stand?", "literal": "then, O Lord, who shall stand?", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-with-thee-forgiveness-001": { "arabic": "فَإِنَّ مِن عِندِكَ الاغْتِفار", "translation": "For with Thee there is forgiveness", "literal": "for from you is forgiveness", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-because-name-waited-001": { "arabic": "مِنْ أَجلِ إسْمِكَ صَبَرْتُ لكَ يا رَبّ", "translation": "Because of Thy Name have I waited for Thee, O Lord", "literal": "for the sake of your name I waited for you, O Lord", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-soul-waited-words-001": { "arabic": "صَبَرَتْ نفسي في أَقوالِكَ", "translation": "my soul hath waited upon Thy word", "literal": "my soul waited in your words", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-soul-hoped-lord-001": { "arabic": "تَوَكَّلَتْ نَفسي على الرَّب", "translation": "my soul hath hoped in the Lord", "literal": "my soul trusted in the Lord", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-morning-watch-night-001": { "arabic": "مِنِ انْفِجارِ الصُّبْحِ إلى اللَّيل", "translation": "From the morning watch until night", "literal": "from the break of dawn until night", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-israel-trust-lord-001": { "arabic": "مِنِ انْفِجارِ الصُّبْحِ لِيَتَّكِلْ إِسْرائيلُ على الرَّب", "translation": "from the morning watch let Israel trust in the Lord", "literal": "from the break of dawn, let Israel rely on the Lord", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-with-lord-mercy-001": { "arabic": "لأنَّ مِنَ الرَّبِّ الرَّحْمَةَ", "translation": "For with the Lord there is mercy", "literal": "for from the Lord is mercy", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-abundant-redemption-001": { "arabic": "وَمِنْهُ النَّجاةَ الكَثيرة", "translation": "and with Him is abundant redemption", "literal": "and from him is much deliverance", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-deliver-israel-iniquities-001": { "arabic": "وَهْوَ يُنَجِّي إِسْرائيلَ مِنْ كُلِّ آثامِه", "translation": "and He will deliver Israel from all his iniquities", "literal": "and he saves Israel from all his iniquities", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-praise-lord-nations-001": { "arabic": "سَبِّحُوا الرَّبَّ يا جَمِيعَ الأُمَم", "translation": "Praise the Lord, all ye nations", "literal": "praise the Lord, O all nations", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-praise-him-peoples-001": { "arabic": "وَامْدَحُوهُ يا سائِرَ الشُّعوب", "translation": "praise Him, all ye people", "literal": "and praise him, O all peoples", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-mercy-great-toward-us-001": { "arabic": "لأَنَّ رَحْمَتَهُ قَدْ قَوِيَتْ عَلَينا", "translation": "For His mercy is great toward us", "literal": "for his mercy has become strong upon us", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-truth-endures-forever-001": { "arabic": "وَحَقُّ الرَّبِّ يَدُومُ إلى الدَّهر", "translation": "and the truth of the Lord endureth forever", "literal": "and the truth of the Lord endures unto the age", "tags": ["psalm", "section: O Lord, I Have Cried", "vespers"] },
+  "vespers-wisdom-001": { "arabic": "الحِكْمَة", "translation": "Wisdom", "literal": "Wisdom", "tags": ["deacon", "section: O Gladsome Light", "vespers"] },
+  "vespers-stand-upright-001": { "arabic": "فلْنَستقم", "translation": "Stand upright", "literal": "let us stand upright", "tags": ["deacon", "section: O Gladsome Light", "vespers"] },
+  "vespers-gladsome-light-001": { "arabic": "يا نوراً بَهِيّاً", "translation": "O gladsome Light", "literal": "O radiant light", "tags": ["hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-holy-glory-father-001": { "arabic": "لِقُدْسِ مَجْدِ الآبِ الذي لا يَموت", "translation": "of the holy glory of the immortal Father", "literal": "of the holiness of the glory of the Father who does not die", "tags": ["hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-heavenly-holy-blessed-001": { "arabic": "السَّماويّ، القدّوسُ، المَغْبوط", "translation": "heavenly, holy and blessed", "literal": "the heavenly, the holy, the blessed", "tags": ["hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-o-jesus-christ-001": { "arabic": "يا يسوعُ المسيح", "translation": "O Jesus Christ", "literal": "O Jesus Christ", "tags": ["christology", "hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-come-sunset-001": { "arabic": "إذْ قدْ بَلَغْنا إلى غُروبِ الشَّمْس", "translation": "Lo now that we have come to the setting of the sun", "literal": "since we have reached the setting of the sun", "tags": ["hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-beheld-evening-light-001": { "arabic": "ونَظرْنا نوراً مسائياً", "translation": "as we behold the evening light", "literal": "and we have seen an evening light", "tags": ["hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-hymn-trinity-god-001": { "arabic": "نُسبِّحُ الآبَ والابنَ والروحَ القُدُسَ الإله", "translation": "we hymn Thee: Father, Son, and Holy Spirit, God", "literal": "we praise the Father and the Son and the Holy Spirit, God", "tags": ["doxology", "hymn", "section: O Gladsome Light", "trinity", "vespers"] },
+  "vespers-son-god-giver-life-001": { "arabic": "فَيا ابنَ اللهِ المُعْطي الحياة", "translation": "O Son of God and Giver of life", "literal": "so O Son of God, the giver of life", "tags": ["christology", "hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-worthy-all-times-001": { "arabic": "إنَّكَ لَمُسْتَحِقٌّ في سائرِ الأوقات", "translation": "Meet it is for Thee at all times", "literal": "indeed you are worthy at all times", "tags": ["hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-praised-joyous-voices-001": { "arabic": "أنْ تُسَبَّحَ بِأَصْواتٍ بارَّة", "translation": "to be magnified by joyous voices", "literal": "to be praised with righteous voices", "tags": ["hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-world-glorifies-thee-001": { "arabic": "لِذلِكَ العالَمُ لَكَ يُمَجِّد", "translation": "Wherefore the whole world doth glorify Thee", "literal": "therefore the world glorifies you", "tags": ["hymn", "section: O Gladsome Light", "vespers"] },
+  "vespers-prokeimenon-saturday-rubric": { "arabic": "السبت", "translation": "Saturday", "literal": "Saturday", "tags": ["prokeimenon", "rubric", "section: Prokeimenon", "vespers"] },
+  "vespers-prokeimenon-once-rubric": { "arabic": "(مرَّةً واحدة)", "translation": "(once)", "literal": "(one time)", "tags": ["prokeimenon", "rubric", "section: Prokeimenon", "vespers"] },
+  "vespers-prokeimenon-refrain-rubric": { "arabic": "(اللازمة)", "translation": "(Refrain)", "literal": "(the refrain)", "tags": ["prokeimenon", "rubric", "section: Prokeimenon", "vespers"] },
+  "vespers-prokeimenon-verse-1-rubric": { "arabic": "ستيخن ١.", "translation": "Verse 1.", "literal": "Verse 1.", "tags": ["prokeimenon", "rubric", "section: Prokeimenon", "vespers"] },
+  "vespers-prokeimenon-verse-2-rubric": { "arabic": "ستيخن ٢.", "translation": "Verse 2.", "literal": "Verse 2.", "tags": ["prokeimenon", "rubric", "section: Prokeimenon", "vespers"] },
+  "vespers-lord-is-king-001": { "arabic": "اَلرَّبُّ قَدْ مَلَكَ", "translation": "The Lord is King", "literal": "the Lord has reigned", "tags": ["prokeimenon", "section: Prokeimenon", "vespers"] },
+  "vespers-clothed-majesty-001": { "arabic": "وَالجَلالَ لَبِسَ", "translation": "and hath clothed Himself with majesty", "literal": "and he has put on majesty", "tags": ["prokeimenon", "section: Prokeimenon", "vespers"] },
+  "vespers-lord-robed-001": { "arabic": "لَبِسَ الرَّبُّ القُوَّةَ", "translation": "The Lord is robed with strength", "literal": "the Lord has put on strength", "tags": ["prokeimenon", "section: Prokeimenon", "vespers"] },
+  "vespers-girded-strength-001": { "arabic": "وَتَمَنْطَقَ بِهَا", "translation": "He is girded with strength", "literal": "and he has girded himself with it", "tags": ["prokeimenon", "section: Prokeimenon", "vespers"] },
+  "vespers-established-world-001": { "arabic": "لأَنَّهُ وَطَّدَ المَسْكُونَةَ", "translation": "For He has established the world", "literal": "for he has made firm the inhabited world", "tags": ["prokeimenon", "section: Prokeimenon", "vespers"] },
+  "vespers-world-not-moved-001": { "arabic": "فَلَنْ تَتَزَعْزَع", "translation": "so that it shall never be moved", "literal": "so it will not be shaken", "tags": ["prokeimenon", "section: Prokeimenon", "vespers"] },
+  "vespers-fervent-whole-soul-001": { "arabic": "لِنَقُلْ جميعُنا مِنُ كُلِّ نُفوسِنا", "translation": "Let us say with our whole soul", "literal": "let us all say from all our souls", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-whole-mind-001": { "arabic": "ومِنْ كُلِّ نِيّاتِنا لِنَقُلْ", "translation": "and with our whole mind, let us say", "literal": "and from all our intentions let us say", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-lord-almighty-001": { "arabic": "أيُّها الرَّبُّ الضابطُ الكُلَّ", "translation": "O Lord Almighty", "literal": "O Lord, ruler of all", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-god-fathers-001": { "arabic": "إلهُ آبائِنا", "translation": "the God of our Fathers", "literal": "God of our fathers", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-hearken-mercy-001": { "arabic": "نَطْلُبُ مِنْكَ فاستجِبْ وارْحَم", "translation": "we pray thee, hearken and have mercy", "literal": "we ask from you, so answer and have mercy", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-have-mercy-god-001": { "arabic": "ارْحَمنا يا اللهُ", "translation": "Have mercy on us, O God", "literal": "have mercy on us, O God", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-great-mercy-001": { "arabic": "كعظيمِ رَحْمَتِكَ", "translation": "according to thy great mercy", "literal": "according to the greatness of your mercy", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-thrice-rubric": { "arabic": "(ثلاثاً)", "translation": "(thrice)", "literal": "(three times)", "tags": ["fervent-supplication", "rubric", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-trisagion-thrice-rubric": { "arabic": "(ثلاثاً)", "translation": "(thrice)", "literal": "(three times)", "tags": ["rubric", "section: The Trisagion Prayers", "trisagion", "vespers"] },
+  "vespers-fervent-repeat-rubric": { "arabic": "(تُعادُ بعدَ كُلِّ طِلْبة)", "translation": "(use this response until noted below)", "literal": "(repeated after every petition)", "tags": ["fervent-supplication", "rubric", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-again-pray-001": { "arabic": "وأيضاً نَطْلُبُ مِنْ أجْلِ", "translation": "Again we pray for", "literal": "and again we ask for the sake of", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-pious-orthodox-001": { "arabic": "المسيحيينَ الحَسَني العبادةِ الأُرْثوذُكْسيين", "translation": "all pious and Orthodox Christians", "literal": "the Orthodox Christians of good worship", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-father-metropolitan-001": { "arabic": "أَبينا ومِتْروبوليتِنا", "translation": "our father and metropolitan", "literal": "our father and metropolitan", "tags": ["fervent-supplication", "hierarchy", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-archpastor-001": { "arabic": "ورئيسِ كَهَنَتِنا", "translation": "and our bishop", "literal": "and our chief priest", "tags": ["fervent-supplication", "hierarchy", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-brethren-clergy-001": { "arabic": "إخوتِنا الكَهَنةِ والشمامِسَةِ", "translation": "our brethren: the priests and deacons", "literal": "our brothers, the priests and deacons", "tags": ["clergy", "fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-monastics-001": { "arabic": "والرُّهْبانِ والراهِباتِ", "translation": "and monastics", "literal": "and monks and nuns", "tags": ["clergy", "fervent-supplication", "litany", "monastic", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-brotherhood-christ-001": { "arabic": "وكُلِّ إخْوَتِنا في المسيح", "translation": "and all our brotherhood in Christ", "literal": "and all our brothers in Christ", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-mercy-life-peace-001": { "arabic": "الرَّحمةِ والحياةِ، والسَّلامِ والعافيةِ والخلاص", "translation": "mercy, life, peace, health, salvation", "literal": "mercy and life, peace and health and salvation", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-servants-orthodox-001": { "arabic": "لِعَبِيدِ اللهِ جميعِ المَسيحِيِّينَ الحَسَنِي العِبادَةِ الأُرثوذُكْسِيِّين", "translation": "for all Orthodox Christians of true worship", "literal": "for the servants of God, all Orthodox Christians of good worship", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-community-001": { "arabic": "السّاكِنِينَ والمَوجُودِينَ في هذه المَدِينة (أو الدّير أو القَرية)", "translation": "who live and dwell in this community", "literal": "dwelling and present in this city (or monastery or village)", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-gathered-church-001": { "arabic": "وَالمُجتمِعِينَ في هذه الكنيسة المقدَّسة", "translation": "and who are gathered in this holy church", "literal": "and gathered in this holy church", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-founders-001": { "arabic": "المُطَوَّبِينَ الدّائمي الذِّكْرِ الذِينَ عَمَّرُوا هذا الهَيكَلَ المُقَدَّس (أو الدّير)", "translation": "the blessed and ever-memorable founders of this holy church", "literal": "the blessed, ever-memorable ones who built this holy temple (or monastery)", "tags": ["departed", "fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-departed-fathers-001": { "arabic": "جميعِ السّابِقِ رُقادُهُمْ مِن آبائِنا وَإخوَتِنا الأُرثوذُكسِيِّين", "translation": "all of our fathers and brethren, the Orthodox departed this life before us", "literal": "all those whose repose preceded, of our Orthodox fathers and brothers", "tags": ["departed", "fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-lie-asleep-001": { "arabic": "المَوضُوعِينَ هٰهُنا وَفِي كُلِّ مَكان", "translation": "who here and in all the world lie asleep in the Lord", "literal": "who are placed here and in every place", "tags": ["departed", "fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-bear-fruit-001": { "arabic": "الذينَ يُقَدِّمونَ الأثمارَ والذينَ يصْنَعونَ الإحسانَ", "translation": "those who bear fruit and do good works", "literal": "those who offer fruits and those who do good", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-venerable-temple-001": { "arabic": "في هذا الهيكلِ المُقَدَّسِ الكُلِّيِّ الوقارِ", "translation": "in this holy and all-venerable temple", "literal": "in this holy, all-revered temple", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-labor-sing-001": { "arabic": "والذينَ يَتْعَبونَ ويُرَتِّلونَ فيهِ", "translation": "those who serve and those who sing", "literal": "and those who labor and chant in it", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-people-present-001": { "arabic": "ومِنْ أجْلِ هذا الشعْبِ الواقِفِ", "translation": "and all the people here present", "literal": "and for the sake of this standing people", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-await-mercy-001": { "arabic": "المُنْتَظِرِ مِنْ لَدُنِكَ الرَّحمَةَ الغَنِيَّةَ العُظْمى", "translation": "who await thy great and rich mercy", "literal": "awaiting from you the great rich mercy", "tags": ["fervent-supplication", "litany", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-merciful-god-001": { "arabic": "لأنَّكَ إلهٌ رَحيِمٌ وَمُحِبٌّ لِلْبَشَرِ", "translation": "For thou art a merciful God and lovest mankind", "literal": "for you are a merciful God and lover of mankind", "tags": ["doxology", "fervent-supplication", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-ascribe-glory-001": { "arabic": "وَلَكَ نُرْسِلُ المَجْدَ", "translation": "and unto Thee we ascribe glory", "literal": "and to you we send up glory", "tags": ["doxology", "fervent-supplication", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-fervent-father-son-spirit-001": { "arabic": "أَيُّها الآبُ والإبنُ والرُّوحُ القُدُس", "translation": "to the Father, and to the Son, and to the Holy Spirit", "literal": "O Father and Son and Holy Spirit", "tags": ["doxology", "fervent-supplication", "section: The Litany of Fervent Supplication", "trinity", "vespers"] },
+  "vespers-fervent-now-ever-ages-001": { "arabic": "الآنَ وكُلَّ أوانٍ وإلى دَهرِ الداهرين", "translation": "now and ever, and unto ages of ages", "literal": "now and every time and unto the age of ages", "tags": ["doxology", "fervent-supplication", "section: The Litany of Fervent Supplication", "vespers"] },
+  "vespers-evening-vouchsafe-001": { "arabic": "أَهِّلْنا يا رَبُّ", "translation": "Vouchsafe, O Lord", "literal": "make us worthy, O Lord", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-keep-without-sin-001": { "arabic": "أنْ نُحْفَظَ في هذا المَساءِ بِغَيرِ خطيئة", "translation": "to keep us this evening without sin", "literal": "that we may be kept this evening without sin", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-blessed-lord-001": { "arabic": "مُبارَكٌ أنتَ يا رَبُّ", "translation": "Blessed art Thou, O Lord", "literal": "blessed are you, O Lord", "tags": ["doxology", "evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-god-fathers-001": { "arabic": "إلهَ آبائنا", "translation": "the God of our fathers", "literal": "God of our fathers", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-praised-name-001": { "arabic": "وَمُسَبَّحٌ وَمُمَجَّدٌ اسْمُكَ إلى الأبد", "translation": "and praised and glorified is Thy Name forever", "literal": "and praised and glorified is your name forever", "tags": ["doxology", "evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-mercy-upon-us-001": { "arabic": "لِتَكُنْ يا رَبُّ رَحْمَتُكَ علينا", "translation": "Let Thy mercy be upon us, O Lord", "literal": "let your mercy, O Lord, be upon us", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-hope-on-thee-001": { "arabic": "كَمِثْلِ اتِّكالِنا عليك", "translation": "even as we have set our hope on Thee", "literal": "according to our reliance upon you", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-teach-commandments-001": { "arabic": "علِّمني وَصاياك", "translation": "teach me Thy statutes", "literal": "teach me your commandments", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-blessed-master-001": { "arabic": "مُبارَكٌ أنتَ يا سَيِّدُ", "translation": "Blessed art Thou, O Master", "literal": "blessed are you, O Master", "tags": ["doxology", "evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-understand-statutes-001": { "arabic": "فَهِّمْني حُقُوقَك", "translation": "make me to understand Thy statutes", "literal": "make me understand your ordinances", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-blessed-holy-one-001": { "arabic": "مُبارَكٌ أنتَ يا قُدُّوسُ", "translation": "Blessed art Thou, O Holy One", "literal": "blessed are you, O Holy One", "tags": ["doxology", "evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-enlighten-statutes-001": { "arabic": "أَنِرْني بِعَدْلِك", "translation": "enlighten me with Thy statutes", "literal": "enlighten me with your righteousness", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-mercy-forever-001": { "arabic": "يا رَبُّ رَحْمَتُكَ إلى الأبَد", "translation": "Thy mercy, O Lord, endureth forever", "literal": "O Lord, your mercy is forever", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-despise-not-works-001": { "arabic": "وَعَنْ أَعمالِ يَدَيكَ لا تُعْرِض", "translation": "O despise not the works of Thy hands", "literal": "and do not turn away from the works of your hands", "tags": ["evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-belongeth-worship-001": { "arabic": "لَكَ يَنبغي المديح", "translation": "To Thee belongeth worship", "literal": "to you praise is fitting", "tags": ["doxology", "evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-belongeth-praise-001": { "arabic": "لكَ يَليقُ التّسبيح", "translation": "to Thee belongeth praise", "literal": "to you praise is appropriate", "tags": ["doxology", "evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-belongeth-glory-001": { "arabic": "لكَ يَجِبُ المَجْد", "translation": "to Thee belongeth glory", "literal": "to you glory is due", "tags": ["doxology", "evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-evening-father-son-spirit-001": { "arabic": "أيُّها الآبُ والابنُ والرُّوحُ القُدُس", "translation": "to the Father, and to the Son, and to the Holy Spirit", "literal": "O Father and Son and Holy Spirit", "tags": ["doxology", "evening-prayer", "section: The Evening Prayer", "trinity", "vespers"] },
+  "vespers-evening-now-ever-ages-001": { "arabic": "الآنَ وكُلَّ أَوانٍ وإلى دَهرِ الدّاهرين", "translation": "now and ever, and unto ages of ages", "literal": "now and every time and unto the age of ages", "tags": ["doxology", "evening-prayer", "section: The Evening Prayer", "vespers"] },
+  "vespers-supplication-complete-evening-001": { "arabic": "لِنُكَمِّلْ طِلْبَتَنا المسائِيَّةَ لِلْرَّب", "translation": "Let us complete our evening prayer unto the Lord", "literal": "let us complete our evening petition to the Lord", "tags": ["litany-of-supplication", "petition", "section: The Litany of Supplication", "vespers"] },
+  "vespers-supplication-grant-this-001": { "arabic": "استَجِبْ يا رَب", "translation": "Grant this, O Lord", "literal": "answer, O Lord", "tags": ["litany-of-supplication", "response", "section: The Litany of Supplication", "vespers"] },
+  "vespers-supplication-repeat-grant-rubric": { "arabic": "(تُعادُ بعدَ كُلِّ طِلْبة)", "translation": "(use this response until noted below)", "literal": "(repeated after every petition)", "tags": ["litany-of-supplication", "rubric", "section: The Litany of Supplication", "vespers"] },
+  "vespers-supplication-whole-evening-001": { "arabic": "أنْ يكونَ مَساؤُنا كلُّهُ", "translation": "That the whole evening may be", "literal": "that our whole evening may be", "tags": ["litany-of-supplication", "petition", "section: The Litany of Supplication", "vespers"] },
+  "vespers-supplication-perfect-evening-001": { "arabic": "كامِلاً مُقَدَّساً سلامِيّاً وبِلا خَطيئةٍ", "translation": "perfect, holy, peaceful, and sinless", "literal": "complete, holy, peaceful, and without sin", "tags": ["litany-of-supplication", "petition", "section: The Litany of Supplication", "vespers"] },
+  "vespers-supplication-good-god-001": { "arabic": "لأنَّكَ إلهٌ صالِحٌ ومحبٌّ لِلْبَشَرِ", "translation": "For thou art a good God and lovest mankind", "literal": "for you are a good God and lover of mankind", "tags": ["doxology", "litany-of-supplication", "section: The Litany of Supplication", "vespers"] },
+  "vespers-supplication-ascribe-glory-001": { "arabic": "ولكَ نُرْسِلُ المجْدَ", "translation": "and unto thee we ascribe glory", "literal": "and to you we send up glory", "tags": ["doxology", "litany-of-supplication", "section: The Litany of Supplication", "vespers"] },
+  "vespers-supplication-father-son-spirit-001": { "arabic": "أيها الآبُ والابنُ والروحُ القدُس", "translation": "to the Father and to the Son and to the Holy Spirit", "literal": "O Father and Son and Holy Spirit", "tags": ["doxology", "litany-of-supplication", "section: The Litany of Supplication", "trinity", "vespers"] },
+  "vespers-supplication-now-ever-ages-001": { "arabic": "الآنَ وكلَّ أوان وإلى دهرِ الدَّاهِرين", "translation": "now and ever, and unto ages of ages", "literal": "now and every time and unto the age of ages", "tags": ["doxology", "litany-of-supplication", "section: The Litany of Supplication", "vespers"] },
+  "vespers-peace-lord-our-god-001": { "arabic": "أيُّها الرَّبُّ إلهُنا", "translation": "O Lord our God", "literal": "O Lord our God", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-bowed-heavens-001": { "arabic": "يا مَنْ طَأْطَأَ السَّماواتِ", "translation": "who didst bow the heavens", "literal": "O you who bowed the heavens", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-came-salvation-001": { "arabic": "ونزَلَ لِخَلاصِ جِنْسِ البَشَر", "translation": "and came down for the salvation of mankind", "literal": "and came down for the salvation of the race of humankind", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-look-servants-001": { "arabic": "أُنظُرْ إلى عبيدِكَ وإلى ميراثِك", "translation": "Look upon thy servants and thine inheritance", "literal": "look upon your servants and your inheritance", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-bowed-heads-001": { "arabic": "فإنَّ عبيدَكَ قد حَنَوا رُؤُوسَهُمْ", "translation": "for thy servants have bowed their heads", "literal": "for your servants have bowed their heads", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-inclined-necks-001": { "arabic": "وأخْضَعُوا أعْناقَهم لكَ", "translation": "and submissively inclined their necks unto thee", "literal": "and submitted their necks to you", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-fearful-judge-001": { "arabic": "أيُّها القاضي المَهيبُ المُحِبُّ البَشَر", "translation": "the fearful Judge who yet lovest mankind", "literal": "O awesome judge, lover of mankind", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-not-help-men-001": { "arabic": "غيرَ مُنتظِرينَ المَعونَةَ مِنَ البَشَر", "translation": "awaiting not help from men", "literal": "not awaiting help from human beings", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-awaiting-mercy-001": { "arabic": "بَلْ مُنْتَظِرينَ رَحْمَتَكَ", "translation": "but entreating thy mercy", "literal": "but awaiting your mercy", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-expecting-salvation-001": { "arabic": "ومُتَوَقِّعينَ خَلاصَك", "translation": "and looking confidently for thy salvation", "literal": "and expecting your salvation", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-guard-all-times-001": { "arabic": "فاحْفَظْهُمْ في كُلِّ حينٍ", "translation": "Guard them at all times", "literal": "so preserve them at every time", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-present-evening-night-001": { "arabic": "وفي هذا المَساءِ الحاضِرِ، والليلِ المُقْبِلِ", "translation": "both during this present evening and in the approaching night", "literal": "and in this present evening and the coming night", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-guarded-adversary-001": { "arabic": "مَصونينَ مِنْ كُلِّ فِعْلٍ مُضادٍّ شَيطانِيّ", "translation": "from every foe, from all adverse powers of the devil", "literal": "protected from every opposing satanic action", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-vain-thoughts-001": { "arabic": "ومِنَ الأفكارِ الباطِلَةِ والهواجِسِ الشرّيرة", "translation": "and from vain thoughts and from evil imaginations", "literal": "and from vain thoughts and evil imaginings", "tags": ["bowing-prayer", "section: The Peace", "vespers"] },
+  "vespers-peace-might-kingdom-001": { "arabic": "لِيكُن عِزُّ مُلكِكَ مُبارَكاً وممجَّداً", "translation": "Blessed and glorified be the might of thy kingdom", "literal": "let the might of your kingdom be blessed and glorified", "tags": ["doxology", "section: The Peace", "vespers"] },
+  "vespers-peace-father-son-spirit-001": { "arabic": "أيُّها الآبُ والابنُ والروحُ القدُس", "translation": "of the Father and of the Son and of the Holy Spirit", "literal": "O Father and Son and Holy Spirit", "tags": ["doxology", "section: The Peace", "trinity", "vespers"] },
+  "vespers-peace-now-ever-ages-001": { "arabic": "الآنَ وكلَّ أوان وإلى دهرِ الدَّاهِرين", "translation": "now and ever, and unto ages of ages", "literal": "now and every time and unto the age of ages", "tags": ["doxology", "section: The Peace", "vespers"] },
+  "vespers-simeon-now-depart-001": { "arabic": "الآنَ أطْلِقْ عَبْدَكَ", "translation": "Lord, now lettest thou Thy servant depart", "literal": "now release your servant", "tags": ["hymn", "section: The Hymn of St. Simeon the God-Receiver", "simeon", "vespers"] },
+  "vespers-simeon-o-master-001": { "arabic": "أيُّها السَّيِّدُ", "translation": "O Master", "literal": "O Master", "tags": ["address", "hymn", "section: The Hymn of St. Simeon the God-Receiver", "simeon", "vespers"] },
+  "vespers-simeon-according-word-001": { "arabic": "على حَسَبِ قَوْلِكَ بِسَلامٍ", "translation": "in peace, according to Thy word", "literal": "according to your word in peace", "tags": ["hymn", "section: The Hymn of St. Simeon the God-Receiver", "simeon", "vespers"] },
+  "vespers-simeon-eyes-saw-salvation-001": { "arabic": "لأنَّ عَيْنَيَّ قَدْ أَبْصَرَتا خَلاصَك", "translation": "for mine eyes have seen Thy salvation", "literal": "for my eyes have seen your salvation", "tags": ["hymn", "section: The Hymn of St. Simeon the God-Receiver", "simeon", "vespers"] },
+  "vespers-simeon-prepared-peoples-001": { "arabic": "الذي أعْدَدْتَهُ أمامَ كُلِّ الشُّعوبِ", "translation": "which Thou hast prepared before the face of all people", "literal": "which you prepared before all peoples", "tags": ["hymn", "section: The Hymn of St. Simeon the God-Receiver", "simeon", "vespers"] },
+  "vespers-simeon-light-gentiles-001": { "arabic": "نوراً لاسْتِعْلانِ الأُمَمِ", "translation": "a light to lighten the Gentiles", "literal": "a light for the revelation of the nations", "tags": ["hymn", "section: The Hymn of St. Simeon the God-Receiver", "simeon", "vespers"] },
+  "vespers-simeon-glory-israel-001": { "arabic": "ومَجْداً لِشَعْبِكَ إسْرائيل", "translation": "and the glory of Thy people Israel", "literal": "and glory for your people Israel", "tags": ["hymn", "section: The Hymn of St. Simeon the God-Receiver", "simeon", "vespers"] },
   "departed-virgin-pure-001": {
     "arabic": "أَيَّتُها العَذْراءُ الطَّاهِرَةُ النَّقِيَّةُ وَحْدَكِ",
     "translation": "O Virgin, alone pure and immaculate",

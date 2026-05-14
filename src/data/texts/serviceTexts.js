@@ -1448,6 +1448,273 @@ export const serviceTextDefinitions = [
     ]
   },
   {
+    "id": "great-vespers",
+    "title": "Great Vespers",
+    "short_title": "Great Vespers",
+    "show_in_reader_nav": true,
+    "nav_landing_at_root": true,
+    "display_title": {
+      "english": [
+        {
+          "text": "Great Vespers"
+        }
+      ],
+      "arabic_phrase_ids": [
+        "homepage-great-vespers-001"
+      ],
+      "icon": "psalterStarIcon",
+      "icon_max_height": 300
+    },
+    "tradition": "antiochian",
+    "language": "ar",
+    "sections": [
+      {
+        "section_id": "blessed-is-our-god",
+        "section": "Blessed is our God",
+        "section_title_phrase": "section-blessed-is-our-god",
+        "segment_ids": [
+          "vespers-opening-blessed-is-our-god",
+          "vespers-opening-amen",
+          "vespers-come-worship-god-king",
+          "vespers-come-worship-christ-king",
+          "vespers-come-worship-christ-himself"
+        ]
+      },
+      {
+        "section_id": "psalm-103",
+        "section": "Psalm 103",
+        "section_title_phrase": "section-psalm-103",
+        "speaker_override": "role-reader",
+        "segment_ids": [
+          "psalter-psalm-103",
+          "vespers-psalm103-glory-both-now",
+          "vespers-psalm103-alleluia-glory",
+          "vespers-psalm103-our-god-hope"
+        ]
+      },
+      {
+        "section_id": "great-litany",
+        "section": "The Great Litany",
+        "section_title_phrase": "section-great-litany",
+        "segment_ids": [
+          "litany-peace-in-peace",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-from-above",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-whole-world",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-holy-house",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-father-metropolitan",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "vespers-litany-country-authorities",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-this-city",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-healthful-seasons",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-travelers",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-deliverance",
+          "litany-peace-let-us-pray",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-help-save",
+          "litany-peace-lord-have-mercy-choir",
+          "litany-peace-calling-remembrance",
+          "litany-peace-to-thee-o-lord",
+          "litany-peace-priest-doxology",
+          "litany-peace-choir-amen"
+        ]
+      },
+      {
+        "section_id": "o-lord-i-have-cried",
+        "section": "O Lord, I Have Cried",
+        "section_title_phrase": "section-o-lord-i-have-cried",
+        "segment_ids": [
+          "vespers-lord-cried-refrain",
+          "vespers-lord-cried-prayer-incense",
+          "vespers-lord-cried-set-watch",
+          "vespers-lord-cried-incline-not",
+          "vespers-lord-cried-men-iniquity",
+          "vespers-lord-cried-just-man",
+          "vespers-lord-cried-prayer-pleasures",
+          "vespers-lord-cried-hear-words",
+          "vespers-lord-cried-eyes-to-thee",
+          "vespers-lord-cried-keep-snare",
+          "vespers-lord-cried-wicked-fall",
+          "vespers-lord-cried-voice-cried",
+          "vespers-lord-cried-poured-supplication",
+          "vespers-lord-cried-spirit-overwhelmed",
+          "vespers-lord-cried-secret-snare",
+          "vespers-lord-cried-looked-right",
+          "vespers-lord-cried-refuge-failed",
+          "vespers-lord-cried-thou-art-refuge",
+          "vespers-lord-cried-attend-cry",
+          "vespers-lord-cried-deliver-persecutors",
+          "vespers-lord-cried-verse-10",
+          "vespers-lord-cried-verse-9",
+          "vespers-lord-cried-verse-8",
+          "vespers-lord-cried-verse-7",
+          "vespers-lord-cried-verse-6",
+          "vespers-lord-cried-verse-5",
+          "vespers-lord-cried-verse-4",
+          "vespers-lord-cried-verse-3",
+          "vespers-lord-cried-verse-2",
+          "vespers-lord-cried-verse-1"
+        ]
+      },
+      {
+        "section_id": "o-gladsome-light",
+        "section": "O Gladsome Light",
+        "section_title_phrase": "section-o-gladsome-light",
+        "segment_ids": [
+          "vespers-gladsome-light-wisdom",
+          "vespers-gladsome-light-hymn"
+        ]
+      },
+      {
+        "section_id": "prokeimenon",
+        "section": "Prokeimenon",
+        "section_title_phrase": "section-prokeimenon",
+        "segment_ids": [
+          "vespers-prokeimenon-saturday",
+          "vespers-prokeimenon-refrain",
+          "vespers-prokeimenon-verse-1",
+          "vespers-prokeimenon-verse-2"
+        ]
+      },
+      {
+        "section_id": "litany-of-fervent-supplication",
+        "section": "The Litany of Fervent Supplication",
+        "section_title_phrase": "section-litany-of-fervent-supplication",
+        "segment_ids": [
+          "vespers-fervent-let-us-say",
+          "vespers-fervent-lord-have-mercy",
+          "vespers-fervent-lord-almighty",
+          "vespers-fervent-lord-have-mercy",
+          "vespers-fervent-have-mercy-god",
+          "vespers-fervent-lord-have-mercy-thrice",
+          "vespers-fervent-pious-orthodox",
+          "vespers-fervent-hierarchs",
+          "vespers-fervent-clergy-monastics",
+          "vespers-fervent-mercy-life",
+          "vespers-fervent-departed",
+          "vespers-fervent-good-works",
+          "vespers-fervent-priest-doxology",
+          "vespers-fervent-amen"
+        ]
+      },
+      {
+        "section_id": "evening-prayer",
+        "section": "The Evening Prayer",
+        "section_title_phrase": "section-evening-prayer",
+        "segment_ids": [
+          "vespers-evening-vouchsafe",
+          "vespers-evening-blessed-fathers",
+          "vespers-evening-mercy-hope",
+          "vespers-evening-blessed-statutes",
+          "vespers-evening-mercy-works",
+          "vespers-evening-final-doxology"
+        ]
+      },
+      {
+        "section_id": "litany-of-supplication",
+        "section": "The Litany of Supplication",
+        "section_title_phrase": "section-vespers-litany-of-supplication",
+        "segment_ids": [
+          "vespers-supplication-complete-evening",
+          "vespers-supplication-lord-have-mercy",
+          "supplication-help-save",
+          "vespers-supplication-lord-have-mercy",
+          "vespers-supplication-whole-evening",
+          "vespers-supplication-grant-this-repeat",
+          "supplication-angel-peace",
+          "supplication-pardon-remission",
+          "supplication-good-profitable",
+          "supplication-remaining-life",
+          "supplication-christian-ending",
+          "supplication-calling-remembrance",
+          "supplication-to-thee-o-lord",
+          "vespers-supplication-priest-doxology",
+          "vespers-supplication-amen"
+        ]
+      },
+      {
+        "section_id": "the-peace",
+        "section": "The Peace",
+        "section_title_phrase": "section-the-peace",
+        "segment_ids": [
+          "vespers-peace-priest-peace",
+          "vespers-peace-choir-and-spirit",
+          "vespers-peace-bow-heads",
+          "vespers-peace-to-thee",
+          "vespers-peace-priest-bowing-address",
+          "vespers-peace-priest-bowing-servants",
+          "vespers-peace-priest-bowing-guard",
+          "vespers-peace-priest-doxology",
+          "vespers-peace-amen"
+        ]
+      },
+      {
+        "section_id": "hymn-st-simeon",
+        "section": "The Hymn of St. Simeon the God-Receiver",
+        "section_title_phrase": "section-hymn-st-simeon",
+        "segment_ids": [
+          "vespers-hymn-st-simeon"
+        ]
+      },
+      {
+        "section_id": "trisagion-prayers",
+        "section": "The Trisagion Prayers",
+        "section_title_phrase": "section-trisagion-prayers",
+        "segment_ids": [
+          "vespers-trisagion-holy-god",
+          "vespers-trisagion-glory-both-now",
+          "vespers-trisagion-all-holy-trinity-address",
+          "vespers-trisagion-all-holy-trinity-lord",
+          "vespers-trisagion-all-holy-trinity-master",
+          "vespers-trisagion-all-holy-trinity-holy-one",
+          "vespers-trisagion-lord-have-mercy-thrice",
+          "vespers-trisagion-glory-both-now",
+          "lords-prayer-prayer",
+          "lords-prayer-kingdom",
+          "lords-prayer-daily-bread",
+          "lords-prayer-forgive",
+          "lords-prayer-temptation",
+          "lords-prayer-priest-doxology",
+          "lords-prayer-choir-amen"
+        ]
+      },
+      {
+        "section_id": "dismissal",
+        "section": "The Dismissal",
+        "section_title_phrase": "section-vespers-dismissal",
+        "segment_ids": [
+          "vespers-dismissal-wisdom",
+          "vespers-dismissal-father-bless",
+          "vespers-dismissal-christ-blessed",
+          "vespers-dismissal-preserve-faith",
+          "vespers-dismissal-theotokos-save",
+          "vespers-dismissal-more-honorable",
+          "vespers-dismissal-glory-christ",
+          "vespers-dismissal-glory-lord-mercy",
+          "vespers-dismissal-priest-main",
+          "dismissal-priest-fathers",
+          "dismissal-choir-amen"
+        ]
+      }
+    ]
+  },
+  {
     "id": "psalter-psalm-50",
     "title": "The Psalter",
     "short_title": "The Psalter",
@@ -1714,6 +1981,19 @@ export function getServiceText(serviceTextId) {
 
 export const defaultServiceTextId = "divine-liturgy-john-chrysostom";
 export const defaultServiceText = serviceTexts[defaultServiceTextId];
-export const readerServiceTexts = serviceTextDefinitions.filter(serviceText => serviceText.show_in_reader_nav);
+const readerServiceTextOrder = [
+  "great-vespers"
+];
+
+export const readerServiceTexts = serviceTextDefinitions
+  .filter(serviceText => serviceText.show_in_reader_nav)
+  .sort((a, b) => {
+    const aIndex = readerServiceTextOrder.indexOf(a.id);
+    const bIndex = readerServiceTextOrder.indexOf(b.id);
+    if (aIndex === -1 && bIndex === -1) return 0;
+    if (aIndex === -1) return 1;
+    if (bIndex === -1) return -1;
+    return aIndex - bIndex;
+  });
 
 export default serviceTexts;
