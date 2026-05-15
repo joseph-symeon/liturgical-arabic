@@ -115,22 +115,27 @@ function rangeContains(container, requested) {
     && container.end.segment_index >= requested.end.segment_index;
 }
 
-function getPhraseIdsForSegment(segmentId) {
-  return (segments[segmentId]?.phrases || [])
+function getPhraseIdsForSegment(segmentId, segmentsMap = segments) {
+  return (segmentsMap[segmentId]?.phrases || [])
     .filter(part => part.phrase_id)
     .map(part => part.phrase_id);
 }
 
-function getPhraseTimingsForSegmentIds(segmentIds, phraseTimings) {
+export function getPhraseTimingsForSegmentIds(segmentIds, phraseTimings, segmentsMap = segments) {
   const timings = [];
   let timingCursor = 0;
   segmentIds.forEach(segmentId => {
-    getPhraseIdsForSegment(segmentId).forEach(phraseId => {
+    getPhraseIdsForSegment(segmentId, segmentsMap).forEach((phraseId, phraseIndex) => {
       const timingIndex = (phraseTimings || []).findIndex((timing, index) => (
         index >= timingCursor && timing.phrase_id === phraseId
       ));
       if (timingIndex < 0) return;
-      timings.push({ ...phraseTimings[timingIndex] });
+      timings.push({
+        ...phraseTimings[timingIndex],
+        segment_id: segmentId,
+        source_segment_id: segmentId,
+        phrase_index: phraseIndex
+      });
       timingCursor = timingIndex + 1;
     });
   });
@@ -152,5 +157,5 @@ function deriveContainedRange(range, containerRange, requestedRange, serviceRang
 
 export function getAlignmentPhraseTimings(alignmentId, segmentIds, recordingId, alignments) {
   const range = getAlignmentRange(alignmentId, segmentIds, recordingId, alignments);
-  return range?.phrase_timings?.map(timing => ({ ...timing })) || [];
+  return range ? getPhraseTimingsForSegmentIds(segmentIds, range.phrase_timings) : [];
 }

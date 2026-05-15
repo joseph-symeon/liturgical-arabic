@@ -7,7 +7,7 @@ import alignments from '../media/alignments.js';
 import {
   getAlignmentRange,
   findServiceAlignmentRange,
-  getAlignmentPhraseTimings
+  getPhraseTimingsForSegmentIds
 } from '../../utils/alignmentRanges.js';
 import { getRangeBounds } from '../../utils/alignmentTiming.js';
 import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
@@ -603,10 +603,9 @@ export function resolveExercise(definition, segmentsMap = segments) {
   );
   const alignedPhraseTimings = definition.media?.alignment_id
     ? getFilteredPhraseTimings(
-        getCaptionTimingsForSegmentIds(
+        getPhraseTimingsForSegmentIds(
           segmentIds,
-          getDefinitionAlignmentRange(definition, segmentIds)?.phrase_timings
-          || getAlignmentPhraseTimings(definition.media.alignment_id, segmentIds, definition.media.recording_id, alignments),
+          getDefinitionAlignmentRange(definition, segmentIds)?.phrase_timings,
           segmentsMap
         ),
         definition.phrase_ids
@@ -748,34 +747,6 @@ function getFilteredPhraseTimings(phraseTimings = [], phraseIds = null) {
   return phraseTimings
     .filter(timing => phraseIdSet.has(timing.phrase_id))
     .map(timing => ({ ...timing }));
-}
-
-function getCaptionTimingsForSegmentIds(segmentIds, phraseTimings = [], segmentsMap = segments) {
-  const captions = [];
-  let timingCursor = 0;
-
-  (segmentIds || []).forEach(segmentId => {
-    const phraseIds = (segmentsMap[segmentId]?.phrases || [])
-      .filter(part => part.phrase_id)
-      .map(part => part.phrase_id);
-
-    phraseIds.forEach((phraseId, phraseIndex) => {
-      const timingIndex = (phraseTimings || []).findIndex((timing, index) => (
-        index >= timingCursor && timing.phrase_id === phraseId
-      ));
-      if (timingIndex < 0) return;
-      const phraseTiming = phraseTimings[timingIndex];
-      captions.push({
-        ...phraseTiming,
-        segment_id: segmentId,
-        source_segment_id: segmentId,
-        phrase_index: phraseIndex
-      });
-      timingCursor = timingIndex + 1;
-    });
-  });
-
-  return captions;
 }
 
 function getMediaAudioClip(definition) {
