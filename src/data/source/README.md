@@ -51,6 +51,18 @@ npm run phrases:check
 Read-only drift report. Shows phrase IDs that are missing or changed between local and Notion. It does not describe which direction would win.
 
 ```sh
+npm run phrases:sync:check
+```
+
+Read-only bidirectional sync preview. Shows safe per-phrase changes in both directions and reports conflicts when local and Notion both changed differently since the last sync.
+
+```sh
+npm run phrases:sync
+```
+
+Bidirectional sync. Applies safe per-phrase changes both ways: local-only changes are pushed to Notion, Notion-only changes are pulled locally, and conflicting phrase IDs are left untouched.
+
+```sh
 npm run phrases:check:pull
 ```
 
@@ -80,14 +92,14 @@ At the start of a coding session:
 
 ```sh
 git pull
-npm run phrases:pull
+npm run phrases:sync
 ```
 
-Before pushing local phrase edits to Notion:
+Before applying mixed local and Notion phrase edits:
 
 ```sh
-npm run phrases:check:push
-npm run phrases:push
+npm run phrases:sync:check
+npm run phrases:sync
 ```
 
 If you are unsure which side has changes:
@@ -98,7 +110,7 @@ npm run phrases:check:pull
 npm run phrases:check:push
 ```
 
-A successful sync writes a local, git-ignored sync manifest at `src/data/source/phrases.sync.json`. The manifest records each Notion phrase page ID and `last_edited_time` so later pushes can detect Notion edits made after your last sync.
+A successful sync writes a local, git-ignored sync manifest at `src/data/source/phrases.sync.json`. The manifest records each Notion phrase page ID, `last_edited_time`, and the last-synced phrase fields so bidirectional sync can safely detect which side changed after your last sync.
 
 The Notion database should have these properties:
 

@@ -294,8 +294,8 @@ function writePhrasesJs(rows) {
 
   const header = [
     '// Phrase text can be edited locally in this file for fast development.',
-    '// Run `npm run phrases:pull` only when you intentionally want Notion to replace it.',
-    '// Run `npm run phrases:check:push` to dry-run pushing local phrase edits back to Notion.'
+    '// Run `npm run phrases:sync:check` to preview a safe bidirectional sync with Notion.',
+    '// Run `npm run phrases:sync` to apply safe phrase changes both ways.'
   ].join('\n');
 
   fs.writeFileSync(outputPath, `${header}\n\nconst phrases = ${JSON.stringify(phrases, null, 2)};\n\nexport default phrases;\n`);
@@ -303,6 +303,7 @@ function writePhrasesJs(rows) {
 
 function writeSyncManifest(pages, rows) {
   const syncedIds = new Set(rows.map(row => row.id));
+  const rowsById = new Map(rows.map(row => [row.id, normalizeNotionRow(row)]));
   const phrases = {};
 
   pages.forEach(page => {
@@ -311,7 +312,8 @@ function writeSyncManifest(pages, rows) {
 
     phrases[id] = {
       notion_page_id: page.id,
-      last_edited_time: page.last_edited_time
+      last_edited_time: page.last_edited_time,
+      row: rowSnapshot(rowsById.get(id))
     };
   });
 
@@ -322,6 +324,15 @@ function writeSyncManifest(pages, rows) {
   };
 
   fs.writeFileSync(syncManifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
+}
+
+function rowSnapshot(row) {
+  return {
+    arabic: row.arabic,
+    translation: row.translation,
+    literal: row.literal,
+    tags: row.tags
+  };
 }
 
 async function notionRequest(endpoint, options = {}) {

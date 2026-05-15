@@ -7,6 +7,8 @@
     "phrases:check": "node scripts/check-notion-phrases.mjs",
     "phrases:check:pull": "node scripts/sync-notion-phrases.mjs --check",
     "phrases:check:push": "node scripts/push-notion-phrases.mjs",
+    "phrases:sync:check": "node scripts/sync-notion-phrases-bidirectional.mjs --check",
+    "phrases:sync": "node scripts/sync-notion-phrases-bidirectional.mjs",
     "phrases:pull": "node scripts/sync-notion-phrases.mjs --force",
     "phrases:push": "node scripts/push-notion-phrases.mjs --apply",
     "import:recording": "node scripts/import-recording.mjs",

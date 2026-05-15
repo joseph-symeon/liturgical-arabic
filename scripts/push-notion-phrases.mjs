@@ -80,14 +80,14 @@ for (const row of rows) {
           properties
         }
       });
-      recordSyncedPage(nextSyncManifest, row.id, createdPage);
+      recordSyncedPage(nextSyncManifest, row.id, createdPage, row);
     }
     continue;
   }
 
   if (pageMatchesRow(page, row, schema)) {
     plan.unchanged.push(row.id);
-    recordSyncedPage(nextSyncManifest, row.id, page);
+    recordSyncedPage(nextSyncManifest, row.id, page, row);
     continue;
   }
 
@@ -97,7 +97,7 @@ for (const row of rows) {
       method: 'PATCH',
       body: { properties }
     });
-    recordSyncedPage(nextSyncManifest, row.id, updatedPage);
+    recordSyncedPage(nextSyncManifest, row.id, updatedPage, row);
   }
 }
 
@@ -199,11 +199,21 @@ function writeSyncManifest(manifest) {
   fs.writeFileSync(syncManifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
-function recordSyncedPage(manifest, id, page) {
+function recordSyncedPage(manifest, id, page, row) {
   if (!page?.id || !page?.last_edited_time) return;
   manifest.phrases[id] = {
     notion_page_id: page.id,
-    last_edited_time: page.last_edited_time
+    last_edited_time: page.last_edited_time,
+    row: rowSnapshot(row)
+  };
+}
+
+function rowSnapshot(row) {
+  return {
+    arabic: row.arabic,
+    translation: row.translation,
+    literal: row.literal,
+    tags: row.tags
   };
 }
 
