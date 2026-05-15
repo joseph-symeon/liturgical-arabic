@@ -212,13 +212,52 @@ export function validateData() {
       errors.push(`Alignment "${alignment.id}" must define a non-empty ranges array.`);
       return;
     }
+    const occurrenceRangeOwners = new Map();
+    const bareSegmentRangeOwners = new Map();
+    const serviceSegmentIdsWithOwners = new Map();
     ranges.forEach((range, index) => {
+      const serviceText = range.service_range ? serviceTextsById[alignment.service_text_id] : null;
+      const resolvedRangeForOwnership = serviceText ? resolveServiceRange(serviceText, range.service_range) : null;
       if (!Array.isArray(range.segment_ids) || range.segment_ids.length === 0) {
         errors.push(`Alignment "${alignment.id}" range ${index + 1} must define segment_ids.`);
       } else {
-        range.segment_ids.forEach(segmentId => {
+        range.segment_ids.forEach((segmentId, segmentIndex) => {
           if (!segmentIds.has(segmentId)) {
             errors.push(`Alignment "${alignment.id}" references missing segment "${segmentId}".`);
+          }
+          const resolvedSegmentIndex = resolvedRangeForOwnership
+            ? resolvedRangeForOwnership.start.segment_index + segmentIndex
+            : null;
+          const occurrenceKey = Number.isInteger(resolvedSegmentIndex)
+            ? `${resolvedRangeForOwnership.start.section_index}:${resolvedSegmentIndex}:${segmentId}`
+            : null;
+
+          if (occurrenceKey) {
+            const previousOwner = occurrenceRangeOwners.get(occurrenceKey);
+            if (previousOwner) {
+              errors.push(`Alignment "${alignment.id}" ranges ${previousOwner} and ${index + 1} both define timing ownership for the same occurrence of segment "${segmentId}". Compose multi-segment clips from single-segment ranges instead.`);
+            } else {
+              occurrenceRangeOwners.set(occurrenceKey, index + 1);
+            }
+            const bareOwner = bareSegmentRangeOwners.get(segmentId);
+            if (bareOwner) {
+              errors.push(`Alignment "${alignment.id}" range ${index + 1} uses service_range for segment "${segmentId}", but range ${bareOwner} defines the same segment without a service_range. Add service_range to make the occurrence explicit.`);
+            }
+            if (!serviceSegmentIdsWithOwners.has(segmentId)) {
+              serviceSegmentIdsWithOwners.set(segmentId, new Set());
+            }
+            serviceSegmentIdsWithOwners.get(segmentId).add(index + 1);
+            return;
+          }
+
+          const previousBareOwner = bareSegmentRangeOwners.get(segmentId);
+          const serviceOwners = serviceSegmentIdsWithOwners.get(segmentId);
+          if (previousBareOwner) {
+            errors.push(`Alignment "${alignment.id}" ranges ${previousBareOwner} and ${index + 1} both define timing ownership for bare segment "${segmentId}". Add service_range when the same text occurs more than once.`);
+          } else if (serviceOwners?.size > 0) {
+            errors.push(`Alignment "${alignment.id}" range ${index + 1} defines bare segment "${segmentId}", but range ${[...serviceOwners][0]} defines an explicit occurrence. Add service_range to make the occurrence explicit.`);
+          } else {
+            bareSegmentRangeOwners.set(segmentId, index + 1);
           }
         });
       }
@@ -228,8 +267,22 @@ export function validateData() {
       } else if (rangeBounds.end_seconds <= rangeBounds.start_seconds) {
         errors.push(`Alignment "${alignment.id}" range ${index + 1} must end after it starts.`);
       }
+      if (
+        Array.isArray(range.phrase_timings)
+          && range.phrase_timings.length > 0
+          && typeof range.start_seconds === 'number'
+          && typeof range.end_seconds === 'number'
+      ) {
+        const inferredBounds = getRangeBounds({ phrase_timings: range.phrase_timings });
+        if (
+          inferredBounds
+            && inferredBounds.start_seconds === range.start_seconds
+            && inferredBounds.end_seconds === range.end_seconds
+        ) {
+          errors.push(`Alignment "${alignment.id}" range ${index + 1} has redundant start_seconds/end_seconds; omit them and let phrase_timings define the range bounds.`);
+        }
+      }
       if (range.service_range) {
-        const serviceText = serviceTextsById[alignment.service_text_id];
         if (!serviceText) {
           errors.push(`Alignment "${alignment.id}" range ${index + 1} service_range requires a valid service_text_id.`);
         } else {

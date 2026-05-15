@@ -3,6 +3,80 @@
 
 export const alignmentDefinitions = [
   {
+    "id": "alignment-great-compline-4-6-12-2_xJIjyydso-come-worship-v1",
+    "service_text_id": "great-compline",
+    "recording_id": "recording-4-6-12-2_xJIjyydso",
+    "method": "faster-whisper-small-word-timestamps-with-waveform-rms-refined-boundaries",
+    "ranges": [
+      {
+        "segment_ids": [
+          "course-come-worship-god-king"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "come-worship-fall-down-001",
+            "start_seconds": 21.385,
+            "end_seconds": 23.2
+          },
+          {
+            "phrase_id": "before-god-our-king-001",
+            "start_seconds": 23.2,
+            "end_seconds": 24.91
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "course-come-worship-christ-king"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "come-worship-fall-down-001",
+            "start_seconds": 25.635,
+            "end_seconds": 27.5
+          },
+          {
+            "phrase_id": "christ-001",
+            "start_seconds": 27.5,
+            "end_seconds": 28.36
+          },
+          {
+            "phrase_id": "our-king-god-001",
+            "start_seconds": 28.36,
+            "end_seconds": 29.91
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "course-come-worship-christ-himself"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "come-worship-fall-down-001",
+            "start_seconds": 30.61,
+            "end_seconds": 32.48
+          },
+          {
+            "phrase_id": "christ-001",
+            "start_seconds": 32.48,
+            "end_seconds": 33.46
+          },
+          {
+            "phrase_id": "this-is-001",
+            "start_seconds": 33.46,
+            "end_seconds": 34.74
+          },
+          {
+            "phrase_id": "our-king-lord-god-001",
+            "start_seconds": 34.74,
+            "end_seconds": 37.195
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "alignment-great-compline-PpavnXyf8fY-dismissal-v1",
     "service_text_id": "great-compline",
     "recording_id": "recording-PpavnXyf8fY",
@@ -12,13 +86,11 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "dismissal-priest-fathers"
         ],
-        "start_seconds": 0,
-        "end_seconds": 10.22,
         "phrase_timings": [
           {
             "phrase_id": "dismissal-prayers-fathers-001",
             "start_seconds": 0,
-            "end_seconds": 3.8
+            "end_seconds": 3.29
           },
           {
             "phrase_id": "dismissal-lord-jesus-001",
@@ -36,12 +108,10 @@ export const alignmentDefinitions = [
         "segment_ids": [
           "dismissal-choir-amen"
         ],
-        "start_seconds": 13.66,
-        "end_seconds": 14.925,
         "phrase_timings": [
           {
             "phrase_id": "amen-001",
-            "start_seconds": 13.66,
+            "start_seconds": 10.66,
             "end_seconds": 14.925
           }
         ]

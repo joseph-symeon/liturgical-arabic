@@ -11,8 +11,8 @@ export function getAlignmentRange(alignmentId, segmentIds, recordingId, alignmen
   const alignment = alignments?.[alignmentId];
   if (!alignment || alignment.recording_id !== recordingId) return null;
 
-  return getExactAlignmentRange(alignment, segmentIds)
-    || composeSegmentAlignmentRange(alignment, segmentIds);
+  return composeSegmentAlignmentRange(alignment, segmentIds)
+    || getExactAlignmentRange(alignment, segmentIds);
 }
 
 function getExactAlignmentRange(alignment, segmentIds) {

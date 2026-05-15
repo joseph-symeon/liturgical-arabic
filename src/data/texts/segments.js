@@ -1859,7 +1859,7 @@ const sourceSegments = {
         "phrase_id": "come-worship-fall-down-001"
       },
       {
-        "text": " لِ"
+        "text": " "
       },
       {
         "phrase_id": "christ-001"
@@ -1888,7 +1888,7 @@ const sourceSegments = {
         "phrase_id": "come-worship-fall-down-001"
       },
       {
-        "text": " لِ"
+        "text": " "
       },
       {
         "phrase_id": "christ-001"
@@ -5187,7 +5187,7 @@ const sourceSegments = {
         "phrase_id": "come-worship-fall-down-001"
       },
       {
-        "text": " لِ"
+        "text": " "
       },
       {
         "phrase_id": "christ-001"
@@ -5216,7 +5216,7 @@ const sourceSegments = {
         "phrase_id": "come-worship-fall-down-001"
       },
       {
-        "text": " لِ"
+        "text": " "
       },
       {
         "phrase_id": "christ-001"

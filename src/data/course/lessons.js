@@ -10,7 +10,8 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "exercise_id": "come-let-us-worship"
+        "exercise_id": "come-let-us-worship",
+        "activity_policy": "standard"
       }
     ]
   },
@@ -324,16 +325,6 @@ const lessons = [
     "display_order": 7,
     "quizlet_deck_url": null,
     "exercises": [
-      {
-        "title": "Through the Prayers",
-        "exercise_id": "dismissal-through-the-prayers",
-        "activity_policy": "standard"
-      },
-      {
-        "title": "Lord Jesus Christ",
-        "exercise_id": "dismissal-lord-jesus-christ",
-        "activity_policy": "standard"
-      },
       {
         "title": "Through the Prayers",
         "exercise_id": "dismissal-through-the-prayers-summary",

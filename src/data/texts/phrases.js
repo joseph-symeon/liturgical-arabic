@@ -3353,9 +3353,9 @@ const phrases = {
     ]
   },
   "christ-001": {
-    "arabic": "المَسِيحِ",
-    "translation": "Christ",
-    "literal": "Christ",
+    "arabic": "لِلْمَسِيحِ",
+    "translation": "to Christ",
+    "literal": "to Christ",
     "tags": [
       "christology",
       "come-let-us-worship",

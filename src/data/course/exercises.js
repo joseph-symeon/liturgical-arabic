@@ -18,6 +18,12 @@ const GREAT_COMPLINE_MEDIA = {
   default_playback_rate: 1
 };
 
+const GREAT_COMPLINE_PSALMS_MEDIA = {
+  recording_id: "recording-4-6-12-2_xJIjyydso",
+  alignment_id: "alignment-great-compline-4-6-12-2_xJIjyydso-come-worship-v1",
+  default_playback_rate: 1
+};
+
 const GREAT_COMPLINE_DISMISSAL_MEDIA = {
   recording_id: "recording-PpavnXyf8fY",
   alignment_id: "alignment-great-compline-PpavnXyf8fY-dismissal-v1",
@@ -289,7 +295,8 @@ export const exerciseDefinitions = [
       "course-come-worship-god-king",
       "course-come-worship-christ-king",
       "course-come-worship-christ-himself"
-    ]
+    ],
+    "media": GREAT_COMPLINE_PSALMS_MEDIA
   },
   {
     "id": "first-antiphon-through-theotokos",
@@ -302,41 +309,6 @@ export const exerciseDefinitions = [
       "start_segment_id": "first-antiphon-through-theotokos-1",
       "end_segment_id": "first-antiphon-through-theotokos-1"
     }
-  },
-  {
-    "id": "dismissal-through-the-prayers",
-    "segment_ids": [
-      "dismissal-priest-fathers"
-    ],
-    "phrase_ids": [
-      "dismissal-prayers-fathers-001"
-    ],
-    "service_text_id": "divine-liturgy-john-chrysostom",
-    "service_range": {
-      "section_id": "dismissal",
-      "start_segment_id": "dismissal-priest-fathers",
-      "end_segment_id": "dismissal-priest-fathers"
-    },
-    "media": GREAT_COMPLINE_DISMISSAL_MEDIA
-  },
-  {
-    "id": "dismissal-lord-jesus-christ",
-    "segment_ids": [
-      "dismissal-priest-fathers",
-      "dismissal-choir-amen"
-    ],
-    "phrase_ids": [
-      "dismissal-lord-jesus-001",
-      "dismissal-have-mercy-save-001",
-      "amen-001"
-    ],
-    "service_text_id": "divine-liturgy-john-chrysostom",
-    "service_range": {
-      "section_id": "dismissal",
-      "start_segment_id": "dismissal-priest-fathers",
-      "end_segment_id": "dismissal-choir-amen"
-    },
-    "media": GREAT_COMPLINE_DISMISSAL_MEDIA
   },
   {
     "id": "dismissal-through-the-prayers-summary",
@@ -631,8 +603,12 @@ export function resolveExercise(definition, segmentsMap = segments) {
   );
   const alignedPhraseTimings = definition.media?.alignment_id
     ? getFilteredPhraseTimings(
-        getDefinitionAlignmentRange(definition, segmentIds)?.phrase_timings
+        getCaptionTimingsForSegmentIds(
+          segmentIds,
+          getDefinitionAlignmentRange(definition, segmentIds)?.phrase_timings
           || getAlignmentPhraseTimings(definition.media.alignment_id, segmentIds, definition.media.recording_id, alignments),
+          segmentsMap
+        ),
         definition.phrase_ids
       )
     : [];
@@ -772,6 +748,34 @@ function getFilteredPhraseTimings(phraseTimings = [], phraseIds = null) {
   return phraseTimings
     .filter(timing => phraseIdSet.has(timing.phrase_id))
     .map(timing => ({ ...timing }));
+}
+
+function getCaptionTimingsForSegmentIds(segmentIds, phraseTimings = [], segmentsMap = segments) {
+  const captions = [];
+  let timingCursor = 0;
+
+  (segmentIds || []).forEach(segmentId => {
+    const phraseIds = (segmentsMap[segmentId]?.phrases || [])
+      .filter(part => part.phrase_id)
+      .map(part => part.phrase_id);
+
+    phraseIds.forEach((phraseId, phraseIndex) => {
+      const timingIndex = (phraseTimings || []).findIndex((timing, index) => (
+        index >= timingCursor && timing.phrase_id === phraseId
+      ));
+      if (timingIndex < 0) return;
+      const phraseTiming = phraseTimings[timingIndex];
+      captions.push({
+        ...phraseTiming,
+        segment_id: segmentId,
+        source_segment_id: segmentId,
+        phrase_index: phraseIndex
+      });
+      timingCursor = timingIndex + 1;
+    });
+  });
+
+  return captions;
 }
 
 function getMediaAudioClip(definition) {
