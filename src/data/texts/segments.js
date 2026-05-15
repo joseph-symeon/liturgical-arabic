@@ -4487,16 +4487,8 @@ const sourceSegments = {
         "phrase_id": "gospel-petition-001"
       },
       {
-        "text": "."
-      }
-    ]
-  },
-  "gospel-prayer-lord-have-mercy": {
-    "speaker": "role-choir",
-    "tags": [
-      "gospel"
-    ],
-    "phrases": [
+        "text": ". "
+      },
       {
         "phrase_id": "gospel-lord-have-mercy-001"
       },
@@ -7699,7 +7691,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-alleluia-001"
+        "phrase_id": "cherubic-alleluia-001"
       },
       {
         "text": "."

@@ -55,6 +55,9 @@ const localRows = fs.existsSync(outputPath) ? await readLocalPhraseRows() : [];
 const localDrift = findLocalDrift(localRows, rows);
 if (CHECK) {
   console.log(formatPullCheckMessage(localDrift, rows.length));
+  if (localDrift.hasDrift) {
+    console.log('Run `npm run phrases:pull` only when Notion should overwrite local phrase edits.');
+  }
   process.exit(localDrift.hasDrift ? 1 : 0);
 }
 
@@ -66,7 +69,7 @@ if (localDrift.hasDrift && !FORCE) {
 
 writePhrasesJs(rows);
 writeSyncManifest(pages, rows);
-console.log(`Synced ${rows.length} Notion phrase rows to ${path.relative(rootDir, outputPath)}.`);
+console.log(formatPullPlan(localDrift, true));
 
 function loadEnvLocal() {
   if (!fs.existsSync(envPath)) return;
@@ -139,19 +142,25 @@ function findLocalDrift(localRows, notionRows) {
   const missingInNotion = localRows.filter(row => !notionById.has(row.id)).map(row => row.id);
   const missingLocally = notionRows.filter(row => !localById.has(row.id)).map(row => row.id);
   const changed = [];
+  const unchanged = [];
 
   localRows.forEach(localRow => {
     const notionRow = notionById.get(localRow.id);
     if (!notionRow) return;
 
     const fields = ['arabic', 'translation', 'literal', 'tags'].filter(field => !valuesEqual(localRow[field], notionRow[field]));
-    if (fields.length > 0) changed.push({ id: localRow.id, fields });
+    if (fields.length > 0) {
+      changed.push({ id: localRow.id, fields });
+    } else {
+      unchanged.push(localRow.id);
+    }
   });
 
   return {
     missingInNotion,
     missingLocally,
     changed,
+    unchanged,
     hasDrift: missingInNotion.length > 0 || missingLocally.length > 0 || changed.length > 0
   };
 }
@@ -176,19 +185,8 @@ function valuesEqual(left, right) {
 
 function formatLocalDriftMessage(drift) {
   const lines = [
-    'Local phrases.js differs from Notion. No local files were changed.',
-    `- Local phrase IDs missing in Notion: ${drift.missingInNotion.length}`,
-    `- Notion phrase IDs missing locally: ${drift.missingLocally.length}`,
-    `- Phrase IDs with changed fields: ${drift.changed.length}`
+    formatPullPlan(drift, false, 'blocked')
   ];
-
-  drift.changed.slice(0, 20).forEach(item => {
-    lines.push(`  - ${item.id}: ${item.fields.join(', ')}`);
-  });
-
-  if (drift.changed.length > 20) {
-    lines.push(`  - ...and ${drift.changed.length - 20} more changed phrase(s)`);
-  }
 
   lines.push('Use `npm run phrases:check` for a read-only drift report.');
   lines.push('Use `npm run phrases:pull` only when Notion should overwrite local phrase edits.');
@@ -198,42 +196,31 @@ function formatLocalDriftMessage(drift) {
 
 function formatPullCheckMessage(drift, notionRowCount) {
   if (!drift.hasDrift) {
-    return `Pull check: local phrases.js already matches ${notionRowCount} Notion phrase row(s).`;
+    return formatPullPlan(
+      {
+        ...drift,
+        unchanged: drift.unchanged.length > 0 ? drift.unchanged : Array.from({ length: notionRowCount })
+      },
+      false
+    );
   }
 
+  return formatPullPlan(drift, false);
+}
+
+function formatPullPlan(drift, apply, status = apply ? 'complete' : 'check') {
   const lines = [
-    'Pull check: pulling Notion would replace local phrases.js with Notion data.',
-    `- Local phrase IDs that would be removed: ${drift.missingInNotion.length}`,
-    `- Notion phrase IDs that would be added locally: ${drift.missingLocally.length}`,
-    `- Phrase IDs with fields that would change locally: ${drift.changed.length}`
+    status === 'complete'
+      ? 'Pull complete: Notion -> local phrases.js.'
+      : status === 'blocked'
+        ? 'Pull blocked: Notion -> local phrases.js.'
+        : 'Pull check: Notion -> local phrases.js.',
+    `- Remove locally: ${drift.missingInNotion.length}`,
+    `- Add locally: ${drift.missingLocally.length}`,
+    `- Update locally: ${drift.changed.length}`,
+    `- Already matching: ${drift.unchanged.length}`,
+    apply ? 'Changes were written to local phrases.js.' : 'No local files were changed.'
   ];
-
-  if (drift.missingInNotion.length > 0) {
-    lines.push('Local-only phrase IDs:');
-    drift.missingInNotion.slice(0, 20).forEach(id => lines.push(`  - ${id}`));
-    if (drift.missingInNotion.length > 20) {
-      lines.push(`  - ...and ${drift.missingInNotion.length - 20} more`);
-    }
-  }
-
-  if (drift.missingLocally.length > 0) {
-    lines.push('Notion-only phrase IDs:');
-    drift.missingLocally.slice(0, 20).forEach(id => lines.push(`  - ${id}`));
-    if (drift.missingLocally.length > 20) {
-      lines.push(`  - ...and ${drift.missingLocally.length - 20} more`);
-    }
-  }
-
-  if (drift.changed.length > 0) {
-    lines.push('Changed phrase IDs:');
-    drift.changed.slice(0, 20).forEach(item => lines.push(`  - ${item.id}: ${item.fields.join(', ')}`));
-    if (drift.changed.length > 20) {
-      lines.push(`  - ...and ${drift.changed.length - 20} more`);
-    }
-  }
-
-  lines.push('No local files were changed.');
-  lines.push('Run `npm run phrases:pull` only when Notion should overwrite local phrase edits.');
 
   return lines.join('\n');
 }

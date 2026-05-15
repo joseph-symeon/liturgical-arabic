@@ -70,9 +70,9 @@ if (missingInNotion.length === 0 && missingLocally.length === 0 && changed.lengt
 }
 
 console.log('Phrase drift found between local data and Notion.');
-printList('Local rows missing in Notion', missingInNotion);
-printList('Notion rows missing locally', missingLocally);
-printChanged(changed);
+console.log(`- Local rows missing in Notion: ${missingInNotion.length}`);
+console.log(`- Notion rows missing locally: ${missingLocally.length}`);
+console.log(`- Rows with changed fields: ${changed.length}`);
 process.exitCode = 1;
 
 function loadEnvLocal() {
@@ -203,18 +203,6 @@ function richTextPlain(parts) {
 
 function valuesEqual(left, right) {
   return JSON.stringify(left) === JSON.stringify(right);
-}
-
-function printList(label, items) {
-  console.log(`${label}: ${items.length}`);
-  items.slice(0, 20).forEach(item => console.log(`  - ${item}`));
-  if (items.length > 20) console.log(`  ...and ${items.length - 20} more`);
-}
-
-function printChanged(items) {
-  console.log(`Rows with changed fields: ${items.length}`);
-  items.slice(0, 40).forEach(item => console.log(`  - ${item.id}: ${item.fields.join(', ')}`));
-  if (items.length > 40) console.log(`  ...and ${items.length - 40} more`);
 }
 
 async function notionRequest(endpoint, options = {}) {

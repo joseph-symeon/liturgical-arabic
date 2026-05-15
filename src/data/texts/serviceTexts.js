@@ -295,7 +295,6 @@ export const serviceTextDefinitions = [
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "gospel-prayer-let-us-pray",
-          "gospel-prayer-lord-have-mercy",
           "gospel-prayer-illumine-quiet",
           "gospel-prayer-commandments-quiet",
           "gospel-prayer-doxology-quiet",
@@ -1017,7 +1016,6 @@ export const serviceTextDefinitions = [
         "section_group_title_phrase": "section-liturgy-catechumen",
         "segment_ids": [
           "gospel-prayer-let-us-pray",
-          "gospel-prayer-lord-have-mercy",
           "gospel-prayer-illumine-quiet",
           "gospel-prayer-commandments-quiet",
           "gospel-prayer-doxology-quiet",

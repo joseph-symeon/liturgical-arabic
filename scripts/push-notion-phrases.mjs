@@ -127,7 +127,7 @@ if (!APPLY) {
   if (conflicts.length > 0) {
     console.log(formatConflictWarning(conflicts, 'check'));
   }
-  console.log('No Notion changes were made. Run `npm run phrases:push` to write these changes.');
+  console.log('Run `npm run phrases:push` to write these changes.');
   console.log('Notion rows that do not exist in local phrases.js will be archived, not permanently deleted.');
   console.log('If Notion has been edited directly, run `npm run phrases:check:pull` before applying a push.');
 }
@@ -243,55 +243,24 @@ function findPushConflicts(rows, existingPagesById, schema, manifest) {
 function formatPushPlan(plan, apply) {
   const lines = [
     apply
-      ? 'Push complete: local phrases.js has been written to Notion.'
-      : 'Push check: local phrases.js would be written to Notion.',
-    `- Local phrase IDs that would be created in Notion: ${plan.created.length}`,
-    `- Local phrase IDs that would update Notion: ${plan.updated.length}`,
-    `- Notion phrase IDs that would be archived: ${plan.archived.length}`,
-    `- Phrase IDs already matching: ${plan.unchanged.length}`
+      ? 'Push complete: local phrases.js -> Notion.'
+      : 'Push check: local phrases.js -> Notion.',
+    `- Create in Notion: ${plan.created.length}`,
+    `- Update in Notion: ${plan.updated.length}`,
+    `- Archive in Notion: ${plan.archived.length}`,
+    `- Already matching: ${plan.unchanged.length}`,
+    apply ? 'Changes were written to Notion.' : 'No Notion changes were made.'
   ];
-
-  appendIdList(lines, 'Create in Notion', plan.created);
-  appendIdList(lines, 'Update in Notion', plan.updated);
-  appendIdList(lines, 'Archive in Notion', plan.archived);
-
-  if (!apply) {
-    lines.push('No Notion changes were made.');
-  }
 
   return lines.join('\n');
 }
 
-function appendIdList(lines, label, ids) {
-  if (ids.length === 0) return;
-
-  lines.push(`${label}:`);
-  ids.slice(0, 20).forEach(id => lines.push(`  - ${id}`));
-  if (ids.length > 20) {
-    lines.push(`  - ...and ${ids.length - 20} more`);
-  }
-}
-
 function formatConflictWarning(conflicts, mode) {
-  const shown = conflicts.slice(0, 20);
   const lines = [
     mode === 'apply'
-      ? `Warning: overwrote ${conflicts.length} newer or unsynced Notion update(s) because local phrases.js was pushed:`
-      : `Warning: ${conflicts.length} update(s) would overwrite newer or unsynced Notion data:`,
-    ...shown.map(conflict => {
-      const synced = conflict.localLastSynced ?? 'never';
-      return [
-        `- ${conflict.id}`,
-        `  reason: ${conflict.reason}`,
-        `  Notion last edited: ${conflict.notionLastEdited}`,
-        `  Local last synced:  ${synced}`
-      ].join('\n');
-    })
+      ? `Warning: overwrote ${conflicts.length} newer or unsynced Notion update(s) because local phrases.js was pushed.`
+      : `Warning: ${conflicts.length} update(s) would overwrite newer or unsynced Notion data.`
   ];
-
-  if (conflicts.length > shown.length) {
-    lines.push(`- ...and ${conflicts.length - shown.length} more`);
-  }
 
   if (mode === 'check') {
     lines.push('Run `npm run phrases:push` only if local phrases.js should overwrite those Notion edits.');
