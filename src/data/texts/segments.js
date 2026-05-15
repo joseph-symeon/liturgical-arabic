@@ -1437,7 +1437,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "entrance-hymn-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
@@ -4496,7 +4496,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "gospel-petition-001"
+        "phrase_id": "petition-001"
       },
       {
         "text": ". "
@@ -5360,13 +5360,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "catechumens-now-ever-ages-001"
+        "phrase_id": "now-ever-ages-001"
       },
       {
         "text": ". "
       },
       {
-        "phrase_id": "catechumens-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -5504,13 +5504,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "catechumens-now-ever-ages-001"
+        "phrase_id": "now-ever-ages-001"
       },
       {
         "text": ". "
       },
       {
-        "phrase_id": "catechumens-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -5664,19 +5664,19 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "first-faithful-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "first-faithful-now-ever-ages-001"
+        "phrase_id": "now-ever-ages-001"
       },
       {
         "text": ". "
       },
       {
-        "phrase_id": "first-faithful-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -5843,19 +5843,19 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "first-faithful-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "first-faithful-now-ever-ages-001"
+        "phrase_id": "now-ever-ages-001"
       },
       {
         "text": ". "
       },
       {
-        "phrase_id": "first-faithful-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -5980,7 +5980,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "second-faithful-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -5992,13 +5992,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "second-faithful-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "second-faithful-now-ever-ages-001"
+        "phrase_id": "now-ever-ages-001"
       },
       {
         "text": "."
@@ -6154,7 +6154,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "second-faithful-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -6166,13 +6166,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "second-faithful-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "second-faithful-now-ever-ages-001"
+        "phrase_id": "now-ever-ages-001"
       },
       {
         "text": "."
@@ -6187,7 +6187,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "second-faithful-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -6564,13 +6564,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "cherubic-now-ever-amen-001"
+        "phrase_id": "now-ever-ages-001"
       },
       {
         "text": ". "
       },
       {
-        "phrase_id": "cherubic-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -7359,7 +7359,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -7387,7 +7387,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "great-entrance-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -7426,7 +7426,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -7454,7 +7454,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "great-entrance-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -7493,7 +7493,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -7521,7 +7521,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "great-entrance-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -7584,7 +7584,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -7612,7 +7612,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "great-entrance-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -7669,7 +7669,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -7697,7 +7697,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "great-entrance-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": ". "
@@ -7762,7 +7762,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -7809,7 +7809,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -7956,7 +7956,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -8103,7 +8103,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -8133,7 +8133,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "great-entrance-amen-001"
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -8519,13 +8519,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "supplication-commend-ourselves-001"
+        "phrase_id": "commend-ourselves-each-other-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "supplication-all-life-christ-001"
+        "phrase_id": "all-life-christ-001"
       },
       {
         "text": "."
@@ -8854,7 +8854,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "supplication-now-ever-ages-001"
+        "phrase_id": "now-ever-ages-001"
       },
       {
         "text": "."
@@ -11626,13 +11626,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "before-lords-prayer-commend-ourselves-001"
+        "phrase_id": "commend-ourselves-each-other-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "before-lords-prayer-all-life-001"
+        "phrase_id": "all-life-christ-001"
       },
       {
         "text": ":"
@@ -12553,7 +12553,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "communion-every-time-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
@@ -13806,13 +13806,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "thanksgiving-commend-ourselves-001"
+        "phrase_id": "commend-ourselves-each-other-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "thanksgiving-all-life-christ-001"
+        "phrase_id": "all-life-christ-001"
       },
       {
         "text": "."
@@ -13925,7 +13925,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "thanksgiving-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
@@ -13993,7 +13993,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "thanksgiving-to-lord-pray-001"
+        "phrase_id": "petition-001"
       },
       {
         "text": "."
@@ -14120,7 +14120,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "amvon-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
@@ -14227,7 +14227,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "amvon-to-lord-pray-001"
+        "phrase_id": "petition-001"
       },
       {
         "text": "."

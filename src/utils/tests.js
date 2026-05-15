@@ -39,7 +39,7 @@ export function runTests() {
     "Light Arabic should be available through getArabicText."
   );
   console.assert(
-    getArabicText(phrases["gospel-petition-001"], "vocalized") === "إلى الرَّبِّ نطلب",
+    getArabicText(phrases["petition-001"], "vocalized") === "إلى الرَّبِّ نطلب",
     "Vocalized Arabic should display with diacritics."
   );
   console.assert(
