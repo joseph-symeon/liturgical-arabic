@@ -295,22 +295,22 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "lords-prayer-kingdom-come-001",
             "start_seconds": 50.32,
-            "end_seconds": 51.67
+            "end_seconds": 52.23
           },
           {
             "phrase_id": "lords-prayer-will-done-001",
             "start_seconds": 52.24,
-            "end_seconds": 53.27
+            "end_seconds": 53.5
           },
           {
             "phrase_id": "lords-prayer-heaven-earth-001",
             "start_seconds": 53.54,
-            "end_seconds": 54.17
+            "end_seconds": 55
           },
           {
             "phrase_id": "lords-prayer-on-earth-001",
-            "start_seconds": 54.42,
-            "end_seconds": 56.24
+            "start_seconds": 55.01,
+            "end_seconds": 56.6
           }
         ]
       },
@@ -327,7 +327,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "lords-prayer-give-today-001",
             "start_seconds": 58.14,
-            "end_seconds": 59.21
+            "end_seconds": 59.33
           }
         ]
       },
@@ -366,7 +366,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "lords-prayer-deliver-evil-001",
             "start_seconds": 67.77,
-            "end_seconds": 69.84
+            "end_seconds": 70.3
           }
         ]
       }
