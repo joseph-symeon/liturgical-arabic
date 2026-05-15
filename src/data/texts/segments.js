@@ -618,9 +618,9 @@ const sourceSegments = {
       "doxology"
     ],
     "phrases": [
-      {
-        "phrase_id": "doxology-now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": ". "
       },
@@ -719,9 +719,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "doxology-now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -789,14 +789,14 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "entrance-always-001"
+        "phrase_id": "every-time-001"
       },
       {
         "text": "، "
       },
-      {
-        "phrase_id": "doxology-now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -1655,7 +1655,19 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "always-now-ever-ages-001"
+        "phrase_id": "every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -1727,7 +1739,19 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "always-now-ever-ages-001"
+        "phrase_id": "every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -1766,9 +1790,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "doxology-now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -1802,7 +1826,19 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "always-now-ever-ages-001"
+        "phrase_id": "every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -1925,9 +1961,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "departed-both-now-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": ". "
       },
@@ -2622,7 +2658,9 @@ const sourceSegments = {
       {"text": " "},
       {"phrase_id": "vespers-fervent-father-son-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "vespers-fervent-now-ever-ages-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}
     ]
   },
@@ -2714,7 +2752,9 @@ const sourceSegments = {
       {"text": "، "},
       {"phrase_id": "vespers-evening-father-son-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "vespers-evening-now-ever-ages-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
       {"phrase_id": "amen-001"},
       {"text": "."}
@@ -2771,7 +2811,9 @@ const sourceSegments = {
       {"text": "، "},
       {"phrase_id": "vespers-supplication-father-son-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "vespers-supplication-now-ever-ages-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}
     ]
   },
@@ -2875,7 +2917,9 @@ const sourceSegments = {
       {"text": "، "},
       {"phrase_id": "vespers-peace-father-son-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "vespers-peace-now-ever-ages-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}
     ]
   },
@@ -2931,7 +2975,9 @@ const sourceSegments = {
     "phrases": [
       {"phrase_id": "departed-glory-trinity-001"},
       {"text": "، "},
-      {"phrase_id": "departed-both-now-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
       {"phrase_id": "amen-001"},
       {"text": "."}
@@ -3017,7 +3063,9 @@ const sourceSegments = {
     "phrases": [
       {"phrase_id": "vespers-dismissal-christ-existing-blessed-001"},
       {"text": "، "},
-      {"phrase_id": "doxology-now-ever-ages-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}
     ]
   },
@@ -3081,7 +3129,9 @@ const sourceSegments = {
     "phrases": [
       {"phrase_id": "departed-glory-trinity-001"},
       {"text": "، "},
-      {"phrase_id": "departed-both-now-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
       {"phrase_id": "amen-001"},
       {"text": ". "},
@@ -3441,9 +3491,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "doxology-now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -3558,9 +3608,9 @@ const sourceSegments = {
       "antiphon"
     ],
     "phrases": [
-      {
-        "phrase_id": "doxology-now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": ". "
       },
@@ -3886,9 +3936,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "doxology-now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -3987,7 +4037,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "little-litany-ascribe-glory-001"
+        "phrase_id": "unto-thee-ascribe-glory-001"
       },
       {
         "text": "، "
@@ -3998,9 +4048,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "doxology-now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -4101,7 +4151,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "trisagion-now-ever-ages-001"
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": ". "
@@ -4331,7 +4387,19 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "always-now-ever-ages-001"
+        "phrase_id": "every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -4649,7 +4717,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "unoriginate-father-spirit-003"
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": ". "
@@ -4975,7 +5049,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "beginner-unto-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": ". "
@@ -5252,7 +5326,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "catechumens-lord-god-001"
+        "phrase_id": "o-lord-our-god-001"
       },
       {
         "text": "، "
@@ -5354,14 +5428,14 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "catechumens-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": ". "
       },
@@ -5384,7 +5458,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "catechumens-lord-god-001"
+        "phrase_id": "o-lord-our-god-001"
       },
       {
         "text": "، "
@@ -5498,14 +5572,14 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "catechumens-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": ". "
       },
@@ -5658,7 +5732,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "first-faithful-glory-honor-worship-001"
+        "phrase_id": "doxology-glory-honor-worship-001"
       },
       {
         "text": "، "
@@ -5669,9 +5743,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": ". "
       },
@@ -5837,7 +5911,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "first-faithful-glory-honor-worship-001"
+        "phrase_id": "doxology-glory-honor-worship-001"
       },
       {
         "text": "، "
@@ -5848,9 +5922,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": ". "
       },
@@ -5997,9 +6071,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -6098,7 +6172,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "second-faithful-without-blame-001"
+        "phrase_id": "second-faithful-blameless-001"
       },
       {
         "text": ". "
@@ -6171,9 +6245,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -6354,7 +6428,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "cherubic-o-lord-god-001"
+        "phrase_id": "o-lord-our-god-001"
       },
       {
         "text": " "
@@ -6540,7 +6614,7 @@ const sourceSegments = {
         "text": ". "
       },
       {
-        "phrase_id": "cherubic-lift-glory-001"
+        "phrase_id": "unto-thee-ascribe-glory-001"
       },
       {
         "text": " "
@@ -6563,9 +6637,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": ". "
       },
@@ -6978,7 +7052,7 @@ const sourceSegments = {
     "break_before": true,
     "tags": ["cherubic-hymn", "faithful", "quiet", "psalm", "psalm-50"],
     "phrases": [
-      { "phrase_id": "cherubic-psalm50-open-lips-001" },
+      { "phrase_id": "open-my-lips-001" },
       { "text": " " },
       { "phrase_id": "cherubic-psalm50-mouth-praise-001" },
       { "text": "." }
@@ -7365,13 +7439,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-now-ever-001"
+        "phrase_id": "now-and-ever-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -7432,13 +7506,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-now-ever-001"
+        "phrase_id": "now-and-ever-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -7499,13 +7573,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-now-ever-001"
+        "phrase_id": "now-and-ever-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -7590,13 +7664,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-now-ever-001"
+        "phrase_id": "now-and-ever-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -7675,13 +7749,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-now-ever-001"
+        "phrase_id": "now-and-ever-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -7709,7 +7783,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-invisibly-001"
+        "phrase_id": "cherubic-invisibly-001"
       },
       {
         "text": "، "
@@ -7768,13 +7842,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-now-ever-001"
+        "phrase_id": "now-and-ever-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -7815,13 +7889,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-now-ever-001"
+        "phrase_id": "now-and-ever-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -7962,13 +8036,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-now-ever-001"
+        "phrase_id": "now-and-ever-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -8109,13 +8183,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "great-entrance-now-ever-001"
+        "phrase_id": "now-and-ever-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "great-entrance-ages-001"
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -8194,7 +8268,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "supplication-let-us-pray-lord-001"
+        "phrase_id": "petition-001"
       },
       {
         "text": "."
@@ -8227,7 +8301,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "supplication-let-us-pray-lord-001"
+        "phrase_id": "petition-001"
       },
       {
         "text": "."
@@ -8254,7 +8328,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "supplication-let-us-pray-lord-001"
+        "phrase_id": "petition-001"
       },
       {
         "text": "."
@@ -8507,13 +8581,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "supplication-ever-virgin-001"
+        "phrase_id": "ever-virgin-mary-002"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "supplication-with-saints-001"
+        "phrase_id": "with-all-saints-001"
       },
       {
         "text": "، "
@@ -8853,9 +8927,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -9347,7 +9421,7 @@ const sourceSegments = {
         "text": ". "
       },
       {
-        "phrase_id": "holy-anaphora-attend-001"
+        "phrase_id": "let-us-attend-001"
       },
       {
         "text": ". "
@@ -11381,7 +11455,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "theotokos-now-ever-ages-001"
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -11467,7 +11547,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "supplication-let-us-pray-lord-001"
+        "phrase_id": "petition-001"
       },
       {
         "text": "."
@@ -11510,7 +11590,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "supplication-let-us-pray-lord-001"
+        "phrase_id": "petition-001"
       },
       {
         "text": "."
@@ -11986,7 +12066,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "lords-prayer-now-ever-ages-001"
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -12191,7 +12277,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "lords-prayer-now-ever-ages-001"
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -12332,7 +12424,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "elevation-let-us-attend-001"
+        "phrase_id": "let-us-attend-001"
       },
       {
         "text": " "
@@ -12559,7 +12651,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "lords-prayer-now-ever-ages-001"
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -12885,7 +12983,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "pre-communion-o-son-god-001"
+        "phrase_id": "son-of-god-001"
       },
       {
         "text": "، "
@@ -13122,7 +13220,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "pre-communion-o-son-god-001"
+        "phrase_id": "son-of-god-001"
       },
       {
         "text": "، "
@@ -13332,7 +13430,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "pre-communion-o-son-god-001"
+        "phrase_id": "son-of-god-001"
       },
       {
         "text": "، "
@@ -13623,7 +13721,19 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "pre-communion-every-time-now-ever-001"
+        "phrase_id": "every-time-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -13757,13 +13867,13 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "thanksgiving-help-save-have-mercy-001"
+        "phrase_id": "supplication-help-save-001"
       },
       {
         "text": " "
       },
       {
-        "phrase_id": "thanksgiving-keep-us-grace-001"
+        "phrase_id": "supplication-preserve-grace-001"
       },
       {
         "text": "."
@@ -13828,7 +13938,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "thanksgiving-to-thee-lord-001"
+        "phrase_id": "to-thee-o-lord"
       },
       {
         "text": "."
@@ -13919,7 +14029,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "thanksgiving-ascribe-glory-001"
+        "phrase_id": "unto-thee-ascribe-glory-001"
       },
       {
         "text": "، "
@@ -13931,7 +14041,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "thanksgiving-now-ever-ages-001"
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
       },
       {
         "text": "."
@@ -14048,13 +14164,13 @@ const sourceSegments = {
         "text": ". "
       },
       {
-        "phrase_id": "amvon-preserve-fullness-001"
+        "phrase_id": "preserve-fullness-church-001"
       },
       {
         "text": ". "
       },
       {
-        "phrase_id": "amvon-sanctify-love-beauty-001"
+        "phrase_id": "sanctify-love-house-001"
       },
       {
         "text": "، "
@@ -14066,7 +14182,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "amvon-forsake-us-not-001"
+        "phrase_id": "forsake-us-not-001"
       },
       {
         "text": ". "
@@ -14125,9 +14241,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "amvon-now-ever-ages-001"
-      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -14206,8 +14322,14 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "amvon-every-time-now-ever-001"
+        "phrase_id": "every-time-001"
       },
+      {
+        "text": "، "
+      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": ". "
       },
@@ -14270,8 +14392,14 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "amvon-every-time-now-ever-001"
+        "phrase_id": "every-time-001"
       },
+      {
+        "text": "، "
+      },
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {
         "text": "."
       }
@@ -14329,7 +14457,19 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "amvon-now-ever-amen-001"
+        "phrase_id": "now-and-ever-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "unto-ages-of-ages-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amen-001"
       },
       {
         "text": ". "
@@ -14732,11 +14872,13 @@ const sourceSegments = {
       {"text": " "},
       {"phrase_id": "thanksgiving-second-giver-good-things-001"},
       {"text": ". "},
-      {"phrase_id": "thanksgiving-second-ascribe-glory-001"},
+      {"phrase_id": "unto-thee-ascribe-glory-001"},
       {"text": " "},
       {"phrase_id": "thanksgiving-second-with-father-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "thanksgiving-second-now-ever-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
       {"phrase_id": "amen-001"},
       {"text": "."}
@@ -15025,7 +15167,9 @@ const sourceSegments = {
       "doxology"
     ],
     "phrases": [
-      {"phrase_id": "departed-both-now-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
       {"phrase_id": "amen-001"},
       {"text": "."}
@@ -15221,7 +15365,9 @@ const sourceSegments = {
       {"text": " "},
       {"phrase_id": "departed-spirit-doxology-001"},
       {"text": "، "},
-      {"phrase_id": "departed-both-now-001"},
+      {"phrase_id": "now-and-ever-001"},
+      {"text": " "},
+      {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}
     ]
   },

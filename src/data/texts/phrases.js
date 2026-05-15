@@ -81,16 +81,6 @@ const phrases = {
       "vespers"
     ]
   },
-  "vespers-peace-now-ever-ages-001": {
-    "arabic": "الآنَ وكلَّ أوان وإلى دهرِ الدَّاهِرين",
-    "translation": "now and ever, and unto ages of ages",
-    "literal": "now and every time and unto the age of ages",
-    "tags": [
-      "doxology",
-      "section: The Peace",
-      "vespers"
-    ]
-  },
   "vespers-peace-father-son-spirit-001": {
     "arabic": "أيُّها الآبُ والابنُ والروحُ القدُس",
     "translation": "of the Father and of the Son and of the Holy Spirit",
@@ -252,17 +242,6 @@ const phrases = {
       "vespers"
     ]
   },
-  "vespers-supplication-now-ever-ages-001": {
-    "arabic": "الآنَ وكلَّ أوان وإلى دهرِ الدَّاهِرين",
-    "translation": "now and ever, and unto ages of ages",
-    "literal": "now and every time and unto the age of ages",
-    "tags": [
-      "doxology",
-      "litany-of-supplication",
-      "section: The Litany of Supplication",
-      "vespers"
-    ]
-  },
   "vespers-supplication-father-son-spirit-001": {
     "arabic": "أيها الآبُ والابنُ والروحُ القدُس",
     "translation": "to the Father and to the Son and to the Holy Spirit",
@@ -349,17 +328,6 @@ const phrases = {
       "litany-of-supplication",
       "petition",
       "section: The Litany of Supplication",
-      "vespers"
-    ]
-  },
-  "vespers-evening-now-ever-ages-001": {
-    "arabic": "الآنَ وكُلَّ أَوانٍ وإلى دَهرِ الدّاهرين",
-    "translation": "now and ever, and unto ages of ages",
-    "literal": "now and every time and unto the age of ages",
-    "tags": [
-      "doxology",
-      "evening-prayer",
-      "section: The Evening Prayer",
       "vespers"
     ]
   },
@@ -549,17 +517,6 @@ const phrases = {
     "tags": [
       "evening-prayer",
       "section: The Evening Prayer",
-      "vespers"
-    ]
-  },
-  "vespers-fervent-now-ever-ages-001": {
-    "arabic": "الآنَ وكُلَّ أوانٍ وإلى دَهرِ الداهرين",
-    "translation": "now and ever, and unto ages of ages",
-    "literal": "now and every time and unto the age of ages",
-    "tags": [
-      "doxology",
-      "fervent-supplication",
-      "section: The Litany of Fervent Supplication",
       "vespers"
     ]
   },
@@ -2552,16 +2509,6 @@ const phrases = {
       "theotokos"
     ]
   },
-  "departed-both-now-001": {
-    "arabic": "الآنَ وَكُلَّ أَوانٍ وَإِلى دَهْرِ الدَّاهِرِينَ",
-    "translation": "Both now and ever, and unto ages of ages",
-    "literal": "now and every time and unto the age of ages",
-    "tags": [
-      "departed",
-      "doxology",
-      "section: Psalm 103"
-    ]
-  },
   "departed-rest-servant-reposed-001": {
     "arabic": "أَرِحْ نَفْسَ (نُفُوسَ) عَبْدِكَ (أَمَتِكَ/عَبِيدِكَ) السَّابِقِ رُقادُهُ (ها/هم)",
     "translation": "give rest also to the soul(s) of thy servant(s) who hath reposed",
@@ -3369,30 +3316,10 @@ const phrases = {
       "thanksgiving-prayers"
     ]
   },
-  "thanksgiving-second-now-ever-001": {
-    "arabic": "الآنَ وَكُلَّ أَوانٍ وَإلى دَهْرِ الدَّاهِرِينَ",
-    "translation": "now and ever, and unto ages of ages",
-    "literal": "now and at every time and unto the age of ages",
-    "tags": [
-      "doxology",
-      "section: Second Prayer",
-      "thanksgiving-prayers"
-    ]
-  },
   "thanksgiving-second-with-father-spirit-001": {
     "arabic": "مَعَ أَبِيكَ وَالرُّوحِ القُدُسِ",
     "translation": "together with the Father and the Holy Spirit",
     "literal": "with your Father and the Holy Spirit",
-    "tags": [
-      "doxology",
-      "section: Second Prayer",
-      "thanksgiving-prayers"
-    ]
-  },
-  "thanksgiving-second-ascribe-glory-001": {
-    "arabic": "وَإِلَيْكَ نَرْفَعُ المَجْدَ",
-    "translation": "and unto thee we ascribe glory",
-    "literal": "and to you we raise glory",
     "tags": [
       "doxology",
       "section: Second Prayer",
@@ -7472,16 +7399,6 @@ const phrases = {
       "section: The Prayer Behind the Amvon"
     ]
   },
-  "amvon-now-ever-amen-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ، وَإِلَى دَهْرِ الدَّاهِرِينَ. آمِين",
-    "translation": "both now and ever, and unto ages of ages. Amen",
-    "literal": "now and at every time, and unto the age of ages. Amen",
-    "tags": [
-      "prayer-behind-amvon",
-      "response",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
   "amvon-glory-father-son-spirit-001": {
     "arabic": "المَجْدُ لِلآبِ وَالابْنِ وَالرُّوحِ القُدُسِ",
     "translation": "Glory to the Father and to the Son and to the Holy Spirit",
@@ -7523,15 +7440,6 @@ const phrases = {
     "arabic": "بَرَكَةُ الرَّبِّ وَرَحْمَتُهُ تَحِلَّانِ عَلَيْكُمْ",
     "translation": "The blessing of the Lord and his mercy come upon you",
     "literal": "the blessing of the Lord and his mercy come upon you",
-    "tags": [
-      "prayer-behind-amvon",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
-  "amvon-every-time-now-ever-001": {
-    "arabic": "كُلَّ حِينٍ، الآنَ وَكُلَّ أَوَانٍ، وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "always, now and ever, and unto ages of ages",
-    "literal": "at every time, now and at every time, and unto the age of ages",
     "tags": [
       "prayer-behind-amvon",
       "section: The Prayer Behind the Amvon"
@@ -7600,16 +7508,6 @@ const phrases = {
     "tags": [
       "prayer-behind-amvon",
       "response",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
-  "amvon-now-ever-ages-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ، وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "now and ever, and unto ages of ages",
-    "literal": "now and at every time, and unto the age of ages",
-    "tags": [
-      "doxology",
-      "prayer-behind-amvon",
       "section: The Prayer Behind the Amvon"
     ]
   },
@@ -7686,37 +7584,10 @@ const phrases = {
       "section: The Prayer Behind the Amvon"
     ]
   },
-  "amvon-forsake-us-not-001": {
-    "arabic": "وَلَا تُهْمِلْنَا نَحْنُ المُتَوَكِّلِينَ عَلَيْكَ",
-    "translation": "and forsake us not who hope on thee",
-    "literal": "and do not neglect us who trust in thee",
-    "tags": [
-      "prayer-behind-amvon",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
   "amvon-glorify-recompense-001": {
     "arabic": "أَنْتَ امْنَحْهُمْ عِوَضًا مِنْ ذلِكَ مَجْدًا بِقُدْرَتِكَ الإِلَهِيَّةِ",
     "translation": "glorify them in recompense by thy divine power",
     "literal": "grant them glory in return for that by thy divine power",
-    "tags": [
-      "prayer-behind-amvon",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
-  "amvon-sanctify-love-beauty-001": {
-    "arabic": "قَدِّسِ الَّذِينَ يُحِبُّونَ جَمَالَ بَيْتِكَ",
-    "translation": "sanctify those who love the beauty of thy house",
-    "literal": "sanctify those who love the beauty of thy house",
-    "tags": [
-      "prayer-behind-amvon",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
-  "amvon-preserve-fullness-001": {
-    "arabic": "وَاحْفَظْ كَمَالَ كَنِيسَتِكَ",
-    "translation": "preserve the fullness of thy Church",
-    "literal": "preserve the fullness of thy Church",
     "tags": [
       "prayer-behind-amvon",
       "section: The Prayer Behind the Amvon"
@@ -7783,26 +7654,6 @@ const phrases = {
     "translation": "Let us go forth in peace",
     "literal": "let us go out in peace",
     "tags": [
-      "litany-of-thanksgiving",
-      "section: The Litany of Thanksgiving"
-    ]
-  },
-  "thanksgiving-now-ever-ages-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ، وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "now and ever, and unto ages of ages",
-    "literal": "now and at every time, and unto the age of ages",
-    "tags": [
-      "doxology",
-      "litany-of-thanksgiving",
-      "section: The Litany of Thanksgiving"
-    ]
-  },
-  "thanksgiving-ascribe-glory-001": {
-    "arabic": "وَإِلَيْكَ نَرْفَعُ المَجْدَ",
-    "translation": "and unto thee we ascribe glory",
-    "literal": "and to thee we lift up glory",
-    "tags": [
-      "doxology",
       "litany-of-thanksgiving",
       "section: The Litany of Thanksgiving"
     ]
@@ -7907,16 +7758,6 @@ const phrases = {
       "section: The Litany of Thanksgiving"
     ]
   },
-  "thanksgiving-to-thee-lord-001": {
-    "arabic": "لَكَ يَا رَبُّ",
-    "translation": "To thee, O Lord",
-    "literal": "to thee, O Lord",
-    "tags": [
-      "litany-of-thanksgiving",
-      "response",
-      "section: The Litany of Thanksgiving"
-    ]
-  },
   "thanksgiving-peaceful-sinless-001": {
     "arabic": "سَلَامِيًّا وَبِلَا خَطِيئَةٍ",
     "translation": "peaceful and sinless",
@@ -7930,24 +7771,6 @@ const phrases = {
     "arabic": "بَعْدَ أَنْ نَسْأَلَ أَنْ يَكُونَ نَهَارُنَا كُلُّهُ كَامِلًا مُقَدَّسًا",
     "translation": "Asking that the whole day may be perfect, holy",
     "literal": "after we ask that our whole day be complete and holy",
-    "tags": [
-      "litany-of-thanksgiving",
-      "section: The Litany of Thanksgiving"
-    ]
-  },
-  "thanksgiving-keep-us-grace-001": {
-    "arabic": "وَاحْفَظْنَا يَا اللهُ بِنِعْمَتِكَ",
-    "translation": "and keep us, O God, by thy grace",
-    "literal": "and keep us, O God, by thy grace",
-    "tags": [
-      "litany-of-thanksgiving",
-      "section: The Litany of Thanksgiving"
-    ]
-  },
-  "thanksgiving-help-save-have-mercy-001": {
-    "arabic": "أُعْضُدْ وَخَلِّصْ وَارْحَمْ",
-    "translation": "Help us; save us; have mercy on us",
-    "literal": "support and save and have mercy",
     "tags": [
       "litany-of-thanksgiving",
       "section: The Litany of Thanksgiving"
@@ -8054,15 +7877,6 @@ const phrases = {
     "literal": "let our mouth be filled with thy praise, O Lord",
     "tags": [
       "hymn",
-      "pre-communion-prayers",
-      "section: The Pre-Communion Prayers"
-    ]
-  },
-  "pre-communion-every-time-now-ever-001": {
-    "arabic": "كُلَّ حِينٍ، الآنَ وَكُلَّ أَوَانٍ، وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "Always, now and ever, and unto ages of ages",
-    "literal": "at every time, now and at every time, and unto the age of ages",
-    "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
     ]
@@ -8744,15 +8558,6 @@ const phrases = {
       "section: The Pre-Communion Prayers"
     ]
   },
-  "pre-communion-o-son-god-001": {
-    "arabic": "يَا ابْنَ اللهِ",
-    "translation": "O Son of God",
-    "literal": "O Son of God",
-    "tags": [
-      "pre-communion-prayers",
-      "section: The Pre-Communion Prayers"
-    ]
-  },
   "pre-communion-mystic-supper-001": {
     "arabic": "إِقْبَلْنِي اليَوْمَ شَرِيكًا لِعَشَائِكَ السِّرِّي",
     "translation": "Of thy mystic supper, O Son of God, accept me today as a communicant",
@@ -9303,15 +9108,6 @@ const phrases = {
       "section: The Elevation"
     ]
   },
-  "elevation-let-us-attend-001": {
-    "arabic": "لِنُصْغِ",
-    "translation": "Let us attend",
-    "literal": "let us attend",
-    "tags": [
-      "elevation",
-      "section: The Elevation"
-    ]
-  },
   "elevation-rubric-once-001": {
     "arabic": "(مَرَّة)",
     "translation": "(once)",
@@ -9652,16 +9448,6 @@ const phrases = {
     "tags": [
       "lord's-prayer",
       "response",
-      "section: The Lord's Prayer"
-    ]
-  },
-  "lords-prayer-now-ever-ages-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "now and ever, and unto ages of ages",
-    "literal": "now and at every time and unto the age of ages",
-    "tags": [
-      "doxology",
-      "lord's-prayer",
       "section: The Lord's Prayer"
     ]
   },
@@ -10166,16 +9952,6 @@ const phrases = {
     "literal": "and let the mercies of our great God be",
     "tags": [
       "blessing",
-      "section: Hymn to the Theotokos",
-      "theotokos"
-    ]
-  },
-  "theotokos-now-ever-ages-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "now and ever and unto ages of ages",
-    "literal": "now and at every time and unto the age of ages",
-    "tags": [
-      "doxology",
       "section: Hymn to the Theotokos",
       "theotokos"
     ]
@@ -11985,15 +11761,6 @@ const phrases = {
       "section: The Holy Anaphora"
     ]
   },
-  "holy-anaphora-attend-001": {
-    "arabic": "لِنُصْغِ",
-    "translation": "let us attend",
-    "literal": "let us listen attentively",
-    "tags": [
-      "anaphora",
-      "section: The Holy Anaphora"
-    ]
-  },
   "holy-anaphora-stand-fear-001": {
     "arabic": "لِنَقِفْ بِخَوْفٍ",
     "translation": "let us stand with fear",
@@ -12699,26 +12466,6 @@ const phrases = {
       "section: The Litany of Supplication"
     ]
   },
-  "supplication-with-saints-001": {
-    "arabic": "مَعَ جَمِيعِ القِدِّيسِينَ",
-    "translation": "with all the saints",
-    "literal": "with all the saints",
-    "tags": [
-      "litany-of-supplication",
-      "saints",
-      "section: The Litany of Supplication"
-    ]
-  },
-  "supplication-ever-virgin-001": {
-    "arabic": "الدَّائِمَةَ البَتُولِيَّةِ مَرْيَمَ",
-    "translation": "and ever-virgin Mary",
-    "literal": "ever-virgin Mary",
-    "tags": [
-      "litany-of-supplication",
-      "section: The Litany of Supplication",
-      "theotokos"
-    ]
-  },
   "supplication-theotokos-001": {
     "arabic": "الفَائِقَةَ البَرَكَاتِ، المَجِيدَةَ، سَيِّدَتَنَا وَالِدَةَ الإِلَهِ",
     "translation": "most blessed and glorious Lady, the Theotokos",
@@ -12935,8 +12682,10 @@ const phrases = {
     "literal": "and preserve us, O God, by your grace",
     "tags": [
       "litany-of-supplication",
+      "litany-of-thanksgiving",
       "petition",
-      "section: The Litany of Supplication"
+      "section: The Litany of Supplication",
+      "section: The Litany of Thanksgiving"
     ]
   },
   "supplication-help-save-001": {
@@ -12945,8 +12694,10 @@ const phrases = {
     "literal": "Support, save, and have mercy",
     "tags": [
       "litany-of-supplication",
+      "litany-of-thanksgiving",
       "petition",
-      "section: The Litany of Supplication"
+      "section: The Litany of Supplication",
+      "section: The Litany of Thanksgiving"
     ]
   },
   "supplication-tribulation-danger-001": {
@@ -13026,16 +12777,6 @@ const phrases = {
     "tags": [
       "litany-of-supplication",
       "rubric",
-      "section: The Litany of Supplication"
-    ]
-  },
-  "supplication-let-us-pray-lord-001": {
-    "arabic": "إِلَى الرَّبِّ نَطْلُبُ",
-    "translation": "let us pray to the Lord",
-    "literal": "to the Lord we ask",
-    "tags": [
-      "litany-of-supplication",
-      "petition",
       "section: The Litany of Supplication"
     ]
   },
@@ -13261,17 +13002,6 @@ const phrases = {
       "section: The Great Entrance"
     ]
   },
-  "great-entrance-invisibly-001": {
-    "arabic": "بِحَالٍ غَيْرِ مَنْظُورٍ",
-    "translation": "invisibly",
-    "literal": "in an invisible manner",
-    "tags": [
-      "angelic-hosts",
-      "great-entrance",
-      "hymn",
-      "section: The Great Entrance"
-    ]
-  },
   "great-entrance-angelic-hosts-001": {
     "arabic": "تَحُفُّ بِهِ المَرَاتِبُ المَلَائِكِيَّةُ",
     "translation": "invisibly escorted by the angelic hosts",
@@ -13424,24 +13154,6 @@ const phrases = {
     "tags": [
       "great-entrance",
       "hierarch",
-      "section: The Great Entrance"
-    ]
-  },
-  "great-entrance-ages-001": {
-    "arabic": "وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "and unto ages of ages",
-    "literal": "and unto the age of ages",
-    "tags": [
-      "great-entrance",
-      "section: The Great Entrance"
-    ]
-  },
-  "great-entrance-now-ever-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ",
-    "translation": "now and ever",
-    "literal": "now and every time",
-    "tags": [
-      "great-entrance",
       "section: The Great Entrance"
     ]
   },
@@ -13664,16 +13376,6 @@ const phrases = {
       "psalm",
       "section: The Cherubic Hymn",
       "worship"
-    ]
-  },
-  "cherubic-psalm50-open-lips-001": {
-    "arabic": "يَا رَبُّ افْتَحْ شَفَتَيَّ",
-    "translation": "O Lord, thou shalt open my lips",
-    "literal": "O Lord, open my lips",
-    "tags": [
-      "cherubic-hymn",
-      "psalm",
-      "section: The Cherubic Hymn"
     ]
   },
   "cherubic-psalm50-tongue-rejoice-001": {
@@ -14231,8 +13933,10 @@ const phrases = {
       "cherubic-hymn",
       "deacon",
       "faithful",
+      "great-entrance",
       "hymn",
-      "section: The Cherubic Hymn"
+      "section: The Cherubic Hymn",
+      "section: The Great Entrance"
     ]
   },
   "cherubic-angelic-hosts-001": {
@@ -14288,18 +13992,6 @@ const phrases = {
       "priest-prayer",
       "section: The Cherubic Hymn",
       "trinity"
-    ]
-  },
-  "cherubic-lift-glory-001": {
-    "arabic": "وَإِلَيْكَ نَرْفَعُ المَجْدَ",
-    "translation": "and unto thee we ascribe glory",
-    "literal": "and to you we lift up glory",
-    "tags": [
-      "cherubic-hymn",
-      "doxology",
-      "faithful",
-      "priest-prayer",
-      "section: The Cherubic Hymn"
     ]
   },
   "cherubic-christ-god-001": {
@@ -14659,18 +14351,6 @@ const phrases = {
       "section: The Cherubic Hymn"
     ]
   },
-  "cherubic-o-lord-god-001": {
-    "arabic": "أَيُّهَا الرَّبُّ إِلَهُنَا",
-    "translation": "O Lord our God",
-    "literal": "O Lord our God",
-    "tags": [
-      "address",
-      "cherubic-hymn",
-      "faithful",
-      "priest-prayer",
-      "section: The Cherubic Hymn"
-    ]
-  },
   "cherubic-alone-lord-god-001": {
     "arabic": "لِأَنَّكَ أَنْتَ وَحْدَكَ",
     "translation": "For thou alone",
@@ -15011,17 +14691,6 @@ const phrases = {
       "section: The Prayer of the Second Litany of the Faithful"
     ]
   },
-  "second-faithful-without-blame-001": {
-    "arabic": "بِلَا لَوْمٍ وَلَا دَيْنُونَةٍ",
-    "translation": "blamelessly and without condemnation",
-    "literal": "without blame and without condemnation",
-    "tags": [
-      "faithful",
-      "mysteries",
-      "priest-prayer",
-      "section: The Prayer of the Second Litany of the Faithful"
-    ]
-  },
   "second-faithful-partake-mysteries-001": {
     "arabic": "وَأَنْ يَشْتَرِكُوا فِي أَسْرَارِكَ المُقَدَّسَةِ",
     "translation": "and to partake blamelessly of thy holy mysteries",
@@ -15182,17 +14851,6 @@ const phrases = {
       "prayer",
       "section-title",
       "section: The Prayer of the Second Litany of the Faithful"
-    ]
-  },
-  "first-faithful-glory-honor-worship-001": {
-    "arabic": "كُلُّ مَجْدٍ وَإِكْرَامٍ وَسُجُودٍ",
-    "translation": "all glory, honor and worship",
-    "literal": "all glory and honor and worship",
-    "tags": [
-      "doxology",
-      "faithful",
-      "priest-prayer",
-      "section: The Prayer of the First Litany of the Faithful"
     ]
   },
   "first-faithful-unto-thee-due-001": {
@@ -15440,19 +15098,6 @@ const phrases = {
       "section: The Prayer of the First Litany of the Faithful"
     ]
   },
-  "catechumens-father-son-spirit-001": {
-    "arabic": "أَيُّهَا الآبُ وَالابْنُ وَالرُّوحُ القُدُسُ",
-    "translation": "of the Father and of the Son and of the Holy Spirit",
-    "literal": "O Father and Son and Holy Spirit",
-    "tags": [
-      "catechumens",
-      "doxology",
-      "faithful",
-      "priest-prayer",
-      "section: The Prayer of the Litany for the Catechumens",
-      "trinity"
-    ]
-  },
   "catechumens-honorable-majestic-name-001": {
     "arabic": "اسْمَكَ الكُلِّيَّ الإِكْرَامِ وَالعَظِيمَ الجَلَالِ",
     "translation": "thine all-honorable and majestic name",
@@ -15637,17 +15282,6 @@ const phrases = {
       "section: The Prayer of the Litany for the Catechumens"
     ]
   },
-  "catechumens-lord-god-001": {
-    "arabic": "أَيُّهَا الرَّبُّ إِلَهُنَا",
-    "translation": "O Lord our God",
-    "literal": "O Lord our God",
-    "tags": [
-      "catechumens",
-      "faithful",
-      "priest-prayer",
-      "section: The Prayer of the Litany for the Catechumens"
-    ]
-  },
   "section-prayer-litany-catechumens": {
     "arabic": "إِفْشِينُ المَوْعُوظِينَ",
     "translation": "The Prayer of the Litany for the Catechumens",
@@ -15825,16 +15459,6 @@ const phrases = {
       "section: Prayer Before the Gospel"
     ]
   },
-  "trisagion-now-ever-ages-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "now and ever and unto ages of ages",
-    "literal": "now and every time and unto the age of ages",
-    "tags": [
-      "doxology",
-      "section: Thrice-Holy Hymn",
-      "trisagion"
-    ]
-  },
   "theotokos-genitive-001": {
     "arabic": "وَالِدَةِ الإِلَهِ",
     "translation": "of the Theotokos",
@@ -15928,17 +15552,6 @@ const phrases = {
       "doxology",
       "little-litany",
       "section: Little Litany After the First Antiphon"
-    ]
-  },
-  "little-litany-ascribe-glory-001": {
-    "arabic": "وَإِلَيْكَ نَرْفَعُ المَجْدَ",
-    "translation": "and unto thee we ascribe glory",
-    "literal": "and therefore we raise up glory",
-    "tags": [
-      "doxology",
-      "little-litany",
-      "second-antiphon",
-      "section: The Little Litany After the Second Antiphon"
     ]
   },
   "doxology-of-father-son-spirit-001": {
@@ -16351,16 +15964,6 @@ const phrases = {
       "trinity"
     ]
   },
-  "beginner-unto-ages-001": {
-    "arabic": "وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "and unto ages of ages",
-    "literal": "and unto the age of ages",
-    "tags": [
-      "beginner",
-      "course",
-      "doxology"
-    ]
-  },
   "beginner-both-now-001": {
     "arabic": "الآنَ",
     "translation": "Both now",
@@ -16509,17 +16112,6 @@ const phrases = {
     "literal": "the one who proclaims the holy and glorious Gospel",
     "tags": [
       "gospel",
-      "section: Prayer Before the Gospel"
-    ]
-  },
-  "unoriginate-father-spirit-003": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "and life giving",
-    "literal": "and life giving",
-    "tags": [
-      "doxology",
-      "gospel",
-      "quiet",
       "section: Prayer Before the Gospel"
     ]
   },
@@ -16813,6 +16405,10 @@ const phrases = {
     "translation": "Let us attend",
     "literal": "Let us pay attention",
     "tags": [
+      "anaphora",
+      "elevation",
+      "section: The Elevation",
+      "section: The Holy Anaphora",
       "section: The Reading of the Epistle",
       "section: The Reading of the Gospel",
       "word"
@@ -17152,9 +16748,11 @@ const phrases = {
     "literal": "and do not neglect us who trust in you",
     "tags": [
       "little-litany",
+      "prayer-behind-amvon",
       "priest-prayer",
       "quiet",
-      "section: Little Litany After the First Antiphon"
+      "section: Little Litany After the First Antiphon",
+      "section: The Prayer Behind the Amvon"
     ]
   },
   "glorify-by-power-001": {
@@ -17174,9 +16772,11 @@ const phrases = {
     "literal": "sanctify those who love the beauty of your house",
     "tags": [
       "little-litany",
+      "prayer-behind-amvon",
       "priest-prayer",
       "quiet",
-      "section: Little Litany After the First Antiphon"
+      "section: Little Litany After the First Antiphon",
+      "section: The Prayer Behind the Amvon"
     ]
   },
   "preserve-fullness-church-001": {
@@ -17185,9 +16785,11 @@ const phrases = {
     "literal": "preserve the fullness of your Church",
     "tags": [
       "little-litany",
+      "prayer-behind-amvon",
       "priest-prayer",
       "quiet",
-      "section: Little Litany After the First Antiphon"
+      "section: Little Litany After the First Antiphon",
+      "section: The Prayer Behind the Amvon"
     ]
   },
   "save-thy-people-001": {
@@ -17324,15 +16926,21 @@ const phrases = {
     ]
   },
   "o-lord-our-god-001": {
-    "arabic": "أَيُّهَا الرَّبُّ إِلَهُنَا",
+    "arabic": "أَيُّهَا الرَّبُّ إِلَهُنَا",
     "translation": "O Lord our God",
     "literal": "O Lord our God",
     "tags": [
+      "address",
+      "catechumens",
+      "cherubic-hymn",
+      "faithful",
       "litany",
       "priest-prayer",
       "quiet",
       "repeated",
-      "section: Litany of Peace"
+      "section: Litany of Peace",
+      "section: The Cherubic Hymn",
+      "section: The Prayer of the Litany for the Catechumens"
     ]
   },
   "unto-christ-our-god-001": {
@@ -17412,10 +17020,12 @@ const phrases = {
     "translation": "with all the saints",
     "literal": "with all the saints",
     "tags": [
+      "litany-of-supplication",
       "repeated",
       "saints",
       "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
+      "section: The Litany of Supplication",
       "section: The Little Litany After the Second Antiphon"
     ]
   },
@@ -17424,10 +17034,12 @@ const phrases = {
     "translation": "and ever virgin Mary",
     "literal": "the ever virgin Mary",
     "tags": [
+      "litany-of-supplication",
       "mary",
       "repeated",
       "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
+      "section: The Litany of Supplication",
       "section: The Little Litany After the Second Antiphon",
       "theotokos"
     ]
@@ -17695,18 +17307,6 @@ const phrases = {
       "section: The Preparation for the Divine Liturgy"
     ]
   },
-  "always-now-ever-ages-001": {
-    "arabic": "كُلَّ حِينٍ، الآنَ وَكُلَّ أَوَانٍ وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "always now and ever and unto ages of ages",
-    "literal": "at every time now and always and unto the age of ages",
-    "tags": [
-      "doxology",
-      "repeated",
-      "section: Blessed is our God",
-      "section: The Preparation for the Divine Liturgy",
-      "section: Thrice-Holy Hymn"
-    ]
-  },
   "blessed-is-our-god-001": {
     "arabic": "تَبَارَكَ اللهُ إِلَهُنَا",
     "translation": "Blessed is our God",
@@ -17763,8 +17363,11 @@ const phrases = {
     "translation": "O Lord thou shalt open my lips",
     "literal": "O Lord open my lips",
     "tags": [
+      "cherubic-hymn",
+      "faithful",
       "preparation",
       "psalm",
+      "section: The Cherubic Hymn",
       "section: The Preparation for the Divine Liturgy"
     ]
   },
@@ -18227,10 +17830,21 @@ const phrases = {
     "translation": "and unto thee we ascribe glory",
     "literal": "and to you we send up glory",
     "tags": [
+      "cherubic-hymn",
       "doxology",
       "entrance",
+      "faithful",
+      "litany-of-thanksgiving",
+      "little-litany",
+      "priest-prayer",
       "repeated",
+      "second-antiphon",
+      "section: Second Prayer",
+      "section: The Cherubic Hymn",
       "section: The Entrance Hymn",
+      "section: The Litany of Thanksgiving",
+      "section: The Little Litany After the Second Antiphon",
+      "thanksgiving-prayers",
       "trisagion"
     ]
   },
@@ -18359,7 +17973,9 @@ const phrases = {
     "tags": [
       "address",
       "christology",
+      "pre-communion-prayers",
       "section: The Entrance Hymn",
+      "section: The Pre-Communion Prayers",
       "section: The Second Antiphon"
     ]
   },
@@ -18417,16 +18033,6 @@ const phrases = {
       "section: The Reading of the Gospel"
     ]
   },
-  "entrance-always-001": {
-    "arabic": "كُلَّ حِينٍ",
-    "translation": "always",
-    "literal": "at every time",
-    "tags": [
-      "entrance",
-      "section: The Entrance",
-      "time"
-    ]
-  },
   "entrance-holy-ones-001": {
     "arabic": "قِدِّيسِيكَ",
     "translation": "of thy holy ones",
@@ -18461,9 +18067,55 @@ const phrases = {
     "translation": "and unto ages of ages",
     "literal": "and unto the age of ages",
     "tags": [
+      "beginner",
+      "catechumens",
+      "cherubic-hymn",
+      "course",
+      "departed",
       "doxology",
+      "evening-prayer",
+      "faithful",
+      "fervent-supplication",
+      "gospel",
+      "great-entrance",
+      "litany-of-supplication",
+      "litany-of-thanksgiving",
+      "lord's-prayer",
+      "prayer-behind-amvon",
+      "pre-communion-prayers",
+      "priest-prayer",
+      "psalm-103",
+      "quiet",
       "repeated",
-      "section: The Entrance Hymn"
+      "section: Blessed is the Kingdom",
+      "section: Hymn to the Theotokos",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: Prayer Before the Gospel",
+      "section: Psalm 103",
+      "section: Second Prayer",
+      "section: The Cherubic Hymn",
+      "section: The Entrance",
+      "section: The Entrance Hymn",
+      "section: The Evening Prayer",
+      "section: The First Antiphon",
+      "section: The Great Entrance",
+      "section: The Litany of Fervent Supplication",
+      "section: The Litany of Supplication",
+      "section: The Litany of Thanksgiving",
+      "section: The Little Litany After the Second Antiphon",
+      "section: The Lord's Prayer",
+      "section: The Peace",
+      "section: The Prayer Behind the Amvon",
+      "section: The Prayer of the First Litany of the Faithful",
+      "section: The Prayer of the Litany for the Catechumens",
+      "section: The Prayer of the Second Litany of the Faithful",
+      "section: The Pre-Communion Prayers",
+      "section: The Second Antiphon",
+      "section: Thrice-Holy Hymn",
+      "thanksgiving-prayers",
+      "theotokos",
+      "vespers"
     ]
   },
   "now-and-ever-001": {
@@ -18471,27 +18123,53 @@ const phrases = {
     "translation": "now and ever",
     "literal": "now and always",
     "tags": [
+      "catechumens",
+      "cherubic-hymn",
+      "departed",
       "doxology",
-      "repeated",
-      "section: The Entrance Hymn"
-    ]
-  },
-  "doxology-now-ever-ages-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "now and ever and unto ages of ages",
-    "literal": "now and always and unto the age of ages",
-    "tags": [
-      "doxology",
+      "evening-prayer",
+      "faithful",
+      "fervent-supplication",
+      "gospel",
+      "great-entrance",
+      "litany-of-supplication",
+      "litany-of-thanksgiving",
+      "lord's-prayer",
+      "prayer-behind-amvon",
+      "pre-communion-prayers",
+      "priest-prayer",
+      "psalm-103",
+      "quiet",
       "repeated",
       "section: Blessed is the Kingdom",
+      "section: Hymn to the Theotokos",
       "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
       "section: Prayer Before the Gospel",
+      "section: Psalm 103",
+      "section: Second Prayer",
+      "section: The Cherubic Hymn",
       "section: The Entrance",
+      "section: The Entrance Hymn",
+      "section: The Evening Prayer",
       "section: The First Antiphon",
+      "section: The Great Entrance",
+      "section: The Litany of Fervent Supplication",
+      "section: The Litany of Supplication",
+      "section: The Litany of Thanksgiving",
       "section: The Little Litany After the Second Antiphon",
+      "section: The Lord's Prayer",
+      "section: The Peace",
+      "section: The Prayer Behind the Amvon",
+      "section: The Prayer of the First Litany of the Faithful",
+      "section: The Prayer of the Litany for the Catechumens",
+      "section: The Prayer of the Second Litany of the Faithful",
+      "section: The Pre-Communion Prayers",
       "section: The Second Antiphon",
-      "section: Thrice-Holy Hymn"
+      "section: Thrice-Holy Hymn",
+      "thanksgiving-prayers",
+      "theotokos",
+      "vespers"
     ]
   },
   "doxology-father-son-spirit-001": {
@@ -18515,9 +18193,12 @@ const phrases = {
     "literal": "all glory and honor and worship",
     "tags": [
       "doxology",
+      "faithful",
+      "priest-prayer",
       "repeated",
       "section: Litany of Peace",
-      "section: The Entrance"
+      "section: The Entrance",
+      "section: The Prayer of the First Litany of the Faithful"
     ]
   },
   "doxology-for-fitting-001": {
@@ -18725,8 +18406,10 @@ const phrases = {
     "translation": "To thee O Lord",
     "literal": "To you O Lord",
     "tags": [
+      "litany-of-thanksgiving",
       "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
+      "section: The Litany of Thanksgiving",
       "section: The Little Litany After the Second Antiphon"
     ]
   },
@@ -18949,11 +18632,12 @@ const phrases = {
     ]
   },
   "petition-001": {
-    "arabic": "إِلَى الرَّبِّ نَطْلُبْ",
+    "arabic": "إِلَى الرَّبِّ نَطْلُب",
     "translation": "let us pray to the Lord",
     "literal": "to the Lord we ask",
     "tags": [
       "gospel",
+      "litany-of-supplication",
       "litany-of-thanksgiving",
       "petition",
       "prayer-behind-amvon",
@@ -18963,6 +18647,7 @@ const phrases = {
       "section: Prayer Before the Gospel",
       "section: The Entrance",
       "section: The Entrance Hymn",
+      "section: The Litany of Supplication",
       "section: The Litany of Thanksgiving",
       "section: The Little Litany After the Second Antiphon",
       "section: The Prayer Behind the Amvon"
@@ -19041,29 +18726,12 @@ const phrases = {
       "role"
     ]
   },
-  "now-ever-ages-001": {
-    "arabic": "الآنَ وَكُلَّ أَوَانٍ وَإِلَى دَهْرِ الدَّاهِرِينَ",
-    "translation": "now and ever, and unto ages of ages",
-    "literal": "now and every time and unto the age of ages",
-    "tags": [
-      "catechumens",
-      "cherubic-hymn",
-      "doxology",
-      "faithful",
-      "litany-of-supplication",
-      "priest-prayer",
-      "section: The Cherubic Hymn",
-      "section: The Litany of Supplication",
-      "section: The Prayer of the First Litany of the Faithful",
-      "section: The Prayer of the Litany for the Catechumens",
-      "section: The Prayer of the Second Litany of the Faithful"
-    ]
-  },
   "father-son-spirit-001": {
     "arabic": "أَيُّهَا الآبُ وَالابْنُ وَالرُّوحُ القُدُسُ",
     "translation": "to the Father and to the Son and to the Holy Spirit",
     "literal": "O Father and Son and Holy Spirit",
     "tags": [
+      "catechumens",
       "doxology",
       "entrance",
       "faithful",
@@ -19074,6 +18742,7 @@ const phrases = {
       "section: The Litany of Thanksgiving",
       "section: The Prayer Behind the Amvon",
       "section: The Prayer of the First Litany of the Faithful",
+      "section: The Prayer of the Litany for the Catechumens",
       "section: The Prayer of the Second Litany of the Faithful",
       "trinity"
     ]
@@ -19098,15 +18767,27 @@ const phrases = {
     "translation": "always",
     "literal": "at every time",
     "tags": [
+      "clergy-dialogue",
       "communion",
       "doxology",
+      "entrance",
       "faithful",
       "great-entrance",
+      "prayer-behind-amvon",
+      "pre-communion-prayers",
+      "preparation",
       "priest-prayer",
       "quiet",
+      "section: Blessed is our God",
       "section: The Communion",
+      "section: The Entrance",
       "section: The Great Entrance",
-      "section: The Prayer of the Second Litany of the Faithful"
+      "section: The Prayer Behind the Amvon",
+      "section: The Prayer of the Second Litany of the Faithful",
+      "section: The Pre-Communion Prayers",
+      "section: The Preparation for the Divine Liturgy",
+      "section: Thrice-Holy Hymn",
+      "time"
     ]
   }
 };

@@ -212,7 +212,7 @@ export const alignmentDefinitions = [
             "end_seconds": 20.16
           },
           {
-            "phrase_id": "beginner-unto-ages-001",
+            "phrase_id": "unto-ages-of-ages-001",
             "start_seconds": 20.16,
             "end_seconds": 21.86
           },
@@ -532,8 +532,13 @@ export const alignmentDefinitions = [
             "end_seconds": 78.12
           },
           {
-            "phrase_id": "doxology-now-ever-ages-001",
+            "phrase_id": "now-and-ever-001",
             "start_seconds": 79.1,
+            "end_seconds": 83.38
+          },
+          {
+            "phrase_id": "unto-ages-of-ages-001",
+            "start_seconds": 83.38,
             "end_seconds": 87.66
           }
         ]
@@ -1323,8 +1328,13 @@ export const alignmentDefinitions = [
             "end_seconds": 384.44
           },
           {
-            "phrase_id": "doxology-now-ever-ages-001",
+            "phrase_id": "now-and-ever-001",
             "start_seconds": 385.46,
+            "end_seconds": 390.03
+          },
+          {
+            "phrase_id": "unto-ages-of-ages-001",
+            "start_seconds": 390.03,
             "end_seconds": 394.61
           }
         ]
@@ -1611,8 +1621,13 @@ export const alignmentDefinitions = [
             "end_seconds": 67.32
           },
           {
-            "phrase_id": "doxology-now-ever-ages-001",
+            "phrase_id": "now-and-ever-001",
             "start_seconds": 67.86,
+            "end_seconds": 72.21
+          },
+          {
+            "phrase_id": "unto-ages-of-ages-001",
+            "start_seconds": 72.21,
             "end_seconds": 76.56
           }
         ]
@@ -1787,8 +1802,13 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "doxology-now-ever-ages-001",
+            "phrase_id": "now-and-ever-001",
             "start_seconds": 141.96,
+            "end_seconds": 145.28
+          },
+          {
+            "phrase_id": "unto-ages-of-ages-001",
+            "start_seconds": 145.28,
             "end_seconds": 148.6
           },
           {
@@ -2172,7 +2192,7 @@ export const alignmentDefinitions = [
             "end_seconds": 67.68
           },
           {
-            "phrase_id": "little-litany-ascribe-glory-001",
+            "phrase_id": "unto-thee-ascribe-glory-001",
             "start_seconds": 67.68,
             "end_seconds": 71.24
           },
@@ -2182,8 +2202,13 @@ export const alignmentDefinitions = [
             "end_seconds": 75.86
           },
           {
-            "phrase_id": "doxology-now-ever-ages-001",
+            "phrase_id": "now-and-ever-001",
             "start_seconds": 75.86,
+            "end_seconds": 80.75
+          },
+          {
+            "phrase_id": "unto-ages-of-ages-001",
+            "start_seconds": 80.75,
             "end_seconds": 85.64
           }
         ]
