@@ -3,6 +3,52 @@
 
 export const alignmentDefinitions = [
   {
+    "id": "alignment-great-compline-PpavnXyf8fY-dismissal-v1",
+    "service_text_id": "great-compline",
+    "recording_id": "recording-PpavnXyf8fY",
+    "method": "faster-whisper-medium-word-timestamps-with-waveform-rms-refined-boundaries",
+    "ranges": [
+      {
+        "segment_ids": [
+          "dismissal-priest-fathers"
+        ],
+        "start_seconds": 0,
+        "end_seconds": 10.22,
+        "phrase_timings": [
+          {
+            "phrase_id": "dismissal-prayers-fathers-001",
+            "start_seconds": 0,
+            "end_seconds": 3.8
+          },
+          {
+            "phrase_id": "dismissal-lord-jesus-001",
+            "start_seconds": 3.8,
+            "end_seconds": 6.64
+          },
+          {
+            "phrase_id": "dismissal-have-mercy-save-001",
+            "start_seconds": 6.64,
+            "end_seconds": 10.22
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "dismissal-choir-amen"
+        ],
+        "start_seconds": 13.66,
+        "end_seconds": 14.925,
+        "phrase_timings": [
+          {
+            "phrase_id": "amen-001",
+            "start_seconds": 13.66,
+            "end_seconds": 14.925
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "alignment-paraklesis-st-marina-oLdHO28NWuM-v1",
     "service_text_id": "paraklesis-st-marina",
     "recording_id": "recording-oLdHO28NWuM",

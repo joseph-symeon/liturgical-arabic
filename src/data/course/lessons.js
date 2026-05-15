@@ -317,6 +317,31 @@ const lessons = [
     ]
   },
   {
+    "id": "lesson-through-the-prayers",
+    "unit_id": "unit-1",
+    "title": "Through the Prayers",
+    "title_phrase": "dismissal-prayers-fathers-001",
+    "display_order": 7,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "title": "Through the Prayers",
+        "exercise_id": "dismissal-through-the-prayers",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Lord Jesus Christ",
+        "exercise_id": "dismissal-lord-jesus-christ",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Through the Prayers",
+        "exercise_id": "dismissal-through-the-prayers-summary",
+        "activity_policy": "standard"
+      }
+    ]
+  },
+  {
     "id": "lesson-all-holy-trinity",
     "unit_id": "unit-1",
     "title": "All Holy Trinity",

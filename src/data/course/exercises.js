@@ -18,6 +18,12 @@ const GREAT_COMPLINE_MEDIA = {
   default_playback_rate: 1
 };
 
+const GREAT_COMPLINE_DISMISSAL_MEDIA = {
+  recording_id: "recording-PpavnXyf8fY",
+  alignment_id: "alignment-great-compline-PpavnXyf8fY-dismissal-v1",
+  default_playback_rate: 1
+};
+
 const PARAKLESIS_ST_MARINA_MEDIA = {
   recording_id: "recording-oLdHO28NWuM",
   alignment_id: "alignment-paraklesis-st-marina-oLdHO28NWuM-v1",
@@ -298,6 +304,55 @@ export const exerciseDefinitions = [
     }
   },
   {
+    "id": "dismissal-through-the-prayers",
+    "segment_ids": [
+      "dismissal-priest-fathers"
+    ],
+    "phrase_ids": [
+      "dismissal-prayers-fathers-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "dismissal",
+      "start_segment_id": "dismissal-priest-fathers",
+      "end_segment_id": "dismissal-priest-fathers"
+    },
+    "media": GREAT_COMPLINE_DISMISSAL_MEDIA
+  },
+  {
+    "id": "dismissal-lord-jesus-christ",
+    "segment_ids": [
+      "dismissal-priest-fathers",
+      "dismissal-choir-amen"
+    ],
+    "phrase_ids": [
+      "dismissal-lord-jesus-001",
+      "dismissal-have-mercy-save-001",
+      "amen-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "dismissal",
+      "start_segment_id": "dismissal-priest-fathers",
+      "end_segment_id": "dismissal-choir-amen"
+    },
+    "media": GREAT_COMPLINE_DISMISSAL_MEDIA
+  },
+  {
+    "id": "dismissal-through-the-prayers-summary",
+    "segment_ids": [
+      "dismissal-priest-fathers",
+      "dismissal-choir-amen"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "dismissal",
+      "start_segment_id": "dismissal-priest-fathers",
+      "end_segment_id": "dismissal-choir-amen"
+    },
+    "media": GREAT_COMPLINE_DISMISSAL_MEDIA
+  },
+  {
     "id": "little-litany-again",
     "segment_ids": [
       "little-litany-again"
@@ -575,7 +630,11 @@ export function resolveExercise(definition, segmentsMap = segments) {
       : null
   );
   const alignedPhraseTimings = definition.media?.alignment_id
-    ? getAlignmentPhraseTimings(definition.media.alignment_id, segmentIds, definition.media.recording_id, alignments)
+    ? getFilteredPhraseTimings(
+        getDefinitionAlignmentRange(definition, segmentIds)?.phrase_timings
+          || getAlignmentPhraseTimings(definition.media.alignment_id, segmentIds, definition.media.recording_id, alignments),
+        definition.phrase_ids
+      )
     : [];
   const resolvedDefinition = {
     ...definition,
@@ -586,6 +645,25 @@ export function resolveExercise(definition, segmentsMap = segments) {
   };
 
   function getLinesForSegmentIds(ids) {
+    const phraseIdSet = definition.phrase_ids ? new Set(definition.phrase_ids) : null;
+    function isIncludedPhrase(part) {
+      return Boolean(part?.phrase_id && phraseIdSet?.has(part.phrase_id));
+    }
+    function hasLaterPhrase(parts, startIndex) {
+      return parts.slice(startIndex + 1).some(part => part.phrase_id);
+    }
+    function filterPhraseParts(parts) {
+      if (!phraseIdSet) return parts.map(part => ({ ...part }));
+      return parts.filter((part, index) => {
+        if (part.phrase_id) return phraseIdSet.has(part.phrase_id);
+        const previousPart = parts[index - 1];
+        const nextPart = parts[index + 1];
+        const previousIncluded = isIncludedPhrase(previousPart);
+        const nextIncluded = isIncludedPhrase(nextPart);
+        return previousIncluded && (nextIncluded || !hasLaterPhrase(parts, index));
+      }).map(part => ({ ...part }));
+    }
+
     return ids
       .map(segmentId => segmentsMap[segmentId])
       .filter(Boolean)
@@ -593,8 +671,9 @@ export function resolveExercise(definition, segmentsMap = segments) {
         ...segment,
         segment_id: ids[index],
         line_order: index + 1,
-        phrases: segment.phrases.map(part => ({ ...part }))
-      }));
+        phrases: filterPhraseParts(segment.phrases)
+      }))
+      .filter(line => !phraseIdSet || line.phrases.some(part => part.phrase_id));
   }
 
   const lines = getLinesForSegmentIds(segmentIds);
@@ -667,16 +746,42 @@ function getServiceAudioClip(definition) {
   };
 }
 
-function getMediaAudioClip(definition) {
+function getDefinitionAlignmentRange(definition, segmentIds = definition.segment_ids || []) {
   if (!definition.media?.alignment_id) return null;
-  const range = getAlignmentRange(
+  const alignment = alignments[definition.media.alignment_id];
+  if (!alignment || alignment.recording_id !== definition.media.recording_id) return null;
+  if (definition.media.range_id) {
+    return (alignment.ranges || []).find(range => range.id === definition.media.range_id) || null;
+  }
+  const segmentKey = (segmentIds || []).join('\u001f');
+  const unnamedExactRange = (alignment.ranges || []).find(range => (
+    !range.id && (range.segment_ids || []).join('\u001f') === segmentKey
+  ));
+  if (unnamedExactRange) return unnamedExactRange;
+  return getAlignmentRange(
     definition.media.alignment_id,
-    definition.segment_ids,
+    segmentIds,
     definition.media.recording_id,
     alignments
   );
+}
+
+function getFilteredPhraseTimings(phraseTimings = [], phraseIds = null) {
+  if (!phraseIds) return phraseTimings.map(timing => ({ ...timing }));
+  const phraseIdSet = new Set(phraseIds);
+  return phraseTimings
+    .filter(timing => phraseIdSet.has(timing.phrase_id))
+    .map(timing => ({ ...timing }));
+}
+
+function getMediaAudioClip(definition) {
+  if (!definition.media?.alignment_id) return null;
+  const range = getDefinitionAlignmentRange(definition);
   if (!range) return null;
-  const bounds = getRangeBounds(range);
+  const phraseBounds = getRangeBounds({
+    phrase_timings: getFilteredPhraseTimings(range.phrase_timings, definition.phrase_ids)
+  });
+  const bounds = definition.phrase_ids ? phraseBounds : getRangeBounds(range);
   if (!bounds) return null;
 
   return {
@@ -750,14 +855,7 @@ function getDerivedActivity(exercise, activityType) {
     exercise.audio_clip?.recording_id,
     alignments
   );
-  const mediaRange = exercise.media?.alignment_id
-    ? getAlignmentRange(
-        exercise.media.alignment_id,
-        exercise.segment_ids,
-        exercise.media.recording_id,
-        alignments
-      )
-    : null;
+  const mediaRange = getDefinitionAlignmentRange(exercise);
   const mediaAlignmentRange = mediaRange
     ? { alignment: alignments[exercise.media.alignment_id], range: mediaRange }
     : null;
