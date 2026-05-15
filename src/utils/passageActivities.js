@@ -4,6 +4,7 @@ export const PASSAGE_ACTIVITY_TYPES = {
   arrange: "arrange",
   typeArabic: "type-arabic",
   matching: "matching",
+  translationDirection: "translation-direction",
   cloze: "cloze"
 };
 
@@ -13,6 +14,7 @@ export const PASSAGE_ACTIVITY_LABELS = {
   [PASSAGE_ACTIVITY_TYPES.arrange]: "Arrange",
   [PASSAGE_ACTIVITY_TYPES.typeArabic]: "Trace",
   [PASSAGE_ACTIVITY_TYPES.matching]: "Matching",
+  [PASSAGE_ACTIVITY_TYPES.translationDirection]: "Translate",
   [PASSAGE_ACTIVITY_TYPES.cloze]: "Cloze"
 };
 

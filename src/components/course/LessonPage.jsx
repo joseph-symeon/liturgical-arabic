@@ -26,7 +26,11 @@ function augmentSmallExerciseActivityOptions(exerciseId, activityOptions) {
   const standardOptions = getStandardActivityOptions(exerciseId);
   return standardOptions.reduce((augmentedOptions, standardOption) => {
     if (
-      ![PASSAGE_ACTIVITY_TYPES.matching, PASSAGE_ACTIVITY_TYPES.typeArabic].includes(standardOption.activity_type)
+      ![
+        PASSAGE_ACTIVITY_TYPES.matching,
+        PASSAGE_ACTIVITY_TYPES.translationDirection,
+        PASSAGE_ACTIVITY_TYPES.typeArabic
+      ].includes(standardOption.activity_type)
         || augmentedOptions.some(option => option.activity_type === standardOption.activity_type)
     ) {
       return augmentedOptions;

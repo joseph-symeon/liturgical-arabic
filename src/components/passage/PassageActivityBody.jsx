@@ -22,12 +22,30 @@ import phrases from '../../data/texts/phrases.js';
 import { getArabicText } from '../../utils/arabic.js';
 import { isPhraseCaptionsActivity, isReadListenActivity, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 
+const TRANSLATION_CORRECT_FEEDBACK_MS = 700;
+const TRANSLATION_FEEDBACK_FADE_MS = 700;
+const TRANSLATION_INCORRECT_FEEDBACK_MS = 1100;
+
 function getShuffledPhraseIds(phraseIds, seed = '') {
   return [...phraseIds].sort((first, second) => {
     const firstKey = `${seed}:${first}`.split('').reduce((sum, character) => sum + character.charCodeAt(0), 0) % 97;
     const secondKey = `${seed}:${second}`.split('').reduce((sum, character) => sum + character.charCodeAt(0), 0) % 97;
     return firstKey - secondKey || first.localeCompare(second);
   });
+}
+
+function getRandomizedPhraseIds(phraseIds) {
+  return [...phraseIds]
+    .map(phraseId => ({ phraseId, sortKey: Math.random() }))
+    .sort((first, second) => first.sortKey - second.sortKey)
+    .map(item => item.phraseId);
+}
+
+function getTranslationChoiceIds(correctPhraseId, phraseIds, maxChoices = 4) {
+  if (!correctPhraseId) return [];
+  const distractorIds = getRandomizedPhraseIds(phraseIds.filter(phraseId => phraseId !== correctPhraseId))
+    .slice(0, Math.max(0, maxChoices - 1));
+  return getRandomizedPhraseIds([correctPhraseId, ...distractorIds]);
 }
 
 function ArrangeAnswerTile({ phraseId, index, arabicMode, arabicFontFamily, arabicFontWeight, onRemove, feedbackState = null }) {
@@ -180,8 +198,27 @@ function getTypingPromptLines(lines, arabicMode) {
   }).filter(line => line.arabicText.trim());
 }
 
+function getPixelValue(styles, property) {
+  return Number.parseFloat(styles.getPropertyValue(property)) || 0;
+}
+
+function getTraceBoxHeight(traceElement, minimumRows) {
+  const styles = window.getComputedStyle(traceElement);
+  const lineHeight = Number.parseFloat(styles.lineHeight) || 32;
+  const paddingBlock = getPixelValue(styles, 'padding-top') + getPixelValue(styles, 'padding-bottom');
+  const borderBlock = getPixelValue(styles, 'border-top-width') + getPixelValue(styles, 'border-bottom-width');
+  const contentHeight = Math.max(0, traceElement.scrollHeight - paddingBlock);
+  const traceRows = Math.max(minimumRows, Math.ceil(contentHeight / lineHeight));
+
+  return Math.ceil(paddingBlock + borderBlock + ((traceRows + 1) * lineHeight));
+}
+
 function getUniquePhraseIds(phraseIds) {
   return [...new Set(phraseIds || [])];
+}
+
+function getPhraseMeaning(phrase) {
+  return phrase?.literal || phrase?.translation || '';
 }
 
 function getPhraseIdsForLines(lines) {
@@ -203,6 +240,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const isArrangeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.arrange;
   const isTypeArabicActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.typeArabic;
   const isMatchingActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.matching;
+  const isTranslationDirectionActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.translationDirection;
   const isClozeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.cloze || isArrangeActivity;
   const isPhraseCaptions = isPhraseCaptionsActivity(exercise.activity?.type);
   const [clozeRevealed, setClozeRevealed] = useState(false);
@@ -215,6 +253,14 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const [matchedPhraseIds, setMatchedPhraseIds] = useState([]);
   const [matchingFeedback, setMatchingFeedback] = useState(null);
   const [matchingCardHeight, setMatchingCardHeight] = useState(null);
+  const [translationDirection, setTranslationDirection] = useState('arabic-to-meaning');
+  const [translationIndex, setTranslationIndex] = useState(0);
+  const [translationFeedback, setTranslationFeedback] = useState(null);
+  const [translationCompleted, setTranslationCompleted] = useState(false);
+  const [translationDismissedChoiceIds, setTranslationDismissedChoiceIds] = useState([]);
+  const [translationAdvancing, setTranslationAdvancing] = useState(false);
+  const [translationMutingAllChoices, setTranslationMutingAllChoices] = useState(false);
+  const [translationShuffleKey, setTranslationShuffleKey] = useState(0);
   const [typingBoxHeight, setTypingBoxHeight] = useState(null);
   const matchingGridRef = useRef(null);
   const typingBoxRef = useRef(null);
@@ -223,6 +269,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const arrangeFeedbackTimerRef = useRef(null);
   const typingFeedbackTimerRef = useRef(null);
   const matchingFeedbackTimerRef = useRef(null);
+  const translationFeedbackTimerRef = useRef(null);
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -235,8 +282,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   );
 
   const clozePhraseIds = exercise.activity?.cloze?.phrase_ids || [];
-  const shuffledClozePhraseIds = useMemo(
-    () => getShuffledPhraseIds(clozePhraseIds, exercise.id),
+  const randomizedArrangePhraseIds = useMemo(
+    () => getRandomizedPhraseIds(clozePhraseIds),
     [clozePhraseIds.join('|'), exercise.id]
   );
   const arrangedPhraseSet = new Set(arrangedPhraseIds);
@@ -266,6 +313,19 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     () => getShuffledPhraseIds(matchingPhraseIds, `${exercise.id}:matching`),
     [matchingPhraseIds.join('|'), exercise.id]
   );
+  const translationPhraseIds = useMemo(
+    () => getUniquePhraseIds(exercise.activity?.translation?.phrase_ids || getPhraseIdsForLines(exercise.lines))
+      .filter(phraseId => phrases[phraseId] && getPhraseMeaning(phrases[phraseId])),
+    [exercise.activity?.translation?.phrase_ids?.join('|'), exercise.lines]
+  );
+  const translationPromptIds = useMemo(
+    () => getRandomizedPhraseIds(translationPhraseIds),
+    [translationPhraseIds.join('|'), translationDirection, translationShuffleKey]
+  );
+  const translationChoiceIds = useMemo(
+    () => getTranslationChoiceIds(translationPromptIds[translationIndex], translationPhraseIds),
+    [translationPromptIds.join('|'), translationPhraseIds.join('|'), translationDirection, translationShuffleKey, translationIndex]
+  );
   const matchedPhraseIdSet = new Set(matchedPhraseIds);
   const activeCaption = isReadListen ? karaokeActiveCaption : null;
 
@@ -283,6 +343,13 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     setMatchingSelection(null);
     setMatchedPhraseIds([]);
     setMatchingFeedback(null);
+    setTranslationIndex(0);
+    setTranslationFeedback(null);
+    setTranslationCompleted(false);
+    setTranslationDismissedChoiceIds([]);
+    setTranslationAdvancing(false);
+    setTranslationMutingAllChoices(false);
+    setTranslationShuffleKey(key => key + 1);
     setTypingBoxHeight(null);
     return () => {
       if (arrangeFeedbackTimerRef.current) {
@@ -297,41 +364,64 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
         clearTimeout(matchingFeedbackTimerRef.current);
         matchingFeedbackTimerRef.current = null;
       }
+      if (translationFeedbackTimerRef.current) {
+        clearTimeout(translationFeedbackTimerRef.current);
+        translationFeedbackTimerRef.current = null;
+      }
     };
   }, [exercise.id]);
 
   useEffect(() => {
-    if (!isTypeArabicActivity || !typingTraceRef.current) return undefined;
+    setTranslationIndex(0);
+    setTranslationFeedback(null);
+    setTranslationCompleted(false);
+    setTranslationDismissedChoiceIds([]);
+    setTranslationAdvancing(false);
+    setTranslationMutingAllChoices(false);
+    setTranslationShuffleKey(key => key + 1);
+  }, [translationDirection, translationPhraseIds.join('|')]);
+
+  useEffect(() => {
+    if (!isTypeArabicActivity || !typingTraceRef.current || !typingBoxRef.current) return undefined;
     let frameId = null;
     let secondFrameId = null;
+    let lastMeasuredWidth = 0;
 
-    function updateTypingBoxHeight() {
+    function updateTypingBoxHeight({ force = false } = {}) {
       if (!typingTraceRef.current) return;
+      const measuredWidth = Math.round(typingTraceRef.current.getBoundingClientRect().width);
+      if (!force && measuredWidth === lastMeasuredWidth) return;
+
+      lastMeasuredWidth = measuredWidth;
       typingTraceRef.current.style.height = 'auto';
       if (typingInputRef.current) {
         typingInputRef.current.style.height = 'auto';
       }
-      const lineHeight = Number.parseFloat(window.getComputedStyle(typingTraceRef.current).lineHeight) || 32;
-      setTypingBoxHeight(Math.ceil(typingTraceRef.current.scrollHeight + lineHeight) + 2);
+      setTypingBoxHeight(getTraceBoxHeight(typingTraceRef.current, Math.max(1, typingPromptLines.length)));
     }
 
-    function scheduleTypingBoxHeightUpdate() {
+    function scheduleTypingBoxHeightUpdate(options) {
       if (frameId) cancelAnimationFrame(frameId);
       if (secondFrameId) cancelAnimationFrame(secondFrameId);
       frameId = requestAnimationFrame(() => {
-        secondFrameId = requestAnimationFrame(updateTypingBoxHeight);
+        secondFrameId = requestAnimationFrame(() => updateTypingBoxHeight(options));
       });
     }
 
     setTypingBoxHeight(null);
-    scheduleTypingBoxHeightUpdate();
-    window.addEventListener('resize', scheduleTypingBoxHeightUpdate);
+    scheduleTypingBoxHeightUpdate({ force: true });
+
+    const resizeObserver = new ResizeObserver(() => {
+      scheduleTypingBoxHeightUpdate();
+    });
+    resizeObserver.observe(typingBoxRef.current);
+
     return () => {
       if (frameId) cancelAnimationFrame(frameId);
       if (secondFrameId) cancelAnimationFrame(secondFrameId);
-      window.removeEventListener('resize', scheduleTypingBoxHeightUpdate);
+      resizeObserver.disconnect();
     };
-  }, [isTypeArabicActivity, typingTraceText, readerLayout]);
+  }, [isTypeArabicActivity, typingTraceText, readerLayout, typingPromptLines.length]);
 
   useEffect(() => {
     if (!isMatchingActivity || !matchingGridRef.current) return undefined;
@@ -376,6 +466,16 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
       matchingFeedbackTimerRef.current = null;
     }
     setMatchingFeedback(null);
+  }
+
+  function clearTranslationFeedback() {
+    if (translationFeedbackTimerRef.current) {
+      clearTimeout(translationFeedbackTimerRef.current);
+      translationFeedbackTimerRef.current = null;
+    }
+    setTranslationFeedback(null);
+    setTranslationAdvancing(false);
+    setTranslationMutingAllChoices(false);
   }
 
   function renderPhraseLines(lines) {
@@ -528,7 +628,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
             </ArrangeAnswerDropzone>
           </SortableContext>
           <div className="lp-arrange-bank">
-            {shuffledClozePhraseIds.map(phraseId => (
+            {randomizedArrangePhraseIds.map(phraseId => (
               <ArrangeBankTile
                 key={phraseId}
                 phraseId={phraseId}
@@ -548,7 +648,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
           <div className="lp-activity-actions lp-arrange-actions">
             <button
               type="button"
-              className="lp-activity-button"
+              className="lp-activity-button lp-activity-submit"
               onClick={() => {
                 setArrangeChecked(true);
                 setArrangeFeedback(arrangementCorrect ? 'correct' : 'incorrect');
@@ -622,7 +722,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
         <div className="lp-activity-actions lp-type-arabic-actions">
           <button
             type="button"
-            className="lp-activity-button lp-type-arabic-submit"
+            className="lp-activity-button lp-activity-submit"
             onClick={() => {
               clearTypingFeedback();
               setTypingFeedback(typedArabicCorrect ? 'correct' : 'incorrect');
@@ -636,6 +736,173 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
             Submit
           </button>
         </div>
+      </div>
+    );
+  }
+
+  function renderTranslationDirectionActivity() {
+    const currentPhraseId = translationPromptIds[translationIndex] || translationPromptIds[0];
+    const currentPhrase = phrases[currentPhraseId];
+    const isArabicPrompt = translationDirection === 'arabic-to-meaning';
+    const promptText = isArabicPrompt ? getArabicText(currentPhrase, arabicMode) : getPhraseMeaning(currentPhrase);
+    const promptLabel = isArabicPrompt ? 'Choose the meaning' : 'Choose the Arabic';
+    const progressText = translationPromptIds.length > 0
+      ? `${Math.min(translationIndex + 1, translationPromptIds.length)} / ${translationPromptIds.length}`
+      : '0 / 0';
+
+    function getChoiceClass(phraseId) {
+      const phrase = phrases[phraseId];
+      const isArabicChoice = !isArabicPrompt;
+      const classNames = [
+        'lp-matching-card',
+        isArabicChoice ? 'arabic' : 'translation',
+        'lp-translation-choice'
+      ];
+      if (translationFeedback?.selectedPhraseId === phraseId && !translationFeedback.correct) {
+        classNames.push('incorrect');
+      }
+      if (translationFeedback?.correctPhraseId === phraseId && translationFeedback.correct) {
+        classNames.push('correct');
+      }
+      if (
+        translationDismissedChoiceIds.includes(phraseId)
+        || (translationFeedback?.correct && translationFeedback.correctPhraseId !== phraseId)
+        || translationMutingAllChoices
+      ) {
+        classNames.push('matched');
+      }
+      if (!phrase) classNames.push('matched');
+      return classNames.join(' ');
+    }
+
+    function chooseTranslation(phraseId) {
+      if (!currentPhraseId || translationFeedback || translationAdvancing || translationDismissedChoiceIds.includes(phraseId)) return;
+      const correct = phraseId === currentPhraseId;
+      setTranslationFeedback({
+        correct,
+        selectedPhraseId: phraseId,
+        correctPhraseId: currentPhraseId
+      });
+      if (correct) setTranslationAdvancing(true);
+      translationFeedbackTimerRef.current = setTimeout(() => {
+        translationFeedbackTimerRef.current = null;
+        setTranslationFeedback(null);
+        if (!correct) {
+          setTranslationDismissedChoiceIds(ids => ids.includes(phraseId) ? ids : ids.concat(phraseId));
+          return;
+        }
+        setTranslationMutingAllChoices(true);
+        translationFeedbackTimerRef.current = setTimeout(() => {
+          translationFeedbackTimerRef.current = null;
+          setTranslationDismissedChoiceIds([]);
+          if (translationIndex >= translationPromptIds.length - 1) {
+            setTranslationCompleted(true);
+            setTranslationAdvancing(false);
+            setTranslationMutingAllChoices(false);
+            return;
+          }
+          setTranslationIndex(index => index + 1);
+          setTranslationAdvancing(false);
+          setTranslationMutingAllChoices(false);
+        }, TRANSLATION_FEEDBACK_FADE_MS);
+      }, correct ? TRANSLATION_CORRECT_FEEDBACK_MS : TRANSLATION_INCORRECT_FEEDBACK_MS);
+    }
+
+    if (!currentPhrase || translationPromptIds.length < 2) {
+      return (
+        <div className="lp-translation-activity" dir="ltr">
+          <div className="lp-cloze-prompt">This exercise needs at least two translatable phrases.</div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="lp-translation-activity" dir="ltr">
+        <div className="lp-translation-header">
+          <div className="lp-segmented-control lp-translation-direction" role="group" aria-label="Translation direction">
+            <button
+              type="button"
+              className={translationDirection === 'arabic-to-meaning' ? 'active' : ''}
+              onClick={() => {
+                clearTranslationFeedback();
+                setTranslationDirection('arabic-to-meaning');
+              }}
+            >
+              Arabic to meaning
+            </button>
+            <button
+              type="button"
+              className={translationDirection === 'meaning-to-arabic' ? 'active' : ''}
+              onClick={() => {
+                clearTranslationFeedback();
+                setTranslationDirection('meaning-to-arabic');
+              }}
+            >
+              Meaning to Arabic
+            </button>
+          </div>
+          <div className="lp-translation-progress">{translationCompleted ? 'Done' : progressText}</div>
+        </div>
+
+        {translationCompleted ? (
+          <div className="lp-translation-complete">
+            <div>Complete</div>
+            <button
+              type="button"
+              className="lp-activity-button lp-activity-submit"
+              onClick={() => {
+                clearTranslationFeedback();
+                setTranslationCompleted(false);
+                setTranslationIndex(0);
+                setTranslationDismissedChoiceIds([]);
+                setTranslationAdvancing(false);
+                setTranslationMutingAllChoices(false);
+                setTranslationShuffleKey(key => key + 1);
+              }}
+            >
+              Practice again
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="lp-translation-prompt">
+              <div className="lp-translation-prompt-label">{promptLabel}</div>
+              <div
+                className={`lp-translation-prompt-text${isArabicPrompt ? ' arabic' : ''}`}
+                dir={isArabicPrompt ? 'rtl' : 'ltr'}
+                style={isArabicPrompt ? {
+                  fontFamily: arabicFontFamily,
+                  fontWeight: arabicFontWeight
+                } : undefined}
+              >
+                {promptText}
+              </div>
+            </div>
+            <div className="lp-translation-options">
+              {translationChoiceIds.map(phraseId => {
+                const phrase = phrases[phraseId];
+                if (!phrase) return null;
+                const isArabicChoice = !isArabicPrompt;
+                return (
+                  <button
+                    type="button"
+                    className={getChoiceClass(phraseId)}
+                    key={`translation-${currentPhraseId}-${phraseId}`}
+                    onClick={() => chooseTranslation(phraseId)}
+                    disabled={Boolean(translationFeedback) || translationAdvancing || translationDismissedChoiceIds.includes(phraseId)}
+                    dir={isArabicChoice ? 'rtl' : 'ltr'}
+                    style={isArabicChoice ? {
+                      fontFamily: arabicFontFamily,
+                      fontWeight: arabicFontWeight
+                    } : undefined}
+                  >
+                    {isArabicChoice ? getArabicText(phrase, arabicMode) : getPhraseMeaning(phrase)}
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
     );
   }
@@ -754,6 +1021,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     <div className="lp-exercise">
       {isMatchingActivity ? (
         renderMatchingActivity()
+      ) : isTranslationDirectionActivity ? (
+        renderTranslationDirectionActivity()
       ) : isTypeArabicActivity ? (
         renderTypeArabicActivity()
       ) : isArrangeActivity ? (
@@ -775,7 +1044,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
           </div>
           {isArrangeActivity && (
             <div className="lp-arrange-bank">
-              {clozePhraseIds.map(phraseId => {
+              {randomizedArrangePhraseIds.map(phraseId => {
                 const phrase = phrases[phraseId];
                 if (!phrase) return null;
                 return (
@@ -805,7 +1074,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
               <>
                 <button
                   type="button"
-                  className="lp-activity-button"
+                  className="lp-activity-button lp-activity-submit"
                   onClick={() => setArrangeChecked(true)}
                   disabled={!arrangementComplete}
                 >

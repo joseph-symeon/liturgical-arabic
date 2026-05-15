@@ -799,6 +799,12 @@ export function getStandardActivityOptions(exerciseId) {
       activity_type: PASSAGE_ACTIVITY_TYPES.phraseCaptions
     });
   }
+  if (phraseCount >= 2 && phraseCount <= 14) {
+    activityOptions.push({
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.translationDirection],
+      activity_type: PASSAGE_ACTIVITY_TYPES.translationDirection
+    });
+  }
   if (phraseCount <= 6) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.matching],
@@ -810,6 +816,8 @@ export function getStandardActivityOptions(exerciseId) {
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.arrange],
       activity_type: PASSAGE_ACTIVITY_TYPES.arrange
     });
+  }
+  if (phraseCount <= 14) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeArabic],
       activity_type: PASSAGE_ACTIVITY_TYPES.typeArabic
@@ -900,6 +908,17 @@ function getDerivedActivity(exercise, activityType) {
     };
   }
 
+  if (activityType === PASSAGE_ACTIVITY_TYPES.translationDirection) {
+    return {
+      ...commonActivity,
+      type: PASSAGE_ACTIVITY_TYPES.translationDirection,
+      title: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.translationDirection],
+      translation: {
+        phrase_ids: phraseIds
+      }
+    };
+  }
+
   return exercise.activity;
 }
 
@@ -909,7 +928,8 @@ export function getExerciseWithActivity(exerciseId, activityType = null) {
   const practiceActivityTypes = new Set([
     PASSAGE_ACTIVITY_TYPES.arrange,
     PASSAGE_ACTIVITY_TYPES.typeArabic,
-    PASSAGE_ACTIVITY_TYPES.matching
+    PASSAGE_ACTIVITY_TYPES.matching,
+    PASSAGE_ACTIVITY_TYPES.translationDirection
   ]);
   const resolvedExercise = practiceActivityTypes.has(activityType)
     ? getPracticeExercise(exercise)
