@@ -1,6 +1,6 @@
 // Phrase text can be edited locally in this file for fast development.
-// Run `npm run phrases:pull` only when you intentionally want Notion to replace it.
-// Run `npm run phrases:check:push` to dry-run pushing local phrase edits back to Notion.
+// Run `npm run phrases:sync:check` to preview a safe bidirectional sync with Notion.
+// Run `npm run phrases:sync` to apply safe phrase changes both ways.
 
 const phrases = {
   "vespers-simeon-glory-israel-001": {
