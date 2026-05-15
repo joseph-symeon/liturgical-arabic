@@ -1948,7 +1948,19 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "cherubic-alleluia-001"
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "alleluia-001"
       },
       {
         "text": "، "
@@ -4490,7 +4502,7 @@ const sourceSegments = {
         "text": ". "
       },
       {
-        "phrase_id": "gospel-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": "."
@@ -6640,7 +6652,19 @@ const sourceSegments = {
         "text": ". "
       },
       {
-        "phrase_id": "cherubic-alleluia-001"
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "alleluia-001"
       },
       {
         "text": "."
@@ -7691,7 +7715,19 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "cherubic-alleluia-001"
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "alleluia-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "alleluia-001"
       },
       {
         "text": "."
@@ -8128,7 +8164,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "supplication-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": ". "
@@ -11447,7 +11483,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "supplication-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": "."
@@ -11490,7 +11526,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "supplication-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": "."
@@ -11563,7 +11599,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "supplication-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": "."
@@ -13706,7 +13742,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "thanksgiving-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": "."
@@ -13743,7 +13779,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "thanksgiving-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": "."
@@ -13973,7 +14009,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "thanksgiving-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": "."
@@ -14207,7 +14243,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "amvon-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": "."
@@ -14299,7 +14335,7 @@ const sourceSegments = {
         "text": ". "
       },
       {
-        "phrase_id": "amvon-lord-have-mercy-001"
+        "phrase_id": "lord-have-mercy-001"
       },
       {
         "text": ". "
@@ -15047,7 +15083,7 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {"phrase_id": "departed-lord-have-mercy-thrice-001"},
+      {"phrase_id": "lord-have-mercy-001"},
       {"text": ". "},
       {"phrase_id": "thanksgiving-after-communion-thrice-001"}
     ]
@@ -15129,7 +15165,7 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {"phrase_id": "departed-lord-have-mercy-thrice-001"},
+      {"phrase_id": "lord-have-mercy-001"},
       {"text": "."}
     ]
   },

@@ -255,26 +255,32 @@ function createSyncPlan(localRows, notionRows, notionPages, manifest) {
 }
 
 function formatSyncPlan(plan, status) {
-  const lines = [
+  const rows = [
+    ['Conflicts', plan.conflicts.length],
+    ['Local added', plan.pushCreate.length],
+    ['Local removed', plan.pushArchive.length],
+    ['Local updated', plan.pushUpdate.length],
+    ['Notion added', plan.pullAdd.length],
+    ['Notion archived', plan.pullRemove.length],
+    ['Notion updated', plan.pullUpdate.length],
+    ['Phrases matching', plan.unchanged.length]
+  ];
+  const labelWidth = Math.max(...rows.map(([label]) => label.length));
+  const countWidth = Math.max(...rows.map(([, count]) => String(count).length));
+
+  return [
     status === 'complete'
       ? 'Sync complete: local phrases.js <-> Notion.'
       : status === 'blocked'
         ? 'Sync blocked: local phrases.js <-> Notion.'
         : 'Sync check: local phrases.js <-> Notion.',
-    `- Create in Notion: ${plan.pushCreate.length}`,
-    `- Update in Notion: ${plan.pushUpdate.length}`,
-    `- Archive in Notion: ${plan.pushArchive.length}`,
-    `- Add locally: ${plan.pullAdd.length}`,
-    `- Update locally: ${plan.pullUpdate.length}`,
-    `- Remove locally: ${plan.pullRemove.length}`,
-    `- Already matching: ${plan.unchanged.length}`,
-    `- Conflicts: ${plan.conflicts.length}`,
+    '',
+    ...rows.map(([label, count]) => `${label.padEnd(labelWidth)}  ${String(count).padStart(countWidth)}`),
+    '',
     status === 'complete'
       ? 'Safe changes were written both ways.'
       : 'No local files or Notion rows were changed.'
-  ];
-
-  return lines.join('\n');
+  ].join('\n');
 }
 
 function formatConflictSummary(conflicts) {

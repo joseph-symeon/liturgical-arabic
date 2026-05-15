@@ -2480,15 +2480,6 @@ const phrases = {
       "litany"
     ]
   },
-  "departed-lord-have-mercy-thrice-001": {
-    "arabic": "يا رَبُّ ارْحَمْ",
-    "translation": "Lord, have mercy",
-    "literal": "O Lord, have mercy",
-    "tags": [
-      "departed",
-      "response"
-    ]
-  },
   "departed-hearken-mercy-001": {
     "arabic": "نَطْلُبُ إِلَيْكَ فَاسْتَجِبْ وَارْحَمْ",
     "translation": "we pray thee, hearken and have mercy",
@@ -7537,16 +7528,6 @@ const phrases = {
       "section: The Prayer Behind the Amvon"
     ]
   },
-  "amvon-lord-have-mercy-001": {
-    "arabic": "يَا رَبُّ ارْحَمْ",
-    "translation": "Lord, have mercy",
-    "literal": "O Lord, have mercy",
-    "tags": [
-      "prayer-behind-amvon",
-      "response",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
   "amvon-to-lord-pray-001": {
     "arabic": "إِلَى الرَّبِّ نَطْلُبْ",
     "translation": "Let us pray to the Lord",
@@ -8025,16 +8006,6 @@ const phrases = {
     "literal": "support and save and have mercy",
     "tags": [
       "litany-of-thanksgiving",
-      "section: The Litany of Thanksgiving"
-    ]
-  },
-  "thanksgiving-lord-have-mercy-001": {
-    "arabic": "يَا رَبُّ ارْحَمْ",
-    "translation": "Lord, have mercy",
-    "literal": "O Lord, have mercy",
-    "tags": [
-      "litany-of-thanksgiving",
-      "response",
       "section: The Litany of Thanksgiving"
     ]
   },
@@ -13183,16 +13154,6 @@ const phrases = {
       "section: The Litany of Supplication"
     ]
   },
-  "supplication-lord-have-mercy-001": {
-    "arabic": "يَا رَبُّ ارْحَمْ",
-    "translation": "Lord, have mercy",
-    "literal": "O Lord, have mercy",
-    "tags": [
-      "litany-of-supplication",
-      "response",
-      "section: The Litany of Supplication"
-    ]
-  },
   "supplication-complete-prayer-001": {
     "arabic": "لِنُكَمِّلْ طِلْبَتَنَا لِلرَّبِّ",
     "translation": "Let us complete our prayer unto the Lord",
@@ -14393,20 +14354,6 @@ const phrases = {
       "priest-prayer",
       "resurrection",
       "section: The Cherubic Hymn"
-    ]
-  },
-  "cherubic-alleluia-001": {
-    "arabic": "هَلِلُويَا، هَلِلُويَا، هَلِلُويَا",
-    "translation": "Alleluia, alleluia, alleluia",
-    "literal": "Alleluia, alleluia, alleluia",
-    "tags": [
-      "cherubic-hymn",
-      "deacon",
-      "faithful",
-      "great-entrance",
-      "hymn",
-      "section: The Cherubic Hymn",
-      "section: The Great Entrance"
     ]
   },
   "cherubic-invisibly-001": {
@@ -16165,17 +16112,6 @@ const phrases = {
       "antiphon",
       "section: The First Antiphon",
       "theotokos"
-    ]
-  },
-  "gospel-lord-have-mercy-001": {
-    "arabic": "يَا رَبُّ ارْحَمْ",
-    "translation": "Lord, have mercy",
-    "literal": "O Lord have mercy",
-    "tags": [
-      "gospel",
-      "mercy",
-      "response",
-      "section: Prayer Before the Gospel"
     ]
   },
   "gospel-petition-001": {
@@ -18637,9 +18573,15 @@ const phrases = {
     "translation": "Alleluia",
     "literal": "Alleluia",
     "tags": [
+      "cherubic-hymn",
+      "deacon",
+      "faithful",
+      "great-entrance",
       "hymn",
       "repeated",
+      "section: The Cherubic Hymn",
       "section: The Entrance Hymn",
+      "section: The Great Entrance",
       "section: The Reading of the Epistle",
       "section: The Second Antiphon",
       "section: Thrice-Holy Hymn"
@@ -19236,14 +19178,22 @@ const phrases = {
     "translation": "Lord, have mercy",
     "literal": "O Lord have mercy",
     "tags": [
+      "departed",
+      "gospel",
+      "litany-of-supplication",
+      "litany-of-thanksgiving",
       "mercy",
+      "prayer-behind-amvon",
       "repeated",
       "response",
       "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
       "section: Prayer Before the Gospel",
       "section: The Entrance Hymn",
-      "section: The Little Litany After the Second Antiphon"
+      "section: The Litany of Supplication",
+      "section: The Litany of Thanksgiving",
+      "section: The Little Litany After the Second Antiphon",
+      "section: The Prayer Behind the Amvon"
     ]
   },
   "petition-001": {
