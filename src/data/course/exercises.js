@@ -311,6 +311,85 @@ export const exerciseDefinitions = [
     }
   },
   {
+    "id": "hymn-to-the-theotokos-meet-bless",
+    "segment_ids": [
+      "theotokos-hymn-rubric",
+      "theotokos-hymn-choir"
+    ],
+    "phrase_ids": [
+      "theotokos-hymn-meet-bless-001",
+      "theotokos-hymn-bless-theotokos-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "theotokos-hymn-rubric",
+      "end_segment_id": "theotokos-hymn-choir"
+    }
+  },
+  {
+    "id": "hymn-to-the-theotokos-ever-blessed",
+    "segment_ids": [
+      "theotokos-hymn-choir"
+    ],
+    "phrase_ids": [
+      "theotokos-hymn-ever-blessed-001",
+      "theotokos-hymn-blameless-mother-001",
+      "theotokos-hymn-mother-our-god-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "theotokos-hymn-choir",
+      "end_segment_id": "theotokos-hymn-choir"
+    }
+  },
+  {
+    "id": "hymn-to-the-theotokos-more-honorable",
+    "segment_ids": [
+      "theotokos-hymn-choir"
+    ],
+    "phrase_ids": [
+      "theotokos-hymn-more-honorable-001",
+      "theotokos-hymn-more-glorious-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "theotokos-hymn-choir",
+      "end_segment_id": "theotokos-hymn-choir"
+    }
+  },
+  {
+    "id": "hymn-to-the-theotokos-without-corruption",
+    "segment_ids": [
+      "theotokos-hymn-choir"
+    ],
+    "phrase_ids": [
+      "theotokos-hymn-without-corruption-001",
+      "theotokos-hymn-truly-magnify-001",
+      "theotokos-hymn-we-magnify-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "theotokos-hymn-choir",
+      "end_segment_id": "theotokos-hymn-choir"
+    }
+  },
+  {
+    "id": "hymn-to-the-theotokos-summary",
+    "segment_ids": [
+      "theotokos-hymn-choir"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "theotokos-hymn-choir",
+      "end_segment_id": "theotokos-hymn-choir"
+    }
+  },
+  {
     "id": "dismissal-through-the-prayers-summary",
     "segment_ids": [
       "dismissal-priest-fathers",
@@ -638,16 +717,43 @@ export function resolveExercise(definition, segmentsMap = segments) {
         return previousIncluded && (nextIncluded || !hasLaterPhrase(parts, index));
       }).map(part => ({ ...part }));
     }
+    function splitLineParts(segment, parts) {
+      if (!segment.split_phrases_by_line_breaks) return [parts];
+      const hasLineBreakMarkers = parts.some(part => part.line_break_after);
+      if (!hasLineBreakMarkers) return [parts];
+
+      const lines = [];
+      let currentParts = [];
+      parts.forEach(part => {
+        currentParts.push(part);
+        if (part.line_break_after) {
+          lines.push(currentParts);
+          currentParts = [];
+        }
+      });
+      if (currentParts.length > 0) lines.push(currentParts);
+      return lines.filter(lineParts => lineParts.some(part => part.phrase_id || part.text?.trim()));
+    }
 
     return ids
-      .map(segmentId => segmentsMap[segmentId])
-      .filter(Boolean)
-      .map((segment, index) => ({
-        ...segment,
-        segment_id: ids[index],
-        line_order: index + 1,
-        phrases: filterPhraseParts(segment.phrases)
+      .map((segmentId, segmentIndex) => ({ segmentId, segmentIndex, segment: segmentsMap[segmentId] }))
+      .filter(({ segment }) => Boolean(segment))
+      .flatMap(({ segmentId, segmentIndex, segment }) => (
+        splitLineParts(segment, filterPhraseParts(segment.phrases))
+          .map((lineParts, lineIndex) => ({
+            ...segment,
+            segment_id: lineIndex === 0 ? segmentId : `${segmentId}@${segmentIndex}:${lineIndex}`,
+            source_segment_id: segmentId,
+            line_order: null,
+            break_before: lineIndex === 0 ? segment.break_before : false,
+            phrases: lineParts
+          }))
+      ))
+      .map((line, index) => ({
+        ...line,
+        line_order: index + 1
       }))
+      .filter(Boolean)
       .filter(line => !phraseIdSet || line.phrases.some(part => part.phrase_id));
   }
 
@@ -710,7 +816,10 @@ function getServiceAudioClip(definition) {
     alignments
   );
   if (!serviceRange) return null;
-  const bounds = getRangeBounds(serviceRange.range);
+  const bounds = getRangeBounds({
+    ...serviceRange.range,
+    phrase_timings: getFilteredPhraseTimings(serviceRange.range.phrase_timings, definition.phrase_ids)
+  });
   if (!bounds) return null;
 
   return {
@@ -775,7 +884,7 @@ function getAlignedCaptions(exercise) {
     alignments
   );
   if (serviceRange?.range?.phrase_timings) {
-    return serviceRange.range.phrase_timings.map(timing => ({ ...timing }));
+    return getFilteredPhraseTimings(serviceRange.range.phrase_timings, exercise.phrase_ids);
   }
 
   return exercise.captions?.map(timing => ({ ...timing })) || [];

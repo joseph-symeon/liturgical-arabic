@@ -9,8 +9,15 @@ export default function PassageTextRenderer({ lines, arabicMode = 'vocalized', r
     .sort((a, b) => a.line_order - b.line_order);
 
   function isActivePart(line, phraseId) {
+    const captionMatchesLine = !activeCaption?.segment_id
+      || activeCaption.segment_id === line.segment_id
+      || (
+        activeCaption.source_segment_id
+          && line.source_segment_id
+          && activeCaption.source_segment_id === line.source_segment_id
+      );
     return activeCaption?.phrase_id === phraseId
-      && (!activeCaption.segment_id || activeCaption.segment_id === line.segment_id);
+      && captionMatchesLine;
   }
 
   function getLineParts(line) {

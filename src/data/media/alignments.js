@@ -2712,6 +2712,78 @@ export const alignmentDefinitions = [
         ]
       }
     ]
+  },
+  {
+    "id": "alignment-divine-liturgy-GlXjGrH0v4Y-theotokos-hymn-v1",
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "recording_id": "recording-GlXjGrH0v4Y",
+    "method": "faster-whisper-small-word-timestamps-with-waveform-rms-refined-boundaries",
+    "ranges": [
+      {
+        "service_range": {
+          "section_id": "anaphora",
+          "start_segment_id": "theotokos-hymn-rubric",
+          "end_segment_id": "theotokos-hymn-choir"
+        },
+        "start_seconds": 24.27,
+        "segment_ids": [
+          "theotokos-hymn-rubric",
+          "theotokos-hymn-choir"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "theotokos-hymn-meet-bless-001",
+            "start_seconds": 24.27,
+            "end_seconds": 35.18
+          },
+          {
+            "phrase_id": "theotokos-hymn-bless-theotokos-001",
+            "start_seconds": 35.18,
+            "end_seconds": 50.17
+          },
+          {
+            "phrase_id": "theotokos-hymn-ever-blessed-001",
+            "start_seconds": 51.08,
+            "end_seconds": 58.08
+          },
+          {
+            "phrase_id": "theotokos-hymn-blameless-mother-001",
+            "start_seconds": 58.8,
+            "end_seconds": 70.18
+          },
+          {
+            "phrase_id": "theotokos-hymn-mother-our-god-001",
+            "start_seconds": 70.18,
+            "end_seconds": 76.84
+          },
+          {
+            "phrase_id": "theotokos-hymn-more-honorable-001",
+            "start_seconds": 78.92,
+            "end_seconds": 90.3
+          },
+          {
+            "phrase_id": "theotokos-hymn-more-glorious-001",
+            "start_seconds": 90.3,
+            "end_seconds": 105.56
+          },
+          {
+            "phrase_id": "theotokos-hymn-without-corruption-001",
+            "start_seconds": 108.25,
+            "end_seconds": 127.96
+          },
+          {
+            "phrase_id": "theotokos-hymn-truly-magnify-001",
+            "start_seconds": 132.28,
+            "end_seconds": 143.04
+          },
+          {
+            "phrase_id": "theotokos-hymn-we-magnify-001",
+            "start_seconds": 145.38,
+            "end_seconds": 162.08
+          }
+        ]
+      }
+    ]
   }
 ];
 

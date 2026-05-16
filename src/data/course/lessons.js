@@ -16,6 +16,41 @@ const lessons = [
     ]
   },
   {
+    "id": "lesson-hymn-to-the-theotokos",
+    "unit_id": "unit-2",
+    "title": "The Hymn to the Theotokos",
+    "title_phrase": "section-hymn-to-the-theotokos",
+    "display_order": 2,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "title": "It is truly meet",
+        "exercise_id": "hymn-to-the-theotokos-meet-bless",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Ever-blessed",
+        "exercise_id": "hymn-to-the-theotokos-ever-blessed",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "More honorable",
+        "exercise_id": "hymn-to-the-theotokos-more-honorable",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Without corruption",
+        "exercise_id": "hymn-to-the-theotokos-without-corruption",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "The Hymn to the Theotokos",
+        "exercise_id": "hymn-to-the-theotokos-summary",
+        "activity_policy": "standard"
+      }
+    ]
+  },
+  {
     "id": "lesson-antiphons",
     "unit_id": "unit-2",
     "title": "The Antiphons",

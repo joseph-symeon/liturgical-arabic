@@ -10605,7 +10605,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-meet-bless-001": {
-    "arabic": "بِواجِبِ الإِسْتِهْلال حقاً",
+    "arabic": "بِواجِبِ الْإِسْتِئهَالِ حقاً",
     "translation": "It is truly meet",
     "literal": "with due worthiness, truly",
     "tags": [

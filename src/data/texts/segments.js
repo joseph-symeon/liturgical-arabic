@@ -10969,6 +10969,7 @@ const sourceSegments = {
   "theotokos-hymn-choir": {
     "speaker": "role-choir",
     "break_before": true,
+    "split_phrases_by_line_breaks": true,
     "tags": [
       "hymn-to-the-theotokos"
     ],
@@ -10983,7 +10984,8 @@ const sourceSegments = {
         "phrase_id": "theotokos-hymn-bless-theotokos-001"
       },
       {
-        "text": " "
+        "text": " ",
+        "line_break_after": true
       },
       {
         "phrase_id": "theotokos-hymn-ever-blessed-001"
@@ -11001,7 +11003,8 @@ const sourceSegments = {
         "phrase_id": "theotokos-hymn-mother-our-god-001"
       },
       {
-        "text": ". "
+        "text": ". ",
+        "line_break_after": true
       },
       {
         "phrase_id": "theotokos-hymn-more-honorable-001"
@@ -11013,7 +11016,8 @@ const sourceSegments = {
         "phrase_id": "theotokos-hymn-more-glorious-001"
       },
       {
-        "text": ". "
+        "text": ". ",
+        "line_break_after": true
       },
       {
         "phrase_id": "theotokos-hymn-without-corruption-001"
@@ -11025,7 +11029,8 @@ const sourceSegments = {
         "phrase_id": "theotokos-hymn-truly-magnify-001"
       },
       {
-        "text": "، "
+        "text": "، ",
+        "line_break_after": true
       },
       {
         "phrase_id": "theotokos-hymn-we-magnify-001"
