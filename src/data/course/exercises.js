@@ -816,10 +816,10 @@ function getServiceAudioClip(definition) {
     alignments
   );
   if (!serviceRange) return null;
-  const bounds = getRangeBounds({
-    ...serviceRange.range,
-    phrase_timings: getFilteredPhraseTimings(serviceRange.range.phrase_timings, definition.phrase_ids)
-  });
+  const filteredPhraseTimings = getFilteredPhraseTimings(serviceRange.range.phrase_timings, definition.phrase_ids);
+  const bounds = definition.phrase_ids
+    ? getRangeBounds({ phrase_timings: filteredPhraseTimings })
+    : getRangeBounds(serviceRange.range);
   if (!bounds) return null;
 
   return {

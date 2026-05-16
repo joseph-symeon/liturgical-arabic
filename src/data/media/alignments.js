@@ -2754,17 +2754,17 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "theotokos-hymn-mother-our-god-001",
             "start_seconds": 70.18,
-            "end_seconds": 76.84
+            "end_seconds": 78.93
           },
           {
             "phrase_id": "theotokos-hymn-more-honorable-001",
-            "start_seconds": 78.92,
+            "start_seconds": 79.65,
             "end_seconds": 90.3
           },
           {
             "phrase_id": "theotokos-hymn-more-glorious-001",
             "start_seconds": 90.3,
-            "end_seconds": 105.56
+            "end_seconds": 107.825
           },
           {
             "phrase_id": "theotokos-hymn-without-corruption-001",
