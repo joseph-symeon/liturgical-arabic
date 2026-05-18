@@ -2769,6 +2769,11 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "theotokos-hymn-without-corruption-001",
             "start_seconds": 108.25,
+            "end_seconds": 118.1
+          },
+          {
+            "phrase_id": "theotokos-hymn-bear-word-001",
+            "start_seconds": 118.1,
             "end_seconds": 127.96
           },
           {
@@ -2780,6 +2785,231 @@ export const alignmentDefinitions = [
             "phrase_id": "theotokos-hymn-we-magnify-001",
             "start_seconds": 145.38,
             "end_seconds": 162.08
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "alignment-divine-liturgy-ymBUtFJeJls-cherubic-hymn-v1",
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "recording_id": "recording-ymBUtFJeJls",
+    "method": "faster-whisper-small-word-timestamps-with-waveform-silence-anchors",
+    "ranges": [
+      {
+        "service_range": {
+          "section_id": "cherubic-hymn",
+          "start_segment_id": "cherubic-hymn-choir",
+          "end_segment_id": "cherubic-hymn-choir"
+        },
+        "segment_ids": [
+          "cherubic-hymn-choir"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "cherubic-represent-001",
+            "start_seconds": 53.3,
+            "end_seconds": 145
+          },
+          {
+            "phrase_id": "cherubic-sing-thrice-holy-001",
+            "start_seconds": 145,
+            "end_seconds": 217.8
+          },
+          {
+            "phrase_id": "cherubic-life-giving-trinity-001",
+            "start_seconds": 217.8,
+            "end_seconds": 251.4
+          },
+          {
+            "phrase_id": "cherubic-lay-aside-now-001",
+            "start_seconds": 252,
+            "end_seconds": 260
+          },
+          {
+            "phrase_id": "cherubic-earthly-care-001",
+            "start_seconds": 260,
+            "end_seconds": 289.2
+          },
+          {
+            "phrase_id": "cherubic-about-to-001",
+            "start_seconds": 289.2,
+            "end_seconds": 309.2
+          },
+          {
+            "phrase_id": "cherubic-receive-king-001",
+            "start_seconds": 309.2,
+            "end_seconds": 337.9
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "section_id": "great-entrance",
+          "start_segment_id": "great-entrance-deacon-all",
+          "end_segment_id": "great-entrance-deacon-all"
+        },
+        "segment_ids": [
+          "great-entrance-deacon-all"
+        ],
+        "start_seconds": 338,
+        "end_seconds": 407.54,
+        "phrase_timings": [
+          {
+            "phrase_id": "great-entrance-all-of-you-001",
+            "start_seconds": 338,
+            "end_seconds": 341.58
+          },
+          {
+            "phrase_id": "great-entrance-all-of-you-001",
+            "start_seconds": 341.8,
+            "end_seconds": 345
+          },
+          {
+            "phrase_id": "great-entrance-lord-remember-001",
+            "start_seconds": 366.65,
+            "end_seconds": 370.05
+          },
+          {
+            "phrase_id": "great-entrance-in-kingdom-001",
+            "start_seconds": 370.05,
+            "end_seconds": 373.56
+          },
+          {
+            "phrase_id": "every-time-001",
+            "start_seconds": 373.56,
+            "end_seconds": 376.08
+          },
+          {
+            "phrase_id": "great-entrance-lord-remember-001",
+            "start_seconds": 376.75,
+            "end_seconds": 379.05
+          },
+          {
+            "phrase_id": "great-entrance-in-kingdom-001",
+            "start_seconds": 379.65,
+            "end_seconds": 384.86
+          },
+          {
+            "phrase_id": "every-time-001",
+            "start_seconds": 382.96,
+            "end_seconds": 384.86
+          },
+          {
+            "phrase_id": "now-and-ever-001",
+            "start_seconds": 384.86,
+            "end_seconds": 389.72
+          },
+          {
+            "phrase_id": "unto-ages-of-ages-001",
+            "start_seconds": 389.72,
+            "end_seconds": 394.08
+          },
+          {
+            "phrase_id": "now-and-ever-001",
+            "start_seconds": 395,
+            "end_seconds": 397.78
+          },
+          {
+            "phrase_id": "unto-ages-of-ages-001",
+            "start_seconds": 397.78,
+            "end_seconds": 404.44
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "section_id": "great-entrance",
+          "start_segment_id": "great-entrance-choir-amen-1",
+          "end_segment_id": "great-entrance-choir-amen-1"
+        },
+        "segment_ids": [
+          "great-entrance-choir-amen-1"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "amen-001",
+            "start_seconds": 404.54,
+            "end_seconds": 408.94
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "section_id": "great-entrance",
+          "start_segment_id": "great-entrance-priest-hierarch",
+          "end_segment_id": "great-entrance-priest-hierarch"
+        },
+        "segment_ids": [
+          "great-entrance-priest-hierarch"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "great-entrance-father-metropolitan-001",
+            "start_seconds": 409.5,
+            "end_seconds": 411.94
+          },
+          {
+            "phrase_id": "great-entrance-so-and-so-001",
+            "start_seconds": 411.94,
+            "end_seconds": 414.68
+          },
+          {
+            "phrase_id": "great-entrance-let-lord-remember-001",
+            "start_seconds": 418.72,
+            "end_seconds": 422.04
+          },
+          {
+            "phrase_id": "great-entrance-in-kingdom-001",
+            "start_seconds": 422.04,
+            "end_seconds": 425.3
+          },
+          {
+            "phrase_id": "every-time-001",
+            "start_seconds": 425.3,
+            "end_seconds": 426.94
+          },
+          {
+            "phrase_id": "now-and-ever-001",
+            "start_seconds": 426.94,
+            "end_seconds": 430.72
+          },
+          {
+            "phrase_id": "unto-ages-of-ages-001",
+            "start_seconds": 430.72,
+            "end_seconds": 435.02
+          }
+        ]
+      },
+      {
+        "service_range": {
+          "section_id": "great-entrance",
+          "start_segment_id": "great-entrance-choir-cherubic-completion",
+          "end_segment_id": "great-entrance-choir-cherubic-completion"
+        },
+        "segment_ids": [
+          "great-entrance-choir-cherubic-completion"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "amen-001",
+            "start_seconds": 435,
+            "end_seconds": 439.65
+          },
+          {
+            "phrase_id": "great-entrance-angelic-hosts-001",
+            "start_seconds": 439.65,
+            "end_seconds": 475.8
+          },
+          {
+            "phrase_id": "cherubic-invisibly-001",
+            "start_seconds": 475.8,
+            "end_seconds": 491.6
+          },
+          {
+            "phrase_id": "alleluia-001",
+            "start_seconds": 492,
+            "end_seconds": 507.889
           }
         ]
       }

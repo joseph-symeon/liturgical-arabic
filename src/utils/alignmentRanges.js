@@ -39,7 +39,15 @@ function composeAlignmentRanges(segmentIds, ranges, serviceRange = null) {
     start_seconds: firstBounds?.start_seconds,
     end_seconds: lastBounds?.end_seconds,
     phrase_timings: timedRanges.flatMap(range => (
-      range.phrase_timings?.map(timing => ({ ...timing })) || []
+      range.phrase_timings?.map(timing => ({
+        ...timing,
+        ...(range.segment_ids?.length === 1
+          ? {
+              segment_id: range.segment_ids[0],
+              source_segment_id: range.segment_ids[0]
+            }
+          : {})
+      })) || []
     )),
     default_playback_rate: timedRanges.find(range => typeof range.default_playback_rate === "number")?.default_playback_rate
   };
@@ -122,22 +130,45 @@ function getPhraseIdsForSegment(segmentId, segmentsMap = segments) {
 }
 
 export function getPhraseTimingsForSegmentIds(segmentIds, phraseTimings, segmentsMap = segments) {
+  if ((segmentIds || []).length === 1) {
+    const segmentId = segmentIds[0];
+    const phraseIdSet = new Set(getPhraseIdsForSegment(segmentId, segmentsMap));
+    return (phraseTimings || [])
+      .filter(timing => phraseIdSet.has(timing.phrase_id))
+      .map(timing => ({
+        ...timing,
+        segment_id: segmentId,
+        source_segment_id: segmentId
+      }));
+  }
+
   const timings = [];
   let timingCursor = 0;
   segmentIds.forEach(segmentId => {
-    getPhraseIdsForSegment(segmentId, segmentsMap).forEach((phraseId, phraseIndex) => {
-      const timingIndex = (phraseTimings || []).findIndex((timing, index) => (
-        index >= timingCursor && timing.phrase_id === phraseId
-      ));
-      if (timingIndex < 0) return;
+    const phraseIds = getPhraseIdsForSegment(segmentId, segmentsMap);
+    const phraseIdSet = new Set(phraseIds);
+    let matchedSegmentTiming = false;
+    while (timingCursor < (phraseTimings || []).length) {
+      const phraseTiming = phraseTimings[timingCursor];
+      const timingSegmentId = phraseTiming.source_segment_id || phraseTiming.segment_id;
+      if (timingSegmentId && timingSegmentId !== segmentId) {
+        break;
+      }
+      if (!phraseIdSet.has(phraseTiming.phrase_id)) {
+        if (matchedSegmentTiming) break;
+        timingCursor += 1;
+        continue;
+      }
+      const phraseIndex = phraseIds.indexOf(phraseTiming.phrase_id);
       timings.push({
-        ...phraseTimings[timingIndex],
+        ...phraseTiming,
         segment_id: segmentId,
         source_segment_id: segmentId,
         phrase_index: phraseIndex
       });
-      timingCursor = timingIndex + 1;
-    });
+      matchedSegmentTiming = true;
+      timingCursor += 1;
+    }
   });
   return timings;
 }

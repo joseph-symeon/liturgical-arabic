@@ -5,17 +5,25 @@ function getOrderedLines(exercise) {
   return [...(exercise?.lines || [])].sort((a, b) => a.line_order - b.line_order);
 }
 
-function getFirstPhraseTranslation(line) {
-  const firstPhraseId = [...(line?.phrases || [])]
+function getPhraseTranslations(line) {
+  return [...(line?.phrases || [])]
     .sort((a, b) => a.display_order - b.display_order)
-    .find(part => part.phrase_id)?.phrase_id;
+    .map(part => phrases[part.phrase_id]?.translation)
+    .filter(Boolean);
+}
 
-  return phrases[firstPhraseId]?.translation;
+function isOneWord(title) {
+  return title.trim().split(/\s+/).length === 1;
 }
 
 function getGeneratedExerciseTitle(exercise) {
   const lines = getOrderedLines(exercise);
-  const firstTitle = getFirstPhraseTranslation(lines[0]);
+  const [firstTitle, secondTitle] = getPhraseTranslations(lines[0]);
+
+  if (firstTitle && secondTitle && isOneWord(firstTitle)) {
+    return `${firstTitle} ${secondTitle}`;
+  }
+
   return firstTitle || null;
 }
 

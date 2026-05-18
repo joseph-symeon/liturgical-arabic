@@ -2006,9 +2006,9 @@ const phrases = {
     ]
   },
   "vespers-country-authorities-001": {
-    "arabic": "مِنْ أَجْلِ حُكّامِ هَذا البَلَدِ",
-    "translation": "For our country, its president (or appropriate head of state)",
-    "literal": "For the rulers of this country",
+    "arabic": "حُكّامِ هَذا البَلَدِ",
+    "translation": "our country, its president (or appropriate head of state)",
+    "literal": "the rulers of this country",
     "tags": [
       "civil-authorities",
       "litany",
@@ -2411,9 +2411,9 @@ const phrases = {
     ]
   },
   "departed-pardon-sins-001": {
-    "arabic": "وَمِنْ أَجْلِ غُفْرانِ جَميعِ ذُنُوبِهِ (ها/هم)",
-    "translation": "and that thou wilt pardon his (her, their) every transgression",
-    "literal": "and for the forgiveness of all his/her/their sins",
+    "arabic": "غُفْرانِ جَميعِ ذُنُوبِهِ (ها/هم)",
+    "translation": "the pardon of his (her, their) every transgression",
+    "literal": "the forgiveness of all his/her/their sins",
     "tags": [
       "departed",
       "litany"
@@ -2429,9 +2429,9 @@ const phrases = {
     ]
   },
   "departed-again-repose-001": {
-    "arabic": "وَأَيْضاً نَطْلُبُ مِنْ أَجْلِ راحَةِ نَفْسِ (نُفُوسِ)",
-    "translation": "Again we pray for the repose of the soul(s)",
-    "literal": "and again we ask for the repose of the soul(s)",
+    "arabic": "راحَةِ نَفْسِ (نُفُوسِ)",
+    "translation": "the repose of the soul(s)",
+    "literal": "the repose of the soul(s)",
     "tags": [
       "departed",
       "litany"
@@ -9887,9 +9887,9 @@ const phrases = {
     ]
   },
   "before-lords-prayer-gifts-precious-001": {
-    "arabic": "مِنْ أَجْلِ هذِهِ القَرَابِينِ الكَرِيمَةِ",
-    "translation": "For the precious gifts",
-    "literal": "for these precious offerings",
+    "arabic": "هذِهِ القَرَابِينِ الكَرِيمَةِ",
+    "translation": "the precious gifts",
+    "literal": "these precious offerings",
     "tags": [
       "litany-before-lords-prayer",
       "offering",
@@ -10535,9 +10535,19 @@ const phrases = {
     ]
   },
   "theotokos-hymn-without-corruption-001": {
-    "arabic": "التي بِغَيْرِ فَسادٍ وَلَدَتْ كَلِمَةَ الله",
-    "translation": "thou who without corruption didst bear God the Word",
-    "literal": "who without corruption gave birth to the Word of God",
+    "arabic": "التي بِغَيْرِ فَسادٍ",
+    "translation": "thou who without corruption",
+    "literal": "who without corruption",
+    "tags": [
+      "hymn",
+      "section: Hymn to the Theotokos",
+      "theotokos"
+    ]
+  },
+  "theotokos-hymn-bear-word-001": {
+    "arabic": "وَلَدَتْ كَلِمَةَ الله",
+    "translation": "didst bear God the Word",
+    "literal": "gave birth to the Word of God",
     "tags": [
       "hymn",
       "section: Hymn to the Theotokos",
@@ -10663,9 +10673,9 @@ const phrases = {
     ]
   },
   "holy-anaphora-especially-theotokos-001": {
-    "arabic": "وَخَاصَّةً مِنْ أَجْلِ الكُلِّيَّةِ القَدَاسَةِ",
-    "translation": "Especially for our all-holy",
-    "literal": "and especially for the all-holy",
+    "arabic": "الكُلِّيَّةِ القَدَاسَةِ",
+    "translation": "our all-holy",
+    "literal": "the all-holy",
     "tags": [
       "anaphora",
       "section: The Holy Anaphora",
@@ -10723,9 +10733,9 @@ const phrases = {
     ]
   },
   "holy-anaphora-departed-faith-001": {
-    "arabic": "مِنْ أَجْلِ الَّذِينَ تَوَفَّوا عَلَى الإِيمَانِ",
-    "translation": "for those who in faith have gone on before us",
-    "literal": "for those who have died in the faith",
+    "arabic": "الَّذِينَ تَوَفَّوا عَلَى الإِيمَانِ",
+    "translation": "those who in faith have gone on before us",
+    "literal": "those who have died in the faith",
     "tags": [
       "anaphora",
       "commemoration",
@@ -10781,16 +10791,6 @@ const phrases = {
     "tags": [
       "anaphora",
       "epiclesis",
-      "section: The Holy Anaphora"
-    ]
-  },
-  "holy-anaphora-amen-three-001": {
-    "arabic": "آمِينَ، آمِينَ، آمِينَ",
-    "translation": "Amen. Amen. Amen",
-    "literal": "amen, amen, amen",
-    "tags": [
-      "anaphora",
-      "response",
       "section: The Holy Anaphora"
     ]
   },
@@ -10967,9 +10967,9 @@ const phrases = {
     ]
   },
   "holy-anaphora-for-all-001": {
-    "arabic": "وَمِنْ أَجْلِ كُلِّ شَيْءٍ",
-    "translation": "and for all",
-    "literal": "and for the sake of everything",
+    "arabic": "كُلِّ شَيْءٍ",
+    "translation": "all",
+    "literal": "everything",
     "tags": [
       "anaphora",
       "offering",
@@ -11470,9 +11470,9 @@ const phrases = {
     ]
   },
   "holy-anaphora-benefits-known-001": {
-    "arabic": "مِنْ أَجْلِ كُلِّ الإِحْسَانَاتِ الصَّادِرَةِ إِلَيْنَا",
-    "translation": "for all the benefits bestowed upon us",
-    "literal": "for all the benefactions issued to us",
+    "arabic": "كُلِّ الإِحْسَانَاتِ الصَّادِرَةِ إِلَيْنَا",
+    "translation": "all the benefits bestowed upon us",
+    "literal": "all the benefactions issued to us",
     "tags": [
       "anaphora",
       "section: The Holy Anaphora",
@@ -11490,9 +11490,9 @@ const phrases = {
     ]
   },
   "holy-anaphora-thank-for-all-001": {
-    "arabic": "فَمِنْ أَجْلِ هذِهِ كُلِّهَا نَشْكُرُكَ",
-    "translation": "For all these things we give thanks unto thee",
-    "literal": "so for all these we thank thee",
+    "arabic": "هذِهِ كُلِّهَا نَشْكُرُكَ",
+    "translation": "all these things we give thanks unto thee",
+    "literal": "all these we thank thee",
     "tags": [
       "anaphora",
       "section: The Holy Anaphora",
@@ -12034,9 +12034,9 @@ const phrases = {
     ]
   },
   "creed-for-salvation-came-down-001": {
-    "arabic": "وَمِنْ أَجْلِ خَلَاصِنَا، نَزَلَ مِنَ السَّمَاءِ",
-    "translation": "and for our salvation came down from heaven",
-    "literal": "and for our salvation came down from heaven",
+    "arabic": "خَلَاصِنَا، نَزَلَ مِنَ السَّمَاءِ",
+    "translation": "our salvation came down from heaven",
+    "literal": "our salvation came down from heaven",
     "tags": [
       "christology",
       "creed",
@@ -12710,16 +12710,6 @@ const phrases = {
       "section: The Litany of Supplication"
     ]
   },
-  "supplication-deliverance-001": {
-    "arabic": "مِنْ أَجْلِ نَجَاتِنَا",
-    "translation": "For our deliverance",
-    "literal": "For our deliverance",
-    "tags": [
-      "litany-of-supplication",
-      "petition",
-      "section: The Litany of Supplication"
-    ]
-  },
   "supplication-faith-reverence-fear-001": {
     "arabic": "بِإِيمَانٍ وَوَرَعٍ وَخَوْفِ اللهِ",
     "translation": "with faith, reverence, and fear of God",
@@ -12741,9 +12731,9 @@ const phrases = {
     ]
   },
   "supplication-holy-house-001": {
-    "arabic": "مِنْ أَجْلِ هذَا البَيْتِ المُقَدَّسِ",
-    "translation": "For this holy house",
-    "literal": "For this holy house",
+    "arabic": "هذَا البَيْتِ المُقَدَّسِ",
+    "translation": "this holy house",
+    "literal": "this holy house",
     "tags": [
       "litany-of-supplication",
       "petition",
@@ -12761,9 +12751,9 @@ const phrases = {
     ]
   },
   "supplication-precious-gifts-001": {
-    "arabic": "مِنْ أَجْلِ هذِهِ القَرَابِينِ",
-    "translation": "For the precious gifts now set forth",
-    "literal": "For these offerings",
+    "arabic": "هذِهِ القَرَابِينِ",
+    "translation": "the precious gifts now set forth",
+    "literal": "these offerings",
     "tags": [
       "litany-of-supplication",
       "offering",
@@ -13037,7 +13027,7 @@ const phrases = {
   },
   "great-entrance-departed-servants-001": {
     "arabic": "السَّابِقَ رُقَادُهُمْ",
-    "translation": "The servants of God departed this life",
+    "translation": "departed this life",
     "literal": "whose repose has preceded",
     "tags": [
       "departed",
@@ -13077,9 +13067,9 @@ const phrases = {
     ]
   },
   "great-entrance-health-welfare-001": {
-    "arabic": "مِنْ أَجْلِ صِحَّتِهِمْ",
-    "translation": "that they may have mercy, life, peace, health",
-    "literal": "for the sake of their health",
+    "arabic": "صِحَّتِهِمْ",
+    "translation": "their health",
+    "literal": "their health",
     "tags": [
       "great-entrance",
       "petition",
@@ -13098,7 +13088,7 @@ const phrases = {
   },
   "great-entrance-servants-of-god-001": {
     "arabic": "عَبِيدَ اللهِ",
-    "translation": "The servants of God, NN.",
+    "translation": "The servants of God",
     "literal": "The servants of God",
     "tags": [
       "great-entrance",
@@ -13108,7 +13098,7 @@ const phrases = {
   },
   "great-entrance-support-good-work-001": {
     "arabic": "وَمُؤَازِرِيهِمْ فِي كُلِّ عَمَلٍ صَالِحٍ",
-    "translation": "and armed forces",
+    "translation": "(or appropriate head of state) and armed forces",
     "literal": "and their support in every good work",
     "tags": [
       "great-entrance",
@@ -13118,7 +13108,7 @@ const phrases = {
   },
   "great-entrance-rulers-001": {
     "arabic": "حُكَّامَنَا",
-    "translation": "Our president (or appropriate head of state), civil authorities",
+    "translation": "Our president",
     "literal": "Our rulers",
     "tags": [
       "great-entrance",
@@ -13149,7 +13139,7 @@ const phrases = {
   },
   "great-entrance-father-metropolitan-001": {
     "arabic": "أَبَانَا وَمِتْرُوبُولِيتَنَا",
-    "translation": "Our father and metropolitan, N.",
+    "translation": "Our father and metropolitan",
     "literal": "Our father and metropolitan",
     "tags": [
       "great-entrance",
@@ -14960,9 +14950,9 @@ const phrases = {
     ]
   },
   "first-faithful-all-people-001": {
-    "arabic": "مِنْ أَجْلِ كُلِّ شَعْبِكَ",
-    "translation": "for all thy people",
-    "literal": "for the sake of all your people",
+    "arabic": "كُلِّ شَعْبِكَ",
+    "translation": "all thy people",
+    "literal": "all your people",
     "tags": [
       "faithful",
       "people",
@@ -15014,9 +15004,9 @@ const phrases = {
     ]
   },
   "first-faithful-sins-ignorance-001": {
-    "arabic": "مِنْ أَجْلِ خَطَايَانَا وَجَهَالَاتِ الشَّعْبِ",
-    "translation": "for our sins and the ignorance of the people",
-    "literal": "for the sake of our sins and the ignorances of the people",
+    "arabic": "خَطَايَانَا وَجَهَالَاتِ الشَّعْبِ",
+    "translation": "our sins and the ignorance of the people",
+    "literal": "our sins and the ignorances of the people",
     "tags": [
       "faithful",
       "priest-prayer",
@@ -15670,10 +15660,21 @@ const phrases = {
       "travel"
     ]
   },
+  "for-the-sake-of-001": {
+    "arabic": "مِنْ أَجْلِ",
+    "translation": "For",
+    "literal": "for the sake of",
+    "tags": [
+      "course",
+      "litany",
+      "petition",
+      "repeated"
+    ]
+  },
   "travelers-001": {
-    "arabic": "مِنْ أَجْلِ المُسَافِرِينَ",
-    "translation": "For travelers",
-    "literal": "for the sake of travelers",
+    "arabic": "المُسَافِرِينَ",
+    "translation": "travelers",
+    "literal": "travelers",
     "tags": [
       "litany",
       "petition",
@@ -15704,9 +15705,9 @@ const phrases = {
     ]
   },
   "this-city-001": {
-    "arabic": "مِنْ أَجْلِ هَذِهِ المَدِينَة",
-    "translation": "For this city",
-    "literal": "for the sake of this city",
+    "arabic": "هَذِهِ المَدِينَة",
+    "translation": "this city",
+    "literal": "this city",
     "tags": [
       "litany",
       "petition",
@@ -15716,7 +15717,7 @@ const phrases = {
   },
   "support-good-work-001": {
     "arabic": "وَمُؤازَرَتِهِمْ فِي كُلِّ عَمَلٍ صالِح",
-    "translation": "civil authorities and armed forces",
+    "translation": "(or appropriate head of state) civil authorities and armed forces",
     "literal": "and helping them in every good deed",
     "tags": [
       "civil-authorities",
@@ -15737,9 +15738,9 @@ const phrases = {
     ]
   },
   "country-president-001": {
-    "arabic": "مِنْ أَجْلِ حُكَّامِنا",
-    "translation": "For our country its president (or appropriate head of state)",
-    "literal": "For our rulers",
+    "arabic": "حُكَّامِنا",
+    "translation": "our country, its president",
+    "literal": "our rulers",
     "tags": [
       "civil-authorities",
       "litany",
@@ -15803,9 +15804,9 @@ const phrases = {
     ]
   },
   "father-metropolitan-001": {
-    "arabic": "مِنْ أَجْلِ أَبِينَا وَمِتْرُوبُولِيتِنَا",
-    "translation": "For our father and metropolitan",
-    "literal": "for the sake of our father and metropolitan",
+    "arabic": "أَبِينَا وَمِتْرُوبُولِيتِنَا",
+    "translation": "our father and metropolitan",
+    "literal": "our father and metropolitan",
     "tags": [
       "hierarchy",
       "litany",
@@ -17116,13 +17117,15 @@ const phrases = {
     ]
   },
   "deliverance-tribulation-001": {
-    "arabic": "مِنْ أَجْلِ نَجَاتِنَا",
-    "translation": "For our deliverance",
-    "literal": "for the sake of our deliverance",
+    "arabic": "نَجَاتِنَا",
+    "translation": "our deliverance",
+    "literal": "our deliverance",
     "tags": [
       "litany",
+      "litany-of-supplication",
       "petition",
-      "section: Litany of Peace"
+      "section: Litany of Peace",
+      "section: The Litany of Supplication"
     ]
   },
   "their-salvation-001": {
@@ -17169,9 +17172,9 @@ const phrases = {
     ]
   },
   "healthful-seasons-001": {
-    "arabic": "مِنْ أَجْلِ اعْتِدَالِ الأَهْوِيَةِ",
-    "translation": "For healthful seasons",
-    "literal": "for the sake of temperate weather",
+    "arabic": "اعْتِدَالِ الأَهْوِيَةِ",
+    "translation": "healthful seasons",
+    "literal": "temperate weather",
     "tags": [
       "creation",
       "litany",
@@ -18500,9 +18503,9 @@ const phrases = {
     ]
   },
   "for-our-salvation-001": {
-    "arabic": "مِنْ أَجْلِ خَلاصِنا",
-    "translation": "for our salvation",
-    "literal": "for the sake of our salvation",
+    "arabic": "خَلاصِنا",
+    "translation": "our salvation",
+    "literal": "our salvation",
     "tags": [
       "incarnation",
       "salvation",
@@ -18550,9 +18553,9 @@ const phrases = {
     ]
   },
   "holy-house-001": {
-    "arabic": "مِنْ أَجْلِ هَذَا الْبَيْتِ الْمُقَدَّس",
-    "translation": "For this holy house",
-    "literal": "for the sake of this holy house",
+    "arabic": "هَذَا الْبَيْتِ الْمُقَدَّس",
+    "translation": "this holy house",
+    "literal": "this holy house",
     "tags": [
       "church",
       "place",
@@ -18579,9 +18582,9 @@ const phrases = {
     ]
   },
   "whole-world-001": {
-    "arabic": "مِنْ أَجْلِ سَلامِ كُلِّ الْعَالَمِ",
-    "translation": "For the peace of the whole world",
-    "literal": "for the sake of peace of the whole world",
+    "arabic": "سَلامِ كُلِّ الْعَالَمِ",
+    "translation": "the peace of the whole world",
+    "literal": "peace of the whole world",
     "tags": [
       "peace",
       "section: Litany of Peace",
@@ -18599,9 +18602,9 @@ const phrases = {
     ]
   },
   "peace-from-above-001": {
-    "arabic": "مِنْ أَجْلِ السَّلامِ مِنَ الْعُلَى",
-    "translation": "For the peace from above",
-    "literal": "for the sake of the peace from on high",
+    "arabic": "السَّلامِ مِنَ الْعُلَى",
+    "translation": "the peace from above",
+    "literal": "the peace from on high",
     "tags": [
       "peace",
       "petition",

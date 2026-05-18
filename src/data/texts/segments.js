@@ -48,6 +48,12 @@ const sourceSegments = {
     "tags": [],
     "phrases": [
       {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "peace-from-above-001"
       },
       {
@@ -66,6 +72,12 @@ const sourceSegments = {
     "break_before": true,
     "tags": [],
     "phrases": [
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
       {
         "phrase_id": "whole-world-001"
       },
@@ -91,6 +103,12 @@ const sourceSegments = {
     "break_before": true,
     "tags": [],
     "phrases": [
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
       {
         "phrase_id": "holy-house-001"
       },
@@ -118,6 +136,12 @@ const sourceSegments = {
       "litany"
     ],
     "phrases": [
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
       {
         "phrase_id": "father-metropolitan-001"
       },
@@ -176,6 +200,12 @@ const sourceSegments = {
     ],
     "phrases": [
       {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "country-president-001"
       },
       {
@@ -198,6 +228,12 @@ const sourceSegments = {
     ],
     "phrases": [
       {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "vespers-country-authorities-001"
       },
       {
@@ -218,6 +254,12 @@ const sourceSegments = {
       "litany"
     ],
     "phrases": [
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
       {
         "phrase_id": "this-city-001"
       },
@@ -334,6 +376,12 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "accepted-incarnate-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
       },
       {
         "text": " "
@@ -3104,6 +3152,8 @@ const sourceSegments = {
       {"phrase_id": "theotokos-hymn-more-glorious-001"},
       {"text": "، "},
       {"phrase_id": "theotokos-hymn-without-corruption-001"},
+      {"text": " "},
+      {"phrase_id": "theotokos-hymn-bear-word-001"},
       {"text": "، "},
       {"phrase_id": "theotokos-hymn-truly-magnify-001"},
       {"text": " "},
@@ -3204,6 +3254,12 @@ const sourceSegments = {
     ],
     "phrases": [
       {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "healthful-seasons-001"
       },
       {
@@ -3230,6 +3286,12 @@ const sourceSegments = {
       "litany"
     ],
     "phrases": [
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
       {
         "phrase_id": "travelers-001"
       },
@@ -3263,6 +3325,12 @@ const sourceSegments = {
       "litany"
     ],
     "phrases": [
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
       {
         "phrase_id": "deliverance-tribulation-001"
       },
@@ -5636,6 +5704,12 @@ const sourceSegments = {
         "text": " "
       },
       {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "first-faithful-sins-ignorance-001"
       },
       {
@@ -5661,6 +5735,12 @@ const sourceSegments = {
       },
       {
         "phrase_id": "first-faithful-bloodless-sacrifices-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
       },
       {
         "text": " "
@@ -7622,6 +7702,12 @@ const sourceSegments = {
         "text": " "
       },
       {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "great-entrance-health-welfare-001"
       },
       {
@@ -8256,6 +8342,12 @@ const sourceSegments = {
     ],
     "phrases": [
       {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "supplication-precious-gifts-001"
       },
       {
@@ -8282,6 +8374,12 @@ const sourceSegments = {
       "litany-of-supplication"
     ],
     "phrases": [
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
       {
         "phrase_id": "supplication-holy-house-001"
       },
@@ -8316,7 +8414,13 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "supplication-deliverance-001"
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "deliverance-tribulation-001"
       },
       {
         "text": " "
@@ -9191,6 +9295,15 @@ const sourceSegments = {
         "text": "، "
       },
       {
+        "text": "وَ"
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "creed-for-salvation-came-down-001"
       },
       {
@@ -9712,6 +9825,15 @@ const sourceSegments = {
     ],
     "phrases": [
       {
+        "text": "فَ"
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "holy-anaphora-thank-for-all-001"
       },
       {
@@ -9722,6 +9844,12 @@ const sourceSegments = {
       },
       {
         "text": "، "
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
       },
       {
         "phrase_id": "holy-anaphora-benefits-known-001"
@@ -10201,6 +10329,15 @@ const sourceSegments = {
         "text": "، "
       },
       {
+        "text": "وَ"
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "holy-anaphora-for-all-001"
       },
       {
@@ -10431,7 +10568,19 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "holy-anaphora-amen-three-001"
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -10482,6 +10631,12 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "holy-anaphora-offer-departed-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
       },
       {
         "text": " "
@@ -10541,6 +10696,15 @@ const sourceSegments = {
       "anaphora"
     ],
     "phrases": [
+      {
+        "text": "وَخَاصَّةً "
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
       {
         "phrase_id": "holy-anaphora-especially-theotokos-001"
       },
@@ -11021,6 +11185,12 @@ const sourceSegments = {
       },
       {
         "phrase_id": "theotokos-hymn-without-corruption-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-hymn-bear-word-001"
       },
       {
         "text": "، "
@@ -11582,6 +11752,12 @@ const sourceSegments = {
       "litany-before-lords-prayer"
     ],
     "phrases": [
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
       {
         "phrase_id": "before-lords-prayer-gifts-precious-001"
       },
@@ -15245,11 +15421,33 @@ const sourceSegments = {
       "litany"
     ],
     "phrases": [
-      {"phrase_id": "departed-again-repose-001"},
+      {
+        "text": "وَأَيْضاً نَطْلُبُ "
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "departed-again-repose-001"
+      },
       {"text": " "},
       {"phrase_id": "departed-servants-names-001"},
       {"text": "، "},
-      {"phrase_id": "departed-pardon-sins-001"},
+      {
+        "text": "وَ"
+      },
+      {
+        "phrase_id": "for-the-sake-of-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "departed-pardon-sins-001"
+      },
       {"text": " "},
       {"phrase_id": "departed-voluntary-involuntary-001"},
       {"text": "."}

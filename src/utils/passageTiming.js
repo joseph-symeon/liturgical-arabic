@@ -63,6 +63,22 @@ export function getPlaybackCaptions(playback) {
 
   return selectedRanges
     .flatMap(range => {
+      if ((range.segment_ids || []).length === 1) {
+        const segmentId = range.segment_ids[0];
+        const phraseIds = (segments[segmentId]?.phrases || [])
+          .filter(part => part.phrase_id)
+          .map(part => part.phrase_id);
+        const phraseIdSet = new Set(phraseIds);
+        return (range.phrase_timings || [])
+          .filter(timing => phraseIdSet.has(timing.phrase_id))
+          .map(timing => ({
+            ...timing,
+            segment_id: `${segmentId}@${range.resolved_service_range.start.segment_index}`,
+            source_segment_id: segmentId,
+            range_key: range.resolved_service_range.key
+          }));
+      }
+
       const captions = [];
       let timingCursor = 0;
       (range.segment_ids || []).forEach((segmentId, segmentOffset) => {

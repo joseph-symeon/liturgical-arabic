@@ -42,6 +42,14 @@ const SECOND_ANTIPHON_MEDIA = {
   default_playback_rate: 1
 };
 
+const CHERUBIC_HYMN_MEDIA = {
+  recording_id: "recording-ymBUtFJeJls",
+  alignment_id: "alignment-divine-liturgy-ymBUtFJeJls-cherubic-hymn-v1",
+  default_playback_rate: 1
+};
+
+const GREAT_ENTRANCE_MEDIA = CHERUBIC_HYMN_MEDIA;
+
 export const exerciseDefinitions = [
   {
     "id": "antiphon-only-begotten",
@@ -367,6 +375,7 @@ export const exerciseDefinitions = [
     ],
     "phrase_ids": [
       "theotokos-hymn-without-corruption-001",
+      "theotokos-hymn-bear-word-001",
       "theotokos-hymn-truly-magnify-001",
       "theotokos-hymn-we-magnify-001"
     ],
@@ -388,6 +397,149 @@ export const exerciseDefinitions = [
       "start_segment_id": "theotokos-hymn-choir",
       "end_segment_id": "theotokos-hymn-choir"
     }
+  },
+  {
+    "id": "cherubic-hymn-represent-trinity",
+    "segment_ids": [
+      "cherubic-hymn-choir"
+    ],
+    "phrase_ids": [
+      "cherubic-represent-001",
+      "cherubic-sing-thrice-holy-001",
+      "cherubic-life-giving-trinity-001"
+    ],
+    "media": CHERUBIC_HYMN_MEDIA
+  },
+  {
+    "id": "cherubic-hymn-lay-aside-king",
+    "segment_ids": [
+      "cherubic-hymn-choir"
+    ],
+    "phrase_ids": [
+      "cherubic-lay-aside-now-001",
+      "cherubic-earthly-care-001",
+      "cherubic-about-to-001",
+      "cherubic-receive-king-001"
+    ],
+    "media": CHERUBIC_HYMN_MEDIA
+  },
+  {
+    "id": "cherubic-hymn-angelic-hosts",
+    "segment_ids": [
+      "great-entrance-choir-cherubic-completion"
+    ],
+    "phrase_ids": [
+      "amen-001",
+      "great-entrance-angelic-hosts-001",
+      "cherubic-invisibly-001"
+    ],
+    "media": CHERUBIC_HYMN_MEDIA
+  },
+  {
+    "id": "cherubic-hymn-summary",
+    "segment_ids": [
+      "cherubic-hymn-choir"
+    ],
+    "show_speakers": true,
+    "media": CHERUBIC_HYMN_MEDIA
+  },
+  {
+    "id": "great-entrance-all",
+    "segment_ids": [
+      "great-entrance-deacon-all"
+    ],
+    "phrase_ids": [
+      "great-entrance-all-of-you-001"
+    ],
+    "media": GREAT_ENTRANCE_MEDIA
+  },
+  {
+    "id": "great-entrance-lord-remember-kingdom",
+    "segment_ids": [
+      "great-entrance-deacon-all"
+    ],
+    "phrase_ids": [
+      "great-entrance-lord-remember-001",
+      "great-entrance-in-kingdom-001"
+    ],
+    "media": GREAT_ENTRANCE_MEDIA
+  },
+  {
+    "id": "great-entrance-hierarch",
+    "segment_ids": [
+      "great-entrance-priest-hierarch"
+    ],
+    "phrase_ids": [
+      "great-entrance-father-metropolitan-001",
+      "great-entrance-so-and-so-001"
+    ],
+    "media": GREAT_ENTRANCE_MEDIA
+  },
+  {
+    "id": "great-entrance-rulers",
+    "segment_ids": [
+      "great-entrance-priest-rulers"
+    ],
+    "phrase_ids": [
+      "great-entrance-rulers-001",
+      "great-entrance-support-good-work-001"
+    ]
+  },
+  {
+    "id": "great-entrance-living",
+    "segment_ids": [
+      "great-entrance-priest-living"
+    ],
+    "phrase_ids": [
+      "great-entrance-servants-of-god-001",
+      "great-entrance-offerings-offered-001",
+      "great-entrance-health-welfare-001",
+      "great-entrance-welfare-001",
+      "great-entrance-remission-sins-001",
+      "great-entrance-names-001"
+    ]
+  },
+  {
+    "id": "great-entrance-departed",
+    "segment_ids": [
+      "great-entrance-priest-departed"
+    ],
+    "phrase_ids": [
+      "great-entrance-servants-of-god-001",
+      "great-entrance-departed-servants-001",
+      "great-entrance-hope-resurrection-001",
+      "great-entrance-eternal-life-001",
+      "great-entrance-names-001"
+    ]
+  },
+  {
+    "id": "great-entrance-angelic-hosts",
+    "segment_ids": [
+      "great-entrance-choir-cherubic-completion"
+    ],
+    "phrase_ids": [
+      "amen-001",
+      "great-entrance-angelic-hosts-001",
+      "cherubic-invisibly-001"
+    ],
+    "media": CHERUBIC_HYMN_MEDIA
+  },
+  {
+    "id": "great-entrance-summary",
+    "segment_ids": [
+      "great-entrance-deacon-all",
+      "great-entrance-choir-amen-1",
+      "great-entrance-priest-hierarch",
+      "great-entrance-choir-amen-2",
+      "great-entrance-priest-rulers",
+      "great-entrance-choir-amen-3",
+      "great-entrance-priest-living",
+      "great-entrance-choir-amen-4",
+      "great-entrance-priest-departed",
+      "great-entrance-choir-cherubic-completion"
+    ],
+    "show_speakers": true,
+    "media": GREAT_ENTRANCE_MEDIA
   },
   {
     "id": "dismissal-through-the-prayers-summary",
@@ -855,7 +1007,8 @@ function getFilteredPhraseTimings(phraseTimings = [], phraseIds = null) {
   const phraseIdSet = new Set(phraseIds);
   return phraseTimings
     .filter(timing => phraseIdSet.has(timing.phrase_id))
-    .map(timing => ({ ...timing }));
+    .map(timing => ({ ...timing }))
+    .sort((first, second) => first.start_seconds - second.start_seconds);
 }
 
 function getMediaAudioClip(definition) {
@@ -899,6 +1052,17 @@ export function hasLinkedRecording(exerciseId) {
   return Boolean(exercise?.audio_clip?.recording_id || exercise?.caption_clip?.recording_id);
 }
 
+export function canUseActivityType(exerciseId, activityType) {
+  const phraseCount = getExercisePhraseCount(exerciseId);
+  if ([
+    PASSAGE_ACTIVITY_TYPES.arrange,
+    PASSAGE_ACTIVITY_TYPES.matching
+  ].includes(activityType)) {
+    return phraseCount > 1;
+  }
+  return true;
+}
+
 export function getStandardActivityOptions(exerciseId) {
   const activityOptions = [...STANDARD_ACTIVITY_OPTIONS];
   const phraseCount = getExercisePhraseCount(exerciseId);
@@ -914,13 +1078,13 @@ export function getStandardActivityOptions(exerciseId) {
       activity_type: PASSAGE_ACTIVITY_TYPES.translationDirection
     });
   }
-  if (phraseCount <= 6) {
+  if (phraseCount > 1 && phraseCount <= 6) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.matching],
       activity_type: PASSAGE_ACTIVITY_TYPES.matching
     });
   }
-  if (phraseCount <= 12) {
+  if (phraseCount > 1 && phraseCount <= 12) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.arrange],
       activity_type: PASSAGE_ACTIVITY_TYPES.arrange

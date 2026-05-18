@@ -9,6 +9,17 @@ export default function SpeakerBlock(props) {
   const lines = section.lines || [];
 
   function getLineParts(line) {
+    function isActivePart(phraseId) {
+      const captionMatchesLine = !props.activeCaption?.segment_id
+        || props.activeCaption.segment_id === line.segment_id
+        || (
+          props.activeCaption.source_segment_id
+            && line.source_segment_id
+            && props.activeCaption.source_segment_id === line.source_segment_id
+        );
+      return props.activeCaption?.phrase_id === phraseId && captionMatchesLine;
+    }
+
     return [...line.phrases]
       .sort((a, b) => a.display_order - b.display_order)
       .map(part =>
@@ -16,10 +27,7 @@ export default function SpeakerBlock(props) {
           ? { text: part.text, isRubric: line.tags?.includes("rubric") || part.tags?.includes("rubric") }
           : {
               id: part.phrase_id,
-              className: props.activeCaption?.segment_id === line.segment_id
-                && props.activeCaption?.phrase_id === part.phrase_id
-                ? "lp-karaoke-active"
-                : undefined
+              className: isActivePart(part.phrase_id) ? "lp-karaoke-active" : undefined
             }
       );
   }

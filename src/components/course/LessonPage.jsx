@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './course.css';
 import PageHeader from '../PageHeader.jsx';
 import PassageExperience from '../passage/PassageExperience.jsx';
-import exercises, { getExerciseWithActivity, getStandardActivityOptions, hasLinkedRecording } from '../../data/course/exercises.js';
+import exercises, { canUseActivityType, getExerciseWithActivity, getStandardActivityOptions, hasLinkedRecording } from '../../data/course/exercises.js';
 import { getExerciseTitle } from './exerciseTitles.js';
 import { getPassageActivityLabel, PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 import { createExercisePassage } from '../../utils/passages.js';
@@ -13,7 +13,10 @@ import {
 } from '../../utils/activitySelectionStorage.js';
 
 function getActivityOptions(item) {
-  if (item?.activity_options) return augmentSmallExerciseActivityOptions(item.exercise_id, item.activity_options);
+  if (item?.activity_options) {
+    return augmentSmallExerciseActivityOptions(item.exercise_id, item.activity_options)
+      .filter(option => canUseActivityType(item.exercise_id, option.activity_type));
+  }
   if (item?.activity_policy === 'standard') return getStandardActivityOptions(item.exercise_id);
   return [];
 }

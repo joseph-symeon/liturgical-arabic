@@ -58,10 +58,14 @@ export default function PassageExperience({
   const activeCaption = getDisplayedCaption(resolvedCaptions, currentTime, {
     leadSeconds: resolvedLeadSeconds,
     clipEndSeconds: resolvedClip?.end_seconds,
-    primeInitialCaption: captionActivity
+    primeInitialCaption: captionActivity || (canUseKaraoke && karaokeMode)
   });
   const activePhrase = activeCaption ? phrases[activeCaption.phrase_id] : null;
-  const karaokeActiveCaption = canUseKaraoke && karaokeMode && playbackActive ? activeCaption : null;
+  const karaokeActiveCaption = canUseKaraoke
+    && karaokeMode
+    && (playbackActive || typeof currentTime === "number")
+    ? activeCaption
+    : null;
 
   useEffect(() => {
     setCurrentTime(null);

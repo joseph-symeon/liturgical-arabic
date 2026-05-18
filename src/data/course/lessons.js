@@ -99,6 +99,45 @@ const lessons = [
     ]
   },
   {
+    "id": "lesson-great-entrance",
+    "unit_id": "unit-3",
+    "title": "The Great Entrance",
+    "title_phrase": "section-great-entrance",
+    "display_order": 1,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "great-entrance-all",
+        "activity_policy": "standard"
+      },
+      {
+        "exercise_id": "great-entrance-lord-remember-kingdom",
+        "activity_policy": "standard"
+      },
+      {
+        "exercise_id": "great-entrance-hierarch",
+        "activity_policy": "standard"
+      },
+      {
+        "exercise_id": "great-entrance-rulers",
+        "activity_policy": "standard"
+      },
+      {
+        "exercise_id": "great-entrance-living",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "The servants of God departed this life",
+        "exercise_id": "great-entrance-departed",
+        "activity_policy": "standard"
+      },
+      {
+        "exercise_id": "great-entrance-summary",
+        "activity_policy": "standard"
+      }
+    ]
+  },
+  {
     "id": "lesson-litany-of-peace",
     "unit_id": "unit-3",
     "title": "Litany of Peace",
@@ -308,6 +347,36 @@ const lessons = [
       },
       {
         "exercise_id": "liturgy-word-summary"
+      }
+    ]
+  },
+  {
+    "id": "lesson-cherubic-hymn",
+    "unit_id": "unit-2",
+    "title": "The Cherubic Hymn",
+    "title_phrase": "section-cherubic-hymn",
+    "display_order": 7,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "title": "Let us who mystically represent",
+        "exercise_id": "cherubic-hymn-represent-trinity",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Now lay aside",
+        "exercise_id": "cherubic-hymn-lay-aside-king",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Escorted by the angelic hosts",
+        "exercise_id": "cherubic-hymn-angelic-hosts",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "The Cherubic Hymn",
+        "exercise_id": "cherubic-hymn-summary",
+        "activity_policy": "standard"
       }
     ]
   },

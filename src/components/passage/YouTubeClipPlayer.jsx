@@ -4,6 +4,7 @@ import { onYouTubeReady } from '../../utils/youtube.js';
 let playerCount = 0;
 const PLAYBACK_RATE_STORAGE_KEY = 'liturgical-arabic:chant-playback-rate';
 const LOOP_RESTART_LEAD_SECONDS = 0.05;
+const SEEK_STARTUP_GRACE_MS = 1500;
 
 function normalizePlaybackRate(value, fallback = 1.0) {
   const numericValue = Number.parseFloat(value);
@@ -32,6 +33,9 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   const userStartedRef = useRef(false);
   const loopEnabledRef = useRef(true);
   const playClockRef = useRef({ mediaTime: startSeconds, wallTime: 0, playbackRate: initialPlaybackRate });
+  const desiredTimeRef = useRef(startSeconds);
+  const pendingPlaybackStartRef = useRef(null);
+  const pendingPlaybackWallTimeRef = useRef(null);
   const playRequestedRef = useRef(false);
   const onTimeUpdateRef = useRef(onTimeUpdate);
   const onPlaybackActiveChangeRef = useRef(onPlaybackActiveChange);
@@ -57,7 +61,10 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     window.localStorage.setItem(PLAYBACK_RATE_STORAGE_KEY, String(playbackRate));
   }, [playbackRate]);
 
-  function emitTimeUpdate(time) {
+  function emitTimeUpdate(time, { remember = true } = {}) {
+    if (remember) {
+      desiredTimeRef.current = Math.max(startSeconds, Math.min(endSeconds, time));
+    }
     setCurrentSeconds(time);
     onTimeUpdateRef.current?.(time);
   }
@@ -118,12 +125,29 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     intervalRef.current = setInterval(() => {
       if (!player) return;
       const currentTime = player.getCurrentTime();
+      const pendingStart = pendingPlaybackStartRef.current;
+      const pendingWallTime = pendingPlaybackWallTimeRef.current;
+      const pendingAgeMs = pendingWallTime === null ? Infinity : performance.now() - pendingWallTime;
+      const hasFreshPendingStart = pendingStart !== null && pendingAgeMs <= SEEK_STARTUP_GRACE_MS;
+      const pendingElapsed = pendingWallTime === null
+        ? 0
+        : (pendingAgeMs / 1000) * (playbackRateRef.current || 1);
+      const pendingDisplayTime = pendingStart === null
+        ? currentTime
+        : Math.min(endSeconds, pendingStart + pendingElapsed);
+      const displayTime = hasFreshPendingStart && currentTime < pendingStart - 0.5
+        ? pendingDisplayTime
+        : currentTime;
+      if (pendingStart !== null && (!hasFreshPendingStart || currentTime >= pendingStart - 0.5)) {
+        pendingPlaybackStartRef.current = null;
+        pendingPlaybackWallTimeRef.current = null;
+      }
       playClockRef.current = {
-        mediaTime: currentTime,
+        mediaTime: displayTime,
         wallTime: performance.now(),
         playbackRate: playbackRateRef.current || 1
       };
-      emitTimeUpdate(currentTime);
+      emitTimeUpdate(displayTime, { remember: pendingStart === null || displayTime === currentTime });
       const boundarySeconds = loopEnabledRef.current
         ? Math.max(startSeconds, endSeconds - LOOP_RESTART_LEAD_SECONDS)
         : endSeconds;
@@ -142,6 +166,9 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     let destroyed = false;
     userStartedRef.current = false;
     playRequestedRef.current = false;
+    desiredTimeRef.current = startSeconds;
+    pendingPlaybackStartRef.current = null;
+    pendingPlaybackWallTimeRef.current = null;
     playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
     setIsReady(false);
     setIsPlaying(false);
@@ -183,6 +210,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
               if (destroyed) return;
               playerRef.current = event.target;
               cueClip(event.target, startSeconds);
+              desiredTimeRef.current = startSeconds;
               playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
               setIsReady(true);
             },
@@ -203,6 +231,8 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
                 if (!userStartedRef.current) {
                   event.target.pauseVideo();
                   cueClip(event.target, startSeconds);
+                  pendingPlaybackStartRef.current = null;
+                  pendingPlaybackWallTimeRef.current = null;
                   playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
                   setIsPlaying(false);
                   emitPlaybackActiveChange(false);
@@ -211,7 +241,7 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
                 setIsPlaying(true);
                 if (state === PlayerState.PLAYING) {
                   emitPlaybackActiveChange(true);
-                  startLoop(event.target);
+                  startLoop(event.target, pendingPlaybackStartRef.current ?? desiredTimeRef.current);
                 }
               }
               if (state === PlayerState.PAUSED) {
@@ -264,19 +294,29 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
       player.pauseVideo();
     } else {
       const currentTime = player.getCurrentTime();
+      const desiredTime = desiredTimeRef.current;
+      const startAt = desiredTime >= startSeconds && desiredTime < endSeconds ? desiredTime : startSeconds;
       userStartedRef.current = true;
       playRequestedRef.current = true;
+      pendingPlaybackStartRef.current = startAt;
+      pendingPlaybackWallTimeRef.current = performance.now();
       if (currentTime < startSeconds || currentTime >= endSeconds) {
-        loadClip(player, startSeconds);
-        playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+        loadClip(player, startAt);
+        playClockRef.current = { mediaTime: startAt, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
         emitPlaybackActiveChange(false);
-        emitTimeUpdate(startSeconds);
+        emitTimeUpdate(startAt);
       } else {
-        playClockRef.current = { mediaTime: currentTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
+        const playbackStart = Math.abs(currentTime - startAt) > 0.25 ? startAt : currentTime;
+        if (playbackStart !== currentTime) {
+          pendingPlaybackStartRef.current = playbackStart;
+          pendingPlaybackWallTimeRef.current = performance.now();
+          player.seekTo(playbackStart, true);
+        }
+        playClockRef.current = { mediaTime: playbackStart, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
         emitPlaybackActiveChange(false);
-        emitTimeUpdate(currentTime);
+        emitTimeUpdate(playbackStart);
         player.playVideo();
-        startLoop(player, currentTime);
+        startLoop(player, playbackStart);
       }
     }
   }
@@ -292,6 +332,8 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     const shouldResume = state === window.YT.PlayerState.PLAYING || state === window.YT.PlayerState.BUFFERING;
     userStartedRef.current = shouldResume || userStartedRef.current;
     playRequestedRef.current = shouldResume;
+    pendingPlaybackStartRef.current = startSeconds;
+    pendingPlaybackWallTimeRef.current = shouldResume ? performance.now() : null;
     if (shouldResume) {
       loadClip(player, startSeconds);
     } else {
@@ -308,8 +350,17 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     const nextTime = Number(event.target.value);
     const state = player.getPlayerState();
     const shouldResume = state === window.YT.PlayerState.PLAYING || state === window.YT.PlayerState.BUFFERING;
+    desiredTimeRef.current = nextTime;
     playRequestedRef.current = shouldResume;
-    player.seekTo(nextTime, true);
+    if (shouldResume) {
+      pendingPlaybackStartRef.current = nextTime;
+      pendingPlaybackWallTimeRef.current = performance.now();
+      player.seekTo(nextTime, true);
+    } else {
+      pendingPlaybackStartRef.current = nextTime;
+      pendingPlaybackWallTimeRef.current = null;
+      cueClip(player, nextTime);
+    }
     playClockRef.current = { mediaTime: nextTime, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
     emitTimeUpdate(nextTime);
     if (shouldResume) {

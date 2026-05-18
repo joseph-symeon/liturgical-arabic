@@ -51,6 +51,16 @@ export const serviceSectionAudioDefinitions = [
     service_text_id: "divine-liturgy-john-chrysostom",
     section_id: "reading-gospel",
     recording_id: "recording-xfUZh8ENiIQ"
+  },
+  {
+    service_text_id: "divine-liturgy-john-chrysostom",
+    section_id: "cherubic-hymn",
+    recording_id: "recording-ymBUtFJeJls"
+  },
+  {
+    service_text_id: "divine-liturgy-john-chrysostom",
+    section_id: "great-entrance",
+    recording_id: "recording-ymBUtFJeJls"
   }
 ];
 
