@@ -8042,10 +8042,10 @@ const phrases = {
     "translation": "and bless thine inheritance",
     "literal": "and bless thy inheritance",
     "tags": [
-      "pre-communion-prayers",
       "prayer-behind-amvon",
-      "section: The Pre-Communion Prayers",
-      "section: The Prayer Behind the Amvon"
+      "pre-communion-prayers",
+      "section: The Prayer Behind the Amvon",
+      "section: The Pre-Communion Prayers"
     ]
   },
   "pre-communion-save-people-001": {
@@ -17307,12 +17307,12 @@ const phrases = {
       "doxology",
       "glory",
       "prayer-behind-amvon",
-      "response",
       "repeated",
+      "response",
       "section: Psalm 103",
-      "section: The Reading of the Gospel",
       "section: The First Antiphon",
       "section: The Prayer Behind the Amvon",
+      "section: The Reading of the Gospel",
       "section: The Second Antiphon",
       "section: Thrice-Holy Hymn"
     ]
