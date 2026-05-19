@@ -25,8 +25,7 @@ const NAV_ITEM_STYLE = {
   cursor: "pointer",
   fontSize: "14px",
   lineHeight: 1.3,
-  fontFamily: "inherit",
-  color: "inherit"
+  fontFamily: "inherit"
 };
 
 const LESSON_ITEM_STYLE = { ...NAV_ITEM_STYLE };
@@ -91,6 +90,22 @@ const HOME_TITLE_PHRASE_IDS = ["homepage-lisan-001", "homepage-al-quddas-001"];
 
 function hasMultipleExercises(lesson) {
   return (lesson?.exercises?.length ?? 0) > 1;
+}
+
+function getNavItemClass(isCurrent, extraClassName = "") {
+  return [
+    "lp-nav-item",
+    isCurrent ? "is-current" : null,
+    extraClassName
+  ].filter(Boolean).join(" ");
+}
+
+function getNavSummaryClass(isCurrent, extraClassName = "") {
+  return [
+    "lp-course-lesson-summary",
+    isCurrent ? "active" : null,
+    extraClassName
+  ].filter(Boolean).join(" ");
 }
 
 function getReaderServiceText(serviceTextId) {
@@ -865,7 +880,7 @@ export default function App() {
             role="menuitem"
             type="button"
             onClick={() => goToLiturgySection(item.sectionIndex, serviceText.id)}
-            className={isCurrentServiceText && selectedSectionIndex === item.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+            className={getNavItemClass(isCurrentServiceText && selectedSectionIndex === item.sectionIndex)}
             style={SECTION_ITEM_STYLE}
           >
             {item.section.section || `Section ${item.sectionIndex + 1}`}
@@ -882,7 +897,7 @@ export default function App() {
           open={isNavDetailOpen(detailId, isCurrentGroup || isCurrentServiceText)}
           onToggle={event => setNavDetailOpen(detailId, event.currentTarget.open)}
         >
-          <summary className="lp-course-lesson-summary">
+          <summary className={getNavSummaryClass(isCurrentGroup)}>
             {item.group}
           </summary>
           <div className="lp-course-exercise-list">
@@ -892,7 +907,7 @@ export default function App() {
                 role="menuitem"
                 type="button"
                 onClick={() => goToLiturgySection(sectionItem.sectionIndex, serviceText.id)}
-                className={isCurrentServiceText && selectedSectionIndex === sectionItem.sectionIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                className={getNavItemClass(isCurrentServiceText && selectedSectionIndex === sectionItem.sectionIndex)}
                 style={SECTION_ITEM_STYLE}
               >
                 {sectionItem.section.section || `Section ${sectionItem.sectionIndex + 1}`}
@@ -919,7 +934,7 @@ export default function App() {
             role="menuitem"
             type="button"
             onClick={() => goToLiturgySection(0, serviceText.id)}
-            className={isCurrentServiceText ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+            className={getNavItemClass(isCurrentServiceText)}
             style={SECTION_ITEM_STYLE}
           >
             {serviceItem.title}
@@ -935,7 +950,7 @@ export default function App() {
             event.stopPropagation();
             goToTableOfContents(serviceText.id);
           }}
-          className={isCurrentServiceText && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+          className={getNavItemClass(isCurrentServiceText && selectedSectionIndex === null)}
           style={{ ...SECTION_ITEM_STYLE, padding: "4px 6px" }}
         >
           {serviceItem.title}
@@ -957,7 +972,7 @@ export default function App() {
           open={isNavDetailOpen(serviceDetailId, serviceHasCurrentSection || (isCurrentServiceText && selectedSectionIndex === null))}
           onToggle={event => setNavDetailOpen(serviceDetailId, event.currentTarget.open)}
         >
-          <summary className="lp-course-lesson-summary">
+          <summary className={getNavSummaryClass(serviceHasCurrentSection || (isCurrentServiceText && selectedSectionIndex === null))}>
             {serviceButton}
           </summary>
           <div className="lp-course-exercise-list">
@@ -982,7 +997,7 @@ export default function App() {
             role="menuitem"
             type="button"
             onClick={() => goToLiturgySection(0, serviceText.id)}
-            className={isCurrentServiceText ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+            className={getNavItemClass(isCurrentServiceText)}
             style={{
               ...SECTION_ITEM_STYLE,
               color: "inherit",
@@ -1004,7 +1019,7 @@ export default function App() {
           open={isNavDetailOpen(groupDetailId, isCurrentServiceText)}
           onToggle={event => setNavDetailOpen(groupDetailId, event.currentTarget.open)}
         >
-          <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+          <summary className={getNavSummaryClass(isCurrentServiceText, "text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]")}>
             {serviceText.nav_landing_at_root ? (
               <button
                 role="menuitem"
@@ -1014,7 +1029,7 @@ export default function App() {
                   event.stopPropagation();
                   goToTableOfContents(serviceText.id);
                 }}
-                className={isCurrentServiceText && selectedSectionIndex === null ? "bg-stone-100 dark:bg-[var(--dark-surface)]" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                className={getNavItemClass(isCurrentServiceText && selectedSectionIndex === null)}
                 style={{
                   ...SECTION_ITEM_STYLE,
                   padding: "4px 6px",
@@ -1046,7 +1061,7 @@ export default function App() {
         open={isNavDetailOpen(groupDetailId, isCurrentGroup)}
         onToggle={event => setNavDetailOpen(groupDetailId, event.currentTarget.open)}
       >
-        <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+        <summary className={getNavSummaryClass(isCurrentGroup, "text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]")}>
           {group.title}
         </summary>
         <div className="lp-course-exercise-list">
@@ -1218,7 +1233,7 @@ export default function App() {
                   role="menuitem"
                   type="button"
                   onClick={goHome}
-                  className={view === "home" ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                  className={getNavItemClass(view === "home")}
                   style={SECTION_ITEM_STYLE}
                 >
                   Home
@@ -1242,7 +1257,7 @@ export default function App() {
                   role="menuitem"
                   type="button"
                   onClick={goToCourseOverview}
-                  className={view === "course-overview" ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                  className={getNavItemClass(view === "course-overview")}
                   style={LESSON_ITEM_STYLE}
                 >
                   Course Overview
@@ -1250,6 +1265,7 @@ export default function App() {
                 {ORDERED_UNITS.map(unit => {
                   const unitLessons = COURSE_LESSONS.filter(l => l.unit_id === unit.id);
                   const isCurrentUnit = unitLessons.some(lesson => lesson.id === selectedLessonId);
+                  const isActiveCourseUnit = view === "lessons" && isCurrentUnit;
                   const unitDetailId = `course-unit:${unit.id}`;
                   return (
                     <details
@@ -1258,7 +1274,7 @@ export default function App() {
                       open={isNavDetailOpen(unitDetailId, isCurrentUnit || view === "course-overview")}
                       onToggle={event => setNavDetailOpen(unitDetailId, event.currentTarget.open)}
                     >
-                      <summary className="lp-course-lesson-summary text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+                      <summary className={getNavSummaryClass(isActiveCourseUnit, "text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]")}>
                         {unit.title}
                       </summary>
 
@@ -1272,7 +1288,7 @@ export default function App() {
                                 role="menuitem"
                                 type="button"
                                 onClick={() => goToLesson(lesson.id, 0)}
-                                className={view === "lessons" && isCurrentLesson ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                                className={getNavItemClass(view === "lessons" && isCurrentLesson)}
                                 style={LESSON_ITEM_STYLE}
                               >
                                 {lesson.title}
@@ -1288,7 +1304,7 @@ export default function App() {
                               open={isNavDetailOpen(lessonDetailId, isCurrentLesson)}
                               onToggle={event => setNavDetailOpen(lessonDetailId, event.currentTarget.open)}
                             >
-                              <summary className={`lp-course-lesson-summary${isCurrentLesson ? " active" : ""}`}>
+                              <summary className={getNavSummaryClass(view === "lessons" && isCurrentLesson)}>
                                 {lesson.title}
                               </summary>
 
@@ -1299,7 +1315,7 @@ export default function App() {
                                     role="menuitem"
                                     type="button"
                                     onClick={() => goToLesson(lesson.id, exerciseIndex)}
-                                    className={view === "lessons" && isCurrentLesson && clampedExerciseIndex === exerciseIndex ? "bg-stone-100 dark:bg-[var(--dark-surface)] font-semibold" : "bg-transparent hover:bg-stone-50 dark:hover:bg-[var(--dark-hover)]"}
+                                    className={getNavItemClass(view === "lessons" && isCurrentLesson && clampedExerciseIndex === exerciseIndex)}
                                     style={LESSON_ITEM_STYLE}
                                   >
                                     {getExerciseTitle(lesson, exerciseIndex)}

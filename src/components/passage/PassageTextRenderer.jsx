@@ -26,7 +26,7 @@ export default function PassageTextRenderer({ lines, arabicMode = 'vocalized', r
 
     if (hasExplicitText) {
       return parts.map(part => (part.text
-        ? { text: part.text, isRubric: line.tags?.includes('rubric') || part.tags?.includes('rubric') }
+        ? { text: part.text, isRubric: line.tags?.includes('rubric') || part.tags?.includes('rubric') || part.tags?.includes('display-rubric') }
         : { id: part.phrase_id, className: isActivePart(line, part.phrase_id) ? 'lp-karaoke-active' : undefined }));
     }
 

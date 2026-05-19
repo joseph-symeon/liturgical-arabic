@@ -98,8 +98,13 @@ export const alignmentDefinitions = [
             "end_seconds": 6.64
           },
           {
-            "phrase_id": "dismissal-have-mercy-save-001",
+            "phrase_id": "have-mercy-on-us-001",
             "start_seconds": 6.64,
+            "end_seconds": 8.4
+          },
+          {
+            "phrase_id": "save-us-001",
+            "start_seconds": 8.4,
             "end_seconds": 10.22
           }
         ]
@@ -304,7 +309,7 @@ export const alignmentDefinitions = [
             "end_seconds": 24.94
           },
           {
-            "phrase_id": "all-holy-trinity-have-mercy-001",
+            "phrase_id": "have-mercy-on-us-001",
             "start_seconds": 24.94,
             "end_seconds": 25.44
           }
@@ -605,7 +610,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 97.67,
+            "end_seconds": 104.36
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 97.67,
             "end_seconds": 104.36
           }
@@ -663,7 +673,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 113.7,
+            "end_seconds": 119.8
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 113.7,
             "end_seconds": 119.8
           }
@@ -726,7 +741,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 134.86,
+            "end_seconds": 141.52
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 134.86,
             "end_seconds": 141.52
           }
@@ -789,7 +809,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 160.93,
+            "end_seconds": 166.1
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 160.93,
             "end_seconds": 166.1
           }
@@ -857,7 +882,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 203.3,
+            "end_seconds": 209.96
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 203.3,
             "end_seconds": 209.96
           }
@@ -915,7 +945,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 223.5,
+            "end_seconds": 229.46
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 223.5,
             "end_seconds": 229.46
           }
@@ -978,7 +1013,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 245.56,
+            "end_seconds": 248.36
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 245.56,
             "end_seconds": 248.36
           }
@@ -1041,7 +1081,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 263.68,
+            "end_seconds": 271.2
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 263.68,
             "end_seconds": 271.2
           }
@@ -1109,7 +1154,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 287.08,
+            "end_seconds": 294.08
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 287.08,
             "end_seconds": 294.08
           }
@@ -1172,7 +1222,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 304.07,
+            "end_seconds": 314.08
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 304.07,
             "end_seconds": 314.08
           }
@@ -1222,7 +1277,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 323.73,
+            "end_seconds": 331.9
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 323.73,
             "end_seconds": 331.9
           }
@@ -1323,7 +1383,7 @@ export const alignmentDefinitions = [
             "end_seconds": 378.82
           },
           {
-            "phrase_id": "doxology-father-son-spirit-001",
+            "phrase_id": "father-son-spirit-001",
             "start_seconds": 378.82,
             "end_seconds": 384.44
           },
@@ -1456,7 +1516,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 5.24,
+            "end_seconds": 9.5
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 5.24,
             "end_seconds": 9.5
           }
@@ -1505,7 +1570,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 17.24,
+            "end_seconds": 21.68
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 17.24,
             "end_seconds": 21.68
           }
@@ -2042,7 +2112,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 5.22,
+            "end_seconds": 14.24
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 5.22,
             "end_seconds": 14.24
           }
@@ -2091,7 +2166,12 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "lord-have-mercy-001",
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 22.28,
+            "end_seconds": 30.56
+          },
+          {
+            "phrase_id": "have-mercy-001",
             "start_seconds": 22.28,
             "end_seconds": 30.56
           }
@@ -2197,7 +2277,7 @@ export const alignmentDefinitions = [
             "end_seconds": 71.24
           },
           {
-            "phrase_id": "doxology-father-son-spirit-001",
+            "phrase_id": "father-son-spirit-001",
             "start_seconds": 71.24,
             "end_seconds": 75.86
           },
@@ -2654,8 +2734,28 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "glory-to-thee-lord-001",
+            "phrase_id": "glory-001",
             "start_seconds": 29.14,
+            "end_seconds": 30.3
+          },
+          {
+            "phrase_id": "to-thee-001",
+            "start_seconds": 30.3,
+            "end_seconds": 31.05
+          },
+          {
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 31.05,
+            "end_seconds": 32.55
+          },
+          {
+            "phrase_id": "glory-001",
+            "start_seconds": 32.85,
+            "end_seconds": 34
+          },
+          {
+            "phrase_id": "to-thee-001",
+            "start_seconds": 34,
             "end_seconds": 35.9
           }
         ]
@@ -2705,8 +2805,28 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "glory-to-thee-lord-001",
+            "phrase_id": "glory-001",
             "start_seconds": 214.82,
+            "end_seconds": 216
+          },
+          {
+            "phrase_id": "to-thee-001",
+            "start_seconds": 216,
+            "end_seconds": 216.7
+          },
+          {
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 216.7,
+            "end_seconds": 218
+          },
+          {
+            "phrase_id": "glory-001",
+            "start_seconds": 218.25,
+            "end_seconds": 219.4
+          },
+          {
+            "phrase_id": "to-thee-001",
+            "start_seconds": 219.4,
             "end_seconds": 220.72
           }
         ]

@@ -52,6 +52,21 @@ const GREAT_ENTRANCE_MEDIA = CHERUBIC_HYMN_MEDIA;
 
 export const exerciseDefinitions = [
   {
+    "id": "blessed-is-the-kingdom",
+    "segment_ids": [
+      "opening-bless-master",
+      "opening-blessed-kingdom",
+      "opening-amen"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "blessed-is-the-kingdom",
+      "start_segment_id": "opening-bless-master",
+      "end_segment_id": "opening-amen"
+    }
+  },
+  {
     "id": "antiphon-only-begotten",
     "segment_ids": [
       "antiphon-word-of-god-only-begotten",
@@ -232,6 +247,184 @@ export const exerciseDefinitions = [
     "show_speakers": true
   },
   {
+    "id": "supplication-complete-prayer",
+    "segment_ids": [
+      "supplication-complete-prayer"
+    ]
+  },
+  {
+    "id": "supplication-precious-gifts",
+    "segment_ids": [
+      "supplication-precious-gifts"
+    ]
+  },
+  {
+    "id": "supplication-holy-house",
+    "segment_ids": [
+      "supplication-holy-house"
+    ]
+  },
+  {
+    "id": "supplication-deliverance",
+    "segment_ids": [
+      "supplication-deliverance"
+    ]
+  },
+  {
+    "id": "supplication-whole-day",
+    "segment_ids": [
+      "supplication-whole-day"
+    ]
+  },
+  {
+    "id": "supplication-angel-peace",
+    "segment_ids": [
+      "supplication-angel-peace"
+    ]
+  },
+  {
+    "id": "supplication-pardon-remission",
+    "segment_ids": [
+      "supplication-pardon-remission"
+    ]
+  },
+  {
+    "id": "supplication-good-profitable",
+    "segment_ids": [
+      "supplication-good-profitable"
+    ]
+  },
+  {
+    "id": "supplication-remaining-life",
+    "segment_ids": [
+      "supplication-remaining-life"
+    ]
+  },
+  {
+    "id": "supplication-christian-ending",
+    "segment_ids": [
+      "supplication-christian-ending"
+    ]
+  },
+  {
+    "id": "supplication-priest-doxology",
+    "segment_ids": [
+      "supplication-priest-doxology"
+    ]
+  },
+  {
+    "id": "supplication-love-trinity",
+    "segment_ids": [
+      "supplication-deacon-love",
+      "supplication-choir-trinity"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "supplication-before-creed",
+    "segment_ids": [
+      "supplication-priest-before-creed",
+      "supplication-deacon-before-creed"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "litany-of-supplication",
+    "segment_ids": [
+      "supplication-complete-prayer",
+      "supplication-lord-have-mercy-repeat",
+      "supplication-precious-gifts",
+      "supplication-holy-house",
+      "supplication-deliverance",
+      "supplication-help-save",
+      "supplication-whole-day",
+      "supplication-grant-this-repeat",
+      "supplication-angel-peace",
+      "supplication-pardon-remission",
+      "supplication-good-profitable",
+      "supplication-remaining-life",
+      "supplication-christian-ending",
+      "supplication-calling-remembrance",
+      "supplication-to-thee-o-lord",
+      "supplication-priest-doxology",
+      "supplication-choir-amen",
+      "supplication-deacon-love",
+      "supplication-choir-trinity",
+      "supplication-priest-before-creed",
+      "supplication-deacon-before-creed"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "creed-father-maker",
+    "segment_ids": [
+      "creed-father-maker"
+    ]
+  },
+  {
+    "id": "creed-son-begotten",
+    "segment_ids": [
+      "creed-son-begotten"
+    ]
+  },
+  {
+    "id": "creed-incarnation-passion",
+    "segment_ids": [
+      "creed-incarnation-passion"
+    ]
+  },
+  {
+    "id": "creed-resurrection-ascension",
+    "segment_ids": [
+      "creed-resurrection-ascension"
+    ]
+  },
+  {
+    "id": "creed-coming-kingdom",
+    "segment_ids": [
+      "creed-coming-kingdom"
+    ]
+  },
+  {
+    "id": "creed-holy-spirit",
+    "segment_ids": [
+      "creed-holy-spirit"
+    ]
+  },
+  {
+    "id": "creed-church-baptism",
+    "segment_ids": [
+      "creed-church-baptism"
+    ]
+  },
+  {
+    "id": "creed-baptism",
+    "segment_ids": [
+      "creed-baptism"
+    ]
+  },
+  {
+    "id": "creed-resurrection-life",
+    "segment_ids": [
+      "creed-resurrection-life"
+    ]
+  },
+  {
+    "id": "creed-summary",
+    "segment_ids": [
+      "creed-father-maker",
+      "creed-son-begotten",
+      "creed-incarnation-passion",
+      "creed-resurrection-ascension",
+      "creed-coming-kingdom",
+      "creed-holy-spirit",
+      "creed-church-baptism",
+      "creed-baptism",
+      "creed-resurrection-life"
+    ],
+    "show_speakers": true
+  },
+  {
     "id": "entrance-bless-master",
     "segment_ids": [
       "entrance-bless-master"
@@ -249,6 +442,13 @@ export const exerciseDefinitions = [
       "entrance-wisdom-stand-upright",
       "entrance-hymn-come-worship"
     ]
+  },
+  {
+    "id": "entrance-priest-doxology",
+    "segment_ids": [
+      "entrance-priest-doxology"
+    ],
+    "show_speakers": true
   },
   {
     "id": "entrance-save-us-son-of-god",
@@ -274,6 +474,7 @@ export const exerciseDefinitions = [
       "entrance-bless-master",
       "entrance-blessed-entrance",
       "entrance-wisdom-stand-upright",
+      "entrance-priest-doxology",
       "entrance-hymn-come-worship",
       "entrance-hymn-save-us-son-of-god",
       "course-entrance-hymn-risen-sundays",
@@ -317,6 +518,121 @@ export const exerciseDefinitions = [
       "start_segment_id": "first-antiphon-through-theotokos-1",
       "end_segment_id": "first-antiphon-through-theotokos-1"
     }
+  },
+  {
+    "id": "holy-anaphora-opening-dialogue",
+    "segment_ids": [
+      "holy-anaphora-stand-aright",
+      "holy-anaphora-mercy-peace",
+      "holy-anaphora-grace",
+      "holy-anaphora-and-with-spirit",
+      "holy-anaphora-lift-hearts",
+      "holy-anaphora-with-lord",
+      "holy-anaphora-thank-lord",
+      "holy-anaphora-meet-right"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "holy-anaphora-stand-aright",
+      "end_segment_id": "holy-anaphora-meet-right"
+    }
+  },
+  {
+    "id": "holy-anaphora-hymn-and-institution",
+    "segment_ids": [
+      "holy-anaphora-triumphal-hymn",
+      "holy-anaphora-sanctus",
+      "holy-anaphora-take-eat",
+      "holy-anaphora-amen-body",
+      "holy-anaphora-cup-after-supper",
+      "holy-anaphora-drink-all",
+      "holy-anaphora-amen-blood"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "holy-anaphora-remembrance-offering",
+    "segment_ids": [
+      "holy-anaphora-thine-own",
+      "holy-anaphora-we-praise"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "holy-anaphora-thine-own",
+      "end_segment_id": "holy-anaphora-we-praise"
+    }
+  },
+  {
+    "id": "holy-anaphora-epiclesis",
+    "segment_ids": [
+      "holy-anaphora-bless-bread",
+      "holy-anaphora-make-bread-body",
+      "holy-anaphora-amen-bread",
+      "holy-anaphora-bless-cup",
+      "holy-anaphora-cup-blood",
+      "holy-anaphora-amen-cup",
+      "holy-anaphora-bless-both",
+      "holy-anaphora-changing-spirit",
+      "holy-anaphora-amen-three"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "holy-anaphora-bless-bread",
+      "end_segment_id": "holy-anaphora-amen-three"
+    }
+  },
+  {
+    "id": "holy-anaphora-commemorations",
+    "segment_ids": [
+      "holy-anaphora-especially-theotokos"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "holy-anaphora-especially-theotokos",
+      "end_segment_id": "holy-anaphora-especially-theotokos"
+    }
+  },
+  {
+    "id": "holy-anaphora-through-theotokos",
+    "segment_ids": [
+      "holy-anaphora-offering-subtitle",
+      "holy-anaphora-stand-aright",
+      "holy-anaphora-mercy-peace",
+      "holy-anaphora-grace",
+      "holy-anaphora-and-with-spirit",
+      "holy-anaphora-lift-hearts",
+      "holy-anaphora-with-lord",
+      "holy-anaphora-thank-lord",
+      "holy-anaphora-meet-right",
+      "holy-anaphora-triumphal-hymn",
+      "holy-anaphora-sanctus",
+      "holy-anaphora-take-eat",
+      "holy-anaphora-amen-body",
+      "holy-anaphora-cup-after-supper",
+      "holy-anaphora-drink-all",
+      "holy-anaphora-amen-blood",
+      "holy-anaphora-thine-own",
+      "holy-anaphora-we-praise",
+      "holy-anaphora-bless-bread",
+      "holy-anaphora-make-bread-body",
+      "holy-anaphora-amen-bread",
+      "holy-anaphora-bless-cup",
+      "holy-anaphora-cup-blood",
+      "holy-anaphora-amen-cup",
+      "holy-anaphora-bless-both",
+      "holy-anaphora-changing-spirit",
+      "holy-anaphora-amen-three",
+      "holy-anaphora-especially-theotokos"
+    ],
+    "show_speakers": true
   },
   {
     "id": "hymn-to-the-theotokos-meet-bless",
@@ -396,6 +712,675 @@ export const exerciseDefinitions = [
       "section_id": "anaphora",
       "start_segment_id": "theotokos-hymn-choir",
       "end_segment_id": "theotokos-hymn-choir"
+    }
+  },
+  {
+    "id": "litany-after-anaphora-saints-departed",
+    "segment_ids": [
+      "theotokos-priest-saints",
+      "theotokos-priest-departed"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "theotokos-priest-saints",
+      "end_segment_id": "theotokos-priest-departed"
+    }
+  },
+  {
+    "id": "litany-after-anaphora-hierarchy-world",
+    "segment_ids": [
+      "theotokos-clergy-hierarch"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "theotokos-clergy-hierarch",
+      "end_segment_id": "theotokos-clergy-hierarch"
+    }
+  },
+  {
+    "id": "litany-after-anaphora-present-city-benefactors",
+    "segment_ids": [
+      "theotokos-deacon-present",
+      "theotokos-choir-all",
+      "theotokos-priest-city",
+      "theotokos-priest-benefactors"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "theotokos-deacon-present",
+      "end_segment_id": "theotokos-priest-benefactors"
+    }
+  },
+  {
+    "id": "litany-after-anaphora-doxology-peace",
+    "segment_ids": [
+      "theotokos-priest-doxology",
+      "theotokos-choir-amen",
+      "theotokos-priest-mercies",
+      "theotokos-choir-and-spirit"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "anaphora",
+      "start_segment_id": "theotokos-priest-doxology",
+      "end_segment_id": "theotokos-choir-and-spirit"
+    }
+  },
+  {
+    "id": "litany-after-anaphora-summary",
+    "segment_ids": [
+      "theotokos-priest-saints",
+      "theotokos-priest-departed",
+      "theotokos-clergy-hierarch",
+      "theotokos-deacon-present",
+      "theotokos-choir-all",
+      "theotokos-priest-city",
+      "theotokos-priest-benefactors",
+      "theotokos-priest-doxology",
+      "theotokos-choir-amen",
+      "theotokos-priest-mercies",
+      "theotokos-choir-and-spirit"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "before-lords-prayer-remember-saints",
+    "segment_ids": [
+      "before-lords-prayer-remember-saints",
+      "before-lords-prayer-lord-have-mercy-1"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-before-lords-prayer",
+      "start_segment_id": "before-lords-prayer-remember-saints",
+      "end_segment_id": "before-lords-prayer-lord-have-mercy-1"
+    }
+  },
+  {
+    "id": "before-lords-prayer-precious-gifts",
+    "segment_ids": [
+      "before-lords-prayer-precious-gifts",
+      "before-lords-prayer-lord-have-mercy-2"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-before-lords-prayer",
+      "start_segment_id": "before-lords-prayer-precious-gifts",
+      "end_segment_id": "before-lords-prayer-lord-have-mercy-2"
+    }
+  },
+  {
+    "id": "before-lords-prayer-receive-gifts",
+    "segment_ids": [
+      "before-lords-prayer-receive-gifts",
+      "before-lords-prayer-lord-have-mercy-3"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-before-lords-prayer",
+      "start_segment_id": "before-lords-prayer-receive-gifts",
+      "end_segment_id": "before-lords-prayer-lord-have-mercy-3"
+    }
+  },
+  {
+    "id": "before-lords-prayer-unity",
+    "segment_ids": [
+      "before-lords-prayer-unity",
+      "before-lords-prayer-to-thee"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-before-lords-prayer",
+      "start_segment_id": "before-lords-prayer-unity",
+      "end_segment_id": "before-lords-prayer-to-thee"
+    }
+  },
+  {
+    "id": "before-lords-prayer-vouchsafe",
+    "segment_ids": [
+      "before-lords-prayer-priest-vouchsafe"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-before-lords-prayer",
+      "start_segment_id": "before-lords-prayer-priest-vouchsafe",
+      "end_segment_id": "before-lords-prayer-priest-vouchsafe"
+    }
+  },
+  {
+    "id": "litany-before-lords-prayer-summary",
+    "segment_ids": [
+      "before-lords-prayer-remember-saints",
+      "before-lords-prayer-lord-have-mercy-1",
+      "before-lords-prayer-precious-gifts",
+      "before-lords-prayer-lord-have-mercy-2",
+      "before-lords-prayer-receive-gifts",
+      "before-lords-prayer-lord-have-mercy-3",
+      "before-lords-prayer-unity",
+      "before-lords-prayer-to-thee",
+      "before-lords-prayer-priest-vouchsafe"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "lords-prayer-first-doxology",
+    "segment_ids": [
+      "lords-prayer-priest-doxology",
+      "lords-prayer-choir-amen",
+      "lords-prayer-priest-peace",
+      "lords-prayer-choir-spirit"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "lords-prayer",
+      "start_segment_id": "lords-prayer-priest-doxology",
+      "end_segment_id": "lords-prayer-choir-spirit"
+    }
+  },
+  {
+    "id": "lords-prayer-bowing-doxology",
+    "segment_ids": [
+      "lords-prayer-deacon-bow-heads",
+      "lords-prayer-choir-to-thee",
+      "lords-prayer-priest-bowing-prayer",
+      "lords-prayer-priest-bowing-doxology",
+      "lords-prayer-choir-bowing-amen"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "lords-prayer",
+      "start_segment_id": "lords-prayer-deacon-bow-heads",
+      "end_segment_id": "lords-prayer-choir-bowing-amen"
+    }
+  },
+  {
+    "id": "lords-prayer-doxologies-summary",
+    "segment_ids": [
+      "lords-prayer-priest-doxology",
+      "lords-prayer-choir-amen",
+      "lords-prayer-priest-peace",
+      "lords-prayer-choir-spirit",
+      "lords-prayer-deacon-bow-heads",
+      "lords-prayer-choir-to-thee",
+      "lords-prayer-priest-bowing-prayer",
+      "lords-prayer-priest-bowing-doxology",
+      "lords-prayer-choir-bowing-amen"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "lords-prayer",
+      "start_segment_id": "lords-prayer-priest-doxology",
+      "end_segment_id": "lords-prayer-choir-bowing-amen"
+    }
+  },
+  {
+    "id": "elevation-attend",
+    "segment_ids": [
+      "elevation-deacon-attend",
+      "elevation-priest-holy-things"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "elevation",
+      "start_segment_id": "elevation-deacon-attend",
+      "end_segment_id": "elevation-priest-holy-things"
+    }
+  },
+  {
+    "id": "elevation-one-holy",
+    "segment_ids": [
+      "elevation-choir-one-holy"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "elevation",
+      "start_segment_id": "elevation-choir-one-holy",
+      "end_segment_id": "elevation-choir-one-holy"
+    }
+  },
+  {
+    "id": "elevation-summary",
+    "segment_ids": [
+      "elevation-deacon-attend",
+      "elevation-priest-holy-things",
+      "elevation-choir-one-holy"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "elevation",
+      "start_segment_id": "elevation-deacon-attend",
+      "end_segment_id": "elevation-choir-one-holy"
+    }
+  },
+  {
+    "id": "pre-communion-confession-belief",
+    "segment_ids": [
+      "pre-communion-confession-prayer"
+    ],
+    "phrase_ids": [
+      "pre-communion-believe-001",
+      "vocative-o-lord-001",
+      "pre-communion-confess-001",
+      "pre-communion-truly-christ-001",
+      "pre-communion-son-living-god-001",
+      "pre-communion-came-save-sinners-001",
+      "pre-communion-save-sinners-001",
+      "pre-communion-first-sinners-001"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-confession-prayer",
+      "end_segment_id": "pre-communion-confession-prayer"
+    }
+  },
+  {
+    "id": "pre-communion-confession-body-blood",
+    "segment_ids": [
+      "pre-communion-confession-prayer"
+    ],
+    "phrase_ids": [
+      "pre-communion-own-body-001",
+      "pre-communion-that-this-is-001",
+      "pre-communion-thy-immaculate-body-001",
+      "pre-communion-itself-001",
+      "pre-communion-own-blood-001",
+      "pre-communion-pray-mercy-forgive-001",
+      "pre-communion-forgive-me-001",
+      "pre-communion-transgressions-voluntary-001",
+      "pre-communion-transgressions-involuntary-001",
+      "pre-communion-word-deed-001",
+      "pre-communion-knowledge-ignorance-001",
+      "pre-communion-ignorance-001"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-confession-prayer",
+      "end_segment_id": "pre-communion-confession-prayer"
+    }
+  },
+  {
+    "id": "pre-communion-confession-communion",
+    "segment_ids": [
+      "pre-communion-confession-prayer"
+    ],
+    "phrase_ids": [
+      "pre-communion-worthy-without-condemnation-001",
+      "pre-communion-partake-mysteries-001",
+      "pre-communion-remission-life-001",
+      "pre-communion-life-everlasting-001",
+      "amen-001"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-confession-prayer",
+      "end_segment_id": "pre-communion-confession-prayer"
+    }
+  },
+  {
+    "id": "pre-communion-mystic-supper",
+    "segment_ids": [
+      "pre-communion-mystic-supper-repeat"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-mystic-supper-repeat",
+      "end_segment_id": "pre-communion-mystic-supper-repeat"
+    }
+  },
+  {
+    "id": "pre-communion-not-judgment",
+    "segment_ids": [
+      "pre-communion-not-judgment-prayer"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-not-judgment-prayer",
+      "end_segment_id": "pre-communion-not-judgment-prayer"
+    }
+  },
+  {
+    "id": "pre-communion-prayers-summary",
+    "segment_ids": [
+      "pre-communion-confession-prayer",
+      "pre-communion-mystic-supper-repeat",
+      "pre-communion-not-judgment-prayer"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "communion-hymns-praise-lord",
+    "segment_ids": [
+      "pre-communion-choir-koinonikon"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-choir-koinonikon",
+      "end_segment_id": "pre-communion-choir-koinonikon"
+    }
+  },
+  {
+    "id": "communion-hymns-with-fear",
+    "segment_ids": [
+      "pre-communion-deacon-draw-near"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-deacon-draw-near",
+      "end_segment_id": "pre-communion-deacon-draw-near"
+    }
+  },
+  {
+    "id": "communion-hymns-blessed-coming",
+    "segment_ids": [
+      "pre-communion-choir-blessed-coming"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-choir-blessed-coming",
+      "end_segment_id": "pre-communion-choir-blessed-coming"
+    }
+  },
+  {
+    "id": "communion-hymns-summary",
+    "segment_ids": [
+      "pre-communion-choir-koinonikon",
+      "pre-communion-deacon-draw-near",
+      "pre-communion-choir-blessed-coming"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-choir-koinonikon",
+      "end_segment_id": "pre-communion-choir-blessed-coming"
+    }
+  },
+  {
+    "id": "post-communion-hymns-save-people",
+    "segment_ids": [
+      "pre-communion-priest-save-people"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-priest-save-people",
+      "end_segment_id": "pre-communion-priest-save-people"
+    }
+  },
+  {
+    "id": "post-communion-hymns-seen-light",
+    "segment_ids": [
+      "pre-communion-choir-seen-light"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-choir-seen-light",
+      "end_segment_id": "pre-communion-choir-seen-light"
+    }
+  },
+  {
+    "id": "post-communion-hymns-be-exalted",
+    "segment_ids": [
+      "pre-communion-deacon-exalt-master",
+      "pre-communion-priest-be-exalted"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-deacon-exalt-master",
+      "end_segment_id": "pre-communion-priest-be-exalted"
+    }
+  },
+  {
+    "id": "post-communion-hymns-mouths-filled",
+    "segment_ids": [
+      "pre-communion-choir-mouths-filled"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "pre-communion-prayers",
+      "start_segment_id": "pre-communion-choir-mouths-filled",
+      "end_segment_id": "pre-communion-choir-mouths-filled"
+    }
+  },
+  {
+    "id": "post-communion-hymns-summary",
+    "segment_ids": [
+      "pre-communion-priest-save-people",
+      "pre-communion-choir-seen-light",
+      "pre-communion-deacon-exalt-master",
+      "pre-communion-priest-be-exalted",
+      "pre-communion-choir-mouths-filled"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "thanksgiving-partaken",
+    "segment_ids": [
+      "thanksgiving-deacon-partaken",
+      "thanksgiving-choir-lord-have-mercy-1"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-of-thanksgiving",
+      "start_segment_id": "thanksgiving-deacon-partaken",
+      "end_segment_id": "thanksgiving-choir-lord-have-mercy-1"
+    }
+  },
+  {
+    "id": "thanksgiving-help-save",
+    "segment_ids": [
+      "thanksgiving-deacon-help-save",
+      "thanksgiving-choir-lord-have-mercy-2"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-of-thanksgiving",
+      "start_segment_id": "thanksgiving-deacon-help-save",
+      "end_segment_id": "thanksgiving-choir-lord-have-mercy-2"
+    }
+  },
+  {
+    "id": "thanksgiving-commend",
+    "segment_ids": [
+      "thanksgiving-deacon-commend",
+      "thanksgiving-choir-to-thee"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-of-thanksgiving",
+      "start_segment_id": "thanksgiving-deacon-commend",
+      "end_segment_id": "thanksgiving-choir-to-thee"
+    }
+  },
+  {
+    "id": "thanksgiving-doxology",
+    "segment_ids": [
+      "thanksgiving-priest-doxology",
+      "thanksgiving-choir-amen"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-of-thanksgiving",
+      "start_segment_id": "thanksgiving-priest-doxology",
+      "end_segment_id": "thanksgiving-choir-amen"
+    }
+  },
+  {
+    "id": "thanksgiving-go-forth",
+    "segment_ids": [
+      "thanksgiving-priest-go-forth",
+      "thanksgiving-choir-in-name",
+      "thanksgiving-deacon-pray",
+      "thanksgiving-choir-lord-have-mercy-3"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "litany-of-thanksgiving",
+      "start_segment_id": "thanksgiving-priest-go-forth",
+      "end_segment_id": "thanksgiving-choir-lord-have-mercy-3"
+    }
+  },
+  {
+    "id": "litany-of-thanksgiving-summary",
+    "segment_ids": [
+      "thanksgiving-deacon-partaken",
+      "thanksgiving-choir-lord-have-mercy-1",
+      "thanksgiving-deacon-help-save",
+      "thanksgiving-choir-lord-have-mercy-2",
+      "thanksgiving-deacon-commend",
+      "thanksgiving-choir-to-thee",
+      "thanksgiving-priest-doxology",
+      "thanksgiving-choir-amen",
+      "thanksgiving-priest-go-forth",
+      "thanksgiving-choir-in-name",
+      "thanksgiving-deacon-pray",
+      "thanksgiving-choir-lord-have-mercy-3"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "amvon-prayer-main",
+    "segment_ids": [
+      "amvon-priest-prayer"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "prayer-behind-amvon",
+      "start_segment_id": "amvon-priest-prayer",
+      "end_segment_id": "amvon-priest-prayer"
+    }
+  },
+  {
+    "id": "amvon-blessed-name",
+    "segment_ids": [
+      "amvon-choir-blessed-name"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "prayer-behind-amvon",
+      "start_segment_id": "amvon-choir-blessed-name",
+      "end_segment_id": "amvon-choir-blessed-name"
+    }
+  },
+  {
+    "id": "amvon-fulfillment-blessing",
+    "segment_ids": [
+      "amvon-priest-fulfillment-aloud",
+      "amvon-deacon-pray",
+      "amvon-choir-lord-have-mercy",
+      "amvon-priest-blessing",
+      "amvon-choir-amen"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "prayer-behind-amvon",
+      "start_segment_id": "amvon-priest-fulfillment-aloud",
+      "end_segment_id": "amvon-choir-amen"
+    }
+  },
+  {
+    "id": "amvon-closing-glory",
+    "segment_ids": [
+      "amvon-priest-glory",
+      "amvon-choir-glory-father"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "prayer-behind-amvon",
+      "start_segment_id": "amvon-priest-glory",
+      "end_segment_id": "amvon-choir-glory-father"
+    }
+  },
+  {
+    "id": "prayer-behind-amvon-summary",
+    "segment_ids": [
+      "amvon-priest-prayer",
+      "amvon-choir-blessed-name",
+      "amvon-priest-fulfillment-aloud",
+      "amvon-deacon-pray",
+      "amvon-choir-lord-have-mercy",
+      "amvon-priest-blessing",
+      "amvon-choir-amen",
+      "amvon-priest-glory",
+      "amvon-choir-glory-father"
+    ],
+    "show_speakers": true
+  },
+  {
+    "id": "dismissal-main",
+    "segment_ids": [
+      "dismissal-priest-main"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "dismissal",
+      "start_segment_id": "dismissal-priest-main",
+      "end_segment_id": "dismissal-priest-main"
+    }
+  },
+  {
+    "id": "dismissal-summary",
+    "segment_ids": [
+      "dismissal-priest-main",
+      "dismissal-priest-fathers",
+      "dismissal-choir-amen"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "dismissal",
+      "start_segment_id": "dismissal-priest-main",
+      "end_segment_id": "dismissal-choir-amen"
     }
   },
   {
@@ -732,7 +1717,11 @@ export const exerciseDefinitions = [
       "course-trisagion-holy-god",
       "course-trisagion-holy-mighty",
       "course-trisagion-holy-immortal",
-      "course-trisagion-have-mercy"
+      "course-trisagion-have-mercy",
+      "course-trisagion-with-strength"
+    ],
+    "include_rubric_phrase_ids": [
+      "dynamis-001"
     ],
     "media": GREAT_COMPLINE_MEDIA
   },
@@ -823,6 +1812,7 @@ export const exerciseDefinitions = [
 ];
 export function resolveExercise(definition, segmentsMap = segments) {
   const segmentIds = definition.segment_ids || [];
+  const displayRubricPhraseIds = new Set(definition.include_rubric_phrase_ids || []);
   const captionClip = definition.caption_clip || (
     definition.media
       ? {
@@ -852,16 +1842,24 @@ export function resolveExercise(definition, segmentsMap = segments) {
 
   function getLinesForSegmentIds(ids) {
     const phraseIdSet = definition.phrase_ids ? new Set(definition.phrase_ids) : null;
+    function isDisplayExemptPart(part) {
+      if (part?.tags?.includes('display-rubric') && displayRubricPhraseIds.size > 0) return false;
+      return isPracticeExemptPart(part) && !displayRubricPhraseIds.has(part?.phrase_id);
+    }
     function isIncludedPhrase(part) {
-      return Boolean(part?.phrase_id && phraseIdSet?.has(part.phrase_id));
+      return Boolean(
+        part?.phrase_id
+          && !isDisplayExemptPart(part)
+          && (!phraseIdSet || phraseIdSet.has(part.phrase_id))
+      );
     }
     function hasLaterPhrase(parts, startIndex) {
-      return parts.slice(startIndex + 1).some(part => part.phrase_id);
+      return parts.slice(startIndex + 1).some(part => part.phrase_id && !isDisplayExemptPart(part));
     }
     function filterPhraseParts(parts) {
-      if (!phraseIdSet) return parts.map(part => ({ ...part }));
+      if (!phraseIdSet) return parts.filter(part => !isDisplayExemptPart(part)).map(part => ({ ...part }));
       return parts.filter((part, index) => {
-        if (part.phrase_id) return phraseIdSet.has(part.phrase_id);
+        if (part.phrase_id) return isIncludedPhrase(part);
         const previousPart = parts[index - 1];
         const nextPart = parts[index + 1];
         const previousIncluded = isIncludedPhrase(previousPart);
@@ -889,7 +1887,7 @@ export function resolveExercise(definition, segmentsMap = segments) {
 
     return ids
       .map((segmentId, segmentIndex) => ({ segmentId, segmentIndex, segment: segmentsMap[segmentId] }))
-      .filter(({ segment }) => Boolean(segment))
+      .filter(({ segment }) => Boolean(segment) && !segment.tags?.includes('rubric') && !segment.tags?.includes('quiet'))
       .flatMap(({ segmentId, segmentIndex, segment }) => (
         splitLineParts(segment, filterPhraseParts(segment.phrases))
           .map((lineParts, lineIndex) => ({
@@ -906,7 +1904,7 @@ export function resolveExercise(definition, segmentsMap = segments) {
         line_order: index + 1
       }))
       .filter(Boolean)
-      .filter(line => !phraseIdSet || line.phrases.some(part => part.phrase_id));
+      .filter(line => line.phrases.some(part => part.phrase_id));
   }
 
   const lines = getLinesForSegmentIds(segmentIds);
@@ -930,7 +1928,7 @@ const STANDARD_ACTIVITY_OPTIONS = [
 ];
 
 function isPracticeExemptPart(part) {
-  return part.tags?.includes('rubric') || phrases[part.phrase_id]?.tags?.includes('rubric');
+  return part.tags?.includes('rubric') || part.tags?.includes('display-rubric') || phrases[part.phrase_id]?.tags?.includes('rubric');
 }
 
 function getPhraseIdsForLines(lines) {
@@ -1104,7 +2102,8 @@ function getDerivedActivity(exercise, activityType) {
 
   const phraseIds = getPhraseIdsForLines(exercise.lines);
   const alignedCaptions = getAlignedCaptions(exercise);
-  const captions = alignedCaptions;
+  const phraseIdSet = new Set(phraseIds);
+  const captions = alignedCaptions.filter(timing => phraseIdSet.has(timing.phrase_id));
   const serviceAlignmentRange = findServiceAlignmentRange(
     exercise.service_text_id,
     exercise.service_range,

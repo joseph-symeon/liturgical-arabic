@@ -62,7 +62,7 @@ export const serviceTextDefinitions = [
       },
       {
         "section_id": "litany-of-peace",
-        "section": "Litany of Peace",
+        "section": "The Litany of Peace",
         "section_title_phrase": "section-litany-of-peace",
         "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",
@@ -783,7 +783,7 @@ export const serviceTextDefinitions = [
       },
       {
         "section_id": "litany-of-peace",
-        "section": "Litany of Peace",
+        "section": "The Litany of Peace",
         "section_title_phrase": "section-litany-of-peace",
         "section_group": "Liturgy of the Catechumens",
         "section_group_title_phrase": "section-liturgy-catechumen",

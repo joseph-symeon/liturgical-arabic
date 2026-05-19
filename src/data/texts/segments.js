@@ -34,9 +34,9 @@ const sourceSegments = {
     "speaker": "role-choir",
     "tags": [],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -155,7 +155,10 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "text": "("
+        "text": "(",
+        "tags": [
+          "display-rubric"
+        ]
       },
       {
         "phrase_id": "bishop-001"
@@ -314,9 +317,9 @@ const sourceSegments = {
     "speaker": "role-all",
     "tags": [],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -762,7 +765,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "doxology-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
@@ -951,7 +954,10 @@ const sourceSegments = {
         "phrase_id": "entrance-ordinary-sundays-label-001"
       },
       {
-        "text": ")"
+        "text": ")",
+        "tags": [
+          "display-rubric"
+        ]
       }
     ]
   },
@@ -981,10 +987,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "text": "(",
-        "tags": [
-          "rubric"
-        ]
+        "text": "("
       },
       {
         "phrase_id": "ordinary-sundays-label-001"
@@ -1455,9 +1458,9 @@ const sourceSegments = {
       "trisagion"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -2004,7 +2007,13 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "departed-glory-trinity-001"
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-father-son-holy-spirit-001"
       },
       {
         "text": "، "
@@ -2560,7 +2569,9 @@ const sourceSegments = {
     "speaker": "role-choir",
     "tags": ["fervent-supplication", "litany", "vespers"],
     "phrases": [
-      {"phrase_id": "lord-have-mercy-001"},
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {"text": "."}
     ]
   },
@@ -2582,7 +2593,9 @@ const sourceSegments = {
     "break_before": true,
     "tags": ["fervent-supplication", "litany", "vespers"],
     "phrases": [
-      {"phrase_id": "vespers-fervent-have-mercy-god-001"},
+      {"phrase_id": "have-mercy-on-us-001"},
+      {"text": " "},
+      {"phrase_id": "o-god-001"},
       {"text": " "},
       {"phrase_id": "vespers-fervent-great-mercy-001"},
       {"text": "، "},
@@ -2594,7 +2607,9 @@ const sourceSegments = {
     "speaker": "role-choir",
     "tags": ["fervent-supplication", "litany", "vespers"],
     "phrases": [
-      {"phrase_id": "lord-have-mercy-001"},
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {"text": ". "},
       {"phrase_id": "vespers-fervent-thrice-rubric"},
       {"text": " "},
@@ -2821,7 +2836,9 @@ const sourceSegments = {
     "speaker": "role-choir",
     "tags": ["litany-of-supplication", "response", "vespers"],
     "phrases": [
-      {"phrase_id": "lord-have-mercy-001"},
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {"text": "."}
     ]
   },
@@ -3021,7 +3038,15 @@ const sourceSegments = {
     "break_before": true,
     "tags": ["doxology", "trisagion", "vespers"],
     "phrases": [
-      {"phrase_id": "departed-glory-trinity-001"},
+      {
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-father-son-holy-spirit-001"
+      },
       {"text": "، "},
       {"phrase_id": "now-and-ever-001"},
       {"text": " "},
@@ -3038,7 +3063,7 @@ const sourceSegments = {
     "phrases": [
       {"phrase_id": "all-holy-trinity-001"},
       {"text": "، "},
-      {"phrase_id": "all-holy-trinity-have-mercy-001"},
+      {"phrase_id": "have-mercy-on-us-001"},
       {"text": "."}
     ]
   },
@@ -3082,7 +3107,9 @@ const sourceSegments = {
     "break_before": true,
     "tags": ["response", "trisagion", "vespers"],
     "phrases": [
-      {"phrase_id": "lord-have-mercy-001"},
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {"text": ". "},
       {"phrase_id": "vespers-trisagion-thrice-rubric"}
     ]
@@ -3177,7 +3204,15 @@ const sourceSegments = {
     "break_before": true,
     "tags": ["dismissal", "response", "vespers"],
     "phrases": [
-      {"phrase_id": "departed-glory-trinity-001"},
+      {
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-father-son-holy-spirit-001"
+      },
       {"text": "، "},
       {"phrase_id": "now-and-ever-001"},
       {"text": " "},
@@ -3185,7 +3220,9 @@ const sourceSegments = {
       {"text": ". "},
       {"phrase_id": "amen-001"},
       {"text": ". "},
-      {"phrase_id": "lord-have-mercy-001"},
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {"text": ". "},
       {"phrase_id": "vespers-trisagion-thrice-rubric"},
       {"text": " "},
@@ -3240,7 +3277,9 @@ const sourceSegments = {
       {"text": "، "},
       {"phrase_id": "dismissal-all-saints-001"},
       {"text": "، "},
-      {"phrase_id": "dismissal-have-mercy-save-001"},
+      {"phrase_id": "have-mercy-on-us-001"},
+      {"text": " وَ"},
+      {"phrase_id": "save-us-001"},
       {"text": " "},
       {"phrase_id": "dismissal-good-lover-001"},
       {"text": "."}
@@ -3554,7 +3593,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "doxology-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
@@ -3778,9 +3817,9 @@ const sourceSegments = {
       "little-litany"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -3824,9 +3863,9 @@ const sourceSegments = {
       "little-litany"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -4111,7 +4150,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "doxology-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
@@ -4191,10 +4230,7 @@ const sourceSegments = {
         "phrase_id": "trisagion-thrice-001"
       },
       {
-        "text": ")",
-        "tags": [
-          "rubric"
-        ]
+        "text": ")"
       }
     ]
   },
@@ -4213,7 +4249,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "trisagion-to-father-son-holy-spirit-001"
+        "phrase_id": "to-father-son-holy-spirit-001"
       },
       {
         "text": "، "
@@ -4273,19 +4309,13 @@ const sourceSegments = {
         "text": ". "
       },
       {
-        "text": "(",
-        "tags": [
-          "rubric"
-        ]
+        "text": "("
       },
       {
         "phrase_id": "dynamis-001"
       },
       {
-        "text": ")",
-        "tags": [
-          "rubric"
-        ]
+        "text": ")"
       }
     ]
   },
@@ -4397,7 +4427,8 @@ const sourceSegments = {
   "word-command-master": {
     "speaker": "role-deacon",
     "tags": [
-      "word"
+      "word",
+      "quiet"
     ],
     "phrases": [
       {
@@ -4411,7 +4442,8 @@ const sourceSegments = {
   "word-blessed-cometh": {
     "speaker": "role-priest",
     "tags": [
-      "word"
+      "word",
+      "quiet"
     ],
     "phrases": [
       {
@@ -4425,7 +4457,8 @@ const sourceSegments = {
   "word-bless-throne": {
     "speaker": "role-deacon",
     "tags": [
-      "word"
+      "word",
+      "quiet"
     ],
     "phrases": [
       {
@@ -4439,7 +4472,8 @@ const sourceSegments = {
   "word-blessed-throne": {
     "speaker": "role-priest",
     "tags": [
-      "word"
+      "word",
+      "quiet"
     ],
     "phrases": [
       {
@@ -4477,7 +4511,8 @@ const sourceSegments = {
   "word-amen": {
     "speaker": "role-deacon",
     "tags": [
-      "word"
+      "word",
+      "quiet"
     ],
     "phrases": [
       {
@@ -4628,7 +4663,8 @@ const sourceSegments = {
   "gospel-prayer-let-us-pray": {
     "speaker": "role-deacon",
     "tags": [
-      "gospel"
+      "gospel",
+      "quiet"
     ],
     "phrases": [
       {
@@ -4637,9 +4673,9 @@ const sourceSegments = {
       {
         "text": ". "
       },
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -4808,7 +4844,8 @@ const sourceSegments = {
     "speaker": "role-deacon",
     "break_before": true,
     "tags": [
-      "gospel"
+      "gospel",
+      "quiet"
     ],
     "phrases": [
       {
@@ -4828,7 +4865,8 @@ const sourceSegments = {
   "gospel-may-god-enable": {
     "speaker": "role-priest",
     "tags": [
-      "gospel"
+      "gospel",
+      "quiet"
     ],
     "phrases": [
       {
@@ -4860,7 +4898,8 @@ const sourceSegments = {
   "gospel-reading-amen": {
     "speaker": "role-deacon",
     "tags": [
-      "gospel"
+      "gospel",
+      "quiet"
     ],
     "phrases": [
       {
@@ -4977,7 +5016,31 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "glory-to-thee-lord-001"
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-thee-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-thee-001"
       },
       {
         "text": "."
@@ -5021,7 +5084,31 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "glory-to-thee-lord-001"
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-thee-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-thee-001"
       },
       {
         "text": "."
@@ -5201,6 +5288,38 @@ const sourceSegments = {
       }
     ]
   },
+  "course-trisagion-with-strength": {
+    "speaker": "",
+    "break_before": true,
+    "tags": [
+      "course",
+      "beginner",
+      "trisagion"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "with-strength-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "text": "(",
+        "tags": [
+          "display-rubric"
+        ]
+      },
+      {
+        "phrase_id": "dynamis-001"
+      },
+      {
+        "text": ")",
+        "tags": [
+          "display-rubric"
+        ]
+      }
+    ]
+  },
   "course-all-holy-trinity-address": {
     "speaker": "",
     "tags": [
@@ -5216,7 +5335,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "all-holy-trinity-have-mercy-001"
+        "phrase_id": "have-mercy-on-us-001"
       },
       {
         "text": "."
@@ -5390,7 +5509,8 @@ const sourceSegments = {
     "tags": [
       "catechumens",
       "faithful",
-      "priest-prayer"
+      "priest-prayer",
+      "quiet"
     ],
     "phrases": [
       {
@@ -5522,7 +5642,8 @@ const sourceSegments = {
       "basil",
       "catechumens",
       "faithful",
-      "priest-prayer"
+      "priest-prayer",
+      "quiet"
     ],
     "phrases": [
       {
@@ -5664,7 +5785,8 @@ const sourceSegments = {
     "break_before": true,
     "tags": [
       "faithful",
-      "priest-prayer"
+      "priest-prayer",
+      "quiet"
     ],
     "phrases": [
       {
@@ -5843,7 +5965,8 @@ const sourceSegments = {
     "tags": [
       "basil",
       "faithful",
-      "priest-prayer"
+      "priest-prayer",
+      "quiet"
     ],
     "phrases": [
       {
@@ -6022,7 +6145,8 @@ const sourceSegments = {
     "tags": [
       "basil",
       "faithful",
-      "priest-prayer"
+      "priest-prayer",
+      "quiet"
     ],
     "phrases": [
       {
@@ -6124,7 +6248,8 @@ const sourceSegments = {
       "basil",
       "doxology",
       "faithful",
-      "priest-prayer"
+      "priest-prayer",
+      "quiet"
     ],
     "phrases": [
       {
@@ -6164,7 +6289,8 @@ const sourceSegments = {
     "break_before": true,
     "tags": [
       "faithful",
-      "priest-prayer"
+      "priest-prayer",
+      "quiet"
     ],
     "phrases": [
       {
@@ -6269,7 +6395,8 @@ const sourceSegments = {
     "speaker": "role-deacon",
     "break_before": true,
     "tags": [
-      "faithful"
+      "faithful",
+      "quiet"
     ],
     "phrases": [
       {
@@ -6298,7 +6425,8 @@ const sourceSegments = {
     "tags": [
       "doxology",
       "faithful",
-      "priest-prayer"
+      "priest-prayer",
+      "quiet"
     ],
     "phrases": [
       {
@@ -6337,7 +6465,8 @@ const sourceSegments = {
     "speaker": "role-choir",
     "tags": [
       "faithful",
-      "response"
+      "response",
+      "quiet"
     ],
     "phrases": [
       {
@@ -6794,7 +6923,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "cherubic-angelic-hosts-001"
+        "phrase_id": "great-entrance-angelic-hosts-001"
       },
       {
         "text": " "
@@ -8323,9 +8452,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": ". "
       },
@@ -9184,6 +9313,12 @@ const sourceSegments = {
         "text": "، "
       },
       {
+        "phrase_id": "supplication-deacon-doors-001"
+      },
+      {
+        "text": "، "
+      },
+      {
         "phrase_id": "supplication-deacon-wisdom-attend-001"
       },
       {
@@ -9475,7 +9610,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "creed-remission-sins-001"
+        "phrase_id": "holy-anaphora-remission-sins-001"
       },
       {
         "text": "."
@@ -9497,6 +9632,12 @@ const sourceSegments = {
       },
       {
         "phrase_id": "creed-life-age-amen-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amen-001"
       },
       {
         "text": "."
@@ -9968,6 +10109,18 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
+      {
+        "phrase_id": "holy-anaphora-holy-holy-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "holy-anaphora-holy-holy-001"
+      },
+      {
+        "text": "، "
+      },
       {
         "phrase_id": "holy-anaphora-holy-holy-001"
       },
@@ -11214,8 +11367,7 @@ const sourceSegments = {
     "speaker": "role-priest",
     "break_before": true,
     "tags": [
-      "hymn-to-the-theotokos",
-      "quiet"
+      "hymn-to-the-theotokos"
     ],
     "phrases": [
       {
@@ -11266,8 +11418,7 @@ const sourceSegments = {
     "speaker": "role-priest",
     "break_before": true,
     "tags": [
-      "hymn-to-the-theotokos",
-      "quiet"
+      "hymn-to-the-theotokos"
     ],
     "phrases": [
       {
@@ -11336,6 +11487,12 @@ const sourceSegments = {
       },
       {
         "phrase_id": "theotokos-clergy-orders-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-deacons-in-christ-001"
       },
       {
         "text": "، "
@@ -11510,8 +11667,7 @@ const sourceSegments = {
     "speaker": "role-priest",
     "break_before": true,
     "tags": [
-      "hymn-to-the-theotokos",
-      "quiet"
+      "hymn-to-the-theotokos"
     ],
     "phrases": [
       {
@@ -11562,8 +11718,7 @@ const sourceSegments = {
     "speaker": "role-priest",
     "break_before": true,
     "tags": [
-      "hymn-to-the-theotokos",
-      "quiet"
+      "hymn-to-the-theotokos"
     ],
     "phrases": [
       {
@@ -11737,9 +11892,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -11786,9 +11941,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -11859,9 +12014,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -12241,7 +12396,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "lords-prayer-father-son-spirit-001"
+        "phrase_id": "theotokos-father-son-spirit-001"
       },
       {
         "text": "، "
@@ -12300,7 +12455,7 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "lords-prayer-and-to-spirit-001"
+        "phrase_id": "and-to-thy-spirit-001"
       },
       {
         "text": "."
@@ -12887,7 +13042,8 @@ const sourceSegments = {
     "speaker": "role-all",
     "break_before": true,
     "tags": [
-      "pre-communion-prayers"
+      "pre-communion-prayers",
+      "quiet"
     ],
     "phrases": [
       {
@@ -13032,7 +13188,19 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "pre-communion-believe-confess-001"
+        "phrase_id": "pre-communion-believe-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-confess-001"
       },
       {
         "text": "، "
@@ -13041,10 +13209,22 @@ const sourceSegments = {
         "phrase_id": "pre-communion-truly-christ-001"
       },
       {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-son-living-god-001"
+      },
+      {
         "text": "، "
       },
       {
         "phrase_id": "pre-communion-came-save-sinners-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-save-sinners-001"
       },
       {
         "text": "، "
@@ -13057,6 +13237,24 @@ const sourceSegments = {
       },
       {
         "phrase_id": "pre-communion-own-body-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-that-this-is-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-thy-immaculate-body-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-itself-001"
       },
       {
         "text": "، "
@@ -13074,7 +13272,19 @@ const sourceSegments = {
         "text": " "
       },
       {
+        "phrase_id": "pre-communion-forgive-me-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "pre-communion-transgressions-voluntary-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-transgressions-involuntary-001"
       },
       {
         "text": "، "
@@ -13087,6 +13297,12 @@ const sourceSegments = {
       },
       {
         "phrase_id": "pre-communion-knowledge-ignorance-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-ignorance-001"
       },
       {
         "text": ". "
@@ -13107,6 +13323,12 @@ const sourceSegments = {
         "phrase_id": "pre-communion-remission-life-001"
       },
       {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-life-everlasting-001"
+      },
+      {
         "text": ". "
       },
       {
@@ -13121,7 +13343,8 @@ const sourceSegments = {
     "speaker": "role-all",
     "break_before": true,
     "tags": [
-      "pre-communion-prayers"
+      "pre-communion-prayers",
+      "quiet"
     ],
     "phrases": [
       {
@@ -13154,11 +13377,18 @@ const sourceSegments = {
     "speaker": "role-all",
     "break_before": true,
     "tags": [
-      "pre-communion-prayers"
+      "pre-communion-prayers",
+      "quiet"
     ],
     "phrases": [
       {
         "phrase_id": "pre-communion-mystic-supper-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-mystic-supper-partaker-001"
       },
       {
         "text": "، "
@@ -13173,10 +13403,22 @@ const sourceSegments = {
         "phrase_id": "pre-communion-not-speak-enemies-001"
       },
       {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-to-thine-enemies-001"
+      },
+      {
         "text": "، "
       },
       {
         "phrase_id": "pre-communion-not-kiss-judas-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-deceitful-kiss-judas-001"
       },
       {
         "text": "، "
@@ -13191,6 +13433,18 @@ const sourceSegments = {
         "phrase_id": "pre-communion-remember-kingdom-001"
       },
       {
+        "text": "، "
+      },
+      {
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-in-thy-kingdom-001"
+      },
+      {
         "text": "."
       }
     ]
@@ -13199,7 +13453,8 @@ const sourceSegments = {
     "speaker": "role-all",
     "break_before": true,
     "tags": [
-      "pre-communion-prayers"
+      "pre-communion-prayers",
+      "quiet"
     ],
     "phrases": [
       {
@@ -13238,7 +13493,8 @@ const sourceSegments = {
     "speaker": "role-all",
     "break_before": true,
     "tags": [
-      "pre-communion-prayers"
+      "pre-communion-prayers",
+      "quiet"
     ],
     "phrases": [
       {
@@ -13283,7 +13539,8 @@ const sourceSegments = {
     "speaker": "role-all",
     "break_before": true,
     "tags": [
-      "pre-communion-prayers"
+      "pre-communion-prayers",
+      "quiet"
     ],
     "phrases": [
       {
@@ -13334,7 +13591,8 @@ const sourceSegments = {
     "speaker": "role-all",
     "break_before": true,
     "tags": [
-      "pre-communion-prayers"
+      "pre-communion-prayers",
+      "quiet"
     ],
     "phrases": [
       {
@@ -13398,6 +13656,12 @@ const sourceSegments = {
         "phrase_id": "pre-communion-mystic-supper-001"
       },
       {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-mystic-supper-partaker-001"
+      },
+      {
         "text": "، "
       },
       {
@@ -13410,10 +13674,22 @@ const sourceSegments = {
         "phrase_id": "pre-communion-not-speak-enemies-001"
       },
       {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-to-thine-enemies-001"
+      },
+      {
         "text": "، "
       },
       {
         "phrase_id": "pre-communion-not-kiss-judas-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-deceitful-kiss-judas-001"
       },
       {
         "text": "، "
@@ -13426,6 +13702,18 @@ const sourceSegments = {
       },
       {
         "phrase_id": "pre-communion-remember-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-in-thy-kingdom-001"
       },
       {
         "text": "."
@@ -13446,6 +13734,12 @@ const sourceSegments = {
         "text": " "
       },
       {
+        "phrase_id": "pre-communion-partaking-holy-mysteries-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "pre-communion-judgment-condemnation-001"
       },
       {
@@ -13453,6 +13747,12 @@ const sourceSegments = {
       },
       {
         "phrase_id": "pre-communion-healing-soul-body-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-and-body-001"
       },
       {
         "text": "."
@@ -13601,11 +13901,18 @@ const sourceSegments = {
     "break_before": true,
     "tags": [
       "pre-communion-prayers",
-      "hymn"
+      "hymn",
+      "quiet"
     ],
     "phrases": [
       {
         "phrase_id": "pre-communion-mystic-supper-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "pre-communion-mystic-supper-partaker-001"
       },
       {
         "text": "، "
@@ -13636,6 +13943,18 @@ const sourceSegments = {
       },
       {
         "phrase_id": "pre-communion-remember-kingdom-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "pre-communion-in-thy-kingdom-001"
       },
       {
         "text": "."
@@ -13773,7 +14092,8 @@ const sourceSegments = {
     "speaker": "role-deacon",
     "break_before": true,
     "tags": [
-      "pre-communion-prayers"
+      "pre-communion-prayers",
+      "quiet"
     ],
     "phrases": [
       {
@@ -14032,9 +14352,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -14069,9 +14389,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -14305,9 +14625,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -14339,7 +14659,7 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "amvon-bless-inheritance-001"
+        "phrase_id": "pre-communion-bless-inheritance-001"
       },
       {
         "text": ". "
@@ -14545,9 +14865,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": "."
       }
@@ -14632,7 +14952,13 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "amvon-glory-father-son-spirit-001"
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-father-son-holy-spirit-001"
       },
       {
         "text": "، "
@@ -14655,9 +14981,9 @@ const sourceSegments = {
       {
         "text": ". "
       },
-      {
-        "phrase_id": "lord-have-mercy-001"
-      },
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {
         "text": ". "
       },
@@ -14839,7 +15165,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "dismissal-have-mercy-save-001"
+        "phrase_id": "have-mercy-on-us-001"
+      },
+      {
+        "text": " وَ"
+      },
+      {
+        "phrase_id": "save-us-001"
       },
       {
         "text": " "
@@ -14872,7 +15204,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "dismissal-have-mercy-save-001"
+        "phrase_id": "have-mercy-on-us-001"
+      },
+      {
+        "text": " وَ"
+      },
+      {
+        "phrase_id": "save-us-001"
       },
       {
         "text": "."
@@ -15319,7 +15657,15 @@ const sourceSegments = {
       "doxology"
     ],
     "phrases": [
-      {"phrase_id": "departed-glory-trinity-001"},
+      {
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-father-son-holy-spirit-001"
+      },
       {"text": "."}
     ]
   },
@@ -15393,7 +15739,9 @@ const sourceSegments = {
       "litany"
     ],
     "phrases": [
-      {"phrase_id": "departed-have-mercy-god-001"},
+      {"phrase_id": "have-mercy-on-us-001"},
+      {"text": " "},
+      {"phrase_id": "o-god-001"},
       {"text": "، "},
       {"phrase_id": "departed-great-mercy-001"},
       {"text": "، "},
@@ -15408,7 +15756,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {"phrase_id": "lord-have-mercy-001"},
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {"text": ". "},
       {"phrase_id": "thanksgiving-after-communion-thrice-001"}
     ]
@@ -15512,7 +15862,9 @@ const sourceSegments = {
       "response"
     ],
     "phrases": [
-      {"phrase_id": "lord-have-mercy-001"},
+      {"phrase_id": "vocative-o-lord-001"},
+      {"text": " "},
+      {"phrase_id": "have-mercy-001"},
       {"text": "."}
     ]
   },

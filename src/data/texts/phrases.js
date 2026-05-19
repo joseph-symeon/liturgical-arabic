@@ -815,17 +815,6 @@ const phrases = {
       "vespers"
     ]
   },
-  "vespers-fervent-have-mercy-god-001": {
-    "arabic": "ارْحَمنا يا اللهُ",
-    "translation": "Have mercy on us, O God",
-    "literal": "have mercy on us, O God",
-    "tags": [
-      "fervent-supplication",
-      "litany",
-      "section: The Litany of Fervent Supplication",
-      "vespers"
-    ]
-  },
   "vespers-fervent-hearken-mercy-001": {
     "arabic": "نَطْلُبُ مِنْكَ فاستجِبْ وارْحَم",
     "translation": "we pray thee, hearken and have mercy",
@@ -2455,15 +2444,6 @@ const phrases = {
       "litany"
     ]
   },
-  "departed-have-mercy-god-001": {
-    "arabic": "إِرْحَمْنا يا اللهُ",
-    "translation": "Have mercy on us, O God",
-    "literal": "have mercy on us, O God",
-    "tags": [
-      "departed",
-      "litany"
-    ]
-  },
   "departed-censer-rubric-001": {
     "arabic": "وَيَأْخُذُ الشَّمّاسُ المِبْخَرَةَ وَيُبَخِّرُ قائِلاً الطِّلْبَةَ التالِيَةَ",
     "translation": "The deacon takes the censer and censes while he says the following litany",
@@ -2542,16 +2522,6 @@ const phrases = {
     "tags": [
       "christ",
       "departed"
-    ]
-  },
-  "departed-glory-trinity-001": {
-    "arabic": "المَجْدُ لِلآبِ وَالابْنِ وَالرُّوحِ القُدُسِ",
-    "translation": "Glory to the Father and to the Son and to the Holy Spirit",
-    "literal": "glory to the Father and the Son and the Holy Spirit",
-    "tags": [
-      "departed",
-      "doxology",
-      "section: Psalm 103"
     ]
   },
   "departed-only-immortal-001": {
@@ -7139,15 +7109,6 @@ const phrases = {
       "section: The Dismissal"
     ]
   },
-  "dismissal-have-mercy-save-001": {
-    "arabic": "ارْحَمْنا وخَلِّصْنا",
-    "translation": "have mercy on us and save us",
-    "literal": "have mercy on us and save us",
-    "tags": [
-      "dismissal",
-      "section: The Dismissal"
-    ]
-  },
   "dismissal-all-saints-001": {
     "arabic": "وجميعِ القِدِّيسين",
     "translation": "and of all the saints",
@@ -7399,16 +7360,6 @@ const phrases = {
       "section: The Prayer Behind the Amvon"
     ]
   },
-  "amvon-glory-father-son-spirit-001": {
-    "arabic": "المَجْدُ لِلآبِ وَالابْنِ وَالرُّوحِ القُدُسِ",
-    "translation": "Glory to the Father and to the Son and to the Holy Spirit",
-    "literal": "glory to the Father and the Son and the Holy Spirit",
-    "tags": [
-      "prayer-behind-amvon",
-      "response",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
   "amvon-our-hope-glory-001": {
     "arabic": "يَا رَجَاءَنَا المَجْدُ لَكَ",
     "translation": "and our Hope, glory to thee",
@@ -7588,15 +7539,6 @@ const phrases = {
     "arabic": "أَنْتَ امْنَحْهُمْ عِوَضًا مِنْ ذلِكَ مَجْدًا بِقُدْرَتِكَ الإِلَهِيَّةِ",
     "translation": "glorify them in recompense by thy divine power",
     "literal": "grant them glory in return for that by thy divine power",
-    "tags": [
-      "prayer-behind-amvon",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
-  "amvon-bless-inheritance-001": {
-    "arabic": "وَبَارِكْ مِيرَاثَكَ",
-    "translation": "and bless thine inheritance",
-    "literal": "and bless thy inheritance",
     "tags": [
       "prayer-behind-amvon",
       "section: The Prayer Behind the Amvon"
@@ -8101,7 +8043,9 @@ const phrases = {
     "literal": "and bless thy inheritance",
     "tags": [
       "pre-communion-prayers",
-      "section: The Pre-Communion Prayers"
+      "prayer-behind-amvon",
+      "section: The Pre-Communion Prayers",
+      "section: The Prayer Behind the Amvon"
     ]
   },
   "pre-communion-save-people-001": {
@@ -8262,9 +8206,18 @@ const phrases = {
     ]
   },
   "pre-communion-healing-soul-body-001": {
-    "arabic": "بَلْ لِشِفَاءِ النَّفْسِ وَالجَسَدِ",
-    "translation": "but unto the healing of soul and body",
-    "literal": "but for healing of soul and body",
+    "arabic": "بَلْ لِشِفَاءِ النَّفْسِ",
+    "translation": "but unto the healing of soul",
+    "literal": "but for healing of the soul",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-and-body-001": {
+    "arabic": "وَالجَسَدِ",
+    "translation": "and body",
+    "literal": "and the body",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -8280,9 +8233,18 @@ const phrases = {
     ]
   },
   "pre-communion-not-judgment-001": {
-    "arabic": "لَا تَكُنْ لِي مُتَنَاوِلَةُ أَسْرَارِكَ المُقَدَّسَةِ",
-    "translation": "Not unto judgment nor unto condemnation be my partaking of thy holy mysteries",
-    "literal": "let not the communion of thy holy mysteries be for me",
+    "arabic": "لَا تَكُنْ لِي",
+    "translation": "Let it not be for me",
+    "literal": "let it not be for me",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-partaking-holy-mysteries-001": {
+    "arabic": "مُتَنَاوِلَةُ أَسْرَارِكَ المُقَدَّسَةِ",
+    "translation": "the partaking of thy holy mysteries",
+    "literal": "the communion of thy holy mysteries",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -8523,9 +8485,18 @@ const phrases = {
     ]
   },
   "pre-communion-remember-kingdom-001": {
-    "arabic": "أُذْكُرْنِي، يَا رَبُّ، فِي مَلَكُوتِكَ",
-    "translation": "Remember me, O Lord, in thy kingdom",
-    "literal": "remember me, O Lord, in thy kingdom",
+    "arabic": "أُذْكُرْنِي",
+    "translation": "Remember me",
+    "literal": "remember me",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-in-thy-kingdom-001": {
+    "arabic": "فِي مَلَكُوتِكَ",
+    "translation": "in thy kingdom",
+    "literal": "in thy kingdom",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -8541,27 +8512,54 @@ const phrases = {
     ]
   },
   "pre-communion-not-kiss-judas-001": {
-    "arabic": "وَلَا أُقَبِّلُكَ قُبْلَةً غَاشَّةً مِثْلَ يَهُوذَا",
-    "translation": "neither will I give thee a kiss as did Judas",
-    "literal": "nor will I kiss thee a deceitful kiss like Judas",
+    "arabic": "وَلَا أُقَبِّلُكَ",
+    "translation": "neither will I give thee a kiss",
+    "literal": "nor will I kiss thee",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-deceitful-kiss-judas-001": {
+    "arabic": "قُبْلَةً غَاشَّةً مِثْلَ يَهُوذَا",
+    "translation": "as did Judas",
+    "literal": "a deceitful kiss like Judas",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
     ]
   },
   "pre-communion-not-speak-enemies-001": {
-    "arabic": "لأَنِّي لَنْ أَقُولَ سِرَّكَ لأَعْدَائِكَ",
-    "translation": "for I will not speak of thy mystery to thine enemies",
-    "literal": "for I will not tell thy mystery to thy enemies",
+    "arabic": "لأَنِّي لَنْ أَقُولَ سِرَّكَ",
+    "translation": "for I will not speak of thy mystery",
+    "literal": "for I will not tell thy mystery",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-to-thine-enemies-001": {
+    "arabic": "لأَعْدَائِكَ",
+    "translation": "to thine enemies",
+    "literal": "to thy enemies",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
     ]
   },
   "pre-communion-mystic-supper-001": {
-    "arabic": "إِقْبَلْنِي اليَوْمَ شَرِيكًا لِعَشَائِكَ السِّرِّي",
-    "translation": "Of thy mystic supper, O Son of God, accept me today as a communicant",
-    "literal": "accept me today as a partaker of thy mystic supper",
+    "arabic": "إِقْبَلْنِي اليَوْمَ",
+    "translation": "accept me today",
+    "literal": "accept me today",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-mystic-supper-partaker-001": {
+    "arabic": "شَرِيكًا لِعَشَائِكَ السِّرِّي",
+    "translation": "as a communicant of thy mystic supper",
+    "literal": "as a partaker of thy mystic supper",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -8604,9 +8602,18 @@ const phrases = {
     ]
   },
   "pre-communion-remission-life-001": {
-    "arabic": "لِغُفْرَانِ الخَطَايَا وَلِلحَيَاةِ الأَبَدِيَّةِ",
-    "translation": "unto remission of my sins and unto life everlasting",
-    "literal": "for forgiveness of sins and for eternal life",
+    "arabic": "لِغُفْرَانِ الخَطَايَا",
+    "translation": "unto remission of my sins",
+    "literal": "for forgiveness of sins",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-life-everlasting-001": {
+    "arabic": "وَلِلحَيَاةِ الأَبَدِيَّةِ",
+    "translation": "and unto life everlasting",
+    "literal": "and for eternal life",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -8631,9 +8638,18 @@ const phrases = {
     ]
   },
   "pre-communion-knowledge-ignorance-001": {
-    "arabic": "الَّتِي بِمَعْرِفَةٍ وَالَّتِي بِغَيْرِ مَعْرِفَةٍ",
-    "translation": "of knowledge and of ignorance",
-    "literal": "those with knowledge and those without knowledge",
+    "arabic": "الَّتِي بِمَعْرِفَةٍ",
+    "translation": "of knowledge",
+    "literal": "those with knowledge",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-ignorance-001": {
+    "arabic": "وَالَّتِي بِغَيْرِ مَعْرِفَةٍ",
+    "translation": "and of ignorance",
+    "literal": "and those without knowledge",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -8649,18 +8665,36 @@ const phrases = {
     ]
   },
   "pre-communion-transgressions-voluntary-001": {
-    "arabic": "زَلَاتِي الطَّوْعِيَّةَ وَالكَرْهِيَّةَ",
-    "translation": "my transgressions both voluntary and involuntary",
-    "literal": "my voluntary and involuntary slips",
+    "arabic": "زَلَاتِي الطَّوْعِيَّةَ",
+    "translation": "my voluntary transgressions",
+    "literal": "my voluntary slips",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-transgressions-involuntary-001": {
+    "arabic": "وَالكَرْهِيَّةَ",
+    "translation": "and involuntary",
+    "literal": "and involuntary",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
     ]
   },
   "pre-communion-pray-mercy-forgive-001": {
-    "arabic": "فَأَطْلُبُ إِلَيْكَ أَنْ تَرْحَمَنِي وَتَغْفِرَ لِي",
-    "translation": "Wherefore I pray thee, have mercy upon me, and pardon",
-    "literal": "so I ask thee to have mercy on me and forgive me",
+    "arabic": "فَأَطْلُبُ إِلَيْكَ أَنْ تَرْحَمَنِي",
+    "translation": "Wherefore I pray thee, have mercy upon me",
+    "literal": "so I ask thee to have mercy on me",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-forgive-me-001": {
+    "arabic": "وَتَغْفِرَ لِي",
+    "translation": "and pardon me",
+    "literal": "and forgive me",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -8676,9 +8710,36 @@ const phrases = {
     ]
   },
   "pre-communion-own-body-001": {
-    "arabic": "وَأُؤْمِنُ أَيْضًا بِأَنَّ هذَا هُوَ جَسَدُكَ الطَّاهِرُ نَفْسُهُ",
-    "translation": "And I believe that this is truly thine own immaculate Body",
-    "literal": "and I also believe that this is thy pure body itself",
+    "arabic": "وَأُؤْمِنُ أَيْضًا",
+    "translation": "And I believe also",
+    "literal": "and I also believe",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-that-this-is-001": {
+    "arabic": "بِأَنَّ هذَا هُوَ",
+    "translation": "that this is",
+    "literal": "that this is",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-thy-immaculate-body-001": {
+    "arabic": "جَسَدُكَ الطَّاهِرُ",
+    "translation": "thine immaculate Body",
+    "literal": "thy pure body",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-itself-001": {
+    "arabic": "نَفْسُهُ",
+    "translation": "truly thine own",
+    "literal": "itself",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -8694,18 +8755,54 @@ const phrases = {
     ]
   },
   "pre-communion-came-save-sinners-001": {
-    "arabic": "الَّذِي أَتَيْتَ إِلَى العَالَمِ لِتُخَلِّصَ الخُطَاةَ",
-    "translation": "who didst come into the world to save sinners",
-    "literal": "who came into the world to save sinners",
+    "arabic": "الَّذِي أَتَيْتَ إِلَى العَالَمِ",
+    "translation": "who didst come into the world",
+    "literal": "who came into the world",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-save-sinners-001": {
+    "arabic": "لِتُخَلِّصَ الخُطَاةَ",
+    "translation": "to save sinners",
+    "literal": "to save sinners",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
     ]
   },
   "pre-communion-truly-christ-001": {
-    "arabic": "بِأَنَّكَ أَنْتَ بِالحَقِيقَةِ المَسِيحُ ابْنُ اللهِ الحَيِّ",
-    "translation": "that thou art truly the Christ, the Son of the living God",
-    "literal": "that thou art truly the Christ, Son of the living God",
+    "arabic": "بِأَنَّكَ أَنْتَ بِالحَقِيقَةِ المَسِيحُ",
+    "translation": "that thou art truly the Christ",
+    "literal": "that thou art truly the Christ",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-son-living-god-001": {
+    "arabic": "ابْنُ اللهِ الحَيِّ",
+    "translation": "the Son of the living God",
+    "literal": "Son of the living God",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-believe-001": {
+    "arabic": "أُؤْمِنُ",
+    "translation": "I believe",
+    "literal": "I believe",
+    "tags": [
+      "pre-communion-prayers",
+      "section: The Pre-Communion Prayers"
+    ]
+  },
+  "pre-communion-confess-001": {
+    "arabic": "وَأَعْتَرِفُ",
+    "translation": "and I confess",
+    "literal": "and I confess",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -9441,26 +9538,6 @@ const phrases = {
       "section: The Peace"
     ]
   },
-  "lords-prayer-and-to-spirit-001": {
-    "arabic": "ولِرُوحِكَ أيضاً",
-    "translation": "And to thy spirit",
-    "literal": "and to your spirit also",
-    "tags": [
-      "lord's-prayer",
-      "response",
-      "section: The Lord's Prayer"
-    ]
-  },
-  "lords-prayer-father-son-spirit-001": {
-    "arabic": "أيُّها الآبُ والإبْنُ والرُّوحُ القُدُس",
-    "translation": "of the Father and of the Son and of the Holy Spirit",
-    "literal": "O Father and Son and Holy Spirit",
-    "tags": [
-      "doxology",
-      "lord's-prayer",
-      "section: The Lord's Prayer"
-    ]
-  },
   "lords-prayer-thine-kingdom-001": {
     "arabic": "لأنَّ لَكَ المُلكَ والقُدْرَةَ والمَجْدَ",
     "translation": "For thine is the kingdom and the power and the glory",
@@ -9962,7 +10039,9 @@ const phrases = {
     "literal": "O Father and Son and Holy Spirit",
     "tags": [
       "doxology",
+      "lord's-prayer",
       "section: Hymn to the Theotokos",
+      "section: The Lord's Prayer",
       "theotokos"
     ]
   },
@@ -10139,7 +10218,7 @@ const phrases = {
   },
   "theotokos-of-present-001": {
     "arabic": "مِنَ الحاضِرِينَ",
-    "translation": "of the people here present",
+    "translation": "And of the people here present",
     "literal": "of those present",
     "tags": [
       "commemoration",
@@ -10328,9 +10407,20 @@ const phrases = {
     ]
   },
   "theotokos-clergy-orders-001": {
-    "arabic": "وجَمِيعَ الكَهَنَةِ والشَّمامِسَةِ الخُدّامِ بالمَسِيح",
-    "translation": "of all the presbytery, the diaconate in Christ",
-    "literal": "and all the priests and deacons serving in Christ",
+    "arabic": "وجَمِيعَ الكَهَنَةِ",
+    "translation": "of all the presbytery",
+    "literal": "and all the priests",
+    "tags": [
+      "commemoration",
+      "quiet",
+      "section: Hymn to the Theotokos",
+      "theotokos"
+    ]
+  },
+  "theotokos-deacons-in-christ-001": {
+    "arabic": "والشَّمامِسَةِ الخُدّامِ بالمَسِيح",
+    "translation": "the diaconate in Christ",
+    "literal": "and the deacons serving in Christ",
     "tags": [
       "commemoration",
       "quiet",
@@ -11123,7 +11213,10 @@ const phrases = {
     "literal": "for the forgiveness of sins",
     "tags": [
       "anaphora",
+      "baptism",
+      "creed",
       "institution",
+      "section: The Creed",
       "section: The Holy Anaphora"
     ]
   },
@@ -11343,9 +11436,9 @@ const phrases = {
     ]
   },
   "holy-anaphora-holy-holy-001": {
-    "arabic": "قُدُّوسٌ، قُدُّوسٌ، قُدُّوسٌ",
-    "translation": "Holy, Holy, Holy",
-    "literal": "holy, holy, holy",
+    "arabic": "قُدُّوسٌ",
+    "translation": "Holy",
+    "literal": "holy",
     "tags": [
       "anaphora",
       "sanctus",
@@ -11799,9 +11892,9 @@ const phrases = {
     ]
   },
   "creed-life-age-amen-001": {
-    "arabic": "وَالحَيَاةَ فِي الدَّهْرِ الآتِي. آمِينَ",
-    "translation": "and the life of the world to come. Amen",
-    "literal": "and life in the age to come. Amen",
+    "arabic": "وَالحَيَاةَ فِي الدَّهْرِ الآتِي",
+    "translation": "and the life of the world to come",
+    "literal": "and life in the age to come",
     "tags": [
       "creed",
       "section: The Creed"
@@ -11814,16 +11907,6 @@ const phrases = {
     "tags": [
       "creed",
       "resurrection",
-      "section: The Creed"
-    ]
-  },
-  "creed-remission-sins-001": {
-    "arabic": "لِمَغْفِرَةِ الخَطَايَا",
-    "translation": "for the remission of sins",
-    "literal": "for the forgiveness of sins",
-    "tags": [
-      "baptism",
-      "creed",
       "section: The Creed"
     ]
   },
@@ -11879,7 +11962,7 @@ const phrases = {
   },
   "creed-worshipped-glorified-001": {
     "arabic": "الَّذِي هُوَ مَعَ الآبِ وَالإِبْنِ",
-    "translation": "who with the Father and the Son together is worshipped and glorified",
+    "translation": "who with the Father and the Son",
     "literal": "who is with the Father and the Son",
     "tags": [
       "creed",
@@ -12106,7 +12189,7 @@ const phrases = {
   "creed-begotten-father-001": {
     "arabic": "المَوْلُودِ مِنَ الآبِ قَبْلَ كُلِّ الدُّهُورِ",
     "translation": "Begotten of the Father before all worlds",
-    "literal": "born of the Father before all ages",
+    "literal": "Begotten of the Father before all ages",
     "tags": [
       "christology",
       "creed",
@@ -12116,7 +12199,7 @@ const phrases = {
   "creed-son-only-begotten-001": {
     "arabic": "إِبْنِ اللهِ الوَحِيدِ",
     "translation": "the Son of God, the only-begotten",
-    "literal": "the only Son of God",
+    "literal": "the only-begotten Son of God",
     "tags": [
       "christology",
       "creed",
@@ -12189,9 +12272,9 @@ const phrases = {
     ]
   },
   "supplication-deacon-doors-001": {
-    "arabic": "الأَبْوَابُ، الأَبْوَابُ",
-    "translation": "The doors. The doors",
-    "literal": "The doors, the doors",
+    "arabic": "الأَبْوَابُ",
+    "translation": "The doors",
+    "literal": "The doors",
     "tags": [
       "litany-of-supplication",
       "section: The Litany of Supplication"
@@ -12998,8 +13081,12 @@ const phrases = {
     "literal": "the angelic ranks surround him",
     "tags": [
       "angelic-hosts",
+      "cherubic-hymn",
+      "deacon",
+      "faithful",
       "great-entrance",
       "hymn",
+      "section: The Cherubic Hymn",
       "section: The Great Entrance"
     ]
   },
@@ -13927,20 +14014,6 @@ const phrases = {
       "hymn",
       "section: The Cherubic Hymn",
       "section: The Great Entrance"
-    ]
-  },
-  "cherubic-angelic-hosts-001": {
-    "arabic": "تَحُفُّ بِهِ المَرَاتِبُ المَلَائِكِيَّةُ",
-    "translation": "escorted by the angelic hosts",
-    "literal": "the angelic ranks surround him",
-    "tags": [
-      "angelic-hosts",
-      "cherubic-hymn",
-      "deacon",
-      "faithful",
-      "hymn",
-      "section: Psalm 103",
-      "section: The Cherubic Hymn"
     ]
   },
   "cherubic-good-life-giving-001": {
@@ -15369,17 +15442,6 @@ const phrases = {
       "section: The Entrance"
     ]
   },
-  "trisagion-to-father-son-holy-spirit-001": {
-    "arabic": "لِلآبِ وَالإِبْنِ وَالرُّوحِ القُدُسِ",
-    "translation": "to the Father and to the Son and to the Holy Spirit",
-    "literal": "to the Father and the Son and the Holy Spirit",
-    "tags": [
-      "doxology",
-      "section: Thrice-Holy Hymn",
-      "trinity",
-      "trisagion"
-    ]
-  },
   "trisagion-adorned-gifts-001": {
     "arabic": "وَزَيَّنَهُ بِجَمِيعِ مَوَاهِبِهِ",
     "translation": "and hast adorned him with thine every gift",
@@ -15842,10 +15904,25 @@ const phrases = {
     "tags": [
       "beginner",
       "course",
+      "departed",
+      "gospel",
+      "litany-of-supplication",
+      "litany-of-thanksgiving",
+      "lord-have-mercy",
       "mercy",
       "petition",
+      "prayer-behind-amvon",
+      "repeated",
+      "response",
       "reusable",
-      "section: Litany of Peace"
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: Prayer Before the Gospel",
+      "section: The Entrance Hymn",
+      "section: The Litany of Supplication",
+      "section: The Litany of Thanksgiving",
+      "section: The Little Litany After the Second Antiphon",
+      "section: The Prayer Behind the Amvon"
     ]
   },
   "jesus-prayer-jesus-christ-001": {
@@ -15916,7 +15993,7 @@ const phrases = {
     ]
   },
   "vocative-o-lord-001": {
-    "arabic": "يا رَبُّ",
+    "arabic": "يَا رَبُّ",
     "translation": "Lord",
     "literal": "O Lord",
     "tags": [
@@ -15924,10 +16001,24 @@ const phrases = {
       "all-holy-trinity",
       "beginner",
       "course",
+      "departed",
+      "gospel",
       "jesus-prayer",
+      "litany-of-supplication",
+      "litany-of-thanksgiving",
       "lord-have-mercy",
+      "prayer-behind-amvon",
+      "repeated",
+      "response",
       "reusable",
       "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: Prayer Before the Gospel",
+      "section: The Entrance Hymn",
+      "section: The Litany of Supplication",
+      "section: The Litany of Thanksgiving",
+      "section: The Little Litany After the Second Antiphon",
+      "section: The Prayer Behind the Amvon",
       "vocative"
     ]
   },
@@ -15939,18 +16030,6 @@ const phrases = {
       "all-holy-trinity",
       "beginner",
       "course"
-    ]
-  },
-  "all-holy-trinity-have-mercy-001": {
-    "arabic": "ارْحَمنا",
-    "translation": "have mercy on us",
-    "literal": "have mercy on us",
-    "tags": [
-      "all-holy-trinity",
-      "beginner",
-      "course",
-      "mercy",
-      "petition"
     ]
   },
   "all-holy-trinity-001": {
@@ -16225,12 +16304,13 @@ const phrases = {
       "section: The Reading of the Gospel"
     ]
   },
-  "glory-to-thee-lord-001": {
-    "arabic": "المَجْدُ لَكَ يَا رَبُّ، المَجْدُ لَكَ",
-    "translation": "Glory to thee O Lord Glory to thee",
-    "literal": "Glory to you O Lord Glory to you",
+  "to-thee-001": {
+    "arabic": "لَكَ",
+    "translation": "to thee",
+    "literal": "to thee",
     "tags": [
       "glory",
+      "repeated",
       "response",
       "section: The Reading of the Gospel"
     ]
@@ -16250,7 +16330,9 @@ const phrases = {
     "translation": "And to thy spirit",
     "literal": "And to your spirit also",
     "tags": [
+      "lord's-prayer",
       "response",
+      "section: The Lord's Prayer",
       "section: The Peace",
       "section: The Reading of the Gospel"
     ]
@@ -16563,9 +16645,19 @@ const phrases = {
     "translation": "have mercy on us",
     "literal": "have mercy on us",
     "tags": [
+      "all-holy-trinity",
+      "beginner",
+      "course",
+      "departed",
+      "dismissal",
+      "fervent-supplication",
       "hymn",
+      "litany",
       "mercy",
+      "petition",
       "repeated",
+      "section: The Dismissal",
+      "section: The Litany of Fervent Supplication",
       "section: Thrice-Holy Hymn",
       "trisagion"
     ]
@@ -17199,7 +17291,9 @@ const phrases = {
     "tags": [
       "doxology",
       "repeated",
+      "section: Psalm 103",
       "section: The First Antiphon",
+      "section: The Prayer Behind the Amvon",
       "section: The Second Antiphon",
       "section: Thrice-Holy Hymn",
       "trinity"
@@ -17211,8 +17305,14 @@ const phrases = {
     "literal": "Glory",
     "tags": [
       "doxology",
+      "glory",
+      "prayer-behind-amvon",
+      "response",
       "repeated",
+      "section: Psalm 103",
+      "section: The Reading of the Gospel",
       "section: The First Antiphon",
+      "section: The Prayer Behind the Amvon",
       "section: The Second Antiphon",
       "section: Thrice-Holy Hymn"
     ]
@@ -18175,21 +18275,6 @@ const phrases = {
       "vespers"
     ]
   },
-  "doxology-father-son-spirit-001": {
-    "arabic": "أَيُّهَا الآبُ وَالابْنُ وَالرُّوحُ الْقُدُسُ",
-    "translation": "to the Father and to the Son and to the Holy Spirit",
-    "literal": "O Father and Son and Holy Spirit",
-    "tags": [
-      "doxology",
-      "repeated",
-      "section: Litany of Peace",
-      "section: Little Litany After the First Antiphon",
-      "section: The Entrance",
-      "section: The Entrance Hymn",
-      "section: The Little Litany After the Second Antiphon",
-      "trinity"
-    ]
-  },
   "doxology-glory-honor-worship-001": {
     "arabic": "كُلُّ مَجْدٍ وَإِكْرَامٍ وَسُجُودٍ",
     "translation": "all glory honor and worship",
@@ -18290,6 +18375,7 @@ const phrases = {
     "tags": [
       "catechumens",
       "cherubic-hymn",
+      "creed",
       "doxology",
       "faithful",
       "great-entrance",
@@ -18302,6 +18388,7 @@ const phrases = {
       "section: Little Litany After the First Antiphon",
       "section: Prayer Before the Gospel",
       "section: The Cherubic Hymn",
+      "section: The Creed",
       "section: The Entrance",
       "section: The Entrance Hymn",
       "section: The First Antiphon",
@@ -18368,14 +18455,18 @@ const phrases = {
     ]
   },
   "o-god-001": {
-    "arabic": "يا الله",
+    "arabic": "يَا اللهُ",
     "translation": "O God",
     "literal": "O God",
     "tags": [
       "address",
+      "departed",
+      "fervent-supplication",
+      "litany",
       "repeated",
       "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
+      "section: The Litany of Fervent Supplication",
       "section: The Little Litany After the Second Antiphon"
     ]
   },
@@ -18430,7 +18521,9 @@ const phrases = {
     "translation": "save us",
     "literal": "save us",
     "tags": [
+      "dismissal",
       "petition",
+      "section: The Dismissal",
       "section: The Entrance Hymn",
       "section: The Second Antiphon"
     ]
@@ -18611,29 +18704,6 @@ const phrases = {
       "section: Litany of Peace"
     ]
   },
-  "lord-have-mercy-001": {
-    "arabic": "يَا رَبُّ ارْحَمْ",
-    "translation": "Lord, have mercy",
-    "literal": "O Lord have mercy",
-    "tags": [
-      "departed",
-      "gospel",
-      "litany-of-supplication",
-      "litany-of-thanksgiving",
-      "mercy",
-      "prayer-behind-amvon",
-      "repeated",
-      "response",
-      "section: Litany of Peace",
-      "section: Little Litany After the First Antiphon",
-      "section: Prayer Before the Gospel",
-      "section: The Entrance Hymn",
-      "section: The Litany of Supplication",
-      "section: The Litany of Thanksgiving",
-      "section: The Little Litany After the Second Antiphon",
-      "section: The Prayer Behind the Amvon"
-    ]
-  },
   "petition-001": {
     "arabic": "إِلَى الرَّبِّ نَطْلُب",
     "translation": "let us pray to the Lord",
@@ -18689,7 +18759,7 @@ const phrases = {
   },
   "section-litany-of-peace": {
     "arabic": "الطِّلْبَةُ السَّلامِيَّةُ الكُبْرَى",
-    "translation": "Litany of Peace",
+    "translation": "The Litany of Peace",
     "literal": "The Great Litany of Peace",
     "tags": [
       "litany",
@@ -18741,8 +18811,13 @@ const phrases = {
       "litany-of-thanksgiving",
       "prayer-behind-amvon",
       "priest-prayer",
+      "repeated",
+      "section: Litany of Peace",
+      "section: Little Litany After the First Antiphon",
+      "section: The Entrance",
       "section: The Entrance Hymn",
       "section: The Litany of Thanksgiving",
+      "section: The Little Litany After the Second Antiphon",
       "section: The Prayer Behind the Amvon",
       "section: The Prayer of the First Litany of the Faithful",
       "section: The Prayer of the Litany for the Catechumens",

@@ -110,6 +110,7 @@ export function getLiturgyCoverageAnalysis({
     totalPhraseOccurrences,
     totalTokenOccurrences,
     uniquePhraseCount: rows.length,
+    uniquePhraseIds: new Set(rows.map(row => row.id)),
     countedSegmentRefs,
     excludedSegmentRefs,
     tokenMilestones: getThresholds(byTokens, totalTokenOccurrences, 'tokenOccurrences'),

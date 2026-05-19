@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import './course.css';
 import exercises from '../../data/course/exercises.js';
 import { getLiturgyCoverageAnalysis } from '../../utils/liturgyCoverage.js';
@@ -7,9 +7,7 @@ function formatCoveragePercent(value) {
   return `${Math.round(value * 100)}%`;
 }
 
-const liturgyCoverage = getLiturgyCoverageAnalysis();
 const COVERAGE_PHRASES_PER_PAGE = 10;
-const COVERAGE_PAGE_COUNT = 5;
 
 function getExercisePhraseIds(exerciseId) {
   return (exercises[exerciseId]?.lines || []).flatMap(line => (
@@ -21,7 +19,7 @@ function getExercisePhraseIds(exerciseId) {
   ));
 }
 
-function getCoursePhraseProgress(units, lessons) {
+function getCoursePhraseProgress(units, lessons, liturgyPhraseIds = new Set()) {
   const seenPhraseIds = new Set();
   const sortedUnits = [...units].sort((a, b) => a.display_order - b.display_order);
 
@@ -37,6 +35,7 @@ function getCoursePhraseProgress(units, lessons) {
 
         (lesson.exercises || []).forEach(item => {
           getExercisePhraseIds(item.exercise_id).forEach(phraseId => {
+            if (!liturgyPhraseIds.has(phraseId)) return;
             lessonPhraseIds.add(phraseId);
             unitPhraseIds.add(phraseId);
             if (!seenPhraseIds.has(phraseId)) {
@@ -74,18 +73,15 @@ function getCoursePhraseProgress(units, lessons) {
 
 export default function CourseOverview({ units, lessons, selectedLessonId, onSelectExercise }) {
   const [coveragePage, setCoveragePage] = useState(0);
-  const coursePhraseProgress = useMemo(
-    () => getCoursePhraseProgress(units, lessons),
-    [units, lessons]
+  const liturgyCoverage = getLiturgyCoverageAnalysis();
+  const coursePhraseProgress = getCoursePhraseProgress(units, lessons, liturgyCoverage.uniquePhraseIds);
+  const coveragePageCount = Math.max(1, Math.ceil(liturgyCoverage.topByPhraseOccurrences.length / COVERAGE_PHRASES_PER_PAGE));
+  const clampedCoveragePage = Math.min(coveragePage, coveragePageCount - 1);
+  const coverageRows = liturgyCoverage.topByPhraseOccurrences.slice(
+    clampedCoveragePage * COVERAGE_PHRASES_PER_PAGE,
+    (clampedCoveragePage + 1) * COVERAGE_PHRASES_PER_PAGE
   );
-  const coverageRows = useMemo(
-    () => liturgyCoverage.topByPhraseOccurrences.slice(
-      coveragePage * COVERAGE_PHRASES_PER_PAGE,
-      (coveragePage + 1) * COVERAGE_PHRASES_PER_PAGE
-    ),
-    [coveragePage]
-  );
-  const firstCoverageRank = coveragePage * COVERAGE_PHRASES_PER_PAGE + 1;
+  const firstCoverageRank = clampedCoveragePage * COVERAGE_PHRASES_PER_PAGE + 1;
   const lastCoverageRank = firstCoverageRank + coverageRows.length - 1;
   return (
     <main className="lp-page" dir="ltr">
@@ -122,7 +118,7 @@ export default function CourseOverview({ units, lessons, selectedLessonId, onSel
                 <span>{formatCoveragePercent(liturgyCoverage.uniquePhraseCount ? unit.cumulativePhraseCount / liturgyCoverage.uniquePhraseCount : 0)} of Liturgy</span>
               </div>
               <div className="lp-course-phrase-progress-meter" aria-hidden="true">
-                <span style={{ width: `${liturgyCoverage.uniquePhraseCount ? (unit.cumulativePhraseCount / liturgyCoverage.uniquePhraseCount) * 100 : 0}%` }} />
+                <span style={{ width: `${liturgyCoverage.uniquePhraseCount ? Math.min(100, (unit.cumulativePhraseCount / liturgyCoverage.uniquePhraseCount) * 100) : 0}%` }} />
               </div>
               <table className="lp-course-coverage-table lp-course-phrase-progress-table">
                 <thead>
@@ -186,34 +182,36 @@ export default function CourseOverview({ units, lessons, selectedLessonId, onSel
           </tbody>
         </table>
         <nav className="lp-course-coverage-pagination" aria-label="Highest-coverage phrases pages">
+          <div className="lp-course-coverage-pagination-controls">
+            <button
+              type="button"
+              onClick={() => setCoveragePage(page => Math.max(0, page - 1))}
+              disabled={clampedCoveragePage === 0}
+            >
+              Previous
+            </button>
+            {Array.from({ length: coveragePageCount }, (_, pageIndex) => (
+              <button
+                key={pageIndex}
+                type="button"
+                onClick={() => setCoveragePage(pageIndex)}
+                className={clampedCoveragePage === pageIndex ? 'active' : ''}
+                aria-current={clampedCoveragePage === pageIndex ? 'page' : undefined}
+              >
+                {pageIndex + 1}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={() => setCoveragePage(page => Math.min(coveragePageCount - 1, page + 1))}
+              disabled={clampedCoveragePage === coveragePageCount - 1}
+            >
+              Next
+            </button>
+          </div>
           <span>
             {firstCoverageRank}-{lastCoverageRank} of {liturgyCoverage.topByPhraseOccurrences.length}
           </span>
-          <button
-            type="button"
-            onClick={() => setCoveragePage(page => Math.max(0, page - 1))}
-            disabled={coveragePage === 0}
-          >
-            Previous
-          </button>
-          {Array.from({ length: COVERAGE_PAGE_COUNT }, (_, pageIndex) => (
-            <button
-              key={pageIndex}
-              type="button"
-              onClick={() => setCoveragePage(pageIndex)}
-              className={coveragePage === pageIndex ? 'active' : ''}
-              aria-current={coveragePage === pageIndex ? 'page' : undefined}
-            >
-              {pageIndex + 1}
-            </button>
-          ))}
-          <button
-            type="button"
-            onClick={() => setCoveragePage(page => Math.min(COVERAGE_PAGE_COUNT - 1, page + 1))}
-            disabled={coveragePage === COVERAGE_PAGE_COUNT - 1}
-          >
-            Next
-          </button>
         </nav>
       </section>
 
