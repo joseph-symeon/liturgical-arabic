@@ -18,9 +18,9 @@ const lessons = [
   },
   {
     "id": "lesson-come-let-us-worship",
-    "unit_id": "unit-2",
+    "unit_id": "daily-seasonal-prayers",
     "title": "Come, let us worship",
-    "display_order": 2,
+    "display_order": 1,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -34,7 +34,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "The Hymn to the Theotokos",
     "title_phrase": "section-hymn-to-the-theotokos",
-    "display_order": 3,
+    "display_order": 2,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -69,7 +69,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "The Antiphons",
     "title_phrase": "section-antiphons",
-    "display_order": 4,
+    "display_order": 3,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -504,47 +504,12 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "exercise_id": "communion-hymns-praise-lord",
-        "activity_policy": "standard"
-      },
-      {
-        "exercise_id": "communion-hymns-with-fear",
-        "activity_policy": "standard"
-      },
-      {
-        "exercise_id": "communion-hymns-blessed-coming",
-        "activity_policy": "standard"
-      },
-      {
+        "title": "Communion Hymns",
         "exercise_id": "communion-hymns-summary",
         "activity_policy": "standard"
-      }
-    ]
-  },
-  {
-    "id": "lesson-post-communion-hymns",
-    "unit_id": "unit-4",
-    "title": "The Post Communion Hymns",
-    "display_order": 5,
-    "quizlet_deck_url": null,
-    "exercises": [
-      {
-        "exercise_id": "post-communion-hymns-save-people",
-        "activity_policy": "standard"
       },
       {
-        "exercise_id": "post-communion-hymns-seen-light",
-        "activity_policy": "standard"
-      },
-      {
-        "exercise_id": "post-communion-hymns-be-exalted",
-        "activity_policy": "standard"
-      },
-      {
-        "exercise_id": "post-communion-hymns-mouths-filled",
-        "activity_policy": "standard"
-      },
-      {
+        "title": "Post Communion Hymns",
         "exercise_id": "post-communion-hymns-summary",
         "activity_policy": "standard"
       }
@@ -555,7 +520,7 @@ const lessons = [
     "unit_id": "unit-4",
     "title": "The Litany of Thanksgiving",
     "title_phrase": "section-litany-of-thanksgiving",
-    "display_order": 6,
+    "display_order": 5,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -589,7 +554,7 @@ const lessons = [
     "unit_id": "unit-4",
     "title": "The Prayer Behind the Amvon",
     "title_phrase": "section-prayer-behind-amvon",
-    "display_order": 7,
+    "display_order": 6,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -619,7 +584,7 @@ const lessons = [
     "unit_id": "unit-4",
     "title": "The Dismissal",
     "title_phrase": "section-dismissal",
-    "display_order": 8,
+    "display_order": 7,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -641,7 +606,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "The Entrance",
     "title_phrase": "section-entrance",
-    "display_order": 6,
+    "display_order": 5,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -767,7 +732,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "Little Litanies",
     "title_phrase": "section-little-litany",
-    "display_order": 5,
+    "display_order": 4,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -801,7 +766,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "Liturgy of the Word",
     "title_phrase": "section-liturgy-word",
-    "display_order": 7,
+    "display_order": 6,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -823,7 +788,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "The Cherubic Hymn",
     "title_phrase": "section-cherubic-hymn",
-    "display_order": 8,
+    "display_order": 7,
     "quizlet_deck_url": null,
     "exercises": [
       {

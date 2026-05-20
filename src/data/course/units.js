@@ -18,6 +18,11 @@ const units = [
     "title": "Unit 4"
   },
   {
+    "id": "daily-seasonal-prayers",
+    "display_order": 5,
+    "title": "Daily & Seasonal Prayers"
+  },
+  {
     "id": "unit-1",
     "display_order": 1,
     "title": "Unit 1"

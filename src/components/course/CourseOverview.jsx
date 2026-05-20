@@ -8,6 +8,7 @@ function formatCoveragePercent(value) {
 }
 
 const COVERAGE_PHRASES_PER_PAGE = 10;
+const COURSE_OVERVIEW_OMITTED_UNIT_IDS = new Set(['daily-seasonal-prayers']);
 
 function getExercisePhraseIds(exerciseId) {
   return (exercises[exerciseId]?.lines || []).flatMap(line => (
@@ -21,7 +22,9 @@ function getExercisePhraseIds(exerciseId) {
 
 function getCoursePhraseProgress(units, lessons, liturgyPhraseIds = new Set()) {
   const seenPhraseIds = new Set();
-  const sortedUnits = [...units].sort((a, b) => a.display_order - b.display_order);
+  const sortedUnits = [...units]
+    .filter(unit => !COURSE_OVERVIEW_OMITTED_UNIT_IDS.has(unit.id))
+    .sort((a, b) => a.display_order - b.display_order);
 
   const unitRows = sortedUnits.map(unit => {
     const unitNewPhraseIds = new Set();
@@ -49,15 +52,18 @@ function getCoursePhraseProgress(units, lessons, liturgyPhraseIds = new Set()) {
         return {
           id: lesson.id,
           title: lesson.title,
+          exerciseCount: lesson.exercises?.length ?? 0,
           newPhraseCount: lessonNewPhraseIds.size,
           uniquePhraseCount: lessonPhraseIds.size
         };
       });
+    const unitExerciseCount = lessonRows.reduce((total, lesson) => total + lesson.exerciseCount, 0);
 
     return {
       id: unit.id,
       title: unit.title,
       displayOrder: unit.display_order,
+      exerciseCount: unitExerciseCount,
       newPhraseCount: unitNewPhraseIds.size,
       uniquePhraseCount: unitPhraseIds.size,
       cumulativePhraseCount: seenPhraseIds.size,
@@ -124,6 +130,7 @@ export default function CourseOverview({ units, lessons, selectedLessonId, onSel
                 <thead>
                   <tr>
                     <th>Lesson</th>
+                    <th>{unit.exerciseCount.toLocaleString()} {unit.exerciseCount === 1 ? 'exercise' : 'exercises'}</th>
                     <th>{unit.newPhraseCount.toLocaleString()} new phrases</th>
                   </tr>
                 </thead>
@@ -144,6 +151,7 @@ export default function CourseOverview({ units, lessons, selectedLessonId, onSel
                             {lesson.title}
                           </a>
                         </td>
+                        <td>{lesson.exerciseCount.toLocaleString()}</td>
                         <td>{lesson.newPhraseCount.toLocaleString()}</td>
                       </tr>
                     );
