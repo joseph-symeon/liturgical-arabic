@@ -654,7 +654,8 @@ export const exerciseDefinitions = [
     ],
     "phrase_ids": [
       "theotokos-hymn-meet-bless-001",
-      "theotokos-hymn-bless-theotokos-001"
+      "theotokos-hymn-we-bless-001",
+      "theotokos-001"
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
@@ -704,7 +705,8 @@ export const exerciseDefinitions = [
     "phrase_ids": [
       "theotokos-hymn-without-corruption-001",
       "theotokos-hymn-bear-word-001",
-      "theotokos-hymn-truly-magnify-001",
+      "theotokos-hymn-truly-you-are-001",
+      "theotokos-nominative-001",
       "theotokos-hymn-we-magnify-001"
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",

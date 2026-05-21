@@ -10578,10 +10578,20 @@ const phrases = {
       "theotokos"
     ]
   },
-  "theotokos-hymn-truly-magnify-001": {
-    "arabic": "حقاً إنَّكِ والِدَةُ الإِلَه",
-    "translation": "and art truly Theotokos",
-    "literal": "truly thou art Theotokos",
+  "theotokos-hymn-truly-you-are-001": {
+    "arabic": "حقاً إنَّكِ",
+    "translation": "and art truly",
+    "literal": "truly thou art",
+    "tags": [
+      "hymn",
+      "section: Hymn to the Theotokos",
+      "theotokos"
+    ]
+  },
+  "theotokos-nominative-001": {
+    "arabic": "والِدَةُ الإِلَه",
+    "translation": "Theotokos",
+    "literal": "Bearer of God",
     "tags": [
       "hymn",
       "section: Hymn to the Theotokos",
@@ -10621,7 +10631,7 @@ const phrases = {
   "theotokos-hymn-more-honorable-001": {
     "arabic": "يا مَنْ هِيَ أكْرَمُ مِنَ الشّيرُوبِيم",
     "translation": "More honorable than the cherubim",
-    "literal": "O thou who art more honorable than the Cherubim",
+    "literal": "O she who is more honorable than the Cherubim",
     "tags": [
       "hymn",
       "section: Hymn to the Theotokos",
@@ -10651,17 +10661,17 @@ const phrases = {
   "theotokos-hymn-ever-blessed-001": {
     "arabic": "الدائِمَةَ الطُّوبى",
     "translation": "the ever-blessed",
-    "literal": "ever blessed",
+    "literal": "the perpetual blessedness",
     "tags": [
       "hymn",
       "section: Hymn to the Theotokos",
       "theotokos"
     ]
   },
-  "theotokos-hymn-bless-theotokos-001": {
-    "arabic": "نُغَبِّطُ والِدَةَ الإِلَهِ",
-    "translation": "to bless thee, O Theotokos",
-    "literal": "we bless the Mother of God",
+  "theotokos-hymn-we-bless-001": {
+    "arabic": "نُغَبِّطُ",
+    "translation": "to bless thee",
+    "literal": "we bless",
     "tags": [
       "hymn",
       "section: Hymn to the Theotokos",
@@ -17084,7 +17094,7 @@ const phrases = {
   "theotokos-001": {
     "arabic": "وَالِدَةَ الإِلَهِ",
     "translation": "the Theotokos",
-    "literal": "Mother of God",
+    "literal": "Bearer of God",
     "tags": [
       "repeated",
       "section: Litany of Peace",

@@ -2857,8 +2857,13 @@ export const alignmentDefinitions = [
             "end_seconds": 35.18
           },
           {
-            "phrase_id": "theotokos-hymn-bless-theotokos-001",
+            "phrase_id": "theotokos-hymn-we-bless-001",
             "start_seconds": 35.18,
+            "end_seconds": 41.75
+          },
+          {
+            "phrase_id": "theotokos-001",
+            "start_seconds": 41.75,
             "end_seconds": 50.17
           },
           {
@@ -2897,8 +2902,13 @@ export const alignmentDefinitions = [
             "end_seconds": 127.96
           },
           {
-            "phrase_id": "theotokos-hymn-truly-magnify-001",
+            "phrase_id": "theotokos-hymn-truly-you-are-001",
             "start_seconds": 132.28,
+            "end_seconds": 136.8
+          },
+          {
+            "phrase_id": "theotokos-nominative-001",
+            "start_seconds": 136.8,
             "end_seconds": 143.04
           },
           {

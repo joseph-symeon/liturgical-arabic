@@ -3209,7 +3209,9 @@ const sourceSegments = {
       {"text": " "},
       {"phrase_id": "theotokos-hymn-bear-word-001"},
       {"text": "، "},
-      {"phrase_id": "theotokos-hymn-truly-magnify-001"},
+      {"phrase_id": "theotokos-hymn-truly-you-are-001"},
+      {"text": " "},
+      {"phrase_id": "theotokos-nominative-001"},
       {"text": " "},
       {"phrase_id": "theotokos-hymn-we-magnify-001"},
       {"text": "."}
@@ -11325,7 +11327,13 @@ const sourceSegments = {
         "text": " "
       },
       {
-        "phrase_id": "theotokos-hymn-bless-theotokos-001"
+        "phrase_id": "theotokos-hymn-we-bless-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-001"
       },
       {
         "text": " ",
@@ -11376,7 +11384,13 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "theotokos-hymn-truly-magnify-001"
+        "phrase_id": "theotokos-hymn-truly-you-are-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-nominative-001"
       },
       {
         "text": "، ",
