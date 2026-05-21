@@ -987,15 +987,18 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "text": "("
+        "text": "(",
+        "tags": [
+          "display-rubric"
+        ]
       },
       {
-        "phrase_id": "ordinary-sundays-label-001"
+        "phrase_id": "entrance-ordinary-sundays-label-001"
       },
       {
         "text": ") ",
         "tags": [
-          "rubric"
+          "display-rubric"
         ]
       },
       {
@@ -1077,16 +1080,16 @@ const sourceSegments = {
       {
         "text": "(",
         "tags": [
-          "rubric"
+          "display-rubric"
         ]
       },
       {
-        "phrase_id": "weekdays-label-001"
+        "phrase_id": "entrance-weekdays-label-001"
       },
       {
         "text": ") ",
         "tags": [
-          "rubric"
+          "display-rubric"
         ]
       },
       {

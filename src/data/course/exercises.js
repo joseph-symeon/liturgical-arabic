@@ -87,6 +87,10 @@ export const exerciseDefinitions = [
       "course-entrance-hymn-wondrous-weekdays",
       "entrance-hymn-risen-alleluia"
     ],
+    "include_rubric_phrase_ids": [
+      "entrance-ordinary-sundays-label-001",
+      "entrance-weekdays-label-001"
+    ],
     "media": SECOND_ANTIPHON_MEDIA
   },
   {
@@ -457,6 +461,10 @@ export const exerciseDefinitions = [
       "course-entrance-hymn-risen-sundays",
       "course-entrance-hymn-wondrous-weekdays",
       "entrance-hymn-risen-alleluia"
+    ],
+    "include_rubric_phrase_ids": [
+      "entrance-ordinary-sundays-label-001",
+      "entrance-weekdays-label-001"
     ]
   },
   {
@@ -483,6 +491,10 @@ export const exerciseDefinitions = [
       "entrance-hymn-holy-art-benediction",
       "entrance-hymn-deacon-ages",
       "entrance-hymn-final-amen"
+    ],
+    "include_rubric_phrase_ids": [
+      "entrance-ordinary-sundays-label-001",
+      "entrance-weekdays-label-001"
     ],
     "show_speakers": true
   },
