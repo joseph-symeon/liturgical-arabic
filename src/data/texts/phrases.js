@@ -1848,11 +1848,12 @@ const phrases = {
       "vespers"
     ]
   },
-  "vespers-our-god-hope-glory-001": {
-    "arabic": "يا إلهَنا وَرَجاءَنا لَكَ المَجْد",
-    "translation": "O our God and our Hope, glory to Thee",
-    "literal": "O our God and our hope, to you be glory",
+  "vespers-our-god-hope-address-001": {
+    "arabic": "يا إلهَنا وَرَجاءَنا",
+    "translation": "O our God and our Hope",
+    "literal": "O our God and our hope",
     "tags": [
+      "address",
       "doxology",
       "section: Psalm 103",
       "vespers"
@@ -3787,16 +3788,6 @@ const phrases = {
     "literal": "(three times)",
     "tags": [
       "rubric",
-      "section: First Prayer",
-      "section: Psalm 103",
-      "thanksgiving-prayers"
-    ]
-  },
-  "thanksgiving-after-communion-glory-001": {
-    "arabic": "المَجْدُ لَكَ يا الله",
-    "translation": "Glory to thee, O God",
-    "literal": "glory to you, O God",
-    "tags": [
       "section: First Prayer",
       "section: Psalm 103",
       "thanksgiving-prayers"
@@ -7044,15 +7035,6 @@ const phrases = {
       "section-title"
     ]
   },
-  "section-psalter": {
-    "arabic": "المَزَامِيرُ",
-    "translation": "The Psalter",
-    "literal": "The Psalms",
-    "tags": [
-      "psalm",
-      "section-title"
-    ]
-  },
   "homepage-psalter-seventy-001": {
     "arabic": "حَسَبَ السَّبْعِينَ",
     "translation": "According to the Seventy",
@@ -7070,15 +7052,6 @@ const phrases = {
     "tags": [
       "homepage",
       "psalm",
-      "title"
-    ]
-  },
-  "homepage-liturgical-arabic-001": {
-    "arabic": "العَرَبِيَّةُ اللِّيتُورْجِيَّة",
-    "translation": "Liturgical Arabic",
-    "literal": "Liturgical Arabic",
-    "tags": [
-      "homepage",
       "title"
     ]
   },
@@ -8803,15 +8776,6 @@ const phrases = {
     "arabic": "وَأَعْتَرِفُ",
     "translation": "and I confess",
     "literal": "and I confess",
-    "tags": [
-      "pre-communion-prayers",
-      "section: The Pre-Communion Prayers"
-    ]
-  },
-  "pre-communion-believe-confess-001": {
-    "arabic": "أُؤْمِنُ، يَا رَبُّ، وَأَعْتَرِفُ",
-    "translation": "I believe, O Lord, and I confess",
-    "literal": "I believe, O Lord, and confess",
     "tags": [
       "pre-communion-prayers",
       "section: The Pre-Communion Prayers"
@@ -15559,15 +15523,6 @@ const phrases = {
       "title"
     ]
   },
-  "homepage-prayers-anaphora-001": {
-    "arabic": "مَعَ صَلَوَاتٍ وَأَنَافُورَا (تَقْدِمَةِ القَرَابِينِ) لِلْقُدّاسِ الإِلٰهِيّ",
-    "translation": "with the Prayers and Anaphora of the Divine Liturgy",
-    "literal": "with prayers and anaphora (offering of the gifts) for the Divine Liturgy",
-    "tags": [
-      "homepage",
-      "title"
-    ]
-  },
   "homepage-john-chrysostom-001": {
     "arabic": "لِلْقِدّيسِ يُوحَنّا الذَّهَبِيِّ الفَمِ",
     "translation": "of St John Chrysostom",
@@ -15785,17 +15740,6 @@ const phrases = {
       "civil-authorities",
       "litany",
       "petition",
-      "section: Litany of Peace"
-    ]
-  },
-  "rubric-appropriate-head-state-001": {
-    "arabic": "(أَوْ رَئِيسِ الدَّوْلَةِ المُنَاسِب)",
-    "translation": "(or appropriate head of state)",
-    "literal": "or the appropriate head of state",
-    "tags": [
-      "civil-authorities",
-      "placeholder",
-      "rubric",
       "section: Litany of Peace"
     ]
   },
@@ -18423,15 +18367,6 @@ const phrases = {
       "section: The Entrance"
     ]
   },
-  "role-rubric": {
-    "arabic": "إِرْشَاد",
-    "translation": "Rubric",
-    "literal": "Instruction",
-    "tags": [
-      "role",
-      "rubric"
-    ]
-  },
   "section-second-antiphon": {
     "arabic": "الأَنْدِيفُونَةُ الثَّانِيَةُ",
     "translation": "The Second Antiphon",
@@ -18526,15 +18461,6 @@ const phrases = {
       "section: The Dismissal",
       "section: The Entrance Hymn",
       "section: The Second Antiphon"
-    ]
-  },
-  "glorified-with-father-001": {
-    "arabic": "الْمُمَجَّدَ مَعَ الْآبِ والرّوحِ الْقُدُسِ",
-    "translation": "glorified together with the Father and the Holy Spirit",
-    "literal": "glorified with the Father and the Holy Spirit",
-    "tags": [
-      "section: The Second Antiphon",
-      "trinity"
     ]
   },
   "one-of-trinity-001": {
@@ -18736,16 +18662,6 @@ const phrases = {
       "section: Litany of Peace",
       "section: Little Litany After the First Antiphon",
       "section: The Little Litany After the Second Antiphon"
-    ]
-  },
-  "title-only-begotten-son-word-of-god": {
-    "arabic": "يَا كَلِمَةَ اللّٰهِ الابْنَ الوَحِيدَ",
-    "translation": "Only begotten Son and Word of God",
-    "literal": "O Word of God the Only Begotten Son",
-    "tags": [
-      "antiphons",
-      "lesson-title",
-      "section-title"
     ]
   },
   "section-antiphons": {

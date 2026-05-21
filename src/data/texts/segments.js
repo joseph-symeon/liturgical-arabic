@@ -2059,7 +2059,19 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "thanksgiving-after-communion-glory-001"
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-thee-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "o-god-001"
       },
       {
         "text": ". "
@@ -2079,7 +2091,19 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "vespers-our-god-hope-glory-001"
+        "phrase_id": "vespers-our-god-hope-address-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-thee-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "glory-001"
       },
       {
         "text": "."
@@ -15241,7 +15265,19 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "thanksgiving-after-communion-glory-001"
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-thee-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "o-god-001"
       },
       {
         "text": ". "
