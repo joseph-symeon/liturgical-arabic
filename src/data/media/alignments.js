@@ -2868,7 +2868,7 @@ export const alignmentDefinitions = [
           },
           {
             "phrase_id": "theotokos-hymn-ever-blessed-001",
-            "start_seconds": 51.08,
+            "start_seconds": 50.9,
             "end_seconds": 58.08
           },
           {
@@ -2879,7 +2879,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "theotokos-hymn-mother-our-god-001",
             "start_seconds": 70.18,
-            "end_seconds": 78.93
+            "end_seconds": 79.3
           },
           {
             "phrase_id": "theotokos-hymn-more-honorable-001",
@@ -2899,17 +2899,17 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "theotokos-hymn-bear-word-001",
             "start_seconds": 118.1,
-            "end_seconds": 127.96
+            "end_seconds": 129.96
           },
           {
             "phrase_id": "theotokos-hymn-truly-you-are-001",
             "start_seconds": 132.28,
-            "end_seconds": 136.8
+            "end_seconds": 135.2
           },
           {
             "phrase_id": "theotokos-nominative-001",
-            "start_seconds": 136.8,
-            "end_seconds": 143.04
+            "start_seconds": 135.4,
+            "end_seconds": 145.04
           },
           {
             "phrase_id": "theotokos-hymn-we-magnify-001",
