@@ -13,6 +13,12 @@ export default function PassageActivityToolbar({
   showTextModeControls = false,
   textMode = "none",
   onTextModeChange,
+  textModeRequired = false,
+  textModeLabel = "Phrase caption text",
+  textModeOptions = [
+    ["translation", "Translation"],
+    ["literal", "Literal"]
+  ],
   hidden = false
 }) {
   const hasActivity = Boolean(activityLabel);
@@ -71,17 +77,14 @@ export default function PassageActivityToolbar({
           )}
 
           {showTextModeControls && (
-            <div className="lp-segmented-control" role="group" aria-label="Phrase caption text">
-              {[
-                ["translation", "Translation"],
-                ["literal", "Literal"]
-              ].map(([mode, label]) => (
+            <div className="lp-segmented-control" role="group" aria-label={textModeLabel}>
+              {textModeOptions.map(([mode, label]) => (
                 <button
                   key={mode}
                   type="button"
                   className={textMode === mode ? "active" : ""}
                   aria-pressed={textMode === mode}
-                  onClick={() => onTextModeChange?.(textMode === mode ? "none" : mode)}
+                  onClick={() => onTextModeChange?.(textModeRequired || textMode !== mode ? mode : "none")}
                 >
                   {label}
                 </button>

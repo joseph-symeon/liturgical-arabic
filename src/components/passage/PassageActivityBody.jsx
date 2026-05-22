@@ -178,6 +178,18 @@ function normalizeArabicTypingValue(value) {
     .trim();
 }
 
+function normalizeEnglishTypingValue(value) {
+  return String(value || '')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/['’]/g, '')
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9\s]/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
 function getTypingPromptLines(lines, arabicMode) {
   return (lines || []).filter(line => !line.tags?.includes('rubric')).map(line => {
     const parts = (line.phrases || []).flatMap((part, index) => {
@@ -221,6 +233,12 @@ function getPhraseMeaning(phrase) {
   return phrase?.literal || phrase?.translation || '';
 }
 
+function getPhraseTextForMode(phrase, textMode) {
+  return textMode === 'translation'
+    ? phrase?.translation || phrase?.literal || ''
+    : phrase?.literal || phrase?.translation || '';
+}
+
 function getPhraseIdsForLines(lines) {
   return (lines || []).flatMap(line => (
     line.tags?.includes('rubric')
@@ -235,10 +253,11 @@ function isPracticeExemptPart(part) {
   return part.tags?.includes('rubric') || phrases[part.phrase_id]?.tags?.includes('rubric');
 }
 
-export default function PassageActivityBody({ exercise, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight, arabicFontSize, karaokeActiveCaption = null }) {
+export default function PassageActivityBody({ exercise, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight, arabicFontSize, karaokeActiveCaption = null, practiceTextMode = 'literal' }) {
   const isReadListen = isReadListenActivity(exercise.activity?.type);
   const isArrangeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.arrange;
   const isTypeArabicActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.typeArabic;
+  const isTypeEnglishActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.typeEnglish;
   const isMatchingActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.matching;
   const isTranslationDirectionActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.translationDirection;
   const isClozeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.cloze || isArrangeActivity;
@@ -248,11 +267,18 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const [arrangeChecked, setArrangeChecked] = useState(false);
   const [arrangeFeedback, setArrangeFeedback] = useState(null);
   const [typedArabic, setTypedArabic] = useState('');
+  const [typedEnglish, setTypedEnglish] = useState('');
+  const [typedRecallArabic, setTypedRecallArabic] = useState('');
   const [typingFeedback, setTypingFeedback] = useState(null);
+  const [englishTypingFeedback, setEnglishTypingFeedback] = useState(null);
   const [matchingSelection, setMatchingSelection] = useState(null);
   const [matchedPhraseIds, setMatchedPhraseIds] = useState([]);
   const [matchingFeedback, setMatchingFeedback] = useState(null);
   const [matchingCardHeight, setMatchingCardHeight] = useState(null);
+  const [recallDirection, setRecallDirection] = useState('arabic-to-english');
+  const [recallIndex, setRecallIndex] = useState(0);
+  const [recallCompleted, setRecallCompleted] = useState(false);
+  const [recallShuffleKey, setRecallShuffleKey] = useState(0);
   const [translationDirection, setTranslationDirection] = useState('arabic-to-meaning');
   const [translationIndex, setTranslationIndex] = useState(0);
   const [translationFeedback, setTranslationFeedback] = useState(null);
@@ -268,6 +294,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const typingTraceRef = useRef(null);
   const arrangeFeedbackTimerRef = useRef(null);
   const typingFeedbackTimerRef = useRef(null);
+  const englishTypingFeedbackTimerRef = useRef(null);
   const matchingFeedbackTimerRef = useRef(null);
   const translationFeedbackTimerRef = useRef(null);
   const sensors = useSensors(
@@ -305,6 +332,27 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     .filter(Boolean)
     .join(readerLayout === 'line' ? '\n' : ' ');
   const typedArabicCorrect = normalizeArabicTypingValue(typedArabic) === normalizeArabicTypingValue(typingTarget);
+  const recallPhraseIds = useMemo(
+    () => getUniquePhraseIds(exercise.activity?.practice?.phrase_ids || getPhraseIdsForLines(exercise.lines))
+      .filter(phraseId => {
+        const phrase = phrases[phraseId];
+        return phrase && getArabicText(phrase, arabicMode) && (phrase.translation || phrase.literal);
+      }),
+    [exercise.activity?.practice?.phrase_ids?.join('|'), exercise.lines, arabicMode]
+  );
+  const recallPromptIds = useMemo(
+    () => getRandomizedPhraseIds(recallPhraseIds),
+    [recallPhraseIds.join('|'), recallDirection, recallShuffleKey]
+  );
+  const currentRecallPhraseId = recallPromptIds[recallIndex] || recallPromptIds[0];
+  const currentRecallPhrase = phrases[currentRecallPhraseId];
+  const typedEnglishNormalized = normalizeEnglishTypingValue(typedEnglish);
+  const typedEnglishCorrect = Boolean(typedEnglishNormalized) && Boolean(currentRecallPhrase) && (
+    typedEnglishNormalized === normalizeEnglishTypingValue(currentRecallPhrase.literal)
+      || typedEnglishNormalized === normalizeEnglishTypingValue(currentRecallPhrase.translation)
+  );
+  const typedRecallArabicCorrect = Boolean(currentRecallPhrase)
+    && normalizeArabicTypingValue(typedRecallArabic) === normalizeArabicTypingValue(getArabicText(currentRecallPhrase, arabicMode));
   const matchingPhraseIds = useMemo(
     () => getUniquePhraseIds(exercise.activity?.matching?.phrase_ids || getPhraseIdsForLines(exercise.lines)),
     [exercise.activity?.matching?.phrase_ids?.join('|'), exercise.lines]
@@ -315,8 +363,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   );
   const translationPhraseIds = useMemo(
     () => getUniquePhraseIds(exercise.activity?.translation?.phrase_ids || getPhraseIdsForLines(exercise.lines))
-      .filter(phraseId => phrases[phraseId] && getPhraseMeaning(phrases[phraseId])),
-    [exercise.activity?.translation?.phrase_ids?.join('|'), exercise.lines]
+      .filter(phraseId => phrases[phraseId] && getPhraseTextForMode(phrases[phraseId], practiceTextMode)),
+    [exercise.activity?.translation?.phrase_ids?.join('|'), exercise.lines, practiceTextMode]
   );
   const translationPromptIds = useMemo(
     () => getRandomizedPhraseIds(translationPhraseIds),
@@ -339,10 +387,16 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     setArrangeChecked(false);
     setArrangeFeedback(null);
     setTypedArabic('');
+    setTypedEnglish('');
+    setTypedRecallArabic('');
     setTypingFeedback(null);
+    setEnglishTypingFeedback(null);
     setMatchingSelection(null);
     setMatchedPhraseIds([]);
     setMatchingFeedback(null);
+    setRecallIndex(0);
+    setRecallCompleted(false);
+    setRecallShuffleKey(key => key + 1);
     setTranslationIndex(0);
     setTranslationFeedback(null);
     setTranslationCompleted(false);
@@ -360,6 +414,10 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
         clearTimeout(typingFeedbackTimerRef.current);
         typingFeedbackTimerRef.current = null;
       }
+      if (englishTypingFeedbackTimerRef.current) {
+        clearTimeout(englishTypingFeedbackTimerRef.current);
+        englishTypingFeedbackTimerRef.current = null;
+      }
       if (matchingFeedbackTimerRef.current) {
         clearTimeout(matchingFeedbackTimerRef.current);
         matchingFeedbackTimerRef.current = null;
@@ -372,6 +430,15 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   }, [exercise.id]);
 
   useEffect(() => {
+    clearEnglishTypingFeedback();
+    setTypedEnglish('');
+    setTypedRecallArabic('');
+    setRecallIndex(0);
+    setRecallCompleted(false);
+    setRecallShuffleKey(key => key + 1);
+  }, [recallDirection, recallPhraseIds.join('|')]);
+
+  useEffect(() => {
     setTranslationIndex(0);
     setTranslationFeedback(null);
     setTranslationCompleted(false);
@@ -379,7 +446,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     setTranslationAdvancing(false);
     setTranslationMutingAllChoices(false);
     setTranslationShuffleKey(key => key + 1);
-  }, [translationDirection, translationPhraseIds.join('|')]);
+  }, [translationDirection, translationPhraseIds.join('|'), practiceTextMode]);
 
   useEffect(() => {
     if (!isTypeArabicActivity || !typingTraceRef.current || !typingBoxRef.current) return undefined;
@@ -458,6 +525,14 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
       typingFeedbackTimerRef.current = null;
     }
     setTypingFeedback(null);
+  }
+
+  function clearEnglishTypingFeedback() {
+    if (englishTypingFeedbackTimerRef.current) {
+      clearTimeout(englishTypingFeedbackTimerRef.current);
+      englishTypingFeedbackTimerRef.current = null;
+    }
+    setEnglishTypingFeedback(null);
   }
 
   function clearMatchingFeedback() {
@@ -740,12 +815,154 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     );
   }
 
+  function renderTypeEnglishActivity() {
+    const isArabicToEnglish = recallDirection === 'arabic-to-english';
+    const recallInputId = `type-english-${exercise.id}`;
+    const recallAnswerValue = isArabicToEnglish ? typedEnglish : typedRecallArabic;
+    const recallAnswerCorrect = isArabicToEnglish ? typedEnglishCorrect : typedRecallArabicCorrect;
+    const recallProgressText = recallPromptIds.length > 0
+      ? `${Math.min(recallIndex + 1, recallPromptIds.length)} / ${recallPromptIds.length}`
+      : '0 / 0';
+    const recallPromptText = isArabicToEnglish
+      ? getArabicText(currentRecallPhrase, arabicMode)
+      : currentRecallPhrase?.translation || currentRecallPhrase?.literal || '';
+
+    function updateRecallDirection(direction) {
+      clearEnglishTypingFeedback();
+      setRecallDirection(direction);
+    }
+
+    function resetRecallPractice() {
+      clearEnglishTypingFeedback();
+      setTypedEnglish('');
+      setTypedRecallArabic('');
+      setRecallCompleted(false);
+      setRecallIndex(0);
+      setRecallShuffleKey(key => key + 1);
+    }
+
+    function submitRecallAnswer() {
+      clearEnglishTypingFeedback();
+      setEnglishTypingFeedback(recallAnswerCorrect ? 'correct' : 'incorrect');
+      englishTypingFeedbackTimerRef.current = setTimeout(() => {
+        setEnglishTypingFeedback(null);
+        englishTypingFeedbackTimerRef.current = null;
+        if (!recallAnswerCorrect) return;
+        setTypedEnglish('');
+        setTypedRecallArabic('');
+        if (recallIndex >= recallPromptIds.length - 1) {
+          setRecallCompleted(true);
+          return;
+        }
+        setRecallIndex(index => index + 1);
+      }, recallAnswerCorrect ? TRANSLATION_CORRECT_FEEDBACK_MS : TRANSLATION_INCORRECT_FEEDBACK_MS);
+    }
+
+    if (!currentRecallPhrase || recallPromptIds.length === 0) {
+      return (
+        <div className="lp-type-english-activity" dir="ltr">
+          <div className="lp-cloze-prompt">This exercise needs at least one phrase with Arabic and English text.</div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="lp-type-english-activity" dir="ltr">
+        <div className="lp-translation-header">
+          <div className="lp-segmented-control lp-translation-direction" role="group" aria-label="Recall direction">
+            <button
+              type="button"
+              className={isArabicToEnglish ? 'active' : ''}
+              aria-pressed={isArabicToEnglish}
+              onClick={() => updateRecallDirection('arabic-to-english')}
+            >
+              Arabic to English
+            </button>
+            <button
+              type="button"
+              className={!isArabicToEnglish ? 'active' : ''}
+              aria-pressed={!isArabicToEnglish}
+              onClick={() => updateRecallDirection('english-to-arabic')}
+            >
+              English to Arabic
+            </button>
+          </div>
+          <div className="lp-translation-progress">{recallCompleted ? 'Done' : recallProgressText}</div>
+        </div>
+
+        {recallCompleted ? (
+          <div className="lp-translation-complete">
+            <div>Complete</div>
+            <button
+              type="button"
+              className="lp-activity-button lp-activity-submit"
+              onClick={resetRecallPractice}
+            >
+              Practice again
+            </button>
+          </div>
+        ) : (
+          <>
+            <label className="lp-type-arabic-label" htmlFor={recallInputId}>
+              {isArabicToEnglish ? 'Type the English' : 'Type the Arabic'}
+            </label>
+            <div
+              className={`lp-type-english-prompt${isArabicToEnglish ? '' : ' lp-type-english-prompt-ltr'}`}
+              dir={isArabicToEnglish ? 'rtl' : 'ltr'}
+              lang={isArabicToEnglish ? 'ar' : 'en'}
+              style={isArabicToEnglish ? {
+                fontFamily: arabicFontFamily,
+                fontWeight: arabicFontWeight
+              } : undefined}
+            >
+              {recallPromptText}
+            </div>
+            <textarea
+              id={recallInputId}
+              className={`lp-type-english-input${englishTypingFeedback ? ` ${englishTypingFeedback}` : ''}`}
+              value={recallAnswerValue}
+              onChange={event => {
+                if (isArabicToEnglish) {
+                  setTypedEnglish(event.target.value);
+                } else {
+                  setTypedRecallArabic(event.target.value);
+                }
+                clearEnglishTypingFeedback();
+              }}
+              dir={isArabicToEnglish ? 'ltr' : 'rtl'}
+              lang={isArabicToEnglish ? 'en' : 'ar'}
+              spellCheck={isArabicToEnglish}
+              autoCapitalize={isArabicToEnglish ? 'sentences' : 'none'}
+              autoCorrect={isArabicToEnglish ? undefined : 'off'}
+              rows={2}
+              style={!isArabicToEnglish ? {
+                fontFamily: arabicFontFamily,
+                fontWeight: arabicFontWeight
+              } : undefined}
+            />
+            <div className="lp-activity-actions lp-type-arabic-actions">
+              <button
+                type="button"
+                className="lp-activity-button lp-activity-submit"
+                onClick={submitRecallAnswer}
+                disabled={!recallAnswerValue.trim() || Boolean(englishTypingFeedback)}
+              >
+                Submit
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  }
+
   function renderTranslationDirectionActivity() {
     const currentPhraseId = translationPromptIds[translationIndex] || translationPromptIds[0];
     const currentPhrase = phrases[currentPhraseId];
     const isArabicPrompt = translationDirection === 'arabic-to-meaning';
-    const promptText = isArabicPrompt ? getArabicText(currentPhrase, arabicMode) : getPhraseMeaning(currentPhrase);
-    const promptLabel = isArabicPrompt ? 'Choose the meaning' : 'Choose the Arabic';
+    const textModeLabel = practiceTextMode === 'translation' ? 'translation' : 'literal';
+    const promptText = isArabicPrompt ? getArabicText(currentPhrase, arabicMode) : getPhraseTextForMode(currentPhrase, practiceTextMode);
+    const promptLabel = isArabicPrompt ? `Choose the ${textModeLabel}` : 'Choose the Arabic';
     const progressText = translationPromptIds.length > 0
       ? `${Math.min(translationIndex + 1, translationPromptIds.length)} / ${translationPromptIds.length}`
       : '0 / 0';
@@ -828,7 +1045,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
                 setTranslationDirection('arabic-to-meaning');
               }}
             >
-              Arabic to meaning
+              Arabic to English
             </button>
             <button
               type="button"
@@ -838,7 +1055,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
                 setTranslationDirection('meaning-to-arabic');
               }}
             >
-              Meaning to Arabic
+              English to Arabic
             </button>
           </div>
           <div className="lp-translation-progress">{translationCompleted ? 'Done' : progressText}</div>
@@ -896,7 +1113,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
                       fontWeight: arabicFontWeight
                     } : undefined}
                   >
-                    {isArabicChoice ? getArabicText(phrase, arabicMode) : getPhraseMeaning(phrase)}
+                    {isArabicChoice ? getArabicText(phrase, arabicMode) : getPhraseTextForMode(phrase, practiceTextMode)}
                   </button>
                 );
               })}
@@ -1005,7 +1222,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
                   onClick={() => chooseMatch('translation', phraseId)}
                   disabled={matchedPhraseIdSet.has(phraseId)}
                 >
-                  {phrase.literal || phrase.translation || phraseId}
+                  {getPhraseTextForMode(phrase, practiceTextMode) || phraseId}
                 </button>
               );
             })}
@@ -1025,6 +1242,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
         renderTranslationDirectionActivity()
       ) : isTypeArabicActivity ? (
         renderTypeArabicActivity()
+      ) : isTypeEnglishActivity ? (
+        renderTypeEnglishActivity()
       ) : isArrangeActivity ? (
         renderArrangeActivity()
       ) : isClozeActivity ? (

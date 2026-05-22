@@ -32,7 +32,8 @@ function augmentSmallExerciseActivityOptions(exerciseId, activityOptions) {
       ![
         PASSAGE_ACTIVITY_TYPES.matching,
         PASSAGE_ACTIVITY_TYPES.translationDirection,
-        PASSAGE_ACTIVITY_TYPES.typeArabic
+        PASSAGE_ACTIVITY_TYPES.typeArabic,
+        PASSAGE_ACTIVITY_TYPES.typeEnglish
       ].includes(standardOption.activity_type)
         || augmentedOptions.some(option => option.activity_type === standardOption.activity_type)
     ) {

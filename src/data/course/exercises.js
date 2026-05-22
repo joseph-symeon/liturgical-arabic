@@ -654,8 +654,7 @@ export const exerciseDefinitions = [
     ],
     "phrase_ids": [
       "theotokos-hymn-meet-bless-001",
-      "theotokos-hymn-we-bless-001",
-      "theotokos-001"
+      "theotokos-hymn-bless-theotokos-001"
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
@@ -2107,6 +2106,10 @@ export function getStandardActivityOptions(exerciseId) {
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeArabic],
       activity_type: PASSAGE_ACTIVITY_TYPES.typeArabic
     });
+    activityOptions.push({
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeEnglish],
+      activity_type: PASSAGE_ACTIVITY_TYPES.typeEnglish
+    });
   }
   return activityOptions;
 }
@@ -2183,6 +2186,17 @@ function getDerivedActivity(exercise, activityType) {
     };
   }
 
+  if (activityType === PASSAGE_ACTIVITY_TYPES.typeEnglish) {
+    return {
+      ...commonActivity,
+      type: PASSAGE_ACTIVITY_TYPES.typeEnglish,
+      title: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeEnglish],
+      practice: {
+        phrase_ids: phraseIds
+      }
+    };
+  }
+
   if (activityType === PASSAGE_ACTIVITY_TYPES.matching) {
     return {
       ...commonActivity,
@@ -2214,6 +2228,7 @@ export function getExerciseWithActivity(exerciseId, activityType = null) {
   const practiceActivityTypes = new Set([
     PASSAGE_ACTIVITY_TYPES.arrange,
     PASSAGE_ACTIVITY_TYPES.typeArabic,
+    PASSAGE_ACTIVITY_TYPES.typeEnglish,
     PASSAGE_ACTIVITY_TYPES.matching,
     PASSAGE_ACTIVITY_TYPES.translationDirection
   ]);

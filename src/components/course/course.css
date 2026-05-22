@@ -615,6 +615,70 @@
   min-width: 132px;
 }
 
+.lp-type-english-activity {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 0;
+}
+
+.lp-type-english-prompt {
+  display: grid;
+  gap: 6px;
+  border: 1px solid #d6d3d1;
+  border-radius: 8px;
+  background: #fafaf9;
+  color: #1c1917;
+  font-size: 24px;
+  line-height: 1.65;
+  padding: 14px 16px;
+  text-align: right;
+}
+
+.lp-type-english-prompt-line {
+  min-width: 0;
+}
+
+.lp-type-english-prompt-ltr {
+  font-size: 21px;
+  line-height: 1.45;
+  text-align: left;
+  white-space: pre-line;
+}
+
+.lp-type-english-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 108px;
+  border: 1px solid #d6d3d1;
+  border-radius: 8px;
+  background: #fff;
+  color: #1c1917;
+  font: inherit;
+  font-size: 17px;
+  line-height: 1.45;
+  padding: 10px 12px;
+  resize: vertical;
+  transition: background-color 700ms ease, border-color 700ms ease, color 700ms ease;
+}
+
+.lp-type-english-input:focus {
+  border-color: #a8a29e;
+  outline: 2px solid rgba(168, 162, 158, 0.28);
+  outline-offset: 2px;
+}
+
+.lp-type-english-input.correct {
+  border-color: #166534;
+  background: color-mix(in srgb, #166534 14%, transparent);
+  color: #166534;
+}
+
+.lp-type-english-input.incorrect {
+  border-color: var(--liturgical-red);
+  background: color-mix(in srgb, var(--liturgical-red) 12%, transparent);
+  color: var(--liturgical-red);
+}
+
 .lp-activity-submit:not(:disabled) {
   border-color: #a8a29e;
   background: #fafaf9;
@@ -1822,6 +1886,8 @@
   .lp-arrange-tile,
   .lp-arrange-answer-tile,
   .lp-type-arabic-copybox,
+  .lp-type-english-prompt,
+  .lp-type-english-input,
   .lp-matching-card {
     background: var(--dark-surface);
     border-color: var(--dark-border);
@@ -1926,11 +1992,20 @@
     caret-color: var(--dark-text);
   }
 
+  .lp-type-english-input {
+    caret-color: var(--dark-text);
+  }
+
   .lp-type-arabic-label {
     color: var(--dark-muted);
   }
 
   .lp-type-arabic-copybox:focus-within {
+    border-color: var(--dark-muted);
+    outline-color: rgba(214, 211, 209, 0.24);
+  }
+
+  .lp-type-english-input:focus {
     border-color: var(--dark-muted);
     outline-color: rgba(214, 211, 209, 0.24);
   }
@@ -1944,12 +2019,24 @@
     color: #86efac;
   }
 
+  .lp-type-english-input.correct {
+    border-color: #86efac;
+    background: color-mix(in srgb, #22c55e 18%, transparent);
+    color: #86efac;
+  }
+
   .lp-type-arabic-copybox.incorrect {
     border-color: var(--liturgical-red);
     background: color-mix(in srgb, var(--liturgical-red) 18%, transparent);
   }
 
   .lp-type-arabic-copybox.incorrect .lp-type-arabic-input {
+    color: var(--liturgical-red);
+  }
+
+  .lp-type-english-input.incorrect {
+    border-color: var(--liturgical-red);
+    background: color-mix(in srgb, var(--liturgical-red) 18%, transparent);
     color: var(--liturgical-red);
   }
 

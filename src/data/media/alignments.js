@@ -2857,13 +2857,8 @@ export const alignmentDefinitions = [
             "end_seconds": 35.18
           },
           {
-            "phrase_id": "theotokos-hymn-we-bless-001",
+            "phrase_id": "theotokos-hymn-bless-theotokos-001",
             "start_seconds": 35.18,
-            "end_seconds": 41.75
-          },
-          {
-            "phrase_id": "theotokos-001",
-            "start_seconds": 41.75,
             "end_seconds": 50.17
           },
           {

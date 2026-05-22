@@ -10668,10 +10668,10 @@ const phrases = {
       "theotokos"
     ]
   },
-  "theotokos-hymn-we-bless-001": {
-    "arabic": "نُغَبِّطُ",
-    "translation": "to bless thee",
-    "literal": "we bless",
+  "theotokos-hymn-bless-theotokos-001": {
+    "arabic": "نُغَبِّطُ والِدَةَ الإِلَهِ",
+    "translation": "to bless thee, O Theotokos",
+    "literal": "we bless the Bearer of God",
     "tags": [
       "hymn",
       "section: Hymn to the Theotokos",
