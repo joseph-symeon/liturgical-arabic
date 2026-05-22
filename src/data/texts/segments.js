@@ -3201,9 +3201,17 @@ const sourceSegments = {
     "break_before": true,
     "tags": ["dismissal", "hymn", "theotokos", "vespers"],
     "phrases": [
+      {"phrase_id": "theotokos-hymn-o-she-who-is-001"},
+      {"text": " "},
       {"phrase_id": "theotokos-hymn-more-honorable-001"},
+      {"text": " "},
+      {"phrase_id": "theotokos-hymn-cherubim-001"},
       {"text": "، "},
       {"phrase_id": "theotokos-hymn-more-glorious-001"},
+      {"text": " "},
+      {"phrase_id": "theotokos-hymn-beyond-compare-than-001"},
+      {"text": " "},
+      {"phrase_id": "theotokos-hymn-seraphim-001"},
       {"text": "، "},
       {"phrase_id": "theotokos-hymn-without-corruption-001"},
       {"text": " "},
@@ -11353,13 +11361,37 @@ const sourceSegments = {
         "line_break_after": true
       },
       {
+        "phrase_id": "theotokos-hymn-o-she-who-is-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "theotokos-hymn-more-honorable-001"
       },
       {
         "text": " "
       },
       {
+        "phrase_id": "theotokos-hymn-cherubim-001"
+      },
+      {
+        "text": " "
+      },
+      {
         "phrase_id": "theotokos-hymn-more-glorious-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-hymn-beyond-compare-than-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "theotokos-hymn-seraphim-001"
       },
       {
         "text": ". ",

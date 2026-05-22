@@ -10619,9 +10619,39 @@ const phrases = {
     ]
   },
   "theotokos-hymn-more-glorious-001": {
-    "arabic": "وأرْفَعُ مَجْداً بِغَيْرِ قِياسٍ مِنَ السّيرافِيم",
-    "translation": "and more glorious beyond compare than the seraphim",
-    "literal": "and higher in glory beyond measure than the Seraphim",
+    "arabic": "وأرْفَعُ مَجْداً",
+    "translation": "and more glorious",
+    "literal": "and higher in glory",
+    "tags": [
+      "hymn",
+      "section: Hymn to the Theotokos",
+      "theotokos"
+    ]
+  },
+  "theotokos-hymn-beyond-compare-than-001": {
+    "arabic": "بِغَيْرِ قِياسٍ مِنَ",
+    "translation": "beyond compare than",
+    "literal": "beyond measure than",
+    "tags": [
+      "hymn",
+      "section: Hymn to the Theotokos",
+      "theotokos"
+    ]
+  },
+  "theotokos-hymn-seraphim-001": {
+    "arabic": "السّيرافِيم",
+    "translation": "the seraphim",
+    "literal": "the Seraphim",
+    "tags": [
+      "hymn",
+      "section: Hymn to the Theotokos",
+      "theotokos"
+    ]
+  },
+  "theotokos-hymn-o-she-who-is-001": {
+    "arabic": "يا مَنْ هِيَ",
+    "translation": "",
+    "literal": "O she who is",
     "tags": [
       "hymn",
       "section: Hymn to the Theotokos",
@@ -10629,9 +10659,19 @@ const phrases = {
     ]
   },
   "theotokos-hymn-more-honorable-001": {
-    "arabic": "يا مَنْ هِيَ أكْرَمُ مِنَ الشّيرُوبِيم",
-    "translation": "More honorable than the cherubim",
-    "literal": "O she who is more honorable than the Cherubim",
+    "arabic": "أكْرَمُ مِنَ",
+    "translation": "more honorable than",
+    "literal": "more honorable than",
+    "tags": [
+      "hymn",
+      "section: Hymn to the Theotokos",
+      "theotokos"
+    ]
+  },
+  "theotokos-hymn-cherubim-001": {
+    "arabic": "الشّيرُوبِيم",
+    "translation": "the cherubim",
+    "literal": "the Cherubim",
     "tags": [
       "hymn",
       "section: Hymn to the Theotokos",

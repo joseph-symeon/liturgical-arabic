@@ -2877,13 +2877,33 @@ export const alignmentDefinitions = [
             "end_seconds": 79.3
           },
           {
-            "phrase_id": "theotokos-hymn-more-honorable-001",
+            "phrase_id": "theotokos-hymn-o-she-who-is-001",
             "start_seconds": 79.65,
+            "end_seconds": 82.8
+          },
+          {
+            "phrase_id": "theotokos-hymn-more-honorable-001",
+            "start_seconds": 82.8,
+            "end_seconds": 86.0
+          },
+          {
+            "phrase_id": "theotokos-hymn-cherubim-001",
+            "start_seconds": 86.0,
             "end_seconds": 90.3
           },
           {
             "phrase_id": "theotokos-hymn-more-glorious-001",
             "start_seconds": 90.3,
+            "end_seconds": 95.8
+          },
+          {
+            "phrase_id": "theotokos-hymn-beyond-compare-than-001",
+            "start_seconds": 95.8,
+            "end_seconds": 101.0
+          },
+          {
+            "phrase_id": "theotokos-hymn-seraphim-001",
+            "start_seconds": 101.0,
             "end_seconds": 107.825
           },
           {

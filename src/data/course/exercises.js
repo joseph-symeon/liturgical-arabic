@@ -686,8 +686,12 @@ export const exerciseDefinitions = [
       "theotokos-hymn-choir"
     ],
     "phrase_ids": [
+      "theotokos-hymn-o-she-who-is-001",
       "theotokos-hymn-more-honorable-001",
-      "theotokos-hymn-more-glorious-001"
+      "theotokos-hymn-cherubim-001",
+      "theotokos-hymn-more-glorious-001",
+      "theotokos-hymn-beyond-compare-than-001",
+      "theotokos-hymn-seraphim-001"
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
