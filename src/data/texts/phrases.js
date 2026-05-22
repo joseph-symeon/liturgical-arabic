@@ -10591,7 +10591,7 @@ const phrases = {
   "theotokos-nominative-001": {
     "arabic": "والِدَةُ الإِلَه",
     "translation": "Theotokos",
-    "literal": "Bearer of God",
+    "literal": "The Bearer of God",
     "tags": [
       "hymn",
       "section: Hymn to the Theotokos",

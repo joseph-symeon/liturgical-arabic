@@ -2069,11 +2069,20 @@ export function hasLinkedRecording(exerciseId) {
 
 export function canUseActivityType(exerciseId, activityType) {
   const phraseCount = getExercisePhraseCount(exerciseId);
+  if (activityType === PASSAGE_ACTIVITY_TYPES.matching) {
+    return phraseCount > 1 && phraseCount <= 6;
+  }
+  if (activityType === PASSAGE_ACTIVITY_TYPES.arrange) {
+    return phraseCount > 1 && phraseCount <= 12;
+  }
+  if (activityType === PASSAGE_ACTIVITY_TYPES.translationDirection) {
+    return phraseCount >= 2 && phraseCount <= 14;
+  }
   if ([
-    PASSAGE_ACTIVITY_TYPES.arrange,
-    PASSAGE_ACTIVITY_TYPES.matching
+    PASSAGE_ACTIVITY_TYPES.typeArabic,
+    PASSAGE_ACTIVITY_TYPES.typeEnglish
   ].includes(activityType)) {
-    return phraseCount > 1;
+    return phraseCount >= 1 && phraseCount <= 14;
   }
   return true;
 }
@@ -2092,6 +2101,8 @@ export function getStandardActivityOptions(exerciseId) {
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.learn],
       activity_type: PASSAGE_ACTIVITY_TYPES.learn
     });
+  }
+  if (canUseActivityType(exerciseId, PASSAGE_ACTIVITY_TYPES.typeArabic)) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeArabic],
       activity_type: PASSAGE_ACTIVITY_TYPES.typeArabic

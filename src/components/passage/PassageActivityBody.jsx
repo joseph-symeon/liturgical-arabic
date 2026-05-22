@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   closestCenter,
   DndContext,
@@ -29,6 +29,10 @@ const ARRANGE_CORRECT_FEEDBACK_MS = 1900;
 const ARRANGE_INCORRECT_FEEDBACK_MS = 1400;
 const MATCHING_COMPLETE_FEEDBACK_MS = 900;
 const LEARN_SETTINGS_STORAGE_KEY = 'liturgical-arabic:learn-settings';
+const LEARN_MATCHING_MIN_PHRASES = 2;
+const LEARN_MATCHING_MAX_PHRASES = 6;
+const LEARN_ARRANGE_MIN_PHRASES = 2;
+const LEARN_ARRANGE_MAX_PHRASES = 12;
 const DEFAULT_LEARN_SETTINGS = {
   shuffleTerms: true,
   multipleChoiceAnswerWith: 'both',
@@ -207,6 +211,7 @@ function ArrangeBankTile({ phraseId, arabicMode, arabicFontFamily, arabicFontWei
     <button
       type="button"
       className={`lp-arrange-tile${disabled ? ' used' : ''}${isDragging ? ' dragging' : ''}${feedbackState ? ` ${feedbackState}` : ''}`}
+      data-phrase-id={phraseId}
       ref={setNodeRef}
       disabled={disabled}
       onClick={onClick}
@@ -228,13 +233,20 @@ function ArrangeBankTile({ phraseId, arabicMode, arabicFontFamily, arabicFontWei
   );
 }
 
-function ArrangeAnswerDropzone({ children, arabicFontFamily, arabicFontWeight }) {
+function ArrangeAnswerDropzone({ children, arabicFontFamily, arabicFontWeight, containerRef }) {
   const { setNodeRef, isOver } = useDroppable({ id: 'answer-dropzone' });
+
+  function setRefs(node) {
+    setNodeRef(node);
+    if (containerRef) {
+      containerRef.current = node;
+    }
+  }
 
   return (
     <div
       className={`lp-arrange-answer${isOver ? ' over' : ''}`}
-      ref={setNodeRef}
+      ref={setRefs}
       dir="rtl"
       aria-label="Arranged Arabic phrase answer"
       style={{
@@ -247,28 +259,46 @@ function ArrangeAnswerDropzone({ children, arabicFontFamily, arabicFontWeight })
   );
 }
 
-function getArrangeLineCounts(lines, phraseIds) {
-  const phraseIdSet = new Set(phraseIds);
-  const counts = (lines || [])
-    .map(line => (line.phrases || []).filter(part => part.phrase_id && phraseIdSet.has(part.phrase_id)).length)
-    .filter(Boolean);
-  return counts.length ? counts : [phraseIds.length];
-}
+function getArrangeRows(arrangedPhraseIds, phraseWidths = {}, availableWidth = 0, gap = 8) {
+  const rows = [];
 
-function getArrangeRows(arrangedPhraseIds, lineCounts) {
-  let start = 0;
-  return lineCounts.flatMap(count => {
-    const segmentRow = arrangedPhraseIds.slice(start, start + count);
-    start += count;
-    const visualRows = [];
-    for (let index = 0; index < count; index += 2) {
-      visualRows.push({
-        phrases: segmentRow.slice(index, index + 2),
-        startIndex: start - count + index
+  let currentRow = [];
+  let currentStartIndex = 0;
+  let currentWidth = 0;
+
+  arrangedPhraseIds.forEach((phraseId, index) => {
+    const phraseWidth = Math.ceil(phraseWidths[phraseId] || 0);
+    const nextWidth = currentRow.length > 0
+      ? currentWidth + gap + phraseWidth
+      : phraseWidth;
+    const shouldStartNewRow = availableWidth > 0
+      && currentRow.length > 0
+      && phraseWidth > 0
+      && nextWidth > availableWidth;
+
+    if (shouldStartNewRow) {
+      rows.push({
+        phrases: currentRow,
+        startIndex: currentStartIndex
       });
+      currentRow = [phraseId];
+      currentStartIndex = index;
+      currentWidth = phraseWidth;
+      return;
     }
-    return visualRows;
+
+    currentRow.push(phraseId);
+    currentWidth = nextWidth;
   });
+
+  if (currentRow.length > 0) {
+    rows.push({
+      phrases: currentRow,
+      startIndex: currentStartIndex
+    });
+  }
+
+  return rows;
 }
 
 function normalizeArabicTypingValue(value) {
@@ -294,6 +324,10 @@ function normalizeEnglishTypingValue(value) {
     .replace(/\s+/g, ' ')
     .trim()
     .toLowerCase();
+}
+
+function normalizeEnglishAnswerForComparison(value) {
+  return normalizeEnglishTypingValue(value).replace(/^the\s+/, '');
 }
 
 function getTypingPromptLines(lines, arabicMode) {
@@ -411,6 +445,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const [learnCompletedIds, setLearnCompletedIds] = useState([]);
   const [learnMissedIds, setLearnMissedIds] = useState([]);
   const [learnPromptCount, setLearnPromptCount] = useState(0);
+  const [learnTotalPromptCount, setLearnTotalPromptCount] = useState(0);
   const [learnWrittenAnswer, setLearnWrittenAnswer] = useState('');
   const [learnTraceAnswer, setLearnTraceAnswer] = useState('');
   const [learnFeedback, setLearnFeedback] = useState(null);
@@ -419,11 +454,19 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const [learnStarted, setLearnStarted] = useState(false);
   const [learnReviewMode, setLearnReviewMode] = useState(null);
   const [learnResetKey, setLearnResetKey] = useState(0);
+  const [matchingShuffleKey, setMatchingShuffleKey] = useState(0);
+  const [arrangeAnswerWidth, setArrangeAnswerWidth] = useState(0);
+  const [arrangePhraseWidths, setArrangePhraseWidths] = useState({});
+  const [arrangePlannedLineCount, setArrangePlannedLineCount] = useState(1);
   const [typingBoxHeight, setTypingBoxHeight] = useState(null);
   const matchingGridRef = useRef(null);
+  const arrangeAnswerRef = useRef(null);
+  const arrangeBankRef = useRef(null);
+  const arrangeMeasureRef = useRef(null);
   const typingBoxRef = useRef(null);
   const typingInputRef = useRef(null);
   const typingTraceRef = useRef(null);
+  const learnWrittenInputRef = useRef(null);
   const learnTraceInputRef = useRef(null);
   const learnTraceGhostRef = useRef(null);
   const arrangeFeedbackTimerRef = useRef(null);
@@ -452,12 +495,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const arrangedPhraseSet = new Set(arrangedPhraseIds);
   const arrangementComplete = arrangedPhraseIds.length === clozePhraseIds.length;
   const arrangementCorrect = arrangementComplete && arrangedPhraseIds.every((phraseId, index) => phraseId === clozePhraseIds[index]);
-  const arrangeLineCounts = useMemo(
-    () => getArrangeLineCounts(exercise.lines, clozePhraseIds),
-    [exercise.lines, clozePhraseIds.join('|')]
-  );
-  const arrangeAnswerLineCount = arrangeLineCounts.reduce((sum, count) => sum + Math.max(1, Math.ceil(count / 2)), 0);
-  const arrangeRows = getArrangeRows(arrangedPhraseIds, arrangeLineCounts);
+  const arrangeRows = getArrangeRows(arrangedPhraseIds, arrangePhraseWidths, arrangeAnswerWidth);
+  const arrangeAnswerLineCount = Math.max(1, arrangePlannedLineCount, arrangeRows.length);
   const typingPromptLines = useMemo(
     () => getTypingPromptLines(exercise.lines, arabicMode),
     [exercise.lines, arabicMode]
@@ -483,23 +522,27 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const currentRecallPhraseId = recallPromptIds[recallIndex] || recallPromptIds[0];
   const currentRecallPhrase = phrases[currentRecallPhraseId];
   const typedEnglishNormalized = normalizeEnglishTypingValue(typedEnglish);
-  const typedEnglishCorrect = Boolean(typedEnglishNormalized) && Boolean(currentRecallPhrase) && (
-    typedEnglishNormalized === normalizeEnglishTypingValue(currentRecallPhrase.literal)
-      || typedEnglishNormalized === normalizeEnglishTypingValue(currentRecallPhrase.translation)
-  );
+  const typedEnglishComparable = normalizeEnglishAnswerForComparison(typedEnglish);
+  const typedEnglishCorrect = Boolean(typedEnglishNormalized) && Boolean(currentRecallPhrase) && getPhraseEnglishAnswers(currentRecallPhrase).some(option => (
+    typedEnglishComparable === normalizeEnglishAnswerForComparison(option)
+  ));
   const typedRecallArabicCorrect = Boolean(currentRecallPhrase)
     && normalizeArabicTypingValue(typedRecallArabic) === normalizeArabicTypingValue(getArabicText(currentRecallPhrase, arabicMode));
   const matchingPhraseIds = useMemo(
     () => getUniquePhraseIds(exercise.activity?.matching?.phrase_ids || exercise.activity?.learn?.phrase_ids || getPhraseIdsForLines(exercise.lines)),
     [exercise.activity?.matching?.phrase_ids?.join('|'), exercise.activity?.learn?.phrase_ids?.join('|'), exercise.lines]
   );
+  const learnCanUseMatching = matchingPhraseIds.length >= LEARN_MATCHING_MIN_PHRASES
+    && matchingPhraseIds.length <= LEARN_MATCHING_MAX_PHRASES;
+  const learnCanUseArrange = clozePhraseIds.length >= LEARN_ARRANGE_MIN_PHRASES
+    && clozePhraseIds.length <= LEARN_ARRANGE_MAX_PHRASES;
   const shuffledMatchingArabic = useMemo(
-    () => getMatchingPhraseOrder(matchingPhraseIds, `${exercise.id}:matching:arabic`, [matchingPhraseIds]),
-    [matchingPhraseIds.join('|'), exercise.id]
+    () => getMatchingPhraseOrder(matchingPhraseIds, `${exercise.id}:matching:${matchingShuffleKey}:arabic`, [matchingPhraseIds]),
+    [matchingPhraseIds.join('|'), exercise.id, matchingShuffleKey]
   );
   const shuffledMatchingTranslations = useMemo(
-    () => getMatchingPhraseOrder(matchingPhraseIds, `${exercise.id}:matching:translation`, [matchingPhraseIds, shuffledMatchingArabic]),
-    [matchingPhraseIds.join('|'), shuffledMatchingArabic.join('|'), exercise.id]
+    () => getMatchingPhraseOrder(matchingPhraseIds, `${exercise.id}:matching:${matchingShuffleKey}:translation`, [matchingPhraseIds, shuffledMatchingArabic]),
+    [matchingPhraseIds.join('|'), shuffledMatchingArabic.join('|'), exercise.id, matchingShuffleKey]
   );
   const translationPhraseIds = useMemo(
     () => getUniquePhraseIds(exercise.activity?.translation?.phrase_ids || getPhraseIdsForLines(exercise.lines))
@@ -530,13 +573,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     ? currentLearnItem
     : currentLearnItem?.phraseId || null;
   const currentLearnPhrase = phrases[currentLearnPhraseId];
-  const learnTermQuestionType = learnQuestionTypes.multipleChoice && learnQuestionTypes.written
-    ? (learnPromptCount % 3 === 1 ? 'written' : 'multiple-choice')
-    : learnQuestionTypes.written
-      ? 'written'
-      : 'multiple-choice';
   const learnQuestionType = currentLearnItemType === 'term'
-    ? learnTermQuestionType
+    ? currentLearnItem?.questionType || (learnQuestionTypes.written ? 'written' : 'multiple-choice')
     : currentLearnItemType;
   const learnMultipleChoiceDirection = learnMultipleChoiceAnswerWith === 'english'
     ? 'arabic-to-english'
@@ -574,9 +612,13 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
       const remaining = queue.slice(1);
       if (wasCorrect) return remaining;
       const retryIndex = Math.min(2, remaining.length);
-      return remaining.slice(0, retryIndex).concat({ type: 'term', phraseId: currentLearnPhraseId }, remaining.slice(retryIndex));
+      const retryItem = typeof currentLearnItem === 'string'
+        ? { type: 'term', phraseId: currentLearnPhraseId, questionType: learnQuestionType, review: true }
+        : { ...currentLearnItem, questionType: learnQuestionType, review: true };
+      return remaining.slice(0, retryIndex).concat(retryItem, remaining.slice(retryIndex));
     });
     setLearnPromptCount(count => count + 1);
+    if (!wasCorrect) setLearnTotalPromptCount(count => count + 1);
     setLearnWrittenAnswer('');
     setLearnTraceAnswer('');
     setLearnFeedback(null);
@@ -709,33 +751,33 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     const termPhraseIds = learnShuffleTerms
       ? getRandomizedPhraseIds(learnPhraseIds)
       : [...learnPhraseIds];
-    const termItems = termPhraseIds.map(phraseId => ({ type: 'term', phraseId }));
-    const reviewTypes = [
-      learnQuestionTypes.matching && matchingPhraseIds.length > 1 ? 'matching' : null,
-      learnQuestionTypes.arrange && clozePhraseIds.length > 1 ? 'arrange' : null
-    ].filter(Boolean);
-    const includeTermPrompts = learnQuestionTypes.multipleChoice || learnQuestionTypes.written;
     const nextQueue = [];
-    const reviewEvery = Math.max(2, Math.ceil(Math.max(1, termItems.length) / Math.max(1, reviewTypes.length + 1)));
-    let reviewIndex = 0;
 
-    termItems.forEach((item, index) => {
-      if (includeTermPrompts) nextQueue.push(item);
-      if (reviewTypes.length > 0 && (index + 1) % reviewEvery === 0 && reviewIndex < reviewTypes.length) {
-        nextQueue.push({ type: reviewTypes[reviewIndex] });
-        reviewIndex += 1;
-      }
-    });
+    if (learnQuestionTypes.matching && learnCanUseMatching) {
+      nextQueue.push({ type: 'matching' });
+    }
 
-    while (reviewIndex < reviewTypes.length) {
-      nextQueue.push({ type: reviewTypes[reviewIndex] });
-      reviewIndex += 1;
+    if (learnQuestionTypes.multipleChoice) {
+      termPhraseIds.forEach(phraseId => {
+        nextQueue.push({ type: 'term', phraseId, questionType: 'multiple-choice' });
+      });
+    }
+
+    if (learnQuestionTypes.written) {
+      termPhraseIds.forEach(phraseId => {
+        nextQueue.push({ type: 'term', phraseId, questionType: 'written' });
+      });
+    }
+
+    if (learnQuestionTypes.arrange && learnCanUseArrange) {
+      nextQueue.push({ type: 'arrange' });
     }
 
     setLearnQueue(nextQueue);
     setLearnCompletedIds([]);
     setLearnMissedIds([]);
     setLearnPromptCount(0);
+    setLearnTotalPromptCount(nextQueue.length);
     setLearnWrittenAnswer('');
     setLearnTraceAnswer('');
     setLearnFeedback(null);
@@ -749,16 +791,112 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     setArrangeChecked(false);
     setArrangeFeedback(null);
     setClozeRevealed(false);
+    setMatchingShuffleKey(key => key + 1);
   }, [
     learnPhraseIds.join('|'),
     matchingPhraseIds.join('|'),
     clozePhraseIds.join('|'),
+    learnCanUseMatching,
+    learnCanUseArrange,
     learnShuffleTerms,
     learnQuestionTypes.multipleChoice,
     learnQuestionTypes.written,
     learnQuestionTypes.matching,
     learnQuestionTypes.arrange,
     learnResetKey
+  ]);
+
+  useLayoutEffect(() => {
+    if (!isClozeActivity && !(isLearnActivity && currentLearnItemType === 'arrange')) return undefined;
+
+    let frameId = null;
+    let secondFrameId = null;
+    let resizeObserver = null;
+    let cancelled = false;
+
+    function measureArrangeLayout(retries = 8) {
+      if (cancelled) return;
+
+      const answerElement = arrangeAnswerRef.current;
+      const measureElement = arrangeMeasureRef.current;
+      const answerWidth = Math.floor(answerElement?.getBoundingClientRect().width || 0);
+      const tileWidths = {};
+      const tiles = Array.from(measureElement?.querySelectorAll('.lp-arrange-measure-tile[data-phrase-id]') || []);
+
+      if ((!answerElement || !measureElement || answerWidth <= 0 || tiles.length === 0) && retries > 0) {
+        frameId = requestAnimationFrame(() => measureArrangeLayout(retries - 1));
+        return;
+      }
+
+      const tileRowTops = [];
+      tiles.forEach(tile => {
+        const phraseId = tile.dataset.phraseId;
+        if (!phraseId) return;
+        const tileRect = tile.getBoundingClientRect();
+        tileWidths[phraseId] = Math.ceil(tileRect.width);
+        tileRowTops.push(Math.round(tileRect.top));
+      });
+
+      setArrangeAnswerWidth(width => (width === answerWidth ? width : answerWidth));
+      setArrangePlannedLineCount(rowCount => {
+        const nextRowCount = Math.max(1, new Set(tileRowTops).size);
+        return rowCount === nextRowCount ? rowCount : nextRowCount;
+      });
+      setArrangePhraseWidths(widths => {
+        const currentEntries = Object.entries(widths);
+        const nextEntries = Object.entries(tileWidths);
+        if (
+          currentEntries.length === nextEntries.length
+            && nextEntries.every(([phraseId, width]) => widths[phraseId] === width)
+        ) {
+          return widths;
+        }
+        return tileWidths;
+      });
+    }
+
+    function scheduleArrangeLayoutMeasure() {
+      if (frameId) cancelAnimationFrame(frameId);
+      if (secondFrameId) cancelAnimationFrame(secondFrameId);
+      frameId = requestAnimationFrame(() => {
+        secondFrameId = requestAnimationFrame(measureArrangeLayout);
+      });
+    }
+
+    measureArrangeLayout();
+    scheduleArrangeLayoutMeasure();
+
+    if (arrangeAnswerRef.current && arrangeMeasureRef.current) {
+      resizeObserver = new ResizeObserver(scheduleArrangeLayoutMeasure);
+      resizeObserver.observe(arrangeAnswerRef.current);
+      resizeObserver.observe(arrangeMeasureRef.current);
+    }
+
+    document.fonts?.ready?.then(() => {
+      if (!cancelled) scheduleArrangeLayoutMeasure();
+    });
+
+    window.addEventListener('resize', scheduleArrangeLayoutMeasure);
+    window.visualViewport?.addEventListener('resize', scheduleArrangeLayoutMeasure);
+
+    return () => {
+      cancelled = true;
+      if (frameId) cancelAnimationFrame(frameId);
+      if (secondFrameId) cancelAnimationFrame(secondFrameId);
+      resizeObserver?.disconnect();
+      window.removeEventListener('resize', scheduleArrangeLayoutMeasure);
+      window.visualViewport?.removeEventListener('resize', scheduleArrangeLayoutMeasure);
+    };
+  }, [
+    isClozeActivity,
+    isLearnActivity,
+    currentLearnItemType,
+    clozePhraseIds.join('|'),
+    randomizedArrangePhraseIds.join('|'),
+    arrangedPhraseIds.join('|'),
+    arabicMode,
+    arabicFontFamily,
+    arabicFontWeight
   ]);
 
   useEffect(() => {
@@ -888,8 +1026,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     if (!isLearnActivity) return;
     const nextQuestionTypes = {
       ...learnQuestionTypes,
-      matching: learnQuestionTypes.matching && matchingPhraseIds.length > 1,
-      arrange: learnQuestionTypes.arrange && clozePhraseIds.length > 1
+      matching: learnQuestionTypes.matching && learnCanUseMatching,
+      arrange: learnQuestionTypes.arrange && learnCanUseArrange
     };
     if (!nextQuestionTypes.multipleChoice && !nextQuestionTypes.written && !nextQuestionTypes.matching && !nextQuestionTypes.arrange) {
       nextQuestionTypes.multipleChoice = learnPhraseIds.length > 0;
@@ -903,7 +1041,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     ) {
       setLearnQuestionTypes(nextQuestionTypes);
     }
-  }, [isLearnActivity, learnPhraseIds.length, matchingPhraseIds.length, clozePhraseIds.length]);
+  }, [isLearnActivity, learnPhraseIds.length, learnCanUseMatching, learnCanUseArrange]);
 
   useEffect(() => {
     if (!isLearnActivity || !learnStarted) return undefined;
@@ -918,6 +1056,29 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     if (!isLearnActivity || !learnStarted) return;
     window.scrollTo({ top: 0, left: 0 });
   }, [isLearnActivity, learnStarted, learnPromptCount, currentLearnItemType, Boolean(learnCorrectionPrompt)]);
+
+  useEffect(() => {
+    if (!isLearnActivity || !learnStarted) return undefined;
+    if (typeof window === 'undefined' || !window.matchMedia('(min-width: 681px)').matches) return undefined;
+    const input = learnCorrectionPrompt
+      ? learnTraceInputRef.current
+      : currentLearnItemType === 'term' && learnQuestionType === 'written' && !learnFeedback
+        ? learnWrittenInputRef.current
+        : null;
+    if (!input) return undefined;
+    const frameId = window.requestAnimationFrame(() => {
+      input.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frameId);
+  }, [
+    isLearnActivity,
+    learnStarted,
+    learnCorrectionPrompt,
+    currentLearnItemType,
+    learnQuestionType,
+    learnFeedback,
+    learnPromptCount
+  ]);
 
   function clearArrangeFeedback() {
     if (arrangeFeedbackTimerRef.current) {
@@ -1085,12 +1246,37 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
           className={`lp-arrange-activity${arrangeFeedback ? ` ${arrangeFeedback}` : ''}`}
           dir="ltr"
           style={{
-            '--arrange-answer-lines': Math.max(3, arrangeAnswerLineCount)
+            '--arrange-answer-lines': arrangeAnswerLineCount
           }}
         >
+          <div
+            className="lp-arrange-measure"
+            ref={arrangeMeasureRef}
+            aria-hidden="true"
+            dir="rtl"
+            style={{
+              fontFamily: arabicFontFamily,
+              fontWeight: arabicFontWeight
+            }}
+          >
+            {clozePhraseIds.map(phraseId => {
+              const phrase = phrases[phraseId];
+              if (!phrase) return null;
+              return (
+                <span className="lp-arrange-measure-tile" data-phrase-id={phraseId} key={`measure-${phraseId}`}>
+                  {getArabicText(phrase, arabicMode)}
+                </span>
+              );
+            })}
+          </div>
           <SortableContext items={arrangedPhraseIds} strategy={rectSortingStrategy}>
-            <ArrangeAnswerDropzone arabicFontFamily={arabicFontFamily} arabicFontWeight={arabicFontWeight}>
-              {arrangeRows.map((row, rowIndex) => {
+            <ArrangeAnswerDropzone
+              arabicFontFamily={arabicFontFamily}
+              arabicFontWeight={arabicFontWeight}
+              containerRef={arrangeAnswerRef}
+            >
+              {Array.from({ length: arrangeAnswerLineCount }, (_, rowIndex) => {
+                const row = arrangeRows[rowIndex] || { phrases: [], startIndex: 0 };
                 return (
                   <div
                     className="lp-arrange-answer-row"
@@ -1117,7 +1303,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
               })}
             </ArrangeAnswerDropzone>
           </SortableContext>
-          <div className="lp-arrange-bank">
+          <div className="lp-arrange-bank" ref={arrangeBankRef}>
             {randomizedArrangePhraseIds.map(phraseId => (
               <ArrangeBankTile
                 key={phraseId}
@@ -1136,9 +1322,9 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
             ))}
           </div>
           <div className="lp-activity-actions lp-arrange-actions">
-            {arrangeChecked && (
-              <div className={`lp-arrange-result${arrangementCorrect ? ' correct' : ' incorrect'}`} aria-live="polite">
-                {arrangementCorrect ? 'Correct order' : 'Not quite yet'}
+            {arrangeChecked && !arrangementCorrect && (
+              <div className="lp-arrange-result incorrect" aria-live="polite">
+                Not quite yet
               </div>
             )}
             <button
@@ -1551,18 +1737,25 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
 
   function renderLearnActivity() {
     const totalTerms = learnPhraseIds.length;
-    const completedSet = new Set(learnCompletedIds);
-    const completedCount = learnPhraseIds.filter(phraseId => completedSet.has(phraseId)).length;
-    const progressText = `${completedCount} / ${totalTerms}`;
+    const totalPrompts = Math.max(learnTotalPromptCount, learnPromptCount + learnQueue.length, 1);
+    const completedCount = Math.min(learnPromptCount, totalPrompts);
+    const progressText = `${completedCount} / ${totalPrompts}`;
     const correctionDirection = learnCorrectionPrompt?.direction || learnDirection;
     const correctionAnswer = learnCorrectionPrompt?.answer || '';
     const correctionPhrase = phrases[learnCorrectionPrompt?.phraseId];
     const correctionArabic = correctionDirection === 'english-to-arabic';
+    const correctionTranslation = correctionPhrase?.translation?.trim() || '';
+    const correctionLiteral = correctionPhrase?.literal?.trim() || '';
+    const showEnglishCorrectionAnswers = !correctionArabic
+      && correctionTranslation
+      && correctionLiteral
+      && normalizeEnglishTypingValue(correctionTranslation) !== normalizeEnglishTypingValue(correctionLiteral);
     const isArabicPrompt = learnDirection === 'arabic-to-english';
     const isArabicAnswer = learnDirection === 'english-to-arabic';
-    const isLearnRetryPrompt = Boolean(currentLearnPhraseId)
+    const isLearnRetryPrompt = Boolean(currentLearnItem?.review)
+      || (Boolean(currentLearnPhraseId)
       && learnMissedIds.includes(currentLearnPhraseId)
-      && !learnCompletedIds.includes(currentLearnPhraseId);
+      && !learnCompletedIds.includes(currentLearnPhraseId));
     const traceComplete = Boolean(correctionAnswer)
       && isLearnAnswerCorrect(learnTraceAnswer, correctionPhrase, correctionDirection);
 
@@ -1640,8 +1833,9 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
         return normalizeArabicTypingValue(answer) === normalizeArabicTypingValue(getArabicText(phrase, arabicMode));
       }
       const normalizedAnswer = normalizeEnglishTypingValue(answer);
+      const comparableAnswer = normalizeEnglishAnswerForComparison(answer);
       return Boolean(normalizedAnswer) && getPhraseEnglishAnswers(phrase).some(option => (
-        normalizedAnswer === normalizeEnglishTypingValue(option)
+        comparableAnswer === normalizeEnglishAnswerForComparison(option)
       ));
     }
 
@@ -1731,6 +1925,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
 
     function toggleLearnReviewType(type) {
       if (!['matching', 'arrange'].includes(type)) return;
+      if (type === 'matching' && !learnCanUseMatching) return;
+      if (type === 'arrange' && !learnCanUseArrange) return;
       setOnlyAvailableQuestionTypes({
         ...learnQuestionTypes,
         [type]: !learnQuestionTypes[type]
@@ -1738,7 +1934,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     }
 
     function renderLearnSessionHeader() {
-      const progressPercent = totalTerms > 0 ? Math.round((completedCount / totalTerms) * 100) : 0;
+      const progressPercent = totalPrompts > 0 ? Math.round((completedCount / totalPrompts) * 100) : 0;
       return (
         <div className="lp-learn-session-header">
           <div className="lp-learn-topbar">
@@ -1751,13 +1947,13 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
             </button>
           </div>
           <div
-            className={`lp-learn-progress-rail${completedCount === totalTerms ? ' complete' : ''}`}
+            className={`lp-learn-progress-rail${completedCount === totalPrompts ? ' complete' : ''}`}
             aria-label={`Learn progress ${progressText}`}
             style={{ '--learn-progress-position': `${progressPercent}%` }}
           >
             <div className="lp-learn-progress-fill" style={{ width: `${progressPercent}%` }} />
             <div className="lp-learn-progress-count">{completedCount}</div>
-            <div className="lp-learn-progress-total">{totalTerms}</div>
+            <div className="lp-learn-progress-total">{totalPrompts}</div>
           </div>
         </div>
       );
@@ -1847,18 +2043,18 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
                       </div>
                     </div>
                   </div>
-                  {(matchingPhraseIds.length > 1 || clozePhraseIds.length > 1) && (
+                  {(learnCanUseMatching || learnCanUseArrange) && (
                     <div
                       className={
-                        (learnQuestionTypes.matching && matchingPhraseIds.length > 1)
-                          || (learnQuestionTypes.arrange && clozePhraseIds.length > 1)
+                        (learnQuestionTypes.matching && learnCanUseMatching)
+                          || (learnQuestionTypes.arrange && learnCanUseArrange)
                           ? "lp-learn-setting-group lp-learn-settings-panel"
                           : "lp-learn-setting-group lp-learn-settings-panel disabled"
                       }
                     >
                       <span className="lp-learn-setting-label">Blocks</span>
                       <div className="lp-learn-review-buttons">
-                        {matchingPhraseIds.length > 1 && (
+                        {learnCanUseMatching && (
                           <button
                             type="button"
                             className={`lp-activity-button${learnQuestionTypes.matching ? ' active' : ''}`}
@@ -1868,7 +2064,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
                             <span>Matching</span>
                           </button>
                         )}
-                        {clozePhraseIds.length > 1 && (
+                        {learnCanUseArrange && (
                           <button
                             type="button"
                             className={`lp-activity-button${learnQuestionTypes.arrange ? ' active' : ''}`}
@@ -2006,6 +2202,18 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
             </div>
           </div>
           <label className="lp-learn-trace-label" htmlFor={`learn-trace-${exercise.id}`}>Retype correct answer</label>
+          {showEnglishCorrectionAnswers && (
+            <div className="lp-learn-correction-answers" aria-label="Accepted English answers">
+              <div>
+                <span>Translation</span>
+                <strong>{correctionTranslation}</strong>
+              </div>
+              <div>
+                <span>Literal</span>
+                <strong>{correctionLiteral}</strong>
+              </div>
+            </div>
+          )}
           <div className="lp-learn-trace-row">
             <div className="lp-learn-trace-copybox">
               <textarea
@@ -2103,6 +2311,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
               <textarea
                 className={`lp-learn-written-input${learnFeedback ? ` ${learnFeedback}` : ''}`}
                 value={learnWrittenAnswer}
+                ref={learnWrittenInputRef}
                 onChange={event => {
                   setLearnWrittenAnswer(event.target.value);
                   setLearnFeedback(null);
