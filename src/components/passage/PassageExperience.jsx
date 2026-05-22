@@ -11,7 +11,6 @@ import PassageSyncedCaption from "./PassageSyncedCaption.jsx";
 const CAPTION_TEXT_MODE_STORAGE_KEY = "liturgical-arabic:phrase-captions-text-mode";
 const PRACTICE_TEXT_MODE_STORAGE_KEY = "liturgical-arabic:practice-text-mode";
 const KARAOKE_MODE_STORAGE_KEY = "liturgical-arabic:karaoke-mode";
-const CAPTION_TEXT_MODES = ["none", "translation", "literal"];
 const REQUIRED_TEXT_MODES = ["translation", "literal"];
 
 function getStoredKaraokeMode() {
@@ -20,9 +19,9 @@ function getStoredKaraokeMode() {
 }
 
 function getStoredCaptionTextMode() {
-  if (typeof window === "undefined") return "none";
+  if (typeof window === "undefined") return "literal";
   const stored = window.localStorage.getItem(CAPTION_TEXT_MODE_STORAGE_KEY);
-  return CAPTION_TEXT_MODES.includes(stored) ? stored : "none";
+  return REQUIRED_TEXT_MODES.includes(stored) ? stored : "literal";
 }
 
 function getStoredPracticeTextMode() {

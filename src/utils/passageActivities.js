@@ -6,6 +6,7 @@ export const PASSAGE_ACTIVITY_TYPES = {
   typeEnglish: "type-english",
   matching: "matching",
   translationDirection: "translation-direction",
+  learn: "learn",
   cloze: "cloze"
 };
 
@@ -17,6 +18,7 @@ export const PASSAGE_ACTIVITY_LABELS = {
   [PASSAGE_ACTIVITY_TYPES.typeEnglish]: "Recall",
   [PASSAGE_ACTIVITY_TYPES.matching]: "Matching",
   [PASSAGE_ACTIVITY_TYPES.translationDirection]: "Translate",
+  [PASSAGE_ACTIVITY_TYPES.learn]: "Learn",
   [PASSAGE_ACTIVITY_TYPES.cloze]: "Cloze"
 };
 

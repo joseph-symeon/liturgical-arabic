@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './course.css';
 import PageHeader from '../PageHeader.jsx';
 import PassageExperience from '../passage/PassageExperience.jsx';
-import exercises, { canUseActivityType, getExerciseWithActivity, getStandardActivityOptions, hasLinkedRecording } from '../../data/course/exercises.js';
+import exercises, { canUseActivityType, getExerciseWithActivity, getStandardActivityOptions } from '../../data/course/exercises.js';
 import { getExerciseTitle } from './exerciseTitles.js';
 import { getPassageActivityLabel, PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 import { createExercisePassage } from '../../utils/passages.js';
@@ -14,37 +14,56 @@ import {
 
 function getActivityOptions(item) {
   if (item?.activity_options) {
-    return augmentSmallExerciseActivityOptions(item.exercise_id, item.activity_options)
+    return getPrimaryActivityOptions(item.exercise_id, item.activity_options)
       .filter(option => canUseActivityType(item.exercise_id, option.activity_type));
   }
   if (item?.activity_policy === 'standard') return getStandardActivityOptions(item.exercise_id);
   return [];
 }
 
-function augmentSmallExerciseActivityOptions(exerciseId, activityOptions) {
-  const options = (activityOptions || []).filter(option => (
-    option.activity_type !== PASSAGE_ACTIVITY_TYPES.phraseCaptions || hasLinkedRecording(exerciseId)
-  ));
+function getPrimaryActivityOptions(exerciseId, activityOptions) {
+  const sourceOptions = activityOptions || [];
+  const options = [{
+    label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.readListen],
+    activity_type: PASSAGE_ACTIVITY_TYPES.readListen
+  }];
   if (!exerciseId || !exercises[exerciseId]) return options;
   const standardOptions = getStandardActivityOptions(exerciseId);
-  return standardOptions.reduce((augmentedOptions, standardOption) => {
-    if (
-      ![
-        PASSAGE_ACTIVITY_TYPES.matching,
-        PASSAGE_ACTIVITY_TYPES.translationDirection,
-        PASSAGE_ACTIVITY_TYPES.typeArabic,
-        PASSAGE_ACTIVITY_TYPES.typeEnglish
-      ].includes(standardOption.activity_type)
-        || augmentedOptions.some(option => option.activity_type === standardOption.activity_type)
-    ) {
-      return augmentedOptions;
-    }
+  const canUseCaptions = sourceOptions.some(option => option.activity_type === PASSAGE_ACTIVITY_TYPES.phraseCaptions)
+    || standardOptions.some(option => option.activity_type === PASSAGE_ACTIVITY_TYPES.phraseCaptions);
+  const canLearn = sourceOptions.some(option => [
+    PASSAGE_ACTIVITY_TYPES.learn,
+    PASSAGE_ACTIVITY_TYPES.matching,
+    PASSAGE_ACTIVITY_TYPES.translationDirection,
+    PASSAGE_ACTIVITY_TYPES.arrange,
+    PASSAGE_ACTIVITY_TYPES.typeArabic,
+    PASSAGE_ACTIVITY_TYPES.typeEnglish
+  ].includes(option.activity_type)) || standardOptions.some(option => option.activity_type === PASSAGE_ACTIVITY_TYPES.learn);
+  const canTrace = sourceOptions.some(option => option.activity_type === PASSAGE_ACTIVITY_TYPES.typeArabic)
+    || standardOptions.some(option => option.activity_type === PASSAGE_ACTIVITY_TYPES.typeArabic);
 
-    return augmentedOptions.concat({
-      label: PASSAGE_ACTIVITY_LABELS[standardOption.activity_type],
-      activity_type: standardOption.activity_type
+  if (canUseCaptions) {
+    options.push({
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions],
+      activity_type: PASSAGE_ACTIVITY_TYPES.phraseCaptions
     });
-  }, options);
+  }
+
+  if (canLearn && !options.some(option => option.activity_type === PASSAGE_ACTIVITY_TYPES.learn)) {
+    options.push({
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.learn],
+      activity_type: PASSAGE_ACTIVITY_TYPES.learn
+    });
+  }
+
+  if (canTrace && !options.some(option => option.activity_type === PASSAGE_ACTIVITY_TYPES.typeArabic)) {
+    options.push({
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeArabic],
+      activity_type: PASSAGE_ACTIVITY_TYPES.typeArabic
+    });
+  }
+
+  return options;
 }
 
 function getActivityOptionValue(option) {
@@ -107,6 +126,7 @@ export default function LessonPage({
   const unitTitle = lesson.unitTitle || lesson.unit_title;
   const exerciseTitle = getExerciseTitle(lesson, selectedExerciseIndex);
   const selectedActivityType = selectedExercise?.exercise?.activity?.type || null;
+  const isLearnActivity = selectedActivityType === PASSAGE_ACTIVITY_TYPES.learn;
   const selectedActivityLabel = selectedActivityOption?.label || getPassageActivityLabel(selectedExercise?.exercise?.activity);
   const selectedActivityValue = getActivityOptionValue(selectedActivityOption) || selectedExerciseItem.exercise_id;
   const passage = createExercisePassage({ exercise: selectedExercise?.exercise });
@@ -121,13 +141,15 @@ export default function LessonPage({
   }
 
   return (
-    <div className="lp-page bottom-nav-page" dir="ltr">
-      <PageHeader
-        eyebrow={unitTitle}
-        title={lesson.title}
-        secondaryTitle={exerciseTitle}
-      />
-      {lesson.subtitle && <p className="lp-subtitle">{lesson.subtitle}</p>}
+    <div className={`lp-page bottom-nav-page${isLearnActivity ? " learn-mode-page" : ""}`} dir="ltr">
+      {!isLearnActivity && (
+        <PageHeader
+          eyebrow={unitTitle}
+          title={lesson.title}
+          secondaryTitle={exerciseTitle}
+        />
+      )}
+      {!isLearnActivity && lesson.subtitle && <p className="lp-subtitle">{lesson.subtitle}</p>}
 
       {missingExercises.length > 0 && (
         <p className="lp-config-note">
@@ -161,33 +183,35 @@ export default function LessonPage({
         />
       )}
 
-      <nav className="lp-course-nav page-nav bottom-page-nav" dir="ltr" aria-label="Course lesson navigation">
-        <div className="page-nav-grid">
-          <button
-            type="button"
-            onClick={onPreviousExercise}
-            disabled={!hasPreviousExercise}
-            className="page-nav-button page-nav-button-start"
-          >
-            {renderNavLabel('Previous', previousExerciseTitle)}
-          </button>
-          <button
-            type="button"
-            onClick={onCourseOverview}
-            className="page-nav-button page-nav-button-center"
-          >
-            <span className="page-nav-label">Course Overview</span>
-          </button>
-          <button
-            type="button"
-            onClick={onNextExercise}
-            disabled={!hasNextExercise}
-            className="page-nav-button page-nav-button-end"
-          >
-            {renderNavLabel('Next', nextExerciseTitle)}
-          </button>
-        </div>
-      </nav>
+      {!isLearnActivity && (
+        <nav className="lp-course-nav page-nav bottom-page-nav" dir="ltr" aria-label="Course lesson navigation">
+          <div className="page-nav-grid">
+            <button
+              type="button"
+              onClick={onPreviousExercise}
+              disabled={!hasPreviousExercise}
+              className="page-nav-button page-nav-button-start"
+            >
+              {renderNavLabel('Previous', previousExerciseTitle)}
+            </button>
+            <button
+              type="button"
+              onClick={onCourseOverview}
+              className="page-nav-button page-nav-button-center"
+            >
+              <span className="page-nav-label">Course Overview</span>
+            </button>
+            <button
+              type="button"
+              onClick={onNextExercise}
+              disabled={!hasNextExercise}
+              className="page-nav-button page-nav-button-end"
+            >
+              {renderNavLabel('Next', nextExerciseTitle)}
+            </button>
+          </div>
+        </nav>
+      )}
     </div>
   );
 }

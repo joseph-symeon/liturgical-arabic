@@ -2087,32 +2087,14 @@ export function getStandardActivityOptions(exerciseId) {
       activity_type: PASSAGE_ACTIVITY_TYPES.phraseCaptions
     });
   }
-  if (phraseCount >= 2 && phraseCount <= 14) {
+  if (phraseCount >= 1) {
     activityOptions.push({
-      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.translationDirection],
-      activity_type: PASSAGE_ACTIVITY_TYPES.translationDirection
+      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.learn],
+      activity_type: PASSAGE_ACTIVITY_TYPES.learn
     });
-  }
-  if (phraseCount > 1 && phraseCount <= 6) {
-    activityOptions.push({
-      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.matching],
-      activity_type: PASSAGE_ACTIVITY_TYPES.matching
-    });
-  }
-  if (phraseCount > 1 && phraseCount <= 12) {
-    activityOptions.push({
-      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.arrange],
-      activity_type: PASSAGE_ACTIVITY_TYPES.arrange
-    });
-  }
-  if (phraseCount <= 14) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeArabic],
       activity_type: PASSAGE_ACTIVITY_TYPES.typeArabic
-    });
-    activityOptions.push({
-      label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeEnglish],
-      activity_type: PASSAGE_ACTIVITY_TYPES.typeEnglish
     });
   }
   return activityOptions;
@@ -2223,6 +2205,17 @@ function getDerivedActivity(exercise, activityType) {
     };
   }
 
+  if (activityType === PASSAGE_ACTIVITY_TYPES.learn) {
+    return {
+      ...commonActivity,
+      type: PASSAGE_ACTIVITY_TYPES.learn,
+      title: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.learn],
+      learn: {
+        phrase_ids: phraseIds
+      }
+    };
+  }
+
   return exercise.activity;
 }
 
@@ -2234,7 +2227,8 @@ export function getExerciseWithActivity(exerciseId, activityType = null) {
     PASSAGE_ACTIVITY_TYPES.typeArabic,
     PASSAGE_ACTIVITY_TYPES.typeEnglish,
     PASSAGE_ACTIVITY_TYPES.matching,
-    PASSAGE_ACTIVITY_TYPES.translationDirection
+    PASSAGE_ACTIVITY_TYPES.translationDirection,
+    PASSAGE_ACTIVITY_TYPES.learn
   ]);
   const resolvedExercise = practiceActivityTypes.has(activityType)
     ? getPracticeExercise(exercise)
