@@ -1453,9 +1453,11 @@
   left: 22px;
 }
 
-.lp-learn-choice:hover:not(:disabled) {
-  border-color: var(--learn-muted);
-  background: var(--learn-surface);
+@media (hover: hover) and (pointer: fine) {
+  .lp-learn-choice:hover:not(:disabled) {
+    border-color: var(--learn-muted);
+    background: var(--learn-surface);
+  }
 }
 
 .lp-learn-choice.correct {
