@@ -2079,10 +2079,12 @@ export function canUseActivityType(exerciseId, activityType) {
     return phraseCount >= 2 && phraseCount <= 14;
   }
   if ([
-    PASSAGE_ACTIVITY_TYPES.typeArabic,
     PASSAGE_ACTIVITY_TYPES.typeEnglish
   ].includes(activityType)) {
     return phraseCount >= 1 && phraseCount <= 14;
+  }
+  if (activityType === PASSAGE_ACTIVITY_TYPES.typeArabic) {
+    return phraseCount >= 1;
   }
   return true;
 }

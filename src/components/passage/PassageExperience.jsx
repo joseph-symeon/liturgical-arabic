@@ -46,6 +46,7 @@ export default function PassageExperience({
   arabicFontWeight,
   arabicFontSize,
   showPracticeToolbar = true,
+  preserveToolbarInFocus = false,
   renderPassage
 }) {
   const resolvedActivityType = activityType || passage?.activity_type || null;
@@ -139,7 +140,16 @@ export default function PassageExperience({
         onTextModeChange={hasPracticeTextMode ? setPracticeTextMode : setCaptionTextMode}
         textModeRequired={hasPracticeTextMode}
         textModeLabel={hasPracticeTextMode ? "English text mode" : "Phrase caption text"}
-        hidden={!showPracticeToolbar}
+        textModeOptions={hasPracticeTextMode
+          ? [
+              ["translation", "Translation"],
+              ["literal", "Literal"]
+            ]
+          : [
+              ["translation", "Translation"],
+              ["literal", "Literal"]
+            ]}
+        hidden={!showPracticeToolbar && !preserveToolbarInFocus}
       />
 
       {captionActivity && (

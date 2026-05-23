@@ -26,73 +26,87 @@ export default function PassageActivityToolbar({
 
   if (!hasActivity && !player && !hasModes) return null;
 
-  return (
-    <div className={hidden ? "lp-activity-toolbar-shell hidden" : "lp-activity-toolbar-shell"}>
-      <div className="lp-activity-toolbar">
-        <div className="lp-activity-controls">
-          {hasActivity && (
-            <>
-              <label className="lp-activity-control-label" htmlFor={activitySelectId}>Activity</label>
-              <div className="lp-activity-card">
-                <div className="lp-activity-field">
-                  {activityOptions.length > 1 ? (
-                    <select
-                      id={activitySelectId}
-                      className="lp-activity-select"
-                      value={selectedActivityValue}
-                      onChange={event => onSelectActivity?.(event.target.value)}
-                    >
-                      {activityOptions.map(option => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    <span className="lp-activity-static">{activityLabel}</span>
-                  )}
-                </div>
-              </div>
-            </>
-          )}
-        </div>
+  const modeControls = hasModes ? (
+    <div className="lp-mode-toggle-row lp-activity-mode-row" dir="ltr">
+      {showKaraokeToggle && (
+        <button
+          type="button"
+          className={`lp-karaoke-mode-button${karaokeMode ? " active" : ""}`}
+          aria-pressed={karaokeMode}
+          onClick={() => onKaraokeModeChange?.(!karaokeMode)}
+        >
+          Karaoke
+        </button>
+      )}
 
-        <div className="lp-toolbar-player">
-          {player}
-        </div>
-      </div>
-
-      {hasModes && (
-        <div className="lp-mode-toggle-row lp-activity-mode-row" dir="ltr">
-          {showKaraokeToggle && (
-            <label className="lp-mode-toggle">
-              <input
-                type="checkbox"
-                checked={karaokeMode}
-                onChange={event => onKaraokeModeChange?.(event.target.checked)}
-              />
-              <span className="lp-mode-switch" aria-hidden="true" />
-              <span>Karaoke mode</span>
-            </label>
-          )}
-
-          {showTextModeControls && (
-            <div className="lp-segmented-control" role="group" aria-label={textModeLabel}>
-              {textModeOptions.map(([mode, label]) => (
-                <button
-                  key={mode}
-                  type="button"
-                  className={textMode === mode ? "active" : ""}
-                  aria-pressed={textMode === mode}
-                  onClick={() => onTextModeChange?.(textModeRequired || textMode !== mode ? mode : "none")}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          )}
+      {showTextModeControls && (
+        <div className="lp-segmented-control" role="group" aria-label={textModeLabel}>
+          {textModeOptions.map(([mode, label]) => (
+            <button
+              key={mode}
+              type="button"
+              className={textMode === mode ? "active" : ""}
+              aria-pressed={textMode === mode}
+              onClick={() => onTextModeChange?.(textModeRequired || textMode !== mode ? mode : "none")}
+            >
+              {label}
+            </button>
+          ))}
         </div>
       )}
     </div>
+  ) : null;
+
+  return (
+    <>
+      {(hasActivity || player) && (
+        <div className={hidden ? "lp-activity-toolbar-shell hidden" : "lp-activity-toolbar-shell"}>
+          <div className={`lp-activity-toolbar${hasModes ? " has-mode-controls" : ""}`}>
+            {hasActivity && (
+              <div className="lp-activity-controls">
+                <label className="lp-activity-control-label" htmlFor={activitySelectId}>Activity</label>
+                <div className="lp-activity-card">
+                  <div className="lp-activity-field">
+                    {activityOptions.length > 1 ? (
+                      <select
+                        id={activitySelectId}
+                        className="lp-activity-select"
+                        value={selectedActivityValue}
+                        onChange={event => onSelectActivity?.(event.target.value)}
+                      >
+                        {activityOptions.map(option => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <span className="lp-activity-static">{activityLabel}</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {player && (
+              <div className="lp-toolbar-player">
+                {player}
+              </div>
+            )}
+
+            {modeControls && (
+              <div className="lp-toolbar-mode-controls">
+                {modeControls}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+      {modeControls && !player && !hasActivity && (
+        <div className={hidden ? "lp-mode-controls-shell hidden" : "lp-mode-controls-shell"}>
+          {modeControls}
+        </div>
+      )}
+    </>
   );
 }

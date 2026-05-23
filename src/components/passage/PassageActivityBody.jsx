@@ -18,6 +18,8 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import PassageTextRenderer from './PassageTextRenderer.jsx';
+import StudyWorkspaceHeader from '../StudyWorkspaceHeader.jsx';
+import LiturgyLine from '../LiturgyLine.jsx';
 import phrases from '../../data/texts/phrases.js';
 import { getArabicText } from '../../utils/arabic.js';
 import { isPhraseCaptionsActivity, isReadListenActivity, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
@@ -29,6 +31,7 @@ const ARRANGE_CORRECT_FEEDBACK_MS = 1900;
 const ARRANGE_INCORRECT_FEEDBACK_MS = 1400;
 const MATCHING_COMPLETE_FEEDBACK_MS = 900;
 const LEARN_SETTINGS_STORAGE_KEY = 'liturgical-arabic:learn-settings';
+const LEARN_SETTINGS_OPEN_STORAGE_KEY = 'liturgical-arabic:learn-settings-open';
 const LEARN_MATCHING_MIN_PHRASES = 2;
 const LEARN_MATCHING_MAX_PHRASES = 6;
 const LEARN_ARRANGE_MIN_PHRASES = 2;
@@ -76,6 +79,11 @@ function getStoredLearnSettings() {
   } catch {
     return DEFAULT_LEARN_SETTINGS;
   }
+}
+
+function getStoredLearnSettingsOpen() {
+  if (typeof window === 'undefined') return false;
+  return window.localStorage.getItem(LEARN_SETTINGS_OPEN_STORAGE_KEY) === 'true';
 }
 
 function getShuffledPhraseIds(phraseIds, seed = '') {
@@ -362,7 +370,7 @@ function getTraceBoxHeight(traceElement, minimumRows) {
   const contentHeight = Math.max(0, traceElement.scrollHeight - paddingBlock);
   const traceRows = Math.max(minimumRows, Math.ceil(contentHeight / lineHeight));
 
-  return Math.ceil(paddingBlock + borderBlock + ((traceRows + 1) * lineHeight));
+  return Math.ceil(paddingBlock + borderBlock + (traceRows * lineHeight));
 }
 
 function getUniquePhraseIds(phraseIds) {
@@ -453,6 +461,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const [learnCorrectionPrompt, setLearnCorrectionPrompt] = useState(null);
   const [learnStarted, setLearnStarted] = useState(false);
   const [learnReviewMode, setLearnReviewMode] = useState(null);
+  const [learnSettingsOpen, setLearnSettingsOpen] = useState(getStoredLearnSettingsOpen);
   const [learnResetKey, setLearnResetKey] = useState(0);
   const [matchingShuffleKey, setMatchingShuffleKey] = useState(0);
   const [arrangeAnswerWidth, setArrangeAnswerWidth] = useState(0);
@@ -1023,6 +1032,11 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   ]);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(LEARN_SETTINGS_OPEN_STORAGE_KEY, String(learnSettingsOpen));
+  }, [learnSettingsOpen]);
+
+  useEffect(() => {
     if (!isLearnActivity) return;
     const nextQuestionTypes = {
       ...learnQuestionTypes,
@@ -1358,9 +1372,6 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   function renderTypeArabicActivity() {
     return (
       <div className="lp-type-arabic-activity" dir="ltr">
-        <label className="lp-type-arabic-label" htmlFor={`type-arabic-${exercise.id}`}>
-          Trace the Arabic
-        </label>
         <div
           className={`lp-type-arabic-copybox${typingFeedback ? ` ${typingFeedback}` : ''}`}
           ref={typingBoxRef}
@@ -1401,6 +1412,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
             spellCheck={false}
             autoCapitalize="none"
             autoCorrect="off"
+            aria-label="Trace the Arabic"
             rows={Math.max(1, typingPromptLines.length)}
             style={typingBoxHeight ? { height: `${typingBoxHeight}px` } : undefined}
           />
@@ -1799,7 +1811,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
               {renderMatchingActivity()}
               <div className="lp-learn-review-actions">
                 <button type="button" className="lp-activity-button" onClick={() => setLearnReviewMode(null)}>
-                  Back to Learn
+                  Back to Comprehension
                 </button>
               </div>
             </div>
@@ -1816,7 +1828,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
               {renderArrangeActivity()}
               <div className="lp-learn-review-actions">
                 <button type="button" className="lp-activity-button" onClick={() => setLearnReviewMode(null)}>
-                  Back to Learn
+                  Back to Comprehension
                 </button>
               </div>
             </div>
@@ -1937,18 +1949,19 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
       const progressPercent = totalPrompts > 0 ? Math.round((completedCount / totalPrompts) * 100) : 0;
       return (
         <div className="lp-learn-session-header">
-          <div className="lp-learn-topbar">
-            <div>
-              <div className="lp-learn-title">Learn</div>
-              <div className="lp-learn-progress-text">{progressText}</div>
-            </div>
-            <button type="button" className="lp-learn-ghost-button" onClick={returnToLearnSetup}>
-              Settings
-            </button>
-          </div>
+          <StudyWorkspaceHeader
+            title="Comprehension"
+            subtitle={progressText}
+            className="lp-learn-topbar"
+            actions={(
+              <button type="button" className="lp-learn-ghost-button" onClick={returnToLearnSetup}>
+                Settings
+              </button>
+            )}
+          />
           <div
             className={`lp-learn-progress-rail${completedCount === totalPrompts ? ' complete' : ''}`}
-            aria-label={`Learn progress ${progressText}`}
+            aria-label={`Comprehension progress ${progressText}`}
             style={{ '--learn-progress-position': `${progressPercent}%` }}
           >
             <div className="lp-learn-progress-fill" style={{ width: `${progressPercent}%` }} />
@@ -1971,38 +1984,76 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
       return renderLearnReview();
     }
 
+    function renderLearnPhrases() {
+      return (
+        <section className="lp-learn-phrases" aria-labelledby="lp-learn-phrases-title">
+          <div className="lp-learn-settings-section-title" id="lp-learn-phrases-title">Phrases</div>
+          <div className="lp-study-home-phrase-list">
+            {learnPhraseIds.map(phraseId => {
+              const phrase = phrases[phraseId];
+              return (
+                <div className="lp-study-home-phrase" key={phraseId}>
+                  <span className="lp-study-home-phrase-arabic" dir="rtl">
+                    <LiturgyLine
+                      line={[{ id: phraseId }]}
+                      arabicMode={arabicMode}
+                      speechRate={speechRate}
+                      arabicFontFamily={arabicFontFamily}
+                      arabicFontWeight={arabicFontWeight}
+                      arabicFontSize={arabicFontSize}
+                    />
+                  </span>
+                  <span className="lp-study-home-phrase-meaning">
+                    {getLearnTextAnswer(phrase, learnEnglishDisplayMode)}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
     if (!learnStarted) {
       return (
         <div className="lp-learn-activity lp-learn-setup" dir="ltr">
-          <div className="lp-learn-topbar">
-            <div>
-              <div className="lp-learn-title">Learn</div>
-              <div className="lp-learn-setup-subtitle">
-                <span>{totalTerms} phrase{totalTerms === 1 ? '' : 's'}</span>
-                <label className="lp-learn-shuffle-chip">
-                  <input
-                    type="checkbox"
-                    checked={learnShuffleTerms}
-                    onChange={event => {
-                      setLearnShuffleTerms(event.target.checked);
-                      resetLearnSession();
-                    }}
-                  />
-                  <span>{learnShuffleTerms ? 'Shuffled' : 'In order'}</span>
-                </label>
+          <StudyWorkspaceHeader
+            title="Comprehension"
+            className="lp-learn-topbar"
+            actions={(
+              <div className="lp-learn-start-actions">
+                <button type="button" className="lp-activity-button lp-activity-submit" onClick={startLearnSession}>
+                  Start
+                </button>
               </div>
-            </div>
-            <div className="lp-learn-start-actions">
-              <button type="button" className="lp-activity-button lp-activity-submit" onClick={startLearnSession}>
-                Start Learn
-              </button>
-            </div>
-          </div>
-          <div className="lp-learn-settings">
+            )}
+          />
+          <details
+            className="lp-learn-settings"
+            open={learnSettingsOpen}
+            onToggle={event => setLearnSettingsOpen(event.currentTarget.open)}
+          >
+            <summary className="lp-learn-settings-summary">
+              <span>Activity mix</span>
+              <span>{learnSettingsOpen ? 'Hide' : 'Edit'}</span>
+            </summary>
             <div className="lp-learn-answer-settings">
               <div className="lp-learn-settings-section">
-                <div className="lp-learn-settings-section-title">Activity mix</div>
                 <div className="lp-learn-activity-mix">
+                  <div className="lp-learn-setting-group lp-learn-settings-panel">
+                    <span className="lp-learn-setting-label">Shuffle phrases</span>
+                    <label className="lp-mode-toggle lp-learn-setting-toggle" aria-label="Shuffle phrases">
+                      <input
+                        type="checkbox"
+                        checked={learnShuffleTerms}
+                        onChange={event => {
+                          setLearnShuffleTerms(event.target.checked);
+                          resetLearnSession();
+                        }}
+                      />
+                      <span className="lp-mode-switch" aria-hidden="true" />
+                    </label>
+                  </div>
                   <div className="lp-learn-settings-panel-grid">
                     <div className={learnQuestionTypes.multipleChoice ? "lp-learn-setting-group lp-learn-settings-panel" : "lp-learn-setting-group lp-learn-settings-panel disabled"}>
                       <span className="lp-learn-setting-label">Multiple choice</span>
@@ -2085,8 +2136,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
                   <span className="lp-learn-setting-label">English captions</span>
                   <div className="lp-segmented-control" role="group" aria-label="English display">
                     {[
-                      ['literal', 'Literal'],
-                      ['translation', 'Translation']
+                      ['translation', 'Translation'],
+                      ['literal', 'Literal']
                     ].map(([value, label]) => (
                       <button
                         key={value}
@@ -2104,7 +2155,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
                 </div>
               </div>
             </div>
-          </div>
+          </details>
+          {renderLearnPhrases()}
         </div>
       );
     }
@@ -2161,7 +2213,7 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
           <div className="lp-learn-complete">
             <div className="lp-learn-complete-mark" aria-hidden="true">✓</div>
             <div className="lp-learn-complete-copy">
-              <div className="lp-learn-complete-kicker">Learn session</div>
+              <div className="lp-learn-complete-kicker">Comprehension session</div>
               <div className="lp-learn-complete-title">Complete</div>
               <div className="lp-learn-complete-stats">{completionSummary}</div>
             </div>

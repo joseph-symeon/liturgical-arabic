@@ -4,7 +4,6 @@ import CourseOverview from "./components/course/CourseOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
 import InteractiveText from "./components/InteractiveText.jsx";
 import PhraseTooltip from "./components/PhraseTooltip.jsx";
-import { getServiceSectionAudio } from "./data/media/serviceSectionAudio.js";
 import { defaultServiceText, defaultServiceTextId, getServiceText, readerServiceTexts } from "./data/texts/serviceTexts.js";
 import phrases from "./data/texts/phrases.js";
 import units from "./data/course/units.js";
@@ -76,6 +75,7 @@ const COMPACT_CHROME_WIDTH = 900;
 const NAV_MENU_STORAGE_KEY = "liturgical-arabic:navigation-menu-open";
 const NAV_DETAILS_STORAGE_KEY = "liturgical-arabic:navigation-details-open";
 const DISPLAY_SETTINGS_STORAGE_KEY = "liturgical-arabic:display-settings";
+const COURSE_STUDY_WORKSPACE_STORAGE_KEY = "liturgical-arabic:study-workspace";
 
 const ORDERED_UNITS = [...units].sort((a, b) => a.display_order - b.display_order);
 const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
@@ -266,6 +266,12 @@ function getStoredDisplaySettings() {
   }
 }
 
+function getStoredCourseStudyWorkspace() {
+  if (typeof window === "undefined") return "home";
+  const stored = window.localStorage.getItem(COURSE_STUDY_WORKSPACE_STORAGE_KEY);
+  return ["home", "recitation", "comprehension"].includes(stored) ? stored : "home";
+}
+
 export default function App() {
   const [initialNavigation] = useState(() => parseNavigationHash());
   const [initialDisplaySettings] = useState(() => getStoredDisplaySettings());
@@ -290,6 +296,7 @@ export default function App() {
   const [arabicFontSize, setArabicFontSize] = useState(initialDisplaySettings.arabicFontSize);
   const speechRate = DEFAULT_SPEECH_RATE;
   const [showPracticeToolbar, setShowPracticeToolbar] = useState(initialDisplaySettings.showPracticeToolbar);
+  const [courseStudyWorkspace, setCourseStudyWorkspace] = useState(getStoredCourseStudyWorkspace);
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
   const [isCompactChrome, setIsCompactChrome] = useState(false);
   const [showCompactTitle, setShowCompactTitle] = useState(false);
@@ -563,9 +570,6 @@ export default function App() {
     ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
   const selectedLiturgySection = selectedSectionIndex === null ? null : readerSections[selectedSectionIndex];
-  const selectedLiturgySectionHasPracticeToolbar = Boolean(
-    selectedLiturgySection && getServiceSectionAudio(selectedServiceText.id, selectedLiturgySection, selectedSectionIndex)
-  );
   const compactPageTitle =
     view === "reader"
       ? (selectedLiturgySection?.section ?? readerServiceHomeTitle)
@@ -583,9 +587,16 @@ export default function App() {
     !menuOpen &&
     !displayMenuOpen &&
     Boolean(compactPageTitle);
-  const pageHasPracticeToolbar =
-    (view === "reader" && selectedLiturgySectionHasPracticeToolbar)
-    || (view === "lessons" && Boolean(selectedLessonWithUnit));
+  const pageCanUseFocusMode =
+    view === "lessons"
+    && Boolean(selectedLessonWithUnit)
+    && courseStudyWorkspace === "recitation";
+
+  useEffect(() => {
+    if (!pageCanUseFocusMode && !showPracticeToolbar) {
+      setShowPracticeToolbar(true);
+    }
+  }, [pageCanUseFocusMode, showPracticeToolbar]);
 
   function renderHome() {
     const homeTitlePhrases = HOME_TITLE_PHRASE_IDS.map(phraseId => phrases[phraseId]).filter(Boolean);
@@ -1168,7 +1179,7 @@ export default function App() {
           )
         })}
 
-      {pageHasPracticeToolbar && !(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderFocusModeToggle()}
+      {pageCanUseFocusMode && !(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderFocusModeToggle()}
 
       {isNarrowViewport && menuOpen && (
         <button
@@ -1395,6 +1406,7 @@ export default function App() {
             hasNextExercise={hasNextExercise}
             previousExerciseTitle={previousExerciseTitle}
             nextExerciseTitle={nextExerciseTitle}
+            onStudySkillChange={setCourseStudyWorkspace}
             onCourseOverview={goToCourseOverview}
             onPreviousExercise={goToPreviousExercise}
             onNextExercise={goToNextExercise}
