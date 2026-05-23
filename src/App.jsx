@@ -493,39 +493,6 @@ export default function App() {
     setView("reader");
   }
 
-  function goToPreviousLesson() {
-    const selectedLessonIndex = COURSE_LESSONS.findIndex(lesson => lesson.id === selectedLessonId);
-    const previousLesson = COURSE_LESSONS[Math.max(0, selectedLessonIndex - 1)];
-    if (previousLesson) {
-      goToLesson(previousLesson.id, Math.max(0, (previousLesson.exercises?.length ?? 1) - 1));
-    }
-  }
-
-  function goToNextLesson() {
-    const selectedLessonIndex = COURSE_LESSONS.findIndex(lesson => lesson.id === selectedLessonId);
-    const nextLesson = COURSE_LESSONS[Math.min(COURSE_LESSONS.length - 1, selectedLessonIndex + 1)];
-    if (nextLesson) {
-      goToLesson(nextLesson.id, 0);
-    }
-  }
-
-  function goToPreviousExercise() {
-    if (selectedExerciseIndex > 0) {
-      goToLesson(selectedLessonId, selectedExerciseIndex - 1);
-      return;
-    }
-    goToPreviousLesson();
-  }
-
-  function goToNextExercise() {
-    const exerciseCount = selectedLesson?.exercises?.length ?? 0;
-    if (selectedExerciseIndex < exerciseCount - 1) {
-      goToLesson(selectedLessonId, selectedExerciseIndex + 1);
-      return;
-    }
-    goToNextLesson();
-  }
-
   function adjustArabicFontSize(delta) {
     setArabicFontSize(size => Math.max(18, Math.min(36, size + delta)));
   }
@@ -555,24 +522,7 @@ export default function App() {
   const selectedLessonWithUnit = selectedLesson
     ? { ...selectedLesson, unitTitle: selectedLessonCourseItem?.title }
     : null;
-  const selectedLessonIndex = COURSE_LESSONS.findIndex(lesson => lesson.id === selectedLessonId);
   const clampedExerciseIndex = Math.max(0, Math.min(selectedExerciseIndex, (selectedLesson?.exercises?.length ?? 1) - 1));
-  const hasPreviousExercise = selectedLessonIndex > 0 || clampedExerciseIndex > 0;
-  const hasNextExercise =
-    selectedLessonIndex >= 0 &&
-    (selectedLessonIndex < COURSE_LESSONS.length - 1 || clampedExerciseIndex < (selectedLesson?.exercises?.length ?? 1) - 1);
-  const previousLesson = COURSE_LESSONS[selectedLessonIndex - 1];
-  const nextLesson = COURSE_LESSONS[selectedLessonIndex + 1];
-  const previousExerciseTitle = hasPreviousExercise
-    ? clampedExerciseIndex > 0
-      ? getExerciseTitle(selectedLesson, clampedExerciseIndex - 1)
-      : getExerciseTitle(previousLesson, Math.max(0, (previousLesson?.exercises?.length ?? 1) - 1))
-    : null;
-  const nextExerciseTitle = hasNextExercise
-    ? clampedExerciseIndex < (selectedLesson?.exercises?.length ?? 1) - 1
-      ? getExerciseTitle(selectedLesson, clampedExerciseIndex + 1)
-      : getExerciseTitle(nextLesson, 0)
-    : null;
   const canUseAppBack = view !== "home" || Boolean(selectedCourseTrack);
   const isLessonActivityView = view === "lessons" && courseStudyWorkspace !== "home";
   const appBackLabel =
@@ -625,51 +575,6 @@ export default function App() {
   const nextSectionTitle = hasNextSection
     ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
-  const selectedLiturgySection = selectedSectionIndex === null ? null : readerSections[selectedSectionIndex];
-  const appRelativePathSegments = [];
-  if (view === "course-overview") {
-    appRelativePathSegments.push(
-      { label: "Course", onClick: goHome },
-      { label: "Tracks", onClick: goToCourseOverview }
-    );
-    if (selectedCourseTrack) {
-      appRelativePathSegments.push({
-        label: selectedCourseTrack.title,
-        onClick: () => goToCourseTrack(selectedCourseTrack.id)
-      });
-    }
-  } else if (view === "lessons") {
-    appRelativePathSegments.push(
-      { label: "Course", onClick: goHome },
-      { label: "Tracks", onClick: goToCourseOverview }
-    );
-    if (selectedLessonCourseItem) {
-      appRelativePathSegments.push({
-        label: selectedLessonCourseItem.title,
-        onClick: () => goToCourseTrack(selectedLessonCourseItem.id)
-      });
-    }
-    if (selectedLesson) {
-      appRelativePathSegments.push({
-        label: selectedLesson.title,
-        onClick: () => goToLessonStudyHome(selectedLesson.id, clampedExerciseIndex)
-      });
-    }
-  } else if (view === "reader") {
-    appRelativePathSegments.push({ label: "Read", onClick: () => goToTableOfContents(selectedServiceText.id) });
-    if (selectedServiceText) {
-      appRelativePathSegments.push({
-        label: selectedServiceText.short_title || selectedServiceText.title,
-        onClick: () => goToTableOfContents(selectedServiceText.id)
-      });
-    }
-    if (selectedLiturgySection) {
-      appRelativePathSegments.push({
-        label: selectedLiturgySection.section,
-        onClick: () => goToLiturgySection(selectedSectionIndex, selectedServiceText.id)
-      });
-    }
-  }
   const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
   const pageCanUseFocusMode =
     view === "lessons"
@@ -961,65 +866,30 @@ export default function App() {
   function renderAppBackButton() {
     const leftOffset = menuOpen && !isNarrowViewport ? SIDE_PANEL_WIDTH + 12 : 52;
     return (
-      <>
-        <button
-          type="button"
-          onClick={goBackInApp}
-          aria-label={appBackLabel}
-          title={appBackLabel}
-          className="rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
-          style={{
-            position: "fixed",
-            top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
-            left: `${leftOffset}px`,
-            zIndex: 40,
-            border: "none",
-            cursor: "pointer",
-            padding: "6px",
-            color: "inherit"
-          }}
-        >
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
-        {appRelativePathSegments.length > 0 && (
-          <div
-            className="app-relative-path"
-            aria-hidden="true"
-            style={{
-              position: "fixed",
-              top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 14px)" : "14px",
-              left: `${leftOffset + 42}px`,
-              zIndex: 40,
-              width: "max-content",
-              maxWidth: `calc(100vw - ${leftOffset + (isCompactChrome ? 128 : 114)}px)`
-            }}
-          >
-            {appRelativePathSegments.map(({ label, onClick }, segmentIndex) => {
-              const isCurrentSegment = segmentIndex === appRelativePathSegments.length - 1;
-              return (
-                <React.Fragment key={`${label}:${segmentIndex}`}>
-                  {segmentIndex > 0 && <span className="app-relative-path-separator">/</span>}
-                  {isCurrentSegment ? (
-                    <span className="app-relative-path-current" aria-current="page">
-                      {label}
-                    </span>
-                  ) : (
-                    <button
-                      type="button"
-                      className="app-relative-path-parent"
-                      onClick={onClick}
-                    >
-                      {label}
-                    </button>
-                  )}
-                </React.Fragment>
-              );
-            })}
-          </div>
-        )}
-      </>
+      <button
+        type="button"
+        onClick={event => {
+          goBackInApp();
+          event.currentTarget.blur();
+        }}
+        aria-label={appBackLabel}
+        title={appBackLabel}
+        className="rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
+        style={{
+          position: "fixed",
+          top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
+          left: `${leftOffset}px`,
+          zIndex: 40,
+          border: "none",
+          cursor: "pointer",
+          padding: "6px",
+          color: "inherit"
+        }}
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
     );
   }
 
@@ -1583,17 +1453,10 @@ export default function App() {
             showPracticeToolbar={showPracticeToolbar}
             studyWorkspace={courseStudyWorkspace}
             selectedExerciseIndex={clampedExerciseIndex}
-            hasPreviousExercise={hasPreviousExercise}
-            hasNextExercise={hasNextExercise}
-            previousExerciseTitle={previousExerciseTitle}
-            nextExerciseTitle={nextExerciseTitle}
             onStudySkillChange={setCourseStudyWorkspace}
-            onCourseOverview={goToCourseOverview}
             onCourseTrack={goToSelectedLessonTrack}
             onCourseLesson={() => goToLessonStudyHome(selectedLessonId, clampedExerciseIndex)}
             onSelectExercise={(exerciseIndex, studyWorkspace) => goToLessonStudyHome(selectedLessonId, exerciseIndex, studyWorkspace)}
-            onPreviousExercise={goToPreviousExercise}
-            onNextExercise={goToNextExercise}
           />
         )}
         {view === "lessons" && !selectedLesson && (

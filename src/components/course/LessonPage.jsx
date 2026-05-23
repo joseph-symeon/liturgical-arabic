@@ -20,6 +20,7 @@ const STUDY_SKILLS = {
 };
 
 const STUDY_SKILL_STORAGE_KEY = 'liturgical-arabic:study-workspace';
+const MARKER_FILL_CONFIDENCE = 0.8;
 
 const RECITATION_ACTIVITY_TYPES = [
   PASSAGE_ACTIVITY_TYPES.readListen,
@@ -163,17 +164,10 @@ export default function LessonPage({
   showPracticeToolbar = true,
   studyWorkspace,
   selectedExerciseIndex,
-  hasPreviousExercise,
-  hasNextExercise,
-  previousExerciseTitle,
-  nextExerciseTitle,
   onStudySkillChange,
-  onCourseOverview,
   onCourseTrack,
   onCourseLesson,
-  onSelectExercise,
-  onPreviousExercise,
-  onNextExercise
+  onSelectExercise
 }) {
   const exerciseItems = lesson.exercises ?? [];
   const selectedExerciseItem = exerciseItems[selectedExerciseIndex] ?? exerciseItems[0];
@@ -268,15 +262,6 @@ export default function LessonPage({
     selectStudySkill(skill);
   }
 
-  function renderNavLabel(action, destination) {
-    return (
-      <>
-        <span className="page-nav-label">{action}</span>
-        {destination && <span className="page-nav-destination">{destination}</span>}
-      </>
-    );
-  }
-
   function selectActivityValue(value) {
     setSelectedActivityOptionId(value);
     storeActivitySelection(SHARED_ACTIVITY_SELECTION_KEY, value);
@@ -350,12 +335,10 @@ export default function LessonPage({
   function renderRecitationWorkspace() {
     return (
       <section className="lp-recitation-workspace" aria-label="Recitation practice">
-        <div className="lp-study-home-topbar">
-          <div>
-            <div className="lp-study-home-kicker">{unitTitle}</div>
-            <h1>{lesson.title}</h1>
-            <div className="lp-study-home-context">{exerciseTitle}</div>
-          </div>
+        <div className="lp-view-header">
+          <div className="lp-view-kicker">{unitTitle}</div>
+          <h1 className="lp-view-title">{lesson.title}</h1>
+          <div className="lp-view-meta">{exerciseTitle}</div>
         </div>
         {renderPassageExperience()}
       </section>
@@ -388,16 +371,13 @@ export default function LessonPage({
   function renderStudyHome() {
     return (
       <section className="lp-study-home-card" aria-labelledby="study-home-title">
-        <div className="lp-study-home-topbar">
-          <div>
-            <div className="lp-study-home-kicker">{unitTitle}</div>
-            <h1 id="study-home-title">{lesson.title}</h1>
-            <div className="lp-study-home-context">{studyHomeContext}</div>
-          </div>
+        <div className="lp-view-header">
+          <div className="lp-view-kicker">{unitTitle}</div>
+          <h1 className="lp-view-title" id="study-home-title">{lesson.title}</h1>
+          <div className="lp-view-meta">{studyHomeContext}</div>
         </div>
 
-        <section className="lp-study-home-exercise-summary" aria-labelledby="study-home-exercise-summary-title">
-          <div className="lp-study-home-panel-label" id="study-home-exercise-summary-title">Lesson exercises</div>
+        <section className="lp-study-home-exercise-summary" aria-label="Exercises">
           <div className="lp-study-home-exercise-list">
             {exerciseItems.map((item, exerciseIndex) => {
               const itemActivityOptions = getActivityOptions(item);
@@ -409,7 +389,11 @@ export default function LessonPage({
               return (
                 <article
                   key={`${lesson.id}:${item.exercise_id}:${exerciseIndex}`}
-                  className={`lp-study-home-exercise-row${isSelectedExercise ? ' active' : ''}`}
+                  className={[
+                    'lp-study-home-exercise-row',
+                    isSelectedExercise ? 'active' : '',
+                    exerciseConfidence >= MARKER_FILL_CONFIDENCE ? 'confident' : ''
+                  ].filter(Boolean).join(' ')}
                 >
                   <button
                     type="button"
@@ -457,6 +441,7 @@ export default function LessonPage({
     <div
       className={[
         'lp-page',
+        'course-view-page',
         'bottom-nav-page',
         isStudyHome ? 'study-home-page' : '',
         isLearnActivity && !isStudyHome ? 'learn-mode-page' : '',
@@ -476,36 +461,6 @@ export default function LessonPage({
 
       {selectedExercise?.exercise && !isStudyHome && (
         isRecitationMode ? renderRecitationWorkspace() : renderPassageExperience()
-      )}
-
-      {(isStudyHome || (!isLearnActivity && !isRecitationMode)) && (
-        <nav className="lp-course-nav page-nav bottom-page-nav" dir="ltr" aria-label="Course lesson navigation">
-          <div className="page-nav-grid">
-            <button
-              type="button"
-              onClick={onPreviousExercise}
-              disabled={!hasPreviousExercise}
-              className="page-nav-button page-nav-button-start"
-            >
-              {renderNavLabel('Previous', previousExerciseTitle)}
-            </button>
-            <button
-              type="button"
-              onClick={onCourseOverview}
-              className="page-nav-button page-nav-button-center"
-            >
-              <span className="page-nav-label">Course Overview</span>
-            </button>
-            <button
-              type="button"
-              onClick={onNextExercise}
-              disabled={!hasNextExercise}
-              className="page-nav-button page-nav-button-end"
-            >
-              {renderNavLabel('Next', nextExerciseTitle)}
-            </button>
-          </div>
-        </nav>
       )}
     </div>
   );

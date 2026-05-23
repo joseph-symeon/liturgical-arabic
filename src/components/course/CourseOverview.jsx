@@ -10,6 +10,8 @@ import {
 } from '../../utils/courseMastery.js';
 import { getStoredPhraseConfidenceMap, PHRASE_PROGRESS_EVENT } from '../../utils/progressScoring.js';
 
+const MARKER_FILL_CONFIDENCE = 0.8;
+
 function formatPercent(value) {
   return `${Math.round(value * 100)}%`;
 }
@@ -119,14 +121,18 @@ export default function CourseOverview({
     const phraseIds = getCourseItemPhraseIds(item);
     const lessonCount = getCourseItemLessonIds(item).length;
     const itemConfidence = getRequiredTrackConfidence(item, phraseConfidenceById);
-    const itemLabel = item.type === 'track' ? 'Track' : 'Lesson';
     const isBonus = item.type === 'bonus';
     const prerequisiteLabel = getPrerequisiteLabel(item);
+    const isConfident = itemConfidence >= MARKER_FILL_CONFIDENCE;
 
     return (
       <button
         type="button"
-        className={isBonus ? 'lp-course-path-card bonus' : 'lp-course-path-card'}
+        className={[
+          'lp-course-path-card',
+          isBonus ? 'bonus' : '',
+          isConfident ? 'confident' : ''
+        ].filter(Boolean).join(' ')}
         key={item.id}
         onClick={() => openTrack(item)}
         style={{ '--track-progress': itemConfidence }}
@@ -138,12 +144,11 @@ export default function CourseOverview({
           {prerequisiteLabel && <span className="lp-course-path-state">{prerequisiteLabel}</span>}
         </div>
         <div className="lp-course-path-main">
-          <div className="lp-course-path-type">{itemLabel}</div>
           <h3>{item.title}</h3>
-        </div>
-        <div className="lp-course-path-meta">
-          <span>{lessonCount} {lessonCount === 1 ? 'lesson' : 'lessons'}</span>
-          <span>{getPhraseCountLabel(phraseIds.size)}</span>
+          <div className="lp-course-path-meta">
+            <span>{lessonCount} {lessonCount === 1 ? 'lesson' : 'lessons'}</span>
+            <span>{getPhraseCountLabel(phraseIds.size)}</span>
+          </div>
         </div>
         <div className="lp-course-path-confidence" aria-label={`${formatPercent(itemConfidence)} required track confidence`}>
           <span>
@@ -151,29 +156,22 @@ export default function CourseOverview({
           </span>
           <strong>{formatPercent(itemConfidence)}</strong>
         </div>
-        <span className="lp-course-path-arrow" aria-hidden="true">›</span>
+        <span className="lp-course-path-action">Practice</span>
       </button>
     );
   }
 
   function renderTrackDetail(track) {
     const lessonRows = getTrackLessonRows(track);
-    const coreLessonRows = lessonRows.filter(row => row.type !== 'bonus');
-    const bonusLessonRows = lessonRows.filter(row => row.type === 'bonus');
-    const prerequisiteLabel = getPrerequisiteLabel(track);
     const phraseIds = getCourseItemPhraseIds(track);
 
     return (
       <section className="lp-track-detail" aria-labelledby="track-detail-title">
-        <div className="lp-track-detail-header">
-          <h2 id="track-detail-title">{track.title}</h2>
-          {prerequisiteLabel && <span className="lp-course-path-state">{prerequisiteLabel}</span>}
-          <div className="lp-course-path-meta">
-            <span>{coreLessonRows.length} core {coreLessonRows.length === 1 ? 'lesson' : 'lessons'}</span>
-            {bonusLessonRows.length > 0 && (
-              <span>{bonusLessonRows.length} bonus {bonusLessonRows.length === 1 ? 'lesson' : 'lessons'}</span>
-            )}
-            <span>{getPhraseCountLabel(phraseIds.size)}</span>
+        <div className="lp-view-header">
+          <div className="lp-view-kicker">Track</div>
+          <h2 className="lp-view-title" id="track-detail-title">{track.title}</h2>
+          <div className="lp-view-meta">
+            {lessonRows.length} {lessonRows.length === 1 ? 'lesson' : 'lessons'} · {getPhraseCountLabel(phraseIds.size)}
           </div>
         </div>
         <div className="lp-track-detail-list">
@@ -186,15 +184,14 @@ export default function CourseOverview({
               : lessonConfidence > 0
                 ? 'started'
                 : 'upcoming';
-            const actionLabel = progressState === 'mastered'
-              ? 'Review'
-              : progressState === 'started'
-                ? 'Practice'
-                : 'Start';
-
+            const isConfident = lessonConfidence >= MARKER_FILL_CONFIDENCE;
             return (
               <article
-                className={`lp-track-lesson-row ${progressState}`}
+                className={[
+                  'lp-track-lesson-row',
+                  progressState,
+                  isConfident ? 'confident' : ''
+                ].filter(Boolean).join(' ')}
                 key={`${row.type}:${row.id}`}
                 role="button"
                 tabIndex={0}
@@ -222,7 +219,7 @@ export default function CourseOverview({
                     <strong>{formatPercent(lessonConfidence)}</strong>
                   </div>
                 </div>
-                <span className="lp-track-lesson-action">{actionLabel}</span>
+                <span className="lp-track-lesson-action">Practice</span>
               </article>
             );
           })}
@@ -232,15 +229,15 @@ export default function CourseOverview({
   }
 
   return (
-    <main className="lp-page lp-course-map-page" dir="ltr">
+    <main className={`lp-page course-view-page lp-course-map-page${selectedTrack ? ' track-detail-page' : ''}`} dir="ltr">
       <section className="lp-course-flow-section" aria-label="Course path">
         {selectedTrack
           ? renderTrackDetail(selectedTrack)
           : (
             <>
-              <div className="lp-course-section-heading">
-                <p className="lp-course-coverage-kicker">Course Path</p>
-                <h2 id="course-path-title">Tracks</h2>
+              <div className="lp-view-header">
+                <p className="lp-view-kicker">Course Path</p>
+                <h2 className="lp-view-title" id="course-path-title">Tracks</h2>
               </div>
               <div className="lp-course-flow">
                 <div className="lp-course-flow-track">
@@ -253,9 +250,9 @@ export default function CourseOverview({
 
       {!selectedTrack && (
         <section className="lp-service-mastery" aria-labelledby="service-mastery-title">
-          <div className="lp-course-section-heading">
-            <p className="lp-course-coverage-kicker">Mastery Map</p>
-            <h2 id="service-mastery-title">Services confidence</h2>
+          <div className="lp-view-header">
+            <p className="lp-view-kicker">Mastery Map</p>
+            <h2 className="lp-view-title" id="service-mastery-title">Services confidence</h2>
           </div>
           <div className="lp-service-mastery-map">
             <div className="lp-service-mastery-core">

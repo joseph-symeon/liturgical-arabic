@@ -434,16 +434,14 @@ export default function PassageActivityBody({
   function renderActivityContextHeader() {
     if (!activityContextHeader?.title) return null;
     return (
-      <div className="lp-study-home-topbar">
-        <div>
-          {activityContextHeader.kicker && (
-            <div className="lp-study-home-kicker">{activityContextHeader.kicker}</div>
-          )}
-          <h1>{activityContextHeader.title}</h1>
-          {activityContextHeader.context && (
-            <div className="lp-study-home-context">{activityContextHeader.context}</div>
-          )}
-        </div>
+      <div className="lp-view-header">
+        {activityContextHeader.kicker && (
+          <div className="lp-view-kicker">{activityContextHeader.kicker}</div>
+        )}
+        <h1 className="lp-view-title">{activityContextHeader.title}</h1>
+        {activityContextHeader.context && (
+          <div className="lp-view-meta">{activityContextHeader.context}</div>
+        )}
       </div>
     );
   }

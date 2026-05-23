@@ -13,7 +13,7 @@
   min-height: calc(100svh - 80px);
 }
 
-.lp-page.learn-mode-page {
+.lp-page.learn-mode-page:not(.course-view-page) {
   --page-nav-max-width: min(980px, calc(100vw - 24px));
   box-sizing: border-box;
   display: grid;
@@ -26,15 +26,16 @@
 }
 
 .lp-page.study-home-page {
-  --page-nav-max-width: min(1040px, calc(100vw - 24px));
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1100px;
-  min-height: 100svh;
-  margin: 0 auto;
-  padding: clamp(28px, 5vw, 64px) clamp(10px, 2vw, 24px);
+  --study-bg: #ffffff;
+  --study-surface: #fafaf9;
+  --study-surface-strong: #f5f5f4;
+  --study-border: #d6d3d1;
+  --study-border-strong: #a8a29e;
+  --study-text: #1c1917;
+  --study-muted: #57534e;
+  --study-subtle: #78716c;
+  --study-accent: #15803d;
+  --study-accent-strong: #166534;
 }
 
 .lp-page.recitation-mode-page {
@@ -51,32 +52,34 @@
   --recite-accent-strong: #166534;
   --study-text: var(--recite-text);
   --study-muted: var(--recite-muted);
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 1100px;
   color: var(--recite-text);
-  padding: clamp(10px, 2vw, 24px) clamp(10px, 2vw, 24px) calc(96px + env(safe-area-inset-bottom, 0px));
 }
 
-.lp-page.study-home-page,
-.lp-study-home-card {
-  --study-bg: #ffffff;
-  --study-surface: #fafaf9;
-  --study-surface-strong: #f5f5f4;
-  --study-border: #d6d3d1;
-  --study-border-strong: #a8a29e;
-  --study-text: #1c1917;
-  --study-muted: #57534e;
-  --study-subtle: #78716c;
-  --study-accent: #15803d;
-  --study-accent-strong: #166534;
+.lp-page.course-view-page {
+  --page-nav-max-width: min(1040px, calc(100vw - 24px));
+  --path-accent: #15803d;
+  --path-card-border: #d6d3d1;
+  --path-card-text: #292524;
+  --path-card-surface: #fff;
+  --path-list-border: #d6d3d1;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 64px) clamp(10px, 2vw, 24px) calc(96px + env(safe-area-inset-bottom, 0px));
+}
+
+.lp-page.course-view-page.lp-course-map-page {
+  padding-bottom: clamp(28px, 5vw, 64px);
 }
 
 .lp-study-home-card {
   display: grid;
   align-content: start;
   grid-template-rows: auto;
-  gap: clamp(14px, 3vw, 24px);
+  gap: 16px;
   flex: 1 1 auto;
   width: 100%;
   margin: 0;
@@ -88,37 +91,55 @@
   padding: 0;
 }
 
-.lp-study-home-topbar {
+.lp-view-header {
   display: block;
   max-width: 860px;
-  margin-bottom: 32px;
+  margin: 0 0 32px;
 }
 
-.lp-study-home-kicker {
-  color: var(--study-muted);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.025em;
+.lp-view-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: 100%;
+  margin: 0;
+  color: var(--study-subtle, #78716c);
+  font-size: 12px;
+  font-weight: 780;
+  letter-spacing: 0.08em;
   line-height: 1;
-  margin-bottom: 8px;
   text-transform: uppercase;
 }
 
-.lp-study-home-card h1,
-.lp-study-home-topbar h1 {
-  margin: 0;
-  color: var(--study-text);
-  font-size: clamp(24px, 3.2vw, 30px);
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1.25;
+.lp-view-kicker::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--path-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--path-accent) 14%, transparent);
 }
 
-.lp-study-home-context {
+.lp-view-header .lp-view-title {
+  margin: 0;
+  color: var(--study-text, #292524);
+  font-size: clamp(28px, 5.8vw, 34px);
+  font-weight: 680;
+  letter-spacing: 0;
+  line-height: 1.04;
+}
+
+.lp-view-header .lp-view-kicker + .lp-view-title {
   margin-top: 12px;
-  color: var(--study-muted);
-  font-size: 18px;
-  font-weight: 400;
+}
+
+.lp-view-meta {
+  max-width: 720px;
+  margin: 8px 0 0;
+  color: var(--study-muted, #57534e);
+  font-size: clamp(17px, 3vw, 21px);
+  font-weight: 430;
   line-height: 1.35;
 }
 
@@ -147,40 +168,143 @@
 .lp-study-home-exercise-summary {
   display: grid;
   align-content: start;
-  gap: 10px;
+  gap: 0;
   max-width: 860px;
 }
 
+.lp-course-flow-track,
+.lp-track-detail-list,
 .lp-study-home-exercise-list {
+  position: relative;
   display: grid;
-  gap: 8px;
+  gap: 14px;
+  padding-left: 44px;
 }
 
+.lp-course-flow-track::before,
+.lp-track-detail-list::before,
+.lp-study-home-exercise-list::before {
+  content: "";
+  position: absolute;
+  top: 50px;
+  bottom: 50px;
+  left: 17px;
+  width: 3px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--path-accent) 38%, var(--path-list-border));
+  pointer-events: none;
+}
+
+.lp-course-path-card,
+.lp-track-lesson-row,
 .lp-study-home-exercise-row {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 12px 14px;
+  gap: 10px 14px;
   align-items: center;
-  width: 100%;
-  border: 1px solid color-mix(in srgb, var(--study-border) 78%, transparent);
+  border: 1px solid var(--path-card-border);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--study-surface) 58%, transparent);
-  color: var(--study-text);
-  font: inherit;
+  background: var(--path-card-surface);
+  color: var(--path-card-text);
   padding: 12px;
+  transition: background 140ms ease, border-color 140ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lp-course-path-card,
+.lp-study-home-exercise-row {
+  appearance: none;
+  width: 100%;
+  font: inherit;
   text-align: left;
 }
 
+.lp-course-path-card:hover,
+.lp-track-lesson-row:hover,
 .lp-study-home-exercise-row:hover,
 .lp-study-home-exercise-row.active {
-  border-color: color-mix(in srgb, var(--study-accent) 42%, var(--study-border));
-  background: color-mix(in srgb, var(--study-accent) 9%, var(--study-surface));
+  border-color: color-mix(in srgb, var(--path-accent) 42%, var(--path-card-border));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 8%, transparent), transparent 56%),
+    var(--path-card-surface);
+}
+
+.lp-course-path-number,
+.lp-track-lesson-marker,
+.lp-study-home-exercise-number {
+  position: absolute;
+  top: 50%;
+  left: -44px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid color-mix(in srgb, var(--path-accent) 38%, var(--path-card-border));
+  border-radius: 999px;
+  background: var(--path-card-surface);
+  box-shadow: 0 0 0 5px var(--path-card-surface);
+  color: color-mix(in srgb, var(--path-accent) 72%, var(--path-card-text));
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+
+.lp-course-path-card.confident .lp-course-path-number,
+.lp-track-lesson-row.confident .lp-track-lesson-marker,
+.lp-study-home-exercise-row.confident .lp-study-home-exercise-number {
+  border-color: var(--path-accent);
+  background: var(--path-accent);
+  color: #fff;
+}
+
+.lp-course-path-confidence,
+.lp-track-lesson-confidence,
+.lp-study-home-exercise-confidence {
+  display: grid;
+  grid-template-columns: minmax(80px, 160px) auto;
+  gap: 8px;
+  align-items: center;
+  width: min(100%, 220px);
+}
+
+.lp-course-path-confidence > span,
+.lp-track-lesson-confidence > span,
+.lp-study-home-exercise-confidence > span {
+  display: block;
+  overflow: hidden;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--path-card-border) 70%, transparent);
+}
+
+.lp-course-path-confidence > span > span,
+.lp-track-lesson-confidence > span > span,
+.lp-study-home-exercise-confidence > span > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--path-accent);
+}
+
+.lp-course-path-confidence strong,
+.lp-track-lesson-confidence strong,
+.lp-study-home-exercise-confidence strong {
+  color: color-mix(in srgb, var(--path-accent) 68%, var(--path-card-text));
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.lp-study-home-exercise-row {
+  width: 100%;
 }
 
 .lp-study-home-exercise-select {
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   min-width: 0;
   border: 0;
@@ -190,25 +314,6 @@
   font: inherit;
   padding: 0;
   text-align: left;
-}
-
-.lp-study-home-exercise-number {
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--study-accent) 34%, var(--study-border));
-  color: color-mix(in srgb, var(--study-accent) 72%, var(--study-text));
-  font-size: 12px;
-  font-weight: 850;
-  line-height: 1;
-}
-
-.lp-study-home-exercise-row.active .lp-study-home-exercise-number {
-  border-color: var(--study-accent);
-  background: var(--study-accent);
-  color: #fff;
 }
 
 .lp-study-home-exercise-main {
@@ -229,36 +334,6 @@
   font-size: 12px;
   font-weight: 700;
   line-height: 1.2;
-}
-
-.lp-study-home-exercise-confidence {
-  display: grid;
-  grid-template-columns: minmax(80px, 150px) auto;
-  gap: 8px;
-  align-items: center;
-  width: min(100%, 210px);
-}
-
-.lp-study-home-exercise-confidence > span {
-  display: block;
-  overflow: hidden;
-  height: 6px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--study-border) 70%, transparent);
-}
-
-.lp-study-home-exercise-confidence > span > span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: var(--study-accent);
-}
-
-.lp-study-home-exercise-confidence strong {
-  color: color-mix(in srgb, var(--study-accent) 68%, var(--study-text));
-  font-size: 12px;
-  font-weight: 850;
-  line-height: 1;
 }
 
 .lp-study-home-exercise-actions {
@@ -432,10 +507,6 @@
 .lp-page.learn-mode-page .lp-learn-setup {
   box-sizing: border-box;
   min-height: calc(100svh - 126px);
-}
-
-.lp-page h1 {
-  margin-bottom: 8px;
 }
 
 .lp-course-study-header {
@@ -1152,10 +1223,6 @@
   border-color: color-mix(in srgb, var(--recite-accent) 60%, var(--recite-border));
   background: color-mix(in srgb, var(--recite-accent) 22%, var(--recite-surface-strong));
   color: var(--recite-text);
-}
-
-.lp-page.recitation-mode-page .lp-course-nav {
-  color: var(--recite-muted);
 }
 
 .lp-page.recitation-mode-page .page-nav-button {
@@ -3146,27 +3213,17 @@
   background: #f5f5f4;
 }
 
-.lp-course-nav {
-  display: grid;
-  gap: 8px;
-  margin-top: 32px;
-}
-
-.lp-course-nav-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 .lp-course-overview {
   display: grid;
   gap: 10px;
   margin-bottom: 28px;
 }
 
-.lp-course-map-page {
-  --course-map-accent: #15803d;
-  max-width: 1040px;
+.lp-course-map-page.track-detail-page {
+  --study-text: #1c1917;
+  --study-muted: #57534e;
+  --study-subtle: #78716c;
+  --study-accent: var(--path-accent);
 }
 
 .lp-course-landing-header {
@@ -3250,7 +3307,12 @@
   line-height: 1.25;
 }
 
-.lp-course-flow-section,
+.lp-course-flow-section {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 34px;
+}
+
 .lp-service-mastery {
   display: grid;
   gap: 16px;
@@ -3259,72 +3321,25 @@
   border-bottom: 1px solid #d6d3d1;
 }
 
-.lp-course-section-heading {
-  display: grid;
-  gap: 6px;
-  max-width: 760px;
-}
-
-.lp-course-section-heading h2 {
-  margin: 0;
-  color: #292524;
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.lp-course-section-heading p:not(.lp-course-coverage-kicker) {
-  margin: 0;
-  color: #57534e;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
 .lp-course-flow {
   display: grid;
   gap: 18px;
-  max-width: 760px;
+  max-width: 860px;
 }
 
 .lp-course-flow-track {
-  position: relative;
-  display: grid;
-  gap: 14px;
   grid-template-columns: minmax(0, 1fr);
-  padding-left: 44px;
-}
-
-.lp-course-flow-track::before {
-  content: "";
-  position: absolute;
-  top: 50px;
-  bottom: 50px;
-  left: 17px;
-  width: 3px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--course-map-accent) 38%, #d6d3d1);
-  pointer-events: none;
 }
 
 .lp-course-path-card {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px 12px;
   min-width: 0;
-  width: 100%;
   overflow: visible;
-  border: 1px solid color-mix(in srgb, var(--course-map-accent) 28%, #d6d3d1);
-  border-radius: 8px;
+  border-color: color-mix(in srgb, var(--path-accent) 28%, #d6d3d1);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 5%, transparent), transparent 48%),
+    linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 5%, transparent), transparent 48%),
     #fff;
   box-shadow: none;
-  color: inherit;
   cursor: pointer;
-  font: inherit;
-  padding: 14px 16px 12px;
-  text-align: left;
 }
 
 .lp-course-path-card-top {
@@ -3334,22 +3349,7 @@
 }
 
 .lp-course-path-number {
-  position: absolute;
-  top: 50%;
-  left: -44px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  background: var(--course-map-accent);
-  color: #fff;
   font-size: 13px;
-  font-weight: 850;
-  line-height: 1;
-  box-shadow: 0 0 0 5px #fff;
-  transform: translateY(-50%);
 }
 
 .lp-course-path-bonus {
@@ -3391,22 +3391,12 @@
   min-width: 0;
 }
 
-.lp-course-path-type {
-  margin-bottom: 7px;
-  color: #78716c;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
 .lp-course-path-card h3 {
   margin: 0;
   color: #292524;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 760;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .lp-course-path-card p:not(.lp-course-coverage-kicker) {
@@ -3421,72 +3411,37 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  align-self: end;
+  margin-top: 6px;
+  color: #78716c;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .lp-course-path-meta span {
-  border: 1px solid color-mix(in srgb, var(--course-map-accent) 36%, #d6d3d1);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--course-map-accent) 9%, transparent);
-  color: color-mix(in srgb, var(--course-map-accent) 70%, #292524);
-  font-size: 12px;
-  font-weight: 750;
-  line-height: 1;
-  padding: 5px 7px;
+  min-width: 0;
 }
 
 .lp-course-path-confidence {
   grid-column: 1;
-  display: grid;
-  grid-template-columns: minmax(80px, 160px) auto;
-  gap: 8px;
-  align-items: center;
-  width: min(100%, 220px);
 }
 
-.lp-course-path-confidence > span {
-  display: block;
-  overflow: hidden;
-  height: 6px;
-  border-radius: 999px;
-  background: color-mix(in srgb, #a8a29e 30%, transparent);
-}
-
-.lp-course-path-confidence > span > span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: var(--course-map-accent);
-}
-
-.lp-course-path-confidence strong {
-  color: color-mix(in srgb, var(--course-map-accent) 66%, #292524);
-  font-size: 12px;
-  font-weight: 850;
-  line-height: 1;
-}
-
-.lp-course-path-arrow {
+.lp-course-path-action {
   grid-column: 2;
-  grid-row: 2 / span 3;
+  grid-row: 2 / span 2;
   align-self: center;
-  color: #57534e;
-  font-size: 28px;
-  font-weight: 550;
-  line-height: 1;
 }
 
 .lp-course-path-card:hover {
-  border-color: color-mix(in srgb, var(--course-map-accent) 42%, #a8a29e);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 8%, transparent), transparent 52%),
+    linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 8%, transparent), transparent 52%),
     #fff;
 }
 
 .lp-track-detail {
   display: grid;
   gap: 16px;
-  max-width: 760px;
+  max-width: 860px;
 }
 
 .lp-track-detail-back {
@@ -3503,107 +3458,32 @@
 }
 
 .lp-track-detail-back:hover {
-  color: var(--course-map-accent);
-}
-
-.lp-track-detail-header {
-  display: grid;
-  gap: 8px;
-}
-
-.lp-track-detail-header h2 {
-  margin: 0;
-  color: #292524;
-  font-size: clamp(26px, 4vw, 38px);
-  font-weight: 760;
-  line-height: 1.05;
-}
-
-.lp-track-detail-list {
-  position: relative;
-  display: grid;
-  gap: 14px;
-  padding-left: 44px;
-}
-
-.lp-track-detail-list::before {
-  content: "";
-  position: absolute;
-  top: 50px;
-  bottom: 50px;
-  left: 17px;
-  width: 3px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--course-map-accent) 38%, #d6d3d1);
-}
-
-.lp-track-lesson-row {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 10px 14px;
-  align-items: center;
-  border: 1px solid #d6d3d1;
-  border-radius: 8px;
-  background: #fff;
-  padding: 12px;
-  transition: background 140ms ease, border-color 140ms ease;
+  color: var(--path-accent);
 }
 
 .lp-track-lesson-row.active {
-  border-color: color-mix(in srgb, var(--course-map-accent) 42%, #a8a29e);
+  border-color: color-mix(in srgb, var(--path-accent) 42%, #a8a29e);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 10%, transparent), transparent 58%),
+    linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 10%, transparent), transparent 58%),
     #fff;
 }
 
 .lp-track-lesson-row.started {
-  border-color: color-mix(in srgb, var(--course-map-accent) 30%, #d6d3d1);
+  border-color: color-mix(in srgb, var(--path-accent) 30%, #d6d3d1);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 5%, transparent), transparent 54%),
+    linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 5%, transparent), transparent 54%),
     #fff;
 }
 
 .lp-track-lesson-row.mastered {
-  border-color: color-mix(in srgb, var(--course-map-accent) 44%, #a8a29e);
+  border-color: color-mix(in srgb, var(--path-accent) 44%, #a8a29e);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 9%, transparent), transparent 58%),
+    linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 9%, transparent), transparent 58%),
     #fff;
 }
 
 .lp-track-lesson-row:hover {
-  border-color: color-mix(in srgb, var(--course-map-accent) 38%, #a8a29e);
-}
-
-.lp-track-lesson-marker {
-  position: absolute;
-  top: 50%;
-  left: -44px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  background: var(--course-map-accent);
-  box-shadow: 0 0 0 5px #fff;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 850;
-  line-height: 1;
-  transform: translateY(-50%);
-}
-
-.lp-track-lesson-row.upcoming .lp-track-lesson-marker {
-  border: 1px solid color-mix(in srgb, var(--course-map-accent) 34%, #d6d3d1);
-  background: #fff;
-  color: color-mix(in srgb, var(--course-map-accent) 72%, #292524);
-}
-
-.lp-track-lesson-row.active .lp-track-lesson-marker,
-.lp-track-lesson-row.mastered .lp-track-lesson-marker {
-  background: var(--course-map-accent);
-  color: #fff;
+  border-color: color-mix(in srgb, var(--path-accent) 38%, #a8a29e);
 }
 
 .lp-track-lesson-main {
@@ -3619,10 +3499,10 @@
   align-items: center;
   width: max-content;
   min-height: 24px;
-  border: 1px solid color-mix(in srgb, var(--course-map-accent) 34%, #d6d3d1);
+  border: 1px solid color-mix(in srgb, var(--path-accent) 34%, #d6d3d1);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--course-map-accent) 11%, #fff);
-  color: color-mix(in srgb, var(--course-map-accent) 74%, #292524);
+  background: color-mix(in srgb, var(--path-accent) 11%, #fff);
+  color: color-mix(in srgb, var(--path-accent) 74%, #292524);
   font-size: 11px;
   font-weight: 850;
   letter-spacing: 0;
@@ -3650,50 +3530,25 @@
 }
 
 .lp-track-lesson-confidence {
-  display: grid;
-  grid-template-columns: minmax(80px, 160px) auto;
-  gap: 8px;
-  align-items: center;
-  width: min(100%, 220px);
   margin-top: 10px;
 }
 
-.lp-track-lesson-confidence > span {
-  display: block;
-  overflow: hidden;
-  height: 6px;
-  border-radius: 999px;
-  background: color-mix(in srgb, #a8a29e 34%, transparent);
-}
-
-.lp-track-lesson-confidence > span > span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: var(--course-map-accent);
-}
-
-.lp-track-lesson-confidence strong {
-  color: color-mix(in srgb, var(--course-map-accent) 66%, #292524);
-  font-size: 12px;
-  font-weight: 850;
-  line-height: 1;
-}
-
+.lp-course-path-action,
 .lp-track-lesson-action {
-  border: 1px solid color-mix(in srgb, var(--course-map-accent) 38%, #d6d3d1);
+  border: 1px solid color-mix(in srgb, var(--path-accent) 38%, #d6d3d1);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--course-map-accent) 11%, #fff);
-  color: color-mix(in srgb, var(--course-map-accent) 72%, #292524);
+  background: color-mix(in srgb, var(--path-accent) 11%, #fff);
+  color: color-mix(in srgb, var(--path-accent) 72%, #292524);
   font-size: 13px;
   font-weight: 800;
   line-height: 1;
   padding: 9px 12px;
 }
 
+.lp-course-path-card:hover .lp-course-path-action,
 .lp-track-lesson-row:hover .lp-track-lesson-action {
-  border-color: color-mix(in srgb, var(--course-map-accent) 45%, #a8a29e);
-  background: color-mix(in srgb, var(--course-map-accent) 17%, #fff);
+  border-color: color-mix(in srgb, var(--path-accent) 45%, #a8a29e);
+  background: color-mix(in srgb, var(--path-accent) 17%, #fff);
 }
 
 .lp-service-mastery {
@@ -3803,12 +3658,7 @@
 }
 
 .lp-course-coverage-kicker {
-  margin: 0 0 4px;
-  color: #78716c;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
+  margin: 0;
 }
 
 .lp-course-coverage h2,
@@ -4632,11 +4482,6 @@
     left: -42px;
   }
 
-  .lp-course-path-card {
-    min-height: 0;
-    padding: 16px 14px 14px;
-  }
-
   .lp-course-path-card h3 {
     font-size: 18px;
   }
@@ -4645,30 +4490,28 @@
     font-size: 13px;
   }
 
-  .lp-course-path-arrow {
-    font-size: 28px;
-  }
-
-  .lp-track-lesson-row {
+  .lp-course-path-card,
+  .lp-track-lesson-row,
+  .lp-study-home-exercise-row {
     grid-template-columns: minmax(0, 1fr) auto;
+    padding: 10px;
   }
 
-  .lp-track-detail-list {
+  .lp-track-detail-list,
+  .lp-study-home-exercise-list {
     padding-left: 42px;
   }
 
-  .lp-track-detail-list::before {
+  .lp-track-detail-list::before,
+  .lp-study-home-exercise-list::before {
     top: 50px;
     bottom: 50px;
     left: 16px;
   }
 
-  .lp-track-lesson-marker {
+  .lp-track-lesson-marker,
+  .lp-study-home-exercise-number {
     left: -42px;
-  }
-
-  .lp-page.study-home-page {
-    padding: 24px 18px 18px;
   }
 
   .lp-study-home-card {
@@ -4676,8 +4519,8 @@
     padding: 0;
   }
 
-  .lp-study-home-topbar {
-    margin-bottom: 18px;
+  .lp-view-header {
+    margin-bottom: 28px;
   }
 
   .lp-study-home-grid {
@@ -4695,19 +4538,8 @@
     min-height: 0;
   }
 
-  .lp-study-home-exercise-summary {
-    gap: 8px;
-  }
-
-  .lp-study-home-exercise-row {
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 10px;
-    align-items: center;
-    padding: 10px;
-  }
-
   .lp-study-home-exercise-select {
-    grid-template-columns: 30px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .lp-study-home-exercise-actions {
@@ -4740,11 +4572,13 @@
     grid-template-columns: 1fr;
   }
 
-  .lp-page.recitation-mode-page {
-    margin-top: 18px;
-    padding-right: 14px;
-    padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
-    padding-left: 14px;
+  .lp-page.course-view-page {
+    margin: 0 auto;
+    padding: 24px 18px calc(96px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .lp-page.course-view-page.lp-course-map-page {
+    padding-bottom: 18px;
   }
 
   .lp-recitation-workspace {
@@ -4998,7 +4832,7 @@
     min-width: 0;
   }
 
-  .lp-page.learn-mode-page {
+  .lp-page.learn-mode-page:not(.course-view-page) {
     min-height: 100svh;
     padding: 8px;
   }
@@ -5414,8 +5248,10 @@
     --recite-accent-strong: #3f9060;
   }
 
+  .lp-page.course-view-page,
   .lp-page.study-home-page,
-  .lp-study-home-card {
+  .lp-study-home-card,
+  .lp-course-map-page.track-detail-page {
     --study-bg: #111513;
     --study-surface: #181d1b;
     --study-surface-strong: #202725;
@@ -5426,6 +5262,10 @@
     --study-subtle: #807b73;
     --study-accent: #54b978;
     --study-accent-strong: #3f9060;
+    --path-card-border: var(--dark-border);
+    --path-card-text: var(--dark-text);
+    --path-card-surface: color-mix(in srgb, var(--dark-surface) 86%, var(--dark-bg));
+    --path-list-border: var(--dark-border);
   }
 
   .lp-learn-activity {
@@ -5810,7 +5650,6 @@
   }
 
   .lp-course-landing-header,
-  .lp-course-flow-section,
   .lp-course-coverage {
     border-bottom-color: var(--dark-border);
   }
@@ -5879,9 +5718,7 @@
     color: var(--dark-text);
   }
 
-  .lp-course-section-heading h2,
   .lp-course-path-card h3,
-  .lp-track-detail-header h2,
   .lp-track-lesson-main h3,
   .lp-service-mastery-node h3,
   .lp-service-mastery-ring span,
@@ -5889,11 +5726,9 @@
     color: var(--dark-text);
   }
 
-  .lp-course-section-heading p:not(.lp-course-coverage-kicker),
   .lp-course-path-card p:not(.lp-course-coverage-kicker),
+  .lp-course-path-meta,
   .lp-course-path-state,
-  .lp-course-path-type,
-  .lp-course-path-arrow,
   .lp-track-detail-back,
   .lp-track-lesson-meta,
   .lp-service-mastery-core span:last-child,
@@ -5907,7 +5742,7 @@
   }
 
   .lp-track-lesson-confidence strong {
-    color: color-mix(in srgb, var(--course-map-accent) 62%, var(--dark-text));
+    color: color-mix(in srgb, var(--path-accent) 62%, var(--dark-text));
   }
 
   .lp-course-path-card,
@@ -5919,22 +5754,19 @@
   }
 
   .lp-course-path-card {
-    border-color: color-mix(in srgb, var(--course-map-accent) 38%, var(--dark-border));
+    border-color: color-mix(in srgb, var(--path-accent) 38%, var(--dark-border));
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 12%, transparent), transparent 42%),
-      var(--dark-surface);
+      linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 12%, transparent), transparent 42%),
+      var(--path-card-surface);
   }
 
-  .lp-course-path-card:hover {
+  .lp-course-path-card:hover,
+  .lp-course-path-card:active,
+  .lp-course-path-card:focus-visible {
+    border-color: color-mix(in srgb, var(--path-accent) 44%, var(--dark-border));
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 16%, transparent), transparent 52%),
-      var(--dark-surface);
-  }
-
-  .lp-course-path-meta span {
-    border-color: color-mix(in srgb, var(--course-map-accent) 44%, var(--dark-border));
-    background: color-mix(in srgb, var(--course-map-accent) 13%, var(--dark-surface));
-    color: color-mix(in srgb, var(--course-map-accent) 62%, var(--dark-text));
+      linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 16%, transparent), transparent 52%),
+      var(--path-card-surface);
   }
 
   .lp-course-path-confidence > span {
@@ -5942,11 +5774,7 @@
   }
 
   .lp-course-path-confidence strong {
-    color: color-mix(in srgb, var(--course-map-accent) 62%, var(--dark-text));
-  }
-
-  .lp-course-path-number {
-    box-shadow: 0 0 0 5px var(--dark-bg);
+    color: color-mix(in srgb, var(--path-accent) 62%, var(--dark-text));
   }
 
   .lp-course-path-bonus {
@@ -5956,30 +5784,20 @@
   }
 
   .lp-track-lesson-badge {
-    border-color: color-mix(in srgb, var(--course-map-accent) 42%, var(--dark-border));
-    background: color-mix(in srgb, var(--course-map-accent) 16%, var(--dark-surface));
-    color: color-mix(in srgb, var(--course-map-accent) 60%, var(--dark-text));
+    border-color: color-mix(in srgb, var(--path-accent) 42%, var(--dark-border));
+    background: color-mix(in srgb, var(--path-accent) 16%, var(--dark-surface));
+    color: color-mix(in srgb, var(--path-accent) 60%, var(--dark-text));
   }
 
-  .lp-track-lesson-marker {
+  .lp-course-path-number,
+  .lp-track-lesson-marker,
+  .lp-study-home-exercise-number {
     box-shadow: 0 0 0 5px var(--dark-bg);
-  }
-
-  .lp-track-lesson-row.upcoming .lp-track-lesson-marker {
-    border-color: color-mix(in srgb, var(--course-map-accent) 26%, var(--dark-border));
-    background: color-mix(in srgb, var(--dark-surface) 86%, var(--dark-bg));
-    color: var(--dark-muted);
-  }
-
-  .lp-track-lesson-row.active .lp-track-lesson-marker,
-  .lp-track-lesson-row.mastered .lp-track-lesson-marker {
-    background: var(--course-map-accent);
-    color: #fff;
   }
 
   .lp-course-flow-track::before,
   .lp-track-detail-list::before {
-    background: color-mix(in srgb, var(--course-map-accent) 42%, var(--dark-border));
+    background: color-mix(in srgb, var(--path-accent) 42%, var(--dark-border));
   }
 
   .lp-course-map-hero-stats,
@@ -5995,42 +5813,44 @@
   }
 
   .lp-track-lesson-row.started {
-    border-color: color-mix(in srgb, var(--course-map-accent) 30%, var(--dark-border));
+    border-color: color-mix(in srgb, var(--path-accent) 30%, var(--dark-border));
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 8%, transparent), transparent 54%),
+      linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 8%, transparent), transparent 54%),
       color-mix(in srgb, var(--dark-surface) 86%, var(--dark-bg));
   }
 
   .lp-track-lesson-row.active {
-    border-color: color-mix(in srgb, var(--course-map-accent) 46%, var(--dark-border));
+    border-color: color-mix(in srgb, var(--path-accent) 46%, var(--dark-border));
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 18%, transparent), transparent 58%),
+      linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 18%, transparent), transparent 58%),
       color-mix(in srgb, var(--dark-surface) 92%, var(--dark-bg));
     box-shadow:
-      inset 0 0 0 1px color-mix(in srgb, var(--course-map-accent) 22%, transparent),
-      inset 0 -2px 0 color-mix(in srgb, var(--course-map-accent) 52%, transparent);
+      inset 0 0 0 1px color-mix(in srgb, var(--path-accent) 22%, transparent),
+      inset 0 -2px 0 color-mix(in srgb, var(--path-accent) 52%, transparent);
   }
 
   .lp-track-lesson-row.mastered {
-    border-color: color-mix(in srgb, var(--course-map-accent) 42%, var(--dark-border));
+    border-color: color-mix(in srgb, var(--path-accent) 42%, var(--dark-border));
     background:
-      linear-gradient(180deg, color-mix(in srgb, var(--course-map-accent) 12%, transparent), transparent 58%),
+      linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 12%, transparent), transparent 58%),
       color-mix(in srgb, var(--dark-surface) 90%, var(--dark-bg));
   }
 
   .lp-track-lesson-row:hover {
-    border-color: color-mix(in srgb, var(--course-map-accent) 44%, var(--dark-border));
+    border-color: color-mix(in srgb, var(--path-accent) 44%, var(--dark-border));
   }
 
+  .lp-course-path-action,
   .lp-track-lesson-action {
-    border-color: color-mix(in srgb, var(--course-map-accent) 44%, var(--dark-border));
-    background: color-mix(in srgb, var(--course-map-accent) 16%, var(--dark-surface));
-    color: color-mix(in srgb, var(--course-map-accent) 64%, var(--dark-text));
+    border-color: color-mix(in srgb, var(--path-accent) 44%, var(--dark-border));
+    background: color-mix(in srgb, var(--path-accent) 16%, var(--dark-surface));
+    color: color-mix(in srgb, var(--path-accent) 64%, var(--dark-text));
   }
 
+  .lp-course-path-card:hover .lp-course-path-action,
   .lp-track-lesson-row:hover .lp-track-lesson-action {
-    border-color: color-mix(in srgb, var(--course-map-accent) 58%, var(--dark-border));
-    background: color-mix(in srgb, var(--course-map-accent) 22%, var(--dark-surface));
+    border-color: color-mix(in srgb, var(--path-accent) 58%, var(--dark-border));
+    background: color-mix(in srgb, var(--path-accent) 22%, var(--dark-surface));
     color: var(--dark-text);
   }
 

@@ -123,55 +123,6 @@
   line-height: 1.25;
 }
 
-.app-relative-path {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  justify-content: flex-start;
-  max-width: min(46vw, 520px);
-  overflow: hidden;
-  color: #78716c;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0;
-  line-height: 20px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.app-relative-path-parent,
-.app-relative-path-current {
-  display: block;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  font: inherit;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.app-relative-path-parent,
-.app-relative-path-separator {
-  flex: 0 1 auto;
-  color: #b9b3aa;
-  opacity: 0.72;
-}
-
-.app-relative-path-current {
-  flex: 0 1 auto;
-  color: #44403c;
-  cursor: default;
-}
-
-.app-relative-path-parent:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
 @media (min-width: 720px) {
   .app-home-action-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -185,14 +136,8 @@
 
   .app-home-subtitle,
   .app-home-arabic-subtitle,
-  .app-home-section-title,
-  .app-relative-path-parent,
-  .app-relative-path-separator {
+  .app-home-section-title {
     color: var(--dark-muted);
-  }
-
-  .app-relative-path-current {
-    color: var(--dark-text);
   }
 
   .app-home-action {
