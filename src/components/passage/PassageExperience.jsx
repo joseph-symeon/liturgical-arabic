@@ -127,36 +127,38 @@ export default function PassageExperience({
     );
   }
 
+  const toolbar = (
+    <PassageActivityToolbar
+      activityLabel={activityLabel}
+      activitySelectId={activitySelectId}
+      activityOptions={activityOptions}
+      selectedActivityValue={selectedActivityValue}
+      onSelectActivity={onSelectActivity}
+      player={renderPlayer()}
+      showKaraokeToggle={canUseKaraoke}
+      karaokeMode={karaokeMode}
+      onKaraokeModeChange={setKaraokeMode}
+      showTextModeControls={captionActivity || hasPracticeTextMode}
+      textMode={hasPracticeTextMode ? practiceTextMode : captionTextMode}
+      onTextModeChange={hasPracticeTextMode ? setPracticeTextMode : setCaptionTextMode}
+      textModeRequired={hasPracticeTextMode}
+      textModeLabel={hasPracticeTextMode ? "English text mode" : "Phrase caption text"}
+      textModeOptions={hasPracticeTextMode
+        ? [
+            ["translation", "Translation"],
+            ["literal", "Literal"]
+          ]
+        : [
+            ["translation", "Translation"],
+            ["literal", "Literal"]
+          ]}
+      toolbarTop={toolbarTop}
+      hidden={!showPracticeToolbar && !preserveToolbarInFocus}
+    />
+  );
+
   return (
     <div className={`lp-passage-experience${!showPracticeToolbar ? " focus-mode" : ""}`}>
-      <PassageActivityToolbar
-        activityLabel={activityLabel}
-        activitySelectId={activitySelectId}
-        activityOptions={activityOptions}
-        selectedActivityValue={selectedActivityValue}
-        onSelectActivity={onSelectActivity}
-        player={renderPlayer()}
-        showKaraokeToggle={canUseKaraoke}
-        karaokeMode={karaokeMode}
-        onKaraokeModeChange={setKaraokeMode}
-        showTextModeControls={captionActivity || hasPracticeTextMode}
-        textMode={hasPracticeTextMode ? practiceTextMode : captionTextMode}
-        onTextModeChange={hasPracticeTextMode ? setPracticeTextMode : setCaptionTextMode}
-        textModeRequired={hasPracticeTextMode}
-        textModeLabel={hasPracticeTextMode ? "English text mode" : "Phrase caption text"}
-        textModeOptions={hasPracticeTextMode
-          ? [
-              ["translation", "Translation"],
-              ["literal", "Literal"]
-            ]
-          : [
-              ["translation", "Translation"],
-              ["literal", "Literal"]
-            ]}
-        toolbarTop={toolbarTop}
-        hidden={!showPracticeToolbar && !preserveToolbarInFocus}
-      />
-
       {captionActivity && (
         <PassageSyncedCaption
           activeCaption={activeCaption}
@@ -197,6 +199,8 @@ export default function PassageExperience({
               />
             )
           : null}
+
+      {toolbar}
     </div>
   );
 }

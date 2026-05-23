@@ -37,6 +37,10 @@ const LEARN_MATCHING_MIN_PHRASES = 2;
 const LEARN_MATCHING_MAX_PHRASES = 6;
 const LEARN_ARRANGE_MIN_PHRASES = 2;
 const LEARN_ARRANGE_MAX_PHRASES = 12;
+const TYPE_ARABIC_TRACE_FONT_SIZE_PX = 22;
+const TYPE_ARABIC_TRACE_LINE_HEIGHT = 1.45;
+const TYPE_ARABIC_TRACE_PADDING_BLOCK_PX = 24;
+const TYPE_ARABIC_TRACE_BORDER_BLOCK_PX = 2;
 const DEFAULT_LEARN_SETTINGS = {
   shuffleTerms: true,
   multipleChoiceAnswerWith: 'both',
@@ -359,17 +363,35 @@ function getTypingPromptLines(lines, arabicMode) {
   }).filter(line => line.arabicText.trim());
 }
 
+function getTraceBoxHeightForRows(rowCount) {
+  const rows = Math.max(1, rowCount);
+  return Math.ceil(
+    TYPE_ARABIC_TRACE_PADDING_BLOCK_PX
+    + TYPE_ARABIC_TRACE_BORDER_BLOCK_PX
+    + (rows * TYPE_ARABIC_TRACE_FONT_SIZE_PX * TYPE_ARABIC_TRACE_LINE_HEIGHT)
+  );
+}
+
 function getPixelValue(styles, property) {
   return Number.parseFloat(styles.getPropertyValue(property)) || 0;
 }
 
-function getTraceBoxHeight(traceElement, minimumRows) {
-  const styles = window.getComputedStyle(traceElement);
-  const lineHeight = Number.parseFloat(styles.lineHeight) || 32;
-  const paddingBlock = getPixelValue(styles, 'padding-top') + getPixelValue(styles, 'padding-bottom');
-  const borderBlock = getPixelValue(styles, 'border-top-width') + getPixelValue(styles, 'border-bottom-width');
-  const contentHeight = Math.max(0, traceElement.scrollHeight - paddingBlock);
-  const traceRows = Math.max(minimumRows, Math.ceil(contentHeight / lineHeight));
+function getTraceBoxHeight(measureElement, boxElement, minimumRows) {
+  const traceStyles = window.getComputedStyle(measureElement);
+  const boxStyles = window.getComputedStyle(boxElement);
+  const lineHeight = Number.parseFloat(traceStyles.lineHeight) || TYPE_ARABIC_TRACE_FONT_SIZE_PX * TYPE_ARABIC_TRACE_LINE_HEIGHT;
+  const paddingBlock = getPixelValue(traceStyles, 'padding-top') + getPixelValue(traceStyles, 'padding-bottom');
+  const borderBlock = getPixelValue(boxStyles, 'border-top-width') + getPixelValue(boxStyles, 'border-bottom-width');
+  const range = document.createRange();
+  range.selectNodeContents(measureElement);
+  const lineTops = new Set(
+    Array.from(range.getClientRects())
+      .filter(rect => rect.width > 0 && rect.height > 0)
+      .map(rect => Math.round(rect.top))
+  );
+  range.detach();
+  const fallbackRows = Math.ceil(Math.max(0, measureElement.scrollHeight - paddingBlock) / lineHeight);
+  const traceRows = Math.max(minimumRows, lineTops.size || fallbackRows);
 
   return Math.ceil(paddingBlock + borderBlock + (traceRows * lineHeight));
 }
@@ -503,6 +525,7 @@ export default function PassageActivityBody({
   const arrangeMeasureRef = useRef(null);
   const typingBoxRef = useRef(null);
   const typingInputRef = useRef(null);
+  const typingMeasureRef = useRef(null);
   const typingTraceRef = useRef(null);
   const learnWrittenInputRef = useRef(null);
   const learnTraceInputRef = useRef(null);
@@ -544,6 +567,10 @@ export default function PassageActivityBody({
     .map(line => line.arabicText.trim())
     .filter(Boolean)
     .join(readerLayout === 'line' ? '\n' : ' ');
+  const typingTraceRows = Math.max(1, typingPromptLines.length);
+  const fallbackTypingBoxHeight = getTraceBoxHeightForRows(typingTraceRows);
+  const resolvedTypingBoxHeight = typingBoxHeight || fallbackTypingBoxHeight;
+  const typingBoxStyle = { height: `${resolvedTypingBoxHeight}px` };
   const typedArabicCorrect = normalizeArabicTypingValue(typedArabic) === normalizeArabicTypingValue(typingTarget);
   const recallPhraseIds = useMemo(
     () => getUniquePhraseIds(exercise.activity?.practice?.phrase_ids || getPhraseIdsForLines(exercise.lines))
@@ -743,7 +770,6 @@ export default function PassageActivityBody({
     setLearnStarted(false);
     setLearnReviewMode(null);
     setLearnResetKey(key => key + 1);
-    setTypingBoxHeight(null);
     return () => {
       if (arrangeFeedbackTimerRef.current) {
         clearTimeout(arrangeFeedbackTimerRef.current);
@@ -945,6 +971,56 @@ export default function PassageActivityBody({
     arabicFontWeight
   ]);
 
+  useLayoutEffect(() => {
+    if (!isTypeArabicActivity || !typingBoxRef.current || !typingMeasureRef.current) return undefined;
+
+    let frameId = null;
+    let secondFrameId = null;
+    let lastMeasuredWidth = 0;
+    let cancelled = false;
+
+    function updateTypingBoxHeight({ force = false } = {}) {
+      if (cancelled) return;
+      const boxElement = typingBoxRef.current;
+      const measureElement = typingMeasureRef.current;
+      if (!boxElement || !measureElement) return;
+
+      const measuredWidth = Math.round(measureElement.getBoundingClientRect().width);
+      if (!force && measuredWidth === lastMeasuredWidth) return;
+
+      lastMeasuredWidth = measuredWidth;
+      const nextHeight = getTraceBoxHeight(measureElement, boxElement, 1);
+      setTypingBoxHeight(height => (height === nextHeight ? height : nextHeight));
+    }
+
+    function scheduleTypingBoxHeightUpdate(options) {
+      if (frameId) cancelAnimationFrame(frameId);
+      if (secondFrameId) cancelAnimationFrame(secondFrameId);
+      frameId = requestAnimationFrame(() => {
+        secondFrameId = requestAnimationFrame(() => updateTypingBoxHeight(options));
+      });
+    }
+
+    updateTypingBoxHeight({ force: true });
+
+    const resizeObserver = new ResizeObserver(() => {
+      scheduleTypingBoxHeightUpdate();
+    });
+    resizeObserver.observe(typingBoxRef.current);
+    resizeObserver.observe(typingMeasureRef.current);
+
+    document.fonts?.ready?.then(() => {
+      if (!cancelled) scheduleTypingBoxHeightUpdate({ force: true });
+    });
+
+    return () => {
+      cancelled = true;
+      if (frameId) cancelAnimationFrame(frameId);
+      if (secondFrameId) cancelAnimationFrame(secondFrameId);
+      resizeObserver.disconnect();
+    };
+  }, [isTypeArabicActivity, typingTraceText, readerLayout, typingTraceRows]);
+
   useEffect(() => {
     if (
       !isLearnActivity
@@ -987,48 +1063,6 @@ export default function PassageActivityBody({
     learnChoiceIds.join('|'),
     currentLearnPhraseId
   ]);
-
-  useEffect(() => {
-    if (!isTypeArabicActivity || !typingTraceRef.current || !typingBoxRef.current) return undefined;
-    let frameId = null;
-    let secondFrameId = null;
-    let lastMeasuredWidth = 0;
-
-    function updateTypingBoxHeight({ force = false } = {}) {
-      if (!typingTraceRef.current) return;
-      const measuredWidth = Math.round(typingTraceRef.current.getBoundingClientRect().width);
-      if (!force && measuredWidth === lastMeasuredWidth) return;
-
-      lastMeasuredWidth = measuredWidth;
-      typingTraceRef.current.style.height = 'auto';
-      if (typingInputRef.current) {
-        typingInputRef.current.style.height = 'auto';
-      }
-      setTypingBoxHeight(getTraceBoxHeight(typingTraceRef.current, Math.max(1, typingPromptLines.length)));
-    }
-
-    function scheduleTypingBoxHeightUpdate(options) {
-      if (frameId) cancelAnimationFrame(frameId);
-      if (secondFrameId) cancelAnimationFrame(secondFrameId);
-      frameId = requestAnimationFrame(() => {
-        secondFrameId = requestAnimationFrame(() => updateTypingBoxHeight(options));
-      });
-    }
-
-    setTypingBoxHeight(null);
-    scheduleTypingBoxHeightUpdate({ force: true });
-
-    const resizeObserver = new ResizeObserver(() => {
-      scheduleTypingBoxHeightUpdate();
-    });
-    resizeObserver.observe(typingBoxRef.current);
-
-    return () => {
-      if (frameId) cancelAnimationFrame(frameId);
-      if (secondFrameId) cancelAnimationFrame(secondFrameId);
-      resizeObserver.disconnect();
-    };
-  }, [isTypeArabicActivity, typingTraceText, readerLayout, typingPromptLines.length]);
 
   useEffect(() => {
     if ((!isMatchingActivity && !(isLearnActivity && currentLearnItemType === 'matching')) || !matchingGridRef.current) return undefined;
@@ -1421,8 +1455,17 @@ export default function PassageActivityBody({
         <div
           className={`lp-type-arabic-copybox${typingFeedback ? ` ${typingFeedback}` : ''}`}
           ref={typingBoxRef}
-          style={typingBoxHeight ? { height: `${typingBoxHeight}px` } : undefined}
+          style={typingBoxStyle}
         >
+          <div
+            className="lp-type-arabic-measure"
+            ref={typingMeasureRef}
+            dir="rtl"
+            lang="ar"
+            aria-hidden="true"
+          >
+            {typingTraceText}
+          </div>
           <textarea
             className="lp-type-arabic-trace"
             value={typingTraceText}
@@ -1432,8 +1475,8 @@ export default function PassageActivityBody({
             aria-hidden="true"
             tabIndex={-1}
             ref={typingTraceRef}
-            rows={Math.max(1, typingPromptLines.length)}
-            style={typingBoxHeight ? { height: `${typingBoxHeight}px` } : undefined}
+            rows={typingTraceRows}
+            style={typingBoxStyle}
           />
           <textarea
             id={`type-arabic-${exercise.id}`}
@@ -1459,8 +1502,8 @@ export default function PassageActivityBody({
             autoCapitalize="none"
             autoCorrect="off"
             aria-label="Trace the Arabic"
-            rows={Math.max(1, typingPromptLines.length)}
-            style={typingBoxHeight ? { height: `${typingBoxHeight}px` } : undefined}
+            rows={typingTraceRows}
+            style={typingBoxStyle}
           />
         </div>
         <div className="lp-activity-actions lp-type-arabic-actions">
