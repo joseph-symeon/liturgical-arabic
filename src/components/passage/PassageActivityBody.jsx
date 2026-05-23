@@ -23,6 +23,7 @@ import LiturgyLine from '../LiturgyLine.jsx';
 import phrases from '../../data/texts/phrases.js';
 import { getArabicText } from '../../utils/arabic.js';
 import { isPhraseCaptionsActivity, isReadListenActivity, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
+import { getComprehensionAttemptType, recordComprehensionAttempt } from '../../utils/progressScoring.js';
 
 const TRANSLATION_CORRECT_FEEDBACK_MS = 700;
 const TRANSLATION_FEEDBACK_FADE_MS = 700;
@@ -407,7 +408,20 @@ function isPracticeExemptPart(part) {
   return part.tags?.includes('rubric') || phrases[part.phrase_id]?.tags?.includes('rubric');
 }
 
-export default function PassageActivityBody({ exercise, arabicMode, readerLayout, speechRate, arabicFontFamily, arabicFontWeight, arabicFontSize, karaokeActiveCaption = null, practiceTextMode = 'literal' }) {
+export default function PassageActivityBody({
+  exercise,
+  arabicMode,
+  readerLayout,
+  speechRate,
+  arabicFontFamily,
+  arabicFontWeight,
+  arabicFontSize,
+  karaokeActiveCaption = null,
+  practiceTextMode = 'literal',
+  activityContextHeader = null,
+  onCourseTrack,
+  onCourseLesson
+}) {
   const storedLearnSettings = useMemo(() => getStoredLearnSettings(), []);
   const isReadListen = isReadListenActivity(exercise.activity?.type);
   const isArrangeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.arrange;
@@ -416,6 +430,23 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   const isMatchingActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.matching;
   const isTranslationDirectionActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.translationDirection;
   const isLearnActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.learn;
+
+  function renderActivityContextHeader() {
+    if (!activityContextHeader?.title) return null;
+    return (
+      <div className="lp-study-home-topbar">
+        <div>
+          {activityContextHeader.kicker && (
+            <div className="lp-study-home-kicker">{activityContextHeader.kicker}</div>
+          )}
+          <h1>{activityContextHeader.title}</h1>
+          {activityContextHeader.context && (
+            <div className="lp-study-home-context">{activityContextHeader.context}</div>
+          )}
+        </div>
+      </div>
+    );
+  }
   const isClozeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.cloze || isArrangeActivity;
   const isPhraseCaptions = isPhraseCaptionsActivity(exercise.activity?.type);
   const [clozeRevealed, setClozeRevealed] = useState(false);
@@ -642,6 +673,14 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
   function chooseLearnChoice(phraseId) {
     if (!phraseId || learnFeedback) return;
     const isCorrect = phraseId === currentLearnPhraseId;
+    recordComprehensionAttempt({
+      phraseId: currentLearnPhraseId,
+      type: getComprehensionAttemptType({
+        questionType: 'multiple-choice',
+        direction: learnDirection
+      }),
+      correct: isCorrect
+    });
     setLearnSelectedChoiceId(phraseId);
     setLearnFeedback(isCorrect ? 'correct' : 'incorrect');
     window.setTimeout(
@@ -1347,6 +1386,15 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
               onClick={() => {
                 setArrangeChecked(true);
                 const nextFeedback = arrangementCorrect ? 'correct' : 'incorrect';
+                if (currentLearnItemType === 'arrange') {
+                  clozePhraseIds.forEach(phraseId => {
+                    recordComprehensionAttempt({
+                      phraseId,
+                      type: getComprehensionAttemptType({ activityType: 'arrange' }),
+                      correct: arrangementCorrect
+                    });
+                  });
+                }
                 setArrangeFeedback(nextFeedback);
                 if (arrangeFeedbackTimerRef.current) clearTimeout(arrangeFeedbackTimerRef.current);
                 arrangeFeedbackTimerRef.current = setTimeout(() => {
@@ -1466,6 +1514,14 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
 
     function submitRecallAnswer() {
       clearEnglishTypingFeedback();
+      recordComprehensionAttempt({
+        phraseId: currentRecallPhraseId,
+        type: getComprehensionAttemptType({
+          questionType: 'written',
+          direction: isArabicToEnglish ? 'arabic-to-english' : 'english-to-arabic'
+        }),
+        correct: recallAnswerCorrect
+      });
       setEnglishTypingFeedback(recallAnswerCorrect ? 'correct' : 'incorrect');
       englishTypingFeedbackTimerRef.current = setTimeout(() => {
         setEnglishTypingFeedback(null);
@@ -1618,6 +1674,14 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     function chooseTranslation(phraseId) {
       if (!currentPhraseId || translationFeedback || translationAdvancing || translationDismissedChoiceIds.includes(phraseId)) return;
       const correct = phraseId === currentPhraseId;
+      recordComprehensionAttempt({
+        phraseId: currentPhraseId,
+        type: getComprehensionAttemptType({
+          questionType: 'multiple-choice',
+          direction: translationDirection === 'arabic-to-meaning' ? 'arabic-to-english' : 'english-to-arabic'
+        }),
+        correct
+      });
       setTranslationFeedback({
         correct,
         selectedPhraseId: phraseId,
@@ -1853,6 +1917,14 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
 
     function submitLearnWritten() {
       const isCorrect = isLearnAnswerCorrect(learnWrittenAnswer, currentLearnPhrase, learnDirection);
+      recordComprehensionAttempt({
+        phraseId: currentLearnPhraseId,
+        type: getComprehensionAttemptType({
+          questionType: 'written',
+          direction: learnDirection
+        }),
+        correct: isCorrect
+      });
       if (isCorrect) {
         setLearnFeedback('correct');
         window.setTimeout(() => moveCurrentLearnTerm(true), TRANSLATION_CORRECT_FEEDBACK_MS);
@@ -1869,6 +1941,14 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
 
     function revealLearnWrittenAnswer() {
       if (learnFeedback) return;
+      recordComprehensionAttempt({
+        phraseId: currentLearnPhraseId,
+        type: getComprehensionAttemptType({
+          questionType: 'written',
+          direction: learnDirection
+        }),
+        correct: false
+      });
       setLearnFeedback('incorrect');
       setLearnCorrectionPrompt({
         phraseId: currentLearnPhraseId,
@@ -1950,7 +2030,6 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
       return (
         <div className="lp-learn-session-header">
           <StudyWorkspaceHeader
-            title="Comprehension"
             subtitle={progressText}
             className="lp-learn-topbar"
             actions={(
@@ -2017,8 +2096,8 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
     if (!learnStarted) {
       return (
         <div className="lp-learn-activity lp-learn-setup" dir="ltr">
+          {renderActivityContextHeader()}
           <StudyWorkspaceHeader
-            title="Comprehension"
             className="lp-learn-topbar"
             actions={(
               <div className="lp-learn-start-actions">
@@ -2228,6 +2307,11 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
               </div>
             </div>
             <div className="lp-learn-complete-actions">
+              {onCourseLesson && (
+                <button type="button" className="lp-activity-button lp-learn-complete-secondary" onClick={onCourseLesson}>
+                  Back to lesson
+                </button>
+              )}
               <button type="button" className="lp-activity-button lp-activity-submit" onClick={resetLearnSession}>
                 Practice again
               </button>
@@ -2477,6 +2561,11 @@ export default function PassageActivityBody({ exercise, arabicMode, readerLayout
       }
 
       const correct = matchingSelection.phraseId === phraseId;
+      recordComprehensionAttempt({
+        phraseId: correct ? phraseId : matchingSelection.phraseId,
+        type: getComprehensionAttemptType({ activityType: 'matching' }),
+        correct
+      });
       setMatchingSelection(null);
       if (correct) {
         setMatchedPhraseIds(ids => {

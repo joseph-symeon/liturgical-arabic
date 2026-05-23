@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './course.css';
 import PassageExperience from '../passage/PassageExperience.jsx';
-import StudyWorkspaceHeader from '../StudyWorkspaceHeader.jsx';
 import exercises, { canUseActivityType, getExerciseWithActivity, getStandardActivityOptions } from '../../data/course/exercises.js';
 import { getExerciseTitle } from './exerciseTitles.js';
 import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
+import { getExercisePhraseIds, getLessonPhraseIds } from '../../utils/courseMastery.js';
 import { createExercisePassage } from '../../utils/passages.js';
+import { getStoredPhraseConfidenceMap, PHRASE_PROGRESS_EVENT } from '../../utils/progressScoring.js';
 import {
   resolveStoredActivitySelection,
   SHARED_ACTIVITY_SELECTION_KEY,
@@ -160,6 +161,7 @@ export default function LessonPage({
   arabicFontWeight,
   arabicFontSize,
   showPracticeToolbar = true,
+  studyWorkspace,
   selectedExerciseIndex,
   hasPreviousExercise,
   hasNextExercise,
@@ -167,17 +169,21 @@ export default function LessonPage({
   nextExerciseTitle,
   onStudySkillChange,
   onCourseOverview,
+  onCourseTrack,
+  onCourseLesson,
+  onSelectExercise,
   onPreviousExercise,
   onNextExercise
 }) {
   const exerciseItems = lesson.exercises ?? [];
   const selectedExerciseItem = exerciseItems[selectedExerciseIndex] ?? exerciseItems[0];
-  const activityOptions = getActivityOptions(selectedExerciseItem);
+  const activityOptions = useMemo(() => getActivityOptions(selectedExerciseItem), [selectedExerciseItem]);
   const initialStudySkill = getStoredStudySkill(activityOptions);
   const [selectedStudySkill, setSelectedStudySkill] = useState(initialStudySkill);
   const [selectedActivityOptionId, setSelectedActivityOptionId] = useState(() => (
     getResolvedActivityValueForStudySkill(activityOptions, initialStudySkill)
   ));
+  const [phraseConfidenceById, setPhraseConfidenceById] = useState(getStoredPhraseConfidenceMap);
   const recitationOptions = getSkillActivityOptions(activityOptions, STUDY_SKILLS.recitation);
   const comprehensionOptions = getSkillActivityOptions(activityOptions, STUDY_SKILLS.comprehension);
   const activeSkillOptions = getSkillActivityOptions(activityOptions, selectedStudySkill);
@@ -195,8 +201,25 @@ export default function LessonPage({
   }, [lesson.id, selectedExerciseIndex]);
 
   useEffect(() => {
-    onStudySkillChange?.(selectedStudySkill);
-  }, [onStudySkillChange, selectedStudySkill]);
+    if (!studyWorkspace || studyWorkspace === selectedStudySkill) return;
+    if (!getAvailableStudySkills(activityOptions).includes(studyWorkspace)) return;
+    const nextActivityValue = getResolvedActivityValueForStudySkill(activityOptions, studyWorkspace);
+    setSelectedStudySkill(studyWorkspace);
+    storeStudySkill(studyWorkspace);
+    setSelectedActivityOptionId(nextActivityValue);
+  }, [activityOptions, selectedStudySkill, studyWorkspace]);
+
+  useEffect(() => {
+    function refreshProgress() {
+      setPhraseConfidenceById(getStoredPhraseConfidenceMap());
+    }
+    window.addEventListener(PHRASE_PROGRESS_EVENT, refreshProgress);
+    window.addEventListener('storage', refreshProgress);
+    return () => {
+      window.removeEventListener(PHRASE_PROGRESS_EVENT, refreshProgress);
+      window.removeEventListener('storage', refreshProgress);
+    };
+  }, []);
 
   const resolvedExercises = exerciseItems
     .map((item, index) => {
@@ -213,16 +236,37 @@ export default function LessonPage({
   const missingExercises = selectedExercise && !selectedExercise.exercise ? [selectedExercise] : [];
   const unitTitle = lesson.unitTitle || lesson.unit_title;
   const exerciseTitle = getExerciseTitle(lesson, selectedExerciseIndex);
+  const hasMultipleExercises = exerciseItems.length > 1;
+  const lessonPhraseCount = getLessonPhraseIds(lesson).size;
+  const studyHomeContext = hasMultipleExercises
+    ? `${exerciseItems.length} exercises · ${lessonPhraseCount} ${lessonPhraseCount === 1 ? 'phrase' : 'phrases'}`
+    : exerciseTitle;
   const selectedActivityType = selectedExercise?.exercise?.activity?.type || null;
   const isLearnActivity = selectedActivityType === PASSAGE_ACTIVITY_TYPES.learn;
   const isStudyHome = selectedStudySkill === STUDY_SKILLS.home;
   const isRecitationMode = selectedStudySkill === STUDY_SKILLS.recitation;
   const selectedActivityValue = getActivityOptionValue(selectedActivityOption) || selectedExerciseItem.exercise_id;
   const passage = createExercisePassage({ exercise: selectedExercise?.exercise });
-  const studyHomeReadExercise = selectedExerciseItem?.exercise_id
-    ? getExerciseWithActivity(selectedExerciseItem.exercise_id, PASSAGE_ACTIVITY_TYPES.readListen)
-    : null;
-  const studyHomePassage = createExercisePassage({ exercise: studyHomeReadExercise || selectedExercise?.exercise });
+  const activityContextHeader = {
+    kicker: unitTitle,
+    title: lesson.title,
+    context: exerciseTitle
+  };
+
+  function getExerciseConfidence(item) {
+    const phraseIds = [...new Set(getExercisePhraseIds(item.exercise_id))];
+    if (phraseIds.length === 0) return 0;
+    const totalConfidence = phraseIds.reduce((total, phraseId) => total + (phraseConfidenceById[phraseId] || 0), 0);
+    return totalConfidence / phraseIds.length;
+  }
+
+  function openExerciseSkill(exerciseIndex, skill) {
+    if (exerciseIndex !== selectedExerciseIndex) {
+      onSelectExercise?.(exerciseIndex, skill);
+      return;
+    }
+    selectStudySkill(skill);
+  }
 
   function renderNavLabel(action, destination) {
     return (
@@ -243,12 +287,14 @@ export default function LessonPage({
     if (skill === STUDY_SKILLS.home) {
       setSelectedStudySkill(skill);
       storeStudySkill(skill);
+      onStudySkillChange?.(skill);
       return;
     }
     const nextActivityValue = resolveActivityValueForSkill(activityOptions, selectedActivityOptionId, skill);
     if (!nextActivityValue) return;
     setSelectedStudySkill(skill);
     storeStudySkill(skill);
+    onStudySkillChange?.(skill);
     selectActivityValue(nextActivityValue);
   }
 
@@ -293,6 +339,10 @@ export default function LessonPage({
         arabicFontSize={arabicFontSize}
         showPracticeToolbar={isRecitationMode && showPracticeToolbar}
         preserveToolbarInFocus={isRecitationMode}
+        activityContextHeader={activityContextHeader}
+        toolbarTop={isRecitationMode ? renderRecitationModeTabs() : null}
+        onCourseTrack={onCourseTrack}
+        onCourseLesson={onCourseLesson}
       />
     );
   }
@@ -300,11 +350,13 @@ export default function LessonPage({
   function renderRecitationWorkspace() {
     return (
       <section className="lp-recitation-workspace" aria-label="Recitation practice">
-        <StudyWorkspaceHeader
-          title="Recitation"
-          actions={renderRecitationModeTabs()}
-          className="lp-recitation-topbar"
-        />
+        <div className="lp-study-home-topbar">
+          <div>
+            <div className="lp-study-home-kicker">{unitTitle}</div>
+            <h1>{lesson.title}</h1>
+            <div className="lp-study-home-context">{exerciseTitle}</div>
+          </div>
+        </div>
         {renderPassageExperience()}
       </section>
     );
@@ -340,51 +392,63 @@ export default function LessonPage({
           <div>
             <div className="lp-study-home-kicker">{unitTitle}</div>
             <h1 id="study-home-title">{lesson.title}</h1>
-            <div className="lp-study-home-context">{exerciseTitle}</div>
+            <div className="lp-study-home-context">{studyHomeContext}</div>
           </div>
         </div>
 
-        <div className="lp-study-home-grid">
-          <section className="lp-study-home-section lp-study-home-text" aria-labelledby="study-home-text-title">
-            <div className="lp-study-home-read-preview">
-              <PassageExperience
-                passage={studyHomePassage}
-                activityLabel={null}
-                activitySelectId="lp-study-home-read-activity"
-                activityOptions={[]}
-                selectedActivityValue={PASSAGE_ACTIVITY_TYPES.readListen}
-                onSelectActivity={() => {}}
-                activityType={PASSAGE_ACTIVITY_TYPES.readListen}
-                resetKey={`study-home:${lesson.id}:${selectedExerciseIndex}`}
-                arabicMode={arabicMode}
-                readerLayout={readerLayout}
-                speechRate={speechRate}
-                arabicFontFamily={arabicFontFamily}
-                arabicFontWeight={arabicFontWeight}
-                arabicFontSize={arabicFontSize}
-                showPracticeToolbar={false}
-              />
-            </div>
-          </section>
-        </div>
-        <div className="lp-study-home-practice-actions" aria-label="Study modes">
-          <button
-            type="button"
-            className="lp-study-home-primary-action"
-            onClick={() => selectStudySkill(STUDY_SKILLS.comprehension)}
-            disabled={!canUseComprehension}
-          >
-            Comprehension
-          </button>
-          <button
-            type="button"
-            className="lp-study-home-primary-action"
-            onClick={() => selectStudySkill(STUDY_SKILLS.recitation)}
-            disabled={!canUseRecitation}
-          >
-            Recitation
-          </button>
-        </div>
+        <section className="lp-study-home-exercise-summary" aria-labelledby="study-home-exercise-summary-title">
+          <div className="lp-study-home-panel-label" id="study-home-exercise-summary-title">Lesson exercises</div>
+          <div className="lp-study-home-exercise-list">
+            {exerciseItems.map((item, exerciseIndex) => {
+              const itemActivityOptions = getActivityOptions(item);
+              const itemCanUseComprehension = getSkillActivityOptions(itemActivityOptions, STUDY_SKILLS.comprehension).length > 0;
+              const itemCanUseRecitation = getSkillActivityOptions(itemActivityOptions, STUDY_SKILLS.recitation).length > 0;
+              const exerciseConfidence = getExerciseConfidence(item);
+              const isSelectedExercise = exerciseIndex === selectedExerciseIndex;
+
+              return (
+                <article
+                  key={`${lesson.id}:${item.exercise_id}:${exerciseIndex}`}
+                  className={`lp-study-home-exercise-row${isSelectedExercise ? ' active' : ''}`}
+                >
+                  <button
+                    type="button"
+                    className="lp-study-home-exercise-select"
+                    onClick={() => onSelectExercise?.(exerciseIndex)}
+                    aria-pressed={isSelectedExercise}
+                  >
+                    <span className="lp-study-home-exercise-number">{exerciseIndex + 1}</span>
+                    <span className="lp-study-home-exercise-main">
+                      <strong>{getExerciseTitle(lesson, exerciseIndex)}</strong>
+                      <span className="lp-study-home-exercise-confidence" aria-label={`${Math.round(exerciseConfidence * 100)}% confidence`}>
+                        <span>
+                          <span style={{ width: `${Math.round(exerciseConfidence * 100)}%` }} />
+                        </span>
+                        <strong>{Math.round(exerciseConfidence * 100)}%</strong>
+                      </span>
+                    </span>
+                  </button>
+                  <span className="lp-study-home-exercise-actions">
+                    <button
+                      type="button"
+                      onClick={() => openExerciseSkill(exerciseIndex, STUDY_SKILLS.comprehension)}
+                      disabled={!itemCanUseComprehension}
+                    >
+                      Comprehension
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openExerciseSkill(exerciseIndex, STUDY_SKILLS.recitation)}
+                      disabled={!itemCanUseRecitation}
+                    >
+                      Recitation
+                    </button>
+                  </span>
+                </article>
+              );
+            })}
+          </div>
+        </section>
       </section>
     );
   }
@@ -403,23 +467,6 @@ export default function LessonPage({
       dir="ltr"
     >
       {isStudyHome && renderStudyHome()}
-
-      {!isStudyHome && (
-        <header className="lp-course-study-header">
-          <button
-            type="button"
-            className="lp-study-home-link"
-            onClick={() => selectStudySkill(STUDY_SKILLS.home)}
-          >
-            <span aria-hidden="true">←</span>
-            Study Home
-          </button>
-          {!isLearnActivity && (
-            <>
-            </>
-          )}
-        </header>
-      )}
 
       {missingExercises.length > 0 && (
         <p className="lp-config-note">

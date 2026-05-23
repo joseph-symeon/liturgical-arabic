@@ -47,6 +47,10 @@ export default function PassageExperience({
   arabicFontSize,
   showPracticeToolbar = true,
   preserveToolbarInFocus = false,
+  activityContextHeader = null,
+  toolbarTop = null,
+  onCourseTrack,
+  onCourseLesson,
   renderPassage
 }) {
   const resolvedActivityType = activityType || passage?.activity_type || null;
@@ -149,6 +153,7 @@ export default function PassageExperience({
               ["translation", "Translation"],
               ["literal", "Literal"]
             ]}
+        toolbarTop={toolbarTop}
         hidden={!showPracticeToolbar && !preserveToolbarInFocus}
       />
 
@@ -186,6 +191,9 @@ export default function PassageExperience({
                 arabicFontSize={arabicFontSize}
                 karaokeActiveCaption={karaokeActiveCaption}
                 practiceTextMode={practiceTextMode}
+                activityContextHeader={activityContextHeader}
+                onCourseTrack={onCourseTrack}
+                onCourseLesson={onCourseLesson}
               />
             )
           : null}

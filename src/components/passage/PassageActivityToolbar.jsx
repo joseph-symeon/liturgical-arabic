@@ -19,6 +19,7 @@ export default function PassageActivityToolbar({
     ["translation", "Translation"],
     ["literal", "Literal"]
   ],
+  toolbarTop = null,
   hidden = false
 }) {
   const hasActivity = Boolean(activityLabel);
@@ -61,6 +62,11 @@ export default function PassageActivityToolbar({
     <>
       {(hasActivity || player) && (
         <div className={hidden ? "lp-activity-toolbar-shell hidden" : "lp-activity-toolbar-shell"}>
+          {toolbarTop && (
+            <div className="lp-activity-toolbar-top">
+              {toolbarTop}
+            </div>
+          )}
           <div className={`lp-activity-toolbar${hasModes ? " has-mode-controls" : ""}`}>
             {hasActivity && (
               <div className="lp-activity-controls">

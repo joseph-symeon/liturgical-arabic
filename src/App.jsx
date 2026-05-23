@@ -6,7 +6,7 @@ import InteractiveText from "./components/InteractiveText.jsx";
 import PhraseTooltip from "./components/PhraseTooltip.jsx";
 import { defaultServiceText, defaultServiceTextId, getServiceText, readerServiceTexts } from "./data/texts/serviceTexts.js";
 import phrases from "./data/texts/phrases.js";
-import units from "./data/course/units.js";
+import courseTracks from "./data/course/courseTracks.js";
 import lessons from "./data/course/lessons.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
 import { getServiceNavigation } from "./utils/serviceNavigation.js";
@@ -77,12 +77,21 @@ const NAV_DETAILS_STORAGE_KEY = "liturgical-arabic:navigation-details-open";
 const DISPLAY_SETTINGS_STORAGE_KEY = "liturgical-arabic:display-settings";
 const COURSE_STUDY_WORKSPACE_STORAGE_KEY = "liturgical-arabic:study-workspace";
 
-const ORDERED_UNITS = [...units].sort((a, b) => a.display_order - b.display_order);
-const COURSE_LESSONS = ORDERED_UNITS.flatMap(unit =>
-  lessons
-    .filter(lesson => lesson.unit_id === unit.id)
-    .sort((a, b) => a.display_order - b.display_order)
-);
+function getCourseItemLessonIds(item) {
+  const lessonIds = item.lesson_ids || (item.lesson_id ? [item.lesson_id] : []);
+  if (item.type !== "track") return lessonIds;
+  const bonusLessonIds = courseTracks
+    .filter(candidate => candidate.parent_track_id === item.id)
+    .flatMap(candidate => candidate.lesson_ids || (candidate.lesson_id ? [candidate.lesson_id] : []));
+  return lessonIds.concat(bonusLessonIds);
+}
+
+const COURSE_NAV_ITEMS = courseTracks.filter(item => !item.parent_track_id);
+const COURSE_LESSONS = COURSE_NAV_ITEMS
+  .flatMap(getCourseItemLessonIds)
+  .filter((lessonId, index, ids) => ids.indexOf(lessonId) === index)
+  .map(lessonId => lessons.find(lesson => lesson.id === lessonId))
+  .filter(Boolean);
 const DEFAULT_LESSON_ID = COURSE_LESSONS[0]?.id ?? lessons[0]?.id ?? null;
 const READER_SERVICE_TEXTS = readerServiceTexts.length > 0 ? readerServiceTexts : [defaultServiceText];
 const DEFAULT_READER_SERVICE_TEXT_ID = defaultServiceTextId;
@@ -120,6 +129,7 @@ function parseNavigationHash() {
       view: "home",
       selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
       selectedSectionIndex: null,
+      selectedCourseTrackId: null,
       selectedLessonId: DEFAULT_LESSON_ID,
       selectedExerciseIndex: 0
     };
@@ -131,6 +141,7 @@ function parseNavigationHash() {
       view: "course-overview",
       selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
       selectedSectionIndex: null,
+      selectedCourseTrackId: null,
       selectedLessonId: DEFAULT_LESSON_ID,
       selectedExerciseIndex: 0
     };
@@ -140,6 +151,7 @@ function parseNavigationHash() {
       view: "reader",
       selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
       selectedSectionIndex: null,
+      selectedCourseTrackId: null,
       selectedLessonId: DEFAULT_LESSON_ID,
       selectedExerciseIndex: 0
     };
@@ -151,6 +163,7 @@ function parseNavigationHash() {
         view: "reader",
         selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
         selectedSectionIndex: sectionIndex,
+        selectedCourseTrackId: null,
         selectedLessonId: DEFAULT_LESSON_ID,
         selectedExerciseIndex: 0
       };
@@ -165,6 +178,7 @@ function parseNavigationHash() {
         view: "reader",
         selectedServiceTextId: serviceText.id,
         selectedSectionIndex: null,
+        selectedCourseTrackId: null,
         selectedLessonId: DEFAULT_LESSON_ID,
         selectedExerciseIndex: 0
       };
@@ -176,6 +190,7 @@ function parseNavigationHash() {
           view: "reader",
           selectedServiceTextId: serviceText.id,
           selectedSectionIndex: sectionIndex,
+          selectedCourseTrackId: null,
           selectedLessonId: DEFAULT_LESSON_ID,
           selectedExerciseIndex: 0
         };
@@ -184,12 +199,23 @@ function parseNavigationHash() {
   }
   if (hash.startsWith("course/")) {
     const parts = hash.split("/");
+    if (parts[1] === "track") {
+      return {
+        view: "course-overview",
+        selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
+        selectedSectionIndex: null,
+        selectedCourseTrackId: parts[2] || null,
+        selectedLessonId: DEFAULT_LESSON_ID,
+        selectedExerciseIndex: 0
+      };
+    }
     const lessonId = parts[1] || DEFAULT_LESSON_ID;
     if (parts[2] !== "exercise") {
       return {
         view: "lessons",
         selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
         selectedSectionIndex: null,
+        selectedCourseTrackId: null,
         selectedLessonId: lessonId,
         selectedExerciseIndex: 0
       };
@@ -200,6 +226,7 @@ function parseNavigationHash() {
       view: "lessons",
       selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
       selectedSectionIndex: null,
+      selectedCourseTrackId: null,
       selectedLessonId: lessonId,
       selectedExerciseIndex
     };
@@ -208,12 +235,13 @@ function parseNavigationHash() {
     view: "home",
     selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
     selectedSectionIndex: null,
+    selectedCourseTrackId: null,
     selectedLessonId: DEFAULT_LESSON_ID,
     selectedExerciseIndex: 0
   };
 }
 
-function getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedLessonId, selectedExerciseIndex) {
+function getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex) {
   if (view === "reader") {
     const serviceTextId = selectedServiceTextId || DEFAULT_READER_SERVICE_TEXT_ID;
     if (serviceTextId === DEFAULT_READER_SERVICE_TEXT_ID) {
@@ -228,6 +256,9 @@ function getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, se
     return `#course/${encodeURIComponent(selectedLessonId ?? "")}/exercise/${selectedExerciseIndex + 1}`;
   }
   if (view === "course-overview") {
+    if (selectedCourseTrackId) {
+      return `#course/track/${encodeURIComponent(selectedCourseTrackId)}`;
+    }
     return "#course";
   }
   return "#home";
@@ -278,6 +309,7 @@ export default function App() {
   const [view, setView] = useState(initialNavigation.view);
   const [selectedServiceTextId, setSelectedServiceTextId] = useState(initialNavigation.selectedServiceTextId);
   const [selectedSectionIndex, setSelectedSectionIndex] = useState(initialNavigation.selectedSectionIndex);
+  const [selectedCourseTrackId, setSelectedCourseTrackId] = useState(initialNavigation.selectedCourseTrackId);
   const [selectedLessonId, setSelectedLessonId] = useState(initialNavigation.selectedLessonId);
   const [selectedExerciseIndex, setSelectedExerciseIndex] = useState(initialNavigation.selectedExerciseIndex);
   const [menuOpen, setMenuOpen] = useState(() => {
@@ -299,7 +331,6 @@ export default function App() {
   const [courseStudyWorkspace, setCourseStudyWorkspace] = useState(getStoredCourseStudyWorkspace);
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
   const [isCompactChrome, setIsCompactChrome] = useState(false);
-  const [showCompactTitle, setShowCompactTitle] = useState(false);
   const previousNavigationKeyRef = useRef(null);
   const previousIsNarrowViewportRef = useRef(null);
 
@@ -347,26 +378,12 @@ export default function App() {
   }, [arabicMode, readerLayout, showQuietPrayers, arabicFontFamily, arabicFontSize, showPracticeToolbar]);
 
   useEffect(() => {
-    if (!isCompactChrome) {
-      setShowCompactTitle(false);
-      return undefined;
-    }
-
-    function updateCompactTitle() {
-      setShowCompactTitle(window.scrollY > 120);
-    }
-
-    updateCompactTitle();
-    window.addEventListener("scroll", updateCompactTitle, { passive: true });
-    return () => window.removeEventListener("scroll", updateCompactTitle);
-  }, [isCompactChrome]);
-
-  useEffect(() => {
     function updateNavigationFromHash() {
       const nextNavigation = parseNavigationHash();
       setView(nextNavigation.view);
       setSelectedServiceTextId(nextNavigation.selectedServiceTextId);
       setSelectedSectionIndex(nextNavigation.selectedSectionIndex);
+      setSelectedCourseTrackId(nextNavigation.selectedCourseTrackId);
       setSelectedLessonId(nextNavigation.selectedLessonId);
       setSelectedExerciseIndex(nextNavigation.selectedExerciseIndex);
       if (isNarrowViewport) setMenuOpen(false);
@@ -378,14 +395,14 @@ export default function App() {
   }, [isNarrowViewport]);
 
   useEffect(() => {
-    const nextHash = getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedLessonId, selectedExerciseIndex);
+    const nextHash = getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex);
     if (window.location.hash !== nextHash) {
       window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${nextHash}`);
     }
-  }, [view, selectedServiceTextId, selectedSectionIndex, selectedLessonId, selectedExerciseIndex]);
+  }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex]);
 
   useEffect(() => {
-    const navigationKey = `${view}:${selectedServiceTextId}:${selectedSectionIndex ?? "toc"}:${selectedLessonId ?? ""}:${selectedExerciseIndex}`;
+    const navigationKey = `${view}:${selectedServiceTextId}:${selectedSectionIndex ?? "toc"}:${selectedCourseTrackId ?? ""}:${selectedLessonId ?? ""}:${selectedExerciseIndex}`;
     if (previousNavigationKeyRef.current === null) {
       previousNavigationKeyRef.current = navigationKey;
       return;
@@ -396,10 +413,11 @@ export default function App() {
     window.requestAnimationFrame(() => {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     });
-  }, [view, selectedServiceTextId, selectedSectionIndex, selectedLessonId, selectedExerciseIndex]);
+  }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex]);
 
   function goHome() {
     setView("home");
+    setSelectedCourseTrackId(null);
     if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
@@ -407,6 +425,7 @@ export default function App() {
   function goToLiturgySection(sectionIndex, serviceTextId = selectedServiceTextId) {
     setSelectedServiceTextId(serviceTextId);
     setSelectedSectionIndex(sectionIndex);
+    setSelectedCourseTrackId(null);
     setView("reader");
     if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
@@ -415,23 +434,49 @@ export default function App() {
   function goToTableOfContents(serviceTextId = selectedServiceTextId) {
     setSelectedServiceTextId(serviceTextId);
     setSelectedSectionIndex(null);
+    setSelectedCourseTrackId(null);
     setView("reader");
     if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
 
   function goToCourseOverview() {
+    setSelectedCourseTrackId(null);
     setView("course-overview");
     if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
   }
 
+  function goToCourseTrack(trackId) {
+    setSelectedCourseTrackId(trackId);
+    setView("course-overview");
+    if (isNarrowViewport) setMenuOpen(false);
+    setDisplayMenuOpen(false);
+  }
+
+  function goToSelectedLessonTrack() {
+    if (selectedLessonCourseItem?.id) {
+      goToCourseTrack(selectedLessonCourseItem.id);
+      return;
+    }
+    goToCourseOverview();
+  }
+
   function goToLesson(lessonId, exerciseIndex = 0) {
     setSelectedLessonId(lessonId);
     setSelectedExerciseIndex(exerciseIndex);
+    setSelectedCourseTrackId(null);
     setView("lessons");
     if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
+  }
+
+  function goToLessonStudyHome(lessonId, exerciseIndex = 0, studyWorkspace = "home") {
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(COURSE_STUDY_WORKSPACE_STORAGE_KEY, studyWorkspace);
+    }
+    setCourseStudyWorkspace(studyWorkspace);
+    goToLesson(lessonId, exerciseIndex);
   }
 
   function goToPreviousSection() {
@@ -505,9 +550,10 @@ export default function App() {
   }
 
   const selectedLesson = lessons.find(l => l.id === selectedLessonId);
-  const selectedLessonUnit = ORDERED_UNITS.find(unit => unit.id === selectedLesson?.unit_id);
+  const selectedLessonCourseItem = COURSE_NAV_ITEMS.find(item => getCourseItemLessonIds(item).includes(selectedLesson?.id));
+  const selectedCourseTrack = courseTracks.find(item => item.id === selectedCourseTrackId);
   const selectedLessonWithUnit = selectedLesson
-    ? { ...selectedLesson, unitTitle: selectedLessonUnit?.title }
+    ? { ...selectedLesson, unitTitle: selectedLessonCourseItem?.title }
     : null;
   const selectedLessonIndex = COURSE_LESSONS.findIndex(lesson => lesson.id === selectedLessonId);
   const clampedExerciseIndex = Math.max(0, Math.min(selectedExerciseIndex, (selectedLesson?.exercises?.length ?? 1) - 1));
@@ -527,6 +573,16 @@ export default function App() {
       ? getExerciseTitle(selectedLesson, clampedExerciseIndex + 1)
       : getExerciseTitle(nextLesson, 0)
     : null;
+  const canUseAppBack = view !== "home" || Boolean(selectedCourseTrack);
+  const isLessonActivityView = view === "lessons" && courseStudyWorkspace !== "home";
+  const appBackLabel =
+    view === "course-overview" && selectedCourseTrack
+      ? "Back to Course Overview"
+      : view === "lessons"
+        ? (isLessonActivityView ? "Back to Lesson" : "Back to Track")
+        : view === "reader" && selectedSectionIndex !== null
+          ? "Back to Table of Contents"
+          : "Back to Home";
 
   useEffect(() => {
     if (view === "lessons" && selectedExerciseIndex !== clampedExerciseIndex) {
@@ -570,27 +626,90 @@ export default function App() {
     ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
   const selectedLiturgySection = selectedSectionIndex === null ? null : readerSections[selectedSectionIndex];
-  const compactPageTitle =
-    view === "reader"
-      ? (selectedLiturgySection?.section ?? readerServiceHomeTitle)
-      : view === "course-overview"
-        ? "Course Overview"
-        : view === "lessons"
-          ? selectedLesson?.title
-          : view === "home"
-            ? "Lisan al-Quddas"
-            : "";
+  const appRelativePathSegments = [];
+  if (view === "course-overview") {
+    appRelativePathSegments.push(
+      { label: "Course", onClick: goHome },
+      { label: "Tracks", onClick: goToCourseOverview }
+    );
+    if (selectedCourseTrack) {
+      appRelativePathSegments.push({
+        label: selectedCourseTrack.title,
+        onClick: () => goToCourseTrack(selectedCourseTrack.id)
+      });
+    }
+  } else if (view === "lessons") {
+    appRelativePathSegments.push(
+      { label: "Course", onClick: goHome },
+      { label: "Tracks", onClick: goToCourseOverview }
+    );
+    if (selectedLessonCourseItem) {
+      appRelativePathSegments.push({
+        label: selectedLessonCourseItem.title,
+        onClick: () => goToCourseTrack(selectedLessonCourseItem.id)
+      });
+    }
+    if (selectedLesson) {
+      appRelativePathSegments.push({
+        label: selectedLesson.title,
+        onClick: () => goToLessonStudyHome(selectedLesson.id, clampedExerciseIndex)
+      });
+    }
+  } else if (view === "reader") {
+    appRelativePathSegments.push({ label: "Read", onClick: () => goToTableOfContents(selectedServiceText.id) });
+    if (selectedServiceText) {
+      appRelativePathSegments.push({
+        label: selectedServiceText.short_title || selectedServiceText.title,
+        onClick: () => goToTableOfContents(selectedServiceText.id)
+      });
+    }
+    if (selectedLiturgySection) {
+      appRelativePathSegments.push({
+        label: selectedLiturgySection.section,
+        onClick: () => goToLiturgySection(selectedSectionIndex, selectedServiceText.id)
+      });
+    }
+  }
   const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
-  const shouldShowCompactTitle =
-    isCompactChrome &&
-    showCompactTitle &&
-    !menuOpen &&
-    !displayMenuOpen &&
-    Boolean(compactPageTitle);
   const pageCanUseFocusMode =
     view === "lessons"
     && Boolean(selectedLessonWithUnit)
     && courseStudyWorkspace === "recitation";
+
+  function goBackInApp() {
+    if (view === "course-overview" && selectedCourseTrack) {
+      setSelectedCourseTrackId(null);
+      return;
+    }
+
+    if (view === "lessons") {
+      if (courseStudyWorkspace !== "home") {
+        if (typeof window !== "undefined") {
+          window.localStorage.setItem(COURSE_STUDY_WORKSPACE_STORAGE_KEY, "home");
+        }
+        setCourseStudyWorkspace("home");
+        return;
+      }
+      setSelectedCourseTrackId(selectedLessonCourseItem?.id ?? null);
+      setView("course-overview");
+      if (isNarrowViewport) setMenuOpen(false);
+      setDisplayMenuOpen(false);
+      return;
+    }
+
+    if (view === "reader") {
+      if (selectedSectionIndex !== null) {
+        goToTableOfContents(selectedServiceTextId);
+        return;
+      }
+      goHome();
+      return;
+    }
+
+    if (view === "course-overview") {
+      goHome();
+    }
+  }
 
   useEffect(() => {
     if (!pageCanUseFocusMode && !showPracticeToolbar) {
@@ -836,6 +955,71 @@ export default function App() {
       >
         {children}
       </button>
+    );
+  }
+
+  function renderAppBackButton() {
+    const leftOffset = menuOpen && !isNarrowViewport ? SIDE_PANEL_WIDTH + 12 : 52;
+    return (
+      <>
+        <button
+          type="button"
+          onClick={goBackInApp}
+          aria-label={appBackLabel}
+          title={appBackLabel}
+          className="rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
+          style={{
+            position: "fixed",
+            top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
+            left: `${leftOffset}px`,
+            zIndex: 40,
+            border: "none",
+            cursor: "pointer",
+            padding: "6px",
+            color: "inherit"
+          }}
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        {appRelativePathSegments.length > 0 && (
+          <div
+            className="app-relative-path"
+            aria-hidden="true"
+            style={{
+              position: "fixed",
+              top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 14px)" : "14px",
+              left: `${leftOffset + 42}px`,
+              zIndex: 40,
+              width: "max-content",
+              maxWidth: `calc(100vw - ${leftOffset + (isCompactChrome ? 128 : 114)}px)`
+            }}
+          >
+            {appRelativePathSegments.map(({ label, onClick }, segmentIndex) => {
+              const isCurrentSegment = segmentIndex === appRelativePathSegments.length - 1;
+              return (
+                <React.Fragment key={`${label}:${segmentIndex}`}>
+                  {segmentIndex > 0 && <span className="app-relative-path-separator">/</span>}
+                  {isCurrentSegment ? (
+                    <span className="app-relative-path-current" aria-current="page">
+                      {label}
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      className="app-relative-path-parent"
+                      onClick={onClick}
+                    >
+                      {label}
+                    </button>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </div>
+        )}
+      </>
     );
   }
 
@@ -1106,32 +1290,6 @@ export default function App() {
         }}
       />
 
-      {isCompactChrome && compactPageTitle && (
-        <div
-          aria-hidden="true"
-          className="text-stone-900 dark:text-[var(--dark-text)]"
-          style={{
-            position: "fixed",
-            top: "calc(env(safe-area-inset-top, 0px) + 11px)",
-            left: "58px",
-            right: "58px",
-            zIndex: 40,
-            opacity: shouldShowCompactTitle ? 1 : 0,
-            pointerEvents: "none",
-            overflow: "hidden",
-            textAlign: "center",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            fontSize: "14px",
-            fontWeight: 600,
-            lineHeight: "30px",
-            transition: "opacity 120ms ease"
-          }}
-        >
-          {compactPageTitle}
-        </div>
-      )}
-
       {!(isNarrowViewport && displayMenuOpen) && renderPanelToggle({
           side: "left",
           isOpen: menuOpen,
@@ -1148,6 +1306,8 @@ export default function App() {
             </svg>
           )
         })}
+
+      {canUseAppBack && !(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderAppBackButton()}
 
       {!(isNarrowViewport && menuOpen) && renderPanelToggle({
           side: "right",
@@ -1273,24 +1433,43 @@ export default function App() {
                 >
                   Course Overview
                 </button>
-                {ORDERED_UNITS.map(unit => {
-                  const unitLessons = COURSE_LESSONS.filter(l => l.unit_id === unit.id);
-                  const isCurrentUnit = unitLessons.some(lesson => lesson.id === selectedLessonId);
-                  const isActiveCourseUnit = view === "lessons" && isCurrentUnit;
-                  const unitDetailId = `course-unit:${unit.id}`;
+                {COURSE_NAV_ITEMS.map(item => {
+                  const itemLessons = getCourseItemLessonIds(item)
+                    .map(lessonId => lessons.find(lesson => lesson.id === lessonId))
+                    .filter(Boolean);
+                  const isCurrentItem = itemLessons.some(lesson => lesson.id === selectedLessonId);
+                  const isActiveCourseItem = view === "lessons" && isCurrentItem;
+                  if (item.type === "standalone" || item.type === "bonus") {
+                    const lesson = itemLessons[0];
+                    if (!lesson) return null;
+                    return (
+                      <button
+                        key={item.id}
+                        role="menuitem"
+                        type="button"
+                        onClick={() => goToLesson(lesson.id, 0)}
+                        className={getNavItemClass(view === "lessons" && selectedLessonId === lesson.id)}
+                        style={LESSON_ITEM_STYLE}
+                      >
+                        {item.title}
+                      </button>
+                    );
+                  }
+
+                  const itemDetailId = `course-item:${item.id}`;
                   return (
                     <details
                       className="lp-course-lesson"
-                      key={unit.id}
-                      open={isNavDetailOpen(unitDetailId, isCurrentUnit || view === "course-overview")}
-                      onToggle={event => setNavDetailOpen(unitDetailId, event.currentTarget.open)}
+                      key={item.id}
+                      open={isNavDetailOpen(itemDetailId, isCurrentItem || view === "course-overview")}
+                      onToggle={event => setNavDetailOpen(itemDetailId, event.currentTarget.open)}
                     >
-                      <summary className={getNavSummaryClass(isActiveCourseUnit, "text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]")}>
-                        {unit.title}
+                      <summary className={getNavSummaryClass(isActiveCourseItem, "text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]")}>
+                        {item.title}
                       </summary>
 
                       <div className="lp-course-exercise-list">
-                        {unitLessons.map(lesson => {
+                        {itemLessons.map(lesson => {
                           const isCurrentLesson = selectedLessonId === lesson.id;
                           if (!hasMultipleExercises(lesson)) {
                             return (
@@ -1384,11 +1563,12 @@ export default function App() {
         )}
         {view === "course-overview" && (
           <CourseOverview
-            units={ORDERED_UNITS}
             lessons={COURSE_LESSONS}
             selectedLessonId={selectedLessonId}
             selectedExerciseIndex={clampedExerciseIndex}
-            onSelectExercise={goToLesson}
+            selectedTrackId={selectedCourseTrack?.id ?? null}
+            onSelectTrack={goToCourseTrack}
+            onSelectExercise={goToLessonStudyHome}
           />
         )}
         {view === "lessons" && selectedLessonWithUnit && (
@@ -1401,6 +1581,7 @@ export default function App() {
             arabicFontWeight={arabicFontWeight}
             arabicFontSize={arabicFontSize}
             showPracticeToolbar={showPracticeToolbar}
+            studyWorkspace={courseStudyWorkspace}
             selectedExerciseIndex={clampedExerciseIndex}
             hasPreviousExercise={hasPreviousExercise}
             hasNextExercise={hasNextExercise}
@@ -1408,6 +1589,9 @@ export default function App() {
             nextExerciseTitle={nextExerciseTitle}
             onStudySkillChange={setCourseStudyWorkspace}
             onCourseOverview={goToCourseOverview}
+            onCourseTrack={goToSelectedLessonTrack}
+            onCourseLesson={() => goToLessonStudyHome(selectedLessonId, clampedExerciseIndex)}
+            onSelectExercise={(exerciseIndex, studyWorkspace) => goToLessonStudyHome(selectedLessonId, exerciseIndex, studyWorkspace)}
             onPreviousExercise={goToPreviousExercise}
             onNextExercise={goToNextExercise}
           />
