@@ -33,6 +33,7 @@ const ARRANGE_INCORRECT_FEEDBACK_MS = 1400;
 const MATCHING_COMPLETE_FEEDBACK_MS = 900;
 const LEARN_SETTINGS_STORAGE_KEY = 'liturgical-arabic:learn-settings';
 const LEARN_SETTINGS_OPEN_STORAGE_KEY = 'liturgical-arabic:learn-settings-open';
+const LEARN_BACK_EVENT = 'liturgical-arabic:learn-back';
 const LEARN_MATCHING_MIN_PHRASES = 2;
 const LEARN_MATCHING_MAX_PHRASES = 6;
 const LEARN_ARRANGE_MIN_PHRASES = 2;
@@ -535,6 +536,7 @@ export default function PassageActivityBody({
   const learnWrittenInputRef = useRef(null);
   const learnTraceInputRef = useRef(null);
   const learnTraceGhostRef = useRef(null);
+  const learnDockedControlsRef = useRef(null);
   const arrangeFeedbackTimerRef = useRef(null);
   const typingFeedbackTimerRef = useRef(null);
   const englishTypingFeedbackTimerRef = useRef(null);
@@ -553,6 +555,50 @@ export default function PassageActivityBody({
     })
   );
 
+  useLayoutEffect(() => {
+    if (!dockLearnSetupControls || learnStarted) return undefined;
+
+    const element = learnDockedControlsRef.current;
+    const page = element?.closest(".lp-page");
+    if (!element || !page) return undefined;
+
+    let frameId = null;
+
+    function updateReserve() {
+      if (frameId) cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => {
+        const height = Math.ceil(element.getBoundingClientRect().height);
+        page.style.setProperty("--recite-toolbar-reserve", `${height}px`);
+      });
+    }
+
+    updateReserve();
+
+    const resizeObserver = new ResizeObserver(updateReserve);
+    resizeObserver.observe(element);
+    window.addEventListener('resize', updateReserve);
+    window.visualViewport?.addEventListener('resize', updateReserve);
+
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', updateReserve);
+      window.visualViewport?.removeEventListener('resize', updateReserve);
+      page.style.removeProperty("--recite-toolbar-reserve");
+    };
+  }, [dockLearnSetupControls, learnStarted, learnSettingsOpen, learnSetupHasExtendedControls]);
+
+  const currentLearnItem = learnQueue[0] || null;
+  const currentLearnItemType = typeof currentLearnItem === 'string'
+    ? 'term'
+    : currentLearnItem?.type || null;
+  const currentLearnPhraseId = typeof currentLearnItem === 'string'
+    ? currentLearnItem
+    : currentLearnItem?.phraseId || null;
+  const currentLearnPhrase = phrases[currentLearnPhraseId];
+  const learnQuestionType = currentLearnItemType === 'term'
+    ? currentLearnItem?.questionType || (learnQuestionTypes.written ? 'written' : 'multiple-choice')
+    : currentLearnItemType;
   const clozePhraseIds = exercise.activity?.cloze?.phrase_ids || exercise.activity?.learn?.phrase_ids || [];
   const randomizedArrangePhraseIds = useMemo(
     () => getRandomizedPhraseIds(clozePhraseIds),
@@ -635,17 +681,6 @@ export default function PassageActivityBody({
       }),
     [exercise.activity?.learn?.phrase_ids?.join('|'), exercise.lines, arabicMode]
   );
-  const currentLearnItem = learnQueue[0] || null;
-  const currentLearnItemType = typeof currentLearnItem === 'string'
-    ? 'term'
-    : currentLearnItem?.type || null;
-  const currentLearnPhraseId = typeof currentLearnItem === 'string'
-    ? currentLearnItem
-    : currentLearnItem?.phraseId || null;
-  const currentLearnPhrase = phrases[currentLearnPhraseId];
-  const learnQuestionType = currentLearnItemType === 'term'
-    ? currentLearnItem?.questionType || (learnQuestionTypes.written ? 'written' : 'multiple-choice')
-    : currentLearnItemType;
   const learnMultipleChoiceDirection = learnMultipleChoiceAnswerWith === 'english'
     ? 'arabic-to-english'
     : learnMultipleChoiceAnswerWith === 'arabic'
@@ -1175,11 +1210,27 @@ export default function PassageActivityBody({
 
   useEffect(() => {
     if (!isLearnActivity || !learnStarted) return undefined;
-    document.documentElement.classList.add('lp-learn-session-active');
+    const root = document.documentElement;
+    root.classList.add('lp-learn-session-active');
+    root.classList.toggle('lp-learn-arrange-active', currentLearnItemType === 'arrange');
     window.scrollTo({ top: 0, left: 0 });
     return () => {
-      document.documentElement.classList.remove('lp-learn-session-active');
+      root.classList.remove('lp-learn-session-active', 'lp-learn-arrange-active');
     };
+  }, [isLearnActivity, learnStarted, currentLearnItemType]);
+
+  useEffect(() => {
+    if (!isLearnActivity || !learnStarted) return undefined;
+
+    function handleLearnBack() {
+      setLearnStarted(false);
+      setLearnReviewMode(null);
+      setLearnCorrectionPrompt(null);
+      setLearnResetKey(key => key + 1);
+    }
+
+    window.addEventListener(LEARN_BACK_EVENT, handleLearnBack);
+    return () => window.removeEventListener(LEARN_BACK_EVENT, handleLearnBack);
   }, [isLearnActivity, learnStarted]);
 
   useEffect(() => {
@@ -2213,7 +2264,7 @@ export default function PassageActivityBody({
         <div className={[
           docked ? "lp-learn-docked-controls" : "lp-learn-inline-controls",
           docked && learnSetupHasExtendedControls ? "has-extended-controls" : ""
-        ].filter(Boolean).join(" ")}>
+        ].filter(Boolean).join(" ")} ref={docked ? learnDockedControlsRef : null}>
           {docked && learnSetupToolbarTop && (
             <div className="lp-activity-toolbar-top">
               {learnSetupToolbarTop}
@@ -2392,7 +2443,7 @@ export default function PassageActivityBody({
         <div className="lp-learn-activity lp-learn-session" dir="ltr">
           {renderLearnSessionHeader()}
           <div
-            className="lp-learn-question-frame"
+            className="lp-learn-question-frame arrange-frame"
             key={`learn-arrange:${learnPromptCount}`}
           >
             <div className="lp-learn-review">

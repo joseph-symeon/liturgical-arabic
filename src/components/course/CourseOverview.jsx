@@ -80,7 +80,7 @@ export default function CourseOverview({
   function openLesson(lessonId) {
     const lesson = getLessonById(lessons, lessonId);
     if (!lesson) return;
-    onSelectExercise(lesson.id, 0);
+    onSelectExercise(lesson.id, 0, 'home');
   }
 
   function getTrackLessonRows(track) {

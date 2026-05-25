@@ -582,6 +582,11 @@ export default function App() {
     && courseStudyWorkspace === "recitation";
 
   function goBackInApp() {
+    if (view === "lessons" && document.documentElement.classList.contains("lp-learn-session-active")) {
+      window.dispatchEvent(new CustomEvent("liturgical-arabic:learn-back"));
+      return;
+    }
+
     if (view === "course-overview" && selectedCourseTrack) {
       setSelectedCourseTrackId(null);
       return;

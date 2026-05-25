@@ -1,4 +1,39 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
+
+function useToolbarReserve(ref, enabled) {
+  useLayoutEffect(() => {
+    if (!enabled) return undefined;
+
+    const element = ref.current;
+    const page = element?.closest(".lp-page");
+    if (!element || !page) return undefined;
+
+    let frameId = null;
+
+    function updateReserve() {
+      if (frameId) cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => {
+        const height = Math.ceil(element.getBoundingClientRect().height);
+        page.style.setProperty("--recite-toolbar-reserve", `${height}px`);
+      });
+    }
+
+    updateReserve();
+
+    const resizeObserver = new ResizeObserver(updateReserve);
+    resizeObserver.observe(element);
+    window.addEventListener("resize", updateReserve);
+    window.visualViewport?.addEventListener("resize", updateReserve);
+
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId);
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateReserve);
+      window.visualViewport?.removeEventListener("resize", updateReserve);
+      page.style.removeProperty("--recite-toolbar-reserve");
+    };
+  }, [ref, enabled]);
+}
 
 export default function PassageActivityToolbar({
   activityLabel = null,
@@ -22,8 +57,10 @@ export default function PassageActivityToolbar({
   toolbarTop = null,
   hidden = false
 }) {
+  const toolbarShellRef = useRef(null);
   const hasActivity = Boolean(activityLabel);
   const hasModes = showKaraokeToggle || showTextModeControls;
+  useToolbarReserve(toolbarShellRef, !hidden);
 
   if (!hasActivity && !player && !hasModes) return null;
 
@@ -61,7 +98,7 @@ export default function PassageActivityToolbar({
   return (
     <>
       {(hasActivity || player) && (
-        <div className={hidden ? "lp-activity-toolbar-shell hidden" : "lp-activity-toolbar-shell"}>
+        <div ref={toolbarShellRef} className={hidden ? "lp-activity-toolbar-shell hidden" : "lp-activity-toolbar-shell"}>
           {toolbarTop && (
             <div className="lp-activity-toolbar-top">
               {toolbarTop}
