@@ -7,6 +7,7 @@ export default function PassageTextRenderer({ lines, arabicMode = 'vocalized', r
 
   const sortedLines = [...lines]
     .sort((a, b) => a.line_order - b.line_order);
+  const visibleSpeakers = new Set(sortedLines.map(line => line.speaker).filter(Boolean));
 
   function isActivePart(line, phraseId) {
     const captionMatchesLine = !activeCaption?.segment_id
@@ -37,7 +38,7 @@ export default function PassageTextRenderer({ lines, arabicMode = 'vocalized', r
     ));
   }
 
-  if (showSpeakers) {
+  if (showSpeakers && visibleSpeakers.size > 1) {
     let lastSpeaker = null;
     return (
       <div className="my-2 text-right" dir="rtl">

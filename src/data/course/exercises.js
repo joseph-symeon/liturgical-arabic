@@ -2069,6 +2069,9 @@ export function hasLinkedRecording(exerciseId) {
 
 export function canUseActivityType(exerciseId, activityType) {
   const phraseCount = getExercisePhraseCount(exerciseId);
+  if (activityType === PASSAGE_ACTIVITY_TYPES.phraseCaptions) {
+    return hasLinkedRecording(exerciseId);
+  }
   if (activityType === PASSAGE_ACTIVITY_TYPES.matching) {
     return phraseCount > 1 && phraseCount <= 6;
   }

@@ -94,6 +94,11 @@ export default function PassageExperience({
   }, [resetKey, passage?.id, resolvedClip?.recording_id, resolvedClip?.video_id, resolvedClip?.start_seconds, resolvedClip?.end_seconds]);
 
   useEffect(() => {
+    if (listenActivity || captionActivity) return;
+    playerRef.current?.pause?.();
+  }, [listenActivity, captionActivity, resolvedActivityType]);
+
+  useEffect(() => {
     if (typeof window === "undefined") return;
     window.localStorage.setItem(CAPTION_TEXT_MODE_STORAGE_KEY, captionTextMode);
   }, [captionTextMode]);

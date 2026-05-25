@@ -60,9 +60,10 @@ export default function PassageActivityToolbar({
   const toolbarShellRef = useRef(null);
   const hasActivity = Boolean(activityLabel);
   const hasModes = showKaraokeToggle || showTextModeControls;
+  const hasToolbarTop = Boolean(toolbarTop);
   useToolbarReserve(toolbarShellRef, !hidden);
 
-  if (!hasActivity && !player && !hasModes) return null;
+  if (!hasActivity && !player && !hasModes && !hasToolbarTop) return null;
 
   const modeControls = hasModes ? (
     <div className="lp-mode-toggle-row lp-activity-mode-row" dir="ltr">
@@ -97,15 +98,16 @@ export default function PassageActivityToolbar({
 
   return (
     <>
-      {(hasActivity || player) && (
+      {(hasActivity || player || hasToolbarTop) && (
         <div ref={toolbarShellRef} className={hidden ? "lp-activity-toolbar-shell hidden" : "lp-activity-toolbar-shell"}>
           {toolbarTop && (
             <div className="lp-activity-toolbar-top">
               {toolbarTop}
             </div>
           )}
-          <div className={`lp-activity-toolbar${hasModes ? " has-mode-controls" : ""}`}>
-            {hasActivity && (
+          {(hasActivity || player || hasModes) && (
+            <div className={`lp-activity-toolbar${hasModes ? " has-mode-controls" : ""}`}>
+              {hasActivity && (
               <div className="lp-activity-controls">
                 <label className="lp-activity-control-label" htmlFor={activitySelectId}>Activity</label>
                 <div className="lp-activity-card">
@@ -129,20 +131,21 @@ export default function PassageActivityToolbar({
                   </div>
                 </div>
               </div>
-            )}
+              )}
 
-            {player && (
+              {player && (
               <div className="lp-toolbar-player">
                 {player}
               </div>
-            )}
+              )}
 
-            {modeControls && (
+              {modeControls && (
               <div className="lp-toolbar-mode-controls">
                 {modeControls}
               </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
         </div>
       )}
       {modeControls && !player && !hasActivity && (

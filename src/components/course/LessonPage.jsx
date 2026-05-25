@@ -41,6 +41,15 @@ function getActivityOptions(item) {
   return [];
 }
 
+function scrollToExerciseTop() {
+  if (typeof window === 'undefined') return;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    });
+  });
+}
+
 function getStudySkillForActivityType(activityType) {
   return COMPREHENSION_ACTIVITY_TYPES.includes(activityType)
     ? STUDY_SKILLS.comprehension
@@ -278,6 +287,7 @@ export default function LessonPage({
     storeStudySkill(skill);
     onStudySkillChange?.(skill);
     selectActivityValue(nextActivityValue);
+    scrollToExerciseTop();
   }
 
   function renderActivityModeTabs() {
@@ -391,6 +401,7 @@ export default function LessonPage({
             {exerciseItems.map((item, exerciseIndex) => {
               const exerciseConfidence = getExerciseConfidence(item);
               const isSelectedExercise = exerciseIndex === selectedExerciseIndex;
+              const isRecapExercise = exerciseItems.length > 1 && exerciseIndex === exerciseItems.length - 1;
 
               return (
                 <article
@@ -398,6 +409,7 @@ export default function LessonPage({
                   className={[
                     'lp-study-home-exercise-row',
                     isSelectedExercise ? 'active' : '',
+                    isRecapExercise ? 'recap' : '',
                     exerciseConfidence >= MARKER_FILL_CONFIDENCE ? 'confident' : ''
                   ].filter(Boolean).join(' ')}
                 >
@@ -407,7 +419,7 @@ export default function LessonPage({
                     onClick={() => onSelectExercise?.(exerciseIndex)}
                     aria-pressed={isSelectedExercise}
                   >
-                    <span className="lp-study-home-exercise-number">{exerciseIndex + 1}</span>
+                    <span className="lp-study-home-exercise-number">{isRecapExercise ? 'Recap' : exerciseIndex + 1}</span>
                     <span className="lp-study-home-exercise-main">
                       <strong>{getExerciseTitle(lesson, exerciseIndex)}</strong>
                       <span className="lp-study-home-exercise-confidence" aria-label={`${Math.round(exerciseConfidence * 100)}% confidence`}>
@@ -419,13 +431,12 @@ export default function LessonPage({
                     </span>
                   </button>
                   <span className="lp-study-home-exercise-actions">
-                    <button
-                      type="button"
+                    <span
                       className="lp-study-home-exercise-action"
-                      onClick={() => onSelectExercise?.(exerciseIndex)}
+                      aria-hidden="true"
                     >
-                      Practice
-                    </button>
+                      <span aria-hidden="true">›</span>
+                    </span>
                   </span>
                 </article>
               );

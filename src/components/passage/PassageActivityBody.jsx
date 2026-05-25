@@ -172,7 +172,7 @@ function getLearnTextAnswer(phrase, textMode = 'literal') {
   return getPhraseTextForMode(phrase, textMode);
 }
 
-function ArrangeAnswerTile({ phraseId, index, arabicMode, arabicFontFamily, arabicFontWeight, onRemove, feedbackState = null }) {
+function ArrangeAnswerTile({ itemId, phraseId, index, arabicMode, arabicFontFamily, arabicFontWeight, onRemove, feedbackState = null }) {
   const phrase = phrases[phraseId];
   const {
     attributes,
@@ -181,7 +181,7 @@ function ArrangeAnswerTile({ phraseId, index, arabicMode, arabicFontFamily, arab
     transform,
     transition,
     isDragging
-  } = useSortable({ id: phraseId });
+  } = useSortable({ id: itemId });
 
   if (!phrase) return null;
 
@@ -206,7 +206,7 @@ function ArrangeAnswerTile({ phraseId, index, arabicMode, arabicFontFamily, arab
   );
 }
 
-function ArrangeBankTile({ phraseId, arabicMode, arabicFontFamily, arabicFontWeight, disabled, onClick, feedbackState = null }) {
+function ArrangeBankTile({ itemId, phraseId, arabicMode, arabicFontFamily, arabicFontWeight, disabled, onClick, feedbackState = null }) {
   const phrase = phrases[phraseId];
   const {
     attributes,
@@ -215,7 +215,7 @@ function ArrangeBankTile({ phraseId, arabicMode, arabicFontFamily, arabicFontWei
     transform,
     isDragging
   } = useDraggable({
-    id: `bank:${phraseId}`,
+    id: `bank:${itemId}`,
     disabled
   });
 
@@ -226,6 +226,7 @@ function ArrangeBankTile({ phraseId, arabicMode, arabicFontFamily, arabicFontWei
       type="button"
       className={`lp-arrange-tile${disabled ? ' used' : ''}${isDragging ? ' dragging' : ''}${feedbackState ? ` ${feedbackState}` : ''}`}
       data-phrase-id={phraseId}
+      data-arrange-item-id={itemId}
       ref={setNodeRef}
       disabled={disabled}
       onClick={onClick}
@@ -273,14 +274,15 @@ function ArrangeAnswerDropzone({ children, arabicFontFamily, arabicFontWeight, c
   );
 }
 
-function getArrangeRows(arrangedPhraseIds, phraseWidths = {}, availableWidth = 0, gap = 8) {
+function getArrangeRows(arrangedItemIds, phraseWidths = {}, availableWidth = 0, gap = 8, getPhraseIdForItem = itemId => itemId) {
   const rows = [];
 
   let currentRow = [];
   let currentStartIndex = 0;
   let currentWidth = 0;
 
-  arrangedPhraseIds.forEach((phraseId, index) => {
+  arrangedItemIds.forEach((itemId, index) => {
+    const phraseId = getPhraseIdForItem(itemId);
     const phraseWidth = Math.ceil(phraseWidths[phraseId] || 0);
     const nextWidth = currentRow.length > 0
       ? currentWidth + gap + phraseWidth
@@ -295,13 +297,13 @@ function getArrangeRows(arrangedPhraseIds, phraseWidths = {}, availableWidth = 0
         phrases: currentRow,
         startIndex: currentStartIndex
       });
-      currentRow = [phraseId];
+      currentRow = [itemId];
       currentStartIndex = index;
       currentWidth = phraseWidth;
       return;
     }
 
-    currentRow.push(phraseId);
+    currentRow.push(itemId);
     currentWidth = nextWidth;
   });
 
@@ -474,7 +476,7 @@ export default function PassageActivityBody({
   const isClozeActivity = exercise.activity?.type === PASSAGE_ACTIVITY_TYPES.cloze || isArrangeActivity;
   const isPhraseCaptions = isPhraseCaptionsActivity(exercise.activity?.type);
   const [clozeRevealed, setClozeRevealed] = useState(false);
-  const [arrangedPhraseIds, setArrangedPhraseIds] = useState([]);
+  const [arrangedArrangeItemIds, setArrangedArrangeItemIds] = useState([]);
   const [arrangeChecked, setArrangeChecked] = useState(false);
   const [arrangeFeedback, setArrangeFeedback] = useState(null);
   const [typedArabic, setTypedArabic] = useState('');
@@ -600,14 +602,37 @@ export default function PassageActivityBody({
     ? currentLearnItem?.questionType || (learnQuestionTypes.written ? 'written' : 'multiple-choice')
     : currentLearnItemType;
   const clozePhraseIds = exercise.activity?.cloze?.phrase_ids || exercise.activity?.learn?.phrase_ids || [];
-  const randomizedArrangePhraseIds = useMemo(
-    () => getRandomizedPhraseIds(clozePhraseIds),
-    [clozePhraseIds.join('|'), exercise.id]
+  const arrangeItems = useMemo(
+    () => clozePhraseIds.map((phraseId, index) => ({
+      id: `${phraseId}:${index}`,
+      phraseId
+    })),
+    [clozePhraseIds.join('|')]
   );
-  const arrangedPhraseSet = new Set(arrangedPhraseIds);
+  const arrangeItemById = useMemo(
+    () => new Map(arrangeItems.map(item => [item.id, item])),
+    [arrangeItems]
+  );
+  const randomizedArrangeItemIds = useMemo(
+    () => getRandomizedPhraseIds(arrangeItems.map(item => item.id)),
+    [arrangeItems.map(item => item.id).join('|'), exercise.id]
+  );
+  const randomizedArrangeItems = randomizedArrangeItemIds
+    .map(itemId => arrangeItemById.get(itemId))
+    .filter(Boolean);
+  const arrangedArrangeItemSet = new Set(arrangedArrangeItemIds);
+  const arrangedPhraseIds = arrangedArrangeItemIds
+    .map(itemId => arrangeItemById.get(itemId)?.phraseId)
+    .filter(Boolean);
   const arrangementComplete = arrangedPhraseIds.length === clozePhraseIds.length;
   const arrangementCorrect = arrangementComplete && arrangedPhraseIds.every((phraseId, index) => phraseId === clozePhraseIds[index]);
-  const arrangeRows = getArrangeRows(arrangedPhraseIds, arrangePhraseWidths, arrangeAnswerWidth);
+  const arrangeRows = getArrangeRows(
+    arrangedArrangeItemIds,
+    arrangePhraseWidths,
+    arrangeAnswerWidth,
+    8,
+    itemId => arrangeItemById.get(itemId)?.phraseId || itemId
+  );
   const arrangeAnswerLineCount = Math.max(1, arrangePlannedLineCount, arrangeRows.length);
   const typingPromptLines = useMemo(
     () => getTypingPromptLines(exercise.lines, arabicMode),
@@ -769,7 +794,7 @@ export default function PassageActivityBody({
       clearTimeout(matchingCompleteTimerRef.current);
       matchingCompleteTimerRef.current = null;
     }
-    setArrangedPhraseIds([]);
+    setArrangedArrangeItemIds([]);
     setArrangeChecked(false);
     setArrangeFeedback(null);
     setClozeRevealed(false);
@@ -781,7 +806,7 @@ export default function PassageActivityBody({
       arrangeFeedbackTimerRef.current = null;
     }
     setClozeRevealed(false);
-    setArrangedPhraseIds([]);
+    setArrangedArrangeItemIds([]);
     setArrangeChecked(false);
     setArrangeFeedback(null);
     setTypedArabic('');
@@ -903,7 +928,7 @@ export default function PassageActivityBody({
     setMatchingSelection(null);
     setMatchedPhraseIds([]);
     setMatchingFeedback(null);
-    setArrangedPhraseIds([]);
+    setArrangedArrangeItemIds([]);
     setArrangeChecked(false);
     setArrangeFeedback(null);
     setClozeRevealed(false);
@@ -1008,8 +1033,8 @@ export default function PassageActivityBody({
     isLearnActivity,
     currentLearnItemType,
     clozePhraseIds.join('|'),
-    randomizedArrangePhraseIds.join('|'),
-    arrangedPhraseIds.join('|'),
+    randomizedArrangeItemIds.join('|'),
+    arrangedArrangeItemIds.join('|'),
     arabicMode,
     arabicFontFamily,
     arabicFontWeight
@@ -1212,12 +1237,11 @@ export default function PassageActivityBody({
     if (!isLearnActivity || !learnStarted) return undefined;
     const root = document.documentElement;
     root.classList.add('lp-learn-session-active');
-    root.classList.toggle('lp-learn-arrange-active', currentLearnItemType === 'arrange');
     window.scrollTo({ top: 0, left: 0 });
     return () => {
-      root.classList.remove('lp-learn-session-active', 'lp-learn-arrange-active');
+      root.classList.remove('lp-learn-session-active');
     };
-  }, [isLearnActivity, learnStarted, currentLearnItemType]);
+  }, [isLearnActivity, learnStarted]);
 
   useEffect(() => {
     if (!isLearnActivity || !learnStarted) return undefined;
@@ -1366,7 +1390,7 @@ export default function PassageActivityBody({
                 onClick={() => {
                   if (!isArrangeActivity) return;
                   setArrangeChecked(false);
-                  setArrangedPhraseIds(ids => ids.filter((_, phraseIndex) => phraseIndex !== currentBlankIndex));
+                  setArrangedArrangeItemIds(ids => ids.filter((_, phraseIndex) => phraseIndex !== currentBlankIndex));
                 }}
               >
                 {getArabicText(arrangedPhrase, arabicMode)}
@@ -1389,17 +1413,17 @@ export default function PassageActivityBody({
     function removeArrangedPhrase(index) {
       setArrangeChecked(false);
       clearArrangeFeedback();
-      setArrangedPhraseIds(ids => ids.filter((_, phraseIndex) => phraseIndex !== index));
+      setArrangedArrangeItemIds(ids => ids.filter((_, phraseIndex) => phraseIndex !== index));
     }
 
-    function addArrangedPhrase(phraseId, overId = null) {
+    function addArrangedItem(itemId, overId = null) {
       clearArrangeFeedback();
-      setArrangedPhraseIds(ids => {
-        if (ids.includes(phraseId) || ids.length >= clozePhraseIds.length) return ids;
-        if (!overId || overId === 'answer-dropzone') return ids.concat(phraseId);
+      setArrangedArrangeItemIds(ids => {
+        if (ids.includes(itemId) || ids.length >= clozePhraseIds.length) return ids;
+        if (!overId || overId === 'answer-dropzone') return ids.concat(itemId);
         const overIndex = ids.indexOf(overId);
-        if (overIndex === -1) return ids.concat(phraseId);
-        return ids.slice(0, overIndex).concat(phraseId, ids.slice(overIndex));
+        if (overIndex === -1) return ids.concat(itemId);
+        return ids.slice(0, overIndex).concat(itemId, ids.slice(overIndex));
       });
     }
 
@@ -1412,12 +1436,12 @@ export default function PassageActivityBody({
       clearArrangeFeedback();
 
       if (activeId.startsWith('bank:')) {
-        addArrangedPhrase(activeId.replace('bank:', ''), overId);
+        addArrangedItem(activeId.replace('bank:', ''), overId);
         return;
       }
 
-      if (activeId !== overId && arrangedPhraseIds.includes(activeId) && arrangedPhraseIds.includes(overId)) {
-        setArrangedPhraseIds(ids => arrayMove(ids, ids.indexOf(activeId), ids.indexOf(overId)));
+      if (activeId !== overId && arrangedArrangeItemIds.includes(activeId) && arrangedArrangeItemIds.includes(overId)) {
+        setArrangedArrangeItemIds(ids => arrayMove(ids, ids.indexOf(activeId), ids.indexOf(overId)));
       }
     }
 
@@ -1450,7 +1474,7 @@ export default function PassageActivityBody({
               );
             })}
           </div>
-          <SortableContext items={arrangedPhraseIds} strategy={rectSortingStrategy}>
+          <SortableContext items={arrangedArrangeItemIds} strategy={rectSortingStrategy}>
             <ArrangeAnswerDropzone
               arabicFontFamily={arabicFontFamily}
               arabicFontWeight={arabicFontWeight}
@@ -1463,41 +1487,47 @@ export default function PassageActivityBody({
                     className="lp-arrange-answer-row"
                     key={`arrange-row-${rowIndex}`}
                   >
-                    {row.phrases.map((phraseId, index) => (
-                      <ArrangeAnswerTile
-                        key={phraseId}
-                        phraseId={phraseId}
-                        index={row.startIndex + index}
-                        arabicMode={arabicMode}
-                        arabicFontFamily={arabicFontFamily}
-                        arabicFontWeight={arabicFontWeight}
-                        onRemove={removeArrangedPhrase}
-                        feedbackState={arrangeFeedback === 'correct'
-                          ? 'correct'
-                          : arrangeFeedback === 'incorrect' && clozePhraseIds[row.startIndex + index] !== phraseId
-                            ? 'incorrect'
-                            : null}
-                      />
-                    ))}
+                    {row.phrases.map((itemId, index) => {
+                      const phraseId = arrangeItemById.get(itemId)?.phraseId;
+                      if (!phraseId) return null;
+                      return (
+                        <ArrangeAnswerTile
+                          key={itemId}
+                          itemId={itemId}
+                          phraseId={phraseId}
+                          index={row.startIndex + index}
+                          arabicMode={arabicMode}
+                          arabicFontFamily={arabicFontFamily}
+                          arabicFontWeight={arabicFontWeight}
+                          onRemove={removeArrangedPhrase}
+                          feedbackState={arrangeFeedback === 'correct'
+                            ? 'correct'
+                            : arrangeFeedback === 'incorrect' && clozePhraseIds[row.startIndex + index] !== phraseId
+                              ? 'incorrect'
+                              : null}
+                        />
+                      );
+                    })}
                   </div>
                 );
               })}
             </ArrangeAnswerDropzone>
           </SortableContext>
           <div className="lp-arrange-bank" ref={arrangeBankRef}>
-            {randomizedArrangePhraseIds.map(phraseId => (
+            {randomizedArrangeItems.map(item => (
               <ArrangeBankTile
-                key={phraseId}
-                phraseId={phraseId}
+                key={item.id}
+                itemId={item.id}
+                phraseId={item.phraseId}
                 arabicMode={arabicMode}
                 arabicFontFamily={arabicFontFamily}
                 arabicFontWeight={arabicFontWeight}
-                disabled={arrangedPhraseSet.has(phraseId)}
-                feedbackState={arrangeFeedback === 'incorrect' && !arrangedPhraseSet.has(phraseId) ? 'incorrect' : null}
+                disabled={arrangedArrangeItemSet.has(item.id)}
+                feedbackState={arrangeFeedback === 'incorrect' && !arrangedArrangeItemSet.has(item.id) ? 'incorrect' : null}
                 onClick={() => {
                   setArrangeChecked(false);
                   clearArrangeFeedback();
-                  addArrangedPhrase(phraseId);
+                  addArrangedItem(item.id);
                 }}
               />
             ))}
@@ -1996,7 +2026,7 @@ export default function PassageActivityBody({
       setMatchedPhraseIds([]);
       setMatchingCorrectFeedbackIds([]);
       setMatchingFeedback(null);
-      setArrangedPhraseIds([]);
+      setArrangedArrangeItemIds([]);
       setArrangeChecked(false);
       setArrangeFeedback(null);
       setClozeRevealed(false);
@@ -2862,7 +2892,7 @@ export default function PassageActivityBody({
       ) : isClozeActivity ? (
         <div className="lp-cloze-activity" dir="ltr">
           <div className="lp-cloze-prompt">
-            {isArrangeActivity ? 'Arrange the missing phrases in the correct order while listening.' : 'Fill in the missing repeated phrases while listening.'}
+            Fill in the missing repeated phrases while listening.
           </div>
           <div className="lp-cloze-lines">
             {(() => {
@@ -2874,33 +2904,6 @@ export default function PassageActivityBody({
               ));
             })()}
           </div>
-          {isArrangeActivity && (
-            <div className="lp-arrange-bank">
-              {randomizedArrangePhraseIds.map(phraseId => {
-                const phrase = phrases[phraseId];
-                if (!phrase) return null;
-                return (
-                  <button
-                    type="button"
-                    className="lp-arrange-tile"
-                    key={phraseId}
-                    disabled={arrangedPhraseSet.has(phraseId)}
-                    onClick={() => {
-                      setArrangeChecked(false);
-                      setArrangedPhraseIds(ids => ids.includes(phraseId) || ids.length >= clozePhraseIds.length ? ids : ids.concat(phraseId));
-                    }}
-                    dir="rtl"
-                    style={{
-                      fontFamily: arabicFontFamily,
-                      fontWeight: arabicFontWeight
-                    }}
-                  >
-                    {getArabicText(phrase, arabicMode)}
-                  </button>
-                );
-              })}
-            </div>
-          )}
           <div className="lp-activity-actions">
             {isArrangeActivity ? (
               <>

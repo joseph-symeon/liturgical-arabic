@@ -80,7 +80,7 @@ export default function CourseOverview({
   function openLesson(lessonId) {
     const lesson = getLessonById(lessons, lessonId);
     if (!lesson) return;
-    onSelectExercise(lesson.id, 0, 'home');
+    onSelectExercise(lesson.id, 0, (lesson.exercises?.length || 0) === 1 ? 'recitation' : 'home');
   }
 
   function getTrackLessonRows(track) {
@@ -110,7 +110,12 @@ export default function CourseOverview({
     return coreRows
       .concat(bonusRows)
       .sort((a, b) => a.sequenceIndex - b.sequenceIndex)
-      .map((row, index) => ({ ...row, label: index + 1 }));
+      .map((row, index, rows) => ({
+        ...row,
+        label: row.type === 'bonus'
+          ? 'Bonus'
+          : rows.slice(0, index + 1).filter(item => item.type !== 'bonus').length
+      }));
   }
 
   function openTrack(item) {
@@ -146,8 +151,7 @@ export default function CourseOverview({
         <div className="lp-course-path-main">
           <h3>{item.title}</h3>
           <div className="lp-course-path-meta">
-            <span>{lessonCount} {lessonCount === 1 ? 'lesson' : 'lessons'}</span>
-            <span>{getPhraseCountLabel(phraseIds.size)}</span>
+            {lessonCount} {lessonCount === 1 ? 'lesson' : 'lessons'} · {getPhraseCountLabel(phraseIds.size)}
           </div>
         </div>
         <div className="lp-course-path-confidence" aria-label={`${formatPercent(itemConfidence)} required track confidence`}>
@@ -156,7 +160,7 @@ export default function CourseOverview({
           </span>
           <strong>{formatPercent(itemConfidence)}</strong>
         </div>
-        <span className="lp-course-path-action">Practice</span>
+        <span className="lp-course-path-action" aria-hidden="true">›</span>
       </button>
     );
   }
@@ -189,6 +193,7 @@ export default function CourseOverview({
               <article
                 className={[
                   'lp-track-lesson-row',
+                  row.type === 'bonus' ? 'bonus' : '',
                   progressState,
                   isConfident ? 'confident' : ''
                 ].filter(Boolean).join(' ')}
@@ -205,12 +210,10 @@ export default function CourseOverview({
                 style={{ '--lesson-progress': lessonConfidence }}
               >
                 <span className="lp-track-lesson-marker">{row.label}</span>
-                {row.type === 'bonus' && <span className="lp-track-lesson-badge">Bonus</span>}
                 <div className="lp-track-lesson-main">
                   <h3>{row.lesson.title}</h3>
                   <div className="lp-track-lesson-meta">
-                    <span>{exerciseCount} {exerciseCount === 1 ? 'exercise' : 'exercises'}</span>
-                    <span>{getPhraseCountLabel(rowPhraseCount)}</span>
+                    {exerciseCount} {exerciseCount === 1 ? 'exercise' : 'exercises'} · {getPhraseCountLabel(rowPhraseCount)}
                   </div>
                   <div className="lp-track-lesson-confidence" aria-label={`${formatPercent(lessonConfidence)} confidence`}>
                     <span>
@@ -219,7 +222,7 @@ export default function CourseOverview({
                     <strong>{formatPercent(lessonConfidence)}</strong>
                   </div>
                 </div>
-                <span className="lp-track-lesson-action">Practice</span>
+                <span className="lp-track-lesson-action" aria-hidden="true">›</span>
               </article>
             );
           })}

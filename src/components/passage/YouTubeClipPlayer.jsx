@@ -321,8 +321,18 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     }
   }
 
+  function pausePlayback() {
+    const player = playerRef.current;
+    if (!player || !isReady) return;
+    clearLoopTimers();
+    playRequestedRef.current = false;
+    emitPlaybackActiveChange(false);
+    player.pauseVideo();
+  }
+
   useImperativeHandle(ref, () => ({
-    togglePlayPause: handlePlayPause
+    togglePlayPause: handlePlayPause,
+    pause: pausePlayback
   }));
 
   function handleStartOver() {

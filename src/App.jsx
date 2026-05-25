@@ -594,6 +594,13 @@ export default function App() {
 
     if (view === "lessons") {
       if (courseStudyWorkspace !== "home") {
+        if ((selectedLesson?.exercises?.length || 0) === 1) {
+          setSelectedCourseTrackId(selectedLessonCourseItem?.id ?? null);
+          setView("course-overview");
+          if (isNarrowViewport) setMenuOpen(false);
+          setDisplayMenuOpen(false);
+          return;
+        }
         if (typeof window !== "undefined") {
           window.localStorage.setItem(COURSE_STUDY_WORKSPACE_STORAGE_KEY, "home");
         }
