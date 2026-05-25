@@ -511,6 +511,75 @@ export const exerciseDefinitions = [
     ]
   },
   {
+    "id": "heavenly-king-spirit-truth",
+    "segment_ids": [
+      "preparation-heavenly-king"
+    ],
+    "phrase_ids": [
+      "preparation-heavenly-king-001",
+      "preparation-comforter-spirit-truth-001",
+      "preparation-spirit-truth-001",
+      "preparation-everywhere-present-001",
+      "preparation-filling-all-things-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "preparation-divine-liturgy",
+      "start_segment_id": "preparation-heavenly-king",
+      "end_segment_id": "preparation-heavenly-king"
+    }
+  },
+  {
+    "id": "heavenly-king-treasury-abide",
+    "segment_ids": [
+      "preparation-treasury-giver"
+    ],
+    "phrase_ids": [
+      "preparation-treasury-giver-001",
+      "preparation-giver-of-life-001",
+      "preparation-come-abide-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "preparation-divine-liturgy",
+      "start_segment_id": "preparation-treasury-giver",
+      "end_segment_id": "preparation-treasury-giver"
+    }
+  },
+  {
+    "id": "heavenly-king-cleanse-save",
+    "segment_ids": [
+      "preparation-cleanse-save"
+    ],
+    "phrase_ids": [
+      "preparation-cleanse-save-001",
+      "preparation-from-every-stain-001",
+      "preparation-save-good-one-001",
+      "preparation-o-good-one-001",
+      "preparation-our-souls-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "preparation-divine-liturgy",
+      "start_segment_id": "preparation-cleanse-save",
+      "end_segment_id": "preparation-cleanse-save"
+    }
+  },
+  {
+    "id": "heavenly-king",
+    "segment_ids": [
+      "preparation-heavenly-king",
+      "preparation-treasury-giver",
+      "preparation-cleanse-save"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "preparation-divine-liturgy",
+      "start_segment_id": "preparation-heavenly-king",
+      "end_segment_id": "preparation-cleanse-save"
+    }
+  },
+  {
     "id": "come-let-us-worship",
     "segment_ids": [
       "course-come-worship-god-king",
@@ -518,6 +587,19 @@ export const exerciseDefinitions = [
       "course-come-worship-christ-himself"
     ],
     "media": GREAT_COMPLINE_PSALMS_MEDIA
+  },
+  {
+    "id": "alleluia-glory-our-god-hope",
+    "segment_ids": [
+      "vespers-psalm103-alleluia-glory",
+      "vespers-psalm103-our-god-hope"
+    ],
+    "service_text_id": "great-vespers",
+    "service_range": {
+      "section_id": "psalm-103",
+      "start_segment_id": "vespers-psalm103-alleluia-glory",
+      "end_segment_id": "vespers-psalm103-our-god-hope"
+    }
   },
   {
     "id": "first-antiphon-through-theotokos",
@@ -908,6 +990,24 @@ export const exerciseDefinitions = [
     }
   },
   {
+    "id": "lords-prayer-thine-kingdom",
+    "segment_ids": [
+      "lords-prayer-priest-doxology"
+    ],
+    "phrase_ids": [
+      "lords-prayer-thine-kingdom-001",
+      "doxology-of-father-son-spirit-001",
+      "now-and-ever-001",
+      "unto-ages-of-ages-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "lords-prayer",
+      "start_segment_id": "lords-prayer-priest-doxology",
+      "end_segment_id": "lords-prayer-priest-doxology"
+    }
+  },
+  {
     "id": "lords-prayer-bowing-doxology",
     "segment_ids": [
       "lords-prayer-deacon-bow-heads",
@@ -921,6 +1021,25 @@ export const exerciseDefinitions = [
     "service_range": {
       "section_id": "lords-prayer",
       "start_segment_id": "lords-prayer-deacon-bow-heads",
+      "end_segment_id": "lords-prayer-choir-bowing-amen"
+    }
+  },
+  {
+    "id": "lords-prayer-peace",
+    "segment_ids": [
+      "lords-prayer-priest-peace",
+      "lords-prayer-choir-spirit",
+      "lords-prayer-deacon-bow-heads",
+      "lords-prayer-choir-to-thee",
+      "lords-prayer-priest-bowing-prayer",
+      "lords-prayer-priest-bowing-doxology",
+      "lords-prayer-choir-bowing-amen"
+    ],
+    "show_speakers": true,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "lords-prayer",
+      "start_segment_id": "lords-prayer-priest-peace",
       "end_segment_id": "lords-prayer-choir-bowing-amen"
     }
   },

@@ -65,6 +65,19 @@ const lessons = [
     ]
   },
   {
+    "id": "lesson-alleluia-glory-our-god-hope",
+    "unit_id": "daily-seasonal-prayers",
+    "title": "Alleluia. Glory to thee.",
+    "display_order": 2,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "alleluia-glory-our-god-hope",
+        "activity_policy": "standard"
+      }
+    ]
+  },
+  {
     "id": "lesson-antiphons",
     "unit_id": "unit-2",
     "title": "The Antiphons",
@@ -421,21 +434,13 @@ const lessons = [
   {
     "id": "lesson-lords-prayer-doxologies",
     "unit_id": "unit-4",
-    "title": "The Lord's Prayer Doxologies",
-    "title_phrase": "section-lords-prayer",
+    "title": "The Peace",
+    "title_phrase": "peace-be-to-all-001",
     "display_order": 1,
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "exercise_id": "lords-prayer-first-doxology",
-        "activity_policy": "standard"
-      },
-      {
-        "exercise_id": "lords-prayer-bowing-doxology",
-        "activity_policy": "standard"
-      },
-      {
-        "exercise_id": "lords-prayer-doxologies-summary",
+        "exercise_id": "lords-prayer-peace",
         "activity_policy": "standard"
       }
     ]
@@ -870,6 +875,36 @@ const lessons = [
     ]
   },
   {
+    "id": "lesson-heavenly-king",
+    "unit_id": "unit-1",
+    "title": "O heavenly King",
+    "title_phrase": "preparation-heavenly-king-001",
+    "display_order": 8,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "title": "O heavenly King",
+        "exercise_id": "heavenly-king-spirit-truth",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Treasury of good things",
+        "exercise_id": "heavenly-king-treasury-abide",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Cleanse us and save us",
+        "exercise_id": "heavenly-king-cleanse-save",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "O heavenly King",
+        "exercise_id": "heavenly-king",
+        "activity_policy": "standard"
+      }
+    ]
+  },
+  {
     "id": "lesson-all-holy-trinity",
     "unit_id": "unit-1",
     "title": "All Holy Trinity",
@@ -1041,6 +1076,20 @@ const lessons = [
       {
         "title": "The Lord's Prayer",
         "exercise_id": "lords-prayer-summary",
+        "activity_policy": "standard"
+      }
+    ]
+  },
+  {
+    "id": "lesson-lords-prayer-thine-kingdom",
+    "unit_id": "unit-1",
+    "title": "For thine is the kingdom",
+    "title_phrase": "lords-prayer-thine-kingdom-001",
+    "display_order": 7,
+    "quizlet_deck_url": null,
+    "exercises": [
+      {
+        "exercise_id": "lords-prayer-thine-kingdom",
         "activity_policy": "standard"
       }
     ]

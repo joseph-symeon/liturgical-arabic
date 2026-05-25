@@ -1545,10 +1545,28 @@ const sourceSegments = {
         "phrase_id": "preparation-heavenly-king-001"
       },
       {
+        "text": " "
+      },
+      {
+        "phrase_id": "preparation-comforter-spirit-truth-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "preparation-spirit-truth-001"
+      },
+      {
         "text": "، "
       },
       {
         "phrase_id": "preparation-everywhere-present-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "preparation-filling-all-things-001"
       },
       {
         "text": "،"
@@ -1563,6 +1581,12 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "preparation-treasury-giver-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "preparation-giver-of-life-001"
       },
       {
         "text": ": "
@@ -1583,6 +1607,30 @@ const sourceSegments = {
     "phrases": [
       {
         "phrase_id": "preparation-cleanse-save-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "preparation-from-every-stain-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "preparation-save-good-one-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "preparation-o-good-one-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "preparation-our-souls-001"
       },
       {
         "text": "."
@@ -12463,7 +12511,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "theotokos-father-son-spirit-001"
+        "phrase_id": "doxology-of-father-son-spirit-001"
       },
       {
         "text": "، "

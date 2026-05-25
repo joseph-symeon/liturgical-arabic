@@ -17521,9 +17521,53 @@ const phrases = {
     ]
   },
   "preparation-cleanse-save-001": {
-    "arabic": "وَطَهِّرْنَا مِنْ كُلِّ دَنَسٍ وَخَلِّصْ أَيُّهَا الصَّالِحُ نُفُوسَنَا",
-    "translation": "and cleanse us from every stain and save our souls O good One",
-    "literal": "and purify us from every stain and save O Good One our souls",
+    "arabic": "وَطَهِّرْنَا",
+    "translation": "and cleanse us",
+    "literal": "and purify us",
+    "tags": [
+      "petition",
+      "preparation",
+      "salvation",
+      "section: The Preparation for the Divine Liturgy"
+    ]
+  },
+  "preparation-from-every-stain-001": {
+    "arabic": "مِنْ كُلِّ دَنَسٍ",
+    "translation": "from every stain",
+    "literal": "from every stain",
+    "tags": [
+      "petition",
+      "preparation",
+      "salvation",
+      "section: The Preparation for the Divine Liturgy"
+    ]
+  },
+  "preparation-save-good-one-001": {
+    "arabic": "وَخَلِّصْ",
+    "translation": "and save",
+    "literal": "and save",
+    "tags": [
+      "petition",
+      "preparation",
+      "salvation",
+      "section: The Preparation for the Divine Liturgy"
+    ]
+  },
+  "preparation-o-good-one-001": {
+    "arabic": "أَيُّهَا الصَّالِحُ",
+    "translation": "O good One",
+    "literal": "O Good One",
+    "tags": [
+      "petition",
+      "preparation",
+      "salvation",
+      "section: The Preparation for the Divine Liturgy"
+    ]
+  },
+  "preparation-our-souls-001": {
+    "arabic": "نُفُوسَنَا",
+    "translation": "our souls",
+    "literal": "our souls",
     "tags": [
       "petition",
       "preparation",
@@ -17542,9 +17586,19 @@ const phrases = {
     ]
   },
   "preparation-treasury-giver-001": {
-    "arabic": "كَنْزُ الصَّالِحَاتِ وَرَازِقُ الحَيَاة",
-    "translation": "the Treasury of good things and Giver of life",
-    "literal": "treasury of good things and giver of life",
+    "arabic": "كَنْزُ الصَّالِحَاتِ",
+    "translation": "the Treasury of good things",
+    "literal": "treasury of good things",
+    "tags": [
+      "holy-spirit",
+      "preparation",
+      "section: The Preparation for the Divine Liturgy"
+    ]
+  },
+  "preparation-giver-of-life-001": {
+    "arabic": "وَرَازِقُ الحَيَاة",
+    "translation": "and Giver of life",
+    "literal": "and giver of life",
     "tags": [
       "holy-spirit",
       "preparation",
@@ -17552,9 +17606,19 @@ const phrases = {
     ]
   },
   "preparation-everywhere-present-001": {
-    "arabic": "الحَاضِرُ فِي كُلِّ مَكَانٍ وَالمَالِئُ الكُلّ",
-    "translation": "who art everywhere present and fillest all things",
-    "literal": "the one present in every place and filling all things",
+    "arabic": "الحَاضِرُ فِي كُلِّ مَكَانٍ",
+    "translation": "who art everywhere present",
+    "literal": "the one present in every place",
+    "tags": [
+      "holy-spirit",
+      "preparation",
+      "section: The Preparation for the Divine Liturgy"
+    ]
+  },
+  "preparation-filling-all-things-001": {
+    "arabic": "وَالمَالِئُ الكُلّ",
+    "translation": "and fillest all things",
+    "literal": "and filling all things",
     "tags": [
       "holy-spirit",
       "preparation",
@@ -17562,9 +17626,29 @@ const phrases = {
     ]
   },
   "preparation-heavenly-king-001": {
-    "arabic": "أَيُّهَا المَلِكُ السَّمَاوِيُّ المُعَزِّي رُوحُ الحَقّ",
-    "translation": "O heavenly King Comforter the Spirit of truth",
-    "literal": "O heavenly King the Comforter Spirit of truth",
+    "arabic": "أَيُّهَا المَلِكُ السَّمَاوِيُّ",
+    "translation": "O heavenly King",
+    "literal": "O heavenly King",
+    "tags": [
+      "holy-spirit",
+      "preparation",
+      "section: The Preparation for the Divine Liturgy"
+    ]
+  },
+  "preparation-comforter-spirit-truth-001": {
+    "arabic": "المُعَزِّي",
+    "translation": "the Comforter",
+    "literal": "the Comforter",
+    "tags": [
+      "holy-spirit",
+      "preparation",
+      "section: The Preparation for the Divine Liturgy"
+    ]
+  },
+  "preparation-spirit-truth-001": {
+    "arabic": "رُوحُ الحَقّ",
+    "translation": "the Spirit of truth",
+    "literal": "Spirit of truth",
     "tags": [
       "holy-spirit",
       "preparation",
