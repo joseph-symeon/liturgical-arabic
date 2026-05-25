@@ -80,9 +80,14 @@ function getAvailableStudySkills(activityOptions) {
 }
 
 function getStoredStudySkill(activityOptions) {
-  if (typeof window === 'undefined') return STUDY_SKILLS.home;
+  const fallbackSkill = getSkillActivityOptions(activityOptions, STUDY_SKILLS.recitation).length > 0
+    ? STUDY_SKILLS.recitation
+    : STUDY_SKILLS.home;
+  if (typeof window === 'undefined') return fallbackSkill;
   const storedSkill = window.localStorage.getItem(STUDY_SKILL_STORAGE_KEY);
-  return getAvailableStudySkills(activityOptions).includes(storedSkill) ? storedSkill : STUDY_SKILLS.home;
+  return getAvailableStudySkills(activityOptions).includes(storedSkill) && storedSkill !== STUDY_SKILLS.home
+    ? storedSkill
+    : fallbackSkill;
 }
 
 function storeStudySkill(skill) {
@@ -254,14 +259,6 @@ export default function LessonPage({
     return totalConfidence / phraseIds.length;
   }
 
-  function openExerciseSkill(exerciseIndex, skill) {
-    if (exerciseIndex !== selectedExerciseIndex) {
-      onSelectExercise?.(exerciseIndex, skill);
-      return;
-    }
-    selectStudySkill(skill);
-  }
-
   function selectActivityValue(value) {
     setSelectedActivityOptionId(value);
     storeActivitySelection(SHARED_ACTIVITY_SELECTION_KEY, value);
@@ -283,11 +280,12 @@ export default function LessonPage({
     selectActivityValue(nextActivityValue);
   }
 
-  function renderRecitationModeTabs() {
-    if (activeSkillOptions.length <= 1) return null;
+  function renderActivityModeTabs() {
+    const options = isRecitationMode ? activeSkillOptions : recitationOptions;
+    if (options.length <= 1) return null;
     return (
       <div className="lp-study-mode-tabs" role="group" aria-label={`${getStudySkillLabel(selectedStudySkill)} mode`}>
-        {activeSkillOptions.map(option => {
+        {options.map(option => {
           const value = getActivityOptionValue(option);
           return (
             <button
@@ -303,6 +301,10 @@ export default function LessonPage({
         })}
       </div>
     );
+  }
+
+  function renderExerciseSkillTabs() {
+    return renderSkillTabs();
   }
 
   function renderPassageExperience() {
@@ -325,7 +327,14 @@ export default function LessonPage({
         showPracticeToolbar={isRecitationMode && showPracticeToolbar}
         preserveToolbarInFocus={isRecitationMode}
         activityContextHeader={activityContextHeader}
-        toolbarTop={isRecitationMode ? renderRecitationModeTabs() : null}
+        toolbarTop={(
+          <>
+            {renderExerciseSkillTabs()}
+            {renderActivityModeTabs()}
+          </>
+        )}
+        learnSetupToolbarTop={renderExerciseSkillTabs()}
+        dockLearnSetupControls={!isRecitationMode}
         onCourseTrack={onCourseTrack}
         onCourseLesson={onCourseLesson}
       />
@@ -380,9 +389,6 @@ export default function LessonPage({
         <section className="lp-study-home-exercise-summary" aria-label="Exercises">
           <div className="lp-study-home-exercise-list">
             {exerciseItems.map((item, exerciseIndex) => {
-              const itemActivityOptions = getActivityOptions(item);
-              const itemCanUseComprehension = getSkillActivityOptions(itemActivityOptions, STUDY_SKILLS.comprehension).length > 0;
-              const itemCanUseRecitation = getSkillActivityOptions(itemActivityOptions, STUDY_SKILLS.recitation).length > 0;
               const exerciseConfidence = getExerciseConfidence(item);
               const isSelectedExercise = exerciseIndex === selectedExerciseIndex;
 
@@ -415,17 +421,10 @@ export default function LessonPage({
                   <span className="lp-study-home-exercise-actions">
                     <button
                       type="button"
-                      onClick={() => openExerciseSkill(exerciseIndex, STUDY_SKILLS.comprehension)}
-                      disabled={!itemCanUseComprehension}
+                      className="lp-study-home-exercise-action"
+                      onClick={() => onSelectExercise?.(exerciseIndex)}
                     >
-                      Comprehension
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => openExerciseSkill(exerciseIndex, STUDY_SKILLS.recitation)}
-                      disabled={!itemCanUseRecitation}
-                    >
-                      Recitation
+                      Practice
                     </button>
                   </span>
                 </article>
@@ -445,7 +444,8 @@ export default function LessonPage({
         'bottom-nav-page',
         isStudyHome ? 'study-home-page' : '',
         isLearnActivity && !isStudyHome ? 'learn-mode-page' : '',
-        isRecitationMode ? 'recitation-mode-page' : 'comprehension-mode-page',
+        'recitation-mode-page',
+        isRecitationMode ? '' : 'comprehension-mode-page',
         isRecitationMode && !showPracticeToolbar ? 'focus-mode-page' : '',
         selectedActivityType && !isStudyHome ? `study-activity-${selectedActivityType}` : ''
       ].filter(Boolean).join(' ')}
@@ -460,7 +460,7 @@ export default function LessonPage({
       )}
 
       {selectedExercise?.exercise && !isStudyHome && (
-        isRecitationMode ? renderRecitationWorkspace() : renderPassageExperience()
+        renderRecitationWorkspace()
       )}
     </div>
   );

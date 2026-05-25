@@ -441,6 +441,9 @@ export default function PassageActivityBody({
   karaokeActiveCaption = null,
   practiceTextMode = 'literal',
   activityContextHeader = null,
+  learnSetupToolbarTop = null,
+  dockLearnSetupControls = false,
+  learnSetupHasExtendedControls = false,
   onCourseTrack,
   onCourseLesson
 }) {
@@ -512,7 +515,9 @@ export default function PassageActivityBody({
   const [learnCorrectionPrompt, setLearnCorrectionPrompt] = useState(null);
   const [learnStarted, setLearnStarted] = useState(false);
   const [learnReviewMode, setLearnReviewMode] = useState(null);
-  const [learnSettingsOpen, setLearnSettingsOpen] = useState(getStoredLearnSettingsOpen);
+  const [learnSettingsOpen, setLearnSettingsOpen] = useState(() => (
+    dockLearnSetupControls ? false : getStoredLearnSettingsOpen()
+  ));
   const [learnResetKey, setLearnResetKey] = useState(0);
   const [matchingShuffleKey, setMatchingShuffleKey] = useState(0);
   const [arrangeAnswerWidth, setArrangeAnswerWidth] = useState(0);
@@ -676,7 +681,11 @@ export default function PassageActivityBody({
     setLearnQueue(queue => {
       const remaining = queue.slice(1);
       if (wasCorrect) return remaining;
-      const retryIndex = Math.min(2, remaining.length);
+      const arrangeIndex = remaining.findIndex(item => (
+        typeof item !== 'string' && item?.type === 'arrange'
+      ));
+      const finalReviewIndex = arrangeIndex === -1 ? remaining.length : arrangeIndex;
+      const retryIndex = Math.min(2, finalReviewIndex);
       const retryItem = typeof currentLearnItem === 'string'
         ? { type: 'term', phraseId: currentLearnPhraseId, questionType: learnQuestionType, review: true }
         : { ...currentLearnItem, questionType: learnQuestionType, review: true };
@@ -1106,6 +1115,42 @@ export default function PassageActivityBody({
     if (typeof window === 'undefined') return;
     window.localStorage.setItem(LEARN_SETTINGS_OPEN_STORAGE_KEY, String(learnSettingsOpen));
   }, [learnSettingsOpen]);
+
+  useEffect(() => {
+    if (!isLearnActivity || !dockLearnSetupControls || !learnSettingsOpen || learnStarted) return undefined;
+    if (typeof window === 'undefined') return undefined;
+
+    const { body, documentElement } = document;
+    const scrollY = window.scrollY;
+    const previousBodyStyles = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow
+    };
+    const previousHtmlOverflow = documentElement.style.overflow;
+
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+    body.style.overflow = 'hidden';
+    documentElement.style.overflow = 'hidden';
+
+    return () => {
+      body.style.position = previousBodyStyles.position;
+      body.style.top = previousBodyStyles.top;
+      body.style.left = previousBodyStyles.left;
+      body.style.right = previousBodyStyles.right;
+      body.style.width = previousBodyStyles.width;
+      body.style.overflow = previousBodyStyles.overflow;
+      documentElement.style.overflow = previousHtmlOverflow;
+      window.scrollTo(0, scrollY);
+    };
+  }, [isLearnActivity, dockLearnSetupControls, learnSettingsOpen, learnStarted]);
 
   useEffect(() => {
     if (!isLearnActivity) return;
@@ -2105,6 +2150,35 @@ export default function PassageActivityBody({
     }
 
     function renderLearnPhrases() {
+      if (dockLearnSetupControls) {
+        return (
+          <div className="lp-learn-phrases-list-only">
+            <div className="lp-study-home-phrase-list">
+              {learnPhraseIds.map(phraseId => {
+                const phrase = phrases[phraseId];
+                return (
+                  <div className="lp-study-home-phrase" key={phraseId}>
+                    <span className="lp-study-home-phrase-arabic" dir="rtl">
+                      <LiturgyLine
+                        line={[{ id: phraseId }]}
+                        arabicMode={arabicMode}
+                        speechRate={speechRate}
+                        arabicFontFamily={arabicFontFamily}
+                        arabicFontWeight={arabicFontWeight}
+                        arabicFontSize={arabicFontSize}
+                      />
+                    </span>
+                    <span className="lp-study-home-phrase-meaning">
+                      {getLearnTextAnswer(phrase, learnEnglishDisplayMode)}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+
       return (
         <section className="lp-learn-phrases" aria-labelledby="lp-learn-phrases-title">
           <div className="lp-learn-settings-section-title" id="lp-learn-phrases-title">Phrases</div>
@@ -2134,20 +2208,17 @@ export default function PassageActivityBody({
       );
     }
 
-    if (!learnStarted) {
+    function renderLearnSetupControls({ docked = false } = {}) {
       return (
-        <div className="lp-learn-activity lp-learn-setup" dir="ltr">
-          {renderActivityContextHeader()}
-          <StudyWorkspaceHeader
-            className="lp-learn-topbar"
-            actions={(
-              <div className="lp-learn-start-actions">
-                <button type="button" className="lp-activity-button lp-activity-submit" onClick={startLearnSession}>
-                  Start
-                </button>
-              </div>
-            )}
-          />
+        <div className={[
+          docked ? "lp-learn-docked-controls" : "lp-learn-inline-controls",
+          docked && learnSetupHasExtendedControls ? "has-extended-controls" : ""
+        ].filter(Boolean).join(" ")}>
+          {docked && learnSetupToolbarTop && (
+            <div className="lp-activity-toolbar-top">
+              {learnSetupToolbarTop}
+            </div>
+          )}
           <details
             className="lp-learn-settings"
             open={learnSettingsOpen}
@@ -2251,7 +2322,7 @@ export default function PassageActivityBody({
                 </div>
               </div>
               <div className="lp-learn-settings-section">
-                <div className="lp-learn-settings-section-title">Display</div>
+                <div className="lp-learn-settings-section-title lp-learn-display-heading">Display</div>
                 <div className="lp-learn-setting-group lp-learn-settings-panel">
                   <span className="lp-learn-setting-label">English captions</span>
                   <div className="lp-segmented-control" role="group" aria-label="English display">
@@ -2276,7 +2347,22 @@ export default function PassageActivityBody({
               </div>
             </div>
           </details>
+          <div className="lp-learn-start-actions">
+            <button type="button" className="lp-activity-button lp-activity-submit" onClick={startLearnSession}>
+              {docked ? 'Study Phrases' : 'Start'}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (!learnStarted) {
+      return (
+        <div className={`lp-learn-activity lp-learn-setup${dockLearnSetupControls ? ' docked-controls' : ''}`} dir="ltr">
+          {!dockLearnSetupControls && renderActivityContextHeader()}
+          {!dockLearnSetupControls && renderLearnSetupControls()}
           {renderLearnPhrases()}
+          {dockLearnSetupControls && renderLearnSetupControls({ docked: true })}
         </div>
       );
     }

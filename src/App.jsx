@@ -298,9 +298,9 @@ function getStoredDisplaySettings() {
 }
 
 function getStoredCourseStudyWorkspace() {
-  if (typeof window === "undefined") return "home";
+  if (typeof window === "undefined") return "recitation";
   const stored = window.localStorage.getItem(COURSE_STUDY_WORKSPACE_STORAGE_KEY);
-  return ["home", "recitation", "comprehension"].includes(stored) ? stored : "home";
+  return ["home", "recitation", "comprehension"].includes(stored) ? stored : "recitation";
 }
 
 export default function App() {
@@ -471,7 +471,7 @@ export default function App() {
     setDisplayMenuOpen(false);
   }
 
-  function goToLessonStudyHome(lessonId, exerciseIndex = 0, studyWorkspace = "home") {
+  function goToLessonStudyHome(lessonId, exerciseIndex = 0, studyWorkspace = "recitation") {
     if (typeof window !== "undefined") {
       window.localStorage.setItem(COURSE_STUDY_WORKSPACE_STORAGE_KEY, studyWorkspace);
     }

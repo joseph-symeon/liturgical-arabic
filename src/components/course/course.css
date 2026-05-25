@@ -41,6 +41,7 @@
 .lp-page.recitation-mode-page {
   --page-nav-max-width: min(1040px, calc(100vw - 24px));
   --recite-toolbar-reserve: 72px;
+  --recite-option-row-height: 40px;
   --recite-bg: #ffffff;
   --recite-surface: #fafaf9;
   --recite-surface-strong: #f5f5f4;
@@ -54,6 +55,10 @@
   --study-text: var(--recite-text);
   --study-muted: var(--recite-muted);
   color: var(--recite-text);
+}
+
+.lp-page.recitation-mode-page.study-activity-learn {
+  --recite-toolbar-reserve: 184px;
 }
 
 .lp-page.course-view-page {
@@ -345,29 +350,10 @@
   justify-content: flex-end;
 }
 
-.lp-study-home-exercise-actions button {
-  min-width: 118px;
-  border: 1px solid color-mix(in srgb, var(--study-accent) 38%, var(--study-border));
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--study-accent) 10%, var(--study-surface));
-  color: color-mix(in srgb, var(--study-accent) 68%, var(--study-text));
+.lp-study-home-exercise-action {
+  appearance: none;
   cursor: pointer;
   font: inherit;
-  font-size: 12px;
-  font-weight: 850;
-  line-height: 1;
-  padding: 8px 10px;
-}
-
-.lp-study-home-exercise-actions button:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--study-accent) 54%, var(--study-border));
-  background: color-mix(in srgb, var(--study-accent) 17%, var(--study-surface));
-  color: var(--study-text);
-}
-
-.lp-study-home-exercise-actions button:disabled {
-  cursor: not-allowed;
-  opacity: 0.45;
 }
 
 .lp-study-home-section {
@@ -611,21 +597,28 @@
 }
 
 .lp-page.recitation-mode-page .lp-study-skill-tabs {
-  align-self: center;
-  width: fit-content;
-  padding: 3px;
-  border: 1px solid color-mix(in srgb, var(--recite-border) 90%, transparent);
-  border-radius: 9px;
-  background: color-mix(in srgb, var(--recite-surface) 72%, transparent);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--recite-text) 4%, transparent);
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .lp-page.recitation-mode-page .lp-study-mode-tabs {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   box-sizing: border-box;
-  width: min(100%, 520px);
+  width: 100%;
   max-width: 100%;
   margin-top: 0;
 }
@@ -660,17 +653,32 @@
 }
 
 .lp-page.recitation-mode-page .lp-study-skill-tabs button {
-  min-width: 140px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 0;
+  min-height: 38px;
   border-color: transparent;
+  border-radius: 0;
   background: transparent;
   color: var(--recite-muted);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: none;
+  padding: 0 0 7px;
+  touch-action: manipulation;
 }
 
 .lp-page.recitation-mode-page .lp-study-mode-tabs button {
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   min-width: 0;
-  min-height: 40px;
+  min-height: var(--recite-option-row-height);
   border-radius: 999px;
   border-color: color-mix(in srgb, var(--recite-border) 88%, transparent);
   background: color-mix(in srgb, var(--recite-surface) 52%, transparent);
@@ -692,6 +700,12 @@
   color: var(--recite-text);
 }
 
+.lp-page.recitation-mode-page .lp-study-skill-tabs button:hover:not(:disabled) {
+  border-color: transparent;
+  background: transparent;
+  color: var(--recite-text);
+}
+
 .lp-study-skill-tabs button.active,
 .lp-study-mode-tabs button.active {
   border-color: var(--liturgical-red-highlight-ring);
@@ -699,13 +713,34 @@
   color: #1c1917;
 }
 
-.lp-page.recitation-mode-page .lp-study-skill-tabs button.active {
-  border-color: color-mix(in srgb, var(--recite-accent) 58%, var(--recite-border));
-  background: color-mix(in srgb, var(--recite-accent) 18%, var(--recite-surface-strong));
-  box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--recite-accent) 28%, transparent),
-    inset 0 -3px 0 color-mix(in srgb, var(--recite-accent) 76%, transparent);
+.lp-page.recitation-mode-page .lp-study-skill-tabs button.active,
+.lp-page.recitation-mode-page .lp-study-skill-tabs button[aria-selected="true"],
+.lp-page.recitation-mode-page .lp-study-skill-tabs button.active:hover:not(:disabled),
+.lp-page.recitation-mode-page .lp-study-skill-tabs button.active:focus,
+.lp-page.recitation-mode-page .lp-study-skill-tabs button.active:focus-visible,
+.lp-page.recitation-mode-page .lp-study-skill-tabs button.active:active {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
   color: var(--recite-text);
+  outline: none;
+}
+
+.lp-page.recitation-mode-page .lp-study-skill-tabs button::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.lp-page.recitation-mode-page .lp-study-skill-tabs button.active::after,
+.lp-page.recitation-mode-page .lp-study-skill-tabs button[aria-selected="true"]::after {
+  background: color-mix(in srgb, var(--recite-accent) 76%, var(--recite-border));
 }
 
 .lp-page.recitation-mode-page .lp-study-mode-tabs button.active,
@@ -808,9 +843,112 @@
   border-top: 1px solid color-mix(in srgb, var(--recite-border) 54%, transparent);
 }
 
-.lp-page.recitation-mode-page .lp-activity-toolbar-top {
+.lp-page.recitation-mode-page .lp-learn-docked-controls {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right, 0px));
+  bottom: 0;
+  left: max(14px, env(safe-area-inset-left, 0px));
+  z-index: 35;
   box-sizing: border-box;
-  width: min(100%, 520px);
+  display: grid;
+  gap: 10px;
+  width: auto;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 12px 0 max(14px, env(safe-area-inset-bottom, 0px));
+  background: var(--recite-bg);
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  right: calc(-1 * max(14px, env(safe-area-inset-right, 0px)));
+  bottom: 0;
+  left: calc(-1 * max(14px, env(safe-area-inset-left, 0px)));
+  z-index: -1;
+  border-top: 1px solid color-mix(in srgb, var(--recite-border) 54%, transparent);
+  background: var(--recite-bg);
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-settings {
+  border-color: color-mix(in srgb, var(--recite-border) 82%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--recite-surface) 76%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--recite-text) 4%, transparent),
+    0 18px 44px color-mix(in srgb, #000 22%, transparent);
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls .lp-activity-toolbar-top {
+  margin-bottom: 0;
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-settings-summary {
+  min-height: var(--recite-option-row-height);
+  box-sizing: border-box;
+  color: var(--recite-muted);
+  padding: 0 16px;
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-display-heading {
+  color: var(--recite-muted);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 0 4px 2px;
+  text-transform: uppercase;
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-answer-settings {
+  max-height: min(58svh, 520px);
+  overflow: auto;
+  padding: 0 14px 14px;
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-start-actions {
+  margin: 0;
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-start-actions .lp-activity-submit {
+  width: 100%;
+  min-height: 52px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls.has-extended-controls .lp-learn-start-actions .lp-activity-submit {
+  min-height: 72px;
+}
+
+.lp-page.recitation-mode-page .lp-learn-setup.docked-controls {
+  gap: 12px;
+  min-height: 0;
+  align-content: start;
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
+.lp-page.recitation-mode-page .lp-learn-setup.docked-controls .lp-learn-phrases {
+  margin-top: 0;
+}
+
+.lp-page.recitation-mode-page .lp-learn-phrases-list-only {
+  --study-surface: var(--learn-surface-strong);
+  --study-border: var(--learn-border);
+  --study-text: var(--learn-text);
+  --study-muted: var(--learn-muted);
+  display: grid;
+  gap: 12px;
+}
+
+.lp-page.recitation-mode-page .lp-activity-toolbar-top {
+  display: grid;
+  gap: 10px;
+  box-sizing: border-box;
+  width: 100%;
   max-width: 100%;
   margin: 0 auto 10px;
 }
@@ -3577,6 +3715,7 @@
 }
 
 .lp-course-path-action,
+.lp-study-home-exercise-action,
 .lp-track-lesson-action {
   border: 1px solid color-mix(in srgb, var(--path-accent) 38%, #d6d3d1);
   border-radius: 999px;
@@ -3589,6 +3728,7 @@
 }
 
 .lp-course-path-card:hover .lp-course-path-action,
+.lp-study-home-exercise-row:hover .lp-study-home-exercise-action,
 .lp-track-lesson-row:hover .lp-track-lesson-action {
   border-color: color-mix(in srgb, var(--path-accent) 45%, #a8a29e);
   background: color-mix(in srgb, var(--path-accent) 17%, #fff);
@@ -4405,19 +4545,81 @@
 }
 
 .lp-page.recitation-mode-page .lp-speed-menu {
-  border-color: var(--recite-border);
-  background: var(--recite-surface);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+  right: 50%;
+  bottom: calc(100% + 14px);
+  width: 172px;
+  box-sizing: border-box;
+  border-color: color-mix(in srgb, var(--recite-border) 86%, transparent);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--recite-accent) 8%, transparent), transparent 64%),
+    var(--recite-surface);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--recite-text) 5%, transparent),
+    0 18px 42px color-mix(in srgb, #000 36%, transparent);
+  padding: 12px;
+  transform: translateX(50%);
 }
 
-.lp-page.recitation-mode-page .lp-speed-title,
-.lp-page.recitation-mode-page .lp-speed-value {
+.lp-page.recitation-mode-page .lp-speed-menu::after {
+  content: "";
+  position: absolute;
+  right: 50%;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  border-right: 1px solid color-mix(in srgb, var(--recite-border) 86%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--recite-border) 86%, transparent);
+  background: var(--recite-surface);
+  transform: translateX(50%) rotate(45deg);
+}
+
+.lp-page.recitation-mode-page .lp-speed-title {
   color: var(--recite-muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  margin-bottom: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.lp-page.recitation-mode-page .lp-speed-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 42px;
+  gap: 10px;
+  align-items: center;
+}
+
+.lp-page.recitation-mode-page .lp-speed-value {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  height: 38px;
+  border: 1px solid color-mix(in srgb, var(--recite-border) 72%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--recite-bg) 46%, transparent);
+  color: var(--recite-text);
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1;
 }
 
 .lp-page.recitation-mode-page .lp-speed-adjust {
-  border-color: var(--recite-border);
-  background: var(--recite-surface-strong);
+  width: 42px;
+  height: 42px;
+  border-color: color-mix(in srgb, var(--recite-border) 86%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--recite-surface-strong) 74%, transparent);
+  color: var(--recite-muted);
+  font-size: 24px;
+  font-weight: 650;
+}
+
+.lp-page.recitation-mode-page .lp-speed-adjust:hover {
+  border-color: color-mix(in srgb, var(--recite-accent) 48%, var(--recite-border));
+  background: color-mix(in srgb, var(--recite-accent) 12%, var(--recite-surface-strong));
   color: var(--recite-text);
 }
 
@@ -4504,6 +4706,10 @@
 }
 
 @media (max-width: 680px) {
+  .lp-page.recitation-mode-page {
+    --recite-option-row-height: 38px;
+  }
+
   .lp-course-flow-track {
     grid-template-columns: 1fr;
   }
@@ -4648,7 +4854,6 @@
 
   .lp-page.recitation-mode-page .lp-study-mode-tabs button {
     flex: 1 1 0;
-    min-height: 38px;
     padding: 0 8px;
     font-size: 12px;
   }
@@ -4715,6 +4920,27 @@
     margin-bottom: 8px;
   }
 
+  .lp-page.recitation-mode-page.study-activity-learn {
+    --recite-toolbar-reserve: 190px;
+  }
+
+  .lp-page.recitation-mode-page .lp-learn-docked-controls {
+    right: max(12px, env(safe-area-inset-right, 0px));
+    left: max(12px, env(safe-area-inset-left, 0px));
+    max-width: 380px;
+    padding: 10px 0 max(12px, env(safe-area-inset-bottom, 0px));
+  }
+
+  .lp-page.recitation-mode-page .lp-learn-docked-controls::before {
+    top: -14px;
+    right: calc(-1 * max(12px, env(safe-area-inset-right, 0px)));
+    left: calc(-1 * max(12px, env(safe-area-inset-left, 0px)));
+  }
+
+  .lp-page.recitation-mode-page .lp-learn-docked-controls.has-extended-controls .lp-learn-start-actions .lp-activity-submit {
+    min-height: 82px;
+  }
+
   .lp-page.recitation-mode-page .lp-controls {
     justify-content: flex-start;
   }
@@ -4760,6 +4986,20 @@
 
   .lp-page.recitation-mode-page .lp-segmented-control {
     gap: 6px;
+  }
+
+  .lp-page.recitation-mode-page .lp-activity-toolbar:has(.lp-progress-bar) .lp-toolbar-mode-controls {
+    justify-content: center;
+  }
+
+  .lp-page.recitation-mode-page .lp-activity-toolbar:has(.lp-progress-bar) .lp-segmented-control {
+    flex-direction: column;
+    align-items: stretch;
+    width: 110px;
+  }
+
+  .lp-page.recitation-mode-page .lp-activity-toolbar:has(.lp-progress-bar) .lp-segmented-control button {
+    width: 100%;
   }
 
   .lp-page.recitation-mode-page .lp-karaoke-mode-button,
@@ -5891,6 +6131,7 @@
   }
 
   .lp-course-path-action,
+  .lp-study-home-exercise-action,
   .lp-track-lesson-action {
     border-color: color-mix(in srgb, var(--path-accent) 44%, var(--dark-border));
     background: color-mix(in srgb, var(--path-accent) 16%, var(--dark-surface));
@@ -5898,6 +6139,7 @@
   }
 
   .lp-course-path-card:hover .lp-course-path-action,
+  .lp-study-home-exercise-row:hover .lp-study-home-exercise-action,
   .lp-track-lesson-row:hover .lp-track-lesson-action {
     border-color: color-mix(in srgb, var(--path-accent) 58%, var(--dark-border));
     background: color-mix(in srgb, var(--path-accent) 22%, var(--dark-surface));

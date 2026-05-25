@@ -49,6 +49,8 @@ export default function PassageExperience({
   preserveToolbarInFocus = false,
   activityContextHeader = null,
   toolbarTop = null,
+  learnSetupToolbarTop = null,
+  dockLearnSetupControls = false,
   onCourseTrack,
   onCourseLesson,
   renderPassage
@@ -71,6 +73,9 @@ export default function PassageExperience({
   const hasPracticeTextMode = translateActivity || matchingActivity;
   const canUseKaraoke = listenActivity && resolvedCaptions.length > 0;
   const shouldTrackPlayerTime = canUseKaraoke || captionActivity;
+  const hasExtendedPlaybackControls = resolvedClip
+    ? resolvedClip.end_seconds - resolvedClip.start_seconds > 30
+    : false;
   const activeCaption = getDisplayedCaption(resolvedCaptions, currentTime, {
     leadSeconds: resolvedLeadSeconds,
     clipEndSeconds: resolvedClip?.end_seconds,
@@ -194,6 +199,9 @@ export default function PassageExperience({
                 karaokeActiveCaption={karaokeActiveCaption}
                 practiceTextMode={practiceTextMode}
                 activityContextHeader={activityContextHeader}
+                learnSetupToolbarTop={learnSetupToolbarTop}
+                dockLearnSetupControls={dockLearnSetupControls}
+                learnSetupHasExtendedControls={hasExtendedPlaybackControls}
                 onCourseTrack={onCourseTrack}
                 onCourseLesson={onCourseLesson}
               />
