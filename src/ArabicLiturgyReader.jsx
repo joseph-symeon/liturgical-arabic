@@ -1,15 +1,13 @@
 import React from "react";
 import { defaultServiceText } from "./data/texts/serviceTexts.js";
 import phrases from "./data/texts/phrases.js";
-import PageHeader from "./components/PageHeader.jsx";
-import InteractiveText from "./components/InteractiveText.jsx";
-import PhraseTooltip from "./components/PhraseTooltip.jsx";
+import BilingualTitle from "./components/BilingualTitle.jsx";
 import PassageRenderer from "./components/passage/PassageRenderer.jsx";
 import { getArabicText } from "./utils/arabic.js";
 import { createServiceSectionPassage } from "./utils/passages.js";
 import { getServiceNavigation } from "./utils/serviceNavigation.js";
-import appIcons from "./assets/icons/index.js";
 import "./components/course/course.css";
+import "./reader.css";
 
 const h = React.createElement;
 
@@ -35,12 +33,14 @@ export default function ArabicLiturgyReader({
   const readerSections = serviceText.sections || [];
   const isTableOfContents = selectedSectionIndex === null || readerSections.length === 0;
   const readerServiceNavigation = getServiceNavigation(serviceText);
-  const readerServiceHomeTitle = readerServiceNavigation[0]?.title || serviceText.short_title || serviceText.title;
-  const readerServiceHomePrimaryTitle = serviceText.short_title || serviceText.title || readerServiceHomeTitle;
+  const displayEnglishTitle = serviceText.display_title?.english || [];
+  const readerServiceHomeTitle = displayEnglishTitle[0]?.text || readerServiceNavigation[0]?.title || serviceText.short_title || serviceText.title;
+  const readerServiceHomePrimaryTitle = displayEnglishTitle[0]?.text || serviceText.short_title || serviceText.title || readerServiceHomeTitle;
   const readerServiceHomeSubtitle =
-    serviceText.nav_title && serviceText.nav_title !== readerServiceHomePrimaryTitle
+    displayEnglishTitle.slice(1).map(line => line.text).filter(Boolean).join(" ")
+    || (serviceText.nav_title && serviceText.nav_title !== readerServiceHomePrimaryTitle
       ? serviceText.nav_title
-      : null;
+      : null);
   const selectedSection = isTableOfContents ? null : readerSections[selectedSectionIndex] || readerSections[0];
   const selectedSectionEyebrow = selectedSection?.section_group || serviceText.title;
   const passage = isTableOfContents
@@ -106,39 +106,75 @@ export default function ArabicLiturgyReader({
     );
   }
 
+  function renderReaderHeader({ kicker = "Reader", title, meta, titlePhrase, arabicTitle, arabicMeta }) {
+    const titleContent = titlePhrase
+      ? h(BilingualTitle, {
+          as: "h1",
+          english: title,
+          phraseId: titlePhrase,
+          arabicMode,
+          speechRate,
+          arabicFontFamily,
+          arabicFontWeight: "500",
+          className: "lp-view-title reader-section-title"
+        })
+      : h("h1", { className: "lp-view-title" }, title);
+
+    return h(
+      "header",
+      { className: "lp-view-header reader-page-header" },
+      kicker ? h("p", { className: "lp-view-kicker" }, kicker) : null,
+      arabicTitle
+        ? h(
+            "div",
+            { className: "reader-page-title-row" },
+            titleContent,
+            h(
+              "div",
+              {
+                className: "reader-service-title-arabic",
+                dir: "rtl",
+                style: {
+                  fontFamily: arabicFontFamily,
+                  fontWeight: 500
+                }
+              },
+              arabicTitle
+            )
+          )
+        : titleContent,
+      meta || arabicMeta
+        ? h(
+            "div",
+            { className: "reader-service-meta-row" },
+            meta ? h("div", { className: "lp-view-meta" }, meta) : h("div", null),
+            arabicMeta
+              ? h(
+                  "div",
+                  {
+                    className: "reader-service-meta-arabic",
+                    dir: "rtl",
+                    style: {
+                      fontFamily: arabicFontFamily,
+                      fontWeight: 500
+                    }
+                  },
+                  arabicMeta
+                )
+              : null
+          )
+        : null
+    );
+  }
+
   function renderTableOfContents() {
     const serviceHome = readerServiceNavigation[0];
-    function renderTitleArabicPhrase(phraseId, className = "") {
-      const phrase = phrases[phraseId];
-      if (!phrase) return null;
-
-      return h(
-        InteractiveText,
-        {
-          spokenText: phrase.arabic,
-          speechRate,
-          tooltip: h(PhraseTooltip, { phrase }),
-          className
-        },
-        getArabicText(phrase, arabicMode)
-      );
-    }
-
-    const titleLines = serviceText.display_title || {};
-    const titleArabicBaseStyle = {
-      fontFamily: arabicFontFamily
-    };
-    const titleArabicEyebrowStyle = {
-      ...titleArabicBaseStyle,
-      fontWeight: 600,
-      fontSize: `${Math.max(arabicFontSize - 2, 18)}px`
-    };
-    const titleArabicMainStyle = {
-      ...titleArabicBaseStyle,
-      fontWeight: 500,
-      fontSize: `${Math.max(arabicFontSize + 3, 24)}px`
-    };
-    const englishTitleLines = titleLines.english || [];
+    const serviceArabicTitleParts = (serviceText.display_title?.arabic_phrase_ids || [])
+      .map(phraseId => phrases[phraseId])
+      .filter(Boolean)
+      .map(phrase => getArabicText(phrase, arabicMode));
+    const serviceArabicTitle = serviceArabicTitleParts[0] || "";
+    const serviceArabicSubtitle = serviceArabicTitleParts.slice(1).join(" ");
 
     function renderSectionButton(section, sectionIndex, isGrouped) {
       const titlePhrase = section.section_title_phrase ? phrases[section.section_title_phrase] : null;
@@ -155,17 +191,12 @@ export default function ArabicLiturgyReader({
         h(
           "span",
           { className: "reader-service-section-card-inner" },
-          h(
-            "span",
-            { className: "reader-service-section-marker", "aria-hidden": "true" },
-            String(sectionIndex + 1).padStart(2, "0")
-          ),
           h("span", { className: `reader-service-section-title text-left ${isGrouped ? "reader-service-home-section-title" : ""}` }, section.section || `Section ${sectionIndex + 1}`),
           titlePhrase
             ? h(
                 "span",
                 {
-                  className: "reader-service-section-arabic liturgical-red text-right",
+                  className: "reader-service-section-arabic text-right",
                   dir: "rtl",
                   style: {
                     fontFamily: arabicFontFamily,
@@ -196,7 +227,7 @@ export default function ArabicLiturgyReader({
             ? h(
                 "span",
                 {
-                  className: "reader-service-group-arabic liturgical-red text-right",
+                  className: "reader-service-group-arabic text-right",
                   dir: "rtl",
                   style: {
                     fontFamily: arabicFontFamily,
@@ -217,88 +248,15 @@ export default function ArabicLiturgyReader({
       );
     }
 
-    const titleIcon = appIcons[titleLines.icon] || (
-      titleLines.arabic_phrase_ids?.length || englishTitleLines.length
-        ? appIcons.chrysostomLandingIcon
-        : null
-    );
-    const iconMaxHeight = titleLines.icon_max_height || 300;
-
     return h(
       "div",
       { dir: "ltr" },
-      titleIcon || titleLines.arabic_phrase_ids?.length || englishTitleLines.length
-        ? h(
-            "header",
-            { className: "mb-10 text-center" },
-            h(
-              "div",
-              {
-                className: "mx-auto mb-4 grid max-w-[560px] gap-2",
-                dir: "rtl"
-              },
-              (titleLines.arabic_phrase_ids || []).map(function renderArabicTitleLine(phraseId, lineIndex) {
-                const isEyebrow =
-                  titleLines.arabic_title_tone === "eyebrow"
-                  || (lineIndex === 0 && titleLines.arabic_phrase_ids.length > 1);
-                return h(
-                  "div",
-                  {
-                    key: phraseId,
-                    className: isEyebrow
-                      ? "text-stone-500 dark:text-[var(--dark-muted)]"
-                      : "liturgical-red leading-tight",
-                    style: isEyebrow ? titleArabicEyebrowStyle : titleArabicMainStyle
-                  },
-                  renderTitleArabicPhrase(phraseId)
-                );
-              })
-            ),
-            titleIcon
-              ? h("img", {
-                  src: titleIcon.src,
-                  alt: titleIcon.title,
-                  className: "mx-auto mb-6 h-auto w-auto max-w-[78vw] opacity-90 dark:opacity-95",
-                  style: {
-                    maxHeight: `${iconMaxHeight}px`
-                  }
-                })
-              : null,
-            h(
-              "div",
-              { className: "mx-auto max-w-[560px]" },
-              englishTitleLines.map(function renderEnglishTitleLine(line, lineIndex) {
-                const isEyebrow = line.tone === "eyebrow" || (lineIndex === 0 && englishTitleLines.length > 1);
-                const isPrimary = line.tone === "red" || (!isEyebrow && englishTitleLines.length > 1);
-                return h(
-                  isEyebrow ? "div" : "h1",
-                  {
-                    key: `${line.text}-${lineIndex}`,
-                    className: isEyebrow
-                      ? "mb-2 text-lg font-semibold uppercase tracking-wide text-stone-500 dark:text-[var(--dark-muted)]"
-                      : isPrimary
-                        ? `${line.tone === "red" ? "liturgical-red" : "text-stone-900 dark:text-[var(--dark-text)]"} text-2xl font-medium leading-tight md:text-3xl`
-                        : "text-lg font-semibold uppercase tracking-wide text-stone-500 dark:text-[var(--dark-muted)]"
-                  },
-                  line.text
-                );
-              })
-            )
-          )
-        : h(
-            "header",
-            { className: "mb-10 text-center" },
-            h(
-              "div",
-              { className: "mb-2 text-sm font-semibold uppercase tracking-wide text-stone-500 dark:text-[var(--dark-muted)]" },
-              serviceText.title
-            ),
-            h(
-              "h1",
-              { className: "liturgical-red text-3xl font-medium leading-tight" },
-              readerServiceHomeTitle
-            )
-          ),
+      renderReaderHeader({
+        title: readerServiceHomePrimaryTitle,
+        meta: readerServiceHomeSubtitle,
+        arabicTitle: serviceArabicTitle,
+        arabicMeta: serviceArabicSubtitle
+      }),
       h(
         "div",
         { className: "lp-course-overview" },
@@ -325,32 +283,44 @@ export default function ArabicLiturgyReader({
     });
   }
 
+  function renderSectionPage() {
+    return h(
+      "div",
+      { className: "reader-section-layout" },
+      renderReaderHeader({
+        kicker: selectedSectionEyebrow,
+        title: selectedSection.section,
+        titlePhrase: selectedSection.section_title_phrase
+      }),
+      h(
+        "div",
+        { className: "reader-section-content" },
+        renderSectionPassage()
+      ),
+      h(
+        "footer",
+        { className: "reader-section-footer" },
+        renderSectionNav("bottom-page-nav grid gap-2")
+      )
+    );
+  }
+
   return h(
     "main",
     {
-      className: `bottom-nav-page mx-auto max-w-[700px] px-4 py-10 leading-8${isTableOfContents ? " reader-service-home-page" : ""}`
+      className: [
+        "lp-page",
+        "course-view-page",
+        "lp-course-map-page",
+        "reader-page",
+        isTableOfContents ? "reader-service-home-page" : "reader-section-page"
+      ].join(" ")
     },
     isTableOfContents
-      ? null
-      : h(
-          PageHeader,
-          {
-            eyebrow: selectedSectionEyebrow,
-            title: selectedSection.section,
-            titlePhrase: selectedSection.section_title_phrase,
-            arabicMode,
-            speechRate,
-            arabicFontFamily,
-            arabicFontWeight: "500"
-          }
-        ),
-    isTableOfContents
       ? renderTableOfContents()
-      : h(
-          React.Fragment,
-          null,
-          renderSectionPassage()
-        ),
-    renderSectionNav("bottom-page-nav grid gap-2")
+      : renderSectionPage(),
+    isTableOfContents
+      ? renderSectionNav("bottom-page-nav grid gap-2")
+      : null
   );
 }

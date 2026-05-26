@@ -4284,18 +4284,95 @@
   border-bottom: 1px solid #d6d3d1;
 }
 
-.reader-service-home-page {
-  --path-accent: var(--app-accent);
+.reader-page {
+  --path-accent: var(--liturgical-red);
   --path-card-border: #d6d3d1;
   --path-card-text: #292524;
   --path-card-surface: #fff;
   --path-list-border: #d6d3d1;
+}
+
+.reader-page .lp-view-kicker::before {
+  background: var(--liturgical-red);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--liturgical-red) 14%, transparent);
+}
+
+.reader-service-home-page {
   max-width: min(100%, 980px);
 }
 
 .reader-service-home-page .lp-course-overview {
   display: grid;
   gap: 16px;
+}
+
+.reader-page-header {
+  margin-bottom: 28px;
+}
+
+.reader-page-title-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: baseline;
+  max-width: 860px;
+}
+
+.reader-section-layout {
+  display: grid;
+  grid-template-rows: auto minmax(0, auto) minmax(0, 1fr) auto;
+  min-height: calc(100svh - clamp(56px, 10vw, 128px));
+}
+
+.reader-section-content {
+  grid-row: 2;
+}
+
+.reader-section-footer {
+  grid-row: 4;
+}
+
+.reader-section-content,
+.reader-section-footer,
+.reader-section-page .page-nav {
+  max-width: 700px;
+}
+
+.reader-section-page .page-nav {
+  width: 100%;
+}
+
+.reader-section-title {
+  max-width: 860px;
+}
+
+.reader-service-title-arabic {
+  min-width: 0;
+  color: var(--study-text, #292524);
+  font-size: clamp(22px, 4.5vw, 30px);
+  line-height: 1.25;
+  text-align: right;
+}
+
+.reader-service-meta-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: baseline;
+  max-width: 860px;
+}
+
+.reader-service-meta-row .lp-view-meta {
+  margin-top: 8px;
+}
+
+.reader-service-meta-arabic {
+  min-width: 0;
+  margin-top: 8px;
+  color: var(--study-muted, #57534e);
+  font-size: clamp(17px, 3vw, 21px);
+  line-height: 1.35;
+  text-align: right;
 }
 
 .reader-service-home-page .lp-course-unit {
@@ -4397,7 +4474,7 @@
 .reader-service-home-section-list {
   gap: 8px;
   margin-top: 0;
-  padding: 0 12px 12px 52px;
+  padding: 0 12px 12px;
 }
 
 .reader-service-home-section-title {
@@ -4429,25 +4506,11 @@
 
 .reader-service-section-card-inner {
   display: grid;
-  grid-template-columns: auto minmax(0, 1.25fr) minmax(0, 0.9fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 12px;
   align-items: center;
   min-height: 54px;
   padding: 10px 12px;
-}
-
-.reader-service-section-marker {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border: 1px solid color-mix(in srgb, var(--path-accent) 34%, var(--path-card-border));
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--path-accent) 10%, var(--path-card-surface));
-  color: color-mix(in srgb, var(--path-accent) 70%, var(--path-card-text));
-  font-size: 11px;
-  font-weight: 850;
-  line-height: 1;
 }
 
 .reader-service-section-title {
@@ -4460,6 +4523,7 @@
 
 .reader-service-section-arabic {
   min-width: 0;
+  color: var(--path-card-text);
   font-size: 16px;
   line-height: 1.35;
 }
@@ -4478,55 +4542,84 @@
     justify-self: end;
   }
 
-  .reader-service-home-section-list {
-    padding-left: 12px;
-  }
-
-  .reader-service-section-card-inner {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .reader-service-section-arabic {
-    grid-column: 2;
-  }
 }
 
-.lp-course-lesson {
+.lp-nav-panel-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   display: grid;
-  gap: 4px;
+  gap: 12px;
+  padding: calc(env(safe-area-inset-top, 0px) + 54px) 0 14px;
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.96) 82%, rgba(255, 255, 255, 0));
 }
 
-.lp-course-lesson-summary {
-  cursor: pointer;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px;
-  align-items: baseline;
-  border-radius: 4px;
-  padding: 4px 6px;
+.lp-nav-panel-body {
+  padding-top: 2px;
+}
+
+.lp-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
   color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px 6px;
+  text-align: left;
 }
 
-.lp-course-lesson-summary::-webkit-details-marker {
-  display: none;
+.lp-nav-brand:hover {
+  background: #f5f5f4;
 }
 
-.lp-course-lesson-summary::before {
-  content: "▸";
-  color: #78716c;
+.lp-nav-brand-mark,
+.lp-nav-item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--app-accent) 11%, #f5f5f4);
+  color: color-mix(in srgb, var(--app-accent) 72%, #1c1917);
+  font-weight: 750;
+}
+
+.lp-nav-brand-mark {
+  width: 34px;
+  height: 34px;
   font-size: 16px;
-  line-height: 1;
-  transform: translateY(1px);
 }
 
-.lp-course-lesson[open] > .lp-course-lesson-summary::before {
-  content: "▾";
-}
-
-.lp-course-exercise-list {
+.lp-nav-brand-copy,
+.lp-nav-item-copy {
   display: grid;
-  gap: 4px;
-  padding-left: 24px;
+  gap: 2px;
+  min-width: 0;
+}
+
+.lp-nav-brand-title,
+.lp-nav-item-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lp-nav-brand-title {
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.lp-nav-brand-subtitle,
+.lp-nav-item-subtitle {
+  color: #78716c;
+  font-size: 12px;
+  line-height: 1.25;
 }
 
 .lp-nav-item {
@@ -4558,41 +4651,22 @@
   background: var(--app-accent);
 }
 
-.lp-course-exercise-link {
-  display: block;
-  border-radius: 4px;
-  padding: 4px 6px;
-  color: inherit;
-  text-decoration: none;
-}
-
-.lp-course-lesson-summary:hover,
-.lp-course-lesson-summary.active,
-.lp-course-exercise-link:hover,
-.lp-course-exercise-link.active {
-  background: #f5f5f4;
-}
-
-.lp-navigation-panel .lp-course-lesson-summary.active {
-  background: color-mix(in srgb, var(--app-accent) 10%, transparent);
-  color: color-mix(in srgb, var(--app-accent) 74%, #1c1917) !important;
-  font-weight: 700;
-}
-
-.lp-navigation-panel .lp-course-lesson-summary.active::before {
-  color: var(--app-accent);
-}
-
-.lp-navigation-panel .lp-course-lesson-summary {
-  grid-template-columns: 24px 1fr;
+.lp-nav-item-main {
+  display: flex;
   align-items: center;
-  border-radius: 8px;
-  padding: 8px 7px;
+  gap: 9px;
+  min-width: 0;
 }
 
-.lp-navigation-panel .lp-course-lesson-summary::before {
-  font-size: 22px;
-  transform: none;
+.lp-nav-item-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.lp-nav-item-title {
+  font-size: 13px;
+  font-weight: 620;
+  line-height: 1.25;
 }
 
 .lp-activity-list {
@@ -6168,8 +6242,6 @@
   }
 
   .lp-course-unit-summary span:last-child,
-  .lp-course-lesson-summary,
-  .lp-course-exercise-link,
   .lp-course-phrase-progress-lesson-link {
     color: var(--dark-text);
   }
@@ -6178,14 +6250,25 @@
     color: var(--dark-muted);
   }
 
-  .lp-course-lesson-summary::before {
+  .lp-nav-panel-header {
+    background: linear-gradient(180deg, var(--dark-bg) 0%, color-mix(in srgb, var(--dark-bg) 96%, transparent) 82%, transparent);
+  }
+
+  .lp-nav-brand:hover {
+    background: var(--dark-hover);
+  }
+
+  .lp-nav-brand-subtitle,
+  .lp-nav-item-subtitle {
     color: var(--dark-muted);
   }
 
-  .lp-course-lesson-summary:hover,
-  .lp-course-lesson-summary.active,
-  .lp-course-exercise-link:hover,
-  .lp-course-exercise-link.active,
+  .lp-nav-brand-mark,
+  .lp-nav-item-icon {
+    background: color-mix(in srgb, var(--app-accent) 18%, var(--dark-hover));
+    color: color-mix(in srgb, var(--app-accent) 62%, var(--dark-text));
+  }
+
   .lp-course-phrase-progress-lesson-link:hover,
   .lp-course-phrase-progress-lesson-link.active {
     background: var(--dark-hover);
@@ -6202,15 +6285,6 @@
 
   .lp-nav-item.is-current::before {
     background: var(--app-accent);
-  }
-
-  .lp-navigation-panel .lp-course-lesson-summary.active {
-    background: color-mix(in srgb, var(--app-accent) 16%, transparent);
-    color: color-mix(in srgb, var(--app-accent) 62%, var(--dark-text)) !important;
-  }
-
-  .lp-navigation-panel .lp-course-lesson-summary.active::before {
-    color: var(--app-accent);
   }
 
   .lp-course-landing-header,

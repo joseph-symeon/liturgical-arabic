@@ -1866,7 +1866,7 @@ export const serviceTextDefinitions = [
     "display_title": {
       "english": [
         {
-          "text": "The Trisagion Prayers"
+          "text": "Trisagion Prayers"
         },
         {
           "text": "for the Departed",
