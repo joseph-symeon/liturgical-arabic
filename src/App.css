@@ -123,6 +123,342 @@
   line-height: 1.25;
 }
 
+.app-account-toggle {
+  position: relative;
+}
+
+.app-account-toggle::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  background: #a8a29e;
+}
+
+.app-account-toggle.signed-in::after {
+  background: #59836a;
+}
+
+.app-account-toggle.needs-attention::after {
+  background: #b32d29;
+}
+
+.app-account-panel-shell {
+  box-shadow: -18px 0 44px rgb(0 0 0 / 0.08);
+}
+
+.app-account-panel {
+  display: grid;
+  gap: 18px;
+  color: #292524;
+  font-family: Arial, sans-serif;
+}
+
+.app-account-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e7e5e4;
+}
+
+.app-account-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-account-kicker {
+  margin-bottom: 5px;
+  color: #a8a29e;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.app-account-header h2 {
+  margin: 0;
+  color: #292524;
+  font-size: 22px;
+  font-weight: 780;
+  letter-spacing: 0;
+  line-height: 1.18;
+}
+
+.app-account-status {
+  flex: 0 0 auto;
+  border: 1px solid #d6d3d1;
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: #fafaf9;
+  color: #57534e;
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1;
+}
+
+.app-account-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 31px;
+  height: 31px;
+  border: 1px solid #d6d3d1;
+  border-radius: 999px;
+  background: #fff;
+  color: #57534e;
+  cursor: pointer;
+  padding: 0;
+}
+
+.app-account-close:hover {
+  background: #f5f5f4;
+  color: #292524;
+}
+
+.app-account-status.synced {
+  border-color: color-mix(in srgb, #59836a 45%, #d6d3d1);
+  background: color-mix(in srgb, #59836a 13%, #fff);
+  color: #476c56;
+}
+
+.app-account-status.syncing,
+.app-account-status.loading {
+  border-color: color-mix(in srgb, #9b6f33 42%, #d6d3d1);
+  background: color-mix(in srgb, #9b6f33 10%, #fff);
+  color: #7a5424;
+}
+
+.app-account-status.error,
+.app-account-status.disabled {
+  border-color: color-mix(in srgb, #b32d29 42%, #d6d3d1);
+  background: color-mix(in srgb, #b32d29 10%, #fff);
+  color: #9b2724;
+}
+
+.app-account-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  padding: 4px;
+  border: 1px solid #e7e5e4;
+  border-radius: 8px;
+  background: #f5f5f4;
+}
+
+.app-account-tab {
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: #57534e;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.app-account-tab.active {
+  border-color: #d6d3d1;
+  background: #fff;
+  color: #292524;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+}
+
+.app-account-form {
+  display: grid;
+  gap: 11px;
+}
+
+.app-account-field {
+  display: grid;
+  gap: 6px;
+  color: #57534e;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.app-account-field input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d6d3d1;
+  border-radius: 7px;
+  background: #fff;
+  color: #292524;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  padding: 10px 11px;
+}
+
+.app-account-field input:focus {
+  outline: 2px solid color-mix(in srgb, #b32d29 28%, transparent);
+  outline-offset: 1px;
+  border-color: color-mix(in srgb, #b32d29 42%, #d6d3d1);
+}
+
+.app-account-button {
+  min-height: 38px;
+  border: 1px solid #d6d3d1;
+  border-radius: 7px;
+  background: #fff;
+  color: #44403c;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.2;
+  padding: 9px 11px;
+}
+
+.app-account-button.primary {
+  border-color: color-mix(in srgb, #59836a 48%, #d6d3d1);
+  background: color-mix(in srgb, #59836a 13%, #fff);
+  color: #476c56;
+}
+
+.app-account-button:hover:not(:disabled),
+.app-account-secondary-actions button:hover:not(:disabled) {
+  background: #f5f5f4;
+}
+
+.app-account-button.primary:hover:not(:disabled) {
+  background: color-mix(in srgb, #59836a 18%, #fff);
+}
+
+.app-account-button:disabled,
+.app-account-secondary-actions button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.app-account-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.app-account-secondary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 2px;
+}
+
+.app-account-secondary-actions button {
+  border: 0;
+  background: transparent;
+  color: #78716c;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  padding: 6px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.app-account-danger {
+  padding-top: 4px;
+  border-top: 1px solid #e7e5e4;
+}
+
+.app-account-danger button {
+  border: 0;
+  background: transparent;
+  color: #78716c;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  padding: 6px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.app-account-danger button:hover:not(:disabled) {
+  color: #9b2724;
+}
+
+.app-account-danger button:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.app-account-message {
+  border: 1px solid #e7e5e4;
+  border-radius: 7px;
+  background: #fafaf9;
+  color: #57534e;
+  font-size: 13px;
+  line-height: 1.45;
+  padding: 10px 11px;
+}
+
+.app-account-summary {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "avatar label"
+    "avatar value";
+  column-gap: 12px;
+  row-gap: 3px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #59836a 35%, #e7e5e4);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, #59836a 16%, #fff), #fafaf9 56%),
+    #fafaf9;
+  padding: 14px;
+}
+
+.app-account-summary::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: #59836a;
+}
+
+.app-account-avatar {
+  grid-area: avatar;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid color-mix(in srgb, #59836a 45%, #d6d3d1);
+  border-radius: 999px;
+  background: color-mix(in srgb, #59836a 12%, #fff);
+  color: #476c56;
+}
+
+.app-account-summary-label {
+  grid-area: label;
+  color: #78716c;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.app-account-summary-value {
+  grid-area: value;
+  overflow-wrap: anywhere;
+  color: #292524;
+  font-size: 15px;
+  font-weight: 760;
+  line-height: 1.25;
+}
+
 @media (min-width: 720px) {
   .app-home-action-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -148,6 +484,76 @@
 
   .app-home-action:hover {
     border-color: var(--dark-muted);
+    background: var(--dark-hover);
+  }
+
+  .app-account-panel-shell {
+    box-shadow: -18px 0 44px rgb(0 0 0 / 0.26);
+  }
+
+  .app-account-panel {
+    color: var(--dark-text);
+  }
+
+  .app-account-header,
+  .app-account-tabs,
+  .app-account-summary,
+  .app-account-danger,
+  .app-account-message {
+    border-color: var(--dark-border);
+  }
+
+  .app-account-header h2,
+  .app-account-tab.active,
+  .app-account-summary-value,
+  .app-account-field input {
+    color: var(--dark-text);
+  }
+
+  .app-account-kicker,
+  .app-account-field,
+  .app-account-summary-label,
+  .app-account-summary-note,
+  .app-account-danger button,
+  .app-account-secondary-actions button {
+    color: var(--dark-muted);
+  }
+
+  .app-account-status,
+  .app-account-close,
+  .app-account-tabs,
+  .app-account-message,
+  .app-account-field input,
+  .app-account-button {
+    background: var(--dark-surface);
+  }
+
+  .app-account-summary {
+    border-color: color-mix(in srgb, #7fa68b 38%, var(--dark-border));
+    background:
+      linear-gradient(135deg, color-mix(in srgb, #7fa68b 16%, var(--dark-surface)), var(--dark-surface) 58%),
+      var(--dark-surface);
+  }
+
+  .app-account-avatar {
+    border-color: color-mix(in srgb, #7fa68b 45%, var(--dark-border));
+    background: color-mix(in srgb, #7fa68b 12%, var(--dark-surface));
+    color: #b8d7c0;
+  }
+
+  .app-account-tab.active,
+  .app-account-close,
+  .app-account-field input,
+  .app-account-button {
+    border-color: var(--dark-border);
+  }
+
+  .app-account-button {
+    color: var(--dark-text);
+  }
+
+  .app-account-button:hover:not(:disabled),
+  .app-account-secondary-actions button:hover:not(:disabled) {
     background: var(--dark-hover);
   }
 }

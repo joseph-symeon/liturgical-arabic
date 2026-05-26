@@ -3,6 +3,7 @@ import recordings from "../../data/media/recordings.js";
 import phrases from "../../data/texts/phrases.js";
 import { isPhraseCaptionsActivity, isReadListenActivity, PASSAGE_ACTIVITY_TYPES } from "../../utils/passageActivities.js";
 import { getDisplayedCaption } from "../../utils/passageTiming.js";
+import { recordRecitationRepetition } from "../../utils/progressScoring.js";
 import YouTubeClipPlayer from "./YouTubeClipPlayer.jsx";
 import PassageActivityBody from "./PassageActivityBody.jsx";
 import PassageActivityToolbar from "./PassageActivityToolbar.jsx";
@@ -12,6 +13,7 @@ const CAPTION_TEXT_MODE_STORAGE_KEY = "liturgical-arabic:phrase-captions-text-mo
 const PRACTICE_TEXT_MODE_STORAGE_KEY = "liturgical-arabic:practice-text-mode";
 const KARAOKE_MODE_STORAGE_KEY = "liturgical-arabic:karaoke-mode";
 const REQUIRED_TEXT_MODES = ["translation", "literal"];
+const RECITATION_REPETITION_THRESHOLD = 0.8;
 
 function getStoredKaraokeMode() {
   if (typeof window === "undefined") return false;
@@ -66,13 +68,15 @@ export default function PassageExperience({
   const [currentTime, setCurrentTime] = useState(null);
   const [playbackActive, setPlaybackActive] = useState(false);
   const playerRef = useRef(null);
+  const recitationCaptionKeysRef = useRef(new Set());
+  const previousPlaybackTimeRef = useRef(null);
   const listenActivity = isReadListenActivity(resolvedActivityType);
   const captionActivity = isPhraseCaptionsActivity(resolvedActivityType);
   const translateActivity = resolvedActivityType === PASSAGE_ACTIVITY_TYPES.translationDirection;
   const matchingActivity = resolvedActivityType === PASSAGE_ACTIVITY_TYPES.matching;
   const hasPracticeTextMode = translateActivity || matchingActivity;
   const canUseKaraoke = listenActivity && resolvedCaptions.length > 0;
-  const shouldTrackPlayerTime = canUseKaraoke || captionActivity;
+  const shouldTrackPlayerTime = (listenActivity || captionActivity) && resolvedCaptions.length > 0;
   const hasExtendedPlaybackControls = resolvedClip
     ? resolvedClip.end_seconds - resolvedClip.start_seconds > 30
     : false;
@@ -91,6 +95,8 @@ export default function PassageExperience({
   useEffect(() => {
     setCurrentTime(null);
     setPlaybackActive(false);
+    recitationCaptionKeysRef.current = new Set();
+    previousPlaybackTimeRef.current = null;
   }, [resetKey, passage?.id, resolvedClip?.recording_id, resolvedClip?.video_id, resolvedClip?.start_seconds, resolvedClip?.end_seconds]);
 
   useEffect(() => {
@@ -112,6 +118,36 @@ export default function PassageExperience({
     if (typeof window === "undefined") return;
     window.localStorage.setItem(KARAOKE_MODE_STORAGE_KEY, String(karaokeMode));
   }, [karaokeMode]);
+
+  useEffect(() => {
+    if (!shouldTrackPlayerTime || !playbackActive || !activeCaption?.phrase_id || typeof currentTime !== "number") return;
+
+    if (previousPlaybackTimeRef.current !== null && currentTime < previousPlaybackTimeRef.current - 1) {
+      recitationCaptionKeysRef.current = new Set();
+    }
+    previousPlaybackTimeRef.current = currentTime;
+
+    const captionStart = activeCaption.start_seconds;
+    const captionEnd = activeCaption.end_seconds;
+    const captionDuration = Math.max(0.25, captionEnd - captionStart);
+    const meaningfulTime = captionStart + (captionDuration * RECITATION_REPETITION_THRESHOLD);
+    if (currentTime < meaningfulTime) return;
+
+    const captionKey = [
+      activeCaption.phrase_id,
+      activeCaption.segment_id,
+      activeCaption.range_key,
+      activeCaption.start_seconds,
+      activeCaption.end_seconds
+    ].filter(value => value !== undefined && value !== null).join(":");
+    if (recitationCaptionKeysRef.current.has(captionKey)) return;
+
+    recitationCaptionKeysRef.current.add(captionKey);
+    recordRecitationRepetition({
+      phraseId: activeCaption.phrase_id,
+      activityType: resolvedActivityType
+    });
+  }, [activeCaption, currentTime, playbackActive, resolvedActivityType, shouldTrackPlayerTime]);
 
   function renderPlayer() {
     if (!resolvedClip) return null;

@@ -23,7 +23,7 @@ import LiturgyLine from '../LiturgyLine.jsx';
 import phrases from '../../data/texts/phrases.js';
 import { getArabicText } from '../../utils/arabic.js';
 import { isPhraseCaptionsActivity, isReadListenActivity, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
-import { getComprehensionAttemptType, recordComprehensionAttempt } from '../../utils/progressScoring.js';
+import { getComprehensionAttemptType, recordComprehensionAttempt, recordRecitationTrace } from '../../utils/progressScoring.js';
 
 const TRANSLATION_CORRECT_FEEDBACK_MS = 700;
 const TRANSLATION_FEEDBACK_FADE_MS = 700;
@@ -643,6 +643,12 @@ export default function PassageActivityBody({
     .map(line => line.arabicText.trim())
     .filter(Boolean)
     .join(readerLayout === 'line' ? '\n' : ' ');
+  const typingPhraseIds = useMemo(
+    () => getUniquePhraseIds(typingPromptLines.flatMap(line => (
+      line.parts || []
+    ).map(part => part.phrase_id).filter(Boolean))),
+    [typingPromptLines]
+  );
   const typingTraceRows = Math.max(1, typingPromptLines.length);
   const fallbackTypingBoxHeight = getTraceBoxHeightForRows(typingTraceRows);
   const resolvedTypingBoxHeight = typingBoxHeight || fallbackTypingBoxHeight;
@@ -1637,14 +1643,22 @@ export default function PassageActivityBody({
             type="button"
             className="lp-activity-button lp-activity-submit"
             onClick={() => {
+              if (typingFeedback) return;
               clearTypingFeedback();
+              if (typedArabicCorrect) {
+                recordRecitationTrace({
+                  phraseIds: typingPhraseIds,
+                  activityType: PASSAGE_ACTIVITY_TYPES.typeArabic,
+                  correct: true
+                });
+              }
               setTypingFeedback(typedArabicCorrect ? 'correct' : 'incorrect');
               typingFeedbackTimerRef.current = setTimeout(() => {
                 setTypingFeedback(null);
                 typingFeedbackTimerRef.current = null;
               }, 1400);
             }}
-            disabled={!typedArabic.trim()}
+            disabled={!typedArabic.trim() || Boolean(typingFeedback)}
           >
             Submit
           </button>

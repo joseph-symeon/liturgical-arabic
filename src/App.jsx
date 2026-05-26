@@ -4,6 +4,7 @@ import CourseOverview from "./components/course/CourseOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
 import InteractiveText from "./components/InteractiveText.jsx";
 import PhraseTooltip from "./components/PhraseTooltip.jsx";
+import SyncAccountPanel from "./components/SyncAccountPanel.jsx";
 import { defaultServiceText, defaultServiceTextId, getServiceText, readerServiceTexts } from "./data/texts/serviceTexts.js";
 import phrases from "./data/texts/phrases.js";
 import courseTracks from "./data/course/courseTracks.js";
@@ -11,6 +12,21 @@ import lessons from "./data/course/lessons.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
 import { getServiceNavigation } from "./utils/serviceNavigation.js";
 import { getArabicText } from "./utils/arabic.js";
+import { getBlankPhraseProgress, getStoredPhraseProgress, PHRASE_PROGRESS_EVENT, replaceStoredPhraseProgress, setProgressTrackingEnabled } from "./utils/progressScoring.js";
+import {
+  canSyncUserState,
+  fetchRemoteUserState,
+  getCurrentSession,
+  mergeRemoteProgressIntoLocal,
+  sendPasswordReset,
+  saveRemoteUserState,
+  signInWithEmail,
+  signInWithPassword,
+  signUpWithPassword,
+  signOut,
+  subscribeToAuthChanges,
+  updatePassword
+} from "./utils/userStateSync.js";
 import appIcons from "./assets/icons/index.js";
 import "./App.css";
 
@@ -76,6 +92,25 @@ const NAV_MENU_STORAGE_KEY = "liturgical-arabic:navigation-menu-open";
 const NAV_DETAILS_STORAGE_KEY = "liturgical-arabic:navigation-details-open";
 const DISPLAY_SETTINGS_STORAGE_KEY = "liturgical-arabic:display-settings";
 const COURSE_STUDY_WORKSPACE_STORAGE_KEY = "liturgical-arabic:study-workspace";
+const SYNC_SAVE_DEBOUNCE_MS = 900;
+
+function hasSupabaseAuthCallbackParams() {
+  if (typeof window === "undefined") return false;
+  const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  const searchParams = new URLSearchParams(window.location.search);
+  return (
+    hashParams.has("access_token") ||
+    hashParams.has("refresh_token") ||
+    hashParams.has("error") ||
+    searchParams.has("code") ||
+    searchParams.has("error")
+  );
+}
+
+function clearSupabaseAuthCallbackParams() {
+  if (typeof window === "undefined" || !hasSupabaseAuthCallbackParams()) return;
+  window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#home`);
+}
 
 function getCourseItemLessonIds(item) {
   const lessonIds = item.lesson_ids || (item.lesson_id ? [item.lesson_id] : []);
@@ -329,10 +364,141 @@ export default function App() {
   const speechRate = DEFAULT_SPEECH_RATE;
   const [showPracticeToolbar, setShowPracticeToolbar] = useState(initialDisplaySettings.showPracticeToolbar);
   const [courseStudyWorkspace, setCourseStudyWorkspace] = useState(getStoredCourseStudyWorkspace);
+  const [syncSession, setSyncSession] = useState(null);
+  const [syncStatus, setSyncStatus] = useState(() => canSyncUserState() ? "loading" : "disabled");
+  const [syncMessage, setSyncMessage] = useState("");
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
   const [isCompactChrome, setIsCompactChrome] = useState(false);
   const previousNavigationKeyRef = useRef(null);
   const previousIsNarrowViewportRef = useRef(null);
+  const syncReadyRef = useRef(false);
+  const syncSaveTimerRef = useRef(null);
+  const preferencesRef = useRef({
+    displaySettings: initialDisplaySettings
+  });
+
+  function getDisplaySettings() {
+    return {
+      arabicMode,
+      readerLayout,
+      showQuietPrayers,
+      arabicFontFamily,
+      arabicFontWeight,
+      arabicFontSize,
+      showPracticeToolbar
+    };
+  }
+
+  function applyDisplaySettings(settings) {
+    if (!settings || typeof settings !== "object") return;
+    if (ARABIC_MODES.includes(settings.arabicMode)) setArabicMode(settings.arabicMode);
+    if (["line", "paragraph"].includes(settings.readerLayout)) setReaderLayout(settings.readerLayout);
+    if (typeof settings.showQuietPrayers === "boolean") setShowQuietPrayers(settings.showQuietPrayers);
+    if (ARABIC_FONTS.some(font => font.value === settings.arabicFontFamily)) setArabicFontFamily(settings.arabicFontFamily);
+    if (typeof settings.arabicFontSize === "number") {
+      setArabicFontSize(Math.max(18, Math.min(36, settings.arabicFontSize)));
+    }
+    if (typeof settings.showPracticeToolbar === "boolean") setShowPracticeToolbar(settings.showPracticeToolbar);
+  }
+
+  function scheduleCloudSave() {
+    if (!syncReadyRef.current || !syncSession?.user?.id) return;
+    if (syncSaveTimerRef.current) clearTimeout(syncSaveTimerRef.current);
+    setSyncStatus("syncing");
+    syncSaveTimerRef.current = window.setTimeout(async () => {
+      syncSaveTimerRef.current = null;
+      try {
+        await saveRemoteUserState({
+          userId: syncSession.user.id,
+          progress: getStoredPhraseProgress(),
+          preferences: preferencesRef.current
+        });
+        setSyncStatus("synced");
+        setSyncMessage("");
+      } catch (error) {
+        setSyncStatus("error");
+        setSyncMessage(error.message || "Sync failed.");
+      }
+    }, SYNC_SAVE_DEBOUNCE_MS);
+  }
+
+  async function handlePasswordSignIn({ email, password }) {
+    if (!canSyncUserState()) {
+      setSyncStatus("disabled");
+      setSyncMessage("Missing Supabase environment values.");
+      return;
+    }
+    setSyncStatus("loading");
+    await signInWithPassword({ email: email.trim(), password });
+    setSyncMessage("");
+  }
+
+  async function handleCreateAccount({ email, password }) {
+    if (!canSyncUserState()) {
+      setSyncStatus("disabled");
+      setSyncMessage("Missing Supabase environment values.");
+      return;
+    }
+    setSyncStatus("loading");
+    await signUpWithPassword({ email: email.trim(), password });
+    setSyncMessage("");
+  }
+
+  async function handleMagicLinkSignIn(email) {
+    if (!canSyncUserState()) {
+      setSyncStatus("disabled");
+      setSyncMessage("Missing Supabase environment values.");
+      return;
+    }
+    setSyncStatus("loading");
+    await signInWithEmail(email.trim());
+    setSyncStatus("signed-out");
+    setSyncMessage("Check your email for the sign-in link.");
+  }
+
+  async function handlePasswordReset(email) {
+    if (!canSyncUserState()) {
+      setSyncStatus("disabled");
+      setSyncMessage("Missing Supabase environment values.");
+      return;
+    }
+    await sendPasswordReset(email.trim());
+    setSyncMessage("Check your email for the password reset link.");
+  }
+
+  async function handlePasswordUpdate(password) {
+    await updatePassword(password);
+    setSyncMessage("Password updated.");
+  }
+
+  async function handleResetProgress() {
+    if (!syncSession?.user?.id) return;
+    const confirmed = window.confirm("Reset all progress for this account? This cannot be undone.");
+    if (!confirmed) return;
+    const blankProgress = replaceStoredPhraseProgress(getBlankPhraseProgress());
+    setSyncStatus("syncing");
+    await saveRemoteUserState({
+      userId: syncSession.user.id,
+      progress: blankProgress,
+      preferences: preferencesRef.current
+    });
+    setSyncStatus("synced");
+    setSyncMessage("Progress reset.");
+  }
+
+  async function handleSyncSignOut() {
+    try {
+      await signOut();
+      syncReadyRef.current = false;
+      setSyncSession(null);
+      setSyncStatus("signed-out");
+      setSyncMessage("");
+    } catch (error) {
+      setSyncStatus("error");
+      setSyncMessage(error.message || "Could not sign out.");
+    }
+  }
 
   useEffect(() => {
     function updateViewport() {
@@ -355,6 +521,117 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (!canSyncUserState()) {
+      setProgressTrackingEnabled(false);
+      setSyncStatus("disabled");
+      return undefined;
+    }
+
+    let cancelled = false;
+    getCurrentSession()
+      .then(session => {
+        if (!cancelled) {
+          if (session) clearSupabaseAuthCallbackParams();
+          setSyncSession(session);
+        }
+      })
+      .catch(error => {
+        if (!cancelled) {
+          setSyncStatus("error");
+          setSyncMessage(error.message || "Could not load sync session.");
+        }
+      });
+
+    const unsubscribe = subscribeToAuthChanges(session => {
+      if (session) clearSupabaseAuthCallbackParams();
+      setSyncSession(session);
+    });
+
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!canSyncUserState()) return;
+
+    if (!syncSession?.user?.id) {
+      syncReadyRef.current = false;
+      setProgressTrackingEnabled(false);
+      setSyncStatus("signed-out");
+      return;
+    }
+
+    let cancelled = false;
+    syncReadyRef.current = false;
+    setProgressTrackingEnabled(false);
+    setSyncStatus("loading");
+
+    async function syncInitialUserState() {
+      try {
+        const remoteState = await fetchRemoteUserState(syncSession.user.id);
+        if (cancelled) return;
+
+        const mergedProgress = await mergeRemoteProgressIntoLocal(remoteState?.progress);
+        if (cancelled) return;
+
+        const remotePreferences = remoteState?.preferences && typeof remoteState.preferences === "object"
+          ? remoteState.preferences
+          : {};
+        const nextPreferences = {
+          ...preferencesRef.current,
+          ...remotePreferences
+        };
+        if (remotePreferences.displaySettings) {
+          preferencesRef.current = nextPreferences;
+          applyDisplaySettings(remotePreferences.displaySettings);
+        } else {
+          nextPreferences.displaySettings = getDisplaySettings();
+          preferencesRef.current = nextPreferences;
+        }
+
+        await saveRemoteUserState({
+          userId: syncSession.user.id,
+          progress: mergedProgress,
+          preferences: preferencesRef.current
+        });
+        if (cancelled) return;
+        syncReadyRef.current = true;
+        setProgressTrackingEnabled(true);
+        setSyncStatus("synced");
+        setSyncMessage("");
+      } catch (error) {
+        if (!cancelled) {
+          setSyncStatus("error");
+          setSyncMessage(error.message || "Could not sync progress.");
+        }
+      }
+    }
+
+    syncInitialUserState();
+
+    return () => {
+      cancelled = true;
+      syncReadyRef.current = false;
+      setProgressTrackingEnabled(false);
+    };
+  }, [syncSession?.user?.id]);
+
+  useEffect(() => {
+    function handleProgressUpdated() {
+      scheduleCloudSave();
+    }
+
+    window.addEventListener(PHRASE_PROGRESS_EVENT, handleProgressUpdated);
+    return () => window.removeEventListener(PHRASE_PROGRESS_EVENT, handleProgressUpdated);
+  }, [syncSession?.user?.id]);
+
+  useEffect(() => () => {
+    if (syncSaveTimerRef.current) clearTimeout(syncSaveTimerRef.current);
+  }, []);
+
+  useEffect(() => {
     if (typeof window === "undefined" || isNarrowViewport) return;
     window.localStorage.setItem(NAV_MENU_STORAGE_KEY, menuOpen ? "true" : "false");
   }, [menuOpen, isNarrowViewport]);
@@ -366,15 +643,13 @@ export default function App() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    window.localStorage.setItem(DISPLAY_SETTINGS_STORAGE_KEY, JSON.stringify({
-      arabicMode,
-      readerLayout,
-      showQuietPrayers,
-      arabicFontFamily,
-      arabicFontWeight,
-      arabicFontSize,
-      showPracticeToolbar
-    }));
+    const displaySettings = getDisplaySettings();
+    preferencesRef.current = {
+      ...preferencesRef.current,
+      displaySettings
+    };
+    window.localStorage.setItem(DISPLAY_SETTINGS_STORAGE_KEY, JSON.stringify(displaySettings));
+    scheduleCloudSave();
   }, [arabicMode, readerLayout, showQuietPrayers, arabicFontFamily, arabicFontSize, showPracticeToolbar]);
 
   useEffect(() => {
@@ -388,6 +663,7 @@ export default function App() {
       setSelectedExerciseIndex(nextNavigation.selectedExerciseIndex);
       if (isNarrowViewport) setMenuOpen(false);
       setDisplayMenuOpen(false);
+      setAccountMenuOpen(false);
     }
 
     window.addEventListener("hashchange", updateNavigationFromHash);
@@ -395,6 +671,7 @@ export default function App() {
   }, [isNarrowViewport]);
 
   useEffect(() => {
+    if (hasSupabaseAuthCallbackParams()) return;
     const nextHash = getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex);
     if (window.location.hash !== nextHash) {
       window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${nextHash}`);
@@ -575,7 +852,7 @@ export default function App() {
   const nextSectionTitle = hasNextSection
     ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
-  const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
+  const hideContentForMenu = (menuOpen || displayMenuOpen || accountMenuOpen) && isNarrowViewport;
   const pageCanUseFocusMode =
     view === "lessons"
     && Boolean(selectedLessonWithUnit)
@@ -921,7 +1198,7 @@ export default function App() {
         style={{
           position: "fixed",
           top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
-          right: "52px",
+          right: "92px",
           zIndex: 40,
           border: "none",
           cursor: "pointer",
@@ -944,6 +1221,41 @@ export default function App() {
             <path d="M20 15v5h-5" />
           </svg>
         )}
+      </button>
+    );
+  }
+
+  function renderAccountToggle() {
+    const signedIn = Boolean(syncSession?.user);
+    const needsAttention = syncStatus === "error" || syncStatus === "disabled";
+    return (
+      <button
+        type="button"
+        onClick={event => {
+          setAccountMenuOpen(open => !open);
+          setDisplayMenuOpen(false);
+          if (isNarrowViewport) setMenuOpen(false);
+          event.currentTarget.blur();
+        }}
+        aria-label="Account and sync"
+        aria-expanded={accountMenuOpen}
+        title="Account and sync"
+        className={`app-account-toggle rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]${signedIn ? " signed-in" : ""}${needsAttention ? " needs-attention" : ""}`}
+        style={{
+          position: "fixed",
+          top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
+          right: "52px",
+          zIndex: 40,
+          border: "none",
+          cursor: "pointer",
+          padding: "6px",
+          color: "inherit"
+        }}
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20 21a8 8 0 0 0-16 0" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
       </button>
     );
   }
@@ -1178,6 +1490,7 @@ export default function App() {
           label: "Navigation",
           onClick: () => {
             setMenuOpen(o => !o);
+            setAccountMenuOpen(false);
             if (isNarrowViewport) setDisplayMenuOpen(false);
           },
           children: (
@@ -1191,12 +1504,15 @@ export default function App() {
 
       {canUseAppBack && !(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderAppBackButton()}
 
-      {!(isNarrowViewport && menuOpen) && renderPanelToggle({
+      {!(isNarrowViewport && (menuOpen || displayMenuOpen)) && !accountMenuOpen && renderAccountToggle()}
+
+      {!(isNarrowViewport && menuOpen) && !accountMenuOpen && renderPanelToggle({
           side: "right",
           isOpen: displayMenuOpen,
           label: "Display settings",
           onClick: () => {
             setDisplayMenuOpen(o => !o);
+            setAccountMenuOpen(false);
             if (isNarrowViewport) setMenuOpen(false);
           },
           children: (
@@ -1221,7 +1537,7 @@ export default function App() {
           )
         })}
 
-      {pageCanUseFocusMode && !(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderFocusModeToggle()}
+      {pageCanUseFocusMode && !(isNarrowViewport && (menuOpen || displayMenuOpen || accountMenuOpen)) && renderFocusModeToggle()}
 
       {isNarrowViewport && menuOpen && (
         <button
@@ -1244,6 +1560,22 @@ export default function App() {
           type="button"
           aria-label="Close display settings"
           onClick={() => setDisplayMenuOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 34,
+            border: 0,
+            background: "transparent",
+            cursor: "default"
+          }}
+        />
+      )}
+
+      {isNarrowViewport && accountMenuOpen && (
+        <button
+          type="button"
+          aria-label="Close account panel"
+          onClick={() => setAccountMenuOpen(false)}
           style={{
             position: "fixed",
             inset: 0,
@@ -1412,6 +1744,7 @@ export default function App() {
         onClickCapture={() => {
           if (isNarrowViewport && menuOpen) setMenuOpen(false);
           if (displayMenuOpen) setDisplayMenuOpen(false);
+          if (accountMenuOpen) setAccountMenuOpen(false);
         }}
         style={{
           "--side-panel-offset": menuOpen && !isNarrowViewport ? `${SIDE_PANEL_WIDTH}px` : "0px",
@@ -1500,6 +1833,40 @@ export default function App() {
           }}
         >
           {renderDisplayMenu()}
+        </aside>
+      )}
+
+      {accountMenuOpen && (
+        <aside
+          className="app-account-panel-shell bg-white dark:bg-[var(--dark-bg)] border-l border-stone-200 dark:border-[var(--dark-border)]"
+          dir="ltr"
+          style={{
+            position: isNarrowViewport ? "fixed" : "sticky",
+            top: 0,
+            right: 0,
+            zIndex: 35,
+            flex: `0 0 ${SIDE_PANEL_WIDTH}px`,
+            width: SIDE_PANEL_WIDTH,
+            maxWidth: "calc(100vw - 56px)",
+            minHeight: "100vh",
+            maxHeight: "100vh",
+            overflowY: "auto",
+            padding: "48px 16px 16px"
+          }}
+        >
+          <SyncAccountPanel
+            session={syncSession}
+            syncStatus={syncStatus}
+            syncMessage={syncMessage}
+            onSignIn={handlePasswordSignIn}
+            onCreateAccount={handleCreateAccount}
+            onMagicLink={handleMagicLinkSignIn}
+            onResetPassword={handlePasswordReset}
+            onUpdatePassword={handlePasswordUpdate}
+            onSignOut={handleSyncSignOut}
+            onResetProgress={handleResetProgress}
+            onClose={() => setAccountMenuOpen(false)}
+          />
         </aside>
       )}
     </div>
