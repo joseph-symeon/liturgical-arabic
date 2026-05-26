@@ -56,6 +56,10 @@ export default function CourseOverview({
   lessons,
   selectedLessonId,
   selectedTrackId,
+  showProgressPrompt = false,
+  onProgressPrompt,
+  canAccessLesson = () => true,
+  onBlockedLesson,
   onSelectTrack,
   onSelectExercise,
   onSelectService
@@ -81,6 +85,10 @@ export default function CourseOverview({
   function openLesson(lessonId) {
     const lesson = getLessonById(lessons, lessonId);
     if (!lesson) return;
+    if (!canAccessLesson(lesson.id)) {
+      onBlockedLesson?.(lesson.id);
+      return;
+    }
     onSelectExercise(lesson.id, 0, (lesson.exercises?.length || 0) === 1 ? 'recitation' : 'home');
   }
 
@@ -123,6 +131,21 @@ export default function CourseOverview({
     onSelectTrack(item.parent_track_id || item.id);
   }
 
+  function renderProgressPrompt() {
+    if (!showProgressPrompt) return null;
+    return (
+      <aside className="lp-course-progress-prompt" aria-label="Preview mode">
+        <div>
+          <strong>Preview mode</strong>
+          <span>Sign in to access the full course and save progress across devices.</span>
+        </div>
+        <button type="button" onClick={onProgressPrompt}>
+          Sign in
+        </button>
+      </aside>
+    );
+  }
+
   function renderPathItem(item, index) {
     const phraseIds = getCourseItemPhraseIds(item);
     const lessonCount = getCourseItemLessonIds(item).length;
@@ -130,6 +153,7 @@ export default function CourseOverview({
     const isBonus = item.type === 'bonus';
     const prerequisiteLabel = getPrerequisiteLabel(item);
     const isConfident = itemConfidence >= MARKER_FILL_CONFIDENCE;
+    const isMuted = [...phraseIds].length > 0 && getCourseItemLessonIds(item).every(lessonId => !canAccessLesson(lessonId));
 
     return (
       <button
@@ -137,7 +161,8 @@ export default function CourseOverview({
         className={[
           'lp-course-path-card',
           isBonus ? 'bonus' : '',
-          isConfident ? 'confident' : ''
+          isConfident ? 'confident' : '',
+          isMuted ? 'muted' : ''
         ].filter(Boolean).join(' ')}
         key={item.id}
         onClick={() => openTrack(item)}
@@ -190,13 +215,15 @@ export default function CourseOverview({
                 ? 'started'
                 : 'upcoming';
             const isConfident = lessonConfidence >= MARKER_FILL_CONFIDENCE;
+            const isLocked = !canAccessLesson(row.lesson.id);
             return (
               <article
                 className={[
                   'lp-track-lesson-row',
                   row.type === 'bonus' ? 'bonus' : '',
                   progressState,
-                  isConfident ? 'confident' : ''
+                  isConfident ? 'confident' : '',
+                  isLocked ? 'locked' : ''
                 ].filter(Boolean).join(' ')}
                 key={`${row.type}:${row.id}`}
                 role="button"
@@ -234,6 +261,8 @@ export default function CourseOverview({
 
   return (
     <main className={`lp-page course-view-page lp-course-map-page${selectedTrack ? ' track-detail-page' : ''}`} dir="ltr">
+      {renderProgressPrompt()}
+
       <section className="lp-course-flow-section" aria-label="Course path">
         {selectedTrack
           ? renderTrackDetail(selectedTrack)

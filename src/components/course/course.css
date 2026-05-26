@@ -3442,6 +3442,60 @@
   --study-accent: var(--path-accent);
 }
 
+.lp-course-progress-prompt {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  max-width: 860px;
+  margin: 0 0 22px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--path-accent) 24%, #d6d3d1);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 5%, transparent), transparent 60%),
+    #fff;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.82);
+}
+
+.lp-course-progress-prompt div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.lp-course-progress-prompt strong {
+  color: #292524;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.lp-course-progress-prompt span {
+  color: #78716c;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.lp-course-progress-prompt button {
+  min-height: 32px;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--path-accent) 18%, #f5f5f4);
+  color: color-mix(in srgb, var(--path-accent) 76%, #1c1917);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1;
+  padding: 7px 13px;
+}
+
+.lp-course-progress-prompt button:hover {
+  background: color-mix(in srgb, var(--path-accent) 24%, #f5f5f4);
+}
+
 .lp-course-landing-header {
   display: grid;
   gap: 20px;
@@ -3653,6 +3707,22 @@
     #fff;
 }
 
+.lp-course-path-card.muted {
+  border-color: #d6d3d1;
+  background: #fff;
+}
+
+.lp-course-path-card.muted .lp-course-path-card-top,
+.lp-course-path-card.muted .lp-course-path-main,
+.lp-course-path-card.muted .lp-course-path-confidence,
+.lp-course-path-card.muted .lp-course-path-action {
+  opacity: 0.5;
+}
+
+.lp-course-path-card.muted .lp-course-path-card-top {
+  opacity: 1;
+}
+
 .lp-track-detail {
   display: grid;
   gap: 16px;
@@ -3699,6 +3769,17 @@
 
 .lp-track-lesson-row:hover {
   border-color: color-mix(in srgb, var(--path-accent) 38%, #a8a29e);
+}
+
+.lp-track-lesson-row.locked {
+  border-color: #d6d3d1;
+  background: #fff;
+}
+
+.lp-track-lesson-row.locked .lp-track-lesson-main,
+.lp-track-lesson-row.locked .lp-track-lesson-confidence,
+.lp-track-lesson-row.locked .lp-track-lesson-action {
+  opacity: 0.5;
 }
 
 .lp-track-lesson-main {
@@ -4908,6 +4989,16 @@
   .lp-study-home-card {
     min-height: 0;
     padding: 0;
+  }
+
+  .lp-course-progress-prompt {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .lp-course-progress-prompt button {
+    justify-self: start;
   }
 
   .lp-view-header {
@@ -6192,6 +6283,7 @@
   }
 
   .lp-course-path-card h3,
+  .lp-course-progress-prompt strong,
   .lp-track-lesson-main h3,
   .lp-course-map-hero-stats span:first-child {
     color: var(--dark-text);
@@ -6200,6 +6292,7 @@
   .lp-course-path-card p:not(.lp-course-coverage-kicker),
   .lp-course-path-meta,
   .lp-course-path-state,
+  .lp-course-progress-prompt span,
   .lp-track-detail-back,
   .lp-track-lesson-meta,
   .lp-service-mastery-intro,
@@ -6216,10 +6309,28 @@
   }
 
   .lp-course-path-card,
+  .lp-course-progress-prompt,
   .lp-track-lesson-row,
   .lp-service-mastery-node,
   .lp-course-map-hero-stats div {
     background-color: var(--dark-surface);
+  }
+
+  .lp-course-progress-prompt {
+    border-color: color-mix(in srgb, var(--path-accent) 30%, var(--dark-border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 10%, transparent), transparent 60%),
+      var(--path-card-surface);
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--dark-text) 4%, transparent);
+  }
+
+  .lp-course-progress-prompt button {
+    background: color-mix(in srgb, var(--path-accent) 22%, var(--dark-surface));
+    color: color-mix(in srgb, var(--path-accent) 72%, var(--dark-text));
+  }
+
+  .lp-course-progress-prompt button:hover {
+    background: color-mix(in srgb, var(--path-accent) 30%, var(--dark-surface));
   }
 
   .lp-course-path-card {
@@ -6236,6 +6347,11 @@
     background:
       linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 16%, transparent), transparent 52%),
       var(--path-card-surface);
+  }
+
+  .lp-course-path-card.muted {
+    border-color: var(--dark-border);
+    background: var(--path-card-surface);
   }
 
   .lp-course-path-confidence > span {
@@ -6301,6 +6417,11 @@
 
   .lp-track-lesson-row:hover {
     border-color: color-mix(in srgb, var(--path-accent) 44%, var(--dark-border));
+  }
+
+  .lp-track-lesson-row.locked {
+    border-color: var(--dark-border);
+    background: color-mix(in srgb, var(--dark-surface) 82%, var(--dark-bg));
   }
 
   .lp-course-path-action,

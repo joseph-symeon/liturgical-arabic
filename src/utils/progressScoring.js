@@ -8,14 +8,20 @@ export const COMPREHENSION_ATTEMPT_TYPES = {
 };
 
 const STORAGE_KEY = 'liturgical-arabic:phrase-progress:v2';
+const PREVIEW_STORAGE_KEY = 'liturgical-arabic:preview-phrase-progress:v1';
 export const PHRASE_PROGRESS_EVENT = 'liturgical-arabic:phrase-progress-updated';
+export const PROGRESS_TRACKING_MODES = {
+  account: 'account',
+  preview: 'preview',
+  disabled: 'disabled'
+};
 const PROGRESS_VERSION = 2;
 const OVERALL_COMPREHENSION_WEIGHT = 0.55;
 const OVERALL_RECITATION_WEIGHT = 0.45;
 const RECITATION_REPETITION_CURVE = 36;
 const RECITATION_TRACE_BONUS = 0.04;
 const RECITATION_TRACE_BONUS_CAP = 0.15;
-let progressTrackingEnabled = false;
+let progressTrackingMode = PROGRESS_TRACKING_MODES.disabled;
 
 const COMPREHENSION_ATTEMPT_WEIGHTS = {
   [COMPREHENSION_ATTEMPT_TYPES.matchingBlock]: 0.08,
@@ -37,6 +43,7 @@ function getTodayKey(timestamp = Date.now()) {
 function getEmptyProgress() {
   return {
     version: PROGRESS_VERSION,
+    reset_at: null,
     phrases: {}
   };
 }
@@ -45,19 +52,39 @@ export function getBlankPhraseProgress() {
   return getEmptyProgress();
 }
 
+export function getResetPhraseProgress(timestamp = Date.now()) {
+  return {
+    ...getEmptyProgress(),
+    reset_at: timestamp
+  };
+}
+
 export function setProgressTrackingEnabled(enabled) {
-  const nextEnabled = Boolean(enabled);
-  if (progressTrackingEnabled === nextEnabled) return;
-  progressTrackingEnabled = nextEnabled;
+  setProgressTrackingMode(enabled ? PROGRESS_TRACKING_MODES.account : PROGRESS_TRACKING_MODES.disabled);
+}
+
+export function setProgressTrackingMode(mode) {
+  const nextMode = Object.values(PROGRESS_TRACKING_MODES).includes(mode)
+    ? mode
+    : PROGRESS_TRACKING_MODES.disabled;
+  if (progressTrackingMode === nextMode) return;
+  progressTrackingMode = nextMode;
   if (typeof window !== 'undefined') {
     window.dispatchEvent(new CustomEvent(PHRASE_PROGRESS_EVENT, {
-      detail: { trackingEnabled: progressTrackingEnabled }
+      detail: {
+        trackingEnabled: isProgressTrackingEnabled(),
+        trackingMode: progressTrackingMode
+      }
     }));
   }
 }
 
 export function isProgressTrackingEnabled() {
-  return progressTrackingEnabled;
+  return progressTrackingMode !== PROGRESS_TRACKING_MODES.disabled;
+}
+
+function getStorageKey(storageMode = progressTrackingMode) {
+  return storageMode === PROGRESS_TRACKING_MODES.preview ? PREVIEW_STORAGE_KEY : STORAGE_KEY;
 }
 
 function getEmptyComprehensionProgress() {
@@ -174,28 +201,29 @@ function migrateProgress(progress) {
 
   return {
     version: PROGRESS_VERSION,
+    reset_at: typeof progress.reset_at === 'number' ? progress.reset_at : null,
     phrases
   };
 }
 
-export function getStoredPhraseProgress() {
+export function getStoredPhraseProgress(storageMode = PROGRESS_TRACKING_MODES.account) {
   if (typeof window === 'undefined') return getEmptyProgress();
   try {
-    const storedProgress = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || 'null');
+    const storedProgress = JSON.parse(window.localStorage.getItem(getStorageKey(storageMode)) || 'null');
     return migrateProgress(storedProgress);
   } catch {
     return getEmptyProgress();
   }
 }
 
-function storePhraseProgress(progress) {
+function storePhraseProgress(progress, storageMode = progressTrackingMode) {
   if (typeof window === 'undefined') return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  window.localStorage.setItem(getStorageKey(storageMode), JSON.stringify(progress));
 }
 
 export function replaceStoredPhraseProgress(progress) {
   const nextProgress = migrateProgress(progress);
-  storePhraseProgress(nextProgress);
+  storePhraseProgress(nextProgress, PROGRESS_TRACKING_MODES.account);
   if (typeof window !== 'undefined') {
     window.dispatchEvent(new CustomEvent(PHRASE_PROGRESS_EVENT, {
       detail: { progress: nextProgress }
@@ -204,9 +232,42 @@ export function replaceStoredPhraseProgress(progress) {
   return nextProgress;
 }
 
+export function getStoredPreviewPhraseProgress() {
+  return getStoredPhraseProgress(PROGRESS_TRACKING_MODES.preview);
+}
+
+export function clearStoredPreviewPhraseProgress() {
+  if (typeof window === 'undefined') return;
+  window.localStorage.removeItem(PREVIEW_STORAGE_KEY);
+  window.dispatchEvent(new CustomEvent(PHRASE_PROGRESS_EVENT, {
+    detail: { previewCleared: true }
+  }));
+}
+
+function hasProgressAfterReset(phraseProgress, resetAt) {
+  if (!resetAt) return true;
+  return (phraseProgress.comprehension?.last_practiced_at || 0) > resetAt
+    || (phraseProgress.recitation?.last_practiced_at || 0) > resetAt;
+}
+
+function filterProgressBeforeReset(progress, resetAt) {
+  if (!resetAt) return progress;
+  const phrases = Object.fromEntries(
+    Object.entries(progress.phrases)
+      .filter(([, phraseProgress]) => hasProgressAfterReset(phraseProgress, resetAt))
+  );
+  return {
+    ...progress,
+    phrases
+  };
+}
+
 export function mergePhraseProgress(firstProgress, secondProgress) {
-  const first = migrateProgress(firstProgress);
-  const second = migrateProgress(secondProgress);
+  const firstMigrated = migrateProgress(firstProgress);
+  const secondMigrated = migrateProgress(secondProgress);
+  const resetAt = Math.max(firstMigrated.reset_at || 0, secondMigrated.reset_at || 0) || null;
+  const first = filterProgressBeforeReset(firstMigrated, resetAt);
+  const second = filterProgressBeforeReset(secondMigrated, resetAt);
   const phraseIds = new Set([
     ...Object.keys(first.phrases),
     ...Object.keys(second.phrases)
@@ -244,6 +305,7 @@ export function mergePhraseProgress(firstProgress, secondProgress) {
 
   return {
     version: PROGRESS_VERSION,
+    reset_at: resetAt,
     phrases
   };
 }
@@ -294,7 +356,7 @@ export function applyComprehensionAttempt(phraseProgress = {}, attempt) {
 export function recordComprehensionAttempt({ phraseId, type, correct, timestamp = Date.now() }) {
   if (!isProgressTrackingEnabled()) return null;
   if (!phraseId) return null;
-  const progress = getStoredPhraseProgress();
+  const progress = getStoredPhraseProgress(progressTrackingMode);
   const previousPhraseProgress = progress.phrases[phraseId] || {};
   const nextPhraseProgress = applyComprehensionAttempt(previousPhraseProgress, {
     type,
@@ -380,7 +442,7 @@ export function applyRecitationTrace(phraseProgress = {}, attempt = {}) {
 
 function recordPhraseRecitation({ phraseId, timestamp, applyAttempt }) {
   if (!phraseId) return null;
-  const progress = getStoredPhraseProgress();
+  const progress = getStoredPhraseProgress(progressTrackingMode);
   const previousPhraseProgress = progress.phrases[phraseId] || {};
   const nextPhraseProgress = applyAttempt(previousPhraseProgress);
   const nextProgress = {
@@ -415,7 +477,7 @@ export function recordRecitationTrace({ phraseIds, activityType, correct, timest
   if (!isProgressTrackingEnabled()) return [];
   const uniquePhraseIds = [...new Set((phraseIds || []).filter(Boolean))];
   if (uniquePhraseIds.length === 0) return [];
-  const progress = getStoredPhraseProgress();
+  const progress = getStoredPhraseProgress(progressTrackingMode);
   const nextPhrases = { ...progress.phrases };
   const results = uniquePhraseIds.map(phraseId => {
     const nextPhraseProgress = applyRecitationTrace(nextPhrases[phraseId] || {}, {
@@ -441,7 +503,7 @@ export function recordRecitationTrace({ phraseIds, activityType, correct, timest
 
 export function getStoredPhraseConfidenceMap() {
   if (!isProgressTrackingEnabled()) return {};
-  const progress = getStoredPhraseProgress();
+  const progress = getStoredPhraseProgress(progressTrackingMode);
   return Object.fromEntries(
     Object.entries(progress.phrases).map(([phraseId, phraseProgress]) => [
       phraseId,
@@ -458,7 +520,7 @@ export function getStoredPhraseProgressDimensionMaps() {
       recitation: {}
     };
   }
-  const progress = getStoredPhraseProgress();
+  const progress = getStoredPhraseProgress(progressTrackingMode);
   return {
     overall: Object.fromEntries(
       Object.entries(progress.phrases).map(([phraseId, phraseProgress]) => [

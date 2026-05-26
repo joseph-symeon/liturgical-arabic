@@ -1,11 +1,14 @@
 import { getSupabaseClient, isSupabaseConfigured } from './supabaseClient.js';
 import {
+  clearStoredPreviewPhraseProgress,
+  getStoredPreviewPhraseProgress,
   getStoredPhraseProgress,
   mergePhraseProgress,
   replaceStoredPhraseProgress
 } from './progressScoring.js';
 
 const USER_STATE_TABLE = 'user_state';
+const PENDING_PROGRESS_SYNC_KEY_PREFIX = 'liturgical-arabic:pending-progress-sync:v1:';
 
 function getEmptyUserState(userId) {
   return {
@@ -143,7 +146,39 @@ export async function saveRemoteUserState({ userId, progress, preferences }) {
   return data;
 }
 
-export async function mergeRemoteProgressIntoLocal(remoteProgress) {
-  const mergedProgress = mergePhraseProgress(getStoredPhraseProgress(), remoteProgress);
+function getPendingProgressSyncKey(userId) {
+  return `${PENDING_PROGRESS_SYNC_KEY_PREFIX}${userId}`;
+}
+
+export function hasPendingProgressSync(userId) {
+  if (typeof window === 'undefined' || !userId) return false;
+  return window.localStorage.getItem(getPendingProgressSyncKey(userId)) === 'true';
+}
+
+export function markPendingProgressSync(userId) {
+  if (typeof window === 'undefined' || !userId) return;
+  window.localStorage.setItem(getPendingProgressSyncKey(userId), 'true');
+}
+
+export function clearPendingProgressSync(userId) {
+  if (typeof window === 'undefined' || !userId) return;
+  window.localStorage.removeItem(getPendingProgressSyncKey(userId));
+}
+
+export function replaceRemoteProgressIntoLocal(remoteProgress) {
+  return replaceStoredPhraseProgress(remoteProgress);
+}
+
+export function mergePendingLocalProgressIntoRemote(remoteProgress) {
+  const mergedProgress = mergePhraseProgress(remoteProgress, getStoredPhraseProgress());
   return replaceStoredPhraseProgress(mergedProgress);
+}
+
+export function mergePreviewProgressIntoRemote(remoteProgress) {
+  const mergedProgress = mergePhraseProgress(remoteProgress, getStoredPreviewPhraseProgress());
+  return replaceStoredPhraseProgress(mergedProgress);
+}
+
+export function clearPreviewProgress() {
+  clearStoredPreviewPhraseProgress();
 }

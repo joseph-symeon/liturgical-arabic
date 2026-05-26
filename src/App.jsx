@@ -12,12 +12,25 @@ import lessons from "./data/course/lessons.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
 import { getServiceNavigation } from "./utils/serviceNavigation.js";
 import { getArabicText } from "./utils/arabic.js";
-import { getBlankPhraseProgress, getStoredPhraseProgress, PHRASE_PROGRESS_EVENT, replaceStoredPhraseProgress, setProgressTrackingEnabled } from "./utils/progressScoring.js";
+import {
+  getResetPhraseProgress,
+  getStoredPhraseProgress,
+  PHRASE_PROGRESS_EVENT,
+  PROGRESS_TRACKING_MODES,
+  replaceStoredPhraseProgress,
+  setProgressTrackingEnabled,
+  setProgressTrackingMode
+} from "./utils/progressScoring.js";
 import {
   canSyncUserState,
+  clearPreviewProgress,
+  clearPendingProgressSync,
   fetchRemoteUserState,
   getCurrentSession,
-  mergeRemoteProgressIntoLocal,
+  hasPendingProgressSync,
+  markPendingProgressSync,
+  mergePendingLocalProgressIntoRemote,
+  mergePreviewProgressIntoRemote,
   sendPasswordReset,
   saveRemoteUserState,
   signInWithEmail,
@@ -92,6 +105,10 @@ const NAV_DETAILS_STORAGE_KEY = "liturgical-arabic:navigation-details-open";
 const DISPLAY_SETTINGS_STORAGE_KEY = "liturgical-arabic:display-settings";
 const COURSE_STUDY_WORKSPACE_STORAGE_KEY = "liturgical-arabic:study-workspace";
 const SYNC_SAVE_DEBOUNCE_MS = 900;
+const SIGNED_OUT_COURSE_LESSON_IDS = new Set([
+  "lesson-lord-have-mercy",
+  "lesson-jesus-prayer"
+]);
 
 function hasSupabaseAuthCallbackParams() {
   if (typeof window === "undefined") return false;
@@ -401,6 +418,16 @@ export default function App() {
     if (typeof settings.showPracticeToolbar === "boolean") setShowPracticeToolbar(settings.showPracticeToolbar);
   }
 
+  function resetViewportAfterAuth() {
+    if (typeof window === "undefined") return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.activeElement?.blur?.();
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      });
+    });
+  }
+
   function scheduleCloudSave() {
     if (!syncReadyRef.current || !syncSession?.user?.id) return;
     if (syncSaveTimerRef.current) clearTimeout(syncSaveTimerRef.current);
@@ -413,11 +440,16 @@ export default function App() {
           progress: getStoredPhraseProgress(),
           preferences: preferencesRef.current
         });
+        clearPendingProgressSync(syncSession.user.id);
         setSyncStatus("synced");
         setSyncMessage("");
       } catch (error) {
         setSyncStatus("error");
-        setSyncMessage(error.message || "Sync failed.");
+        setSyncMessage(
+          typeof navigator !== "undefined" && navigator.onLine === false
+            ? "Progress saved on this device. It will sync when you're back online."
+            : error.message || "Sync failed."
+        );
       }
     }, SYNC_SAVE_DEBOUNCE_MS);
   }
@@ -430,6 +462,9 @@ export default function App() {
     }
     setSyncStatus("loading");
     await signInWithPassword({ email: email.trim(), password });
+    setAccountMenuOpen(false);
+    setDisplayMenuOpen(false);
+    resetViewportAfterAuth();
     setSyncMessage("");
   }
 
@@ -475,13 +510,20 @@ export default function App() {
     if (!syncSession?.user?.id) return;
     const confirmed = window.confirm("Reset all progress for this account? This cannot be undone.");
     if (!confirmed) return;
-    const blankProgress = replaceStoredPhraseProgress(getBlankPhraseProgress());
+    if (syncSaveTimerRef.current) {
+      clearTimeout(syncSaveTimerRef.current);
+      syncSaveTimerRef.current = null;
+    }
+    const blankProgress = replaceStoredPhraseProgress(getResetPhraseProgress());
+    clearPendingProgressSync(syncSession.user.id);
+    clearPreviewProgress();
     setSyncStatus("syncing");
     await saveRemoteUserState({
       userId: syncSession.user.id,
       progress: blankProgress,
       preferences: preferencesRef.current
     });
+    clearPendingProgressSync(syncSession.user.id);
     setSyncStatus("synced");
     setSyncMessage("Progress reset.");
   }
@@ -521,7 +563,7 @@ export default function App() {
 
   useEffect(() => {
     if (!canSyncUserState()) {
-      setProgressTrackingEnabled(false);
+      setProgressTrackingMode(PROGRESS_TRACKING_MODES.preview);
       setSyncStatus("disabled");
       return undefined;
     }
@@ -557,7 +599,7 @@ export default function App() {
 
     if (!syncSession?.user?.id) {
       syncReadyRef.current = false;
-      setProgressTrackingEnabled(false);
+      setProgressTrackingMode(PROGRESS_TRACKING_MODES.preview);
       setSyncStatus("signed-out");
       return;
     }
@@ -572,7 +614,9 @@ export default function App() {
         const remoteState = await fetchRemoteUserState(syncSession.user.id);
         if (cancelled) return;
 
-        const mergedProgress = await mergeRemoteProgressIntoLocal(remoteState?.progress);
+        const nextProgress = hasPendingProgressSync(syncSession.user.id)
+          ? mergePendingLocalProgressIntoRemote(remoteState?.progress)
+          : mergePreviewProgressIntoRemote(remoteState?.progress);
         if (cancelled) return;
 
         const remotePreferences = remoteState?.preferences && typeof remoteState.preferences === "object"
@@ -592,10 +636,12 @@ export default function App() {
 
         await saveRemoteUserState({
           userId: syncSession.user.id,
-          progress: mergedProgress,
+          progress: nextProgress,
           preferences: preferencesRef.current
         });
         if (cancelled) return;
+        clearPendingProgressSync(syncSession.user.id);
+        clearPreviewProgress();
         syncReadyRef.current = true;
         setProgressTrackingEnabled(true);
         setSyncStatus("synced");
@@ -613,17 +659,32 @@ export default function App() {
     return () => {
       cancelled = true;
       syncReadyRef.current = false;
-      setProgressTrackingEnabled(false);
+      setProgressTrackingMode(PROGRESS_TRACKING_MODES.preview);
     };
   }, [syncSession?.user?.id]);
 
   useEffect(() => {
-    function handleProgressUpdated() {
+    function handleProgressUpdated(event) {
+      if (event?.detail && Object.prototype.hasOwnProperty.call(event.detail, "trackingEnabled")) return;
+      if (syncReadyRef.current && syncSession?.user?.id) {
+        markPendingProgressSync(syncSession.user.id);
+      }
       scheduleCloudSave();
     }
 
     window.addEventListener(PHRASE_PROGRESS_EVENT, handleProgressUpdated);
     return () => window.removeEventListener(PHRASE_PROGRESS_EVENT, handleProgressUpdated);
+  }, [syncSession?.user?.id]);
+
+  useEffect(() => {
+    function handleOnline() {
+      if (hasPendingProgressSync(syncSession?.user?.id)) {
+        scheduleCloudSave();
+      }
+    }
+
+    window.addEventListener("online", handleOnline);
+    return () => window.removeEventListener("online", handleOnline);
   }, [syncSession?.user?.id]);
 
   useEffect(() => () => {
@@ -691,6 +752,14 @@ export default function App() {
     });
   }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex]);
 
+  useEffect(() => {
+    if (syncStatus === "loading") return;
+    if (view !== "lessons" || !selectedLessonId || canAccessCourseLesson(selectedLessonId)) return;
+    setView("course-overview");
+    setSelectedCourseTrackId(null);
+    setSelectedExerciseIndex(0);
+  }, [syncStatus, syncSession?.user?.id, view, selectedLessonId]);
+
   function goHome() {
     setView("home");
     setSelectedCourseTrackId(null);
@@ -723,6 +792,20 @@ export default function App() {
     setDisplayMenuOpen(false);
   }
 
+  function openProgressSignIn() {
+    setDisplayMenuOpen(true);
+    setAccountMenuOpen(true);
+    if (isNarrowViewport) setMenuOpen(false);
+  }
+
+  function canAccessCourseLesson(lessonId) {
+    return Boolean(syncSession?.user) || SIGNED_OUT_COURSE_LESSON_IDS.has(lessonId);
+  }
+
+  function handleBlockedCourseLesson() {
+    openProgressSignIn();
+  }
+
   function goToCourseTrack(trackId) {
     setSelectedCourseTrackId(trackId);
     setView("course-overview");
@@ -739,6 +822,10 @@ export default function App() {
   }
 
   function goToLesson(lessonId, exerciseIndex = 0) {
+    if (!canAccessCourseLesson(lessonId)) {
+      handleBlockedCourseLesson();
+      return;
+    }
     setSelectedLessonId(lessonId);
     setSelectedExerciseIndex(exerciseIndex);
     setSelectedCourseTrackId(null);
@@ -982,9 +1069,7 @@ export default function App() {
   function renderDisplayMenu() {
     const signedIn = Boolean(syncSession?.user);
     const needsAttention = syncStatus === "error" || syncStatus === "disabled";
-    const profileSubtitle = !signedIn
-      ? "Sign in"
-      : syncStatus === "error"
+    const profileSubtitle = syncStatus === "error"
         ? "Needs attention"
         : syncStatus === "disabled"
           ? "Sync unavailable"
@@ -1092,7 +1177,7 @@ export default function App() {
             </span>
             <span className="app-profile-row-main">
               <span className="app-profile-row-title">{signedIn ? syncSession.user.email : "Sign in"}</span>
-              <span className="app-profile-row-subtitle">{profileSubtitle}</span>
+              {signedIn && <span className="app-profile-row-subtitle">{profileSubtitle}</span>}
             </span>
             <span className="app-profile-row-status" aria-hidden="true" />
             <svg className="app-profile-row-chevron" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1808,6 +1893,10 @@ export default function App() {
             selectedLessonId={selectedLessonId}
             selectedExerciseIndex={clampedExerciseIndex}
             selectedTrackId={selectedCourseTrack?.id ?? null}
+            showProgressPrompt={!syncSession?.user}
+            onProgressPrompt={openProgressSignIn}
+            canAccessLesson={canAccessCourseLesson}
+            onBlockedLesson={handleBlockedCourseLesson}
             onSelectTrack={goToCourseTrack}
             onSelectExercise={goToLessonStudyHome}
             onSelectService={goToTableOfContents}
@@ -1825,6 +1914,8 @@ export default function App() {
             showPracticeToolbar={showPracticeToolbar}
             studyWorkspace={courseStudyWorkspace}
             selectedExerciseIndex={clampedExerciseIndex}
+            showProgressPrompt={!syncSession?.user}
+            onProgressPrompt={openProgressSignIn}
             onStudySkillChange={setCourseStudyWorkspace}
             onCourseTrack={goToSelectedLessonTrack}
             onCourseLesson={() => goToLessonStudyHome(selectedLessonId, clampedExerciseIndex)}

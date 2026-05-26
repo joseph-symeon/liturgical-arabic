@@ -178,6 +178,8 @@ export default function LessonPage({
   showPracticeToolbar = true,
   studyWorkspace,
   selectedExerciseIndex,
+  showProgressPrompt = false,
+  onProgressPrompt,
   onStudySkillChange,
   onCourseTrack,
   onCourseLesson,
@@ -351,6 +353,21 @@ export default function LessonPage({
     );
   }
 
+  function renderProgressPrompt() {
+    if (!showProgressPrompt) return null;
+    return (
+      <aside className="lp-course-progress-prompt" aria-label="Preview mode">
+        <div>
+          <strong>Preview mode</strong>
+          <span>Sign in to access the full course and save progress across devices.</span>
+        </div>
+        <button type="button" onClick={onProgressPrompt}>
+          Sign in
+        </button>
+      </aside>
+    );
+  }
+
   function renderRecitationWorkspace() {
     return (
       <section className="lp-recitation-workspace" aria-label="Recitation practice">
@@ -395,6 +412,7 @@ export default function LessonPage({
           <h1 className="lp-view-title" id="study-home-title">{lesson.title}</h1>
           <div className="lp-view-meta">{studyHomeContext}</div>
         </div>
+        {renderProgressPrompt()}
 
         <section className="lp-study-home-exercise-summary" aria-label="Exercises">
           <div className="lp-study-home-exercise-list">
