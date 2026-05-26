@@ -96,19 +96,27 @@
   min-height: 68px;
   align-content: center;
   padding: 15px 16px;
-  border: 1px solid #d6d3d1;
+  border: 1px solid color-mix(in srgb, #d6d3d1 86%, var(--app-accent));
   border-radius: 8px;
-  background: #fff;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 5%, transparent), transparent 62%),
+    #fff;
   color: #292524;
   cursor: pointer;
   font: inherit;
   text-align: left;
-  transition: background 120ms ease, border-color 120ms ease, transform 120ms ease;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.84);
+  transition: background 140ms ease, border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
 }
 
 .app-home-action:hover {
-  border-color: #a8a29e;
-  background: #fafaf9;
+  border-color: color-mix(in srgb, var(--app-accent) 42%, #d6d3d1);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 10%, transparent), transparent 62%),
+    #fff;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 10px 24px color-mix(in srgb, var(--app-accent) 10%, transparent);
   transform: translateY(-1px);
 }
 
@@ -156,20 +164,46 @@
   gap: 18px;
   color: #292524;
   font-family: Arial, sans-serif;
+  padding-top: 0;
+}
+
+.app-account-profile-nav {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
 }
 
 .app-account-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: start;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   padding-bottom: 14px;
   border-bottom: 1px solid #e7e5e4;
+}
+
+.app-account-header-simple {
+  grid-template-columns: minmax(0, 1fr);
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.app-account-heading {
+  min-width: 0;
+}
+
+.app-account-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
 }
 
 .app-account-header-actions {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
 }
 
@@ -179,7 +213,7 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  line-height: 1.25;
+  line-height: 1.4;
   text-transform: uppercase;
 }
 
@@ -204,7 +238,8 @@
   line-height: 1;
 }
 
-.app-account-close {
+.app-account-close,
+.app-account-back {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -218,7 +253,15 @@
   padding: 0;
 }
 
-.app-account-close:hover {
+.app-account-back {
+  flex: 0 0 auto;
+  border-color: color-mix(in srgb, #d6d3d1 72%, transparent);
+  background: #fafaf9;
+  color: #57534e;
+}
+
+.app-account-close:hover,
+.app-account-back:hover {
   background: #f5f5f4;
   color: #292524;
 }
@@ -300,9 +343,9 @@
 }
 
 .app-account-field input:focus {
-  outline: 2px solid color-mix(in srgb, #b32d29 28%, transparent);
+  outline: 2px solid color-mix(in srgb, var(--app-accent) 28%, transparent);
   outline-offset: 1px;
-  border-color: color-mix(in srgb, #b32d29 42%, #d6d3d1);
+  border-color: color-mix(in srgb, var(--app-accent) 42%, #d6d3d1);
 }
 
 .app-account-button {
@@ -367,25 +410,18 @@
 }
 
 .app-account-danger {
-  padding-top: 4px;
+  padding-top: 14px;
   border-top: 1px solid #e7e5e4;
 }
 
 .app-account-danger button {
-  border: 0;
-  background: transparent;
-  color: #78716c;
-  cursor: pointer;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 750;
-  padding: 6px 0;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  background: #f5f5f4;
+  color: color-mix(in srgb, var(--app-accent) 72%, #1c1917);
 }
 
 .app-account-danger button:hover:not(:disabled) {
-  color: #9b2724;
+  background: #e7e5e4;
+  color: color-mix(in srgb, var(--app-accent) 82%, #1c1917);
 }
 
 .app-account-danger button:disabled {
@@ -459,6 +495,275 @@
   line-height: 1.25;
 }
 
+.app-chrome-button {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none;
+  backdrop-filter: none;
+  transition: background 140ms ease, color 140ms ease, transform 140ms ease;
+}
+
+.app-chrome-button:hover {
+  background: #f5f5f4 !important;
+  color: #292524;
+}
+
+.app-side-panel {
+  background: color-mix(in srgb, #fff 94%, #fafaf9) !important;
+  box-shadow: 18px 0 42px rgb(28 25 23 / 0.06);
+}
+
+.app-display-panel {
+  box-shadow: -18px 0 42px rgb(28 25 23 / 0.06);
+}
+
+.app-display-profile-section {
+  padding-bottom: 4px;
+}
+
+.app-display-panel-scroll {
+  box-sizing: border-box;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: calc(env(safe-area-inset-top, 0px) + 48px) 16px 16px;
+  scrollbar-gutter: stable;
+}
+
+.app-panel-section-heading {
+  display: block;
+  overflow: visible;
+  border-bottom: 1px solid #e7e5e4;
+  margin: 0 0 12px;
+  padding: 2px 0 12px;
+  color: #a8a29e;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+  min-height: 31px;
+  text-transform: uppercase;
+}
+
+.app-display-settings-heading {
+  margin-top: 14px;
+}
+
+.app-display-settings-heading + section {
+  border-top: 0;
+  padding-top: 14px;
+}
+
+.app-display-section {
+  padding: 14px 0;
+}
+
+.app-display-section-title {
+  margin: 0 0 10px;
+}
+
+.app-display-section-body {
+  gap: 10px;
+}
+
+.app-display-button-row {
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.app-display-panel .lp-display-field {
+  min-height: 34px;
+  gap: 10px;
+}
+
+.app-display-panel .lp-display-field-control {
+  max-width: 204px;
+}
+
+.app-display-panel .lp-display-field-label,
+.app-display-panel .app-display-toggle-field > div:first-child {
+  font-size: 13px;
+}
+
+.app-display-panel {
+  --app-control-accent: var(--app-accent);
+  --app-control-border: #d6d3d1;
+  --app-control-surface: #f5f5f4;
+  --app-control-surface-strong: #fff;
+  --app-control-text: #57534e;
+  --app-control-muted: #a8a29e;
+}
+
+.app-control-option {
+  min-height: 32px;
+  box-sizing: border-box;
+  border: 1px solid var(--app-control-border);
+  background: var(--app-control-surface);
+  color: var(--app-control-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px !important;
+  font-weight: 500;
+  line-height: 1;
+  padding: 7px 12px !important;
+  transition: none;
+}
+
+.app-control-option:hover:not(.active) {
+  border-color: var(--app-control-muted);
+  background: color-mix(in srgb, var(--app-control-surface) 74%, var(--app-control-muted));
+  color: #292524;
+}
+
+.app-control-option.active {
+  border-color: color-mix(in srgb, var(--app-control-accent) 58%, var(--app-control-border));
+  background: color-mix(in srgb, var(--app-control-accent) 18%, var(--app-control-surface-strong));
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--app-control-accent) 72%, transparent);
+  color: color-mix(in srgb, var(--app-control-accent) 76%, #1c1917);
+  font-weight: 600;
+}
+
+.app-display-panel .app-reset-control {
+  background: #f5f5f4;
+  color: color-mix(in srgb, var(--app-accent) 72%, #1c1917);
+}
+
+button.app-reset-control,
+.app-display-panel button.app-reset-control,
+.app-account-danger button.app-reset-control {
+  min-height: 32px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1;
+  padding: 7px 12px !important;
+  text-decoration: none;
+}
+
+.app-display-reset-section {
+  padding: 14px 0;
+}
+
+.app-display-panel .app-font-size-stepper {
+  display: grid;
+  grid-template-columns: 28px minmax(40px, 1fr) 28px;
+  gap: 3px;
+  align-items: center;
+  width: 106px;
+  border-radius: 999px;
+  background: #fafaf9;
+  padding: 2px;
+}
+
+.app-display-panel .app-font-size-stepper .lp-speed-adjust {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.app-display-panel .app-font-size-stepper .lp-speed-value {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  height: 28px;
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.app-profile-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  min-height: 40px;
+  margin: 0 0 4px;
+  border: 1px solid color-mix(in srgb, #d6d3d1 82%, transparent);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 5%, transparent), transparent 70%),
+    #fff;
+  color: #292524;
+  cursor: pointer;
+  font: inherit;
+  padding: 6px 8px;
+  text-align: left;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.app-profile-row:hover {
+  border-color: color-mix(in srgb, var(--app-accent) 36%, #d6d3d1);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 9%, transparent), transparent 70%),
+    #fff;
+}
+
+.app-profile-row-avatar {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid color-mix(in srgb, var(--app-accent) 32%, #d6d3d1);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--app-accent) 9%, #fff);
+  color: color-mix(in srgb, var(--app-accent) 72%, #292524);
+}
+
+.app-profile-row-main {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.app-profile-row-title,
+.app-profile-row-subtitle {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-profile-row-title {
+  color: inherit;
+  font-size: 12px;
+  font-weight: 780;
+  line-height: 1.15;
+}
+
+.app-profile-row-subtitle {
+  color: #78716c;
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.15;
+}
+
+.app-profile-row-status {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #a8a29e;
+}
+
+.app-profile-row.signed-in .app-profile-row-status {
+  background: var(--app-accent);
+}
+
+.app-profile-row.needs-attention .app-profile-row-status {
+  background: var(--rubric-red);
+}
+
+.app-profile-row-chevron {
+  color: #a8a29e;
+}
+
 @media (min-width: 720px) {
   .app-home-action-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -477,14 +782,124 @@
   }
 
   .app-home-action {
-    border-color: var(--dark-border);
-    background: var(--dark-surface);
+    border-color: color-mix(in srgb, var(--app-accent) 24%, var(--dark-border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 9%, transparent), transparent 62%),
+      var(--dark-surface);
     color: var(--dark-text);
   }
 
   .app-home-action:hover {
+    border-color: color-mix(in srgb, var(--app-accent) 48%, var(--dark-border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 15%, transparent), transparent 62%),
+      var(--dark-hover);
+  }
+
+  .app-chrome-button {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none;
+  }
+
+  .app-chrome-button:hover {
+    background: var(--dark-hover) !important;
+    color: var(--dark-text);
+  }
+
+  .app-side-panel {
+    background: var(--dark-bg) !important;
+    box-shadow: 18px 0 42px rgb(0 0 0 / 0.24);
+  }
+
+  .app-profile-row {
+    border-color: color-mix(in srgb, var(--app-accent) 18%, var(--dark-border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 8%, transparent), transparent 70%),
+      var(--dark-surface);
+    color: var(--dark-text);
+  }
+
+  .app-profile-row:hover {
+    border-color: color-mix(in srgb, var(--app-accent) 42%, var(--dark-border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 12%, transparent), transparent 70%),
+      var(--dark-hover);
+  }
+
+  .app-profile-row-avatar {
+    border-color: color-mix(in srgb, var(--app-accent) 34%, var(--dark-border));
+    background: color-mix(in srgb, var(--app-accent) 12%, var(--dark-surface));
+    color: color-mix(in srgb, var(--app-accent) 68%, var(--dark-text));
+  }
+
+  .app-profile-row-subtitle,
+  .app-profile-row-chevron {
+    color: var(--dark-muted);
+  }
+
+  .app-panel-section-heading {
+    color: var(--dark-muted);
+    border-bottom-color: var(--dark-border);
+  }
+
+  .app-display-panel {
+    --app-control-accent: #54b978;
+    --app-control-border: var(--dark-border);
+    --app-control-surface: color-mix(in srgb, var(--dark-surface) 72%, transparent);
+    --app-control-surface-strong: var(--dark-surface);
+    --app-control-text: var(--dark-text);
+    --app-control-muted: var(--dark-muted);
+  }
+
+  .app-control-option {
+    border: 1px solid color-mix(in srgb, var(--dark-border) 86%, transparent);
+    background: color-mix(in srgb, var(--dark-surface) 72%, transparent);
+    color: var(--dark-text);
+  }
+
+  .app-control-option:hover:not(.active) {
     border-color: var(--dark-muted);
     background: var(--dark-hover);
+    color: var(--app-control-text);
+  }
+
+  .app-control-option.active {
+    border-color: color-mix(in srgb, var(--app-control-border) 90%, transparent);
+    background: color-mix(in srgb, var(--app-control-accent) 24%, var(--app-control-surface-strong));
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--app-control-accent) 44%, transparent),
+      inset 0 -3px 0 color-mix(in srgb, var(--app-control-accent) 88%, transparent);
+    color: color-mix(in srgb, var(--app-control-accent) 72%, var(--app-control-text));
+  }
+
+  .app-display-panel .app-reset-control {
+    background: var(--dark-surface);
+    color: var(--app-accent-strong);
+  }
+
+  .app-display-panel .lp-setting-control-box,
+  .app-display-panel .lp-speed-adjust,
+  .app-display-panel .lp-mode-switch {
+    border-color: color-mix(in srgb, var(--dark-border) 72%, transparent);
+  }
+
+  .app-display-panel .app-font-size-stepper {
+    border-color: color-mix(in srgb, var(--dark-border) 86%, transparent);
+    background: #101313;
+  }
+
+  .app-display-panel .app-font-size-stepper .lp-speed-adjust {
+    background: #1b1f20;
+  }
+
+  .app-display-panel .lp-speed-adjust:hover {
+    border-color: color-mix(in srgb, var(--dark-muted) 38%, var(--dark-border));
+  }
+
+  .app-display-panel .lp-mode-toggle input:checked + .lp-mode-switch {
+    border-color: color-mix(in srgb, var(--app-control-accent) 58%, var(--app-control-border));
+    background: color-mix(in srgb, var(--app-control-accent) 42%, var(--app-control-surface-strong));
   }
 
   .app-account-panel-shell {
@@ -514,7 +929,6 @@
   .app-account-field,
   .app-account-summary-label,
   .app-account-summary-note,
-  .app-account-danger button,
   .app-account-secondary-actions button {
     color: var(--dark-muted);
   }
@@ -543,16 +957,34 @@
 
   .app-account-tab.active,
   .app-account-close,
+  .app-account-back,
   .app-account-field input,
   .app-account-button {
     border-color: var(--dark-border);
+  }
+
+  .app-account-back {
+    background: var(--dark-surface);
+    color: var(--dark-muted);
+  }
+
+  .app-account-back:hover {
+    border-color: color-mix(in srgb, var(--dark-muted) 42%, var(--dark-border));
+    background: var(--dark-hover);
+    color: var(--dark-text);
   }
 
   .app-account-button {
     color: var(--dark-text);
   }
 
+  .app-account-danger button {
+    background: var(--dark-surface);
+    color: var(--app-accent-strong);
+  }
+
   .app-account-button:hover:not(:disabled),
+  .app-account-danger button:hover:not(:disabled),
   .app-account-secondary-actions button:hover:not(:disabled) {
     background: var(--dark-hover);
   }

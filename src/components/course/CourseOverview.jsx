@@ -57,12 +57,13 @@ export default function CourseOverview({
   selectedLessonId,
   selectedTrackId,
   onSelectTrack,
-  onSelectExercise
+  onSelectExercise,
+  onSelectService
 }) {
   const primaryPathItems = courseTracks.filter(item => item.type === 'track' && !item.parent_track_id);
   const [phraseConfidenceById, setPhraseConfidenceById] = useState(getStoredPhraseConfidenceMap);
   const masteryRows = getServiceConfidenceRows(phraseConfidenceById);
-  const topMasteryRows = masteryRows.slice(0, 8);
+  const topMasteryRows = masteryRows.slice(0, 6);
   const selectedTrack = courseTracks.find(item => item.id === selectedTrackId);
 
   useEffect(() => {
@@ -256,23 +257,33 @@ export default function CourseOverview({
           <div className="lp-view-header">
             <p className="lp-view-kicker">Mastery Map</p>
             <h2 className="lp-view-title" id="service-mastery-title">Services confidence</h2>
+            <p className="lp-service-mastery-intro">
+              Confidence estimates how ready you are to comprehend and follow along with each service.
+            </p>
           </div>
           <div className="lp-service-mastery-map">
-            <div className="lp-service-mastery-core">
-              <span>{formatPercent(topMasteryRows.reduce((total, row) => total + row.confidence, 0) / Math.max(1, topMasteryRows.length))}</span>
-              <span>Liturgical Arabic</span>
-            </div>
             <div className="lp-service-mastery-nodes">
               {topMasteryRows.map(row => (
-                <article className="lp-service-mastery-node" key={row.id} style={{ '--mastery': row.confidence }}>
-                  <div className="lp-service-mastery-ring" aria-hidden="true">
-                    <span>{formatPercent(row.confidence)}</span>
-                  </div>
-                  <div>
+                <button
+                  type="button"
+                  className="lp-course-path-card lp-service-mastery-node"
+                  key={row.id}
+                  style={{ '--mastery': row.confidence }}
+                  onClick={() => onSelectService?.(row.id)}
+                  aria-label={`Open ${row.title} in Reader. ${formatPercent(row.confidence)} service confidence. ${getPhraseCountLabel(row.totalPhraseCount)}.`}
+                >
+                  <div className="lp-course-path-main lp-service-mastery-node-main">
                     <h3>{row.title}</h3>
-                    <p>{row.knownPhraseCount.toLocaleString()} of {row.totalPhraseCount.toLocaleString()} phrases touched</p>
+                    <div className="lp-course-path-meta">{getPhraseCountLabel(row.totalPhraseCount)}</div>
                   </div>
-                </article>
+                  <div className="lp-course-path-confidence" aria-label={`${formatPercent(row.confidence)} service confidence`}>
+                    <span>
+                      <span style={{ width: `${Math.round(row.confidence * 100)}%` }} />
+                    </span>
+                    <strong>{formatPercent(row.confidence)}</strong>
+                  </div>
+                  <span className="lp-course-path-action" aria-hidden="true">›</span>
+                </button>
               ))}
             </div>
           </div>

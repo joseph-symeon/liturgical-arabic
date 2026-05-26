@@ -366,6 +366,13 @@
   line-height: 1.2;
 }
 
+.lp-study-home-exercise-meta {
+  color: var(--study-muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 .lp-study-home-exercise-actions {
   display: flex;
   flex-wrap: wrap;
@@ -846,9 +853,9 @@
 
 .lp-page.recitation-mode-page .lp-activity-toolbar-shell {
   position: fixed;
-  right: max(14px, env(safe-area-inset-right, 0px));
+  right: calc(var(--workspace-right-offset, 0px) + max(14px, env(safe-area-inset-right, 0px)));
   bottom: 0;
-  left: max(14px, env(safe-area-inset-left, 0px));
+  left: calc(var(--workspace-left-offset, 0px) + max(14px, env(safe-area-inset-left, 0px)));
   order: 10;
   box-sizing: border-box;
   width: auto;
@@ -874,9 +881,9 @@
 
 .lp-page.recitation-mode-page .lp-learn-docked-controls {
   position: fixed;
-  right: max(14px, env(safe-area-inset-right, 0px));
+  right: calc(var(--workspace-right-offset, 0px) + max(14px, env(safe-area-inset-right, 0px)));
   bottom: 0;
-  left: max(14px, env(safe-area-inset-left, 0px));
+  left: calc(var(--workspace-left-offset, 0px) + max(14px, env(safe-area-inset-left, 0px)));
   z-index: 35;
   box-sizing: border-box;
   display: grid;
@@ -1217,8 +1224,8 @@
 }
 
 .lp-mode-toggle input:checked + .lp-mode-switch {
-  border-color: var(--liturgical-red-highlight-ring);
-  background: var(--liturgical-red-toggle-fill);
+  border-color: color-mix(in srgb, var(--app-accent) 42%, #d6d3d1);
+  background: var(--app-accent-fill);
 }
 
 .lp-mode-toggle input:checked + .lp-mode-switch::after {
@@ -1226,18 +1233,22 @@
 }
 
 .lp-setting-option {
+  border: 1px solid color-mix(in srgb, #d6d3d1 82%, transparent);
   background: #f5f5f4;
+  color: #57534e;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
 }
 
 .lp-setting-option.active {
-  border-color: var(--liturgical-red-highlight-ring);
-  background: var(--liturgical-red-toggle-fill);
+  border-color: color-mix(in srgb, var(--app-accent) 46%, #d6d3d1);
+  background: color-mix(in srgb, var(--app-accent) 16%, #fff);
+  color: color-mix(in srgb, var(--app-accent) 72%, #1c1917);
 }
 
 .lp-reset-display-button {
-  border: 1px solid var(--liturgical-red);
-  background: color-mix(in srgb, var(--liturgical-red) 10%, transparent);
-  color: var(--liturgical-red);
+  border: 1px solid color-mix(in srgb, var(--app-accent) 42%, #d6d3d1);
+  background: color-mix(in srgb, var(--app-accent) 10%, transparent);
+  color: color-mix(in srgb, var(--app-accent) 72%, #1c1917);
   font-size: 14px !important;
   padding: 8px 12px !important;
 }
@@ -3539,6 +3550,7 @@
 .lp-course-path-card {
   min-width: 0;
   overflow: visible;
+  grid-template-rows: auto auto auto;
   border-color: color-mix(in srgb, var(--path-accent) 28%, #d6d3d1);
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 5%, transparent), transparent 48%),
@@ -3548,7 +3560,7 @@
 }
 
 .lp-course-path-card-top {
-  grid-column: 1 / -1;
+  grid-column: 1;
   display: block;
   min-height: 0;
 }
@@ -3626,8 +3638,13 @@
 
 .lp-course-path-action {
   grid-column: 2;
-  grid-row: 2 / span 2;
-  align-self: center;
+  grid-row: 1 / 4;
+  place-self: center;
+}
+
+.lp-track-lesson-action,
+.lp-study-home-exercise-actions {
+  place-self: center;
 }
 
 .lp-course-path-card:hover {
@@ -3734,93 +3751,49 @@
   border-bottom: 0;
 }
 
+.lp-service-mastery-intro {
+  max-width: 620px;
+  margin: 8px 0 0;
+  color: #57534e;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
 .lp-service-mastery-map {
   display: grid;
-  grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
-  gap: 18px;
-  align-items: center;
-}
-
-.lp-service-mastery-core {
-  display: grid;
-  place-items: center;
-  align-content: center;
-  justify-self: stretch;
-  min-height: 220px;
-  border: 1px solid color-mix(in srgb, var(--liturgical-red) 28%, #d6d3d1);
-  border-radius: 8px;
-  background:
-    radial-gradient(circle, color-mix(in srgb, var(--liturgical-red) 12%, transparent) 0 38%, transparent 39%),
-    #fff;
-  text-align: center;
-}
-
-.lp-service-mastery-core span:first-child {
-  color: var(--liturgical-red);
-  font-size: clamp(36px, 7vw, 60px);
-  font-weight: 850;
-  line-height: 1;
-}
-
-.lp-service-mastery-core span:last-child {
-  max-width: 140px;
-  margin-top: 8px;
-  color: #57534e;
-  font-size: 13px;
-  font-weight: 800;
-  line-height: 1.2;
-  text-transform: uppercase;
+  max-width: 860px;
 }
 
 .lp-service-mastery-nodes {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
 }
 
 .lp-service-mastery-node {
-  display: grid;
-  grid-template-columns: 66px minmax(0, 1fr);
-  gap: 12px;
-  align-items: center;
+  --track-progress: var(--mastery);
+  grid-template-rows: auto auto;
+}
+
+.lp-service-mastery-node .lp-course-path-main {
+  grid-row: 1;
+}
+
+.lp-service-mastery-node .lp-course-path-confidence {
+  grid-row: 2;
+}
+
+.lp-service-mastery-node .lp-course-path-action {
+  grid-row: 1 / 3;
+}
+
+.lp-service-mastery-node:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--path-accent) 32%, transparent);
+  outline-offset: 2px;
+}
+
+.lp-service-mastery-node-main {
   min-width: 0;
-  border: 1px solid #d6d3d1;
-  border-radius: 8px;
-  background: #fff;
-  padding: 12px;
-}
-
-.lp-service-mastery-ring {
-  display: grid;
-  place-items: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle, #fff 0 56%, transparent 57%),
-    conic-gradient(var(--liturgical-red) calc(var(--mastery) * 1turn), #e7e5e4 0);
-}
-
-.lp-service-mastery-ring span {
-  color: #292524;
-  font-size: 13px;
-  font-weight: 850;
-  line-height: 1;
-}
-
-.lp-service-mastery-node h3 {
-  margin: 0;
-  color: #292524;
-  font-size: 15px;
-  font-weight: 750;
-  line-height: 1.2;
-}
-
-.lp-service-mastery-node p {
-  margin: 4px 0 0;
-  color: #78716c;
-  font-size: 12px;
-  line-height: 1.25;
 }
 
 .lp-course-coverage {
@@ -4230,6 +4203,71 @@
   border-bottom: 1px solid #d6d3d1;
 }
 
+.reader-service-home-page {
+  --path-accent: var(--app-accent);
+  --path-card-border: #d6d3d1;
+  --path-card-text: #292524;
+  --path-card-surface: #fff;
+  --path-list-border: #d6d3d1;
+  max-width: min(100%, 980px);
+}
+
+.reader-service-home-page .lp-course-overview {
+  display: grid;
+  gap: 16px;
+}
+
+.reader-service-home-page .lp-course-unit {
+  overflow: hidden;
+  border: 1px solid var(--path-card-border);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 5%, transparent), transparent 58%),
+    var(--path-card-surface);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--path-card-text) 4%, transparent);
+  padding: 0;
+}
+
+.reader-service-home-page .lp-course-unit:last-child {
+  border-bottom: 1px solid var(--path-card-border);
+}
+
+.reader-service-home-page .lp-course-unit-summary {
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, auto);
+  gap: 10px;
+  min-height: 56px;
+  align-items: center;
+  padding: 12px 14px;
+}
+
+.reader-service-home-page .lp-course-unit-summary::before {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid color-mix(in srgb, var(--path-accent) 38%, var(--path-card-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--path-accent) 9%, var(--path-card-surface));
+  color: color-mix(in srgb, var(--path-accent) 70%, var(--path-card-text));
+  font-size: 16px;
+  transform: none;
+}
+
+.reader-service-home-page .reader-service-group-title {
+  min-width: 0;
+  color: var(--path-card-text);
+  font-size: 16px;
+  font-weight: 760;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+.reader-service-home-page .reader-service-group-arabic {
+  min-width: 0;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
 .lp-course-unit-summary {
   cursor: pointer;
   display: grid;
@@ -4261,6 +4299,13 @@
   white-space: nowrap;
 }
 
+.reader-service-home-page .lp-course-unit-summary .reader-service-group-title {
+  color: var(--path-card-text);
+  font-size: 16px;
+  font-weight: 760;
+  white-space: normal;
+}
+
 .lp-course-lesson-list {
   display: grid;
   gap: 4px;
@@ -4269,11 +4314,100 @@
 }
 
 .reader-service-home-section-list {
-  padding-left: 0;
+  gap: 8px;
+  margin-top: 0;
+  padding: 0 12px 12px 52px;
 }
 
 .reader-service-home-section-title {
   padding-left: 0;
+}
+
+.reader-service-section-card {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--path-card-border) 74%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--path-card-surface) 86%, transparent);
+  color: var(--path-card-text);
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-align: left;
+  transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.reader-service-section-card:hover {
+  border-color: color-mix(in srgb, var(--path-accent) 42%, var(--path-card-border));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 8%, transparent), transparent 56%),
+    var(--path-card-surface);
+  transform: translateY(-1px);
+}
+
+.reader-service-section-card-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1.25fr) minmax(0, 0.9fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 54px;
+  padding: 10px 12px;
+}
+
+.reader-service-section-marker {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid color-mix(in srgb, var(--path-accent) 34%, var(--path-card-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--path-accent) 10%, var(--path-card-surface));
+  color: color-mix(in srgb, var(--path-accent) 70%, var(--path-card-text));
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.reader-service-section-title {
+  min-width: 0;
+  color: var(--path-card-text);
+  font-size: 15px;
+  font-weight: 720;
+  line-height: 1.25;
+}
+
+.reader-service-section-arabic {
+  min-width: 0;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+@media (max-width: 700px) {
+  .reader-service-home-page .lp-course-overview {
+    gap: 12px;
+  }
+
+  .reader-service-home-page .lp-course-unit-summary {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .reader-service-home-page .reader-service-group-arabic {
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  .reader-service-home-section-list {
+    padding-left: 12px;
+  }
+
+  .reader-service-section-card-inner {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .reader-service-section-arabic {
+    grid-column: 2;
+  }
 }
 
 .lp-course-lesson {
@@ -4318,17 +4452,18 @@
   position: relative;
   background: transparent;
   color: inherit;
-  transition: background 120ms ease, color 120ms ease;
+  transition: background 120ms ease, color 120ms ease, box-shadow 120ms ease;
 }
 
 .lp-nav-item:hover {
-  background: #fafaf9;
+  background: color-mix(in srgb, var(--app-accent) 6%, #fafaf9);
 }
 
 .lp-nav-item.is-current {
-  background: color-mix(in srgb, var(--liturgical-red) 10%, transparent);
-  color: var(--liturgical-red) !important;
+  background: color-mix(in srgb, var(--app-accent) 12%, transparent);
+  color: color-mix(in srgb, var(--app-accent) 74%, #1c1917) !important;
   font-weight: 700;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--app-accent) 14%, transparent);
 }
 
 .lp-nav-item.is-current::before {
@@ -4339,7 +4474,7 @@
   left: 0;
   width: 3px;
   border-radius: 999px;
-  background: var(--liturgical-red);
+  background: var(--app-accent);
 }
 
 .lp-course-exercise-link {
@@ -4358,19 +4493,20 @@
 }
 
 .lp-navigation-panel .lp-course-lesson-summary.active {
-  background: color-mix(in srgb, var(--liturgical-red) 7%, transparent);
-  color: var(--liturgical-red) !important;
+  background: color-mix(in srgb, var(--app-accent) 10%, transparent);
+  color: color-mix(in srgb, var(--app-accent) 74%, #1c1917) !important;
   font-weight: 700;
 }
 
 .lp-navigation-panel .lp-course-lesson-summary.active::before {
-  color: var(--liturgical-red);
+  color: var(--app-accent);
 }
 
 .lp-navigation-panel .lp-course-lesson-summary {
   grid-template-columns: 24px 1fr;
   align-items: center;
-  padding: 7px 6px;
+  border-radius: 8px;
+  padding: 8px 7px;
 }
 
 .lp-navigation-panel .lp-course-lesson-summary::before {
@@ -4547,9 +4683,7 @@
   box-sizing: border-box;
   border-color: color-mix(in srgb, var(--recite-border) 86%, transparent);
   border-radius: 8px;
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--recite-accent) 8%, transparent), transparent 64%),
-    var(--recite-surface);
+  background: var(--recite-surface);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, var(--recite-text) 5%, transparent),
     0 18px 42px color-mix(in srgb, #000 36%, transparent);
@@ -4583,19 +4717,23 @@
 
 .lp-page.recitation-mode-page .lp-speed-row {
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) 42px;
-  gap: 10px;
+  grid-template-columns: 38px minmax(0, 1fr) 38px;
+  gap: 6px;
   align-items: center;
+  border: 1px solid color-mix(in srgb, var(--recite-border) 86%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--recite-surface) 72%, transparent);
+  padding: 3px;
 }
 
 .lp-page.recitation-mode-page .lp-speed-value {
   display: grid;
   place-items: center;
   min-width: 0;
-  height: 38px;
-  border: 1px solid color-mix(in srgb, var(--recite-border) 72%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--recite-bg) 46%, transparent);
+  height: 34px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: var(--recite-text);
   font-size: 15px;
   font-weight: 850;
@@ -4603,8 +4741,8 @@
 }
 
 .lp-page.recitation-mode-page .lp-speed-adjust {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border-color: color-mix(in srgb, var(--recite-border) 86%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--recite-surface-strong) 74%, transparent);
@@ -5479,7 +5617,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
+  border: 1px solid #d6d3d1;
+  border-radius: 999px;
+  background: #fafaf9;
+  padding: 3px;
 }
 
 .lp-speed-adjust {
@@ -5494,8 +5636,12 @@
 }
 
 .lp-speed-value {
+  display: grid;
+  place-items: center;
   font-size: 13px;
-  min-width: 42px;
+  min-width: 46px;
+  height: 28px;
+  border-radius: 999px;
   text-align: center;
 }
 
@@ -5557,7 +5703,8 @@
   .lp-page.course-view-page,
   .lp-page.study-home-page,
   .lp-study-home-card,
-  .lp-course-map-page.track-detail-page {
+  .lp-course-map-page.track-detail-page,
+  .reader-service-home-page {
     --study-bg: #111513;
     --study-surface: #181d1b;
     --study-surface-strong: #202725;
@@ -5572,6 +5719,25 @@
     --path-card-text: var(--dark-text);
     --path-card-surface: color-mix(in srgb, var(--dark-surface) 86%, var(--dark-bg));
     --path-list-border: var(--dark-border);
+  }
+
+  .reader-service-home-page .lp-course-unit {
+    border-color: color-mix(in srgb, var(--app-accent) 22%, var(--dark-border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 9%, transparent), transparent 58%),
+      color-mix(in srgb, var(--dark-surface) 86%, var(--dark-bg));
+  }
+
+  .reader-service-section-card {
+    border-color: color-mix(in srgb, var(--dark-border) 76%, transparent);
+    background: color-mix(in srgb, var(--dark-surface) 76%, transparent);
+  }
+
+  .reader-service-section-card:hover {
+    border-color: color-mix(in srgb, var(--app-accent) 44%, var(--dark-border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--app-accent) 12%, transparent), transparent 58%),
+      color-mix(in srgb, var(--dark-surface) 92%, var(--dark-bg));
   }
 
   .lp-learn-activity {
@@ -5657,7 +5823,8 @@
   }
 
   .lp-setting-option.active {
-    background: var(--liturgical-red-toggle-fill);
+    background: color-mix(in srgb, var(--app-accent) 24%, var(--dark-surface));
+    color: var(--dark-text);
   }
 
   .lp-setting-control-box {
@@ -5938,21 +6105,21 @@
   }
 
   .lp-nav-item.is-current {
-    background: color-mix(in srgb, var(--liturgical-red-control) 18%, transparent);
-    color: #f87171 !important;
+    background: color-mix(in srgb, var(--app-accent) 18%, transparent);
+    color: color-mix(in srgb, var(--app-accent) 62%, var(--dark-text)) !important;
   }
 
   .lp-nav-item.is-current::before {
-    background: #ef4444;
+    background: var(--app-accent);
   }
 
   .lp-navigation-panel .lp-course-lesson-summary.active {
-    background: color-mix(in srgb, var(--liturgical-red-control) 16%, transparent);
-    color: #f87171 !important;
+    background: color-mix(in srgb, var(--app-accent) 16%, transparent);
+    color: color-mix(in srgb, var(--app-accent) 62%, var(--dark-text)) !important;
   }
 
   .lp-navigation-panel .lp-course-lesson-summary.active::before {
-    color: #ef4444;
+    color: var(--app-accent);
   }
 
   .lp-course-landing-header,
@@ -6026,8 +6193,6 @@
 
   .lp-course-path-card h3,
   .lp-track-lesson-main h3,
-  .lp-service-mastery-node h3,
-  .lp-service-mastery-ring span,
   .lp-course-map-hero-stats span:first-child {
     color: var(--dark-text);
   }
@@ -6037,8 +6202,7 @@
   .lp-course-path-state,
   .lp-track-detail-back,
   .lp-track-lesson-meta,
-  .lp-service-mastery-core span:last-child,
-  .lp-service-mastery-node p,
+  .lp-service-mastery-intro,
   .lp-course-map-hero-stats span:last-child {
     color: var(--dark-muted);
   }
@@ -6054,8 +6218,7 @@
   .lp-course-path-card,
   .lp-track-lesson-row,
   .lp-service-mastery-node,
-  .lp-course-map-hero-stats div,
-  .lp-service-mastery-core {
+  .lp-course-map-hero-stats div {
     background-color: var(--dark-surface);
   }
 
@@ -6100,10 +6263,12 @@
     background: color-mix(in srgb, var(--path-accent) 42%, var(--dark-border));
   }
 
-  .lp-course-map-hero-stats,
-  .lp-service-mastery-node {
-    border-color: var(--dark-border);
-    background: var(--dark-border);
+  .lp-course-map-hero-stats {
+    border-color: color-mix(in srgb, var(--path-accent) 30%, var(--dark-border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 8%, transparent), transparent 54%),
+      color-mix(in srgb, var(--dark-surface) 86%, var(--dark-bg));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--dark-text) 4%, transparent);
   }
 
   .lp-track-lesson-row {
@@ -6124,9 +6289,7 @@
     background:
       linear-gradient(180deg, color-mix(in srgb, var(--path-accent) 18%, transparent), transparent 58%),
       color-mix(in srgb, var(--dark-surface) 92%, var(--dark-bg));
-    box-shadow:
-      inset 0 0 0 1px color-mix(in srgb, var(--path-accent) 22%, transparent),
-      inset 0 -2px 0 color-mix(in srgb, var(--path-accent) 52%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--path-accent) 22%, transparent);
   }
 
   .lp-track-lesson-row.mastered {
@@ -6150,19 +6313,6 @@
   .lp-study-home-exercise-row:hover .lp-study-home-exercise-action,
   .lp-track-lesson-row:hover .lp-track-lesson-action {
     color: color-mix(in srgb, var(--dark-muted) 76%, var(--dark-text));
-  }
-
-  .lp-service-mastery-core {
-    border-color: color-mix(in srgb, var(--liturgical-red) 34%, var(--dark-border));
-    background:
-      radial-gradient(circle, color-mix(in srgb, var(--liturgical-red) 18%, transparent) 0 38%, transparent 39%),
-      var(--dark-surface);
-  }
-
-  .lp-service-mastery-ring {
-    background:
-      radial-gradient(circle, var(--dark-surface) 0 56%, transparent 57%),
-      conic-gradient(var(--liturgical-red) calc(var(--mastery) * 1turn), var(--dark-active) 0);
   }
 
   .lp-activity-link {

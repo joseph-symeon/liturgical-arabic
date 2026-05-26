@@ -1,36 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { defaultServiceText } from "./data/texts/serviceTexts.js";
 import phrases from "./data/texts/phrases.js";
 import PageHeader from "./components/PageHeader.jsx";
 import InteractiveText from "./components/InteractiveText.jsx";
 import PhraseTooltip from "./components/PhraseTooltip.jsx";
-import PassageExperience from "./components/passage/PassageExperience.jsx";
 import PassageRenderer from "./components/passage/PassageRenderer.jsx";
 import { getArabicText } from "./utils/arabic.js";
-import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from "./utils/passageActivities.js";
 import { createServiceSectionPassage } from "./utils/passages.js";
-import {
-  resolveStoredActivitySelection,
-  SHARED_ACTIVITY_SELECTION_KEY,
-  storeActivitySelection
-} from "./utils/activitySelectionStorage.js";
 import { getServiceNavigation } from "./utils/serviceNavigation.js";
 import appIcons from "./assets/icons/index.js";
 import "./components/course/course.css";
 
 const h = React.createElement;
-const READER_ACTIVITY_OPTIONS = [
-  { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.readListen], value: PASSAGE_ACTIVITY_TYPES.readListen },
-  { label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions], value: PASSAGE_ACTIVITY_TYPES.phraseCaptions }
-];
-
-function getReaderActivity() {
-  return resolveStoredActivitySelection(
-    SHARED_ACTIVITY_SELECTION_KEY,
-    READER_ACTIVITY_OPTIONS.map(option => option.value),
-    PASSAGE_ACTIVITY_TYPES.readListen
-  ) || PASSAGE_ACTIVITY_TYPES.readListen;
-}
 
 export default function ArabicLiturgyReader({
   serviceText = defaultServiceText,
@@ -42,7 +23,6 @@ export default function ArabicLiturgyReader({
   arabicFontFamily,
   arabicFontWeight,
   arabicFontSize,
-  showPracticeToolbar = true,
   hasPreviousSection = false,
   hasNextSection = false,
   previousSectionTitle,
@@ -61,9 +41,6 @@ export default function ArabicLiturgyReader({
     serviceText.nav_title && serviceText.nav_title !== readerServiceHomePrimaryTitle
       ? serviceText.nav_title
       : null;
-  const [readerActivity, setReaderActivity] = useState(() => (
-    isTableOfContents ? PASSAGE_ACTIVITY_TYPES.readListen : getReaderActivity()
-  ));
   const selectedSection = isTableOfContents ? null : readerSections[selectedSectionIndex] || readerSections[0];
   const selectedSectionEyebrow = selectedSection?.section_group || serviceText.title;
   const passage = isTableOfContents
@@ -73,11 +50,6 @@ export default function ArabicLiturgyReader({
         sectionIndex: selectedSectionIndex,
         showQuietPrayers
       });
-
-  useEffect(() => {
-    if (isTableOfContents) return;
-    setReaderActivity(getReaderActivity());
-  }, [isTableOfContents]);
 
   function renderArabicTitle(phrase) {
     if (!phrase) return null;
@@ -178,18 +150,22 @@ export default function ArabicLiturgyReader({
           onClick: function selectSection() {
             onSelectSection(sectionIndex);
           },
-          className:
-            "block w-full rounded px-2 py-1 hover:bg-stone-100 dark:hover:bg-[var(--dark-hover)]"
+          className: "reader-service-section-card"
         },
         h(
           "span",
-          { className: "grid grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] items-baseline gap-4" },
-          h("span", { className: `text-left ${isGrouped ? "reader-service-home-section-title" : ""}` }, section.section || `Section ${sectionIndex + 1}`),
+          { className: "reader-service-section-card-inner" },
+          h(
+            "span",
+            { className: "reader-service-section-marker", "aria-hidden": "true" },
+            String(sectionIndex + 1).padStart(2, "0")
+          ),
+          h("span", { className: `reader-service-section-title text-left ${isGrouped ? "reader-service-home-section-title" : ""}` }, section.section || `Section ${sectionIndex + 1}`),
           titlePhrase
             ? h(
                 "span",
                 {
-                  className: "liturgical-red text-right",
+                  className: "reader-service-section-arabic liturgical-red text-right",
                   dir: "rtl",
                   style: {
                     fontFamily: arabicFontFamily,
@@ -215,12 +191,12 @@ export default function ArabicLiturgyReader({
         h(
           "summary",
           { className: "lp-course-unit-summary" },
-          h("span", null, item.group),
+          h("span", { className: "reader-service-group-title" }, item.group),
           groupPhrase
             ? h(
                 "span",
                 {
-                  className: "liturgical-red text-right",
+                  className: "reader-service-group-arabic liturgical-red text-right",
                   dir: "rtl",
                   style: {
                     fontFamily: arabicFontFamily,
@@ -331,44 +307,21 @@ export default function ArabicLiturgyReader({
     );
   }
 
-  function renderSectionPassageExperience() {
-    function renderPassage(karaokeActiveCaption = null) {
-      return h(PassageRenderer, {
-        key: passage.segment_ids.join(":") + selectedSectionIndex,
-        section: {
-          lines: passage.lines,
-          section: passage.section.section,
-          section_title_phrase: passage.section.section_title_phrase
-        },
-        arabicMode,
-        speechRate,
-        arabicFontFamily,
-        arabicFontWeight,
-        arabicFontSize,
-        readerLayout,
-        activeCaption: karaokeActiveCaption,
-        showSectionHeading: false
-      });
-    }
-
-    if (!passage?.playback) return renderPassage();
-    return h(PassageExperience, {
-      passage,
-      activityLabel: PASSAGE_ACTIVITY_LABELS[readerActivity],
-      activitySelectId: "reader-activity-select",
-      activityOptions: READER_ACTIVITY_OPTIONS,
-      selectedActivityValue: readerActivity,
-      onSelectActivity: value => {
-        setReaderActivity(value);
-        storeActivitySelection(SHARED_ACTIVITY_SELECTION_KEY, value);
+  function renderSectionPassage() {
+    return h(PassageRenderer, {
+      key: passage.segment_ids.join(":") + selectedSectionIndex,
+      section: {
+        lines: passage.lines,
+        section: passage.section.section,
+        section_title_phrase: passage.section.section_title_phrase
       },
-      activityType: readerActivity,
-      resetKey: selectedSectionIndex,
       arabicMode,
+      speechRate,
       arabicFontFamily,
       arabicFontWeight,
-      showPracticeToolbar,
-      renderPassage: ({ karaokeActiveCaption }) => renderPassage(karaokeActiveCaption)
+      arabicFontSize,
+      readerLayout,
+      showSectionHeading: false
     });
   }
 
@@ -396,7 +349,7 @@ export default function ArabicLiturgyReader({
       : h(
           React.Fragment,
           null,
-          renderSectionPassageExperience()
+          renderSectionPassage()
         ),
     renderSectionNav("bottom-page-nav grid gap-2")
   );

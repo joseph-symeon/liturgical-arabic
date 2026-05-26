@@ -4,7 +4,7 @@ import PassageExperience from '../passage/PassageExperience.jsx';
 import exercises, { canUseActivityType, getExerciseWithActivity, getStandardActivityOptions } from '../../data/course/exercises.js';
 import { getExerciseTitle } from './exerciseTitles.js';
 import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
-import { getExercisePhraseIds, getLessonPhraseIds } from '../../utils/courseMastery.js';
+import { getExercisePhraseIds, getLessonPhraseIds, getPhraseCountLabel } from '../../utils/courseMastery.js';
 import { createExercisePassage } from '../../utils/passages.js';
 import { getStoredPhraseConfidenceMap, PHRASE_PROGRESS_EVENT } from '../../utils/progressScoring.js';
 import {
@@ -400,6 +400,7 @@ export default function LessonPage({
           <div className="lp-study-home-exercise-list">
             {exerciseItems.map((item, exerciseIndex) => {
               const exerciseConfidence = getExerciseConfidence(item);
+              const exercisePhraseCount = new Set(getExercisePhraseIds(item.exercise_id)).size;
               const isSelectedExercise = exerciseIndex === selectedExerciseIndex;
               const isRecapExercise = exerciseItems.length > 1 && exerciseIndex === exerciseItems.length - 1;
 
@@ -422,6 +423,7 @@ export default function LessonPage({
                     <span className="lp-study-home-exercise-number">{isRecapExercise ? 'Recap' : exerciseIndex + 1}</span>
                     <span className="lp-study-home-exercise-main">
                       <strong>{getExerciseTitle(lesson, exerciseIndex)}</strong>
+                      <span className="lp-study-home-exercise-meta">{getPhraseCountLabel(exercisePhraseCount)}</span>
                       <span className="lp-study-home-exercise-confidence" aria-label={`${Math.round(exerciseConfidence * 100)}% confidence`}>
                         <span>
                           <span style={{ width: `${Math.round(exerciseConfidence * 100)}%` }} />

@@ -12,8 +12,12 @@
   <style>
     :root {
       --rubric-red: #b91c1c;
+      --app-accent: #2f6f4e;
+      --app-accent-strong: #24563d;
+      --app-accent-soft: color-mix(in srgb, var(--app-accent) 12%, transparent);
+      --app-accent-fill: color-mix(in srgb, var(--app-accent) 88%, transparent);
       --liturgical-red: var(--rubric-red);
-      --liturgical-red-control: var(--liturgical-red);
+      --liturgical-red-control: var(--app-accent);
       --liturgical-red-control-fill: var(--liturgical-red-control);
       --liturgical-red-highlight-fill: color-mix(in srgb, var(--liturgical-red-control) 16%, transparent);
       --liturgical-red-toggle-fill: color-mix(in srgb, var(--liturgical-red-control) 88%, transparent);
@@ -183,8 +187,12 @@
     @media (prefers-color-scheme: dark) {
       :root {
         --rubric-red: #f87171;
+        --app-accent: #5f9f78;
+        --app-accent-strong: #9cc7aa;
+        --app-accent-soft: color-mix(in srgb, var(--app-accent) 18%, transparent);
+        --app-accent-fill: color-mix(in srgb, var(--app-accent) 72%, transparent);
         --liturgical-red: var(--rubric-red);
-        --liturgical-red-control: #b91c1c;
+        --liturgical-red-control: var(--app-accent);
         --liturgical-red-control-fill: color-mix(in srgb, var(--liturgical-red-control) 62%, transparent);
         --liturgical-red-highlight-fill: color-mix(in srgb, var(--liturgical-red-control) 34%, transparent);
         --liturgical-red-highlight-ring: color-mix(in srgb, var(--liturgical-red-control) 24%, transparent);

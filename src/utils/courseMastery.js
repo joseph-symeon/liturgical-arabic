@@ -25,8 +25,6 @@ export const SERVICE_MASTERY_SERVICE_IDS = [
   'divine-liturgy-john-chrysostom',
   'divine-liturgy-basil',
   'great-vespers',
-  'great-compline',
-  'paraklesis-st-marina',
   'thanksgiving-prayers',
   'departed-trisagion-prayers',
   'psalter-psalm-50'

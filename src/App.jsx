@@ -34,9 +34,9 @@ const NAV_ITEM_STYLE = {
   display: "block",
   width: "100%",
   textAlign: "left",
-  padding: "9px 10px",
+  padding: "9px 11px",
   border: "none",
-  borderRadius: "6px",
+  borderRadius: "8px",
   cursor: "pointer",
   fontSize: "14px",
   lineHeight: 1.3,
@@ -56,12 +56,11 @@ const MENU_LABEL_STYLE = {
 };
 const SECTION_ITEM_STYLE = { ...NAV_ITEM_STYLE };
 const SETTING_BUTTON_STYLE = {
-  border: "none",
   borderRadius: "999px",
   cursor: "pointer",
   fontFamily: "inherit",
   fontSize: "12px",
-  padding: "5px 8px"
+  padding: "6px 10px"
 };
 const SYSTEM_SANS_FONT = 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
 const ARABIC_FONTS = [
@@ -852,7 +851,7 @@ export default function App() {
   const nextSectionTitle = hasNextSection
     ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
-  const hideContentForMenu = (menuOpen || displayMenuOpen || accountMenuOpen) && isNarrowViewport;
+  const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
   const pageCanUseFocusMode =
     view === "lessons"
     && Boolean(selectedLessonWithUnit)
@@ -981,13 +980,23 @@ export default function App() {
   }
 
   function renderDisplayMenu() {
+    const signedIn = Boolean(syncSession?.user);
+    const needsAttention = syncStatus === "error" || syncStatus === "disabled";
+    const profileSubtitle = !signedIn
+      ? "Sign in"
+      : syncStatus === "error"
+        ? "Needs attention"
+        : syncStatus === "disabled"
+          ? "Sync unavailable"
+          : "Account";
+
     function renderDisplaySection(title, children) {
       return (
-        <section className="border-t border-stone-200 py-4 first:border-t-0 first:pt-0 dark:border-[var(--dark-border)]">
-          <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
+        <section className="app-display-section border-t border-stone-200 first:border-t-0 dark:border-[var(--dark-border)]">
+          <h2 className="app-display-section-title text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
             {title}
           </h2>
-          <div className="grid gap-3">
+          <div className="app-display-section-body grid">
             {children}
           </div>
         </section>
@@ -1004,12 +1013,16 @@ export default function App() {
     }
 
     function renderButtonRow(children, className = "") {
-      return <div className={["flex flex-wrap items-center gap-2", className].filter(Boolean).join(" ")}>{children}</div>;
+      return <div className={["app-display-button-row flex flex-wrap items-center", className].filter(Boolean).join(" ")}>{children}</div>;
+    }
+
+    function getDisplayOptionClass(isActive) {
+      return `app-control-option${isActive ? " active" : ""}`;
     }
 
     function renderToggleField(label, checked, onChange) {
       return (
-        <div className="flex items-center justify-between gap-4">
+        <div className="app-display-toggle-field flex items-center justify-between gap-4">
           <div className="text-xs text-stone-500 dark:text-[var(--dark-muted)]">{label}</div>
           <label className="lp-mode-toggle" dir="ltr">
             <span>{checked ? "On" : "Off"}</span>
@@ -1024,15 +1037,70 @@ export default function App() {
       );
     }
 
+    if (accountMenuOpen) {
+      return (
+        <div
+          role="group"
+          aria-label="Profile"
+          className="app-display-panel-scroll text-stone-900 dark:text-[var(--dark-text)]"
+          dir="ltr"
+          onClick={event => event.stopPropagation()}
+        >
+          <section className="app-display-profile-section">
+            <div className="app-panel-section-heading">Profile</div>
+            <SyncAccountPanel
+              session={syncSession}
+              syncStatus={syncStatus}
+              syncMessage={syncMessage}
+              onSignIn={handlePasswordSignIn}
+              onCreateAccount={handleCreateAccount}
+              onMagicLink={handleMagicLinkSignIn}
+              onResetPassword={handlePasswordReset}
+              onUpdatePassword={handlePasswordUpdate}
+              onSignOut={handleSyncSignOut}
+              onResetProgress={handleResetProgress}
+              onClose={() => setAccountMenuOpen(false)}
+            />
+          </section>
+        </div>
+      );
+    }
+
     return (
       <div
         role="group"
         aria-label="Display settings"
-        className="text-stone-900 dark:text-[var(--dark-text)]"
+        className="app-display-panel-scroll text-stone-900 dark:text-[var(--dark-text)]"
         dir="ltr"
         onClick={event => event.stopPropagation()}
       >
-        <div className="text-stone-400 dark:text-[var(--dark-muted)]" style={{ ...MENU_LABEL_STYLE, padding: "0 0 12px" }}>
+        <section className="app-display-profile-section">
+          <h2 className="app-panel-section-heading">
+            Profile
+          </h2>
+          <button
+            type="button"
+            className={`app-profile-row${signedIn ? " signed-in" : ""}${needsAttention ? " needs-attention" : ""}`}
+            onClick={() => setAccountMenuOpen(true)}
+            aria-label={signedIn ? "Open account settings" : "Sign in to sync progress"}
+          >
+            <span className="app-profile-row-avatar" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21a8 8 0 0 0-16 0" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </span>
+            <span className="app-profile-row-main">
+              <span className="app-profile-row-title">{signedIn ? syncSession.user.email : "Sign in"}</span>
+              <span className="app-profile-row-subtitle">{profileSubtitle}</span>
+            </span>
+            <span className="app-profile-row-status" aria-hidden="true" />
+            <svg className="app-profile-row-chevron" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </section>
+        <div className="app-panel-section-heading app-display-settings-heading">
           Display
         </div>
         {renderDisplaySection("Reading", (
@@ -1045,7 +1113,7 @@ export default function App() {
                       key={option.value}
                       type="button"
                       onClick={() => setArabicMode(option.value)}
-                      className={arabicMode === option.value ? "lp-setting-option active font-semibold" : "lp-setting-option"}
+                      className={getDisplayOptionClass(arabicMode === option.value)}
                       style={SETTING_BUTTON_STYLE}
                     >
                       {option.label}
@@ -1060,7 +1128,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => setReaderLayout("line")}
-                    className={readerLayout === "line" ? "lp-setting-option active font-semibold" : "lp-setting-option"}
+                    className={getDisplayOptionClass(readerLayout === "line")}
                     style={SETTING_BUTTON_STYLE}
                   >
                     Line
@@ -1068,7 +1136,7 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => setReaderLayout("paragraph")}
-                    className={readerLayout === "paragraph" ? "lp-setting-option active font-semibold" : "lp-setting-option"}
+                    className={getDisplayOptionClass(readerLayout === "paragraph")}
                     style={SETTING_BUTTON_STYLE}
                   >
                     Paragraph
@@ -1090,7 +1158,7 @@ export default function App() {
                       role="radio"
                       aria-checked={arabicFontFamily === font.value}
                       onClick={() => setArabicFontFamily(font.value)}
-                      className={arabicFontFamily === font.value ? "lp-setting-option active font-semibold" : "lp-setting-option"}
+                      className={getDisplayOptionClass(arabicFontFamily === font.value)}
                       style={SETTING_BUTTON_STYLE}
                     >
                       {font.label}
@@ -1101,7 +1169,7 @@ export default function App() {
             ))}
             {renderField("Size", (
               renderButtonRow(
-                <div className="lp-setting-control-box">
+                <div className="lp-setting-control-box app-font-size-stepper">
                   <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(-1)}>−</button>
                   <div className="lp-speed-value">{arabicFontSize}px</div>
                   <button type="button" className="lp-speed-adjust" onClick={() => adjustArabicFontSize(1)}>+</button>
@@ -1113,11 +1181,11 @@ export default function App() {
         {renderDisplaySection("Content", (
           renderToggleField("Silent prayers", showQuietPrayers, setShowQuietPrayers)
         ))}
-        <section className="flex justify-start border-t border-stone-200 py-4 dark:border-[var(--dark-border)]">
+        <section className="app-display-reset-section flex justify-start border-t border-stone-200 dark:border-[var(--dark-border)]">
           <button
             type="button"
             onClick={resetDisplaySettings}
-            className="lp-setting-option lp-reset-display-button"
+            className="app-reset-control"
             style={SETTING_BUTTON_STYLE}
           >
             Reset all
@@ -1135,7 +1203,7 @@ export default function App() {
         aria-label={label}
         aria-expanded={isOpen}
         title={label}
-        className="rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
+        className="app-chrome-button rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
         style={{
           position: "fixed",
           top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
@@ -1163,7 +1231,7 @@ export default function App() {
         }}
         aria-label={appBackLabel}
         title={appBackLabel}
-        className="rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
+        className="app-chrome-button rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
         style={{
           position: "fixed",
           top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
@@ -1194,11 +1262,11 @@ export default function App() {
         aria-label={focusMode ? "Exit focus mode" : "Enter focus mode"}
         aria-pressed={focusMode}
         title={focusMode ? "Exit focus mode" : "Focus mode"}
-        className="rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
+        className="app-chrome-button rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]"
         style={{
           position: "fixed",
           top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
-          right: "92px",
+          right: "52px",
           zIndex: 40,
           border: "none",
           cursor: "pointer",
@@ -1221,41 +1289,6 @@ export default function App() {
             <path d="M20 15v5h-5" />
           </svg>
         )}
-      </button>
-    );
-  }
-
-  function renderAccountToggle() {
-    const signedIn = Boolean(syncSession?.user);
-    const needsAttention = syncStatus === "error" || syncStatus === "disabled";
-    return (
-      <button
-        type="button"
-        onClick={event => {
-          setAccountMenuOpen(open => !open);
-          setDisplayMenuOpen(false);
-          if (isNarrowViewport) setMenuOpen(false);
-          event.currentTarget.blur();
-        }}
-        aria-label="Account and sync"
-        aria-expanded={accountMenuOpen}
-        title="Account and sync"
-        className={`app-account-toggle rounded bg-white/85 text-stone-900 hover:bg-stone-100 dark:bg-[var(--dark-bg)] dark:text-[var(--dark-text)] dark:hover:bg-[var(--dark-hover)]${signedIn ? " signed-in" : ""}${needsAttention ? " needs-attention" : ""}`}
-        style={{
-          position: "fixed",
-          top: isCompactChrome ? "calc(env(safe-area-inset-top, 0px) + 8px)" : "8px",
-          right: "52px",
-          zIndex: 40,
-          border: "none",
-          cursor: "pointer",
-          padding: "6px",
-          color: "inherit"
-        }}
-      >
-        <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M20 21a8 8 0 0 0-16 0" />
-          <circle cx="12" cy="7" r="4" />
-        </svg>
       </button>
     );
   }
@@ -1504,15 +1537,16 @@ export default function App() {
 
       {canUseAppBack && !(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderAppBackButton()}
 
-      {!(isNarrowViewport && (menuOpen || displayMenuOpen)) && !accountMenuOpen && renderAccountToggle()}
-
-      {!(isNarrowViewport && menuOpen) && !accountMenuOpen && renderPanelToggle({
+      {!(isNarrowViewport && menuOpen) && renderPanelToggle({
           side: "right",
           isOpen: displayMenuOpen,
           label: "Display settings",
           onClick: () => {
-            setDisplayMenuOpen(o => !o);
-            setAccountMenuOpen(false);
+            setDisplayMenuOpen(o => {
+              const nextOpen = !o;
+              if (!nextOpen) setAccountMenuOpen(false);
+              return nextOpen;
+            });
             if (isNarrowViewport) setMenuOpen(false);
           },
           children: (
@@ -1537,7 +1571,7 @@ export default function App() {
           )
         })}
 
-      {pageCanUseFocusMode && !(isNarrowViewport && (menuOpen || displayMenuOpen || accountMenuOpen)) && renderFocusModeToggle()}
+      {pageCanUseFocusMode && !(isNarrowViewport && (menuOpen || displayMenuOpen)) && renderFocusModeToggle()}
 
       {isNarrowViewport && menuOpen && (
         <button
@@ -1559,23 +1593,10 @@ export default function App() {
         <button
           type="button"
           aria-label="Close display settings"
-          onClick={() => setDisplayMenuOpen(false)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 34,
-            border: 0,
-            background: "transparent",
-            cursor: "default"
+          onClick={() => {
+            setDisplayMenuOpen(false);
+            setAccountMenuOpen(false);
           }}
-        />
-      )}
-
-      {isNarrowViewport && accountMenuOpen && (
-        <button
-          type="button"
-          aria-label="Close account panel"
-          onClick={() => setAccountMenuOpen(false)}
           style={{
             position: "fixed",
             inset: 0,
@@ -1589,7 +1610,7 @@ export default function App() {
 
       {menuOpen && (
       <aside
-        className="lp-navigation-panel bg-white dark:bg-[var(--dark-bg)] border-r border-stone-200 dark:border-[var(--dark-border)]"
+        className="lp-navigation-panel app-side-panel bg-white dark:bg-[var(--dark-bg)] border-r border-stone-200 dark:border-[var(--dark-border)]"
         dir="ltr"
         style={{
           position: isNarrowViewport ? "fixed" : "sticky",
@@ -1602,13 +1623,13 @@ export default function App() {
           minHeight: "100vh",
           maxHeight: "100vh",
           overflowY: "auto",
-          padding: "48px 12px 14px"
+          padding: "54px 12px 16px"
         }}
       >
           <div
             role="menu"
             className="text-stone-900 dark:text-[var(--dark-text)]"
-            style={{ display: "flex", flexDirection: "column", gap: "14px", alignItems: "stretch", margin: 0, padding: 0, listStyle: "none", fontFamily: "Arial, sans-serif", fontSize: "14px" }}
+            style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "stretch", margin: 0, padding: 0, listStyle: "none", fontFamily: SYSTEM_SANS_FONT, fontSize: "14px" }}
           >
               <div role="group" aria-label="Liturgical Texts" style={MENU_GROUP_STYLE}>
                 <div className="text-stone-400 dark:text-[var(--dark-muted)]" style={{ ...MENU_LABEL_STYLE, padding: "0 2px 12px" }}>
@@ -1742,12 +1763,17 @@ export default function App() {
       <div
         className="app-content"
         onClickCapture={() => {
-          if (isNarrowViewport && menuOpen) setMenuOpen(false);
-          if (displayMenuOpen) setDisplayMenuOpen(false);
-          if (accountMenuOpen) setAccountMenuOpen(false);
+          if (!isNarrowViewport) return;
+          if (menuOpen) setMenuOpen(false);
+          if (displayMenuOpen) {
+            setDisplayMenuOpen(false);
+            setAccountMenuOpen(false);
+          }
         }}
         style={{
           "--side-panel-offset": menuOpen && !isNarrowViewport ? `${SIDE_PANEL_WIDTH}px` : "0px",
+          "--workspace-left-offset": menuOpen && !isNarrowViewport ? `${SIDE_PANEL_WIDTH}px` : "0px",
+          "--workspace-right-offset": displayMenuOpen && !isNarrowViewport ? `${SIDE_PANEL_WIDTH}px` : "0px",
           flex: "1 1 auto",
           minWidth: 0,
           display: hideContentForMenu ? "none" : "block"
@@ -1784,6 +1810,7 @@ export default function App() {
             selectedTrackId={selectedCourseTrack?.id ?? null}
             onSelectTrack={goToCourseTrack}
             onSelectExercise={goToLessonStudyHome}
+            onSelectService={goToTableOfContents}
           />
         )}
         {view === "lessons" && selectedLessonWithUnit && (
@@ -1816,7 +1843,8 @@ export default function App() {
 
       {displayMenuOpen && (
         <aside
-          className="bg-white dark:bg-[var(--dark-bg)] border-l border-stone-200 dark:border-[var(--dark-border)]"
+          key={accountMenuOpen ? "profile-panel" : "display-panel"}
+          className="app-side-panel app-display-panel bg-white dark:bg-[var(--dark-bg)] border-l border-stone-200 dark:border-[var(--dark-border)]"
           dir="ltr"
           style={{
             position: isNarrowViewport ? "fixed" : "sticky",
@@ -1828,47 +1856,14 @@ export default function App() {
             maxWidth: "calc(100vw - 56px)",
             minHeight: "100vh",
             maxHeight: "100vh",
-            overflowY: "auto",
-            padding: "48px 16px 16px"
+            overflow: "hidden",
+            padding: 0
           }}
         >
           {renderDisplayMenu()}
         </aside>
       )}
 
-      {accountMenuOpen && (
-        <aside
-          className="app-account-panel-shell bg-white dark:bg-[var(--dark-bg)] border-l border-stone-200 dark:border-[var(--dark-border)]"
-          dir="ltr"
-          style={{
-            position: isNarrowViewport ? "fixed" : "sticky",
-            top: 0,
-            right: 0,
-            zIndex: 35,
-            flex: `0 0 ${SIDE_PANEL_WIDTH}px`,
-            width: SIDE_PANEL_WIDTH,
-            maxWidth: "calc(100vw - 56px)",
-            minHeight: "100vh",
-            maxHeight: "100vh",
-            overflowY: "auto",
-            padding: "48px 16px 16px"
-          }}
-        >
-          <SyncAccountPanel
-            session={syncSession}
-            syncStatus={syncStatus}
-            syncMessage={syncMessage}
-            onSignIn={handlePasswordSignIn}
-            onCreateAccount={handleCreateAccount}
-            onMagicLink={handleMagicLinkSignIn}
-            onResetPassword={handlePasswordReset}
-            onUpdatePassword={handlePasswordUpdate}
-            onSignOut={handleSyncSignOut}
-            onResetProgress={handleResetProgress}
-            onClose={() => setAccountMenuOpen(false)}
-          />
-        </aside>
-      )}
     </div>
   );
 }
