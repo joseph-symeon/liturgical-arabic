@@ -347,6 +347,37 @@ function normalizeEnglishAnswerForComparison(value) {
   return normalizeEnglishTypingValue(value).replace(/^the\s+/, '');
 }
 
+function getArabicInputCharacters(value) {
+  return Array.from(String(value || '')).flatMap((character, index) => {
+    const normalized = normalizeArabicTypingValue(character);
+    const arabicLetter = normalized.match(/[\u0621-\u064A]/)?.[0];
+    return arabicLetter ? [{ normalized: arabicLetter, index }] : [];
+  });
+}
+
+function getFirstArabicMismatchSelection(expectedText, submittedText) {
+  const expectedCharacters = Array.from(normalizeArabicTypingValue(expectedText).replace(/[^\u0621-\u064A]/g, ''));
+  const submittedCharacters = getArabicInputCharacters(submittedText);
+  const compareLength = Math.max(expectedCharacters.length, submittedCharacters.length);
+
+  for (let index = 0; index < compareLength; index += 1) {
+    if (expectedCharacters[index] === submittedCharacters[index]?.normalized) continue;
+    const submittedCharacter = submittedCharacters[index];
+    if (submittedCharacter) {
+      return {
+        start: submittedCharacter.index,
+        end: submittedCharacter.index + 1
+      };
+    }
+    return {
+      start: submittedText.length,
+      end: submittedText.length
+    };
+  }
+
+  return null;
+}
+
 function getTypingPromptLines(lines, arabicMode) {
   return (lines || []).filter(line => !line.tags?.includes('rubric')).map(line => {
     const parts = (line.phrases || []).flatMap((part, index) => {
@@ -1622,8 +1653,16 @@ export default function PassageActivityBody({
                   activityType: PASSAGE_ACTIVITY_TYPES.typeArabic,
                   correct: true
                 });
+                setTypedArabic('');
+              } else {
+                const mismatchSelection = getFirstArabicMismatchSelection(typingTarget, typedArabic);
+                requestAnimationFrame(() => {
+                  const input = typingInputRef.current;
+                  if (!input || !mismatchSelection) return;
+                  input.focus();
+                  input.setSelectionRange(mismatchSelection.start, mismatchSelection.end);
+                });
               }
-              setTypedArabic('');
               setTypingFeedback(submittedCorrectly ? 'correct' : 'incorrect');
               typingFeedbackTimerRef.current = setTimeout(() => {
                 setTypingFeedback(null);

@@ -1893,6 +1893,7 @@
   pointer-events: none;
   resize: none;
   text-align: right;
+  white-space: pre-wrap;
 }
 
 .lp-type-arabic-input {
@@ -1937,12 +1938,31 @@
   background: color-mix(in srgb, var(--liturgical-red) 12%, transparent);
 }
 
+.lp-type-arabic-copybox.incorrect .lp-type-arabic-trace {
+  animation: traceMismatchPulse 640ms ease both;
+}
+
 .lp-type-arabic-copybox.incorrect .lp-type-arabic-input {
   color: var(--liturgical-red);
 }
 
 .lp-type-arabic-actions {
   justify-content: flex-end;
+}
+
+@keyframes traceMismatchPulse {
+  0%,
+  100% {
+    opacity: 0.24;
+    text-shadow: none;
+  }
+  28%,
+  70% {
+    opacity: 0.72;
+    text-shadow:
+      0 0 0.1px currentColor,
+      0 0 10px color-mix(in srgb, var(--liturgical-red) 54%, transparent);
+  }
 }
 
 .lp-type-arabic-actions .lp-activity-button {
