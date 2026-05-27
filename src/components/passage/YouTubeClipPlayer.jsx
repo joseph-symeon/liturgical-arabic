@@ -18,7 +18,157 @@ function getStoredPlaybackRate(fallback = 1.0) {
   return normalizePlaybackRate(stored, normalizePlaybackRate(fallback));
 }
 
-const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recordingId, startSeconds, endSeconds, defaultPlaybackRate = 1.0, onTimeUpdate, onPlaybackActiveChange }, ref) {
+function PlaybackDetailsControls({
+  active,
+  speedDisplay,
+  startSeconds,
+  endSeconds,
+  progressValue,
+  progressPercent,
+  isReady,
+  onBack,
+  onAdjustSpeed,
+  onProgressChange
+}) {
+  const tabIndex = active ? 0 : -1;
+
+  return (
+    <div className="lp-controls lp-controls-details" aria-hidden={!active}>
+      <button
+        type="button"
+        className="lp-icon-button lp-controls-back-button"
+        onClick={onBack}
+        tabIndex={tabIndex}
+        aria-label="Back to playback controls"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        className="lp-speed-adjust"
+        onClick={() => onAdjustSpeed(-0.1)}
+        tabIndex={tabIndex}
+        aria-label="Decrease playback speed"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 12h10" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        className="lp-speed-button lp-details-speed-button"
+        onClick={onBack}
+        tabIndex={tabIndex}
+        aria-label="Back to playback controls"
+      >
+        {speedDisplay}
+      </button>
+
+      <button
+        type="button"
+        className="lp-speed-adjust"
+        onClick={() => onAdjustSpeed(0.1)}
+        tabIndex={tabIndex}
+        aria-label="Increase playback speed"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 7v10M7 12h10" />
+        </svg>
+      </button>
+
+      <input
+        className="lp-progress-bar lp-inline-progress-bar"
+        type="range"
+        min={startSeconds}
+        max={endSeconds}
+        step="0.05"
+        value={progressValue}
+        onChange={onProgressChange}
+        disabled={!isReady}
+        tabIndex={tabIndex}
+        aria-label="Chant progress"
+        style={{ '--progress-percent': `${progressPercent}%` }}
+      />
+    </div>
+  );
+}
+
+function PlaybackMainControls({
+  active,
+  isPlaying,
+  isReady,
+  loopEnabled,
+  speedDisplay,
+  onPlayPause,
+  onToggleLoop,
+  onShowDetails
+}) {
+  const tabIndex = active ? 0 : -1;
+
+  return (
+    <div className="lp-controls lp-controls-main" aria-hidden={!active}>
+      <button
+        className={`lp-icon-button${isPlaying ? " active" : ""}`}
+        onClick={onPlayPause}
+        disabled={!isReady}
+        tabIndex={tabIndex}
+        aria-label={isPlaying ? 'Pause' : 'Play'}
+      >
+        {isPlaying ? (
+          <svg viewBox="0 0 24 24">
+            <rect x="6" y="4" width="4" height="16" />
+            <rect x="14" y="4" width="4" height="16" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24">
+            <polygon points="6,4 20,12 6,20" />
+          </svg>
+        )}
+      </button>
+
+      <button
+        type="button"
+        className={`lp-loop-button${loopEnabled ? " active" : ""}`}
+        onClick={onToggleLoop}
+        tabIndex={tabIndex}
+        aria-label={loopEnabled ? "Disable loop" : "Enable loop"}
+        aria-pressed={loopEnabled}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17 2l4 4-4 4" />
+          <path d="M3 11V9a3 3 0 0 1 3-3h15" />
+          <path d="M7 22l-4-4 4-4" />
+          <path d="M21 13v2a3 3 0 0 1-3 3H3" />
+        </svg>
+      </button>
+
+      <button
+        className="lp-speed-button"
+        onClick={onShowDetails}
+        tabIndex={tabIndex}
+        aria-label="Show playback speed and progress controls"
+      >
+        {speedDisplay}
+      </button>
+    </div>
+  );
+}
+
+const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({
+  videoId,
+  recordingId,
+  startSeconds,
+  endSeconds,
+  defaultPlaybackRate = 1.0,
+  controlsMode = 'main',
+  onControlsModeChange,
+  onTimeUpdate,
+  onPlaybackActiveChange
+}, ref) {
   const initialPlaybackRate = getStoredPlaybackRate(defaultPlaybackRate);
   const playerIdRef = useRef(null);
   if (playerIdRef.current === null) {
@@ -44,7 +194,6 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   const [isReady, setIsReady] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(initialPlaybackRate);
   const [loopEnabled, setLoopEnabled] = useState(true);
-  const [speedMenuOpen, setSpeedMenuOpen] = useState(false);
   const [playerError, setPlayerError] = useState(null);
   const [currentSeconds, setCurrentSeconds] = useState(startSeconds);
 
@@ -276,14 +425,6 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoId, startSeconds, endSeconds]);
 
-  // Close speed menu when clicking outside the speed wrapper
-  useEffect(() => {
-    if (!speedMenuOpen) return;
-    const close = () => setSpeedMenuOpen(false);
-    document.addEventListener('click', close);
-    return () => document.removeEventListener('click', close);
-  }, [speedMenuOpen]);
-
   function handlePlayPause() {
     const player = playerRef.current;
     if (!player || !isReady) return;
@@ -334,25 +475,6 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
     togglePlayPause: handlePlayPause,
     pause: pausePlayback
   }));
-
-  function handleStartOver() {
-    const player = playerRef.current;
-    if (!player || !isReady) return;
-    const state = player.getPlayerState();
-    const shouldResume = state === window.YT.PlayerState.PLAYING || state === window.YT.PlayerState.BUFFERING;
-    userStartedRef.current = shouldResume || userStartedRef.current;
-    playRequestedRef.current = shouldResume;
-    pendingPlaybackStartRef.current = startSeconds;
-    pendingPlaybackWallTimeRef.current = shouldResume ? performance.now() : null;
-    if (shouldResume) {
-      loadClip(player, startSeconds);
-    } else {
-      cueClip(player, startSeconds);
-    }
-    playClockRef.current = { mediaTime: startSeconds, wallTime: performance.now(), playbackRate: playbackRateRef.current || 1 };
-    emitPlaybackActiveChange(false);
-    emitTimeUpdate(startSeconds);
-  }
 
   function handleProgressChange(event) {
     const player = playerRef.current;
@@ -406,9 +528,9 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
   }
 
   const speedDisplay = `${playbackRate.toFixed(1)}×`;
-  const showExtendedControls = endSeconds - startSeconds > 30;
   const progressValue = Math.max(startSeconds, Math.min(endSeconds, currentSeconds));
   const progressPercent = ((progressValue - startSeconds) / Math.max(0.001, endSeconds - startSeconds)) * 100;
+  const showingPlaybackDetails = controlsMode === 'details';
 
   return (
     <>
@@ -420,89 +542,30 @@ const YouTubeClipPlayer = forwardRef(function YouTubeClipPlayer({ videoId, recor
         <div className="lp-player-label">Play Chant</div>
         <div className="lp-clip-player">
           {playerError && <p className="lp-player-error">{playerError}</p>}
-          <div className="lp-controls">
-            <button
-              className={`lp-icon-button${isPlaying ? " active" : ""}`}
-              onClick={handlePlayPause}
-              disabled={!isReady}
-              aria-label={isPlaying ? 'Pause' : 'Play'}
-            >
-              {isPlaying ? (
-                <svg viewBox="0 0 24 24">
-                  <rect x="6" y="4" width="4" height="16" />
-                  <rect x="14" y="4" width="4" height="16" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24">
-                  <polygon points="6,4 20,12 6,20" />
-                </svg>
-              )}
-            </button>
-
-            <button
-              type="button"
-              className={`lp-loop-button${loopEnabled ? " active" : ""}`}
-              onClick={toggleLoop}
-              aria-label={loopEnabled ? "Disable loop" : "Enable loop"}
-              aria-pressed={loopEnabled}
-            >
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M17 2l4 4-4 4" />
-                <path d="M3 11V9a3 3 0 0 1 3-3h15" />
-                <path d="M7 22l-4-4 4-4" />
-                <path d="M21 13v2a3 3 0 0 1-3 3H3" />
-              </svg>
-            </button>
-
-            {showExtendedControls && (
-              <button
-                type="button"
-                className="lp-restart-button"
-                onClick={handleStartOver}
-                disabled={!isReady}
-                aria-label="Start over"
-              >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <rect x="4" y="4" width="4" height="16" rx="1" />
-                  <polygon points="21,4 8,12 21,20" />
-                </svg>
-              </button>
-            )}
-
-            <div className="lp-speed-wrapper" onClick={e => e.stopPropagation()}>
-              <button
-                className="lp-speed-button"
-                onClick={() => setSpeedMenuOpen(o => !o)}
-              >
-                {speedDisplay}
-              </button>
-
-              {speedMenuOpen && (
-                <div className="lp-speed-menu">
-                  <div className="lp-speed-title">Speed</div>
-                  <div className="lp-speed-row">
-                    <button className="lp-speed-adjust" onClick={() => adjustSpeed(-0.1)}>−</button>
-                    <div className="lp-speed-value">{speedDisplay}</div>
-                    <button className="lp-speed-adjust" onClick={() => adjustSpeed(0.1)}>+</button>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-          {showExtendedControls && (
-            <input
-              className="lp-progress-bar"
-              type="range"
-              min={startSeconds}
-              max={endSeconds}
-              step="0.05"
-              value={progressValue}
-              onChange={handleProgressChange}
-              disabled={!isReady}
-              aria-label="Chant progress"
-              style={{ '--progress-percent': `${progressPercent}%` }}
+          <div className={`lp-playback-viewport ${showingPlaybackDetails ? 'details' : 'main'}`}>
+            <PlaybackDetailsControls
+              active={showingPlaybackDetails}
+              speedDisplay={speedDisplay}
+              startSeconds={startSeconds}
+              endSeconds={endSeconds}
+              progressValue={progressValue}
+              progressPercent={progressPercent}
+              isReady={isReady}
+              onBack={() => onControlsModeChange?.('main')}
+              onAdjustSpeed={adjustSpeed}
+              onProgressChange={handleProgressChange}
             />
-          )}
+            <PlaybackMainControls
+              active={!showingPlaybackDetails}
+              isPlaying={isPlaying}
+              isReady={isReady}
+              loopEnabled={loopEnabled}
+              speedDisplay={speedDisplay}
+              onPlayPause={handlePlayPause}
+              onToggleLoop={toggleLoop}
+              onShowDetails={() => onControlsModeChange?.('details')}
+            />
+          </div>
         </div>
       </div>
     </>

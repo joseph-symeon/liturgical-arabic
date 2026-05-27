@@ -51,6 +51,7 @@ export default function PassageExperience({
   preserveToolbarInFocus = false,
   activityContextHeader = null,
   toolbarTop = null,
+  toolbarMiddle = null,
   learnSetupToolbarTop = null,
   dockLearnSetupControls = false,
   onCourseTrack,
@@ -67,6 +68,7 @@ export default function PassageExperience({
   const [practiceTextMode, setPracticeTextMode] = useState(getStoredPracticeTextMode);
   const [currentTime, setCurrentTime] = useState(null);
   const [playbackActive, setPlaybackActive] = useState(false);
+  const [playbackControlsMode, setPlaybackControlsMode] = useState('main');
   const playerRef = useRef(null);
   const recitationCaptionKeysRef = useRef(new Set());
   const previousPlaybackTimeRef = useRef(null);
@@ -77,9 +79,6 @@ export default function PassageExperience({
   const hasPracticeTextMode = translateActivity || matchingActivity;
   const canUseKaraoke = listenActivity && resolvedCaptions.length > 0;
   const shouldTrackPlayerTime = (listenActivity || captionActivity) && resolvedCaptions.length > 0;
-  const hasExtendedPlaybackControls = resolvedClip
-    ? resolvedClip.end_seconds - resolvedClip.start_seconds > 30
-    : false;
   const activeCaption = getDisplayedCaption(resolvedCaptions, currentTime, {
     leadSeconds: resolvedLeadSeconds,
     clipEndSeconds: resolvedClip?.end_seconds,
@@ -98,6 +97,10 @@ export default function PassageExperience({
     recitationCaptionKeysRef.current = new Set();
     previousPlaybackTimeRef.current = null;
   }, [resetKey, passage?.id, resolvedClip?.recording_id, resolvedClip?.video_id, resolvedClip?.start_seconds, resolvedClip?.end_seconds]);
+
+  useEffect(() => {
+    setPlaybackControlsMode('main');
+  }, [resetKey, resolvedClip?.recording_id, resolvedClip?.video_id, resolvedClip?.start_seconds, resolvedClip?.end_seconds]);
 
   useEffect(() => {
     if (listenActivity || captionActivity) return;
@@ -167,6 +170,8 @@ export default function PassageExperience({
         startSeconds={resolvedClip.start_seconds}
         endSeconds={resolvedClip.end_seconds}
         defaultPlaybackRate={resolvedClip.default_playback_rate}
+        controlsMode={playbackControlsMode}
+        onControlsModeChange={setPlaybackControlsMode}
         onTimeUpdate={shouldTrackPlayerTime ? setCurrentTime : undefined}
         onPlaybackActiveChange={shouldTrackPlayerTime ? setPlaybackActive : undefined}
       />
@@ -199,6 +204,8 @@ export default function PassageExperience({
             ["literal", "Literal"]
           ]}
       toolbarTop={toolbarTop}
+      toolbarMiddle={toolbarMiddle}
+      suppressModeControls={playbackControlsMode === 'details'}
       hidden={!showPracticeToolbar && !preserveToolbarInFocus}
     />
   );
@@ -242,7 +249,6 @@ export default function PassageExperience({
                 activityContextHeader={activityContextHeader}
                 learnSetupToolbarTop={learnSetupToolbarTop}
                 dockLearnSetupControls={dockLearnSetupControls}
-                learnSetupHasExtendedControls={hasExtendedPlaybackControls}
                 onCourseTrack={onCourseTrack}
                 onCourseLesson={onCourseLesson}
               />

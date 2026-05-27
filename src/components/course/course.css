@@ -41,7 +41,13 @@
 .lp-page.recitation-mode-page {
   --page-nav-max-width: min(1040px, calc(100vw - 24px));
   --recite-toolbar-reserve: calc(72px + env(safe-area-inset-bottom, 0px));
+  --drawer-tab-row-height: 38px;
   --recite-option-row-height: 40px;
+  --playback-control-size: 38px;
+  --drawer-control-row-height: calc(var(--playback-control-size) + 14px);
+  --drawer-settings-row-max-height: min(58svh, 520px);
+  --playback-control-gap: 8px;
+  --playback-speed-width: 50px;
   --recite-bg: #ffffff;
   --recite-surface: #fafaf9;
   --recite-surface-strong: #f5f5f4;
@@ -55,10 +61,6 @@
   --study-text: var(--recite-text);
   --study-muted: var(--recite-muted);
   color: var(--recite-text);
-}
-
-.lp-page.recitation-mode-page.study-activity-learn {
-  --recite-toolbar-reserve: calc(184px + env(safe-area-inset-bottom, 0px));
 }
 
 .lp-page.course-view-page {
@@ -78,7 +80,7 @@
 }
 
 .lp-page.course-view-page.recitation-mode-page {
-  padding-bottom: var(--recite-toolbar-reserve);
+  padding-bottom: max(var(--recite-toolbar-reserve), var(--recite-toolbar-stable-reserve, 0px));
 }
 
 .lp-page.course-view-page.lp-course-map-page {
@@ -638,9 +640,11 @@
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
   gap: 18px;
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
   max-width: 100%;
   padding: 0;
   border: 0;
@@ -653,9 +657,11 @@
   z-index: 1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
   gap: 8px;
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
   max-width: 100%;
   margin-top: 0;
 }
@@ -696,8 +702,10 @@
   justify-content: center;
   appearance: none;
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
   min-width: 0;
-  min-height: 38px;
+  min-height: 0;
+  height: 100%;
   border-color: transparent;
   border-radius: 0;
   background: transparent;
@@ -714,8 +722,10 @@
 .lp-page.recitation-mode-page .lp-study-mode-tabs button {
   appearance: none;
   -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
   min-width: 0;
-  min-height: var(--recite-option-row-height);
+  min-height: 0;
+  height: 100%;
   border-radius: 999px;
   border-color: color-mix(in srgb, var(--recite-border) 88%, transparent);
   background: color-mix(in srgb, var(--recite-surface) 52%, transparent);
@@ -824,25 +834,15 @@
 }
 
 .lp-page.recitation-mode-page .lp-activity-toolbar {
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  min-height: 76px;
-  margin: 0;
-  padding: 12px;
-  border: 1px solid color-mix(in srgb, var(--recite-border) 86%, transparent);
-  border-radius: 8px;
-  background: var(--recite-surface);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--recite-text) 5%, transparent);
-}
-
-.lp-page.recitation-mode-page .lp-activity-toolbar {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) auto;
   align-items: center;
   justify-content: stretch;
-  min-height: 52px;
-  padding: 7px 9px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 6px 9px;
   border: 1px solid color-mix(in srgb, var(--recite-border) 82%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--recite-surface) 76%, transparent);
@@ -858,6 +858,12 @@
   left: calc(var(--workspace-left-offset, 0px) + max(14px, env(safe-area-inset-left, 0px)));
   order: 10;
   box-sizing: border-box;
+  display: grid;
+  grid-template-rows:
+    var(--drawer-tab-row-height)
+    var(--recite-option-row-height)
+    var(--drawer-control-row-height);
+  gap: 10px;
   width: auto;
   max-width: 780px;
   margin: 0 auto;
@@ -880,34 +886,14 @@
 }
 
 .lp-page.recitation-mode-page .lp-learn-docked-controls {
-  position: fixed;
-  right: calc(var(--workspace-right-offset, 0px) + max(14px, env(safe-area-inset-right, 0px)));
-  bottom: 0;
-  left: calc(var(--workspace-left-offset, 0px) + max(14px, env(safe-area-inset-left, 0px)));
-  z-index: 35;
-  box-sizing: border-box;
-  display: grid;
-  gap: 10px;
-  width: auto;
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 6px 0 max(14px, env(safe-area-inset-bottom, 0px));
-  background: var(--recite-bg);
-}
-
-.lp-page.recitation-mode-page .lp-learn-docked-controls::before {
-  content: "";
-  position: absolute;
-  top: -6px;
-  right: calc(-1 * max(14px, env(safe-area-inset-right, 0px)));
-  bottom: 0;
-  left: calc(-1 * max(14px, env(safe-area-inset-left, 0px)));
-  z-index: -1;
-  border-top: 1px solid color-mix(in srgb, var(--recite-border) 54%, transparent);
   background: var(--recite-bg);
 }
 
 .lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-settings {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  box-sizing: border-box;
+  min-height: 0;
   border-color: color-mix(in srgb, var(--recite-border) 82%, transparent);
   border-radius: 8px;
   background: color-mix(in srgb, var(--recite-surface) 76%, transparent);
@@ -916,14 +902,32 @@
     0 18px 44px color-mix(in srgb, #000 22%, transparent);
 }
 
+.lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-settings:not([open]) {
+  grid-template-rows: minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-settings[open] {
+  grid-template-rows: var(--recite-option-row-height) minmax(0, auto);
+  height: auto;
+  max-height: var(--drawer-settings-row-max-height);
+}
+
 .lp-page.recitation-mode-page .lp-learn-docked-controls .lp-activity-toolbar-top {
   margin-bottom: 0;
 }
 
 .lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-settings-summary {
-  min-height: var(--recite-option-row-height);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  align-content: center;
+  min-height: 0;
+  height: 100%;
   box-sizing: border-box;
   color: var(--recite-muted);
+  line-height: 1;
   padding: 0 16px;
 }
 
@@ -938,25 +942,31 @@
 }
 
 .lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-answer-settings {
-  max-height: min(58svh, 520px);
+  min-height: 0;
   overflow: auto;
   padding: 0 14px 14px;
 }
 
 .lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-start-actions {
+  display: grid;
+  align-items: stretch;
   margin: 0;
+  padding-top: 0;
+  height: 100%;
 }
 
 .lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-start-actions .lp-activity-submit {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
   width: 100%;
-  min-height: 52px;
+  height: 100%;
+  min-height: 0;
   border-radius: 999px;
   font-size: 15px;
   font-weight: 850;
-}
-
-.lp-page.recitation-mode-page .lp-learn-docked-controls.has-extended-controls .lp-learn-start-actions .lp-activity-submit {
-  min-height: 72px;
+  line-height: 1;
+  padding: 0 18px;
 }
 
 .lp-page.recitation-mode-page .lp-learn-setup.docked-controls {
@@ -985,8 +995,69 @@
   gap: 10px;
   box-sizing: border-box;
   width: 100%;
+  height: var(--drawer-tab-row-height);
+  min-height: 0;
   max-width: 100%;
-  margin: 0 auto 10px;
+  margin: 0 auto;
+}
+
+.lp-page.recitation-mode-page .lp-activity-toolbar-middle {
+  display: grid;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--recite-option-row-height);
+  min-height: 0;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.lp-page.recitation-mode-page .lp-activity-toolbar-action {
+  display: grid;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--drawer-control-row-height);
+  min-height: 0;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.lp-page.recitation-mode-page .lp-activity-toolbar-top > *,
+.lp-page.recitation-mode-page .lp-activity-toolbar-middle > *,
+.lp-page.recitation-mode-page .lp-activity-toolbar-action > * {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.lp-page.recitation-mode-page .lp-activity-toolbar-action > .lp-activity-submit {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1;
+  padding: 0 18px;
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls.settings-open {
+  grid-template-rows:
+    var(--drawer-tab-row-height)
+    minmax(0, auto)
+    var(--drawer-control-row-height);
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls.settings-open .lp-activity-toolbar-middle {
+  height: auto;
+  max-height: var(--drawer-settings-row-max-height);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.lp-page.recitation-mode-page .lp-learn-docked-controls.settings-open .lp-learn-answer-settings {
+  max-height: calc(var(--drawer-settings-row-max-height) - var(--recite-option-row-height));
 }
 
 .lp-page.recitation-mode-page.focus-mode-page .lp-course-study-header {
@@ -1003,9 +1074,10 @@
 
 .lp-page.recitation-mode-page .lp-toolbar-player {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   min-width: 0;
+  height: 100%;
 }
 
 .lp-page.recitation-mode-page .lp-toolbar-mode-controls {
@@ -1092,7 +1164,7 @@
 
 .lp-activity-toolbar-shell.hidden,
 .lp-mode-controls-shell.hidden {
-  display: none;
+  display: none !important;
 }
 
 .lp-activity-controls {
@@ -4746,8 +4818,7 @@
   padding: 0;
 }
 
-.lp-page.recitation-mode-page .lp-clip-player,
-.lp-page.recitation-mode-page .lp-clip-player:has(.lp-progress-bar) {
+.lp-page.recitation-mode-page .lp-clip-player {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   width: max-content;
@@ -4757,14 +4828,10 @@
   justify-items: start;
 }
 
-.lp-page.recitation-mode-page .lp-clip-player:has(.lp-progress-bar) {
-  grid-template-rows: auto auto;
-}
-
 .lp-page.recitation-mode-page .lp-controls {
   flex-wrap: nowrap;
   justify-content: flex-start;
-  gap: 8px;
+  gap: var(--playback-control-gap);
   grid-column: 1 / -1;
   grid-row: 1;
 }
@@ -4774,18 +4841,16 @@
 }
 
 .lp-page.recitation-mode-page .lp-progress-bar {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  width: calc(100% - 8px);
+  width: 100%;
   min-width: 0;
   height: 12px;
-  margin-left: 8px;
+  margin: 0;
 }
 
 .lp-page.recitation-mode-page .lp-icon-button {
-  flex-basis: 38px;
-  width: 38px;
-  height: 38px;
+  flex-basis: var(--playback-control-size);
+  width: var(--playback-control-size);
+  height: var(--playback-control-size);
   border: 1px solid color-mix(in srgb, var(--recite-border) 86%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--recite-surface-strong) 72%, transparent);
@@ -4804,18 +4869,16 @@
 }
 
 .lp-page.recitation-mode-page .lp-loop-button,
-.lp-page.recitation-mode-page .lp-restart-button,
 .lp-page.recitation-mode-page .lp-speed-button {
-  height: 38px;
+  height: var(--playback-control-size);
   border-radius: 999px;
   border-color: color-mix(in srgb, var(--recite-border) 86%, transparent);
   background: color-mix(in srgb, var(--recite-surface-strong) 72%, transparent);
   color: var(--recite-muted);
 }
 
-.lp-page.recitation-mode-page .lp-loop-button,
-.lp-page.recitation-mode-page .lp-restart-button {
-  width: 38px;
+.lp-page.recitation-mode-page .lp-loop-button {
+  width: var(--playback-control-size);
 }
 
 .lp-page.recitation-mode-page .lp-loop-button.active {
@@ -4825,85 +4888,118 @@
 }
 
 .lp-page.recitation-mode-page .lp-speed-button {
-  width: 50px;
-  min-width: 50px;
-  max-width: 50px;
+  display: grid;
+  place-items: center;
+  width: var(--playback-speed-width);
+  min-width: var(--playback-speed-width);
+  max-width: var(--playback-speed-width);
   font-weight: 700;
 }
 
-.lp-page.recitation-mode-page .lp-speed-menu {
-  right: 50%;
-  bottom: calc(100% + 14px);
-  width: 172px;
-  box-sizing: border-box;
-  border-color: color-mix(in srgb, var(--recite-border) 86%, transparent);
-  border-radius: 8px;
-  background: var(--recite-surface);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--recite-text) 5%, transparent),
-    0 18px 42px color-mix(in srgb, #000 36%, transparent);
-  padding: 12px;
-  transform: translateX(50%);
-}
-
-.lp-page.recitation-mode-page .lp-speed-menu::after {
-  content: "";
-  position: absolute;
-  right: 50%;
-  bottom: -7px;
-  width: 12px;
-  height: 12px;
-  border-right: 1px solid color-mix(in srgb, var(--recite-border) 86%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--recite-border) 86%, transparent);
-  background: var(--recite-surface);
-  transform: translateX(50%) rotate(45deg);
-}
-
-.lp-page.recitation-mode-page .lp-speed-title {
-  color: var(--recite-muted);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  margin-bottom: 10px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.lp-page.recitation-mode-page .lp-speed-row {
+.lp-page.recitation-mode-page .lp-playback-viewport {
   display: grid;
-  grid-template-columns: 38px minmax(0, 1fr) 38px;
-  gap: 6px;
   align-items: center;
-  border: 1px solid color-mix(in srgb, var(--recite-border) 86%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--recite-surface) 72%, transparent);
-  padding: 3px;
+  width: 100%;
+  min-width: 0;
+  height: var(--playback-control-size);
 }
 
-.lp-page.recitation-mode-page .lp-speed-value {
+.lp-page.recitation-mode-page .lp-playback-viewport > .lp-controls {
+  grid-area: 1 / 1;
+  width: 100%;
+  min-width: 0;
+  transition: opacity 160ms ease;
+}
+
+.lp-page.recitation-mode-page .lp-playback-viewport.main .lp-controls-details,
+.lp-page.recitation-mode-page .lp-playback-viewport.details .lp-controls-main {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lp-page.recitation-mode-page .lp-controls-main {
+  width: min(100%, 300px);
+  justify-content: flex-start;
+}
+
+.lp-page.recitation-mode-page .lp-controls-details {
+  display: grid;
+  grid-template-columns:
+    var(--playback-control-size)
+    var(--playback-control-size)
+    var(--playback-speed-width)
+    var(--playback-control-size)
+    minmax(12px, 1fr)
+    minmax(120px, min(300px, 40%));
+  column-gap: var(--playback-control-gap);
+  align-items: center;
+  width: 100%;
+  height: var(--playback-control-size);
+  min-width: 0;
+  overflow: visible;
+}
+
+.lp-page.recitation-mode-page .lp-controls-back-button svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.6;
+}
+
+.lp-page.recitation-mode-page .lp-controls-details .lp-speed-adjust,
+.lp-page.recitation-mode-page .lp-details-speed-button {
+  box-sizing: border-box;
+  align-self: center;
+  justify-self: start;
+  height: var(--playback-control-size);
+}
+
+.lp-page.recitation-mode-page .lp-controls-details .lp-speed-adjust {
   display: grid;
   place-items: center;
-  min-width: 0;
-  height: 34px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: var(--recite-text);
-  font-size: 15px;
-  font-weight: 850;
+  width: var(--playback-control-size);
+  margin: 0;
+  padding: 0;
+  border-color: color-mix(in srgb, var(--recite-accent) 58%, var(--recite-border));
+  background: color-mix(in srgb, var(--recite-accent) 16%, var(--recite-surface-strong));
+  color: color-mix(in srgb, var(--recite-accent) 74%, var(--recite-text));
+  box-shadow: none;
   line-height: 1;
+}
+
+.lp-page.recitation-mode-page .lp-controls-details .lp-speed-adjust svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.6;
+}
+
+.lp-page.recitation-mode-page .lp-details-speed-button {
+  color: var(--recite-muted);
+  line-height: 1;
+}
+
+.lp-page.recitation-mode-page .lp-inline-progress-bar {
+  grid-column: 6;
+  align-self: center;
+  justify-self: end;
+  width: 100%;
+  height: 12px;
+  overflow: visible;
 }
 
 .lp-page.recitation-mode-page .lp-speed-adjust {
-  width: 38px;
-  height: 38px;
+  width: var(--playback-control-size);
+  height: var(--playback-control-size);
   border-color: color-mix(in srgb, var(--recite-border) 86%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--recite-surface-strong) 74%, transparent);
   color: var(--recite-muted);
-  font-size: 24px;
-  font-weight: 650;
 }
 
 .lp-page.recitation-mode-page .lp-speed-adjust:hover {
@@ -4995,10 +5091,6 @@
 }
 
 @media (max-width: 680px) {
-  .lp-page.recitation-mode-page {
-    --recite-option-row-height: 38px;
-  }
-
   .lp-course-flow-track {
     grid-template-columns: 1fr;
   }
@@ -5128,6 +5220,11 @@
     padding: 24px 18px calc(96px + env(safe-area-inset-bottom, 0px));
   }
 
+  .lp-page.recitation-mode-page {
+    --recite-toolbar-stable-reserve: calc(190px + env(safe-area-inset-bottom, 0px));
+    --playback-speed-width: 48px;
+  }
+
   .lp-page.course-view-page.lp-course-map-page {
     padding-bottom: 18px;
   }
@@ -5161,12 +5258,12 @@
   }
 
   .lp-page.recitation-mode-page .lp-activity-toolbar {
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 12px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
     justify-content: start;
     justify-items: stretch;
-    min-height: 0;
-    padding: 12px;
+    box-sizing: border-box;
+    overflow: visible;
   }
 
   .lp-page.recitation-mode-page .lp-player-stack {
@@ -5175,8 +5272,7 @@
     max-width: 100%;
   }
 
-  .lp-page.recitation-mode-page .lp-clip-player,
-  .lp-page.recitation-mode-page .lp-clip-player:has(.lp-progress-bar) {
+  .lp-page.recitation-mode-page .lp-clip-player {
     display: grid;
     width: max-content;
     max-width: 100%;
@@ -5198,6 +5294,12 @@
     grid-column: 1;
     grid-row: 1;
     align-self: center;
+    justify-self: stretch;
+  }
+
+  .lp-page.recitation-mode-page .lp-player-stack,
+  .lp-page.recitation-mode-page .lp-clip-player {
+    width: 100%;
   }
 
   .lp-page.recitation-mode-page .lp-activity-toolbar-shell {
@@ -5205,6 +5307,7 @@
     right: max(12px, env(safe-area-inset-right, 0px));
     bottom: 0;
     left: max(12px, env(safe-area-inset-left, 0px));
+    gap: 8px;
     width: auto;
     max-width: none;
     margin: 0 auto;
@@ -5219,51 +5322,38 @@
 
   .lp-page.recitation-mode-page .lp-activity-toolbar-top {
     width: 100%;
-    margin-bottom: 8px;
+    margin-bottom: 0;
   }
 
-  .lp-page.recitation-mode-page.study-activity-learn {
-    --recite-toolbar-reserve: calc(190px + env(safe-area-inset-bottom, 0px));
+  .lp-page.recitation-mode-page .lp-study-skill-tabs button {
+    padding-bottom: 7px;
   }
 
-  .lp-page.recitation-mode-page .lp-learn-docked-controls {
-    right: max(12px, env(safe-area-inset-right, 0px));
-    left: max(12px, env(safe-area-inset-left, 0px));
-    max-width: none;
-    padding: 6px 0 max(12px, env(safe-area-inset-bottom, 0px));
+  .lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-settings-summary {
+    padding: 0 14px;
   }
 
-  .lp-page.recitation-mode-page .lp-learn-docked-controls::before {
-    top: -6px;
-    right: calc(-1 * max(12px, env(safe-area-inset-right, 0px)));
-    left: calc(-1 * max(12px, env(safe-area-inset-left, 0px)));
-  }
-
-  .lp-page.recitation-mode-page .lp-learn-docked-controls.has-extended-controls .lp-learn-start-actions .lp-activity-submit {
-    min-height: 82px;
+  .lp-page.recitation-mode-page .lp-learn-docked-controls .lp-learn-start-actions .lp-activity-submit {
+    padding: 0 18px;
   }
 
   .lp-page.recitation-mode-page .lp-controls {
     justify-content: flex-start;
-  }
-
-  .lp-page.recitation-mode-page .lp-controls {
-    gap: 7px;
+    gap: var(--playback-control-gap);
   }
 
   .lp-page.recitation-mode-page .lp-icon-button,
-  .lp-page.recitation-mode-page .lp-loop-button,
-  .lp-page.recitation-mode-page .lp-restart-button {
-    flex-basis: 38px;
-    width: 38px;
-    height: 38px;
+  .lp-page.recitation-mode-page .lp-loop-button {
+    flex-basis: var(--playback-control-size);
+    width: var(--playback-control-size);
+    height: var(--playback-control-size);
   }
 
   .lp-page.recitation-mode-page .lp-speed-button {
-    width: 48px;
-    min-width: 48px;
-    max-width: 48px;
-    height: 38px;
+    width: var(--playback-speed-width);
+    min-width: var(--playback-speed-width);
+    max-width: var(--playback-speed-width);
+    height: var(--playback-control-size);
   }
 
   .lp-page.recitation-mode-page .lp-progress-bar {
@@ -5288,20 +5378,6 @@
 
   .lp-page.recitation-mode-page .lp-segmented-control {
     gap: 6px;
-  }
-
-  .lp-page.recitation-mode-page .lp-activity-toolbar:has(.lp-progress-bar) .lp-toolbar-mode-controls {
-    justify-content: center;
-  }
-
-  .lp-page.recitation-mode-page .lp-activity-toolbar:has(.lp-progress-bar) .lp-segmented-control {
-    flex-direction: column;
-    align-items: stretch;
-    width: 110px;
-  }
-
-  .lp-page.recitation-mode-page .lp-activity-toolbar:has(.lp-progress-bar) .lp-segmented-control button {
-    width: 100%;
   }
 
   .lp-page.recitation-mode-page .lp-karaoke-mode-button,
@@ -5352,7 +5428,7 @@
     display: none;
   }
 
-  html.lp-learn-session-active .lp-page.learn-mode-page .lp-activity-toolbar-shell {
+  html.lp-learn-session-active .lp-page.learn-mode-page .lp-activity-toolbar-shell:not(.lp-learn-docked-controls) {
     display: none;
   }
 
@@ -5689,8 +5765,7 @@
   fill: currentColor;
 }
 
-.lp-loop-button,
-.lp-restart-button {
+.lp-loop-button {
   flex: 0 0 auto;
   width: 36px;
   height: 36px;
@@ -5709,18 +5784,12 @@
   color: #d6d3d1;
 }
 
-.lp-restart-button:disabled {
-  cursor: default;
-  opacity: 0.45;
-}
-
 .lp-loop-button.active {
   color: #333;
   border-color: #ccc;
 }
 
-.lp-loop-button svg,
-.lp-restart-button svg {
+.lp-loop-button svg {
   width: 16px;
   height: 16px;
   fill: none;
@@ -5728,16 +5797,6 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
-}
-
-.lp-restart-button rect,
-.lp-restart-button polygon {
-  fill: currentColor;
-  stroke: none;
-}
-
-.lp-speed-wrapper {
-  position: relative;
 }
 
 .lp-speed-button {
@@ -5759,36 +5818,6 @@
   background: #fff;
 }
 
-.lp-speed-menu {
-  position: absolute;
-  right: 0;
-  bottom: calc(100% + 8px);
-  width: 130px;
-  padding: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-  z-index: 10;
-}
-
-.lp-speed-title {
-  font-size: 12px;
-  color: #555;
-  margin-bottom: 8px;
-}
-
-.lp-speed-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  border: 1px solid #d6d3d1;
-  border-radius: 999px;
-  background: #fafaf9;
-  padding: 3px;
-}
-
 .lp-speed-adjust {
   width: 30px;
   height: 30px;
@@ -5798,16 +5827,6 @@
   cursor: pointer;
   font-size: 18px;
   line-height: 1;
-}
-
-.lp-speed-value {
-  display: grid;
-  place-items: center;
-  font-size: 13px;
-  min-width: 46px;
-  height: 28px;
-  border-radius: 999px;
-  text-align: center;
 }
 
 .lp-display-field {
@@ -5933,14 +5952,12 @@
     }
   }
 
-  .lp-subtitle,
-  .lp-speed-title {
+  .lp-subtitle {
     color: var(--dark-muted);
   }
 
   .lp-activity-card,
   .lp-clip-player,
-  .lp-speed-menu,
   .lp-arrange-tile,
   .lp-arrange-answer-tile,
   .lp-type-arabic-copybox,
@@ -5954,7 +5971,6 @@
 
   .lp-icon-button,
   .lp-loop-button,
-  .lp-restart-button,
   .lp-speed-button,
   .lp-speed-adjust,
   .lp-activity-button,

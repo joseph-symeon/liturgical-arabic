@@ -199,9 +199,12 @@ export default function LessonPage({
   const activeSkillOptions = getSkillActivityOptions(activityOptions, selectedStudySkill);
   const canUseRecitation = recitationOptions.length > 0;
   const canUseComprehension = comprehensionOptions.length > 0;
+  const selectedSkillActivityValue = selectedStudySkill === STUDY_SKILLS.home
+    ? selectedActivityOptionId
+    : resolveActivityValueForSkill(activityOptions, selectedActivityOptionId, selectedStudySkill);
   const selectedActivityOption = activityOptions.find(option => (
-    getActivityOptionValue(option) === selectedActivityOptionId
-  )) || activityOptions[0] || null;
+    getActivityOptionValue(option) === selectedSkillActivityValue
+  )) || activeSkillOptions[0] || activityOptions[0] || null;
 
   useEffect(() => {
     const nextStudySkill = getStoredStudySkill(activityOptions);
@@ -218,6 +221,13 @@ export default function LessonPage({
     storeStudySkill(studyWorkspace);
     setSelectedActivityOptionId(nextActivityValue);
   }, [activityOptions, selectedStudySkill, studyWorkspace]);
+
+  useEffect(() => {
+    if (selectedStudySkill === STUDY_SKILLS.home) return;
+    if (!selectedSkillActivityValue || selectedSkillActivityValue === selectedActivityOptionId) return;
+    setSelectedActivityOptionId(selectedSkillActivityValue);
+    storeActivitySelection(SHARED_ACTIVITY_SELECTION_KEY, selectedSkillActivityValue);
+  }, [selectedActivityOptionId, selectedSkillActivityValue, selectedStudySkill]);
 
   useEffect(() => {
     function refreshProgress() {
@@ -293,7 +303,7 @@ export default function LessonPage({
   }
 
   function renderActivityModeTabs() {
-    const options = isRecitationMode ? activeSkillOptions : recitationOptions;
+    const options = activeSkillOptions;
     if (options.length <= 1) return null;
     return (
       <div className="lp-study-mode-tabs" role="group" aria-label={`${getStudySkillLabel(selectedStudySkill)} mode`}>
@@ -339,12 +349,8 @@ export default function LessonPage({
         showPracticeToolbar={isRecitationMode && showPracticeToolbar}
         preserveToolbarInFocus={isRecitationMode}
         activityContextHeader={activityContextHeader}
-        toolbarTop={(
-          <>
-            {renderExerciseSkillTabs()}
-            {renderActivityModeTabs()}
-          </>
-        )}
+        toolbarTop={renderExerciseSkillTabs()}
+        toolbarMiddle={renderActivityModeTabs()}
         learnSetupToolbarTop={renderExerciseSkillTabs()}
         dockLearnSetupControls={!isRecitationMode}
         onCourseTrack={onCourseTrack}

@@ -18,6 +18,7 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import PassageTextRenderer from './PassageTextRenderer.jsx';
+import PassageBottomDrawer from './PassageBottomDrawer.jsx';
 import StudyWorkspaceHeader from '../StudyWorkspaceHeader.jsx';
 import LiturgyLine from '../LiturgyLine.jsx';
 import phrases from '../../data/texts/phrases.js';
@@ -446,7 +447,6 @@ export default function PassageActivityBody({
   activityContextHeader = null,
   learnSetupToolbarTop = null,
   dockLearnSetupControls = false,
-  learnSetupHasExtendedControls = false,
   onCourseTrack,
   onCourseLesson
 }) {
@@ -556,39 +556,6 @@ export default function PassageActivityBody({
       coordinateGetter: sortableKeyboardCoordinates
     })
   );
-
-  useLayoutEffect(() => {
-    if (!dockLearnSetupControls || learnStarted) return undefined;
-
-    const element = learnDockedControlsRef.current;
-    const page = element?.closest(".lp-page");
-    if (!element || !page) return undefined;
-
-    let frameId = null;
-
-    function updateReserve() {
-      if (frameId) cancelAnimationFrame(frameId);
-      frameId = requestAnimationFrame(() => {
-        const height = Math.ceil(element.getBoundingClientRect().height);
-        page.style.setProperty("--recite-toolbar-reserve", `${height}px`);
-      });
-    }
-
-    updateReserve();
-
-    const resizeObserver = new ResizeObserver(updateReserve);
-    resizeObserver.observe(element);
-    window.addEventListener('resize', updateReserve);
-    window.visualViewport?.addEventListener('resize', updateReserve);
-
-    return () => {
-      if (frameId) cancelAnimationFrame(frameId);
-      resizeObserver.disconnect();
-      window.removeEventListener('resize', updateReserve);
-      window.visualViewport?.removeEventListener('resize', updateReserve);
-      page.style.removeProperty("--recite-toolbar-reserve");
-    };
-  }, [dockLearnSetupControls, learnStarted, learnSettingsOpen, learnSetupHasExtendedControls]);
 
   const currentLearnItem = learnQueue[0] || null;
   const currentLearnItemType = typeof currentLearnItem === 'string'
@@ -1623,6 +1590,9 @@ export default function PassageActivityBody({
                 if (typingTraceRef.current) typingTraceRef.current.scrollTop = 0;
               });
             }}
+            onPaste={event => {
+              event.preventDefault();
+            }}
             onScroll={() => {
               if (!typingInputRef.current || !typingTraceRef.current) return;
               typingInputRef.current.scrollTop = 0;
@@ -1643,16 +1613,18 @@ export default function PassageActivityBody({
             type="button"
             className="lp-activity-button lp-activity-submit"
             onClick={() => {
-              if (typingFeedback) return;
+              if (typingFeedback || typingFeedbackTimerRef.current) return;
+              const submittedCorrectly = typedArabicCorrect;
               clearTypingFeedback();
-              if (typedArabicCorrect) {
+              if (submittedCorrectly) {
                 recordRecitationTrace({
                   phraseIds: typingPhraseIds,
                   activityType: PASSAGE_ACTIVITY_TYPES.typeArabic,
                   correct: true
                 });
               }
-              setTypingFeedback(typedArabicCorrect ? 'correct' : 'incorrect');
+              setTypedArabic('');
+              setTypingFeedback(submittedCorrectly ? 'correct' : 'incorrect');
               typingFeedbackTimerRef.current = setTimeout(() => {
                 setTypingFeedback(null);
                 typingFeedbackTimerRef.current = null;
@@ -2304,16 +2276,11 @@ export default function PassageActivityBody({
     }
 
     function renderLearnSetupControls({ docked = false } = {}) {
-      return (
-        <div className={[
-          docked ? "lp-learn-docked-controls" : "lp-learn-inline-controls",
-          docked && learnSetupHasExtendedControls ? "has-extended-controls" : ""
-        ].filter(Boolean).join(" ")} ref={docked ? learnDockedControlsRef : null}>
-          {docked && learnSetupToolbarTop && (
-            <div className="lp-activity-toolbar-top">
-              {learnSetupToolbarTop}
-            </div>
-          )}
+      const learnControlsClassName = [
+        docked ? "lp-learn-docked-controls" : "lp-learn-inline-controls",
+        docked && learnSettingsOpen ? "settings-open" : ""
+      ].filter(Boolean).join(" ");
+      const learnSettingsControl = (
           <details
             className="lp-learn-settings"
             open={learnSettingsOpen}
@@ -2442,11 +2409,44 @@ export default function PassageActivityBody({
               </div>
             </div>
           </details>
-          <div className="lp-learn-start-actions">
-            <button type="button" className="lp-activity-button lp-activity-submit" onClick={startLearnSession}>
-              {docked ? 'Study Phrases' : 'Start'}
-            </button>
-          </div>
+      );
+      const learnStartButton = (
+        <button type="button" className="lp-activity-button lp-activity-submit" onClick={startLearnSession}>
+          {docked ? 'Study Phrases' : 'Start'}
+        </button>
+      );
+      const learnStartAction = (
+        <div className="lp-learn-start-actions">
+          {learnStartButton}
+        </div>
+      );
+      const learnControlsContent = (
+        <>
+          {docked && learnSetupToolbarTop && (
+            <div className="lp-activity-toolbar-top">
+              {learnSetupToolbarTop}
+            </div>
+          )}
+          {learnSettingsControl}
+          {learnStartAction}
+        </>
+      );
+
+      if (docked) {
+        return (
+          <PassageBottomDrawer
+            className={learnControlsClassName}
+            drawerRef={learnDockedControlsRef}
+            top={learnSetupToolbarTop}
+            middle={learnSettingsControl}
+            action={learnStartButton}
+          />
+        );
+      }
+
+      return (
+        <div className={learnControlsClassName}>
+          {learnControlsContent}
         </div>
       );
     }

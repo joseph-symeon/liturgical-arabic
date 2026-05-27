@@ -1,39 +1,5 @@
-import React, { useLayoutEffect, useRef } from "react";
-
-function useToolbarReserve(ref, enabled) {
-  useLayoutEffect(() => {
-    if (!enabled) return undefined;
-
-    const element = ref.current;
-    const page = element?.closest(".lp-page");
-    if (!element || !page) return undefined;
-
-    let frameId = null;
-
-    function updateReserve() {
-      if (frameId) cancelAnimationFrame(frameId);
-      frameId = requestAnimationFrame(() => {
-        const height = Math.ceil(element.getBoundingClientRect().height);
-        page.style.setProperty("--recite-toolbar-reserve", `${height}px`);
-      });
-    }
-
-    updateReserve();
-
-    const resizeObserver = new ResizeObserver(updateReserve);
-    resizeObserver.observe(element);
-    window.addEventListener("resize", updateReserve);
-    window.visualViewport?.addEventListener("resize", updateReserve);
-
-    return () => {
-      if (frameId) cancelAnimationFrame(frameId);
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", updateReserve);
-      window.visualViewport?.removeEventListener("resize", updateReserve);
-      page.style.removeProperty("--recite-toolbar-reserve");
-    };
-  }, [ref, enabled]);
-}
+import React from "react";
+import PassageBottomDrawer from "./PassageBottomDrawer.jsx";
 
 export default function PassageActivityToolbar({
   activityLabel = null,
@@ -55,17 +21,20 @@ export default function PassageActivityToolbar({
     ["literal", "Literal"]
   ],
   toolbarTop = null,
+  toolbarMiddle = null,
+  suppressModeControls = false,
   hidden = false
 }) {
-  const toolbarShellRef = useRef(null);
   const hasActivity = Boolean(activityLabel);
   const hasModes = showKaraokeToggle || showTextModeControls;
   const hasToolbarTop = Boolean(toolbarTop);
-  useToolbarReserve(toolbarShellRef, !hidden);
+  const hasToolbarMiddle = Boolean(toolbarMiddle);
 
-  if (!hasActivity && !player && !hasModes && !hasToolbarTop) return null;
+  if (hidden) return null;
 
-  const modeControls = hasModes ? (
+  if (!hasActivity && !player && !hasModes && !hasToolbarTop && !hasToolbarMiddle) return null;
+
+  const modeControls = hasModes && !suppressModeControls ? (
     <div className="lp-mode-toggle-row lp-activity-mode-row" dir="ltr">
       {showKaraokeToggle && (
         <button
@@ -98,15 +67,12 @@ export default function PassageActivityToolbar({
 
   return (
     <>
-      {(hasActivity || player || hasToolbarTop) && (
-        <div ref={toolbarShellRef} className={hidden ? "lp-activity-toolbar-shell hidden" : "lp-activity-toolbar-shell"}>
-          {toolbarTop && (
-            <div className="lp-activity-toolbar-top">
-              {toolbarTop}
-            </div>
-          )}
-          {(hasActivity || player || hasModes) && (
-            <div className={`lp-activity-toolbar${hasModes ? " has-mode-controls" : ""}`}>
+      {(hasActivity || player || hasToolbarTop || hasToolbarMiddle) && (
+        <PassageBottomDrawer
+          top={toolbarTop}
+          middle={toolbarMiddle}
+          action={(hasActivity || player || hasModes) ? (
+            <div className="lp-activity-toolbar">
               {hasActivity && (
               <div className="lp-activity-controls">
                 <label className="lp-activity-control-label" htmlFor={activitySelectId}>Activity</label>
@@ -145,8 +111,8 @@ export default function PassageActivityToolbar({
               </div>
               )}
             </div>
-          )}
-        </div>
+          ) : null}
+        />
       )}
       {modeControls && !player && !hasActivity && (
         <div className={hidden ? "lp-mode-controls-shell hidden" : "lp-mode-controls-shell"}>
