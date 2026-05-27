@@ -308,6 +308,13 @@ function getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, se
   return "#home";
 }
 
+function isCurrentHashForLesson(lessonId) {
+  if (typeof window === "undefined" || !lessonId) return false;
+  const hash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+  const parts = hash.split("/");
+  return parts[0] === "course" && parts[1] === lessonId;
+}
+
 function getStoredDisplaySettings() {
   if (typeof window === "undefined") return DEFAULT_DISPLAY_SETTINGS;
 
@@ -361,6 +368,7 @@ export default function App() {
   const [showPracticeToolbar, setShowPracticeToolbar] = useState(initialDisplaySettings.showPracticeToolbar);
   const [courseStudyWorkspace, setCourseStudyWorkspace] = useState(getStoredCourseStudyWorkspace);
   const [syncSession, setSyncSession] = useState(null);
+  const [authReady, setAuthReady] = useState(() => !canSyncUserState());
   const [syncStatus, setSyncStatus] = useState(() => canSyncUserState() ? "loading" : "disabled");
   const [syncMessage, setSyncMessage] = useState("");
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
@@ -554,10 +562,12 @@ export default function App() {
         if (!cancelled) {
           if (session) clearSupabaseAuthCallbackParams();
           setSyncSession(session);
+          setAuthReady(true);
         }
       })
       .catch(error => {
         if (!cancelled) {
+          setAuthReady(true);
           setSyncStatus("error");
           setSyncMessage(error.message || "Could not load sync session.");
         }
@@ -566,6 +576,7 @@ export default function App() {
     const unsubscribe = subscribeToAuthChanges(session => {
       if (session) clearSupabaseAuthCallbackParams();
       setSyncSession(session);
+      setAuthReady(true);
     });
 
     return () => {
@@ -576,6 +587,7 @@ export default function App() {
 
   useEffect(() => {
     if (!canSyncUserState()) return;
+    if (!authReady) return;
 
     if (!syncSession?.user?.id) {
       syncReadyRef.current = false;
@@ -641,7 +653,7 @@ export default function App() {
       syncReadyRef.current = false;
       setProgressTrackingMode(PROGRESS_TRACKING_MODES.preview);
     };
-  }, [syncSession?.user?.id]);
+  }, [authReady, syncSession?.user?.id]);
 
   useEffect(() => {
     function handleProgressUpdated(event) {
@@ -730,6 +742,7 @@ export default function App() {
   useEffect(() => {
     if (syncStatus === "loading") return;
     if (view !== "lessons" || !selectedLessonId || canAccessCourseLesson(selectedLessonId)) return;
+    if (isCurrentHashForLesson(selectedLessonId)) return;
     setView("course-overview");
     setSelectedCourseTrackId(null);
     setSelectedExerciseIndex(0);
@@ -902,6 +915,7 @@ export default function App() {
     ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
   const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
+  const showCourseProgressPrompt = authReady && !syncSession?.user;
   const pageCanUseFocusMode =
     view === "lessons"
     && Boolean(selectedLessonWithUnit)
@@ -1657,7 +1671,7 @@ export default function App() {
             selectedLessonId={selectedLessonId}
             selectedExerciseIndex={clampedExerciseIndex}
             selectedTrackId={selectedCourseTrack?.id ?? null}
-            showProgressPrompt={!syncSession?.user}
+            showProgressPrompt={showCourseProgressPrompt}
             onProgressPrompt={openProgressSignIn}
             canAccessLesson={canAccessCourseLesson}
             onBlockedLesson={handleBlockedCourseLesson}
@@ -1678,7 +1692,7 @@ export default function App() {
             showPracticeToolbar={showPracticeToolbar}
             studyWorkspace={courseStudyWorkspace}
             selectedExerciseIndex={clampedExerciseIndex}
-            showProgressPrompt={!syncSession?.user}
+            showProgressPrompt={showCourseProgressPrompt}
             onProgressPrompt={openProgressSignIn}
             onStudySkillChange={setCourseStudyWorkspace}
             onCourseTrack={goToSelectedLessonTrack}

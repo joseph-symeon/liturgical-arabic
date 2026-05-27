@@ -995,7 +995,10 @@ export const exerciseDefinitions = [
       "lords-prayer-priest-doxology"
     ],
     "phrase_ids": [
-      "lords-prayer-thine-kingdom-001",
+      "lords-prayer-thine-kingdom-for-001",
+      "lords-prayer-thine-kingdom-kingdom-001",
+      "lords-prayer-thine-kingdom-power-001",
+      "lords-prayer-thine-kingdom-glory-001",
       "doxology-of-father-son-spirit-001",
       "now-and-ever-001",
       "unto-ages-of-ages-001"

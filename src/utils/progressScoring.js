@@ -87,6 +87,15 @@ function getStorageKey(storageMode = progressTrackingMode) {
   return storageMode === PROGRESS_TRACKING_MODES.preview ? PREVIEW_STORAGE_KEY : STORAGE_KEY;
 }
 
+function getStoredPhraseProgressForDisplay() {
+  if (isProgressTrackingEnabled()) return getStoredPhraseProgress(progressTrackingMode);
+
+  const accountProgress = getStoredPhraseProgress(PROGRESS_TRACKING_MODES.account);
+  if (Object.keys(accountProgress.phrases).length > 0) return accountProgress;
+
+  return getStoredPhraseProgress(PROGRESS_TRACKING_MODES.preview);
+}
+
 function getEmptyComprehensionProgress() {
   return {
     confidence: 0,
@@ -502,8 +511,7 @@ export function recordRecitationTrace({ phraseIds, activityType, correct, timest
 }
 
 export function getStoredPhraseConfidenceMap() {
-  if (!isProgressTrackingEnabled()) return {};
-  const progress = getStoredPhraseProgress(progressTrackingMode);
+  const progress = getStoredPhraseProgressForDisplay();
   return Object.fromEntries(
     Object.entries(progress.phrases).map(([phraseId, phraseProgress]) => [
       phraseId,
@@ -513,14 +521,7 @@ export function getStoredPhraseConfidenceMap() {
 }
 
 export function getStoredPhraseProgressDimensionMaps() {
-  if (!isProgressTrackingEnabled()) {
-    return {
-      overall: {},
-      comprehension: {},
-      recitation: {}
-    };
-  }
-  const progress = getStoredPhraseProgress(progressTrackingMode);
+  const progress = getStoredPhraseProgressForDisplay();
   return {
     overall: Object.fromEntries(
       Object.entries(progress.phrases).map(([phraseId, phraseProgress]) => [

@@ -12505,7 +12505,25 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "lords-prayer-thine-kingdom-001"
+        "phrase_id": "lords-prayer-thine-kingdom-for-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-thine-kingdom-kingdom-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-thine-kingdom-power-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "lords-prayer-thine-kingdom-glory-001"
       },
       {
         "text": "، "
@@ -12766,7 +12784,19 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "elevation-hear-us-001"
+        "phrase_id": "o-lord-address-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "jesus-christ-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "our-god-001"
       },
       {
         "text": "، "
@@ -15307,13 +15337,31 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "dismissal-prayers-fathers-001"
+        "phrase_id": "dismissal-through-prayers-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "dismissal-holy-fathers-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "dismissal-lord-jesus-001"
+        "phrase_id": "o-lord-address-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "jesus-christ-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "our-god-001"
       },
       {
         "text": "، "
@@ -15640,7 +15688,11 @@ const sourceSegments = {
       "fourth-prayer"
     ],
     "phrases": [
-      {"phrase_id": "thanksgiving-fourth-body-life-001"},
+      {"phrase_id": "o-lord-address-001"},
+      {"text": " "},
+      {"phrase_id": "jesus-christ-001"},
+      {"text": " "},
+      {"phrase_id": "our-god-001"},
       {"text": "، "},
       {"phrase_id": "thanksgiving-fourth-body-life-002"},
       {"text": " "},

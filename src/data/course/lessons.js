@@ -862,13 +862,13 @@ const lessons = [
   {
     "id": "lesson-through-the-prayers",
     "unit_id": "unit-1",
-    "title": "Through the Prayers",
-    "title_phrase": "dismissal-prayers-fathers-001",
+    "title": "Through the prayers",
+    "title_phrase": "dismissal-through-prayers-001",
     "display_order": 7,
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "title": "Through the Prayers",
+        "title": "Through the prayers",
         "exercise_id": "dismissal-through-the-prayers-summary",
         "activity_policy": "standard"
       }

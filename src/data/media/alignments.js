@@ -88,13 +88,28 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "dismissal-prayers-fathers-001",
+            "phrase_id": "dismissal-through-prayers-001",
             "start_seconds": 0,
+            "end_seconds": 1.35
+          },
+          {
+            "phrase_id": "dismissal-holy-fathers-001",
+            "start_seconds": 1.35,
             "end_seconds": 3.29
           },
           {
-            "phrase_id": "dismissal-lord-jesus-001",
+            "phrase_id": "o-lord-address-001",
             "start_seconds": 3.8,
+            "end_seconds": 4.55
+          },
+          {
+            "phrase_id": "jesus-christ-001",
+            "start_seconds": 4.55,
+            "end_seconds": 5.65
+          },
+          {
+            "phrase_id": "our-god-001",
+            "start_seconds": 5.65,
             "end_seconds": 6.64
           },
           {

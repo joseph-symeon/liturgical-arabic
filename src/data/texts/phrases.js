@@ -7064,10 +7064,19 @@ const phrases = {
       "section: The Dismissal"
     ]
   },
-  "dismissal-prayers-fathers-001": {
-    "arabic": "بِصَلَواتِ آبائِنا القِدِّيسين",
-    "translation": "Through the prayers of our holy fathers",
-    "literal": "by the prayers of our holy fathers",
+  "dismissal-through-prayers-001": {
+    "arabic": "بِصَلَواتِ",
+    "translation": "Through the prayers",
+    "literal": "by the prayers",
+    "tags": [
+      "dismissal",
+      "section: The Dismissal"
+    ]
+  },
+  "dismissal-holy-fathers-001": {
+    "arabic": "آبائِنا القِدِّيسين",
+    "translation": "of our holy fathers",
+    "literal": "of our holy fathers",
     "tags": [
       "dismissal",
       "section: The Dismissal"
@@ -9506,6 +9515,46 @@ const phrases = {
     "arabic": "لأنَّ لَكَ المُلكَ والقُدْرَةَ والمَجْدَ",
     "translation": "For thine is the kingdom and the power and the glory",
     "literal": "for thine is the kingdom and the power and the glory",
+    "tags": [
+      "doxology",
+      "lord's-prayer",
+      "section: The Lord's Prayer"
+    ]
+  },
+  "lords-prayer-thine-kingdom-for-001": {
+    "arabic": "لأنَّ لَكَ",
+    "translation": "For thine is",
+    "literal": "for yours is",
+    "tags": [
+      "doxology",
+      "lord's-prayer",
+      "section: The Lord's Prayer"
+    ]
+  },
+  "lords-prayer-thine-kingdom-kingdom-001": {
+    "arabic": "المُلكَ",
+    "translation": "the kingdom",
+    "literal": "the kingdom",
+    "tags": [
+      "doxology",
+      "lord's-prayer",
+      "section: The Lord's Prayer"
+    ]
+  },
+  "lords-prayer-thine-kingdom-power-001": {
+    "arabic": "والقُدْرَةَ",
+    "translation": "and the power",
+    "literal": "and the power",
+    "tags": [
+      "doxology",
+      "lord's-prayer",
+      "section: The Lord's Prayer"
+    ]
+  },
+  "lords-prayer-thine-kingdom-glory-001": {
+    "arabic": "والمَجْدَ",
+    "translation": "and the glory",
+    "literal": "and the glory",
     "tags": [
       "doxology",
       "lord's-prayer",
@@ -17028,6 +17077,34 @@ const phrases = {
       "section: Litany of Peace",
       "section: The Cherubic Hymn",
       "section: The Prayer of the Litany for the Catechumens"
+    ]
+  },
+  "o-lord-address-001": {
+    "arabic": "أَيُّها الرَّبُّ",
+    "translation": "O Lord",
+    "literal": "O Lord",
+    "tags": [
+      "address",
+      "christ",
+      "repeated"
+    ]
+  },
+  "jesus-christ-001": {
+    "arabic": "يَسُوعُ المَسِيحُ",
+    "translation": "Jesus Christ",
+    "literal": "Jesus Christ",
+    "tags": [
+      "christ",
+      "repeated"
+    ]
+  },
+  "our-god-001": {
+    "arabic": "إِلَهُنا",
+    "translation": "our God",
+    "literal": "our God",
+    "tags": [
+      "address",
+      "repeated"
     ]
   },
   "unto-christ-our-god-001": {

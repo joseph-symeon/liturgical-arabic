@@ -14,11 +14,11 @@ const courseTracks = [
       "lesson-thrice-holy",
       "lesson-all-holy-trinity",
       "lesson-lords-prayer",
-      "lesson-through-the-prayers",
       "lesson-lords-prayer-thine-kingdom",
-      "lesson-alleluia-glory-our-god-hope",
+      "lesson-through-the-prayers",
       "lesson-heavenly-king",
-      "lesson-come-let-us-worship"
+      "lesson-come-let-us-worship",
+      "lesson-alleluia-glory-our-god-hope"
     ],
     unlocks: [
       "track-divine-liturgy-part-1"
