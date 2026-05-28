@@ -109,6 +109,10 @@
   margin: 0 0 32px;
 }
 
+.lp-page.recitation-mode-page.study-activity-phrase-captions .lp-recitation-workspace > .lp-view-header {
+  transition: opacity 220ms ease, transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .lp-view-kicker {
   display: inline-flex;
   align-items: center;
@@ -1061,6 +1065,12 @@
 }
 
 .lp-page.recitation-mode-page.focus-mode-page .lp-course-study-header {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-24px);
+}
+
+.lp-page.recitation-mode-page.focus-mode-page.study-activity-phrase-captions .lp-recitation-workspace > .lp-view-header {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-24px);
