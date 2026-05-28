@@ -3363,8 +3363,8 @@ const sourceSegments = {
       {"phrase_id": "dismissal-all-saints-001"},
       {"text": "، "},
       {"phrase_id": "have-mercy-on-us-001"},
-      {"text": " وَ"},
-      {"phrase_id": "save-us-001"},
+      {"text": " "},
+      {"phrase_id": "dismissal-and-save-us-001"},
       {"text": " "},
       {"phrase_id": "dismissal-good-lover-001"},
       {"text": "."}
@@ -15313,10 +15313,10 @@ const sourceSegments = {
         "phrase_id": "have-mercy-on-us-001"
       },
       {
-        "text": " وَ"
+        "text": " "
       },
       {
-        "phrase_id": "save-us-001"
+        "phrase_id": "dismissal-and-save-us-001"
       },
       {
         "text": " "
@@ -15370,10 +15370,10 @@ const sourceSegments = {
         "phrase_id": "have-mercy-on-us-001"
       },
       {
-        "text": " وَ"
+        "text": " "
       },
       {
-        "phrase_id": "save-us-001"
+        "phrase_id": "dismissal-and-save-us-001"
       },
       {
         "text": "."

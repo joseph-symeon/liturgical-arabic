@@ -355,6 +355,43 @@ function getArabicInputCharacters(value) {
   });
 }
 
+function getEnglishInputCharacters(value) {
+  return Array.from(String(value || '')).flatMap((character, index) => {
+    const normalized = normalizeEnglishTypingValue(character);
+    if (!normalized) return [];
+    return Array.from(normalized).map(normalizedCharacter => ({
+      normalized: normalizedCharacter,
+      index
+    }));
+  });
+}
+
+function getFirstTextMismatchSelection(expectedText, submittedText, { arabic = false } = {}) {
+  if (arabic) return getFirstArabicMismatchSelection(expectedText, submittedText);
+
+  const expectedCharacters = Array.from(normalizeEnglishTypingValue(expectedText).replace(/\s/g, ''));
+  const submittedCharacters = getEnglishInputCharacters(submittedText)
+    .filter(character => character.normalized !== ' ');
+  const compareLength = Math.max(expectedCharacters.length, submittedCharacters.length);
+
+  for (let index = 0; index < compareLength; index += 1) {
+    if (expectedCharacters[index] === submittedCharacters[index]?.normalized) continue;
+    const submittedCharacter = submittedCharacters[index];
+    if (submittedCharacter) {
+      return {
+        start: submittedCharacter.index,
+        end: submittedCharacter.index + 1
+      };
+    }
+    return {
+      start: submittedText.length,
+      end: submittedText.length
+    };
+  }
+
+  return null;
+}
+
 function getFirstArabicMismatchSelection(expectedText, submittedText) {
   const expectedCharacters = Array.from(normalizeArabicTypingValue(expectedText).replace(/[^\u0621-\u064A]/g, ''));
   const submittedCharacters = getArabicInputCharacters(submittedText);
@@ -376,6 +413,27 @@ function getFirstArabicMismatchSelection(expectedText, submittedText) {
   }
 
   return null;
+}
+
+function selectFirstTraceMismatch(input, expectedText, submittedText, options = {}) {
+  const mismatchSelection = getFirstTextMismatchSelection(expectedText, submittedText, options);
+  requestAnimationFrame(() => {
+    if (!input || !mismatchSelection) return;
+    input.focus();
+    input.setSelectionRange(mismatchSelection.start, mismatchSelection.end);
+  });
+}
+
+function startTimedTraceFeedback(feedback, timerRef, setFeedback, duration = 1400) {
+  if (timerRef.current) {
+    clearTimeout(timerRef.current);
+    timerRef.current = null;
+  }
+  setFeedback(feedback);
+  timerRef.current = setTimeout(() => {
+    setFeedback(null);
+    timerRef.current = null;
+  }, duration);
 }
 
 function getTypingPromptLines(lines, arabicMode) {
@@ -547,6 +605,7 @@ export default function PassageActivityBody({
   const [learnFeedback, setLearnFeedback] = useState(null);
   const [learnSelectedChoiceId, setLearnSelectedChoiceId] = useState(null);
   const [learnCorrectionPrompt, setLearnCorrectionPrompt] = useState(null);
+  const [learnTraceFeedback, setLearnTraceFeedback] = useState(null);
   const [learnStarted, setLearnStarted] = useState(false);
   const [learnReviewMode, setLearnReviewMode] = useState(null);
   const [learnSettingsOpen, setLearnSettingsOpen] = useState(() => (
@@ -572,6 +631,7 @@ export default function PassageActivityBody({
   const learnDockedControlsRef = useRef(null);
   const arrangeFeedbackTimerRef = useRef(null);
   const typingFeedbackTimerRef = useRef(null);
+  const learnTraceFeedbackTimerRef = useRef(null);
   const englishTypingFeedbackTimerRef = useRef(null);
   const matchingFeedbackTimerRef = useRef(null);
   const matchingCorrectFeedbackTimerRefs = useRef([]);
@@ -760,6 +820,7 @@ export default function PassageActivityBody({
     setLearnWrittenAnswer('');
     setLearnTraceAnswer('');
     setLearnFeedback(null);
+    clearLearnTraceFeedback();
     setLearnSelectedChoiceId(null);
     if (wasCorrect) {
       setLearnCompletedIds(ids => ids.includes(currentLearnPhraseId) ? ids : ids.concat(currentLearnPhraseId));
@@ -838,6 +899,7 @@ export default function PassageActivityBody({
     setLearnWrittenAnswer('');
     setLearnTraceAnswer('');
     setLearnFeedback(null);
+    clearLearnTraceFeedback();
     setLearnSelectedChoiceId(null);
     setLearnCorrectionPrompt(null);
     setLearnStarted(false);
@@ -855,6 +917,10 @@ export default function PassageActivityBody({
       if (englishTypingFeedbackTimerRef.current) {
         clearTimeout(englishTypingFeedbackTimerRef.current);
         englishTypingFeedbackTimerRef.current = null;
+      }
+      if (learnTraceFeedbackTimerRef.current) {
+        clearTimeout(learnTraceFeedbackTimerRef.current);
+        learnTraceFeedbackTimerRef.current = null;
       }
       if (matchingFeedbackTimerRef.current) {
         clearTimeout(matchingFeedbackTimerRef.current);
@@ -926,6 +992,7 @@ export default function PassageActivityBody({
     setLearnWrittenAnswer('');
     setLearnTraceAnswer('');
     setLearnFeedback(null);
+    clearLearnTraceFeedback();
     setLearnSelectedChoiceId(null);
     setLearnCorrectionPrompt(null);
     setLearnReviewMode(null);
@@ -1254,6 +1321,7 @@ export default function PassageActivityBody({
       setLearnStarted(false);
       setLearnReviewMode(null);
       setLearnCorrectionPrompt(null);
+      clearLearnTraceFeedback();
       setLearnResetKey(key => key + 1);
     }
 
@@ -1265,29 +1333,6 @@ export default function PassageActivityBody({
     if (!isLearnActivity || !learnStarted) return;
     window.scrollTo({ top: 0, left: 0 });
   }, [isLearnActivity, learnStarted, learnPromptCount, currentLearnItemType, Boolean(learnCorrectionPrompt)]);
-
-  useEffect(() => {
-    if (!isLearnActivity || !learnStarted) return undefined;
-    if (typeof window === 'undefined' || !window.matchMedia('(min-width: 681px)').matches) return undefined;
-    const input = learnCorrectionPrompt
-      ? learnTraceInputRef.current
-      : currentLearnItemType === 'term' && learnQuestionType === 'written' && !learnFeedback
-        ? learnWrittenInputRef.current
-        : null;
-    if (!input) return undefined;
-    const frameId = window.requestAnimationFrame(() => {
-      input.focus({ preventScroll: true });
-    });
-    return () => window.cancelAnimationFrame(frameId);
-  }, [
-    isLearnActivity,
-    learnStarted,
-    learnCorrectionPrompt,
-    currentLearnItemType,
-    learnQuestionType,
-    learnFeedback,
-    learnPromptCount
-  ]);
 
   function clearArrangeFeedback() {
     if (arrangeFeedbackTimerRef.current) {
@@ -1303,6 +1348,14 @@ export default function PassageActivityBody({
       typingFeedbackTimerRef.current = null;
     }
     setTypingFeedback(null);
+  }
+
+  function clearLearnTraceFeedback() {
+    if (learnTraceFeedbackTimerRef.current) {
+      clearTimeout(learnTraceFeedbackTimerRef.current);
+      learnTraceFeedbackTimerRef.current = null;
+    }
+    setLearnTraceFeedback(null);
   }
 
   function clearEnglishTypingFeedback() {
@@ -1655,19 +1708,15 @@ export default function PassageActivityBody({
                 });
                 setTypedArabic('');
               } else {
-                const mismatchSelection = getFirstArabicMismatchSelection(typingTarget, typedArabic);
-                requestAnimationFrame(() => {
-                  const input = typingInputRef.current;
-                  if (!input || !mismatchSelection) return;
-                  input.focus();
-                  input.setSelectionRange(mismatchSelection.start, mismatchSelection.end);
+                selectFirstTraceMismatch(typingInputRef.current, typingTarget, typedArabic, {
+                  arabic: true
                 });
               }
-              setTypingFeedback(submittedCorrectly ? 'correct' : 'incorrect');
-              typingFeedbackTimerRef.current = setTimeout(() => {
-                setTypingFeedback(null);
-                typingFeedbackTimerRef.current = null;
-              }, 1400);
+              startTimedTraceFeedback(
+                submittedCorrectly ? 'correct' : 'incorrect',
+                typingFeedbackTimerRef,
+                setTypingFeedback
+              );
             }}
             disabled={!typedArabic.trim() || Boolean(typingFeedback)}
           >
@@ -2152,7 +2201,22 @@ export default function PassageActivityBody({
 
     function finishCorrection() {
       setLearnCorrectionPrompt(null);
+      clearLearnTraceFeedback();
       moveCurrentLearnTerm(false);
+    }
+
+    function submitLearnCorrectionTrace() {
+      if (!learnTraceAnswer.trim()) return;
+      clearLearnTraceFeedback();
+      if (traceComplete) {
+        finishCorrection();
+        return;
+      }
+
+      selectFirstTraceMismatch(learnTraceInputRef.current, correctionAnswer, learnTraceAnswer, {
+        arabic: correctionArabic
+      });
+      startTimedTraceFeedback('incorrect', learnTraceFeedbackTimerRef, setLearnTraceFeedback);
     }
 
     function setOnlyAvailableQuestionTypes(nextTypes) {
@@ -2612,7 +2676,11 @@ export default function PassageActivityBody({
             </div>
           )}
           <div className="lp-learn-trace-row">
-            <div className="lp-learn-trace-copybox">
+            <div className={[
+              'lp-learn-trace-copybox',
+              correctionArabic ? 'trace-style' : '',
+              learnTraceFeedback || ''
+            ].filter(Boolean).join(' ')}>
               <textarea
                 className="lp-learn-trace-ghost"
                 value={correctionAnswer}
@@ -2635,6 +2703,7 @@ export default function PassageActivityBody({
                 ref={learnTraceInputRef}
                 onChange={event => {
                   setLearnTraceAnswer(event.target.value);
+                  clearLearnTraceFeedback();
                   requestAnimationFrame(() => {
                     if (learnTraceInputRef.current) learnTraceInputRef.current.scrollTop = 0;
                     if (learnTraceGhostRef.current) learnTraceGhostRef.current.scrollTop = 0;
@@ -2646,9 +2715,9 @@ export default function PassageActivityBody({
                   learnTraceGhostRef.current.scrollTop = 0;
                 }}
                 onKeyDown={event => {
-                  if (event.key !== 'Enter' || event.shiftKey || !traceComplete) return;
+                  if (event.key !== 'Enter' || event.shiftKey || !learnTraceAnswer.trim()) return;
                   event.preventDefault();
-                  finishCorrection();
+                  submitLearnCorrectionTrace();
                 }}
                 enterKeyHint="done"
                 rows={1}
@@ -2667,8 +2736,8 @@ export default function PassageActivityBody({
             <button
               type="button"
               className="lp-activity-button lp-activity-submit"
-              onClick={finishCorrection}
-              disabled={!traceComplete}
+              onClick={submitLearnCorrectionTrace}
+              disabled={!learnTraceAnswer.trim()}
             >
               Continue
             </button>

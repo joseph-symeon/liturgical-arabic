@@ -1918,6 +1918,11 @@
   outline: none;
 }
 
+.lp-type-arabic-input::selection {
+  background: color-mix(in srgb, var(--recite-accent, var(--app-accent)) 34%, transparent);
+  color: currentColor;
+}
+
 .lp-type-arabic-copybox:focus-within {
   border-color: #a8a29e;
   outline: 2px solid rgba(168, 162, 158, 0.28);
@@ -1934,16 +1939,7 @@
 }
 
 .lp-type-arabic-copybox.incorrect {
-  border-color: var(--liturgical-red);
-  background: color-mix(in srgb, var(--liturgical-red) 12%, transparent);
-}
-
-.lp-type-arabic-copybox.incorrect .lp-type-arabic-trace {
-  animation: traceMismatchPulse 640ms ease both;
-}
-
-.lp-type-arabic-copybox.incorrect .lp-type-arabic-input {
-  color: var(--liturgical-red);
+  animation: traceInputNudge 360ms ease both;
 }
 
 .lp-type-arabic-actions {
@@ -1962,6 +1958,19 @@
     text-shadow:
       0 0 0.1px currentColor,
       0 0 10px color-mix(in srgb, var(--liturgical-red) 54%, transparent);
+  }
+}
+
+@keyframes traceInputNudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  28% {
+    transform: translateY(-5px);
+  }
+  58% {
+    transform: translateY(4px);
   }
 }
 
@@ -2945,23 +2954,29 @@
 
 .lp-learn-trace-copybox {
   position: relative;
-  min-height: 58px;
-  border: 2px solid var(--learn-border-strong);
+  min-height: 0;
+  border: 1px solid color-mix(in srgb, var(--learn-border-strong) 52%, var(--learn-border));
   border-radius: 8px;
-  background: transparent;
+  background: color-mix(in srgb, var(--learn-surface-strong) 88%, var(--learn-text) 4%);
   overflow: hidden;
+  --trace-input-font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --trace-input-font-size: 22px;
+  --trace-input-font-weight: 400;
+  --trace-input-line-height: 1.45;
+  transition: background-color 700ms ease, border-color 700ms ease, color 700ms ease;
 }
 
 .lp-learn-trace-ghost,
 .lp-learn-trace-input {
   box-sizing: border-box;
   width: 100%;
-  min-height: 58px;
+  min-height: 0;
   border: 0;
   background: transparent;
-  font: inherit;
-  font-size: 20px;
-  line-height: 1.35;
+  font-family: var(--trace-input-font-family);
+  font-size: var(--trace-input-font-size);
+  font-weight: var(--trace-input-font-weight);
+  line-height: var(--trace-input-line-height);
   padding: 12px 14px;
   resize: none;
 }
@@ -2970,8 +2985,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  color: var(--learn-muted);
-  opacity: 0.5;
+  color: var(--learn-text);
+  opacity: 0.24;
   overflow: hidden;
   pointer-events: none;
 }
@@ -2980,16 +2995,26 @@
   position: relative;
   z-index: 1;
   color: var(--learn-text);
+  caret-color: var(--learn-accent);
 }
 
 .lp-learn-trace-input:focus {
   outline: none;
 }
 
+.lp-learn-trace-input::selection {
+  background: color-mix(in srgb, var(--learn-accent) 34%, transparent);
+  color: var(--learn-text);
+}
+
 .lp-learn-trace-copybox:focus-within {
-  border-color: var(--learn-muted);
-  outline: 2px solid color-mix(in srgb, var(--learn-muted) 28%, transparent);
+  border-color: color-mix(in srgb, var(--learn-muted) 58%, var(--learn-border));
+  outline: 2px solid color-mix(in srgb, var(--learn-muted) 18%, transparent);
   outline-offset: 2px;
+}
+
+.lp-learn-trace-copybox.incorrect {
+  animation: traceInputNudge 360ms ease both;
 }
 
 .lp-learn-skip {
@@ -5334,6 +5359,10 @@
     padding: 6px 0 max(12px, env(safe-area-inset-bottom, 0px));
   }
 
+  html.lp-pwa-standalone .lp-page.recitation-mode-page .lp-activity-toolbar-shell {
+    padding-bottom: calc(max(12px, env(safe-area-inset-bottom, 0px)) + 34px);
+  }
+
   .lp-page.recitation-mode-page .lp-activity-toolbar-shell::before {
     top: -6px;
     right: calc(-1 * max(12px, env(safe-area-inset-right, 0px)));
@@ -5503,7 +5532,7 @@
 
   html.lp-learn-session-active .lp-page.learn-mode-page .lp-learn-question-frame.arrange-frame .lp-arrange-tile,
   html.lp-learn-session-active .lp-page.learn-mode-page .lp-learn-question-frame.arrange-frame .lp-arrange-answer-tile {
-    touch-action: pan-y;
+    touch-action: none;
   }
 
   html.lp-learn-session-active .lp-page.learn-mode-page .lp-learn-correction {
@@ -6083,6 +6112,10 @@
     opacity: 0.5;
   }
 
+  .lp-learn-trace-ghost {
+    opacity: 0.5;
+  }
+
   .lp-type-arabic-input {
     color: var(--dark-text);
     caret-color: var(--dark-text);
@@ -6119,15 +6152,6 @@
     border-color: #86efac;
     background: color-mix(in srgb, #22c55e 18%, transparent);
     color: #86efac;
-  }
-
-  .lp-type-arabic-copybox.incorrect {
-    border-color: var(--liturgical-red);
-    background: color-mix(in srgb, var(--liturgical-red) 18%, transparent);
-  }
-
-  .lp-type-arabic-copybox.incorrect .lp-type-arabic-input {
-    color: var(--liturgical-red);
   }
 
   .lp-type-english-input.incorrect {

@@ -382,6 +382,25 @@ export default function App() {
     displaySettings: initialDisplaySettings
   });
 
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const root = document.documentElement;
+    const standaloneQuery = window.matchMedia?.("(display-mode: standalone)");
+
+    function updateStandaloneClass() {
+      const isStandalone = Boolean(window.navigator?.standalone) || Boolean(standaloneQuery?.matches);
+      root.classList.toggle("lp-pwa-standalone", isStandalone);
+    }
+
+    updateStandaloneClass();
+    standaloneQuery?.addEventListener?.("change", updateStandaloneClass);
+
+    return () => {
+      standaloneQuery?.removeEventListener?.("change", updateStandaloneClass);
+      root.classList.remove("lp-pwa-standalone");
+    };
+  }, []);
+
   function getDisplaySettings() {
     return {
       arabicMode,

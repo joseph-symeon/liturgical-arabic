@@ -18674,6 +18674,16 @@ const phrases = {
       "section: The Second Antiphon"
     ]
   },
+  "dismissal-and-save-us-001": {
+    "arabic": "وَخَلِّصْنَا",
+    "translation": "and save us",
+    "literal": "and save us",
+    "tags": [
+      "dismissal",
+      "petition",
+      "section: The Dismissal"
+    ]
+  },
   "one-of-trinity-001": {
     "arabic": "وَأَنْتَ لَمْ تَزَلْ أَحَدَ الثّالوثِ القُدّوسِ",
     "translation": "who art one of the Holy Trinity",
