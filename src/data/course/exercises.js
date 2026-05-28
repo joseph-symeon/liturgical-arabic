@@ -1764,6 +1764,7 @@ export const exerciseDefinitions = [
     "id": "word-epistle-reading",
     "segment_ids": [
       "epistle-let-us-attend-1",
+      "course-trisagion-with-strength",
       "epistle-reader-prokeimenon",
       "epistle-wisdom",
       "epistle-reader-title",
@@ -1771,6 +1772,9 @@ export const exerciseDefinitions = [
       "epistle-reader-reads",
       "epistle-peace-reader",
       "epistle-alleluia"
+    ],
+    "include_rubric_phrase_ids": [
+      "dynamis-001"
     ]
   },
   {
@@ -1856,11 +1860,7 @@ export const exerciseDefinitions = [
       "course-trisagion-holy-god",
       "course-trisagion-holy-mighty",
       "course-trisagion-holy-immortal",
-      "course-trisagion-have-mercy",
-      "course-trisagion-with-strength"
-    ],
-    "include_rubric_phrase_ids": [
-      "dynamis-001"
+      "course-trisagion-have-mercy"
     ],
     "media": GREAT_COMPLINE_MEDIA
   },
