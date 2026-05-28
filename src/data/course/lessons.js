@@ -72,7 +72,18 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "exercise_id": "alleluia-glory-our-god-hope",
+        "title": "Alleluia. Glory to thee.",
+        "exercise_id": "alleluia-glory-to-thee",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "O our God and our Hope",
+        "exercise_id": "our-god-hope-glory-to-thee",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "Alleluia. O our God and our Hope.",
+        "exercise_id": "alleluia-glory-our-god-hope-summary",
         "activity_policy": "standard"
       }
     ]

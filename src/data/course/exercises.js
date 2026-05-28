@@ -595,12 +595,36 @@ export const exerciseDefinitions = [
     "media": GREAT_COMPLINE_PSALMS_MEDIA
   },
   {
-    "id": "alleluia-glory-our-god-hope",
+    "id": "alleluia-glory-to-thee",
+    "segment_ids": [
+      "vespers-psalm103-alleluia-glory"
+    ],
+    "media": GREAT_COMPLINE_PSALMS_MEDIA,
+    "service_text_id": "great-vespers",
+    "service_range": {
+      "section_id": "psalm-103",
+      "start_segment_id": "vespers-psalm103-alleluia-glory",
+      "end_segment_id": "vespers-psalm103-alleluia-glory"
+    }
+  },
+  {
+    "id": "our-god-hope-glory-to-thee",
+    "segment_ids": [
+      "vespers-psalm103-our-god-hope"
+    ],
+    "service_text_id": "great-vespers",
+    "service_range": {
+      "section_id": "psalm-103",
+      "start_segment_id": "vespers-psalm103-our-god-hope",
+      "end_segment_id": "vespers-psalm103-our-god-hope"
+    }
+  },
+  {
+    "id": "alleluia-glory-our-god-hope-summary",
     "segment_ids": [
       "vespers-psalm103-alleluia-glory",
       "vespers-psalm103-our-god-hope"
     ],
-    "media": GREAT_COMPLINE_PSALMS_MEDIA,
     "service_text_id": "great-vespers",
     "service_range": {
       "section_id": "psalm-103",
