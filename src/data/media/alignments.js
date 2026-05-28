@@ -255,6 +255,100 @@ export const alignmentDefinitions = [
     ]
   },
   {
+    "id": "alignment-great-compline--_8U-4WDLbI-heavenly-king-v1",
+    "service_text_id": "great-compline",
+    "recording_id": "recording--_8U-4WDLbI",
+    "method": "faster-whisper-medium-word-timestamps-with-waveform-rms-refined-boundaries",
+    "ranges": [
+      {
+        "segment_ids": [
+          "preparation-heavenly-king"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "preparation-heavenly-king-001",
+            "start_seconds": 18.265,
+            "end_seconds": 19.76
+          },
+          {
+            "phrase_id": "preparation-comforter-spirit-truth-001",
+            "start_seconds": 19.76,
+            "end_seconds": 20.42
+          },
+          {
+            "phrase_id": "preparation-spirit-truth-001",
+            "start_seconds": 20.42,
+            "end_seconds": 21.26
+          },
+          {
+            "phrase_id": "preparation-everywhere-present-001",
+            "start_seconds": 21.26,
+            "end_seconds": 23.04
+          },
+          {
+            "phrase_id": "preparation-filling-all-things-001",
+            "start_seconds": 23.04,
+            "end_seconds": 23.94
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "preparation-treasury-giver"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "preparation-treasury-giver-001",
+            "start_seconds": 24.38,
+            "end_seconds": 25.56
+          },
+          {
+            "phrase_id": "preparation-giver-of-life-001",
+            "start_seconds": 25.56,
+            "end_seconds": 26.555
+          },
+          {
+            "phrase_id": "preparation-come-abide-001",
+            "start_seconds": 26.995,
+            "end_seconds": 28.3
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "preparation-cleanse-save"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "preparation-cleanse-save-001",
+            "start_seconds": 28.3,
+            "end_seconds": 29.12
+          },
+          {
+            "phrase_id": "preparation-from-every-stain-001",
+            "start_seconds": 29.12,
+            "end_seconds": 29.76
+          },
+          {
+            "phrase_id": "preparation-save-good-one-001",
+            "start_seconds": 29.76,
+            "end_seconds": 30.26
+          },
+          {
+            "phrase_id": "preparation-o-good-one-001",
+            "start_seconds": 30.26,
+            "end_seconds": 31.42
+          },
+          {
+            "phrase_id": "preparation-our-souls-001",
+            "start_seconds": 31.42,
+            "end_seconds": 31.925
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "alignment-great-compline-g_4r4wzt2Vg-v1",
     "service_text_id": "great-compline",
     "recording_id": "recording-g_4r4wzt2Vg",

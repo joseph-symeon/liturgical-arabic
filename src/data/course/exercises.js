@@ -18,6 +18,12 @@ const GREAT_COMPLINE_MEDIA = {
   default_playback_rate: 1
 };
 
+const HEAVENLY_KING_MEDIA = {
+  recording_id: "recording--_8U-4WDLbI",
+  alignment_id: "alignment-great-compline--_8U-4WDLbI-heavenly-king-v1",
+  default_playback_rate: 1
+};
+
 const GREAT_COMPLINE_PSALMS_MEDIA = {
   recording_id: "recording-4-6-12-2_xJIjyydso",
   alignment_id: "alignment-great-compline-4-6-12-2_xJIjyydso-come-worship-v1",
@@ -528,6 +534,7 @@ export const exerciseDefinitions = [
       "preparation-everywhere-present-001",
       "preparation-filling-all-things-001"
     ],
+    "media": HEAVENLY_KING_MEDIA,
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
       "section_id": "preparation-divine-liturgy",
@@ -545,6 +552,7 @@ export const exerciseDefinitions = [
       "preparation-giver-of-life-001",
       "preparation-come-abide-001"
     ],
+    "media": HEAVENLY_KING_MEDIA,
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
       "section_id": "preparation-divine-liturgy",
@@ -564,6 +572,7 @@ export const exerciseDefinitions = [
       "preparation-o-good-one-001",
       "preparation-our-souls-001"
     ],
+    "media": HEAVENLY_KING_MEDIA,
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
       "section_id": "preparation-divine-liturgy",
@@ -578,6 +587,7 @@ export const exerciseDefinitions = [
       "preparation-treasury-giver",
       "preparation-cleanse-save"
     ],
+    "media": HEAVENLY_KING_MEDIA,
     "service_text_id": "divine-liturgy-john-chrysostom",
     "service_range": {
       "section_id": "preparation-divine-liturgy",
