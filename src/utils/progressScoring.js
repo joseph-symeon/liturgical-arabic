@@ -22,13 +22,36 @@ const RECITATION_REPETITION_CURVE = 36;
 const RECITATION_TRACE_BONUS = 0.04;
 let progressTrackingMode = PROGRESS_TRACKING_MODES.disabled;
 
-const COMPREHENSION_ATTEMPT_WEIGHTS = {
-  [COMPREHENSION_ATTEMPT_TYPES.matchingBlock]: 0.08,
-  [COMPREHENSION_ATTEMPT_TYPES.arrangeBlock]: 0.1,
-  [COMPREHENSION_ATTEMPT_TYPES.multipleChoiceEnglish]: 0.13,
-  [COMPREHENSION_ATTEMPT_TYPES.multipleChoiceArabic]: 0.2,
-  [COMPREHENSION_ATTEMPT_TYPES.writtenEnglish]: 0.32,
-  [COMPREHENSION_ATTEMPT_TYPES.writtenArabic]: 0.46
+const DEFAULT_COMPREHENSION_ATTEMPT_SIGNAL = {
+  correctWeight: 0.1,
+  incorrectWeight: 0.04
+};
+
+const COMPREHENSION_ATTEMPT_SIGNALS = {
+  [COMPREHENSION_ATTEMPT_TYPES.matchingBlock]: {
+    correctWeight: 0.06,
+    incorrectWeight: 0.02
+  },
+  [COMPREHENSION_ATTEMPT_TYPES.arrangeBlock]: {
+    correctWeight: 0.28,
+    incorrectWeight: 0.025
+  },
+  [COMPREHENSION_ATTEMPT_TYPES.multipleChoiceEnglish]: {
+    correctWeight: 0.1,
+    incorrectWeight: 0.05
+  },
+  [COMPREHENSION_ATTEMPT_TYPES.multipleChoiceArabic]: {
+    correctWeight: 0.18,
+    incorrectWeight: 0.03
+  },
+  [COMPREHENSION_ATTEMPT_TYPES.writtenEnglish]: {
+    correctWeight: 0.22,
+    incorrectWeight: 0.035
+  },
+  [COMPREHENSION_ATTEMPT_TYPES.writtenArabic]: {
+    correctWeight: 0.42,
+    incorrectWeight: 0.015
+  }
 };
 
 function clamp01(value) {
@@ -328,7 +351,7 @@ function getCorrectGainMultiplier(comprehensionProgress, todayKey) {
 export function applyComprehensionAttempt(phraseProgress = {}, attempt) {
   const migratedProgress = migratePhraseProgress(phraseProgress);
   const comprehensionProgress = migratedProgress.comprehension;
-  const weight = COMPREHENSION_ATTEMPT_WEIGHTS[attempt.type] ?? 0.1;
+  const signal = COMPREHENSION_ATTEMPT_SIGNALS[attempt.type] ?? DEFAULT_COMPREHENSION_ATTEMPT_SIGNAL;
   const currentConfidence = clamp01(comprehensionProgress.confidence || 0);
   const timestamp = attempt.timestamp || Date.now();
   const todayKey = getTodayKey(timestamp);
@@ -336,8 +359,8 @@ export function applyComprehensionAttempt(phraseProgress = {}, attempt) {
   const isCorrect = Boolean(attempt.correct);
   const correctGainMultiplier = getCorrectGainMultiplier(comprehensionProgress, todayKey);
   const nextConfidence = isCorrect
-    ? currentConfidence + ((1 - currentConfidence) * weight * correctGainMultiplier)
-    : currentConfidence - ((0.05 + weight * 0.55) * (0.75 + currentConfidence * 0.5));
+    ? currentConfidence + ((1 - currentConfidence) * signal.correctWeight * correctGainMultiplier)
+    : currentConfidence - (signal.incorrectWeight * (0.75 + currentConfidence * 0.5));
 
   const nextProgress = {
     ...migratedProgress,
