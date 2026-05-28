@@ -1,5 +1,5 @@
 // First-class recording source definitions.
-// Recordings are reusable media sources that activities and alignments can reference.
+// Recordings are reusable media sources that passages and alignments can reference.
 
 const recordingDefinitions = [
   {
@@ -971,6 +971,30 @@ const recordingDefinitions = [
       "language": "ar",
       "format": "json",
       "source_file_name": "recording-oLdHO28NWuM.asr.json",
+      "kind": "asr-word-timestamps",
+      "engine": "faster-whisper",
+      "model": "medium"
+    }
+  },
+  {
+    "id": "recording-f-DJruJ0HRs",
+    "title": "The Jesus Prayer",
+    "language": "ar",
+    "youtube": {
+      "video_id": "f-DJruJ0HRs",
+      "url": "https://www.youtube.com/watch?v=f-DJruJ0HRs",
+      "channel": "Joseph Price",
+      "duration_seconds": 3,
+      "upload_date": "20260505"
+    },
+    "audio": {
+      "format": "m4a",
+      "source_file_name": "recording-f-DJruJ0HRs.m4a"
+    },
+    "captions": {
+      "language": "ar",
+      "format": "json",
+      "source_file_name": "recording-f-DJruJ0HRs.asr.json",
       "kind": "asr-word-timestamps",
       "engine": "faster-whisper",
       "model": "medium"

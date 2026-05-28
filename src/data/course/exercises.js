@@ -50,6 +50,12 @@ const CHERUBIC_HYMN_MEDIA = {
 
 const GREAT_ENTRANCE_MEDIA = CHERUBIC_HYMN_MEDIA;
 
+const JESUS_PRAYER_MEDIA = {
+  recording_id: "recording-f-DJruJ0HRs",
+  alignment_id: "alignment-jesus-prayer-f-DJruJ0HRs-v1",
+  default_playback_rate: 1
+};
+
 export const exerciseDefinitions = [
   {
     "id": "blessed-is-the-kingdom",
@@ -1823,7 +1829,8 @@ export const exerciseDefinitions = [
     "id": "jesus-prayer",
     "segment_ids": [
       "course-jesus-prayer"
-    ]
+    ],
+    "media": JESUS_PRAYER_MEDIA
   },
   {
     "id": "glory-both-now",
@@ -2050,7 +2057,7 @@ export function resolveExercise(definition, segmentsMap = segments) {
 
   return {
     ...resolvedDefinition,
-    audio_clip: getServiceAudioClip(definition) || getMediaAudioClip(definition),
+    audio_clip: definition.audio_clip || getServiceAudioClip(definition) || getMediaAudioClip(definition),
     lines
   };
 }
@@ -2189,10 +2196,14 @@ export function hasLinkedRecording(exerciseId) {
   return Boolean(exercise?.audio_clip?.recording_id || exercise?.caption_clip?.recording_id);
 }
 
+function hasCaptionTimings(exerciseId) {
+  return getAlignedCaptions(exercises[exerciseId]).length > 0;
+}
+
 export function canUseActivityType(exerciseId, activityType) {
   const phraseCount = getExercisePhraseCount(exerciseId);
   if (activityType === PASSAGE_ACTIVITY_TYPES.phraseCaptions) {
-    return hasLinkedRecording(exerciseId);
+    return hasCaptionTimings(exerciseId);
   }
   if (activityType === PASSAGE_ACTIVITY_TYPES.matching) {
     return phraseCount > 1 && phraseCount <= 6;
@@ -2217,7 +2228,7 @@ export function canUseActivityType(exerciseId, activityType) {
 export function getStandardActivityOptions(exerciseId) {
   const activityOptions = [...STANDARD_ACTIVITY_OPTIONS];
   const phraseCount = getExercisePhraseCount(exerciseId);
-  if (hasLinkedRecording(exerciseId)) {
+  if (hasCaptionTimings(exerciseId)) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions],
       activity_type: PASSAGE_ACTIVITY_TYPES.phraseCaptions

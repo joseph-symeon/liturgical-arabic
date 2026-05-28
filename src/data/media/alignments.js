@@ -3,6 +3,40 @@
 
 export const alignmentDefinitions = [
   {
+    "id": "alignment-jesus-prayer-f-DJruJ0HRs-v1",
+    "recording_id": "recording-f-DJruJ0HRs",
+    "method": "faster-whisper-medium-word-timestamps-with-waveform-rms-refined-boundaries",
+    "ranges": [
+      {
+        "segment_ids": [
+          "course-jesus-prayer"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "vocative-o-lord-001",
+            "start_seconds": 0,
+            "end_seconds": 0.54
+          },
+          {
+            "phrase_id": "jesus-prayer-jesus-christ-001",
+            "start_seconds": 0.54,
+            "end_seconds": 1.64
+          },
+          {
+            "phrase_id": "jesus-prayer-son-of-god-001",
+            "start_seconds": 1.64,
+            "end_seconds": 2.32
+          },
+          {
+            "phrase_id": "jesus-prayer-have-mercy-on-me-001",
+            "start_seconds": 2.32,
+            "end_seconds": 2.975
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "alignment-great-compline-4-6-12-2_xJIjyydso-come-worship-v1",
     "service_text_id": "great-compline",
     "recording_id": "recording-4-6-12-2_xJIjyydso",
