@@ -669,7 +669,9 @@ const sourceSegments = {
       "doxology"
     ],
     "phrases": [
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -770,7 +772,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -845,7 +849,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -1496,9 +1502,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": "..."
       }
@@ -1762,9 +1768,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -1846,9 +1852,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -1892,7 +1898,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -1933,9 +1941,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -2069,7 +2077,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -2796,7 +2806,9 @@ const sourceSegments = {
       {"text": " "},
       {"phrase_id": "vespers-fervent-father-son-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}
@@ -2890,7 +2902,9 @@ const sourceSegments = {
       {"text": "، "},
       {"phrase_id": "vespers-evening-father-son-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
@@ -2951,7 +2965,9 @@ const sourceSegments = {
       {"text": "، "},
       {"phrase_id": "vespers-supplication-father-son-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}
@@ -3057,7 +3073,9 @@ const sourceSegments = {
       {"text": "، "},
       {"phrase_id": "vespers-peace-father-son-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}
@@ -3123,7 +3141,9 @@ const sourceSegments = {
         "phrase_id": "to-father-son-holy-spirit-001"
       },
       {"text": "، "},
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
@@ -3213,7 +3233,9 @@ const sourceSegments = {
     "phrases": [
       {"phrase_id": "vespers-dismissal-christ-existing-blessed-001"},
       {"text": "، "},
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}
@@ -3299,7 +3321,9 @@ const sourceSegments = {
         "phrase_id": "to-father-son-holy-spirit-001"
       },
       {"text": "، "},
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
@@ -3683,7 +3707,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -3800,7 +3826,9 @@ const sourceSegments = {
       "antiphon"
     ],
     "phrases": [
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -4128,7 +4156,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -4240,7 +4270,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -4339,9 +4371,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -4579,9 +4611,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -4905,9 +4937,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -5706,7 +5738,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -5851,7 +5885,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -6030,7 +6066,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -6210,7 +6248,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -6361,7 +6401,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -6538,7 +6580,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -6931,7 +6975,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -7732,9 +7778,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -7799,9 +7845,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -7866,9 +7912,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -7963,9 +8009,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -8048,9 +8094,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -8141,9 +8187,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": "، "
       },
@@ -8188,9 +8234,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": "، "
       },
@@ -8335,9 +8381,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -8482,9 +8528,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -9245,7 +9291,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -11899,9 +11947,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -12534,9 +12582,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -12745,9 +12793,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -13131,9 +13179,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": " "
       },
@@ -14372,9 +14420,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": "، "
       },
@@ -14686,9 +14734,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": "، "
       },
@@ -14887,7 +14935,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -14973,7 +15023,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -15043,7 +15095,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {
@@ -15108,9 +15162,9 @@ const sourceSegments = {
       {
         "text": "، "
       },
-      {
-        "phrase_id": "now-and-ever-001"
-      },
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {
         "text": "، "
       },
@@ -15570,7 +15624,9 @@ const sourceSegments = {
       {"text": " "},
       {"phrase_id": "thanksgiving-second-with-father-spirit-001"},
       {"text": "، "},
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
@@ -15873,7 +15929,9 @@ const sourceSegments = {
       "doxology"
     ],
     "phrases": [
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": ". "},
@@ -16099,7 +16157,9 @@ const sourceSegments = {
       {"text": " "},
       {"phrase_id": "departed-spirit-doxology-001"},
       {"text": "، "},
-      {"phrase_id": "now-and-ever-001"},
+      {"phrase_id": "beginner-both-now-001"},
+      {"text": " "},
+      {"phrase_id": "beginner-and-ever-001"},
       {"text": " "},
       {"phrase_id": "unto-ages-of-ages-001"},
       {"text": "."}

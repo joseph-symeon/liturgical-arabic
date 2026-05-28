@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import recordings from "../../data/media/recordings.js";
 import phrases from "../../data/texts/phrases.js";
+import segments from "../../data/texts/segments.js";
 import { isPhraseCaptionsActivity, isReadListenActivity, PASSAGE_ACTIVITY_TYPES } from "../../utils/passageActivities.js";
 import { getDisplayedCaption } from "../../utils/passageTiming.js";
 import { recordRecitationRepetition } from "../../utils/progressScoring.js";
@@ -14,6 +15,8 @@ const PRACTICE_TEXT_MODE_STORAGE_KEY = "liturgical-arabic:practice-text-mode";
 const KARAOKE_MODE_STORAGE_KEY = "liturgical-arabic:karaoke-mode";
 const REQUIRED_TEXT_MODES = ["translation", "literal"];
 const RECITATION_REPETITION_THRESHOLD = 0.8;
+const GROUPED_CAPTION_MIN_WORDS = 2;
+const GROUPED_CAPTION_MAX_GAP_SECONDS = 0.55;
 
 function getStoredKaraokeMode() {
   if (typeof window === "undefined") return false;
@@ -30,6 +33,127 @@ function getStoredPracticeTextMode() {
   if (typeof window === "undefined") return "literal";
   const stored = window.localStorage.getItem(PRACTICE_TEXT_MODE_STORAGE_KEY);
   return REQUIRED_TEXT_MODES.includes(stored) ? stored : "literal";
+}
+
+function getCaptionBoundaryKey(caption) {
+  return [
+    caption?.range_key,
+    caption?.segment_id,
+    caption?.source_segment_id
+  ].filter(Boolean).join(":");
+}
+
+function getArabicWordCountForCaption(caption) {
+  const arabic = phrases[caption?.phrase_id]?.arabic || "";
+  return arabic.trim().split(/\s+/).filter(Boolean).length;
+}
+
+function startsWithAttachedWaw(caption) {
+  const arabic = phrases[caption?.phrase_id]?.arabic || "";
+  return /^و[^\s]/u.test(arabic.trim());
+}
+
+function hasStrongTextBoundaryBetween(first, second) {
+  if (!first?.source_segment_id || first.source_segment_id !== second?.source_segment_id) return false;
+  if (!Number.isInteger(first.phrase_index) || !Number.isInteger(second.phrase_index)) return false;
+  if (second.phrase_index !== first.phrase_index + 1) return false;
+
+  const parts = segments[first.source_segment_id]?.phrases || [];
+  const phrasePartIndexes = parts
+    .map((part, index) => part.phrase_id ? index : null)
+    .filter(index => index !== null);
+  const firstPartIndex = phrasePartIndexes[first.phrase_index];
+  const secondPartIndex = phrasePartIndexes[second.phrase_index];
+  if (!Number.isInteger(firstPartIndex) || !Number.isInteger(secondPartIndex)) return false;
+
+  const textBetween = parts
+    .slice(firstPartIndex + 1, secondPartIndex)
+    .map(part => part.text || "")
+    .join("");
+  return /[،؛.!؟]/u.test(textBetween);
+}
+
+function canGroupCaptions(first, second) {
+  if (!first || !second) return false;
+  if (getCaptionBoundaryKey(first) !== getCaptionBoundaryKey(second)) return false;
+  if (hasStrongTextBoundaryBetween(first, second)) return false;
+  if (
+    Number.isInteger(first.phrase_index)
+      && Number.isInteger(second.phrase_index)
+      && second.phrase_index <= first.phrase_index
+  ) {
+    return false;
+  }
+  return second.start_seconds - first.end_seconds <= GROUPED_CAPTION_MAX_GAP_SECONDS;
+}
+
+function isCompleteTwoPhraseSegmentGroup(groupCaptions, nextCaption, afterNextCaption) {
+  const currentCaption = groupCaptions[groupCaptions.length - 1];
+  if (groupCaptions.length !== 1) return false;
+  if (currentCaption.phrase_index !== 0 || nextCaption?.phrase_index !== 1) return false;
+  return !afterNextCaption
+    || getCaptionBoundaryKey(nextCaption) !== getCaptionBoundaryKey(afterNextCaption)
+    || (
+      Number.isInteger(afterNextCaption.phrase_index)
+        && afterNextCaption.phrase_index <= nextCaption.phrase_index
+    );
+}
+
+function shouldGroupCaptionForward(groupCaptions, nextCaption, wordCount, afterNextCaption) {
+  if (!canGroupCaptions(groupCaptions[groupCaptions.length - 1], nextCaption)) return false;
+
+  if (isCompleteTwoPhraseSegmentGroup(groupCaptions, nextCaption, afterNextCaption)) return true;
+
+  const nextWordCount = getArabicWordCountForCaption(nextCaption);
+  if (startsWithAttachedWaw(nextCaption) && nextWordCount === 1) return true;
+
+  const currentCaption = groupCaptions[groupCaptions.length - 1];
+  if (wordCount < GROUPED_CAPTION_MIN_WORDS && startsWithAttachedWaw(currentCaption) && nextWordCount > 1) {
+    return false;
+  }
+
+  return wordCount < GROUPED_CAPTION_MIN_WORDS;
+}
+
+function buildCaptionDisplayGroups(captions) {
+  const groups = [];
+  let index = 0;
+
+  while (index < captions.length) {
+    const groupCaptions = [captions[index]];
+    let wordCount = getArabicWordCountForCaption(captions[index]);
+
+    while (index + groupCaptions.length < captions.length) {
+      const nextCaption = captions[index + groupCaptions.length];
+      const afterNextCaption = captions[index + groupCaptions.length + 1];
+      if (!shouldGroupCaptionForward(groupCaptions, nextCaption, wordCount, afterNextCaption)) break;
+      groupCaptions.push(nextCaption);
+      wordCount += getArabicWordCountForCaption(nextCaption);
+    }
+
+    groups.push({
+      ...groupCaptions[0],
+      display_key: groupCaptions
+        .map(caption => `${caption.phrase_id}:${caption.start_seconds}:${caption.end_seconds}`)
+        .join("|"),
+      phrase_ids: groupCaptions.map(caption => caption.phrase_id),
+      start_seconds: groupCaptions[0].start_seconds,
+      end_seconds: groupCaptions[groupCaptions.length - 1].end_seconds
+    });
+    index += groupCaptions.length;
+  }
+
+  return groups;
+}
+
+function findDisplayCaptionForActiveCaption(displayCaptions, activeCaption) {
+  if (!activeCaption) return null;
+  return displayCaptions.find(displayCaption => (
+    displayCaption.start_seconds <= activeCaption.start_seconds
+      && displayCaption.end_seconds >= activeCaption.end_seconds
+      && displayCaption.phrase_ids?.includes(activeCaption.phrase_id)
+      && getCaptionBoundaryKey(displayCaption) === getCaptionBoundaryKey(activeCaption)
+  )) || activeCaption;
 }
 
 export default function PassageExperience({
@@ -85,6 +209,18 @@ export default function PassageExperience({
     primeInitialCaption: captionActivity || (canUseKaraoke && karaokeMode)
   });
   const activePhrase = activeCaption ? phrases[activeCaption.phrase_id] : null;
+  const groupedDisplayCaptions = useMemo(
+    () => buildCaptionDisplayGroups(resolvedCaptions),
+    [resolvedCaptions]
+  );
+  const displayCaption = captionActivity
+    ? findDisplayCaptionForActiveCaption(groupedDisplayCaptions, activeCaption)
+    : activeCaption;
+  const displayPhrases = displayCaption?.phrase_ids?.length
+    ? displayCaption.phrase_ids.map(phraseId => phrases[phraseId]).filter(Boolean)
+    : activePhrase
+      ? [activePhrase]
+      : [];
   const karaokeActiveCaption = canUseKaraoke
     && karaokeMode
     && (playbackActive || typeof currentTime === "number")
@@ -214,8 +350,9 @@ export default function PassageExperience({
     <div className={`lp-passage-experience${!showPracticeToolbar ? " focus-mode" : ""}`}>
       {captionActivity && (
         <PassageSyncedCaption
-          activeCaption={activeCaption}
+          activeCaption={displayCaption}
           activePhrase={activePhrase}
+          activePhrases={displayPhrases}
           textMode={captionTextMode}
           arabicMode={arabicMode}
           arabicFontFamily={arabicFontFamily}

@@ -4,16 +4,22 @@ import { getArabicText } from "../../utils/arabic.js";
 export default function PassageSyncedCaption({
   activeCaption,
   activePhrase,
+  activePhrases,
   textMode = "none",
   arabicMode = "vocalized",
   arabicFontFamily,
   arabicFontWeight,
   onTogglePlayback
 }) {
+  const displayedPhrases = activePhrases?.length
+    ? activePhrases
+    : activePhrase
+      ? [activePhrase]
+      : [];
   const secondaryText = textMode === "translation"
-    ? activePhrase?.translation
+    ? displayedPhrases.map(phrase => phrase?.translation).filter(Boolean).join(" ")
     : textMode === "literal"
-      ? activePhrase?.literal
+      ? displayedPhrases.map(phrase => phrase?.literal).filter(Boolean).join(" ")
       : null;
 
   return (
@@ -21,10 +27,10 @@ export default function PassageSyncedCaption({
       className="lp-synced-stage"
       dir="rtl"
     >
-      {activePhrase && (
+      {displayedPhrases.length > 0 && (
         <div
           className={onTogglePlayback ? "lp-synced-line active interactive" : "lp-synced-line active"}
-          key={activeCaption?.phrase_id}
+          key={activeCaption?.display_key || activeCaption?.phrase_id}
           role={onTogglePlayback ? "button" : undefined}
           tabIndex={onTogglePlayback ? 0 : undefined}
           aria-label={onTogglePlayback ? "Play or pause caption audio" : undefined}
@@ -40,7 +46,9 @@ export default function PassageSyncedCaption({
             fontWeight: arabicFontWeight
           }}
         >
-          <div className="lp-synced-arabic">{getArabicText(activePhrase, arabicMode)}</div>
+          <div className="lp-synced-arabic">
+            {displayedPhrases.map(phrase => getArabicText(phrase, arabicMode)).join(" ")}
+          </div>
           {secondaryText && (
             <div className="lp-synced-translation" dir="ltr">
               {secondaryText}

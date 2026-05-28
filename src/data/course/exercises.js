@@ -1031,7 +1031,8 @@ export const exerciseDefinitions = [
       "lords-prayer-thine-kingdom-power-001",
       "lords-prayer-thine-kingdom-glory-001",
       "doxology-of-father-son-spirit-001",
-      "now-and-ever-001",
+      "beginner-both-now-001",
+      "beginner-and-ever-001",
       "unto-ages-of-ages-001"
     ],
     "service_text_id": "divine-liturgy-john-chrysostom",

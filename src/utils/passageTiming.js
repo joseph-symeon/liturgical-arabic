@@ -1,6 +1,8 @@
 import { getRangeBounds } from "./alignmentTiming.js";
 import segments from "../data/texts/segments.js";
 
+const CONTINUOUS_CAPTION_GAP_TOLERANCE_SECONDS = 0.12;
+
 export function getActiveCaption(captions, currentTime, {
   leadSeconds = 0,
   clipEndSeconds = null
@@ -11,9 +13,14 @@ export function getActiveCaption(captions, currentTime, {
     const nextCaption = captions[index + 1];
     const isFinalCaption = index === captions.length - 1;
     const displayStart = caption.start_seconds - leadSeconds;
+    const captionEnd = nextCaption
+      && nextCaption.start_seconds > caption.end_seconds
+      && nextCaption.start_seconds - caption.end_seconds <= CONTINUOUS_CAPTION_GAP_TOLERANCE_SECONDS
+        ? nextCaption.start_seconds
+        : caption.end_seconds;
     const displayEnd = nextCaption
-      ? Math.min(caption.end_seconds, nextCaption.start_seconds - 0.01)
-      : Math.max(caption.end_seconds, clipEndSeconds ?? caption.end_seconds);
+      ? Math.min(captionEnd, nextCaption.start_seconds)
+      : Math.max(captionEnd, clipEndSeconds ?? captionEnd);
 
     return isFinalCaption
       ? currentTime >= displayStart && currentTime <= displayEnd

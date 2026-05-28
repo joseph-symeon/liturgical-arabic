@@ -30,7 +30,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "jesus-prayer-have-mercy-on-me-001",
             "start_seconds": 2.32,
-            "end_seconds": 2.975
+            "end_seconds": 3
           }
         ]
       }
@@ -608,8 +608,13 @@ export const alignmentDefinitions = [
             "end_seconds": 76.08
           },
           {
-            "phrase_id": "now-and-ever-001",
+            "phrase_id": "beginner-both-now-001",
             "start_seconds": 76.08,
+            "end_seconds": 77.022
+          },
+          {
+            "phrase_id": "beginner-and-ever-001",
+            "start_seconds": 77.022,
             "end_seconds": 78.56
           },
           {
@@ -665,8 +670,13 @@ export const alignmentDefinitions = [
             "end_seconds": 78.12
           },
           {
-            "phrase_id": "now-and-ever-001",
+            "phrase_id": "beginner-both-now-001",
             "start_seconds": 79.1,
+            "end_seconds": 80.726
+          },
+          {
+            "phrase_id": "beginner-and-ever-001",
+            "start_seconds": 80.726,
             "end_seconds": 83.38
           },
           {
@@ -1516,8 +1526,13 @@ export const alignmentDefinitions = [
             "end_seconds": 384.44
           },
           {
-            "phrase_id": "now-and-ever-001",
+            "phrase_id": "beginner-both-now-001",
             "start_seconds": 385.46,
+            "end_seconds": 387.197
+          },
+          {
+            "phrase_id": "beginner-and-ever-001",
+            "start_seconds": 387.197,
             "end_seconds": 390.03
           },
           {
@@ -1819,8 +1834,13 @@ export const alignmentDefinitions = [
             "end_seconds": 67.32
           },
           {
-            "phrase_id": "now-and-ever-001",
+            "phrase_id": "beginner-both-now-001",
             "start_seconds": 67.86,
+            "end_seconds": 69.513
+          },
+          {
+            "phrase_id": "beginner-and-ever-001",
+            "start_seconds": 69.513,
             "end_seconds": 72.21
           },
           {
@@ -2000,8 +2020,13 @@ export const alignmentDefinitions = [
         ],
         "phrase_timings": [
           {
-            "phrase_id": "now-and-ever-001",
+            "phrase_id": "beginner-both-now-001",
             "start_seconds": 141.96,
+            "end_seconds": 143.222
+          },
+          {
+            "phrase_id": "beginner-and-ever-001",
+            "start_seconds": 143.222,
             "end_seconds": 145.28
           },
           {
@@ -2410,8 +2435,13 @@ export const alignmentDefinitions = [
             "end_seconds": 75.86
           },
           {
-            "phrase_id": "now-and-ever-001",
+            "phrase_id": "beginner-both-now-001",
             "start_seconds": 75.86,
+            "end_seconds": 77.718
+          },
+          {
+            "phrase_id": "beginner-and-ever-001",
+            "start_seconds": 77.718,
             "end_seconds": 80.75
           },
           {
@@ -3169,8 +3199,13 @@ export const alignmentDefinitions = [
             "end_seconds": 384.86
           },
           {
-            "phrase_id": "now-and-ever-001",
+            "phrase_id": "beginner-both-now-001",
             "start_seconds": 384.86,
+            "end_seconds": 386.707
+          },
+          {
+            "phrase_id": "beginner-and-ever-001",
+            "start_seconds": 386.707,
             "end_seconds": 389.72
           },
           {
@@ -3179,8 +3214,13 @@ export const alignmentDefinitions = [
             "end_seconds": 394.08
           },
           {
-            "phrase_id": "now-and-ever-001",
+            "phrase_id": "beginner-both-now-001",
             "start_seconds": 395,
+            "end_seconds": 396.056
+          },
+          {
+            "phrase_id": "beginner-and-ever-001",
+            "start_seconds": 396.056,
             "end_seconds": 397.78
           },
           {
@@ -3243,8 +3283,13 @@ export const alignmentDefinitions = [
             "end_seconds": 426.94
           },
           {
-            "phrase_id": "now-and-ever-001",
+            "phrase_id": "beginner-both-now-001",
             "start_seconds": 426.94,
+            "end_seconds": 428.376
+          },
+          {
+            "phrase_id": "beginner-and-ever-001",
+            "start_seconds": 428.376,
             "end_seconds": 430.72
           },
           {
