@@ -4151,7 +4151,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "doxology-of-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "
@@ -12577,7 +12577,7 @@ const sourceSegments = {
         "text": "، "
       },
       {
-        "phrase_id": "doxology-of-father-son-spirit-001"
+        "phrase_id": "father-son-spirit-001"
       },
       {
         "text": "، "

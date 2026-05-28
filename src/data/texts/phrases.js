@@ -15660,17 +15660,6 @@ const phrases = {
       "section: Little Litany After the First Antiphon"
     ]
   },
-  "doxology-of-father-son-spirit-001": {
-    "arabic": "أَيُّهَا الآبُ وَالإِبْنُ وَالرُّوحُ الْقُدُسُ",
-    "translation": "of the Father and of the Son and of the Holy Spirit",
-    "literal": "O Father and Son and Holy Spirit",
-    "tags": [
-      "doxology",
-      "little-litany",
-      "section: Little Litany After the First Antiphon",
-      "trinity"
-    ]
-  },
   "our-king-lord-god-001": {
     "arabic": "مَلِكُنَا وَرَبُّنَا وَإِلَهُنَا",
     "translation": "our King and our God",

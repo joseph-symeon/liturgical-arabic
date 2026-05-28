@@ -603,7 +603,7 @@ export const alignmentDefinitions = [
             "end_seconds": 73.2
           },
           {
-            "phrase_id": "doxology-of-father-son-spirit-001",
+            "phrase_id": "father-son-spirit-001",
             "start_seconds": 73.2,
             "end_seconds": 76.08
           },
@@ -1829,7 +1829,7 @@ export const alignmentDefinitions = [
             "end_seconds": 61.82
           },
           {
-            "phrase_id": "doxology-of-father-son-spirit-001",
+            "phrase_id": "father-son-spirit-001",
             "start_seconds": 61.82,
             "end_seconds": 67.32
           },

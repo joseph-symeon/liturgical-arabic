@@ -1100,6 +1100,16 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
+        "title": "For thine is the kingdom",
+        "exercise_id": "lords-prayer-thine-kingdom-core",
+        "activity_policy": "standard"
+      },
+      {
+        "exercise_id": "lords-prayer-thine-kingdom-common",
+        "activity_policy": "standard"
+      },
+      {
+        "title": "For thine is the kingdom",
         "exercise_id": "lords-prayer-thine-kingdom",
         "activity_policy": "standard"
       }

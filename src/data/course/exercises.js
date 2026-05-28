@@ -1021,6 +1021,44 @@ export const exerciseDefinitions = [
     }
   },
   {
+    "id": "lords-prayer-thine-kingdom-core",
+    "segment_ids": [
+      "lords-prayer-priest-doxology"
+    ],
+    "phrase_ids": [
+      "lords-prayer-thine-kingdom-for-001",
+      "lords-prayer-thine-kingdom-kingdom-001",
+      "lords-prayer-thine-kingdom-power-001",
+      "lords-prayer-thine-kingdom-glory-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "lords-prayer",
+      "start_segment_id": "lords-prayer-priest-doxology",
+      "end_segment_id": "lords-prayer-priest-doxology"
+    },
+    "media": GREAT_COMPLINE_MEDIA
+  },
+  {
+    "id": "lords-prayer-thine-kingdom-common",
+    "segment_ids": [
+      "lords-prayer-priest-doxology"
+    ],
+    "phrase_ids": [
+      "father-son-spirit-001",
+      "beginner-both-now-001",
+      "beginner-and-ever-001",
+      "unto-ages-of-ages-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "lords-prayer",
+      "start_segment_id": "lords-prayer-priest-doxology",
+      "end_segment_id": "lords-prayer-priest-doxology"
+    },
+    "media": GREAT_COMPLINE_MEDIA
+  },
+  {
     "id": "lords-prayer-thine-kingdom",
     "segment_ids": [
       "lords-prayer-priest-doxology"
@@ -1030,7 +1068,7 @@ export const exerciseDefinitions = [
       "lords-prayer-thine-kingdom-kingdom-001",
       "lords-prayer-thine-kingdom-power-001",
       "lords-prayer-thine-kingdom-glory-001",
-      "doxology-of-father-son-spirit-001",
+      "father-son-spirit-001",
       "beginner-both-now-001",
       "beginner-and-ever-001",
       "unto-ages-of-ages-001"
