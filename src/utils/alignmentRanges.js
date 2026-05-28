@@ -129,17 +129,32 @@ function getPhraseIdsForSegment(segmentId, segmentsMap = segments) {
     .map(part => part.phrase_id);
 }
 
-export function getPhraseTimingsForSegmentIds(segmentIds, phraseTimings, segmentsMap = segments) {
-  if ((segmentIds || []).length === 1) {
-    const segmentId = segmentIds[0];
-    const phraseIdSet = new Set(getPhraseIdsForSegment(segmentId, segmentsMap));
-    return (phraseTimings || [])
-      .filter(timing => phraseIdSet.has(timing.phrase_id))
-      .map(timing => ({
+function getSegmentPhraseTimings(segmentId, phraseTimings, segmentsMap = segments) {
+  const phraseIds = getPhraseIdsForSegment(segmentId, segmentsMap);
+  const phraseIdSet = new Set(phraseIds);
+  let phraseCursor = 0;
+
+  return (phraseTimings || [])
+    .filter(timing => phraseIdSet.has(timing.phrase_id))
+    .map(timing => {
+      let phraseIndex = phraseIds.findIndex((phraseId, index) => (
+        index >= phraseCursor && phraseId === timing.phrase_id
+      ));
+      if (phraseIndex < 0) phraseIndex = phraseIds.indexOf(timing.phrase_id);
+      phraseCursor = phraseIndex >= 0 ? phraseIndex + 1 : phraseCursor;
+
+      return {
         ...timing,
         segment_id: segmentId,
-        source_segment_id: segmentId
-      }));
+        source_segment_id: segmentId,
+        phrase_index: phraseIndex
+      };
+    });
+}
+
+export function getPhraseTimingsForSegmentIds(segmentIds, phraseTimings, segmentsMap = segments) {
+  if ((segmentIds || []).length === 1) {
+    return getSegmentPhraseTimings(segmentIds[0], phraseTimings, segmentsMap);
   }
 
   const timings = [];
@@ -147,6 +162,7 @@ export function getPhraseTimingsForSegmentIds(segmentIds, phraseTimings, segment
   segmentIds.forEach(segmentId => {
     const phraseIds = getPhraseIdsForSegment(segmentId, segmentsMap);
     const phraseIdSet = new Set(phraseIds);
+    let phraseCursor = 0;
     let matchedSegmentTiming = false;
     while (timingCursor < (phraseTimings || []).length) {
       const phraseTiming = phraseTimings[timingCursor];
@@ -159,13 +175,17 @@ export function getPhraseTimingsForSegmentIds(segmentIds, phraseTimings, segment
         timingCursor += 1;
         continue;
       }
-      const phraseIndex = phraseIds.indexOf(phraseTiming.phrase_id);
+      let phraseIndex = phraseIds.findIndex((phraseId, index) => (
+        index >= phraseCursor && phraseId === phraseTiming.phrase_id
+      ));
+      if (phraseIndex < 0) phraseIndex = phraseIds.indexOf(phraseTiming.phrase_id);
       timings.push({
         ...phraseTiming,
         segment_id: segmentId,
         source_segment_id: segmentId,
         phrase_index: phraseIndex
       });
+      phraseCursor = phraseIndex >= 0 ? phraseIndex + 1 : phraseCursor;
       matchedSegmentTiming = true;
       timingCursor += 1;
     }

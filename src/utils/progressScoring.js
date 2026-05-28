@@ -20,7 +20,6 @@ const OVERALL_COMPREHENSION_WEIGHT = 0.55;
 const OVERALL_RECITATION_WEIGHT = 0.45;
 const RECITATION_REPETITION_CURVE = 36;
 const RECITATION_TRACE_BONUS = 0.04;
-const RECITATION_TRACE_BONUS_CAP = 0.15;
 let progressTrackingMode = PROGRESS_TRACKING_MODES.disabled;
 
 const COMPREHENSION_ATTEMPT_WEIGHTS = {
@@ -127,7 +126,7 @@ function calculateRecitationConfidence(recitation = {}) {
   const meaningfulRepetitions = Math.max(0, recitation.meaningful_repetitions || 0);
   const correctTraces = Math.max(0, recitation.correct_traces || 0);
   const repetitionConfidence = 1 - Math.exp(-meaningfulRepetitions / RECITATION_REPETITION_CURVE);
-  const traceBonus = Math.min(RECITATION_TRACE_BONUS_CAP, correctTraces * RECITATION_TRACE_BONUS);
+  const traceBonus = correctTraces * RECITATION_TRACE_BONUS;
   return clamp01(repetitionConfidence + traceBonus);
 }
 

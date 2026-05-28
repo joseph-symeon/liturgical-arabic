@@ -9,7 +9,7 @@ export default function PassageTextRenderer({ lines, arabicMode = 'vocalized', r
     .sort((a, b) => a.line_order - b.line_order);
   const visibleSpeakers = new Set(sortedLines.map(line => line.speaker).filter(Boolean));
 
-  function isActivePart(line, phraseId) {
+  function isActivePart(line, phraseId, phraseIndex) {
     const captionMatchesLine = !activeCaption?.segment_id
       || activeCaption.segment_id === line.segment_id
       || (
@@ -17,24 +17,33 @@ export default function PassageTextRenderer({ lines, arabicMode = 'vocalized', r
           && line.source_segment_id
           && activeCaption.source_segment_id === line.source_segment_id
       );
+    const captionMatchesPhraseIndex = activeCaption?.phrase_index == null
+      || phraseIndex == null
+      || activeCaption.phrase_index === phraseIndex;
     return activeCaption?.phrase_id === phraseId
-      && captionMatchesLine;
+      && captionMatchesLine
+      && captionMatchesPhraseIndex;
   }
 
   function getLineParts(line) {
     const parts = [...line.phrases].sort((a, b) => a.display_order - b.display_order);
     const hasExplicitText = parts.some(part => part.text);
+    let phraseIndex = -1;
 
     if (hasExplicitText) {
-      return parts.map(part => (part.text
-        ? { text: part.text, isRubric: line.tags?.includes('rubric') || part.tags?.includes('rubric') || part.tags?.includes('display-rubric') }
-        : { id: part.phrase_id, className: isActivePart(line, part.phrase_id) ? 'lp-karaoke-active' : undefined }));
+      return parts.map(part => {
+        if (part.text) {
+          return { text: part.text, isRubric: line.tags?.includes('rubric') || part.tags?.includes('rubric') || part.tags?.includes('display-rubric') };
+        }
+        phraseIndex += 1;
+        return { id: part.phrase_id, className: isActivePart(line, part.phrase_id, phraseIndex) ? 'lp-karaoke-active' : undefined };
+      });
     }
 
     return parts.flatMap(({ phrase_id }, index) => (
       index === 0
-        ? [{ id: phrase_id, className: isActivePart(line, phrase_id) ? 'lp-karaoke-active' : undefined }]
-        : [{ text: ' ' }, { id: phrase_id, className: isActivePart(line, phrase_id) ? 'lp-karaoke-active' : undefined }]
+        ? [{ id: phrase_id, className: isActivePart(line, phrase_id, index) ? 'lp-karaoke-active' : undefined }]
+        : [{ text: ' ' }, { id: phrase_id, className: isActivePart(line, phrase_id, index) ? 'lp-karaoke-active' : undefined }]
     ));
   }
 

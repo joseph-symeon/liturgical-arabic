@@ -600,6 +600,7 @@ export const exerciseDefinitions = [
       "vespers-psalm103-alleluia-glory",
       "vespers-psalm103-our-god-hope"
     ],
+    "media": GREAT_COMPLINE_PSALMS_MEDIA,
     "service_text_id": "great-vespers",
     "service_range": {
       "section_id": "psalm-103",
@@ -1014,7 +1015,8 @@ export const exerciseDefinitions = [
       "section_id": "lords-prayer",
       "start_segment_id": "lords-prayer-priest-doxology",
       "end_segment_id": "lords-prayer-priest-doxology"
-    }
+    },
+    "media": GREAT_COMPLINE_MEDIA
   },
   {
     "id": "lords-prayer-bowing-doxology",

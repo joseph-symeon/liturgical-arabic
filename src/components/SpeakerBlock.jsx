@@ -9,7 +9,7 @@ export default function SpeakerBlock(props) {
   const lines = section.lines || [];
 
   function getLineParts(line) {
-    function isActivePart(phraseId) {
+    function isActivePart(phraseId, phraseIndex) {
       const captionMatchesLine = !props.activeCaption?.segment_id
         || props.activeCaption.segment_id === line.segment_id
         || (
@@ -17,19 +17,25 @@ export default function SpeakerBlock(props) {
             && line.source_segment_id
             && props.activeCaption.source_segment_id === line.source_segment_id
         );
-      return props.activeCaption?.phrase_id === phraseId && captionMatchesLine;
+      const captionMatchesPhraseIndex = props.activeCaption?.phrase_index == null
+        || phraseIndex == null
+        || props.activeCaption.phrase_index === phraseIndex;
+      return props.activeCaption?.phrase_id === phraseId
+        && captionMatchesLine
+        && captionMatchesPhraseIndex;
     }
 
+    let phraseIndex = -1;
     return [...line.phrases]
       .sort((a, b) => a.display_order - b.display_order)
-      .map(part =>
-        part.text
-          ? { text: part.text, isRubric: line.tags?.includes("rubric") || part.tags?.includes("rubric") }
-          : {
-              id: part.phrase_id,
-              className: isActivePart(part.phrase_id) ? "lp-karaoke-active" : undefined
-            }
-      );
+      .map(part => {
+        if (part.text) return { text: part.text, isRubric: line.tags?.includes("rubric") || part.tags?.includes("rubric") };
+        phraseIndex += 1;
+        return {
+          id: part.phrase_id,
+          className: isActivePart(part.phrase_id, phraseIndex) ? "lp-karaoke-active" : undefined
+        };
+      });
   }
 
   function renderGrouped() {

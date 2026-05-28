@@ -107,6 +107,43 @@ export const alignmentDefinitions = [
             "end_seconds": 37.195
           }
         ]
+      },
+      {
+        "segment_ids": [
+          "vespers-psalm103-alleluia-glory"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "alleluia-001",
+            "start_seconds": 222.75,
+            "end_seconds": 223.5
+          },
+          {
+            "phrase_id": "alleluia-001",
+            "start_seconds": 223.5,
+            "end_seconds": 224.3
+          },
+          {
+            "phrase_id": "alleluia-001",
+            "start_seconds": 224.3,
+            "end_seconds": 224.98
+          },
+          {
+            "phrase_id": "glory-001",
+            "start_seconds": 224.98,
+            "end_seconds": 225.32
+          },
+          {
+            "phrase_id": "to-thee-001",
+            "start_seconds": 225.32,
+            "end_seconds": 225.54
+          },
+          {
+            "phrase_id": "o-god-001",
+            "start_seconds": 225.54,
+            "end_seconds": 226.15
+          }
+        ]
       }
     ]
   },
@@ -537,6 +574,48 @@ export const alignmentDefinitions = [
             "phrase_id": "lords-prayer-deliver-evil-001",
             "start_seconds": 67.77,
             "end_seconds": 70.3
+          }
+        ]
+      },
+      {
+        "segment_ids": [
+          "lords-prayer-priest-doxology"
+        ],
+        "phrase_timings": [
+          {
+            "phrase_id": "lords-prayer-thine-kingdom-for-001",
+            "start_seconds": 70.41,
+            "end_seconds": 71.26
+          },
+          {
+            "phrase_id": "lords-prayer-thine-kingdom-kingdom-001",
+            "start_seconds": 71.26,
+            "end_seconds": 71.82
+          },
+          {
+            "phrase_id": "lords-prayer-thine-kingdom-power-001",
+            "start_seconds": 71.82,
+            "end_seconds": 72.32
+          },
+          {
+            "phrase_id": "lords-prayer-thine-kingdom-glory-001",
+            "start_seconds": 72.32,
+            "end_seconds": 73.2
+          },
+          {
+            "phrase_id": "doxology-of-father-son-spirit-001",
+            "start_seconds": 73.2,
+            "end_seconds": 76.08
+          },
+          {
+            "phrase_id": "now-and-ever-001",
+            "start_seconds": 76.08,
+            "end_seconds": 78.56
+          },
+          {
+            "phrase_id": "unto-ages-of-ages-001",
+            "start_seconds": 78.56,
+            "end_seconds": 81.985
           }
         ]
       }

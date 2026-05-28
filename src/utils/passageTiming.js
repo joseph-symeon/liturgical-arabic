@@ -41,6 +41,19 @@ export function getPlaybackCaptions(playback) {
   const selectedRanges = [];
   const usedSegmentIndexes = new Set();
 
+  function getSegmentPhraseIds(segmentId) {
+    return (segments[segmentId]?.phrases || [])
+      .filter(part => part.phrase_id)
+      .map(part => part.phrase_id);
+  }
+
+  function getCaptionPhraseIndex(phraseIds, phraseId, cursor) {
+    const phraseIndex = phraseIds.findIndex((candidatePhraseId, index) => (
+      index >= cursor && candidatePhraseId === phraseId
+    ));
+    return phraseIndex >= 0 ? phraseIndex : phraseIds.indexOf(phraseId);
+  }
+
   [...ranges]
     .sort((first, second) => (
       (first.resolved_service_range.end.segment_index - first.resolved_service_range.start.segment_index)
@@ -65,38 +78,44 @@ export function getPlaybackCaptions(playback) {
     .flatMap(range => {
       if ((range.segment_ids || []).length === 1) {
         const segmentId = range.segment_ids[0];
-        const phraseIds = (segments[segmentId]?.phrases || [])
-          .filter(part => part.phrase_id)
-          .map(part => part.phrase_id);
+        const phraseIds = getSegmentPhraseIds(segmentId);
         const phraseIdSet = new Set(phraseIds);
+        let phraseCursor = 0;
         return (range.phrase_timings || [])
           .filter(timing => phraseIdSet.has(timing.phrase_id))
-          .map(timing => ({
-            ...timing,
-            segment_id: `${segmentId}@${range.resolved_service_range.start.segment_index}`,
-            source_segment_id: segmentId,
-            range_key: range.resolved_service_range.key
-          }));
+          .map(timing => {
+            const phraseIndex = getCaptionPhraseIndex(phraseIds, timing.phrase_id, phraseCursor);
+            phraseCursor = phraseIndex >= 0 ? phraseIndex + 1 : phraseCursor;
+            return {
+              ...timing,
+              segment_id: `${segmentId}@${range.resolved_service_range.start.segment_index}`,
+              source_segment_id: segmentId,
+              phrase_index: phraseIndex,
+              range_key: range.resolved_service_range.key
+            };
+          });
       }
 
       const captions = [];
       let timingCursor = 0;
       (range.segment_ids || []).forEach((segmentId, segmentOffset) => {
-        const phraseIds = (segments[segmentId]?.phrases || [])
-          .filter(part => part.phrase_id)
-          .map(part => part.phrase_id);
+        const phraseIds = getSegmentPhraseIds(segmentId);
+        let phraseCursor = 0;
         phraseIds.forEach(phraseId => {
           const timingIndex = (range.phrase_timings || []).findIndex((timing, index) => (
             index >= timingCursor && timing.phrase_id === phraseId
           ));
           if (timingIndex < 0) return;
           const phraseTiming = range.phrase_timings[timingIndex];
+          const phraseIndex = getCaptionPhraseIndex(phraseIds, phraseTiming.phrase_id, phraseCursor);
           captions.push({
             ...phraseTiming,
             segment_id: `${segmentId}@${range.resolved_service_range.start.segment_index + segmentOffset}`,
             source_segment_id: segmentId,
+            phrase_index: phraseIndex,
             range_key: range.resolved_service_range.key
           });
+          phraseCursor = phraseIndex >= 0 ? phraseIndex + 1 : phraseCursor;
           timingCursor = timingIndex + 1;
         });
       });
