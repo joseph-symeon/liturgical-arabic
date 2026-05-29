@@ -2666,7 +2666,7 @@ export default function PassageActivityBody({
           <div className="lp-learn-complete">
             <div className="lp-learn-complete-mark" aria-hidden="true">✓</div>
             <div className="lp-learn-complete-copy">
-              <div className="lp-learn-complete-kicker">Comprehension session</div>
+              <div className="lp-learn-complete-kicker">Phrase Review</div>
               <div className="lp-learn-complete-title">Complete</div>
               <div className="lp-learn-complete-stats">{completionSummary}</div>
             </div>

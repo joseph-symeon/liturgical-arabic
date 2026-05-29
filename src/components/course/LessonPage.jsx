@@ -346,7 +346,7 @@ export default function LessonPage({
         ].filter(Boolean).join(' ')}
         style={{
           '--active-confidence': `${activeConfidence * 100}%`,
-          '--active-confidence-offset': activeSkill === STUDY_SKILLS.comprehension ? 'calc(100% + 6px)' : '0px'
+          '--active-confidence-offset': activeSkill === STUDY_SKILLS.comprehension ? 'calc(100% + var(--confidence-row-gap))' : '0px'
         }}
         aria-label="Exercise confidence"
       >

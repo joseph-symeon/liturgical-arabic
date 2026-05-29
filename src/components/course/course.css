@@ -45,7 +45,7 @@
   --recite-option-row-height: 40px;
   --playback-control-size: 38px;
   --drawer-control-row-height: calc(var(--playback-control-size) + 14px);
-  --drawer-confidence-row-height: 64px;
+  --drawer-confidence-row-height: 52px;
   --drawer-settings-row-max-height: min(58svh, 520px);
   --playback-control-gap: 8px;
   --playback-speed-width: 50px;
@@ -1069,13 +1069,15 @@
 
 .lp-page.recitation-mode-page .lp-drawer-confidence-stack {
   --confidence-active-fill: color-mix(in srgb, var(--recite-accent) 76%, var(--recite-border));
+  --confidence-row-gap: 2px;
+  --confidence-stack-block-padding: 3px;
   position: relative;
   display: grid;
   grid-template-rows: 1fr 1fr;
-  gap: 6px;
+  gap: var(--confidence-row-gap);
   min-width: 0;
   height: 100%;
-  padding: 6px 2px 0;
+  padding: var(--confidence-stack-block-padding) 2px;
 }
 
 .lp-page.recitation-mode-page .lp-drawer-confidence-row {
@@ -1143,10 +1145,10 @@
 
 .lp-page.recitation-mode-page .lp-drawer-confidence-active-fill {
   position: absolute;
-  top: 6px;
+  top: var(--confidence-stack-block-padding);
   right: 56px;
   left: 132px;
-  height: calc((100% - 12px) / 2);
+  height: calc((100% - var(--confidence-stack-block-padding) - var(--confidence-stack-block-padding) - var(--confidence-row-gap)) / 2);
   pointer-events: none;
   transform: translateY(var(--active-confidence-offset));
   transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -5449,7 +5451,7 @@
   }
 
   .lp-page.recitation-mode-page {
-    --recite-toolbar-stable-reserve: calc(190px + env(safe-area-inset-bottom, 0px));
+    --recite-toolbar-stable-reserve: calc(178px + env(safe-area-inset-bottom, 0px));
     --playback-speed-width: 48px;
   }
 
