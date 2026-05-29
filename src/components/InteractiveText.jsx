@@ -42,12 +42,24 @@ export default function InteractiveText(props) {
   useEffect(() => {
     if (!isOpen) return;
     const close = () => setIsOpen(false);
+    const closeOnOutsidePointerDown = (event) => {
+      const target = event.target;
+      if (
+        textRef.current?.contains(target) ||
+        tooltipRef.current?.contains(target)
+      ) {
+        return;
+      }
+      setIsOpen(false);
+    };
     const closeOther = (event) => {
       if (event.detail !== idRef.current) setIsOpen(false);
     };
+    document.addEventListener("pointerdown", closeOnOutsidePointerDown, true);
     document.addEventListener("click", close);
     document.addEventListener("interactive-text-open", closeOther);
     return () => {
+      document.removeEventListener("pointerdown", closeOnOutsidePointerDown, true);
       document.removeEventListener("click", close);
       document.removeEventListener("interactive-text-open", closeOther);
     };

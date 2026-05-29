@@ -36,14 +36,14 @@ export default function PassageTextRenderer({ lines, arabicMode = 'vocalized', r
           return { text: part.text, isRubric: line.tags?.includes('rubric') || part.tags?.includes('rubric') || part.tags?.includes('display-rubric') };
         }
         phraseIndex += 1;
-        return { id: part.phrase_id, className: isActivePart(line, part.phrase_id, phraseIndex) ? 'lp-karaoke-active' : undefined };
+        return { id: part.phrase_id, className: isActivePart(line, part.phrase_id, part.phrase_index ?? phraseIndex) ? 'lp-karaoke-active' : undefined };
       });
     }
 
     return parts.flatMap(({ phrase_id }, index) => (
       index === 0
-        ? [{ id: phrase_id, className: isActivePart(line, phrase_id, index) ? 'lp-karaoke-active' : undefined }]
-        : [{ text: ' ' }, { id: phrase_id, className: isActivePart(line, phrase_id, index) ? 'lp-karaoke-active' : undefined }]
+        ? [{ id: phrase_id, className: isActivePart(line, phrase_id, parts[index].phrase_index ?? index) ? 'lp-karaoke-active' : undefined }]
+        : [{ text: ' ' }, { id: phrase_id, className: isActivePart(line, phrase_id, parts[index].phrase_index ?? index) ? 'lp-karaoke-active' : undefined }]
     ));
   }
 

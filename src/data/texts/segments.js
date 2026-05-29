@@ -4594,13 +4594,31 @@ const sourceSegments = {
     ],
     "phrases": [
       {
-        "phrase_id": "blessed-throne-glory-001"
+        "phrase_id": "blessed-art-thou-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "throne-of-glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "thy-kingdom-001"
       },
       {
         "text": "، "
       },
       {
-        "phrase_id": "enthroned-cherubim-001"
+        "phrase_id": "enthroned-sitter-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "upon-cherubim-001"
       },
       {
         "text": "، "

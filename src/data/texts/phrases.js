@@ -16529,20 +16529,50 @@ const phrases = {
       "word"
     ]
   },
-  "enthroned-cherubim-001": {
-    "arabic": "أَيُّهَا الجَالِسُ عَلَى الشِّيرُوبِيمِ",
-    "translation": "who art enthroned upon the cherubim",
-    "literal": "O you who sit upon the cherubim",
+  "enthroned-sitter-001": {
+    "arabic": "أَيُّهَا الجَالِسُ",
+    "translation": "O you who sit",
+    "literal": "O you who sit",
     "tags": [
       "cherubim",
       "section: Thrice-Holy Hymn",
       "word"
     ]
   },
-  "blessed-throne-glory-001": {
-    "arabic": "مُبَارَكٌ أَنْتَ عَلَى عَرْشِ مَجْدِ مَلِكِكَ",
-    "translation": "Blessed art thou on the throne of the glory of thy kingdom",
-    "literal": "Blessed are you upon the throne of the glory of your kingdom",
+  "upon-cherubim-001": {
+    "arabic": "عَلَى الشِّيرُوبِيمِ",
+    "translation": "upon the cherubim",
+    "literal": "upon the cherubim",
+    "tags": [
+      "cherubim",
+      "section: Thrice-Holy Hymn",
+      "word"
+    ]
+  },
+  "blessed-art-thou-001": {
+    "arabic": "مُبَارَكٌ أَنْتَ",
+    "translation": "Blessed art thou",
+    "literal": "Blessed are you",
+    "tags": [
+      "blessing",
+      "section: Thrice-Holy Hymn",
+      "word"
+    ]
+  },
+  "throne-of-glory-001": {
+    "arabic": "عَلَى عَرْشِ",
+    "translation": "on the throne",
+    "literal": "upon the throne",
+    "tags": [
+      "blessing",
+      "section: Thrice-Holy Hymn",
+      "word"
+    ]
+  },
+  "thy-kingdom-001": {
+    "arabic": "مَجْدِ مَلِكِكَ",
+    "translation": "of the glory of thy kingdom",
+    "literal": "of the glory of your kingdom",
     "tags": [
       "blessing",
       "section: Thrice-Holy Hymn",

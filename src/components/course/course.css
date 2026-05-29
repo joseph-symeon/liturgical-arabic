@@ -4683,7 +4683,15 @@
   background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.96) 82%, rgba(255, 255, 255, 0));
 }
 
+.lp-navigation-panel {
+  display: flex;
+  flex-direction: column;
+}
+
 .lp-nav-panel-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
   padding-top: 2px;
 }
 

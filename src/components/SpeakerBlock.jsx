@@ -33,7 +33,7 @@ export default function SpeakerBlock(props) {
         phraseIndex += 1;
         return {
           id: part.phrase_id,
-          className: isActivePart(part.phrase_id, phraseIndex) ? "lp-karaoke-active" : undefined
+          className: isActivePart(part.phrase_id, part.phrase_index ?? phraseIndex) ? "lp-karaoke-active" : undefined
         };
       });
   }

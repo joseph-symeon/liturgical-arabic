@@ -71,26 +71,6 @@ export default function SyncAccountPanel({
   if (isSignedIn) {
     return (
       <div className="app-account-panel app-account-panel-signed-in" dir="ltr">
-        <div className="app-account-title-row">
-          <button type="button" className="app-account-back" onClick={onClose} aria-label="Back to display settings">
-            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-          </button>
-          <h2>Profile</h2>
-        </div>
-
-        <div className="app-account-summary">
-          <div className="app-account-avatar" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 21a8 8 0 0 0-16 0" />
-              <circle cx="12" cy="7" r="4" />
-            </svg>
-          </div>
-          <div className="app-account-summary-label">Signed in</div>
-          <div className="app-account-summary-value">{session.user.email}</div>
-        </div>
-
         {friendlyMessage && <div className="app-account-message">{friendlyMessage}</div>}
 
         <div className="app-account-actions">
@@ -153,14 +133,7 @@ export default function SyncAccountPanel({
     <div className="app-account-panel" dir="ltr">
       <div className="app-account-header">
         <div className="app-account-heading">
-          <div className="app-account-title-row">
-            <button type="button" className="app-account-back" onClick={onClose} aria-label="Back to display settings">
-              <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-            <h2>Sign In</h2>
-          </div>
+          <h2>Sign In</h2>
         </div>
         {needsAttention && (
           <div className="app-account-header-actions">

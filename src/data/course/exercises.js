@@ -2078,7 +2078,20 @@ export function resolveExercise(definition, segmentsMap = segments) {
       return parts.slice(startIndex + 1).some(part => part.phrase_id && !isDisplayExemptPart(part));
     }
     function filterPhraseParts(parts) {
-      if (!phraseIdSet) return parts.filter(part => !isDisplayExemptPart(part)).map(part => ({ ...part }));
+      const phraseIndexByPart = new Map();
+      let phraseIndex = -1;
+      parts.forEach(part => {
+        if (part.phrase_id && !isDisplayExemptPart(part)) {
+          phraseIndex += 1;
+          phraseIndexByPart.set(part, phraseIndex);
+        }
+      });
+      const annotatePart = part => (
+        part.phrase_id
+          ? { ...part, phrase_index: phraseIndexByPart.get(part) }
+          : { ...part }
+      );
+      if (!phraseIdSet) return parts.filter(part => !isDisplayExemptPart(part)).map(annotatePart);
       return parts.filter((part, index) => {
         if (part.phrase_id) return isIncludedPhrase(part);
         const previousPart = parts[index - 1];
@@ -2086,7 +2099,7 @@ export function resolveExercise(definition, segmentsMap = segments) {
         const previousIncluded = isIncludedPhrase(previousPart);
         const nextIncluded = isIncludedPhrase(nextPart);
         return previousIncluded && (nextIncluded || !hasLaterPhrase(parts, index));
-      }).map(part => ({ ...part }));
+      }).map(annotatePart);
     }
     function splitLineParts(segment, parts) {
       if (!segment.split_phrases_by_line_breaks) return [parts];

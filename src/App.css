@@ -150,13 +150,6 @@
   min-width: 0;
 }
 
-.app-account-title-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
 .app-account-header-actions {
   display: flex;
   align-items: center;
@@ -195,8 +188,7 @@
   line-height: 1;
 }
 
-.app-account-close,
-.app-account-back {
+.app-account-close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -210,15 +202,7 @@
   padding: 0;
 }
 
-.app-account-back {
-  flex: 0 0 auto;
-  border-color: color-mix(in srgb, #d6d3d1 72%, transparent);
-  background: #fafaf9;
-  color: #57534e;
-}
-
-.app-account-close:hover,
-.app-account-back:hover {
+.app-account-close:hover {
   background: #f5f5f4;
   color: #292524;
 }
@@ -397,62 +381,6 @@
   padding: 10px 11px;
 }
 
-.app-account-summary {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  grid-template-areas:
-    "avatar label"
-    "avatar value";
-  column-gap: 12px;
-  row-gap: 3px;
-  overflow: hidden;
-  border: 1px solid color-mix(in srgb, #59836a 35%, #e7e5e4);
-  border-radius: 8px;
-  background:
-    linear-gradient(135deg, color-mix(in srgb, #59836a 16%, #fff), #fafaf9 56%),
-    #fafaf9;
-  padding: 14px;
-}
-
-.app-account-summary::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 4px;
-  background: #59836a;
-}
-
-.app-account-avatar {
-  grid-area: avatar;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid color-mix(in srgb, #59836a 45%, #d6d3d1);
-  border-radius: 999px;
-  background: color-mix(in srgb, #59836a 12%, #fff);
-  color: #476c56;
-}
-
-.app-account-summary-label {
-  grid-area: label;
-  color: #78716c;
-  font-size: 12px;
-  font-weight: 750;
-  line-height: 1.2;
-}
-
-.app-account-summary-value {
-  grid-area: value;
-  overflow-wrap: anywhere;
-  color: #292524;
-  font-size: 15px;
-  font-weight: 760;
-  line-height: 1.25;
-}
-
 .app-chrome-button {
   border: 0 !important;
   background: transparent !important;
@@ -475,8 +403,23 @@
   box-shadow: -18px 0 42px rgb(28 25 23 / 0.06);
 }
 
-.app-display-profile-section {
-  padding-bottom: 4px;
+.app-nav-profile-section {
+  display: grid;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.app-nav-profile-heading {
+  margin-bottom: 0;
+}
+
+.app-nav-profile-row {
+  margin-bottom: 0;
+}
+
+.app-nav-profile-panel {
+  padding-top: 4px;
 }
 
 .app-display-panel-scroll {
@@ -505,17 +448,12 @@
   text-transform: uppercase;
 }
 
-.app-display-settings-heading {
-  margin-top: 14px;
-}
-
-.app-display-settings-heading + section {
-  border-top: 0;
-  padding-top: 14px;
-}
-
 .app-display-section {
   padding: 14px 0;
+}
+
+.app-display-section + .app-display-section {
+  border-top: 1px solid #e7e5e4;
 }
 
 .app-display-section-title {
@@ -603,8 +541,45 @@ button.app-reset-control,
   text-decoration: none;
 }
 
-.app-display-reset-section {
-  padding: 14px 0;
+.app-display-preview-section {
+  display: grid;
+  gap: 22px;
+  border-top: 1px solid #e7e5e4;
+  padding: 14px 0 2px;
+}
+
+.app-display-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.app-display-preview-label {
+  color: #a8a29e;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+button.app-display-reset-control {
+  min-height: 32px;
+  padding: 7px 12px !important;
+}
+
+.app-display-preview-lines {
+  display: grid;
+  gap: 0;
+}
+
+.app-display-preview-arabic {
+  text-align: right;
+}
+
+.app-display-preview-arabic .leading-loose {
+  line-height: 1.45 !important;
 }
 
 .app-display-panel .app-font-size-stepper {
@@ -770,6 +745,18 @@ button.app-reset-control,
     border-bottom-color: var(--dark-border);
   }
 
+  .app-display-section + .app-display-section {
+    border-top-color: var(--dark-border);
+  }
+
+  .app-display-preview-section {
+    border-top-color: var(--dark-border);
+  }
+
+  .app-display-preview-label {
+    color: var(--dark-muted);
+  }
+
   .app-display-panel {
     --app-control-accent: #54b978;
     --app-control-border: var(--dark-border);
@@ -838,21 +825,17 @@ button.app-reset-control,
   }
 
   .app-account-header,
-  .app-account-summary,
   .app-account-danger,
   .app-account-message {
     border-color: var(--dark-border);
   }
 
-  .app-account-header h2,
-  .app-account-summary-value {
+  .app-account-header h2 {
     color: var(--dark-text);
   }
 
   .app-account-kicker,
   .app-account-field,
-  .app-account-summary-label,
-  .app-account-summary-note,
   .app-account-secondary-actions button {
     color: var(--dark-muted);
   }
@@ -918,33 +901,8 @@ button.app-reset-control,
     opacity: 1;
   }
 
-  .app-account-summary {
-    border-color: color-mix(in srgb, #7fa68b 38%, var(--dark-border));
-    background:
-      linear-gradient(135deg, color-mix(in srgb, #7fa68b 16%, var(--dark-surface)), var(--dark-surface) 58%),
-      var(--dark-surface);
-  }
-
-  .app-account-avatar {
-    border-color: color-mix(in srgb, #7fa68b 45%, var(--dark-border));
-    background: color-mix(in srgb, #7fa68b 12%, var(--dark-surface));
-    color: #b8d7c0;
-  }
-
-  .app-account-close,
-  .app-account-back {
+  .app-account-close {
     border-color: var(--dark-border);
-  }
-
-  .app-account-back {
-    background: var(--dark-surface);
-    color: var(--dark-muted);
-  }
-
-  .app-account-back:hover {
-    border-color: color-mix(in srgb, var(--dark-muted) 42%, var(--dark-border));
-    background: var(--dark-hover);
-    color: var(--dark-text);
   }
 
   .app-account-danger button {

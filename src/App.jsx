@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ArabicLiturgyReader from "./ArabicLiturgyReader.jsx";
 import CourseOverview from "./components/course/CourseOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
+import LiturgyLine from "./components/LiturgyLine.jsx";
 import SyncAccountPanel from "./components/SyncAccountPanel.jsx";
 import { defaultServiceText, defaultServiceTextId, getServiceText, readerServiceTexts } from "./data/texts/serviceTexts.js";
 import phrases from "./data/texts/phrases.js";
@@ -102,6 +103,54 @@ const SIGNED_OUT_COURSE_LESSON_IDS = new Set([
   "lesson-lord-have-mercy",
   "lesson-jesus-prayer"
 ]);
+const DISPLAY_PREVIEW_HOLY_GOD_LINE = [
+  { id: "holy-god-001" },
+  { text: "،" }
+];
+const DISPLAY_PREVIEW_HOLY_MIGHTY_LINE = [
+  { id: "holy-mighty-001" },
+  { text: "،" }
+];
+const DISPLAY_PREVIEW_HOLY_IMMORTAL_LINE = [
+  { id: "holy-immortal-001" },
+  { text: "، " },
+  { id: "have-mercy-on-us-001" },
+  { text: "." }
+];
+const DISPLAY_PREVIEW_LINES = [
+  DISPLAY_PREVIEW_HOLY_GOD_LINE,
+  DISPLAY_PREVIEW_HOLY_MIGHTY_LINE,
+  DISPLAY_PREVIEW_HOLY_IMMORTAL_LINE
+];
+const DISPLAY_PREVIEW_PARAGRAPH_LINE = [
+  { id: "holy-god-001" },
+  { text: "، " },
+  { id: "holy-mighty-001" },
+  { text: "، " },
+  { id: "holy-immortal-001" },
+  { text: "، " },
+  { id: "have-mercy-on-us-001" },
+  { text: "." }
+];
+const DISPLAY_QUIET_PREVIEW_LINE = [
+  { id: "blessed-art-thou-001" },
+  { text: " " },
+  { id: "throne-of-glory-001" },
+  { text: " " },
+  { id: "thy-kingdom-001" },
+  { text: "، " },
+  { id: "enthroned-sitter-001" },
+  { text: " " },
+  { id: "upon-cherubim-001" },
+  { text: "، " },
+  { id: "every-time-001" },
+  { text: "..." }
+];
+const DISPLAY_PARAGRAPH_PREVIEW_LINE = [
+  ...DISPLAY_PREVIEW_PARAGRAPH_LINE,
+  { text: " " },
+  ...DISPLAY_QUIET_PREVIEW_LINE
+];
 
 function hasSupabaseAuthCallbackParams() {
   if (typeof window === "undefined") return false;
@@ -808,9 +857,9 @@ export default function App() {
   }
 
   function openProgressSignIn() {
-    setDisplayMenuOpen(true);
+    setMenuOpen(true);
+    setDisplayMenuOpen(false);
     setAccountMenuOpen(true);
-    if (isNarrowViewport) setMenuOpen(false);
   }
 
   function canAccessCourseLesson(lessonId) {
@@ -1121,7 +1170,7 @@ export default function App() {
     );
   }
 
-  function renderDisplayMenu() {
+  function renderProfileRow({ className = "" } = {}) {
     const signedIn = Boolean(syncSession?.user);
     const needsAttention = syncStatus === "error" || syncStatus === "disabled";
     const profileSubtitle = syncStatus === "error"
@@ -1130,9 +1179,62 @@ export default function App() {
           ? "Sync unavailable"
           : "Account";
 
+    return (
+      <button
+        type="button"
+        className={["app-profile-row", signedIn ? "signed-in" : "", needsAttention ? "needs-attention" : "", className].filter(Boolean).join(" ")}
+        onClick={() => setAccountMenuOpen(open => !open)}
+        aria-expanded={accountMenuOpen}
+        aria-label={signedIn ? "Open account settings" : "Sign in to sync progress"}
+      >
+        <span className="app-profile-row-avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 21a8 8 0 0 0-16 0" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+        </span>
+        <span className="app-profile-row-main">
+          <span className="app-profile-row-title">{signedIn ? syncSession.user.email : "Sign in"}</span>
+          <span className="app-profile-row-subtitle">{signedIn ? profileSubtitle : "Sync progress"}</span>
+        </span>
+        <span className="app-profile-row-status" aria-hidden="true" />
+        <svg className="app-profile-row-chevron" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d={accountMenuOpen ? "M6 9l6 6 6-6" : "M9 18l6-6-6-6"} />
+        </svg>
+      </button>
+    );
+  }
+
+  function renderNavigationProfileSection() {
+    return (
+      <section className="app-nav-profile-section" aria-label="Profile">
+        <div className="app-panel-section-heading app-nav-profile-heading">Profile</div>
+        {renderProfileRow({ className: "app-nav-profile-row" })}
+        {accountMenuOpen && (
+          <div className="app-nav-profile-panel">
+            <SyncAccountPanel
+              session={syncSession}
+              syncStatus={syncStatus}
+              syncMessage={syncMessage}
+              onSignIn={handlePasswordSignIn}
+              onCreateAccount={handleCreateAccount}
+              onMagicLink={handleMagicLinkSignIn}
+              onResetPassword={handlePasswordReset}
+              onUpdatePassword={handlePasswordUpdate}
+              onSignOut={handleSyncSignOut}
+              onResetProgress={handleResetProgress}
+              onClose={() => setAccountMenuOpen(false)}
+            />
+          </div>
+        )}
+      </section>
+    );
+  }
+
+  function renderDisplayMenu() {
     function renderDisplaySection(title, children) {
       return (
-        <section className="app-display-section border-t border-stone-200 first:border-t-0 dark:border-[var(--dark-border)]">
+        <section className="app-display-section">
           <h2 className="app-display-section-title text-xs font-semibold uppercase tracking-wide text-stone-400 dark:text-[var(--dark-muted)]">
             {title}
           </h2>
@@ -1177,35 +1279,6 @@ export default function App() {
       );
     }
 
-    if (accountMenuOpen) {
-      return (
-        <div
-          role="group"
-          aria-label="Profile"
-          className="app-display-panel-scroll text-stone-900 dark:text-[var(--dark-text)]"
-          dir="ltr"
-          onClick={event => event.stopPropagation()}
-        >
-          <section className="app-display-profile-section">
-            <div className="app-panel-section-heading">Profile</div>
-            <SyncAccountPanel
-              session={syncSession}
-              syncStatus={syncStatus}
-              syncMessage={syncMessage}
-              onSignIn={handlePasswordSignIn}
-              onCreateAccount={handleCreateAccount}
-              onMagicLink={handleMagicLinkSignIn}
-              onResetPassword={handlePasswordReset}
-              onUpdatePassword={handlePasswordUpdate}
-              onSignOut={handleSyncSignOut}
-              onResetProgress={handleResetProgress}
-              onClose={() => setAccountMenuOpen(false)}
-            />
-          </section>
-        </div>
-      );
-    }
-
     return (
       <div
         role="group"
@@ -1214,33 +1287,7 @@ export default function App() {
         dir="ltr"
         onClick={event => event.stopPropagation()}
       >
-        <section className="app-display-profile-section">
-          <h2 className="app-panel-section-heading">
-            Profile
-          </h2>
-          <button
-            type="button"
-            className={`app-profile-row${signedIn ? " signed-in" : ""}${needsAttention ? " needs-attention" : ""}`}
-            onClick={() => setAccountMenuOpen(true)}
-            aria-label={signedIn ? "Open account settings" : "Sign in to sync progress"}
-          >
-            <span className="app-profile-row-avatar" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 21a8 8 0 0 0-16 0" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </span>
-            <span className="app-profile-row-main">
-              <span className="app-profile-row-title">{signedIn ? syncSession.user.email : "Sign in"}</span>
-              {signedIn && <span className="app-profile-row-subtitle">{profileSubtitle}</span>}
-            </span>
-            <span className="app-profile-row-status" aria-hidden="true" />
-            <svg className="app-profile-row-chevron" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </button>
-        </section>
-        <div className="app-panel-section-heading app-display-settings-heading">
+        <div className="app-panel-section-heading">
           Display
         </div>
         {renderDisplaySection("Reading", (
@@ -1321,15 +1368,59 @@ export default function App() {
         {renderDisplaySection("Content", (
           renderToggleField("Silent prayers", showQuietPrayers, setShowQuietPrayers)
         ))}
-        <section className="app-display-reset-section flex justify-start border-t border-stone-200 dark:border-[var(--dark-border)]">
-          <button
-            type="button"
-            onClick={resetDisplaySettings}
-            className="app-reset-control"
-            style={SETTING_BUTTON_STYLE}
-          >
-            Reset all
-          </button>
+        <section className="app-display-preview-section" aria-label="Display preview">
+          <div className="app-display-preview-header">
+            <div className="app-display-preview-label">Preview</div>
+            <button
+              type="button"
+              onClick={resetDisplaySettings}
+              className="app-reset-control app-display-reset-control"
+              style={SETTING_BUTTON_STYLE}
+            >
+              Reset all
+            </button>
+          </div>
+          <div className={`app-display-preview-lines ${readerLayout === "paragraph" ? "is-paragraph" : "is-line"}`}>
+            {readerLayout === "paragraph" ? (
+              <div className="app-display-preview-arabic" dir="rtl">
+                <LiturgyLine
+                  line={showQuietPrayers ? DISPLAY_PARAGRAPH_PREVIEW_LINE : DISPLAY_PREVIEW_PARAGRAPH_LINE}
+                  arabicMode={arabicMode}
+                  speechRate={speechRate}
+                  arabicFontFamily={arabicFontFamily}
+                  arabicFontWeight={arabicFontWeight}
+                  arabicFontSize={arabicFontSize}
+                />
+              </div>
+            ) : (
+              <>
+                {DISPLAY_PREVIEW_LINES.map((line, lineIndex) => (
+                  <div className="app-display-preview-arabic" dir="rtl" key={`display-preview-line-${lineIndex}`}>
+                    <LiturgyLine
+                      line={line}
+                      arabicMode={arabicMode}
+                      speechRate={speechRate}
+                      arabicFontFamily={arabicFontFamily}
+                      arabicFontWeight={arabicFontWeight}
+                      arabicFontSize={arabicFontSize}
+                    />
+                  </div>
+                ))}
+                {showQuietPrayers && (
+                  <div className="app-display-preview-arabic" dir="rtl">
+                    <LiturgyLine
+                      line={DISPLAY_QUIET_PREVIEW_LINE}
+                      arabicMode={arabicMode}
+                      speechRate={speechRate}
+                      arabicFontFamily={arabicFontFamily}
+                      arabicFontWeight={arabicFontWeight}
+                      arabicFontSize={arabicFontSize}
+                    />
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </section>
       </div>
     );
@@ -1493,8 +1584,11 @@ export default function App() {
           isOpen: menuOpen,
           label: "Navigation",
           onClick: () => {
-            setMenuOpen(o => !o);
-            setAccountMenuOpen(false);
+            setMenuOpen(open => {
+              const nextOpen = !open;
+              if (!nextOpen) setAccountMenuOpen(false);
+              return nextOpen;
+            });
             if (isNarrowViewport) setDisplayMenuOpen(false);
           },
           children: (
@@ -1515,7 +1609,7 @@ export default function App() {
           onClick: () => {
             setDisplayMenuOpen(o => {
               const nextOpen = !o;
-              if (!nextOpen) setAccountMenuOpen(false);
+              if (nextOpen) setAccountMenuOpen(false);
               return nextOpen;
             });
             if (isNarrowViewport) setMenuOpen(false);
@@ -1548,7 +1642,10 @@ export default function App() {
         <button
           type="button"
           aria-label="Close navigation"
-          onClick={() => setMenuOpen(false)}
+          onClick={() => {
+            setMenuOpen(false);
+            setAccountMenuOpen(false);
+          }}
           style={{
             position: "fixed",
             inset: 0,
@@ -1607,15 +1704,17 @@ export default function App() {
             </button>
           </header>
           <div
-            role="menu"
+            aria-label="Navigation"
             className="lp-nav-panel-body text-stone-900 dark:text-[var(--dark-text)]"
             style={{ display: "flex", flexDirection: "column", gap: "16px", alignItems: "stretch", margin: 0, padding: 0, listStyle: "none", fontFamily: SYSTEM_SANS_FONT, fontSize: "14px" }}
           >
               <div role="group" aria-label="Primary navigation" style={MENU_GROUP_STYLE}>
                 <button
-                  role="menuitem"
                   type="button"
-                  onClick={goToReaderIndex}
+                  onClick={() => {
+                    setAccountMenuOpen(false);
+                    goToReaderIndex();
+                  }}
                   className={getNavItemClass(view === "reader" || view === "reader-index")}
                   style={SECTION_ITEM_STYLE}
                 >
@@ -1625,9 +1724,11 @@ export default function App() {
                   })}
                 </button>
                 <button
-                  role="menuitem"
                   type="button"
-                  onClick={goToCourseOverview}
+                  onClick={() => {
+                    setAccountMenuOpen(false);
+                    goToCourseOverview();
+                  }}
                   className={getNavItemClass(view === "course-overview" || view === "lessons")}
                   style={SECTION_ITEM_STYLE}
                 >
@@ -1637,6 +1738,7 @@ export default function App() {
                   })}
                 </button>
               </div>
+              {renderNavigationProfileSection()}
           </div>
       </aside>
       )}
@@ -1731,7 +1833,7 @@ export default function App() {
 
       {displayMenuOpen && (
         <aside
-          key={accountMenuOpen ? "profile-panel" : "display-panel"}
+          key="display-panel"
           className="app-side-panel app-display-panel bg-white dark:bg-[var(--dark-bg)] border-l border-stone-200 dark:border-[var(--dark-border)]"
           dir="ltr"
           style={{
