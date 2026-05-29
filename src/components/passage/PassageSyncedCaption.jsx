@@ -29,7 +29,10 @@ export default function PassageSyncedCaption({
     >
       {displayedPhrases.length > 0 && (
         <div
-          className={onTogglePlayback ? "lp-synced-line active interactive" : "lp-synced-line active"}
+          className={[
+            "lp-synced-line active",
+            onTogglePlayback ? "interactive" : null
+          ].filter(Boolean).join(" ")}
           key={activeCaption?.display_key || activeCaption?.phrase_id}
           role={onTogglePlayback ? "button" : undefined}
           tabIndex={onTogglePlayback ? 0 : undefined}

@@ -22,6 +22,7 @@ export default function PassageActivityToolbar({
   ],
   toolbarTop = null,
   toolbarMiddle = null,
+  toolbarBottom = null,
   suppressModeControls = false,
   hidden = false
 }) {
@@ -29,10 +30,11 @@ export default function PassageActivityToolbar({
   const hasModes = showKaraokeToggle || showTextModeControls;
   const hasToolbarTop = Boolean(toolbarTop);
   const hasToolbarMiddle = Boolean(toolbarMiddle);
+  const hasToolbarBottom = Boolean(toolbarBottom);
 
   if (hidden) return null;
 
-  if (!hasActivity && !player && !hasModes && !hasToolbarTop && !hasToolbarMiddle) return null;
+  if (!hasActivity && !player && !hasModes && !hasToolbarTop && !hasToolbarMiddle && !hasToolbarBottom) return null;
 
   const modeControls = hasModes && !suppressModeControls ? (
     <div className="lp-mode-toggle-row lp-activity-mode-row" dir="ltr">
@@ -68,10 +70,11 @@ export default function PassageActivityToolbar({
 
   return (
     <>
-      {(hasActivity || player || hasToolbarTop || hasToolbarMiddle) && (
+      {(hasActivity || player || hasToolbarTop || hasToolbarMiddle || hasToolbarBottom) && (
         <PassageBottomDrawer
           top={toolbarTop}
           middle={toolbarMiddle}
+          bottom={toolbarBottom}
           action={(hasActivity || player || hasModes) ? (
             <div className="lp-activity-toolbar">
               {hasActivity && (

@@ -14,7 +14,8 @@ const CAPTION_TEXT_MODE_STORAGE_KEY = "liturgical-arabic:phrase-captions-text-mo
 const PRACTICE_TEXT_MODE_STORAGE_KEY = "liturgical-arabic:practice-text-mode";
 const KARAOKE_MODE_STORAGE_KEY = "liturgical-arabic:karaoke-mode";
 const REQUIRED_TEXT_MODES = ["translation", "literal"];
-const RECITATION_REPETITION_THRESHOLD = 0.8;
+const RECITATION_REPETITION_THRESHOLD = 0.95;
+const RECITATION_COMPLETION_MAX_TIME_STEP_SECONDS = 1.25;
 const GROUPED_CAPTION_MIN_WORDS = 2;
 const GROUPED_CAPTION_MAX_GAP_SECONDS = 0.55;
 
@@ -176,10 +177,12 @@ export default function PassageExperience({
   activityContextHeader = null,
   toolbarTop = null,
   toolbarMiddle = null,
+  toolbarBottom = null,
   learnSetupToolbarTop = null,
+  learnSetupToolbarBottom = null,
+  learnCompleteToolbarBottom = null,
   dockLearnSetupControls = false,
   onCourseTrack,
-  onCourseLesson,
   renderPassage
 }) {
   const resolvedActivityType = activityType || passage?.activity_type || null;
@@ -259,34 +262,54 @@ export default function PassageExperience({
   }, [karaokeMode]);
 
   useEffect(() => {
-    if (!shouldTrackPlayerTime || !playbackActive || !activeCaption?.phrase_id || typeof currentTime !== "number") return;
+    if (!shouldTrackPlayerTime || !playbackActive || typeof currentTime !== "number") return;
 
+    function getCaptionKey(caption) {
+      return [
+        caption.phrase_id,
+        caption.segment_id,
+        caption.range_key,
+        caption.start_seconds,
+        caption.end_seconds
+      ].filter(value => value !== undefined && value !== null).join(":");
+    }
+
+    function recordCaptionCompletion(caption) {
+      const captionKey = getCaptionKey(caption);
+      if (recitationCaptionKeysRef.current.has(captionKey)) return false;
+
+      recitationCaptionKeysRef.current.add(captionKey);
+      recordRecitationRepetition({
+        phraseId: caption.phrase_id,
+        activityType: resolvedActivityType
+      });
+      return true;
+    }
+
+    function getMeaningfulTime(caption) {
+      const captionDuration = Math.max(0.25, caption.end_seconds - caption.start_seconds);
+      return caption.start_seconds + (captionDuration * RECITATION_REPETITION_THRESHOLD);
+    }
+
+    const previousPlaybackTime = previousPlaybackTimeRef.current;
     if (previousPlaybackTimeRef.current !== null && currentTime < previousPlaybackTimeRef.current - 1) {
       recitationCaptionKeysRef.current = new Set();
     }
     previousPlaybackTimeRef.current = currentTime;
 
-    const captionStart = activeCaption.start_seconds;
-    const captionEnd = activeCaption.end_seconds;
-    const captionDuration = Math.max(0.25, captionEnd - captionStart);
-    const meaningfulTime = captionStart + (captionDuration * RECITATION_REPETITION_THRESHOLD);
-    if (currentTime < meaningfulTime) return;
+    const timeStep = previousPlaybackTime === null ? 0 : currentTime - previousPlaybackTime;
+    const movingForward = previousPlaybackTime !== null
+      && timeStep >= 0
+      && timeStep <= RECITATION_COMPLETION_MAX_TIME_STEP_SECONDS;
+    if (!movingForward) return;
 
-    const captionKey = [
-      activeCaption.phrase_id,
-      activeCaption.segment_id,
-      activeCaption.range_key,
-      activeCaption.start_seconds,
-      activeCaption.end_seconds
-    ].filter(value => value !== undefined && value !== null).join(":");
-    if (recitationCaptionKeysRef.current.has(captionKey)) return;
-
-    recitationCaptionKeysRef.current.add(captionKey);
-    recordRecitationRepetition({
-      phraseId: activeCaption.phrase_id,
-      activityType: resolvedActivityType
-    });
-  }, [activeCaption, currentTime, playbackActive, resolvedActivityType, shouldTrackPlayerTime]);
+    resolvedCaptions
+      .filter(caption => {
+        const meaningfulTime = getMeaningfulTime(caption);
+        return meaningfulTime > previousPlaybackTime && meaningfulTime <= currentTime;
+      })
+      .forEach(recordCaptionCompletion);
+  }, [currentTime, playbackActive, resolvedActivityType, resolvedCaptions, shouldTrackPlayerTime]);
 
   function renderPlayer() {
     if (!resolvedClip) return null;
@@ -341,6 +364,7 @@ export default function PassageExperience({
           ]}
       toolbarTop={toolbarTop}
       toolbarMiddle={toolbarMiddle}
+      toolbarBottom={toolbarBottom}
       suppressModeControls={playbackControlsMode === 'details'}
       hidden={!showPracticeToolbar && !preserveToolbarInFocus}
     />
@@ -385,9 +409,10 @@ export default function PassageExperience({
                 practiceTextMode={practiceTextMode}
                 activityContextHeader={activityContextHeader}
                 learnSetupToolbarTop={learnSetupToolbarTop}
+                learnSetupToolbarBottom={learnSetupToolbarBottom}
+                learnCompleteToolbarBottom={learnCompleteToolbarBottom}
                 dockLearnSetupControls={dockLearnSetupControls}
                 onCourseTrack={onCourseTrack}
-                onCourseLesson={onCourseLesson}
               />
             )
           : null}

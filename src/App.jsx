@@ -1817,7 +1817,6 @@ export default function App() {
             onProgressPrompt={openProgressSignIn}
             onStudySkillChange={setCourseStudyWorkspace}
             onCourseTrack={goToSelectedLessonTrack}
-            onCourseLesson={() => goToLessonStudyHome(selectedLessonId, clampedExerciseIndex)}
             onSelectExercise={(exerciseIndex, studyWorkspace) => goToLessonStudyHome(selectedLessonId, exerciseIndex, studyWorkspace)}
           />
         )}

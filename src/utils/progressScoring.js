@@ -18,7 +18,9 @@ export const PROGRESS_TRACKING_MODES = {
 const PROGRESS_VERSION = 2;
 const OVERALL_COMPREHENSION_WEIGHT = 0.55;
 const OVERALL_RECITATION_WEIGHT = 0.45;
-const RECITATION_REPETITION_CURVE = 36;
+const RECITATION_REPETITION_TARGET = 80;
+const RECITATION_REPETITION_GATE_MIDPOINT = -8;
+const RECITATION_REPETITION_GATE_STEEPNESS = 0.12;
 const RECITATION_TRACE_BONUS = 0.04;
 let progressTrackingMode = PROGRESS_TRACKING_MODES.disabled;
 
@@ -148,7 +150,18 @@ function getEmptyRecitationProgress() {
 function calculateRecitationConfidence(recitation = {}) {
   const meaningfulRepetitions = Math.max(0, recitation.meaningful_repetitions || 0);
   const correctTraces = Math.max(0, recitation.correct_traces || 0);
-  const repetitionConfidence = 1 - Math.exp(-meaningfulRepetitions / RECITATION_REPETITION_CURVE);
+  const linearProgress = Math.min(1, meaningfulRepetitions / RECITATION_REPETITION_TARGET);
+  const baseline = 1 / (1 + Math.exp(
+    RECITATION_REPETITION_GATE_STEEPNESS * RECITATION_REPETITION_GATE_MIDPOINT
+  ));
+  const repetitionSignal = 1 / (
+    1 + Math.exp(
+      -RECITATION_REPETITION_GATE_STEEPNESS
+        * (meaningfulRepetitions - RECITATION_REPETITION_GATE_MIDPOINT)
+    )
+  );
+  const readinessGate = (repetitionSignal - baseline) / (1 - baseline);
+  const repetitionConfidence = linearProgress * readinessGate;
   const traceBonus = correctTraces * RECITATION_TRACE_BONUS;
   return clamp01(repetitionConfidence + traceBonus);
 }

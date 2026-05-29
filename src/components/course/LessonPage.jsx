@@ -6,7 +6,7 @@ import { getExerciseTitle } from './exerciseTitles.js';
 import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 import { getExercisePhraseIds, getLessonPhraseIds, getPhraseCountLabel } from '../../utils/courseMastery.js';
 import { createExercisePassage } from '../../utils/passages.js';
-import { getStoredPhraseConfidenceMap, PHRASE_PROGRESS_EVENT } from '../../utils/progressScoring.js';
+import { getStoredPhraseProgressDimensionMaps, PHRASE_PROGRESS_EVENT } from '../../utils/progressScoring.js';
 import {
   resolveStoredActivitySelection,
   SHARED_ACTIVITY_SELECTION_KEY,
@@ -21,6 +21,8 @@ const STUDY_SKILLS = {
 
 const STUDY_SKILL_STORAGE_KEY = 'liturgical-arabic:study-workspace';
 const MARKER_FILL_CONFIDENCE = 0.8;
+const CONFIDENCE_PULSE_MS = 520;
+const COMPREHENSION_SESSION_COMPLETE_EVENT = 'liturgical-arabic:comprehension-session-complete';
 
 const RECITATION_ACTIVITY_TYPES = [
   PASSAGE_ACTIVITY_TYPES.readListen,
@@ -59,6 +61,12 @@ function getStudySkillForActivityType(activityType) {
 function getStudySkillLabel(skill) {
   if (skill === STUDY_SKILLS.home) return 'Study Home';
   return skill === STUDY_SKILLS.comprehension ? 'Comprehension' : 'Recitation';
+}
+
+function formatDrawerConfidence(confidence) {
+  const percentage = confidence * 100;
+  if (percentage < 10) return `${percentage.toFixed(1)}%`;
+  return `${Math.round(percentage)}%`;
 }
 
 function getActivityOptionSkill(option) {
@@ -182,7 +190,6 @@ export default function LessonPage({
   onProgressPrompt,
   onStudySkillChange,
   onCourseTrack,
-  onCourseLesson,
   onSelectExercise
 }) {
   const exerciseItems = lesson.exercises ?? [];
@@ -193,7 +200,8 @@ export default function LessonPage({
   const [selectedActivityOptionId, setSelectedActivityOptionId] = useState(() => (
     getResolvedActivityValueForStudySkill(activityOptions, initialStudySkill)
   ));
-  const [phraseConfidenceById, setPhraseConfidenceById] = useState(getStoredPhraseConfidenceMap);
+  const [phraseProgressDimensions, setPhraseProgressDimensions] = useState(getStoredPhraseProgressDimensionMaps);
+  const [confidencePulseActive, setConfidencePulseActive] = useState(false);
   const recitationOptions = getSkillActivityOptions(activityOptions, STUDY_SKILLS.recitation);
   const comprehensionOptions = getSkillActivityOptions(activityOptions, STUDY_SKILLS.comprehension);
   const activeSkillOptions = getSkillActivityOptions(activityOptions, selectedStudySkill);
@@ -230,16 +238,49 @@ export default function LessonPage({
   }, [selectedActivityOptionId, selectedSkillActivityValue, selectedStudySkill]);
 
   useEffect(() => {
-    function refreshProgress() {
-      setPhraseConfidenceById(getStoredPhraseConfidenceMap());
+    let pulseFrameId = null;
+    let pulseTimeoutId = null;
+    const exercisePhraseIds = new Set(getExercisePhraseIds(selectedExerciseItem?.exercise_id));
+
+    function cancelConfidencePulseTimers() {
+      if (pulseFrameId) cancelAnimationFrame(pulseFrameId);
+      if (pulseTimeoutId) clearTimeout(pulseTimeoutId);
+      pulseFrameId = null;
+      pulseTimeoutId = null;
     }
+
+    function triggerPulseForExercise(event) {
+      const detail = event.detail || {};
+      const updatedPhraseIds = detail.phraseIds || (detail.phraseId ? [detail.phraseId] : []);
+      if (updatedPhraseIds.length > 0 && !updatedPhraseIds.some(phraseId => exercisePhraseIds.has(phraseId))) return;
+
+      cancelConfidencePulseTimers();
+      setConfidencePulseActive(false);
+      pulseFrameId = requestAnimationFrame(() => {
+        setConfidencePulseActive(true);
+        pulseTimeoutId = window.setTimeout(() => setConfidencePulseActive(false), CONFIDENCE_PULSE_MS);
+      });
+    }
+
+    function refreshProgress(event) {
+      setPhraseProgressDimensions(getStoredPhraseProgressDimensionMaps());
+      if (event.type === PHRASE_PROGRESS_EVENT) triggerPulseForExercise(event);
+    }
+
+    function pulseCompletedComprehensionSession(event) {
+      triggerPulseForExercise(event);
+    }
+
     window.addEventListener(PHRASE_PROGRESS_EVENT, refreshProgress);
+    window.addEventListener(COMPREHENSION_SESSION_COMPLETE_EVENT, pulseCompletedComprehensionSession);
     window.addEventListener('storage', refreshProgress);
     return () => {
+      cancelConfidencePulseTimers();
       window.removeEventListener(PHRASE_PROGRESS_EVENT, refreshProgress);
+      window.removeEventListener(COMPREHENSION_SESSION_COMPLETE_EVENT, pulseCompletedComprehensionSession);
       window.removeEventListener('storage', refreshProgress);
     };
-  }, []);
+  }, [selectedExerciseItem?.exercise_id]);
 
   const resolvedExercises = exerciseItems
     .map((item, index) => {
@@ -274,10 +315,64 @@ export default function LessonPage({
   };
 
   function getExerciseConfidence(item) {
-    const phraseIds = [...new Set(getExercisePhraseIds(item.exercise_id))];
+    return getExerciseDimensionConfidence(item, 'overall');
+  }
+
+  function getExerciseDimensionConfidence(item, dimension) {
+    const phraseIds = [...new Set(getExercisePhraseIds(item?.exercise_id))];
     if (phraseIds.length === 0) return 0;
-    const totalConfidence = phraseIds.reduce((total, phraseId) => total + (phraseConfidenceById[phraseId] || 0), 0);
+    const confidenceById = phraseProgressDimensions[dimension] || {};
+    const totalConfidence = phraseIds.reduce((total, phraseId) => total + (confidenceById[phraseId] || 0), 0);
     return totalConfidence / phraseIds.length;
+  }
+
+  function renderConfidenceBars() {
+    const recitationConfidence = getExerciseDimensionConfidence(selectedExerciseItem, 'recitation');
+    const comprehensionConfidence = getExerciseDimensionConfidence(selectedExerciseItem, 'comprehension');
+    const activeSkill = selectedStudySkill;
+    const activeConfidence = activeSkill === STUDY_SKILLS.comprehension
+      ? comprehensionConfidence
+      : recitationConfidence;
+    const rows = [
+      ['recitation', 'Recitation', recitationConfidence],
+      ['comprehension', 'Comprehension', comprehensionConfidence]
+    ];
+
+    return (
+      <div
+        className={[
+          'lp-drawer-confidence-stack',
+          confidencePulseActive ? 'is-pulsing' : ''
+        ].filter(Boolean).join(' ')}
+        style={{
+          '--active-confidence': `${activeConfidence * 100}%`,
+          '--active-confidence-offset': activeSkill === STUDY_SKILLS.comprehension ? 'calc(100% + 6px)' : '0px'
+        }}
+        aria-label="Exercise confidence"
+      >
+        {rows.map(([skill, label, confidence]) => {
+          const active = activeSkill === STUDY_SKILLS[skill];
+          return (
+            <div
+              key={skill}
+              className={`lp-drawer-confidence-row${active ? ' active' : ' muted'}`}
+              style={{ '--confidence': `${confidence * 100}%` }}
+            >
+              <div className="lp-drawer-confidence-label">
+                {label}
+              </div>
+              <div className="lp-drawer-confidence-track" aria-hidden="true">
+                <span />
+              </div>
+              <strong className="lp-drawer-confidence-percent">{formatDrawerConfidence(confidence)}</strong>
+            </div>
+          );
+        })}
+        <div className="lp-drawer-confidence-active-fill" aria-hidden="true">
+          <span />
+        </div>
+      </div>
+    );
   }
 
   function selectActivityValue(value) {
@@ -351,10 +446,12 @@ export default function LessonPage({
         activityContextHeader={activityContextHeader}
         toolbarTop={renderExerciseSkillTabs()}
         toolbarMiddle={renderActivityModeTabs()}
+        toolbarBottom={renderConfidenceBars()}
         learnSetupToolbarTop={renderExerciseSkillTabs()}
+        learnSetupToolbarBottom={renderConfidenceBars()}
+        learnCompleteToolbarBottom={renderConfidenceBars()}
         dockLearnSetupControls={!isRecitationMode}
         onCourseTrack={onCourseTrack}
-        onCourseLesson={onCourseLesson}
       />
     );
   }

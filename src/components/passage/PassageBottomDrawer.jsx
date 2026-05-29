@@ -39,6 +39,7 @@ export default function PassageBottomDrawer({
   top = null,
   middle = null,
   action = null,
+  bottom = null,
   children = null,
   className = "",
   hidden = false,
@@ -48,10 +49,10 @@ export default function PassageBottomDrawer({
   const resolvedRef = drawerRef || internalRef;
   useDrawerReserve(resolvedRef, !hidden);
 
-  if (hidden || (!top && !middle && !action && !children)) return null;
+  if (hidden || (!top && !middle && !action && !bottom && !children)) return null;
 
   return (
-    <div ref={resolvedRef} className={["lp-activity-toolbar-shell", className].filter(Boolean).join(" ")}>
+    <div ref={resolvedRef} className={["lp-activity-toolbar-shell", bottom ? "has-bottom-row" : "", className].filter(Boolean).join(" ")}>
       {children || (
         <>
           {top && (
@@ -67,6 +68,11 @@ export default function PassageBottomDrawer({
           {action && (
             <div className="lp-activity-toolbar-action">
               {action}
+            </div>
+          )}
+          {bottom && (
+            <div className="lp-activity-toolbar-bottom">
+              {bottom}
             </div>
           )}
         </>

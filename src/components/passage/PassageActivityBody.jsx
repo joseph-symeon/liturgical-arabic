@@ -35,6 +35,7 @@ const MATCHING_COMPLETE_FEEDBACK_MS = 900;
 const LEARN_SETTINGS_STORAGE_KEY = 'liturgical-arabic:learn-settings';
 const LEARN_SETTINGS_OPEN_STORAGE_KEY = 'liturgical-arabic:learn-settings-open';
 const LEARN_BACK_EVENT = 'liturgical-arabic:learn-back';
+const COMPREHENSION_SESSION_COMPLETE_EVENT = 'liturgical-arabic:comprehension-session-complete';
 const LEARN_MATCHING_MIN_PHRASES = 2;
 const LEARN_MATCHING_MAX_PHRASES = 6;
 const LEARN_ARRANGE_MIN_PHRASES = 2;
@@ -535,9 +536,10 @@ export default function PassageActivityBody({
   practiceTextMode = 'literal',
   activityContextHeader = null,
   learnSetupToolbarTop = null,
+  learnSetupToolbarBottom = null,
+  learnCompleteToolbarBottom = null,
   dockLearnSetupControls = false,
-  onCourseTrack,
-  onCourseLesson
+  onCourseTrack
 }) {
   const storedLearnSettings = useMemo(() => getStoredLearnSettings(), []);
   const isReadListen = isReadListenActivity(exercise.activity?.type);
@@ -608,6 +610,7 @@ export default function PassageActivityBody({
   const [learnTraceFeedback, setLearnTraceFeedback] = useState(null);
   const [learnStarted, setLearnStarted] = useState(false);
   const [learnReviewMode, setLearnReviewMode] = useState(null);
+  const [learnFinalAnswerComplete, setLearnFinalAnswerComplete] = useState(false);
   const [learnSettingsOpen, setLearnSettingsOpen] = useState(() => (
     dockLearnSetupControls ? false : getStoredLearnSettingsOpen()
   ));
@@ -637,6 +640,9 @@ export default function PassageActivityBody({
   const matchingCorrectFeedbackTimerRefs = useRef([]);
   const matchingCompleteTimerRef = useRef(null);
   const translationFeedbackTimerRef = useRef(null);
+  const learnSessionCompletePulseRef = useRef(false);
+  const learnResetRequestedRef = useRef(false);
+  const learnCompletionSettingsCollapsedRef = useRef(false);
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -802,6 +808,7 @@ export default function PassageActivityBody({
 
   function moveCurrentLearnTerm(wasCorrect) {
     if (!currentLearnPhraseId) return;
+    setLearnFinalAnswerComplete(false);
     setLearnQueue(queue => {
       const remaining = queue.slice(1);
       if (wasCorrect) return remaining;
@@ -842,6 +849,7 @@ export default function PassageActivityBody({
     });
     setLearnSelectedChoiceId(phraseId);
     setLearnFeedback(isCorrect ? 'correct' : 'incorrect');
+    if (isCorrect && learnQueue.length <= 1) setLearnFinalAnswerComplete(true);
     window.setTimeout(
       () => moveCurrentLearnTerm(isCorrect),
       isCorrect ? TRANSLATION_CORRECT_FEEDBACK_MS : TRANSLATION_INCORRECT_FEEDBACK_MS
@@ -849,6 +857,7 @@ export default function PassageActivityBody({
   }
 
   function completeCurrentLearnReview() {
+    setLearnFinalAnswerComplete(false);
     setLearnQueue(queue => queue.slice(1));
     setLearnPromptCount(count => count + 1);
     setMatchingSelection(null);
@@ -904,6 +913,8 @@ export default function PassageActivityBody({
     setLearnCorrectionPrompt(null);
     setLearnStarted(false);
     setLearnReviewMode(null);
+    setLearnFinalAnswerComplete(false);
+    learnSessionCompletePulseRef.current = false;
     setLearnResetKey(key => key + 1);
     return () => {
       if (arrangeFeedbackTimerRef.current) {
@@ -959,6 +970,10 @@ export default function PassageActivityBody({
   }, [translationDirection, translationPhraseIds.join('|'), practiceTextMode]);
 
   useEffect(() => {
+    const holdingCompletedSession = learnStarted && learnQueue.length === 0 && learnPromptCount > 0;
+    if (holdingCompletedSession && !learnResetRequestedRef.current) return;
+    learnResetRequestedRef.current = false;
+
     const termPhraseIds = learnShuffleTerms
       ? getRandomizedPhraseIds(learnPhraseIds)
       : [...learnPhraseIds];
@@ -996,6 +1011,7 @@ export default function PassageActivityBody({
     setLearnSelectedChoiceId(null);
     setLearnCorrectionPrompt(null);
     setLearnReviewMode(null);
+    learnSessionCompletePulseRef.current = false;
     setMatchingSelection(null);
     setMatchedPhraseIds([]);
     setMatchingFeedback(null);
@@ -1017,6 +1033,27 @@ export default function PassageActivityBody({
     learnQuestionTypes.arrange,
     learnResetKey
   ]);
+
+  useEffect(() => {
+    if (!isLearnActivity || !learnStarted || currentLearnItem || learnSessionCompletePulseRef.current) return;
+    learnSessionCompletePulseRef.current = true;
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent(COMPREHENSION_SESSION_COMPLETE_EVENT, {
+        detail: { phraseIds: learnPhraseIds }
+      }));
+    }
+  }, [currentLearnItem, isLearnActivity, learnPhraseIds, learnStarted]);
+
+  useLayoutEffect(() => {
+    const isComplete = isLearnActivity && learnStarted && !currentLearnItem && learnPromptCount > 0;
+    if (!isComplete) {
+      learnCompletionSettingsCollapsedRef.current = false;
+      return;
+    }
+    if (learnCompletionSettingsCollapsedRef.current) return;
+    learnCompletionSettingsCollapsedRef.current = true;
+    setLearnSettingsOpen(false);
+  }, [currentLearnItem, isLearnActivity, learnPromptCount, learnStarted]);
 
   useLayoutEffect(() => {
     if (!isClozeActivity && !(isLearnActivity && currentLearnItemType === 'arrange')) return undefined;
@@ -1304,15 +1341,18 @@ export default function PassageActivityBody({
     }
   }, [isLearnActivity, learnPhraseIds.length, learnCanUseMatching, learnCanUseArrange]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!isLearnActivity || !learnStarted) return undefined;
+    const isComplete = !currentLearnItem && learnPromptCount > 0;
     const root = document.documentElement;
-    root.classList.add('lp-learn-session-active');
+    root.classList.toggle('lp-learn-session-active', !isComplete);
+    root.classList.toggle('lp-learn-session-complete-active', isComplete);
     window.scrollTo({ top: 0, left: 0 });
     return () => {
       root.classList.remove('lp-learn-session-active');
+      root.classList.remove('lp-learn-session-complete-active');
     };
-  }, [isLearnActivity, learnStarted]);
+  }, [currentLearnItem, isLearnActivity, learnPromptCount, learnStarted]);
 
   useEffect(() => {
     if (!isLearnActivity || !learnStarted) return undefined;
@@ -1321,6 +1361,7 @@ export default function PassageActivityBody({
       setLearnStarted(false);
       setLearnReviewMode(null);
       setLearnCorrectionPrompt(null);
+      setLearnFinalAnswerComplete(false);
       clearLearnTraceFeedback();
       setLearnResetKey(key => key + 1);
     }
@@ -1611,6 +1652,9 @@ export default function PassageActivityBody({
                   });
                 }
                 setArrangeFeedback(nextFeedback);
+                if (currentLearnItemType === 'arrange' && nextFeedback === 'correct' && learnQueue.length <= 1) {
+                  setLearnFinalAnswerComplete(true);
+                }
                 if (arrangeFeedbackTimerRef.current) clearTimeout(arrangeFeedbackTimerRef.current);
                 arrangeFeedbackTimerRef.current = setTimeout(() => {
                   arrangeFeedbackTimerRef.current = null;
@@ -2056,7 +2100,8 @@ export default function PassageActivityBody({
     const totalTerms = learnPhraseIds.length;
     const totalPrompts = Math.max(learnTotalPromptCount, learnPromptCount + learnQueue.length, 1);
     const completedCount = Math.min(learnPromptCount, totalPrompts);
-    const progressText = `${completedCount} / ${totalPrompts}`;
+    const displayedCompletedCount = learnFinalAnswerComplete ? totalPrompts : completedCount;
+    const progressText = `${displayedCompletedCount} / ${totalPrompts}`;
     const correctionDirection = learnCorrectionPrompt?.direction || learnDirection;
     const correctionAnswer = learnCorrectionPrompt?.answer || '';
     const correctionPhrase = phrases[learnCorrectionPrompt?.phraseId];
@@ -2076,8 +2121,11 @@ export default function PassageActivityBody({
     const traceComplete = Boolean(correctionAnswer)
       && isLearnAnswerCorrect(learnTraceAnswer, correctionPhrase, correctionDirection);
 
-    function resetLearnSession() {
+    function resetLearnSession({ restartCompleted = true } = {}) {
+      if (restartCompleted) learnResetRequestedRef.current = true;
       setLearnReviewMode(null);
+      setLearnFinalAnswerComplete(false);
+      learnSessionCompletePulseRef.current = false;
       setLearnResetKey(key => key + 1);
     }
 
@@ -2167,6 +2215,7 @@ export default function PassageActivityBody({
         correct: isCorrect
       });
       if (isCorrect) {
+        if (learnQueue.length <= 1) setLearnFinalAnswerComplete(true);
         setLearnFeedback('correct');
         window.setTimeout(() => moveCurrentLearnTerm(true), TRANSLATION_CORRECT_FEEDBACK_MS);
         return;
@@ -2222,7 +2271,7 @@ export default function PassageActivityBody({
     function setOnlyAvailableQuestionTypes(nextTypes) {
       if (!nextTypes.multipleChoice && !nextTypes.written && !nextTypes.matching && !nextTypes.arrange) return;
       setLearnQuestionTypes(nextTypes);
-      resetLearnSession();
+      resetLearnSession({ restartCompleted: false });
     }
 
     function toggleLearnAnswerMode(currentMode, value) {
@@ -2282,25 +2331,21 @@ export default function PassageActivityBody({
     }
 
     function renderLearnSessionHeader() {
-      const progressPercent = totalPrompts > 0 ? Math.round((completedCount / totalPrompts) * 100) : 0;
+      const progressPercent = totalPrompts > 0 ? Math.round((displayedCompletedCount / totalPrompts) * 100) : 0;
       return (
         <div className="lp-learn-session-header">
           <StudyWorkspaceHeader
             subtitle={progressText}
             className="lp-learn-topbar"
-            actions={(
-              <button type="button" className="lp-learn-ghost-button" onClick={returnToLearnSetup}>
-                Settings
-              </button>
-            )}
+            actions={null}
           />
           <div
-            className={`lp-learn-progress-rail${completedCount === totalPrompts ? ' complete' : ''}`}
+            className={`lp-learn-progress-rail${displayedCompletedCount === totalPrompts ? ' complete' : ''}`}
             aria-label={`Comprehension progress ${progressText}`}
             style={{ '--learn-progress-position': `${progressPercent}%` }}
           >
             <div className="lp-learn-progress-fill" style={{ width: `${progressPercent}%` }} />
-            <div className="lp-learn-progress-count">{completedCount}</div>
+            <div className="lp-learn-progress-count">{displayedCompletedCount}</div>
             <div className="lp-learn-progress-total">{totalPrompts}</div>
           </div>
         </div>
@@ -2378,141 +2423,145 @@ export default function PassageActivityBody({
       );
     }
 
+    function renderLearnSettingsControl() {
+      return (
+        <details
+          className="lp-learn-settings"
+          open={learnSettingsOpen}
+          onToggle={event => setLearnSettingsOpen(event.currentTarget.open)}
+        >
+          <summary className="lp-learn-settings-summary">
+            <span>Activity mix</span>
+            <span>{learnSettingsOpen ? 'Hide' : 'Edit'}</span>
+          </summary>
+          <div className="lp-learn-answer-settings">
+            <div className="lp-learn-settings-section">
+              <div className="lp-learn-activity-mix">
+                <div className="lp-learn-setting-group lp-learn-settings-panel">
+                  <span className="lp-learn-setting-label">Shuffle phrases</span>
+                  <label className="lp-mode-toggle lp-learn-setting-toggle" aria-label="Shuffle phrases">
+                    <input
+                      type="checkbox"
+                      checked={learnShuffleTerms}
+                      onChange={event => {
+                        setLearnShuffleTerms(event.target.checked);
+                        resetLearnSession({ restartCompleted: false });
+                      }}
+                    />
+                    <span className="lp-mode-switch" aria-hidden="true" />
+                  </label>
+                </div>
+                <div className="lp-learn-settings-panel-grid">
+                  <div className={learnQuestionTypes.multipleChoice ? "lp-learn-setting-group lp-learn-settings-panel" : "lp-learn-setting-group lp-learn-settings-panel disabled"}>
+                    <span className="lp-learn-setting-label">Multiple choice</span>
+                    <div className="lp-segmented-control" role="group" aria-label="Multiple choice answers">
+                      {[
+                        ['english', 'English'],
+                        ['arabic', 'Arabic']
+                      ].map(([value, label]) => (
+                        <button
+                          key={value}
+                          type="button"
+                          className={learnQuestionTypes.multipleChoice && (learnMultipleChoiceAnswerWith === value || learnMultipleChoiceAnswerWith === 'both') ? 'active' : ''}
+                          aria-pressed={learnQuestionTypes.multipleChoice && (learnMultipleChoiceAnswerWith === value || learnMultipleChoiceAnswerWith === 'both')}
+                          onClick={() => chooseLearnMultipleChoiceAnswerMode(value)}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={learnQuestionTypes.written ? "lp-learn-setting-group lp-learn-settings-panel" : "lp-learn-setting-group lp-learn-settings-panel disabled"}>
+                    <span className="lp-learn-setting-label">Written</span>
+                    <div className="lp-segmented-control" role="group" aria-label="Written answers">
+                      {[
+                        ['english', 'English'],
+                        ['arabic', 'Arabic']
+                      ].map(([value, label]) => (
+                        <button
+                          key={value}
+                          type="button"
+                          className={learnQuestionTypes.written && (learnWrittenAnswerWith === value || learnWrittenAnswerWith === 'both') ? 'active' : ''}
+                          aria-pressed={learnQuestionTypes.written && (learnWrittenAnswerWith === value || learnWrittenAnswerWith === 'both')}
+                          onClick={() => chooseLearnWrittenAnswerMode(value)}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                {(learnCanUseMatching || learnCanUseArrange) && (
+                  <div
+                    className={
+                      (learnQuestionTypes.matching && learnCanUseMatching)
+                        || (learnQuestionTypes.arrange && learnCanUseArrange)
+                        ? "lp-learn-setting-group lp-learn-settings-panel"
+                        : "lp-learn-setting-group lp-learn-settings-panel disabled"
+                    }
+                  >
+                    <span className="lp-learn-setting-label">Blocks</span>
+                    <div className="lp-learn-review-buttons">
+                      {learnCanUseMatching && (
+                        <button
+                          type="button"
+                          className={`lp-activity-button${learnQuestionTypes.matching ? ' active' : ''}`}
+                          aria-pressed={learnQuestionTypes.matching}
+                          onClick={() => toggleLearnReviewType('matching')}
+                        >
+                          <span>Matching</span>
+                        </button>
+                      )}
+                      {learnCanUseArrange && (
+                        <button
+                          type="button"
+                          className={`lp-activity-button${learnQuestionTypes.arrange ? ' active' : ''}`}
+                          aria-pressed={learnQuestionTypes.arrange}
+                          onClick={() => toggleLearnReviewType('arrange')}
+                        >
+                          <span>Arrange</span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="lp-learn-settings-section">
+              <div className="lp-learn-settings-section-title lp-learn-display-heading">Display</div>
+              <div className="lp-learn-setting-group lp-learn-settings-panel">
+                <span className="lp-learn-setting-label">English captions</span>
+                <div className="lp-segmented-control" role="group" aria-label="English display">
+                  {[
+                    ['translation', 'Translation'],
+                    ['literal', 'Literal']
+                  ].map(([value, label]) => (
+                    <button
+                      key={value}
+                      type="button"
+                      className={learnEnglishDisplayMode === value ? 'active' : ''}
+                      onClick={() => {
+                        setLearnEnglishDisplayMode(value);
+                        resetLearnSession({ restartCompleted: false });
+                      }}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      );
+    }
+
     function renderLearnSetupControls({ docked = false } = {}) {
       const learnControlsClassName = [
         docked ? "lp-learn-docked-controls" : "lp-learn-inline-controls",
         docked && learnSettingsOpen ? "settings-open" : ""
       ].filter(Boolean).join(" ");
-      const learnSettingsControl = (
-          <details
-            className="lp-learn-settings"
-            open={learnSettingsOpen}
-            onToggle={event => setLearnSettingsOpen(event.currentTarget.open)}
-          >
-            <summary className="lp-learn-settings-summary">
-              <span>Activity mix</span>
-              <span>{learnSettingsOpen ? 'Hide' : 'Edit'}</span>
-            </summary>
-            <div className="lp-learn-answer-settings">
-              <div className="lp-learn-settings-section">
-                <div className="lp-learn-activity-mix">
-                  <div className="lp-learn-setting-group lp-learn-settings-panel">
-                    <span className="lp-learn-setting-label">Shuffle phrases</span>
-                    <label className="lp-mode-toggle lp-learn-setting-toggle" aria-label="Shuffle phrases">
-                      <input
-                        type="checkbox"
-                        checked={learnShuffleTerms}
-                        onChange={event => {
-                          setLearnShuffleTerms(event.target.checked);
-                          resetLearnSession();
-                        }}
-                      />
-                      <span className="lp-mode-switch" aria-hidden="true" />
-                    </label>
-                  </div>
-                  <div className="lp-learn-settings-panel-grid">
-                    <div className={learnQuestionTypes.multipleChoice ? "lp-learn-setting-group lp-learn-settings-panel" : "lp-learn-setting-group lp-learn-settings-panel disabled"}>
-                      <span className="lp-learn-setting-label">Multiple choice</span>
-                      <div className="lp-segmented-control" role="group" aria-label="Multiple choice answers">
-                        {[
-                          ['english', 'English'],
-                          ['arabic', 'Arabic']
-                        ].map(([value, label]) => (
-                          <button
-                            key={value}
-                            type="button"
-                            className={learnQuestionTypes.multipleChoice && (learnMultipleChoiceAnswerWith === value || learnMultipleChoiceAnswerWith === 'both') ? 'active' : ''}
-                            aria-pressed={learnQuestionTypes.multipleChoice && (learnMultipleChoiceAnswerWith === value || learnMultipleChoiceAnswerWith === 'both')}
-                            onClick={() => chooseLearnMultipleChoiceAnswerMode(value)}
-                          >
-                            {label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    <div className={learnQuestionTypes.written ? "lp-learn-setting-group lp-learn-settings-panel" : "lp-learn-setting-group lp-learn-settings-panel disabled"}>
-                      <span className="lp-learn-setting-label">Written</span>
-                      <div className="lp-segmented-control" role="group" aria-label="Written answers">
-                        {[
-                          ['english', 'English'],
-                          ['arabic', 'Arabic']
-                        ].map(([value, label]) => (
-                          <button
-                            key={value}
-                            type="button"
-                            className={learnQuestionTypes.written && (learnWrittenAnswerWith === value || learnWrittenAnswerWith === 'both') ? 'active' : ''}
-                            aria-pressed={learnQuestionTypes.written && (learnWrittenAnswerWith === value || learnWrittenAnswerWith === 'both')}
-                            onClick={() => chooseLearnWrittenAnswerMode(value)}
-                          >
-                            {label}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  {(learnCanUseMatching || learnCanUseArrange) && (
-                    <div
-                      className={
-                        (learnQuestionTypes.matching && learnCanUseMatching)
-                          || (learnQuestionTypes.arrange && learnCanUseArrange)
-                          ? "lp-learn-setting-group lp-learn-settings-panel"
-                          : "lp-learn-setting-group lp-learn-settings-panel disabled"
-                      }
-                    >
-                      <span className="lp-learn-setting-label">Blocks</span>
-                      <div className="lp-learn-review-buttons">
-                        {learnCanUseMatching && (
-                          <button
-                            type="button"
-                            className={`lp-activity-button${learnQuestionTypes.matching ? ' active' : ''}`}
-                            aria-pressed={learnQuestionTypes.matching}
-                            onClick={() => toggleLearnReviewType('matching')}
-                          >
-                            <span>Matching</span>
-                          </button>
-                        )}
-                        {learnCanUseArrange && (
-                          <button
-                            type="button"
-                            className={`lp-activity-button${learnQuestionTypes.arrange ? ' active' : ''}`}
-                            aria-pressed={learnQuestionTypes.arrange}
-                            onClick={() => toggleLearnReviewType('arrange')}
-                          >
-                            <span>Arrange</span>
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="lp-learn-settings-section">
-                <div className="lp-learn-settings-section-title lp-learn-display-heading">Display</div>
-                <div className="lp-learn-setting-group lp-learn-settings-panel">
-                  <span className="lp-learn-setting-label">English captions</span>
-                  <div className="lp-segmented-control" role="group" aria-label="English display">
-                    {[
-                      ['translation', 'Translation'],
-                      ['literal', 'Literal']
-                    ].map(([value, label]) => (
-                      <button
-                        key={value}
-                        type="button"
-                        className={learnEnglishDisplayMode === value ? 'active' : ''}
-                        onClick={() => {
-                          setLearnEnglishDisplayMode(value);
-                          resetLearnSession();
-                        }}
-                      >
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </details>
-      );
+      const learnSettingsControl = renderLearnSettingsControl();
       const learnStartButton = (
         <button type="button" className="lp-activity-button lp-activity-submit" onClick={startLearnSession}>
           {docked ? 'Study Phrases' : 'Start'}
@@ -2543,6 +2592,7 @@ export default function PassageActivityBody({
             top={learnSetupToolbarTop}
             middle={learnSettingsControl}
             action={learnStartButton}
+            bottom={learnSetupToolbarBottom}
           />
         );
       }
@@ -2613,7 +2663,6 @@ export default function PassageActivityBody({
 
       return (
         <div className="lp-learn-activity lp-learn-session" dir="ltr">
-          {renderLearnSessionHeader()}
           <div className="lp-learn-complete">
             <div className="lp-learn-complete-mark" aria-hidden="true">✓</div>
             <div className="lp-learn-complete-copy">
@@ -2631,17 +2680,24 @@ export default function PassageActivityBody({
                 <span>repeated</span>
               </div>
             </div>
-            <div className="lp-learn-complete-actions">
-              {onCourseLesson && (
-                <button type="button" className="lp-activity-button lp-learn-complete-secondary" onClick={onCourseLesson}>
-                  Back to lesson
+          </div>
+          {learnCompleteToolbarBottom && (
+            <PassageBottomDrawer
+              className={[
+                'lp-learn-docked-controls',
+                'lp-learn-complete-drawer',
+                learnSettingsOpen ? 'settings-open' : ''
+              ].filter(Boolean).join(' ')}
+              top={learnSetupToolbarTop}
+              middle={renderLearnSettingsControl()}
+              action={(
+                <button type="button" className="lp-activity-button lp-activity-submit" onClick={resetLearnSession}>
+                  Practice Again
                 </button>
               )}
-              <button type="button" className="lp-activity-button lp-activity-submit" onClick={resetLearnSession}>
-                Practice again
-              </button>
-            </div>
-          </div>
+              bottom={learnCompleteToolbarBottom}
+            />
+          )}
         </div>
       );
     }
@@ -2898,6 +2954,10 @@ export default function PassageActivityBody({
       });
       setMatchingSelection(null);
       if (correct) {
+        const willCompleteMatching = currentLearnItemType === 'matching'
+          && matchingPhraseIds.length > 0
+          && matchedPhraseIdSet.size + (matchedPhraseIdSet.has(phraseId) ? 0 : 1) >= matchingPhraseIds.length;
+        if (willCompleteMatching && learnQueue.length <= 1) setLearnFinalAnswerComplete(true);
         setMatchedPhraseIds(ids => {
           const nextIds = ids.includes(phraseId) ? ids : ids.concat(phraseId);
           if (
