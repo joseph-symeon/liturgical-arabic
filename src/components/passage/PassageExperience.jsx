@@ -183,6 +183,7 @@ export default function PassageExperience({
   learnCompleteToolbarBottom = null,
   dockLearnSetupControls = false,
   onCourseTrack,
+  recitationUnitPhraseCount = null,
   renderPassage
 }) {
   const resolvedActivityType = activityType || passage?.activity_type || null;
@@ -281,7 +282,8 @@ export default function PassageExperience({
       recitationCaptionKeysRef.current.add(captionKey);
       recordRecitationRepetition({
         phraseId: caption.phrase_id,
-        activityType: resolvedActivityType
+        activityType: resolvedActivityType,
+        unitPhraseCount: recitationUnitPhraseCount
       });
       return true;
     }

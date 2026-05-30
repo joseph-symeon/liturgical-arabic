@@ -299,6 +299,7 @@ export default function LessonPage({
   const exerciseTitle = getExerciseTitle(lesson, selectedExerciseIndex);
   const hasMultipleExercises = exerciseItems.length > 1;
   const lessonPhraseCount = getLessonPhraseIds(lesson).size;
+  const selectedExercisePhraseCount = new Set(getExercisePhraseIds(selectedExerciseItem?.exercise_id)).size;
   const studyHomeContext = hasMultipleExercises
     ? `${exerciseItems.length} exercises · ${lessonPhraseCount} ${lessonPhraseCount === 1 ? 'phrase' : 'phrases'}`
     : exerciseTitle;
@@ -452,6 +453,7 @@ export default function LessonPage({
         learnCompleteToolbarBottom={renderConfidenceBars()}
         dockLearnSetupControls={!isRecitationMode}
         onCourseTrack={onCourseTrack}
+        recitationUnitPhraseCount={selectedExercisePhraseCount || lessonPhraseCount}
       />
     );
   }

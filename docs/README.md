@@ -5,6 +5,7 @@ Start here when working on the project.
 ## App And Course Data
 
 - [Data Architecture](data-architecture.md): how phrases, segments, service texts, recordings, alignments, activities, and lessons relate.
+- [Progress Scoring](progress-scoring.md): how Comprehension and Recitation confidence are calculated.
 - [Phrase Source Workflow](../src/data/source/README.md): how phrase data syncs with Notion.
 
 ## Recording Pipeline
