@@ -530,7 +530,22 @@ export const exerciseDefinitions = [
     "phrase_ids": [
       "preparation-heavenly-king-001",
       "preparation-comforter-spirit-truth-001",
-      "preparation-spirit-truth-001",
+      "preparation-spirit-truth-001"
+    ],
+    "media": HEAVENLY_KING_MEDIA,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "preparation-divine-liturgy",
+      "start_segment_id": "preparation-heavenly-king",
+      "end_segment_id": "preparation-heavenly-king"
+    }
+  },
+  {
+    "id": "heavenly-king-everywhere-present",
+    "segment_ids": [
+      "preparation-heavenly-king"
+    ],
+    "phrase_ids": [
       "preparation-everywhere-present-001",
       "preparation-filling-all-things-001"
     ],
@@ -1785,6 +1800,45 @@ export const exerciseDefinitions = [
     }
   },
   {
+    "id": "calling-remembrance-theotokos",
+    "segment_ids": [
+      "little-litany-calling-remembrance"
+    ],
+    "phrase_ids": [
+      "calling-remembrance-001",
+      "all-holy-immaculate-001",
+      "most-blessed-glorious-lady-001",
+      "glorious-lady-001",
+      "theotokos-001",
+      "ever-virgin-mary-002"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "little-litany-after-first-antiphon",
+      "start_segment_id": "little-litany-calling-remembrance",
+      "end_segment_id": "little-litany-calling-remembrance"
+    }
+  },
+  {
+    "id": "calling-remembrance-commend",
+    "segment_ids": [
+      "little-litany-calling-remembrance"
+    ],
+    "phrase_ids": [
+      "with-all-saints-001",
+      "commend-ourselves-001",
+      "and-each-other-001",
+      "and-all-our-life-001",
+      "unto-christ-our-god-001"
+    ],
+    "service_text_id": "divine-liturgy-john-chrysostom",
+    "service_range": {
+      "section_id": "little-litany-after-first-antiphon",
+      "start_segment_id": "little-litany-calling-remembrance",
+      "end_segment_id": "little-litany-calling-remembrance"
+    }
+  },
+  {
     "id": "little-litany-calling-remembrance",
     "segment_ids": [
       "little-litany-calling-remembrance"
@@ -1824,8 +1878,11 @@ export const exerciseDefinitions = [
     "id": "little-litanies-summary",
     "segment_ids": [
       "little-litany-again",
+      "little-litany-lord-have-mercy-1",
       "little-litany-help-save",
+      "little-litany-lord-have-mercy-2",
       "little-litany-calling-remembrance",
+      "little-litany-to-thee-o-lord",
       "little-litany-for-thine-might",
       "little-litany-good-god-doxology"
     ],

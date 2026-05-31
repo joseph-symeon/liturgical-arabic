@@ -17692,7 +17692,7 @@ const phrases = {
     ]
   },
   "preparation-giver-of-life-001": {
-    "arabic": "وَرَازِقُ الحَيَاة",
+    "arabic": "وَرَازِقُ الحَيَاةِ",
     "translation": "and Giver of life",
     "literal": "and giver of life",
     "tags": [
@@ -17712,7 +17712,7 @@ const phrases = {
     ]
   },
   "preparation-filling-all-things-001": {
-    "arabic": "وَالمَالِئُ الكُلّ",
+    "arabic": "وَالمَالِئُ الكُلِّ",
     "translation": "and fillest all things",
     "literal": "and filling all things",
     "tags": [
@@ -17742,7 +17742,7 @@ const phrases = {
     ]
   },
   "preparation-spirit-truth-001": {
-    "arabic": "رُوحُ الحَقّ",
+    "arabic": "رُوحُ الحَقِّ",
     "translation": "the Spirit of truth",
     "literal": "Spirit of truth",
     "tags": [

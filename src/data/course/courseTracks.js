@@ -17,8 +17,8 @@ const courseTracks = [
       "lesson-lords-prayer-thine-kingdom",
       "lesson-through-the-prayers",
       "lesson-heavenly-king",
-      "lesson-come-let-us-worship",
-      "lesson-alleluia-glory-our-god-hope"
+      "lesson-alleluia-glory-our-god-hope",
+      "lesson-come-let-us-worship"
     ],
     unlocks: [
       "track-divine-liturgy-part-1"
@@ -47,6 +47,7 @@ const courseTracks = [
       "lesson-blessed-is-the-kingdom",
       "lesson-hymn-to-the-theotokos",
       "lesson-antiphons",
+      "lesson-calling-remembrance",
       "lesson-little-litanies",
       "lesson-entrance",
       "lesson-liturgy-word",
