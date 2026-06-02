@@ -4171,6 +4171,126 @@
   min-width: 0;
 }
 
+.lp-confidence-guide-section {
+  display: grid;
+  gap: 16px;
+}
+
+.lp-confidence-guide-card {
+  --track-progress: 0.84;
+  width: min(100%, 860px);
+  border-color: color-mix(in srgb, var(--path-accent) 38%, #d6d3d1);
+}
+
+.lp-confidence-guide-card-meter {
+  grid-column: 1;
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e7e5e4;
+}
+
+.lp-confidence-guide-card-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #b91c1c, #0f766e);
+}
+
+.lp-confidence-guide-page {
+  --confidence-guide-accent: #0f766e;
+  --confidence-guide-warm: #b91c1c;
+}
+
+.lp-confidence-guide {
+  display: grid;
+  gap: 20px;
+  max-width: 920px;
+}
+
+.lp-confidence-guide-intro {
+  max-width: 680px;
+  margin: 8px 0 0;
+  color: #57534e;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.lp-confidence-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lp-confidence-guide-panel {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid #d6d3d1;
+  border-radius: 8px;
+  background: #fff;
+  padding: 16px;
+}
+
+.lp-confidence-guide-panel.primary {
+  border-color: color-mix(in srgb, var(--confidence-guide-accent) 32%, #d6d3d1);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--confidence-guide-accent) 8%, transparent), transparent 58%),
+    #fff;
+}
+
+.lp-confidence-guide-panel h3 {
+  margin: 0;
+  color: #292524;
+  font-size: 17px;
+  font-weight: 760;
+  line-height: 1.2;
+}
+
+.lp-confidence-guide-panel p {
+  margin: 0;
+  color: #57534e;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.lp-confidence-guide-example {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  border-top: 1px solid #d6d3d1;
+  padding-top: 18px;
+}
+
+.lp-confidence-guide-example div {
+  min-width: 0;
+  border-left: 3px solid color-mix(in srgb, var(--confidence-guide-accent) 64%, #d6d3d1);
+  padding-left: 12px;
+}
+
+.lp-confidence-guide-example span,
+.lp-confidence-guide-example strong {
+  display: block;
+  min-width: 0;
+}
+
+.lp-confidence-guide-example span {
+  color: #78716c;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.lp-confidence-guide-example strong {
+  margin-top: 6px;
+  color: #292524;
+  font-size: 15px;
+  font-weight: 780;
+  line-height: 1.25;
+}
+
 .lp-course-coverage {
   display: grid;
   gap: 16px;
@@ -5355,6 +5475,11 @@
   .lp-study-home-exercise-row {
     grid-template-columns: minmax(0, 1fr) auto;
     padding: 10px;
+  }
+
+  .lp-confidence-guide-grid,
+  .lp-confidence-guide-example {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .lp-track-detail-list,
@@ -6616,8 +6741,16 @@
   .lp-track-detail-back,
   .lp-track-lesson-meta,
   .lp-service-mastery-intro,
+  .lp-confidence-guide-intro,
+  .lp-confidence-guide-panel p,
+  .lp-confidence-guide-example span,
   .lp-course-map-hero-stats span:last-child {
     color: var(--dark-muted);
+  }
+
+  .lp-confidence-guide-panel h3,
+  .lp-confidence-guide-example strong {
+    color: var(--dark-text);
   }
 
   .lp-track-lesson-confidence > span {
@@ -6632,6 +6765,7 @@
   .lp-course-progress-prompt,
   .lp-track-lesson-row,
   .lp-service-mastery-node,
+  .lp-confidence-guide-panel,
   .lp-course-map-hero-stats div {
     background-color: var(--dark-surface);
   }
@@ -6678,6 +6812,10 @@
     background: color-mix(in srgb, var(--dark-active) 78%, transparent);
   }
 
+  .lp-confidence-guide-card-meter {
+    background: color-mix(in srgb, var(--dark-active) 78%, transparent);
+  }
+
   .lp-course-path-confidence strong {
     color: color-mix(in srgb, var(--path-accent) 62%, var(--dark-text));
   }
@@ -6686,6 +6824,25 @@
     background: var(--dark-active);
     box-shadow: 0 0 0 5px var(--dark-bg);
     color: var(--dark-text);
+  }
+
+  .lp-confidence-guide-panel {
+    border-color: var(--dark-border);
+  }
+
+  .lp-confidence-guide-panel.primary {
+    border-color: color-mix(in srgb, var(--confidence-guide-accent) 38%, var(--dark-border));
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--confidence-guide-accent) 14%, transparent), transparent 58%),
+      var(--dark-surface);
+  }
+
+  .lp-confidence-guide-example {
+    border-top-color: var(--dark-border);
+  }
+
+  .lp-confidence-guide-section {
+    border-bottom-color: var(--dark-border);
   }
 
   .lp-course-path-number,

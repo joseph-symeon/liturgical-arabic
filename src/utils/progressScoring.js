@@ -41,6 +41,9 @@ const COMPREHENSION_MIN_HALF_LIFE_DAYS = 2;
 const COMPREHENSION_MAX_HALF_LIFE_DAYS = 60;
 const COMPREHENSION_SUCCESSFUL_DAY_BONUS_DAYS = 2.5;
 const COMPREHENSION_CONFIDENCE_BONUS_DAYS = 8;
+const COMPREHENSION_CONFIDENCE_DURABILITY_DAYS = 3;
+const COMPREHENSION_SINGLE_DAY_EARNED_CONFIDENCE_CEILING = 0.9;
+const COMPREHENSION_SINGLE_DAY_DURABLE_REPETITION_CAP = 1;
 const COMPREHENSION_CORRECT_REPETITION_BONUS_DAYS = 2;
 const COMPREHENSION_CORRECT_REPETITION_BONUS_CAP_DAYS = 8;
 let progressTrackingMode = PROGRESS_TRACKING_MODES.disabled;
@@ -337,16 +340,33 @@ function getPracticeCount(practiceDays = {}) {
   return Object.values(practiceDays || {}).reduce((total, count) => total + (Number(count) || 0), 0);
 }
 
+function getComprehensionConfidenceDurabilityFactor(successfulDayCount) {
+  if (successfulDayCount <= 1) return 0;
+  return clamp01((successfulDayCount - 1) / (COMPREHENSION_CONFIDENCE_DURABILITY_DAYS - 1));
+}
+
+function getComprehensionDurableCorrectPracticeCount(correctPracticeCount, successfulDayCount) {
+  if (successfulDayCount <= 1) {
+    return Math.min(correctPracticeCount, COMPREHENSION_SINGLE_DAY_DURABLE_REPETITION_CAP);
+  }
+  return correctPracticeCount;
+}
+
 function calculateComprehensionHalfLifeDays(comprehension = {}) {
   const earnedConfidence = clamp01(comprehension.earned_confidence ?? comprehension.confidence ?? 0);
   const successfulDayCount = getPracticeDayCount(comprehension.successful_practice_days);
   const correctPracticeCount = getPracticeCount(comprehension.successful_practice_days);
+  const durableCorrectPracticeCount = getComprehensionDurableCorrectPracticeCount(
+    correctPracticeCount,
+    successfulDayCount
+  );
+  const earnedConfidenceDurabilityFactor = getComprehensionConfidenceDurabilityFactor(successfulDayCount);
   const halfLifeDays = COMPREHENSION_MIN_HALF_LIFE_DAYS
     + (successfulDayCount * COMPREHENSION_SUCCESSFUL_DAY_BONUS_DAYS)
-    + (earnedConfidence * COMPREHENSION_CONFIDENCE_BONUS_DAYS)
+    + (earnedConfidence * COMPREHENSION_CONFIDENCE_BONUS_DAYS * earnedConfidenceDurabilityFactor)
     + Math.min(
       COMPREHENSION_CORRECT_REPETITION_BONUS_CAP_DAYS,
-      Math.log1p(correctPracticeCount) * COMPREHENSION_CORRECT_REPETITION_BONUS_DAYS
+      Math.log1p(durableCorrectPracticeCount) * COMPREHENSION_CORRECT_REPETITION_BONUS_DAYS
     );
 
   return clampNumber(
@@ -650,6 +670,15 @@ function getCorrectGainMultiplier(comprehensionProgress, todayKey) {
   return 1;
 }
 
+function getCorrectEarnedConfidenceTarget(comprehensionProgress, todayKey) {
+  const attemptsToday = comprehensionProgress.last_practiced_day === todayKey ? comprehensionProgress.attempts_today || 0 : 0;
+  const successfulDayCount = getPracticeDayCount(comprehensionProgress.successful_practice_days);
+  if (attemptsToday > 0 && successfulDayCount <= 1) {
+    return COMPREHENSION_SINGLE_DAY_EARNED_CONFIDENCE_CEILING;
+  }
+  return 1;
+}
+
 export function mergePhraseProgress(firstProgress, secondProgress) {
   const firstMigrated = migrateProgress(firstProgress);
   const secondMigrated = migrateProgress(secondProgress);
@@ -706,8 +735,13 @@ export function applyComprehensionAttempt(phraseProgress = {}, attempt) {
   const attemptsToday = comprehensionProgress.last_practiced_day === todayKey ? comprehensionProgress.attempts_today || 0 : 0;
   const isCorrect = Boolean(attempt.correct);
   const correctGainMultiplier = getCorrectGainMultiplier(comprehensionProgress, todayKey);
+  const correctEarnedConfidenceTarget = getCorrectEarnedConfidenceTarget(comprehensionProgress, todayKey);
   const nextEarnedConfidence = isCorrect
-    ? currentEarnedConfidence + ((1 - currentEarnedConfidence) * signal.correctWeight * correctGainMultiplier)
+    ? currentEarnedConfidence + (
+        Math.max(0, correctEarnedConfidenceTarget - currentEarnedConfidence)
+          * signal.correctWeight
+          * correctGainMultiplier
+      )
     : currentEarnedConfidence - (signal.incorrectWeight * (0.75 + currentEarnedConfidence * 0.5));
   const practiceDays = {
     ...comprehensionProgress.practice_days,

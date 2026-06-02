@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ArabicLiturgyReader from "./ArabicLiturgyReader.jsx";
 import CourseOverview from "./components/course/CourseOverview.jsx";
 import LessonPage from "./components/course/LessonPage.jsx";
+import ConfidenceGuidePage from "./components/course/ConfidenceGuidePage.jsx";
 import LiturgyLine from "./components/LiturgyLine.jsx";
 import SyncAccountPanel from "./components/SyncAccountPanel.jsx";
 import { defaultServiceText, defaultServiceTextId, getServiceText, readerServiceTexts } from "./data/texts/serviceTexts.js";
@@ -289,6 +290,16 @@ function parseNavigationHash() {
   }
   if (hash.startsWith("course/")) {
     const parts = hash.split("/");
+    if (parts[1] === "confidence") {
+      return {
+        view: "confidence-guide",
+        selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
+        selectedSectionIndex: null,
+        selectedCourseTrackId: null,
+        selectedLessonId: DEFAULT_LESSON_ID,
+        selectedExerciseIndex: 0
+      };
+    }
     if (parts[1] === "track") {
       return {
         view: "course-overview",
@@ -353,6 +364,9 @@ function getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, se
       return `#course/track/${encodeURIComponent(selectedCourseTrackId)}`;
     }
     return "#course";
+  }
+  if (view === "confidence-guide") {
+    return "#course/confidence";
   }
   return "#home";
 }
@@ -856,6 +870,13 @@ export default function App() {
     setDisplayMenuOpen(false);
   }
 
+  function goToConfidenceGuide() {
+    setSelectedCourseTrackId(null);
+    setView("confidence-guide");
+    if (isNarrowViewport) setMenuOpen(false);
+    setDisplayMenuOpen(false);
+  }
+
   function openProgressSignIn() {
     setMenuOpen(true);
     setDisplayMenuOpen(false);
@@ -997,6 +1018,11 @@ export default function App() {
 
     if (view === "course-overview" && selectedCourseTrack) {
       setSelectedCourseTrackId(null);
+      return;
+    }
+
+    if (view === "confidence-guide") {
+      goToCourseOverview();
       return;
     }
 
@@ -1729,7 +1755,7 @@ export default function App() {
                     setAccountMenuOpen(false);
                     goToCourseOverview();
                   }}
-                  className={getNavItemClass(view === "course-overview" || view === "lessons")}
+                  className={getNavItemClass(view === "course-overview" || view === "lessons" || view === "confidence-guide")}
                   style={SECTION_ITEM_STYLE}
                 >
                   {renderNavItemContent({
@@ -1799,7 +1825,11 @@ export default function App() {
             onSelectTrack={goToCourseTrack}
             onSelectExercise={goToLessonStudyHome}
             onSelectService={goToTableOfContents}
+            onConfidenceGuide={goToConfidenceGuide}
           />
+        )}
+        {view === "confidence-guide" && (
+          <ConfidenceGuidePage onCourseOverview={goToCourseOverview} />
         )}
         {view === "lessons" && selectedLessonWithUnit && (
           <LessonPage

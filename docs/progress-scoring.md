@@ -15,7 +15,7 @@ The model keeps the existing tuned activity weights as the source of earned mast
 | arrange block | 0.24 | 0.03 |
 | written Arabic | 0.34 | 0.02 |
 
-Repeated same-day correct answers use a reduced signal. Correct answers after a miss also use a reduced signal. This keeps one-session gains useful but makes durable confidence depend on correct practice across time.
+Repeated same-day correct answers use a reduced signal. Correct answers after a miss also use a reduced signal. This keeps one-session gains useful while limiting one-day drilling. During a phrase's first successful day, same-day correct practice approaches a high earned-confidence ceiling instead of running all the way to 100%.
 
 Each phrase stores both earned and current confidence:
 
@@ -48,7 +48,9 @@ The phrase's half-life grows when a learner demonstrates stronger evidence:
 
 - higher earned confidence
 - more successful practice days
-- more successful repetitions
+- more successful repetitions across durable practice
+
+Same-day success is treated as good evidence of current recall, but weak evidence of durability. On the first successful day, earned confidence does not yet add to half-life, same-day correct repetitions are capped for half-life purposes, and earned confidence is tapered near the top of the range. After successful practice on later days, earned confidence and successful repetitions contribute more fully to confidence and half-life.
 
 This keeps Comprehension as a course-progress confidence meter, while letting weak or stale phrases naturally surface over time. A phrase practiced successfully on only one day decays sooner than a phrase revisited successfully across several days.
 

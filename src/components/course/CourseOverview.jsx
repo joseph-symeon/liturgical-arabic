@@ -62,7 +62,8 @@ export default function CourseOverview({
   onBlockedLesson,
   onSelectTrack,
   onSelectExercise,
-  onSelectService
+  onSelectService,
+  onConfidenceGuide
 }) {
   const primaryPathItems = courseTracks.filter(item => item.type === 'track' && !item.parent_track_id);
   const [phraseConfidenceById, setPhraseConfidenceById] = useState(getStoredPhraseConfidenceMap);
@@ -279,7 +280,7 @@ export default function CourseOverview({
               </div>
             </>
           )}
-      </section>
+	      </section>
 
       {!selectedTrack && (
         <section className="lp-service-mastery" aria-labelledby="service-mastery-title">
@@ -316,6 +317,32 @@ export default function CourseOverview({
               ))}
             </div>
           </div>
+        </section>
+      )}
+
+      {!selectedTrack && (
+        <section className="lp-confidence-guide-section" aria-labelledby="confidence-guide-card-title">
+          <div className="lp-view-header">
+            <p className="lp-view-kicker">Progress Model</p>
+            <h2 className="lp-view-title" id="confidence-guide-card-title">Confidence score</h2>
+          </div>
+          <button
+            type="button"
+            className="lp-course-path-card lp-confidence-guide-card"
+            onClick={onConfidenceGuide}
+          >
+            <div className="lp-course-path-card-top">
+              <span className="lp-course-path-state">Guide</span>
+            </div>
+            <div className="lp-course-path-main">
+              <h3>How confidence works</h3>
+              <div className="lp-course-path-meta">Comprehension, recitation, and memory over time</div>
+            </div>
+            <div className="lp-confidence-guide-card-meter" aria-hidden="true">
+              <span style={{ width: '84%' }} />
+            </div>
+            <span className="lp-course-path-action" aria-hidden="true">›</span>
+          </button>
         </section>
       )}
     </main>
