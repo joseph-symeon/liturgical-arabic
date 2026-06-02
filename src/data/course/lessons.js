@@ -913,7 +913,6 @@ const lessons = [
     "quizlet_deck_url": null,
     "exercises": [
       {
-        "title": "O heavenly King",
         "exercise_id": "heavenly-king-spirit-truth",
         "activity_policy": "standard"
       },
@@ -922,17 +921,18 @@ const lessons = [
         "activity_policy": "standard"
       },
       {
-        "title": "Treasury of good things",
         "exercise_id": "heavenly-king-treasury-abide",
         "activity_policy": "standard"
       },
       {
-        "title": "Cleanse us from every stain",
+        "exercise_id": "heavenly-king-come-abide-cleanse",
+        "activity_policy": "standard"
+      },
+      {
         "exercise_id": "heavenly-king-cleanse-save",
         "activity_policy": "standard"
       },
       {
-        "title": "O heavenly King",
         "exercise_id": "heavenly-king",
         "activity_policy": "standard"
       }

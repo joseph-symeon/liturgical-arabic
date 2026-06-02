@@ -278,7 +278,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "preparation-spirit-truth-001",
             "start_seconds": 20.42,
-            "end_seconds": 21.26
+            "end_seconds": 21.1
           },
           {
             "phrase_id": "preparation-everywhere-present-001",
@@ -288,7 +288,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "preparation-filling-all-things-001",
             "start_seconds": 23.04,
-            "end_seconds": 23.94
+            "end_seconds": 24
           }
         ]
       },
@@ -311,14 +311,7 @@ export const alignmentDefinitions = [
             "phrase_id": "preparation-come-abide-001",
             "start_seconds": 26.995,
             "end_seconds": 28.3
-          }
-        ]
-      },
-      {
-        "segment_ids": [
-          "preparation-cleanse-save"
-        ],
-        "phrase_timings": [
+          },
           {
             "phrase_id": "preparation-cleanse-save-001",
             "start_seconds": 28.3,
@@ -327,11 +320,11 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "preparation-from-every-stain-001",
             "start_seconds": 29.12,
-            "end_seconds": 29.76
+            "end_seconds": 29.45
           },
           {
             "phrase_id": "preparation-save-good-one-001",
-            "start_seconds": 29.76,
+            "start_seconds": 29.7,
             "end_seconds": 30.26
           },
           {
@@ -342,7 +335,7 @@ export const alignmentDefinitions = [
           {
             "phrase_id": "preparation-our-souls-001",
             "start_seconds": 31.42,
-            "end_seconds": 31.925
+            "end_seconds": 32.5
           }
         ]
       }

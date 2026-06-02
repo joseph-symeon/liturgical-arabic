@@ -564,8 +564,7 @@ export const exerciseDefinitions = [
     ],
     "phrase_ids": [
       "preparation-treasury-giver-001",
-      "preparation-giver-of-life-001",
-      "preparation-come-abide-001"
+      "preparation-giver-of-life-001"
     ],
     "media": HEAVENLY_KING_MEDIA,
     "service_text_id": "divine-liturgy-john-chrysostom",
@@ -576,39 +575,39 @@ export const exerciseDefinitions = [
     }
   },
   {
-    "id": "heavenly-king-cleanse-save",
+    "id": "heavenly-king-come-abide-cleanse",
     "segment_ids": [
-      "preparation-cleanse-save"
+      "preparation-treasury-giver"
     ],
     "phrase_ids": [
+      "preparation-come-abide-001",
       "preparation-cleanse-save-001",
-      "preparation-from-every-stain-001",
+      "preparation-from-every-stain-001"
+    ],
+    "media": HEAVENLY_KING_MEDIA,
+    "service_text_id": "divine-liturgy-john-chrysostom",
+  },
+  {
+    "id": "heavenly-king-cleanse-save",
+    "segment_ids": [
+      "preparation-treasury-giver"
+    ],
+    "phrase_ids": [
       "preparation-save-good-one-001",
       "preparation-o-good-one-001",
       "preparation-our-souls-001"
     ],
     "media": HEAVENLY_KING_MEDIA,
-    "service_text_id": "divine-liturgy-john-chrysostom",
-    "service_range": {
-      "section_id": "preparation-divine-liturgy",
-      "start_segment_id": "preparation-cleanse-save",
-      "end_segment_id": "preparation-cleanse-save"
-    }
+    "service_text_id": "divine-liturgy-john-chrysostom"
   },
   {
     "id": "heavenly-king",
     "segment_ids": [
       "preparation-heavenly-king",
-      "preparation-treasury-giver",
-      "preparation-cleanse-save"
+      "preparation-treasury-giver"
     ],
     "media": HEAVENLY_KING_MEDIA,
-    "service_text_id": "divine-liturgy-john-chrysostom",
-    "service_range": {
-      "section_id": "preparation-divine-liturgy",
-      "start_segment_id": "preparation-heavenly-king",
-      "end_segment_id": "preparation-cleanse-save"
-    }
+    "service_text_id": "divine-liturgy-john-chrysostom"
   },
   {
     "id": "come-let-us-worship",

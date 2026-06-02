@@ -35,7 +35,6 @@ export const serviceTextDefinitions = [
         "segment_ids": [
           "preparation-heavenly-king",
           "preparation-treasury-giver",
-          "preparation-cleanse-save",
           "preparation-rubric-omit-heavenly-king",
           "preparation-glory-highest",
           "preparation-open-my-lips",
@@ -756,7 +755,6 @@ export const serviceTextDefinitions = [
         "segment_ids": [
           "preparation-heavenly-king",
           "preparation-treasury-giver",
-          "preparation-cleanse-save",
           "preparation-rubric-omit-heavenly-king",
           "preparation-glory-highest",
           "preparation-open-my-lips",

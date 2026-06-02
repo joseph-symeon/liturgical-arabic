@@ -1601,16 +1601,8 @@ const sourceSegments = {
         "phrase_id": "preparation-come-abide-001"
       },
       {
-        "text": "،"
-      }
-    ]
-  },
-  "preparation-cleanse-save": {
-    "speaker": "role-priest",
-    "tags": [
-      "preparation"
-    ],
-    "phrases": [
+        "text": "، "
+      },
       {
         "phrase_id": "preparation-cleanse-save-001"
       },
