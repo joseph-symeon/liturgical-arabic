@@ -76,7 +76,7 @@
 
     .page-nav-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
       align-items: stretch;
     }
@@ -111,13 +111,6 @@
       align-items: flex-start;
       justify-self: stretch;
       text-align: left;
-    }
-
-    .page-nav-button-center {
-      align-items: center;
-      justify-self: center;
-      min-width: 128px;
-      text-align: center;
     }
 
     .page-nav-button-end {
@@ -166,21 +159,12 @@
     }
 
     @media (max-width: 900px) {
+      :root {
+        --app-content-top-offset: calc(env(safe-area-inset-top, 0px) + 52px);
+      }
+
       .app-content {
-        padding-top: calc(env(safe-area-inset-top, 0px) + 52px);
-      }
-    }
-
-    @container (max-width: 520px) {
-      .page-nav-grid {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        gap: 8px;
-      }
-
-      .page-nav-button-center {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        width: 100%;
+        padding-top: var(--app-content-top-offset);
       }
     }
 

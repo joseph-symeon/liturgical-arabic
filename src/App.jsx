@@ -1808,7 +1808,6 @@ export default function App() {
             nextSectionTitle={nextSectionTitle}
             onPreviousSection={goToPreviousSection}
             onNextSection={goToNextSection}
-            onTableOfContents={() => goToTableOfContents(selectedServiceText.id)}
             onSelectSection={goToLiturgySection}
           />
         )}

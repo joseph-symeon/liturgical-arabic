@@ -1,3 +1,6 @@
 .lp-page.reader-section-page {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - var(--app-content-top-offset, 0px));
   padding-bottom: 0;
 }

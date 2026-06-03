@@ -27,7 +27,6 @@ export default function ArabicLiturgyReader({
   nextSectionTitle,
   onPreviousSection,
   onNextSection,
-  onTableOfContents,
   onSelectSection
 }) {
   const readerSections = serviceText.sections || [];
@@ -81,16 +80,6 @@ export default function ArabicLiturgyReader({
             className: "page-nav-button page-nav-button-start"
           },
           renderNavLabel("Previous", previousSectionTitle)
-        ),
-        h(
-          "button",
-          {
-            type: "button",
-            onClick: onTableOfContents,
-            disabled: isTableOfContents,
-            className: "page-nav-button page-nav-button-center"
-          },
-          renderNavLabel(readerServiceHomePrimaryTitle, readerServiceHomeSubtitle)
         ),
         h(
           "button",
