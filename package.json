@@ -18,7 +18,7 @@
     "align:refine-boundaries": "node scripts/refine-audio-boundaries.mjs",
     "import:recording:check": "node scripts/check-recording-import-deps.mjs",
     "import:recording:transcribe": "node scripts/transcribe-recording.mjs",
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview"
   },

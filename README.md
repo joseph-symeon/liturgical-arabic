@@ -10,6 +10,8 @@ npm run build
 npm run import:recording:check
 ```
 
+`npm run dev` is configured for local network access. Use the local URL for desktop, or open `http://<your-computer-ip>:5173/liturgical-arabic/` from a mobile device on the same Wi-Fi network.
+
 ## Documentation
 
 - [Docs Index](docs/README.md)

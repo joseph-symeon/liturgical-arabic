@@ -3,6 +3,9 @@ import React, { useState } from "react";
 function getFriendlyAuthMessage(message) {
   const normalized = String(message || "").toLowerCase();
   if (!message) return "";
+  if (normalized.includes("failed to fetch") || normalized.includes("networkerror") || normalized.includes("load failed")) {
+    return "Could not reach the sign-in server. If the Supabase project was just resumed, hard-refresh this page or restart `npm run dev` and try again.";
+  }
   if (normalized.includes("invalid login credentials")) return "That email and password did not match.";
   if (normalized.includes("rate limit")) return "Too many email requests. Use password sign-in or wait a few minutes.";
   if (normalized.includes("password should be at least")) return "Use a password with at least 6 characters.";
