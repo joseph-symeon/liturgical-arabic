@@ -3,6 +3,53 @@ import segments from "../data/texts/segments.js";
 
 const CONTINUOUS_CAPTION_GAP_TOLERANCE_SECONDS = 0.12;
 
+export function resolvePendingPlaybackTime({
+  currentTime,
+  pendingStart,
+  pendingAgeMs,
+  graceMs,
+  seekSettled = false
+}) {
+  if (pendingStart === null) {
+    return {
+      displayTime: currentTime,
+      pending: false,
+      shouldClear: false
+    };
+  }
+
+  const pendingIsFresh = pendingAgeMs <= graceMs;
+  const pending = pendingIsFresh && !seekSettled;
+  return {
+    displayTime: pending
+      ? pendingStart
+      : currentTime,
+    pending,
+    shouldClear: !pendingIsFresh || seekSettled
+  };
+}
+
+export function advancePendingSeekSettlement(state, currentTime, pendingStart, {
+  nearStartSeconds = 0.5,
+  backwardToleranceSeconds = 0.05,
+  maximumForwardStepSeconds = 0.3
+} = {}) {
+  const previousState = state || { observedNearStart: false, lastTime: null };
+  const nearStart = Math.abs(currentTime - pendingStart) <= nearStartSeconds;
+  const stableForwardSample = previousState.observedNearStart
+    && typeof previousState.lastTime === "number"
+    && currentTime >= previousState.lastTime - backwardToleranceSeconds
+    && currentTime - previousState.lastTime <= maximumForwardStepSeconds;
+
+  return {
+    state: {
+      observedNearStart: nearStart,
+      lastTime: currentTime
+    },
+    settled: nearStart && stableForwardSample
+  };
+}
+
 export function getActiveCaption(captions, currentTime, {
   leadSeconds = 0,
   clipEndSeconds = null

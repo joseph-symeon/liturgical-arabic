@@ -10,8 +10,8 @@ const courseTracks = [
     description: "Begin with the most reusable mercy prayer, then build the opening prayer sequence piece by piece.",
     lesson_ids: [
       "lesson-lord-have-mercy",
-      "lesson-glory",
       "lesson-thrice-holy",
+      "lesson-glory",
       "lesson-all-holy-trinity",
       "lesson-lords-prayer",
       "lesson-lords-prayer-thine-kingdom",

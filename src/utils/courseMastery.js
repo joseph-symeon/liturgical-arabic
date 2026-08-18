@@ -40,8 +40,9 @@ function isExcludedSegment(segmentId, segment) {
   );
 }
 
-export function getExercisePhraseIds(exerciseId) {
-  return (exercises[exerciseId]?.lines || []).flatMap(line => (
+export function getExercisePhraseIds(exerciseOrId) {
+  const exercise = typeof exerciseOrId === 'string' ? exercises[exerciseOrId] : exerciseOrId;
+  return (exercise?.lines || []).flatMap(line => (
     line.tags?.includes('rubric')
       ? []
       : (line.phrases || [])

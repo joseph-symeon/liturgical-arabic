@@ -84,6 +84,10 @@
   padding-bottom: max(var(--recite-toolbar-reserve), var(--recite-toolbar-stable-reserve, 0px));
 }
 
+.lp-page.course-view-page.study-home-page.compound-selection-active {
+  padding-bottom: calc(164px + env(safe-area-inset-bottom, 0px));
+}
+
 .lp-page.course-view-page.lp-course-map-page {
   padding-bottom: clamp(28px, 5vw, 64px);
 }
@@ -185,8 +189,15 @@
 .lp-study-home-exercise-summary {
   display: grid;
   align-content: start;
-  gap: 0;
+  gap: 16px;
   max-width: 860px;
+}
+
+.lp-compound-selection-help {
+  margin: 0;
+  color: var(--study-muted);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .lp-course-flow-track,
@@ -326,7 +337,130 @@
 }
 
 .lp-study-home-exercise-row {
+  grid-template-columns: minmax(0, 1fr);
   width: 100%;
+}
+
+.lp-study-home-exercise-row.compound-selectable.active {
+  border-color: color-mix(in srgb, var(--path-accent) 68%, var(--path-card-border));
+  box-shadow: inset 3px 0 0 var(--path-accent);
+}
+
+.lp-study-home-exercise-row.selection-disabled {
+  opacity: 0.48;
+}
+
+.lp-study-home-exercise-row.selection-disabled:hover {
+  border-color: var(--path-card-border);
+  background: var(--path-card-surface);
+}
+
+.lp-study-home-exercise-select:disabled {
+  cursor: not-allowed;
+}
+
+.lp-study-home-exercise-action.compound-toggle {
+  width: 26px;
+  height: 26px;
+  border: 1px solid color-mix(in srgb, var(--path-accent) 42%, var(--path-card-border));
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--path-accent) 76%, var(--path-card-text));
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.lp-study-home-exercise-row.active .lp-study-home-exercise-action.compound-toggle {
+  border-color: var(--path-accent);
+  background: var(--path-accent);
+  color: #fff;
+}
+
+.lp-compound-selection-actions {
+  position: fixed;
+  right: calc(var(--workspace-right-offset, 0px) + max(14px, env(safe-area-inset-right, 0px)));
+  bottom: 0;
+  left: calc(var(--workspace-left-offset, 0px) + max(14px, env(safe-area-inset-left, 0px)));
+  z-index: 35;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 48px var(--drawer-control-row-height);
+  gap: 10px;
+  width: auto;
+  max-width: 780px;
+  margin: 0 auto;
+  background: var(--recite-bg);
+  padding: 6px 0 max(14px, env(safe-area-inset-bottom, 0px));
+}
+
+.lp-compound-selection-actions::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: calc(-1 * max(14px, env(safe-area-inset-right, 0px)));
+  bottom: 0;
+  left: calc(-1 * max(14px, env(safe-area-inset-left, 0px)));
+  z-index: -1;
+  border-top: 1px solid color-mix(in srgb, var(--recite-border) 54%, transparent);
+  background: var(--recite-bg);
+}
+
+.lp-compound-selection-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 14px;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--recite-border) 82%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--recite-surface) 76%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--recite-text) 4%, transparent),
+    0 18px 44px color-mix(in srgb, #000 22%, transparent);
+  padding: 0 16px;
+}
+
+.lp-compound-selection-summary strong {
+  overflow: hidden;
+  color: var(--study-text);
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lp-compound-selection-summary span {
+  color: var(--study-muted);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.lp-page.recitation-mode-page .lp-compound-selection-action {
+  margin: 0;
+}
+
+.lp-compound-selection-actions button {
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 1px solid var(--path-accent);
+  border-radius: 999px;
+  background: var(--path-accent);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1;
+  padding: 0 18px;
+  white-space: nowrap;
+}
+
+.lp-compound-selection-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .lp-study-home-exercise-row.recap .lp-study-home-exercise-number {
@@ -341,9 +475,11 @@
 
 .lp-study-home-exercise-select {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px 14px;
   align-items: center;
   min-width: 0;
+  width: 100%;
   border: 0;
   background: transparent;
   color: inherit;
@@ -378,14 +514,6 @@
   font-size: 12px;
   font-weight: 700;
   line-height: 1.2;
-}
-
-.lp-study-home-exercise-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  gap: 8px;
-  justify-content: flex-end;
 }
 
 .lp-study-home-exercise-action {
@@ -3990,8 +4118,7 @@
   place-self: center;
 }
 
-.lp-track-lesson-action,
-.lp-study-home-exercise-actions {
+.lp-track-lesson-action {
   place-self: center;
 }
 
@@ -5478,6 +5605,10 @@
     padding: 10px;
   }
 
+  .lp-study-home-exercise-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .lp-confidence-guide-grid,
   .lp-confidence-guide-example {
     grid-template-columns: minmax(0, 1fr);
@@ -5506,6 +5637,16 @@
 
   .lp-study-home-exercise-row.recap .lp-study-home-exercise-number {
     left: -25px;
+  }
+
+  .lp-compound-selection-actions {
+    right: max(12px, env(safe-area-inset-right, 0px));
+    left: max(12px, env(safe-area-inset-left, 0px));
+  }
+
+  .lp-compound-selection-actions::before {
+    right: calc(-1 * max(12px, env(safe-area-inset-right, 0px)));
+    left: calc(-1 * max(12px, env(safe-area-inset-left, 0px)));
   }
 
   .lp-study-home-card {
@@ -5543,13 +5684,7 @@
   }
 
   .lp-study-home-exercise-select {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .lp-study-home-exercise-actions {
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .lp-study-home-panel {
@@ -5574,6 +5709,10 @@
   .lp-page.course-view-page {
     margin: 0 auto;
     padding: 24px 18px calc(96px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .lp-page.course-view-page.study-home-page.compound-selection-active {
+    padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px));
   }
 
   .lp-page.recitation-mode-page {

@@ -55,6 +55,7 @@ const CHERUBIC_HYMN_MEDIA = {
 };
 
 const GREAT_ENTRANCE_MEDIA = CHERUBIC_HYMN_MEDIA;
+const MAX_COMPOUND_AUDIO_GAP_SECONDS = 1;
 
 const JESUS_PRAYER_MEDIA = {
   recording_id: "recording-f-DJruJ0HRs",
@@ -2209,6 +2210,9 @@ export function resolveExercise(definition, segmentsMap = segments) {
 const exercises = Object.fromEntries(
   exerciseDefinitions.map(definition => [definition.id, resolveExercise(definition)])
 );
+const exerciseDefinitionsById = new Map(
+  exerciseDefinitions.map(definition => [definition.id, definition])
+);
 
 const STANDARD_ACTIVITY_OPTIONS = [
   {
@@ -2331,23 +2335,27 @@ function getAlignedCaptions(exercise) {
   return exercise.captions?.map(timing => ({ ...timing })) || [];
 }
 
-export function getExercisePhraseCount(exerciseId) {
-  return getPhraseIdsForLines(exercises[exerciseId]?.lines).length;
+function getResolvedExercise(exerciseOrId) {
+  return typeof exerciseOrId === 'string' ? exercises[exerciseOrId] : exerciseOrId;
 }
 
-export function hasLinkedRecording(exerciseId) {
-  const exercise = exercises[exerciseId];
+export function getExercisePhraseCount(exerciseOrId) {
+  return getPhraseIdsForLines(getResolvedExercise(exerciseOrId)?.lines).length;
+}
+
+export function hasLinkedRecording(exerciseOrId) {
+  const exercise = getResolvedExercise(exerciseOrId);
   return Boolean(exercise?.audio_clip?.recording_id || exercise?.caption_clip?.recording_id);
 }
 
-function hasCaptionTimings(exerciseId) {
-  return getAlignedCaptions(exercises[exerciseId]).length > 0;
+function hasCaptionTimings(exerciseOrId) {
+  return getAlignedCaptions(getResolvedExercise(exerciseOrId)).length > 0;
 }
 
-export function canUseActivityType(exerciseId, activityType) {
-  const phraseCount = getExercisePhraseCount(exerciseId);
+export function canUseActivityType(exerciseOrId, activityType) {
+  const phraseCount = getExercisePhraseCount(exerciseOrId);
   if (activityType === PASSAGE_ACTIVITY_TYPES.phraseCaptions) {
-    return hasCaptionTimings(exerciseId);
+    return hasCaptionTimings(exerciseOrId);
   }
   if (activityType === PASSAGE_ACTIVITY_TYPES.matching) {
     return phraseCount > 1 && phraseCount <= 6;
@@ -2369,10 +2377,10 @@ export function canUseActivityType(exerciseId, activityType) {
   return true;
 }
 
-export function getStandardActivityOptions(exerciseId) {
+export function getStandardActivityOptions(exerciseOrId) {
   const activityOptions = [...STANDARD_ACTIVITY_OPTIONS];
-  const phraseCount = getExercisePhraseCount(exerciseId);
-  if (hasCaptionTimings(exerciseId)) {
+  const phraseCount = getExercisePhraseCount(exerciseOrId);
+  if (hasCaptionTimings(exerciseOrId)) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.phraseCaptions],
       activity_type: PASSAGE_ACTIVITY_TYPES.phraseCaptions
@@ -2384,7 +2392,7 @@ export function getStandardActivityOptions(exerciseId) {
       activity_type: PASSAGE_ACTIVITY_TYPES.learn
     });
   }
-  if (canUseActivityType(exerciseId, PASSAGE_ACTIVITY_TYPES.typeArabic)) {
+  if (canUseActivityType(exerciseOrId, PASSAGE_ACTIVITY_TYPES.typeArabic)) {
     activityOptions.push({
       label: PASSAGE_ACTIVITY_LABELS[PASSAGE_ACTIVITY_TYPES.typeArabic],
       activity_type: PASSAGE_ACTIVITY_TYPES.typeArabic
@@ -2512,8 +2520,8 @@ function getDerivedActivity(exercise, activityType) {
   return exercise.activity;
 }
 
-export function getExerciseWithActivity(exerciseId, activityType = null) {
-  const exercise = exercises[exerciseId];
+export function getExerciseWithActivity(exerciseOrId, activityType = null) {
+  const exercise = getResolvedExercise(exerciseOrId);
   if (!exercise || !activityType) return exercise;
   const practiceActivityTypes = new Set([
     PASSAGE_ACTIVITY_TYPES.arrange,
@@ -2532,6 +2540,104 @@ export function getExerciseWithActivity(exerciseId, activityType = null) {
     id: `${exercise.id}:${activityType}`,
     activity: getDerivedActivity(exercise, activityType)
   };
+}
+
+function getExerciseAlignmentId(exercise) {
+  const serviceAlignmentRange = findServiceAlignmentRange(
+    exercise.service_text_id,
+    exercise.service_range,
+    exercise.audio_clip?.recording_id,
+    alignments
+  );
+  return serviceAlignmentRange?.alignment?.id || exercise.media?.alignment_id || null;
+}
+
+export function getRecapExerciseIndex(lesson) {
+  const items = lesson?.exercises || [];
+  return items.length > 1 ? items.length - 1 : null;
+}
+
+export function composeExerciseRange(lesson, startIndex, endIndex) {
+  const items = (lesson?.exercises || []).slice(startIndex, endIndex + 1);
+  if (items.length === 0) return null;
+  if (items.length === 1) return exercises[items[0].exercise_id] || null;
+
+  const sourceExercises = items.map(item => exercises[item.exercise_id]);
+  if (sourceExercises.some(exercise => !exercise?.audio_clip)) return null;
+
+  const [firstExercise] = sourceExercises;
+  const recordingId = firstExercise.audio_clip.recording_id;
+  const alignmentId = getExerciseAlignmentId(firstExercise);
+  const hasCompatibleMedia = Boolean(recordingId && alignmentId) && sourceExercises.every(exercise => (
+    exercise.audio_clip.recording_id === recordingId
+      && getExerciseAlignmentId(exercise) === alignmentId
+  ));
+  if (!hasCompatibleMedia) return null;
+
+  const hasCompatibleBoundaries = sourceExercises.slice(0, -1).every((exercise, index) => {
+    const nextExercise = sourceExercises[index + 1];
+    const gapSeconds = nextExercise.audio_clip.start_seconds - exercise.audio_clip.end_seconds;
+    const currentSequence = items[index].audio_sequence || null;
+    const nextSequence = items[index + 1].audio_sequence || null;
+    const sequenceIsCompatible = currentSequence || nextSequence
+      ? currentSequence === nextSequence
+      : true;
+    return sequenceIsCompatible
+      && gapSeconds >= 0
+      && gapSeconds <= MAX_COMPOUND_AUDIO_GAP_SECONDS;
+  });
+  if (!hasCompatibleBoundaries) return null;
+
+  const segmentIds = sourceExercises.flatMap(exercise => exercise.segment_ids || []);
+  const phraseIds = sourceExercises.flatMap(exercise => getPhraseIdsForLines(exercise.lines));
+  if (new Set(phraseIds).size !== phraseIds.length) return null;
+
+  const captions = sourceExercises
+    .flatMap(getAlignedCaptions)
+    .sort((first, second) => first.start_seconds - second.start_seconds);
+  const sourceTitles = items
+    .map((item, index) => item.title || sourceExercises[index].title)
+    .filter(Boolean);
+  const compoundExercise = {
+    ...firstExercise,
+    id: `${lesson.id}:range:${startIndex + 1}-${endIndex + 1}`,
+    title: sourceTitles.length > 1
+      ? `${sourceTitles[0]} ... ${sourceTitles[sourceTitles.length - 1]}`
+      : sourceTitles[0],
+    segment_ids: segmentIds,
+    lines: sourceExercises
+      .flatMap(exercise => exercise.lines || [])
+      .map((line, lineIndex) => ({ ...line, line_order: lineIndex + 1 })),
+    phrase_ids: undefined,
+    service_range: undefined,
+    media: {
+      recording_id: recordingId,
+      alignment_id: alignmentId,
+      default_playback_rate: firstExercise.audio_clip.default_playback_rate ?? 1
+    },
+    audio_clip: {
+      recording_id: recordingId,
+      start_seconds: firstExercise.audio_clip.start_seconds,
+      end_seconds: sourceExercises[sourceExercises.length - 1].audio_clip.end_seconds,
+      default_playback_rate: firstExercise.audio_clip.default_playback_rate ?? 1
+    },
+    caption_clip: {
+      recording_id: recordingId,
+      alignment_id: alignmentId,
+      default_playback_rate: firstExercise.audio_clip.default_playback_rate ?? 1
+    },
+    captions,
+    activity: null,
+    show_speakers: sourceExercises.some(exercise => exercise.show_speakers),
+    source_exercise_ids: items.map(item => item.exercise_id)
+  };
+
+  const sourceCaptionCount = items.reduce(
+    (total, item) => total + getAlignedCaptions(exercises[item.exercise_id]).length,
+    0
+  );
+  if (compoundExercise.captions.length !== sourceCaptionCount) return null;
+  return compoundExercise;
 }
 
 export default exercises;

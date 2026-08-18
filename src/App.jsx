@@ -9,9 +9,11 @@ import { defaultServiceText, defaultServiceTextId, getServiceText, readerService
 import phrases from "./data/texts/phrases.js";
 import courseTracks from "./data/course/courseTracks.js";
 import lessons from "./data/course/lessons.js";
+import { composeExerciseRange, getRecapExerciseIndex } from "./data/course/exercises.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
 import { getServiceNavigation } from "./utils/serviceNavigation.js";
 import { getArabicText } from "./utils/arabic.js";
+import { formatExerciseRange, parseExerciseRange } from "./utils/exerciseRanges.js";
 import {
   getResetPhraseProgress,
   getStoredPhraseProgress,
@@ -321,15 +323,15 @@ function parseNavigationHash() {
         selectedExerciseIndex: 0
       };
     }
-    const exerciseNumber = parts[2] === "exercise" ? Number(parts[3]) : 1;
-    const selectedExerciseIndex = Number.isInteger(exerciseNumber) && exerciseNumber > 0 ? exerciseNumber - 1 : 0;
+    const exerciseSelection = parseExerciseRange(parts[2] === "exercise" ? parts[3] : '1');
     return {
       view: "lessons",
       selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
       selectedSectionIndex: null,
       selectedCourseTrackId: null,
       selectedLessonId: lessonId,
-      selectedExerciseIndex
+      selectedExerciseIndex: exerciseSelection.startIndex,
+      selectedExerciseEndIndex: exerciseSelection.endIndex
     };
   }
   return {
@@ -342,7 +344,7 @@ function parseNavigationHash() {
   };
 }
 
-function getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex) {
+function getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex, selectedExerciseEndIndex) {
   if (view === "reader") {
     const serviceTextId = selectedServiceTextId || DEFAULT_READER_SERVICE_TEXT_ID;
     if (serviceTextId === DEFAULT_READER_SERVICE_TEXT_ID) {
@@ -357,7 +359,11 @@ function getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, se
     return "#reader";
   }
   if (view === "lessons") {
-    return `#course/${encodeURIComponent(selectedLessonId ?? "")}/exercise/${selectedExerciseIndex + 1}`;
+    const exerciseSelection = formatExerciseRange({
+      startIndex: selectedExerciseIndex,
+      endIndex: selectedExerciseEndIndex
+    });
+    return `#course/${encodeURIComponent(selectedLessonId ?? "")}/exercise/${exerciseSelection}`;
   }
   if (view === "course-overview") {
     if (selectedCourseTrackId) {
@@ -414,6 +420,9 @@ export default function App() {
   const [selectedCourseTrackId, setSelectedCourseTrackId] = useState(initialNavigation.selectedCourseTrackId);
   const [selectedLessonId, setSelectedLessonId] = useState(initialNavigation.selectedLessonId);
   const [selectedExerciseIndex, setSelectedExerciseIndex] = useState(initialNavigation.selectedExerciseIndex);
+  const [selectedExerciseEndIndex, setSelectedExerciseEndIndex] = useState(
+    initialNavigation.selectedExerciseEndIndex ?? initialNavigation.selectedExerciseIndex
+  );
   const [menuOpen, setMenuOpen] = useState(() => {
     if (typeof window === "undefined") return false;
     const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
@@ -790,6 +799,7 @@ export default function App() {
       setSelectedCourseTrackId(nextNavigation.selectedCourseTrackId);
       setSelectedLessonId(nextNavigation.selectedLessonId);
       setSelectedExerciseIndex(nextNavigation.selectedExerciseIndex);
+      setSelectedExerciseEndIndex(nextNavigation.selectedExerciseEndIndex ?? nextNavigation.selectedExerciseIndex);
       if (isNarrowViewport) setMenuOpen(false);
       setDisplayMenuOpen(false);
       setAccountMenuOpen(false);
@@ -801,14 +811,22 @@ export default function App() {
 
   useEffect(() => {
     if (hasSupabaseAuthCallbackParams()) return;
-    const nextHash = getNavigationHash(view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex);
+    const nextHash = getNavigationHash(
+      view,
+      selectedServiceTextId,
+      selectedSectionIndex,
+      selectedCourseTrackId,
+      selectedLessonId,
+      selectedExerciseIndex,
+      selectedExerciseEndIndex
+    );
     if (window.location.hash !== nextHash) {
       window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${nextHash}`);
     }
-  }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex]);
+  }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex, selectedExerciseEndIndex]);
 
   useEffect(() => {
-    const navigationKey = `${view}:${selectedServiceTextId}:${selectedSectionIndex ?? "toc"}:${selectedCourseTrackId ?? ""}:${selectedLessonId ?? ""}:${selectedExerciseIndex}`;
+    const navigationKey = `${view}:${selectedServiceTextId}:${selectedSectionIndex ?? "toc"}:${selectedCourseTrackId ?? ""}:${selectedLessonId ?? ""}:${selectedExerciseIndex}-${selectedExerciseEndIndex}`;
     if (previousNavigationKeyRef.current === null) {
       previousNavigationKeyRef.current = navigationKey;
       return;
@@ -819,7 +837,7 @@ export default function App() {
     window.requestAnimationFrame(() => {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     });
-  }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex]);
+  }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex, selectedExerciseEndIndex]);
 
   useEffect(() => {
     if (syncStatus === "loading") return;
@@ -828,6 +846,7 @@ export default function App() {
     setView("course-overview");
     setSelectedCourseTrackId(null);
     setSelectedExerciseIndex(0);
+    setSelectedExerciseEndIndex(0);
   }, [syncStatus, syncSession?.user?.id, view, selectedLessonId]);
 
   function goHome() {
@@ -913,6 +932,7 @@ export default function App() {
     }
     setSelectedLessonId(lessonId);
     setSelectedExerciseIndex(exerciseIndex);
+    setSelectedExerciseEndIndex(exerciseIndex);
     setSelectedCourseTrackId(null);
     setView("lessons");
     if (isNarrowViewport) setMenuOpen(false);
@@ -925,6 +945,24 @@ export default function App() {
     }
     setCourseStudyWorkspace(studyWorkspace);
     goToLesson(lessonId, exerciseIndex);
+  }
+
+  function goToLessonExerciseRange(lessonId, startIndex, endIndex, studyWorkspace = "home") {
+    if (!canAccessCourseLesson(lessonId)) {
+      handleBlockedCourseLesson();
+      return;
+    }
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(COURSE_STUDY_WORKSPACE_STORAGE_KEY, studyWorkspace);
+    }
+    setCourseStudyWorkspace(studyWorkspace);
+    setSelectedLessonId(lessonId);
+    setSelectedExerciseIndex(startIndex);
+    setSelectedExerciseEndIndex(endIndex);
+    setSelectedCourseTrackId(null);
+    setView("lessons");
+    if (isNarrowViewport) setMenuOpen(false);
+    setDisplayMenuOpen(false);
   }
 
   function goToPreviousSection() {
@@ -959,7 +997,21 @@ export default function App() {
   const selectedLessonWithUnit = selectedLesson
     ? { ...selectedLesson, unitTitle: selectedLessonCourseItem?.title }
     : null;
-  const clampedExerciseIndex = Math.max(0, Math.min(selectedExerciseIndex, (selectedLesson?.exercises?.length ?? 1) - 1));
+  const lastExerciseIndex = Math.max(0, (selectedLesson?.exercises?.length ?? 1) - 1);
+  const clampedExerciseIndex = Math.max(0, Math.min(selectedExerciseIndex, lastExerciseIndex));
+  const recapExerciseIndex = getRecapExerciseIndex(selectedLesson);
+  const lastSelectableCompoundIndex = recapExerciseIndex !== null
+    && clampedExerciseIndex < recapExerciseIndex
+    ? recapExerciseIndex - 1
+    : lastExerciseIndex;
+  const proposedExerciseEndIndex = Math.max(
+    clampedExerciseIndex,
+    Math.min(selectedExerciseEndIndex, lastSelectableCompoundIndex)
+  );
+  const clampedExerciseEndIndex = proposedExerciseEndIndex === clampedExerciseIndex
+    || composeExerciseRange(selectedLesson, clampedExerciseIndex, proposedExerciseEndIndex)
+    ? proposedExerciseEndIndex
+    : clampedExerciseIndex;
   const canUseAppBack = view !== "home" || Boolean(selectedCourseTrack);
   const isLessonActivityView = view === "lessons" && courseStudyWorkspace !== "home";
   const appBackLabel =
@@ -979,7 +1031,10 @@ export default function App() {
     if (view === "lessons" && selectedExerciseIndex !== clampedExerciseIndex) {
       setSelectedExerciseIndex(clampedExerciseIndex);
     }
-  }, [view, selectedExerciseIndex, clampedExerciseIndex]);
+    if (view === "lessons" && selectedExerciseEndIndex !== clampedExerciseEndIndex) {
+      setSelectedExerciseEndIndex(clampedExerciseEndIndex);
+    }
+  }, [view, selectedExerciseIndex, selectedExerciseEndIndex, clampedExerciseIndex, clampedExerciseEndIndex]);
 
   const selectedServiceText = getReaderServiceText(selectedServiceTextId);
   const readerSections = selectedServiceText.sections || [];
@@ -1842,11 +1897,15 @@ export default function App() {
             showPracticeToolbar={showPracticeToolbar}
             studyWorkspace={courseStudyWorkspace}
             selectedExerciseIndex={clampedExerciseIndex}
+            selectedExerciseEndIndex={clampedExerciseEndIndex}
             showProgressPrompt={showCourseProgressPrompt}
             onProgressPrompt={openProgressSignIn}
             onStudySkillChange={setCourseStudyWorkspace}
             onCourseTrack={goToSelectedLessonTrack}
             onSelectExercise={(exerciseIndex, studyWorkspace) => goToLessonStudyHome(selectedLessonId, exerciseIndex, studyWorkspace)}
+            onSelectExerciseRange={(startIndex, endIndex, studyWorkspace) => (
+              goToLessonExerciseRange(selectedLessonId, startIndex, endIndex, studyWorkspace)
+            )}
           />
         )}
         {view === "lessons" && !selectedLesson && (

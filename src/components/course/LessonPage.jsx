@@ -1,11 +1,22 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import './course.css';
 import PassageExperience from '../passage/PassageExperience.jsx';
-import exercises, { canUseActivityType, getExerciseWithActivity, getStandardActivityOptions } from '../../data/course/exercises.js';
+import exercises, {
+  canUseActivityType,
+  composeExerciseRange,
+  getRecapExerciseIndex,
+  getExerciseWithActivity,
+  getStandardActivityOptions
+} from '../../data/course/exercises.js';
 import { getExerciseTitle } from './exerciseTitles.js';
 import { PASSAGE_ACTIVITY_LABELS, PASSAGE_ACTIVITY_TYPES } from '../../utils/passageActivities.js';
 import { getExercisePhraseIds, getLessonPhraseIds, getPhraseCountLabel } from '../../utils/courseMastery.js';
 import { createExercisePassage } from '../../utils/passages.js';
+import {
+  canUpdateExerciseRange,
+  normalizeExerciseRange,
+  updateExerciseRange
+} from '../../utils/exerciseRanges.js';
 import { getStoredPhraseProgressDimensionMaps, PHRASE_PROGRESS_EVENT } from '../../utils/progressScoring.js';
 import {
   resolveStoredActivitySelection,
@@ -34,12 +45,13 @@ const COMPREHENSION_ACTIVITY_TYPES = [
   PASSAGE_ACTIVITY_TYPES.learn
 ];
 
-function getActivityOptions(item) {
+function getActivityOptions(item, resolvedExercise = null) {
+  const exerciseTarget = resolvedExercise || item?.exercise_id;
   if (item?.activity_options) {
     return getPrimaryActivityOptions(item.exercise_id, item.activity_options)
-      .filter(option => canUseActivityType(item.exercise_id, option.activity_type));
+      .filter(option => canUseActivityType(exerciseTarget, option.activity_type));
   }
-  if (item?.activity_policy === 'standard') return getStandardActivityOptions(item.exercise_id);
+  if (item?.activity_policy === 'standard') return getStandardActivityOptions(exerciseTarget);
   return [];
 }
 
@@ -186,16 +198,45 @@ export default function LessonPage({
   showPracticeToolbar = true,
   studyWorkspace,
   selectedExerciseIndex,
+  selectedExerciseEndIndex = selectedExerciseIndex,
   showProgressPrompt = false,
   onProgressPrompt,
   onStudySkillChange,
   onCourseTrack,
-  onSelectExercise
+  onSelectExercise,
+  onSelectExerciseRange
 }) {
   const exerciseItems = lesson.exercises ?? [];
+  const recapExerciseIndex = getRecapExerciseIndex(lesson);
+  const selectableExerciseCount = recapExerciseIndex ?? exerciseItems.length;
+  const supportsCompoundSelection = selectableExerciseCount > 1
+    && Array.from({ length: selectableExerciseCount - 1 }, (_, index) => (
+      composeExerciseRange(lesson, index, index + 1)
+    )).some(Boolean);
+  const selectedExerciseRange = normalizeExerciseRange(
+    selectedExerciseIndex,
+    selectedExerciseEndIndex,
+    selectableExerciseCount
+  );
+  const isRecapSelected = supportsCompoundSelection && selectedExerciseIndex === recapExerciseIndex;
   const selectedExerciseItem = exerciseItems[selectedExerciseIndex] ?? exerciseItems[0];
-  const activityOptions = useMemo(() => getActivityOptions(selectedExerciseItem), [selectedExerciseItem]);
-  const initialStudySkill = getStoredStudySkill(activityOptions);
+  const selectedRangeExercise = useMemo(() => {
+    if (!supportsCompoundSelection || isRecapSelected) {
+      return exercises[selectedExerciseItem?.exercise_id] || null;
+    }
+    return composeExerciseRange(
+      lesson,
+      selectedExerciseRange.startIndex,
+      selectedExerciseRange.endIndex
+    );
+  }, [isRecapSelected, lesson, selectedExerciseItem?.exercise_id, selectedExerciseRange.endIndex, selectedExerciseRange.startIndex, supportsCompoundSelection]);
+  const activityOptions = useMemo(
+    () => getActivityOptions(selectedExerciseItem, selectedRangeExercise),
+    [selectedExerciseItem, selectedRangeExercise]
+  );
+  const initialStudySkill = studyWorkspace === STUDY_SKILLS.home
+    ? STUDY_SKILLS.home
+    : getStoredStudySkill(activityOptions);
   const [selectedStudySkill, setSelectedStudySkill] = useState(initialStudySkill);
   const [selectedActivityOptionId, setSelectedActivityOptionId] = useState(() => (
     getResolvedActivityValueForStudySkill(activityOptions, initialStudySkill)
@@ -215,11 +256,13 @@ export default function LessonPage({
   )) || activeSkillOptions[0] || activityOptions[0] || null;
 
   useEffect(() => {
-    const nextStudySkill = getStoredStudySkill(activityOptions);
+    const nextStudySkill = studyWorkspace === STUDY_SKILLS.home
+      ? STUDY_SKILLS.home
+      : getStoredStudySkill(activityOptions);
     const resolvedActivityValue = getResolvedActivityValueForStudySkill(activityOptions, nextStudySkill);
     setSelectedStudySkill(nextStudySkill);
     setSelectedActivityOptionId(resolvedActivityValue);
-  }, [lesson.id, selectedExerciseIndex]);
+  }, [activityOptions, lesson.id, selectedExerciseEndIndex, selectedExerciseIndex, studyWorkspace]);
 
   useEffect(() => {
     if (!studyWorkspace || studyWorkspace === selectedStudySkill) return;
@@ -240,7 +283,7 @@ export default function LessonPage({
   useEffect(() => {
     let pulseFrameId = null;
     let pulseTimeoutId = null;
-    const exercisePhraseIds = new Set(getExercisePhraseIds(selectedExerciseItem?.exercise_id));
+    const exercisePhraseIds = new Set(getExercisePhraseIds(selectedRangeExercise));
 
     function cancelConfidencePulseTimers() {
       if (pulseFrameId) cancelAnimationFrame(pulseFrameId);
@@ -280,32 +323,42 @@ export default function LessonPage({
       window.removeEventListener(COMPREHENSION_SESSION_COMPLETE_EVENT, pulseCompletedComprehensionSession);
       window.removeEventListener('storage', refreshProgress);
     };
-  }, [selectedExerciseItem?.exercise_id]);
+  }, [selectedRangeExercise]);
 
-  const resolvedExercises = exerciseItems
-    .map((item, index) => {
-      const option = index === selectedExerciseIndex ? selectedActivityOption : null;
-      const exerciseId = option?.exercise_id || item.exercise_id;
-      const activityType = option?.activity_type || item.activity_type || null;
-      return {
-        exercise_id: exerciseId,
-        exercise: activityType ? getExerciseWithActivity(exerciseId, activityType) : exercises[exerciseId],
-        audio_clip: exercises[exerciseId]?.audio_clip
-      };
-    });
-  const selectedExercise = resolvedExercises[selectedExerciseIndex] ?? resolvedExercises[0];
+  const selectedSourceExercise = selectedActivityOption?.exercise_id
+    ? exercises[selectedActivityOption.exercise_id]
+    : selectedRangeExercise;
+  const selectedActivityTypeOverride = selectedActivityOption?.activity_type || selectedExerciseItem?.activity_type || null;
+  const selectedExercise = {
+    exercise_id: selectedSourceExercise?.id || selectedExerciseItem?.exercise_id,
+    exercise: selectedActivityTypeOverride
+      ? getExerciseWithActivity(selectedSourceExercise, selectedActivityTypeOverride)
+      : selectedSourceExercise,
+    audio_clip: selectedSourceExercise?.audio_clip
+  };
   const missingExercises = selectedExercise && !selectedExercise.exercise ? [selectedExercise] : [];
   const unitTitle = lesson.unitTitle || lesson.unit_title;
-  const exerciseTitle = getExerciseTitle(lesson, selectedExerciseIndex);
+  const rangeExerciseItems = exerciseItems.slice(
+    selectedExerciseRange.startIndex,
+    selectedExerciseRange.endIndex + 1
+  );
+  const rangeExerciseTitles = rangeExerciseItems.map((item, rangeIndex) => (
+    item.title || getExerciseTitle(lesson, selectedExerciseRange.startIndex + rangeIndex)
+  ));
+  const exerciseTitle = supportsCompoundSelection && !isRecapSelected && rangeExerciseItems.length > 1
+    ? `${rangeExerciseTitles[0]} ... ${rangeExerciseTitles[rangeExerciseTitles.length - 1]}`
+    : getExerciseTitle(lesson, selectedExerciseIndex);
   const hasMultipleExercises = exerciseItems.length > 1;
   const lessonPhraseCount = getLessonPhraseIds(lesson).size;
-  const selectedExercisePhraseCount = new Set(getExercisePhraseIds(selectedExerciseItem?.exercise_id)).size;
+  const selectedExercisePhraseCount = new Set(getExercisePhraseIds(selectedRangeExercise)).size;
   const studyHomeContext = hasMultipleExercises
     ? `${exerciseItems.length} exercises · ${lessonPhraseCount} ${lessonPhraseCount === 1 ? 'phrase' : 'phrases'}`
     : exerciseTitle;
   const selectedActivityType = selectedExercise?.exercise?.activity?.type || null;
   const isLearnActivity = selectedActivityType === PASSAGE_ACTIVITY_TYPES.learn;
-  const isStudyHome = selectedStudySkill === STUDY_SKILLS.home;
+  const isStudyHome = studyWorkspace
+    ? studyWorkspace === STUDY_SKILLS.home
+    : selectedStudySkill === STUDY_SKILLS.home;
   const isRecitationMode = selectedStudySkill === STUDY_SKILLS.recitation;
   const selectedActivityValue = getActivityOptionValue(selectedActivityOption) || selectedExerciseItem.exercise_id;
   const passage = createExercisePassage({ exercise: selectedExercise?.exercise });
@@ -320,7 +373,8 @@ export default function LessonPage({
   }
 
   function getExerciseDimensionConfidence(item, dimension) {
-    const phraseIds = [...new Set(getExercisePhraseIds(item?.exercise_id))];
+    const exerciseTarget = item?.exercise_id || item;
+    const phraseIds = [...new Set(getExercisePhraseIds(exerciseTarget))];
     if (phraseIds.length === 0) return 0;
     const confidenceById = phraseProgressDimensions[dimension] || {};
     const totalConfidence = phraseIds.reduce((total, phraseId) => total + (confidenceById[phraseId] || 0), 0);
@@ -328,8 +382,8 @@ export default function LessonPage({
   }
 
   function renderConfidenceBars() {
-    const recitationConfidence = getExerciseDimensionConfidence(selectedExerciseItem, 'recitation');
-    const comprehensionConfidence = getExerciseDimensionConfidence(selectedExerciseItem, 'comprehension');
+    const recitationConfidence = getExerciseDimensionConfidence(selectedRangeExercise, 'recitation');
+    const comprehensionConfidence = getExerciseDimensionConfidence(selectedRangeExercise, 'comprehension');
     const activeSkill = selectedStudySkill;
     const activeConfidence = activeSkill === STUDY_SKILLS.comprehension
       ? comprehensionConfidence
@@ -435,7 +489,7 @@ export default function LessonPage({
         selectedActivityValue={selectedActivityValue}
         onSelectActivity={selectActivityValue}
         activityType={selectedActivityType}
-        resetKey={`${lesson.id}:${selectedExerciseIndex}`}
+        resetKey={`${lesson.id}:${selectedExerciseRange.startIndex}-${selectedExerciseRange.endIndex}`}
         arabicMode={arabicMode}
         readerLayout={readerLayout}
         speechRate={speechRate}
@@ -509,6 +563,23 @@ export default function LessonPage({
     );
   }
 
+  function selectCompoundExercise(exerciseIndex) {
+    const nextRange = updateExerciseRange(selectedExerciseRange, exerciseIndex);
+    const nextExercise = composeExerciseRange(lesson, nextRange.startIndex, nextRange.endIndex);
+    const resolvedRange = nextExercise
+      ? nextRange
+      : { startIndex: exerciseIndex, endIndex: exerciseIndex };
+    onSelectExerciseRange?.(resolvedRange.startIndex, resolvedRange.endIndex, STUDY_SKILLS.home);
+  }
+
+  function practiceCompoundSelection() {
+    onSelectExerciseRange?.(
+      selectedExerciseRange.startIndex,
+      selectedExerciseRange.endIndex,
+      STUDY_SKILLS.recitation
+    );
+  }
+
   function renderStudyHome() {
     return (
       <section className="lp-study-home-card" aria-labelledby="study-home-title">
@@ -520,12 +591,36 @@ export default function LessonPage({
         {renderProgressPrompt()}
 
         <section className="lp-study-home-exercise-summary" aria-label="Exercises">
+          {supportsCompoundSelection && (
+            <p className="lp-compound-selection-help">
+              Choose an exercise, then add compatible adjacent exercises to practice them together.
+            </p>
+          )}
           <div className="lp-study-home-exercise-list">
             {exerciseItems.map((item, exerciseIndex) => {
               const exerciseConfidence = getExerciseConfidence(item);
               const exercisePhraseCount = new Set(getExercisePhraseIds(item.exercise_id)).size;
-              const isSelectedExercise = exerciseIndex === selectedExerciseIndex;
-              const isRecapExercise = exerciseItems.length > 1 && exerciseIndex === exerciseItems.length - 1;
+              const isRecapExercise = recapExerciseIndex === exerciseIndex;
+              const isCompoundExercise = supportsCompoundSelection && exerciseIndex < selectableExerciseCount;
+              const isSelectedExercise = isCompoundExercise
+                ? !isRecapSelected
+                  && exerciseIndex >= selectedExerciseRange.startIndex
+                  && exerciseIndex <= selectedExerciseRange.endIndex
+                : exerciseIndex === selectedExerciseIndex;
+              const candidateRange = isCompoundExercise
+                ? updateExerciseRange(selectedExerciseRange, exerciseIndex)
+                : null;
+              const candidateExercise = candidateRange
+                ? composeExerciseRange(lesson, candidateRange.startIndex, candidateRange.endIndex)
+                : null;
+              const canAddExercise = candidateRange
+                && candidateRange.endIndex > candidateRange.startIndex
+                && Boolean(candidateExercise);
+              const canSelectExercise = !isCompoundExercise
+                || (
+                  canUpdateExerciseRange(selectedExerciseRange, exerciseIndex)
+                    && Boolean(candidateExercise || selectedExerciseRange.startIndex === selectedExerciseRange.endIndex)
+                );
 
               return (
                 <article
@@ -534,14 +629,24 @@ export default function LessonPage({
                     'lp-study-home-exercise-row',
                     isSelectedExercise ? 'active' : '',
                     isRecapExercise ? 'recap' : '',
+                    isCompoundExercise ? 'compound-selectable' : '',
+                    !canSelectExercise ? 'selection-disabled' : '',
                     exerciseConfidence >= MARKER_FILL_CONFIDENCE ? 'confident' : ''
                   ].filter(Boolean).join(' ')}
                 >
                   <button
                     type="button"
                     className="lp-study-home-exercise-select"
-                    onClick={() => onSelectExercise?.(exerciseIndex)}
+                    onClick={() => (
+                      isCompoundExercise
+                        ? selectCompoundExercise(exerciseIndex)
+                        : onSelectExercise?.(exerciseIndex)
+                    )}
                     aria-pressed={isSelectedExercise}
+                    disabled={!canSelectExercise}
+                    title={!canSelectExercise
+                      ? 'This exercise cannot be added because its audio is not continuous with the selection.'
+                      : undefined}
                   >
                     <span className="lp-study-home-exercise-number">{isRecapExercise ? 'Recap' : exerciseIndex + 1}</span>
                     <span className="lp-study-home-exercise-main">
@@ -554,19 +659,41 @@ export default function LessonPage({
                         <strong>{Math.round(exerciseConfidence * 100)}%</strong>
                       </span>
                     </span>
-                  </button>
-                  <span className="lp-study-home-exercise-actions">
                     <span
-                      className="lp-study-home-exercise-action"
+                      className={`lp-study-home-exercise-action${isCompoundExercise ? ' compound-toggle' : ''}`}
                       aria-hidden="true"
                     >
-                      <span aria-hidden="true">›</span>
+                      <span aria-hidden="true">
+                        {isCompoundExercise ? (isSelectedExercise ? '✓' : canAddExercise ? '+' : '›') : '›'}
+                      </span>
                     </span>
-                  </span>
+                  </button>
                 </article>
               );
             })}
           </div>
+          {supportsCompoundSelection && !isRecapSelected && (
+            <div className="lp-compound-selection-actions">
+              <div className="lp-compound-selection-summary">
+                <strong>
+                  {selectedExerciseRange.endIndex - selectedExerciseRange.startIndex + 1 === 1
+                    ? rangeExerciseTitles[0]
+                    : `${selectedExerciseRange.endIndex - selectedExerciseRange.startIndex + 1} exercises selected`}
+                </strong>
+                <span>{getPhraseCountLabel(selectedExercisePhraseCount)}</span>
+              </div>
+              <div className="lp-compound-selection-action lp-activity-toolbar-action">
+                <button
+                  type="button"
+                  className="lp-activity-button lp-activity-submit"
+                  onClick={practiceCompoundSelection}
+                  disabled={!selectedRangeExercise}
+                >
+                  Study Phrases
+                </button>
+              </div>
+            </div>
+          )}
         </section>
       </section>
     );
@@ -579,6 +706,7 @@ export default function LessonPage({
         'course-view-page',
         'bottom-nav-page',
         isStudyHome ? 'study-home-page' : '',
+        isStudyHome && supportsCompoundSelection && !isRecapSelected ? 'compound-selection-active' : '',
         isLearnActivity && !isStudyHome ? 'learn-mode-page' : '',
         'recitation-mode-page',
         isRecitationMode ? '' : 'comprehension-mode-page',
