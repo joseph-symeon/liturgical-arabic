@@ -874,8 +874,11 @@ export default function App() {
   }
 
   function goToTableOfContents(serviceTextId = selectedServiceTextId) {
+    const serviceText = getReaderServiceText(serviceTextId);
+    const opensSingleSectionDirectly = serviceText.nav_single_section_direct
+      && serviceText.sections?.length === 1;
     setSelectedServiceTextId(serviceTextId);
-    setSelectedSectionIndex(null);
+    setSelectedSectionIndex(opensSingleSectionDirectly ? 0 : null);
     setSelectedCourseTrackId(null);
     setView("reader");
     if (isNarrowViewport) setMenuOpen(false);

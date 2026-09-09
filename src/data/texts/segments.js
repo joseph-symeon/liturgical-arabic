@@ -9,6 +9,100 @@ function phraseParts(parts) {
 }
 
 const sourceSegments = {
+  "trisagion-prayers-in-the-name": {
+    "speaker": "role-reader",
+    "tags": [
+      "opening",
+      "trisagion"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "trisagion-prayers-in-the-name-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "father-son-holy-spirit-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "phrase_id": "amen-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "trisagion-prayers-glory-to-thee-o-god": {
+    "speaker": "role-reader",
+    "tags": [
+      "doxology",
+      "trisagion"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-thee-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "o-god-001"
+      },
+      {
+        "text": "، "
+      },
+      {
+        "phrase_id": "glory-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "to-thee-001"
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  "trisagion-prayers-lord-have-mercy-twelve": {
+    "speaker": "role-reader",
+    "break_before": true,
+    "tags": [
+      "response",
+      "trisagion"
+    ],
+    "phrases": [
+      {
+        "phrase_id": "vocative-o-lord-001"
+      },
+      {
+        "text": " "
+      },
+      {
+        "phrase_id": "have-mercy-001"
+      },
+      {
+        "text": ". "
+      },
+      {
+        "text": "(١٢)",
+        "tags": [
+          "rubric"
+        ]
+      }
+    ]
+  },
   "litany-peace-in-peace": {
     "speaker": "role-deacon",
     "tags": [],

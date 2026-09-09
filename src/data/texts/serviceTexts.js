@@ -1711,6 +1711,61 @@ export const serviceTextDefinitions = [
     ]
   },
   {
+    "id": "trisagion-prayers",
+    "title": "The Trisagion Prayers",
+    "short_title": "The Trisagion Prayers",
+    "show_in_reader_nav": true,
+    "nav_single_section_direct": true,
+    "display_title": {
+      "english": [
+        {
+          "text": "The Trisagion Prayers"
+        }
+      ],
+      "arabic_phrase_ids": [
+        "section-trisagion-prayers"
+      ],
+      "icon": "homeAltarIcon",
+      "icon_max_height": 300
+    },
+    "tradition": "antiochian",
+    "language": "ar",
+    "sections": [
+      {
+        "section_id": "trisagion-prayers",
+        "section": "The Trisagion Prayers",
+        "section_title_phrase": "section-trisagion-prayers",
+        "speaker_override": "role-reader",
+        "segment_ids": [
+          "trisagion-prayers-in-the-name",
+          "trisagion-prayers-glory-to-thee-o-god",
+          "preparation-heavenly-king",
+          "preparation-treasury-giver",
+          "vespers-trisagion-holy-god",
+          "vespers-trisagion-glory-both-now",
+          "vespers-trisagion-all-holy-trinity-address",
+          "vespers-trisagion-all-holy-trinity-lord",
+          "vespers-trisagion-all-holy-trinity-master",
+          "vespers-trisagion-all-holy-trinity-holy-one",
+          "vespers-trisagion-lord-have-mercy-thrice",
+          "vespers-trisagion-glory-both-now",
+          "lords-prayer-prayer",
+          "lords-prayer-kingdom",
+          "lords-prayer-daily-bread",
+          "lords-prayer-forgive",
+          "lords-prayer-temptation",
+          "dismissal-priest-fathers",
+          "dismissal-choir-amen",
+          "trisagion-prayers-lord-have-mercy-twelve",
+          "vespers-trisagion-glory-both-now",
+          "vespers-come-worship-god-king",
+          "vespers-come-worship-christ-king",
+          "vespers-come-worship-christ-himself"
+        ]
+      }
+    ]
+  },
+  {
     "id": "psalter-psalm-50",
     "title": "The Psalter",
     "short_title": "The Psalter",

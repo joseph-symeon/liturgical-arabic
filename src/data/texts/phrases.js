@@ -3,6 +3,16 @@
 // Run `npm run phrases:sync` to apply safe phrase changes both ways.
 
 const phrases = {
+  "trisagion-prayers-in-the-name-001": {
+    "arabic": "بِاسْمِ",
+    "translation": "In the name",
+    "literal": "In the name",
+    "tags": [
+      "opening",
+      "section: The Trisagion Prayers",
+      "trisagion"
+    ]
+  },
   "vespers-simeon-glory-israel-001": {
     "arabic": "ومَجْداً لِشَعْبِكَ إسْرائيل",
     "translation": "and the glory of Thy people Israel",
