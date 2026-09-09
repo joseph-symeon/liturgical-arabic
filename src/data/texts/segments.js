@@ -38,6 +38,7 @@ const sourceSegments = {
   },
   "trisagion-prayers-glory-to-thee-o-god": {
     "speaker": "role-reader",
+    "break_before": true,
     "tags": [
       "doxology",
       "trisagion"
@@ -1637,6 +1638,7 @@ const sourceSegments = {
   },
   "preparation-heavenly-king": {
     "speaker": "role-priest",
+    "break_before": true,
     "tags": [
       "preparation"
     ],
@@ -2058,6 +2060,7 @@ const sourceSegments = {
   },
   "vespers-come-worship-god-king": {
     "speaker": "role-reader",
+    "break_before": true,
     "tags": [
       "come-let-us-worship",
       "opening",

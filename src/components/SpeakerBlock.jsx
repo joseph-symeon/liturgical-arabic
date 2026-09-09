@@ -48,8 +48,13 @@ export default function SpeakerBlock(props) {
           && last.lastLineTags?.includes("quiet")
           && !line.tags?.includes("paragraph-break");
         const joinsParagraphOnly = line.tags?.includes("paragraph-join");
+        const shouldBreak = line.break_before && !joinsQuietPrayer && !joinsParagraphOnly;
         last.phrases = last.phrases.concat(
-          [line.break_before && !joinsQuietPrayer && !joinsParagraphOnly ? { break: true } : { text: " " }],
+          shouldBreak
+            ? line.blank_line_before
+              ? [{ break: true }, { break: true }]
+              : [{ break: true }]
+            : [{ text: " " }],
           getLineParts(line)
         );
         last.lastLineTags = line.tags || [];
@@ -80,10 +85,10 @@ export default function SpeakerBlock(props) {
 
   function renderLineByLine() {
     let lastSpeaker = null;
-    return lines.map(function (line) {
+    return lines.flatMap(function (line, index) {
       const showSpeaker = Boolean(line.speaker) && line.speaker !== lastSpeaker;
       lastSpeaker = line.speaker;
-      return h(SpeakerLine, {
+      const renderedLine = h(SpeakerLine, {
         key: line.line_order,
         speaker: line.speaker,
         line: getLineParts(line),
@@ -94,6 +99,17 @@ export default function SpeakerBlock(props) {
         arabicFontSize: props.arabicFontSize,
         showSpeaker
       });
+      if (!line.blank_line_before || index === 0) return [renderedLine];
+
+      const fontSize = Number(props.arabicFontSize) || 24;
+      return [
+        h("div", {
+          key: `blank-line-${line.line_order}`,
+          "aria-hidden": true,
+          style: { height: `${fontSize}px` }
+        }),
+        renderedLine
+      ];
     });
   }
 

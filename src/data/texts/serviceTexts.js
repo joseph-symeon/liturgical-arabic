@@ -1736,6 +1736,7 @@ export const serviceTextDefinitions = [
         "section": "The Trisagion Prayers",
         "section_title_phrase": "section-trisagion-prayers",
         "speaker_override": "role-reader",
+        "break_spacing": "blank-line",
         "segment_ids": [
           "trisagion-prayers-in-the-name",
           "trisagion-prayers-glory-to-thee-o-god",

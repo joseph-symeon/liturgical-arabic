@@ -8,7 +8,8 @@ function getLinesForSegmentIds(segmentIds, {
   showQuietPrayers = true,
   splitSegmentPhrases = false,
   omittedPhraseIds = [],
-  speakerOverride
+  speakerOverride,
+  blankLineBreaks = false
 } = {}) {
   const omittedPhraseIdSet = new Set(omittedPhraseIds);
   return (segmentIds || [])
@@ -59,6 +60,11 @@ function getLinesForSegmentIds(segmentIds, {
     })
     .map((line, index) => ({
       ...line,
+      blank_line_before: Boolean(
+        blankLineBreaks
+          && line.break_before
+          && !line.tags?.includes("paragraph-join")
+      ),
       line_order: index + 1
     }));
 }
@@ -93,7 +99,8 @@ export function createServiceSectionPassage({
       showQuietPrayers: shouldShowQuietPrayers,
       splitSegmentPhrases: section.split_segment_phrases,
       omittedPhraseIds: section.omit_phrase_ids,
-      speakerOverride: Object.hasOwn(section, "speaker_override") ? section.speaker_override : undefined
+      speakerOverride: Object.hasOwn(section, "speaker_override") ? section.speaker_override : undefined,
+      blankLineBreaks: section.break_spacing === "blank-line"
     }),
     playback,
     clip: getPlaybackClip(playback),
