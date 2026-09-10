@@ -1061,7 +1061,7 @@ export default function App() {
   const nextSectionTitle = hasNextSection
     ? readerSections[selectedSectionIndex === null ? 0 : selectedSectionIndex + 1]?.section
     : null;
-  const hideContentForMenu = (menuOpen || displayMenuOpen) && isNarrowViewport;
+  const hideContentForMenu = menuOpen && isNarrowViewport;
   const showCourseProgressPrompt = authReady && !syncSession?.user;
   const pageCanUseFocusMode =
     view === "lessons"
@@ -1840,7 +1840,7 @@ export default function App() {
         style={{
           "--side-panel-offset": menuOpen && !isNarrowViewport ? `${SIDE_PANEL_WIDTH}px` : "0px",
           "--workspace-left-offset": menuOpen && !isNarrowViewport ? `${SIDE_PANEL_WIDTH}px` : "0px",
-          "--workspace-right-offset": displayMenuOpen && !isNarrowViewport ? `${SIDE_PANEL_WIDTH}px` : "0px",
+          "--workspace-right-offset": "0px",
           flex: "1 1 auto",
           minWidth: 0,
           display: hideContentForMenu ? "none" : "block"
@@ -1921,28 +1921,32 @@ export default function App() {
         )}
       </div>
 
-      {displayMenuOpen && (
-        <aside
-          key="display-panel"
-          className="app-side-panel app-display-panel bg-white dark:bg-[var(--dark-bg)] border-l border-stone-200 dark:border-[var(--dark-border)]"
-          dir="ltr"
-          style={{
-            position: isNarrowViewport ? "fixed" : "sticky",
-            top: 0,
-            right: 0,
-            zIndex: 35,
-            flex: `0 0 ${SIDE_PANEL_WIDTH}px`,
-            width: SIDE_PANEL_WIDTH,
-            maxWidth: "calc(100vw - 56px)",
-            minHeight: "100vh",
-            maxHeight: "100vh",
-            overflow: "hidden",
-            padding: 0
-          }}
-        >
-          {renderDisplayMenu()}
-        </aside>
-      )}
+      <aside
+        key="display-panel"
+        aria-hidden={!displayMenuOpen}
+        className="app-side-panel app-display-panel bg-white dark:bg-[var(--dark-bg)] border-l border-stone-200 dark:border-[var(--dark-border)]"
+        dir="ltr"
+        style={{
+          position: "fixed",
+          top: 0,
+          right: 0,
+          zIndex: 35,
+          width: SIDE_PANEL_WIDTH,
+          maxWidth: "calc(100vw - 56px)",
+          minHeight: "100vh",
+          maxHeight: "100vh",
+          overflow: "hidden",
+          padding: 0,
+          pointerEvents: displayMenuOpen ? "auto" : "none",
+          transform: displayMenuOpen ? "translateX(0)" : "translateX(100%)",
+          visibility: displayMenuOpen ? "visible" : "hidden",
+          transition: displayMenuOpen
+            ? "transform 180ms ease-out, visibility 0s linear"
+            : "transform 160ms ease-in, visibility 0s linear 160ms"
+        }}
+      >
+        {renderDisplayMenu()}
+      </aside>
 
     </div>
   );

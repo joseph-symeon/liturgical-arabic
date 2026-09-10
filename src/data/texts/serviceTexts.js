@@ -1736,7 +1736,18 @@ export const serviceTextDefinitions = [
         "section": "The Trisagion Prayers",
         "section_title_phrase": "section-trisagion-prayers",
         "speaker_override": "role-reader",
-        "break_spacing": "blank-line",
+        "blank_line_before_segment_ids": [
+          "trisagion-prayers-glory-to-thee-o-god",
+          "preparation-heavenly-king",
+          "vespers-trisagion-holy-god",
+          "vespers-trisagion-glory-both-now",
+          "vespers-trisagion-all-holy-trinity-address",
+          "vespers-trisagion-lord-have-mercy-thrice",
+          "lords-prayer-prayer",
+          "dismissal-priest-fathers",
+          "trisagion-prayers-lord-have-mercy-twelve",
+          "vespers-come-worship-god-king"
+        ],
         "segment_ids": [
           "trisagion-prayers-in-the-name",
           "trisagion-prayers-glory-to-thee-o-god",

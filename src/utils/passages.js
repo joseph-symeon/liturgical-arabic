@@ -9,9 +9,10 @@ function getLinesForSegmentIds(segmentIds, {
   splitSegmentPhrases = false,
   omittedPhraseIds = [],
   speakerOverride,
-  blankLineBreaks = false
+  blankLineBeforeSegmentIds = []
 } = {}) {
   const omittedPhraseIdSet = new Set(omittedPhraseIds);
+  const blankLineBeforeSegmentIdSet = new Set(blankLineBeforeSegmentIds);
   return (segmentIds || [])
     .map((segmentId, index) => ({ segment_id: segmentId, segment_index: index, segment: segmentsMap[segmentId] }))
     .filter(({ segment }) => segment && (showQuietPrayers || !segment.tags?.includes("quiet")))
@@ -61,8 +62,7 @@ function getLinesForSegmentIds(segmentIds, {
     .map((line, index) => ({
       ...line,
       blank_line_before: Boolean(
-        blankLineBreaks
-          && line.break_before
+        blankLineBeforeSegmentIdSet.has(line.source_segment_id)
           && !line.tags?.includes("paragraph-join")
       ),
       line_order: index + 1
@@ -100,7 +100,7 @@ export function createServiceSectionPassage({
       splitSegmentPhrases: section.split_segment_phrases,
       omittedPhraseIds: section.omit_phrase_ids,
       speakerOverride: Object.hasOwn(section, "speaker_override") ? section.speaker_override : undefined,
-      blankLineBreaks: section.break_spacing === "blank-line"
+      blankLineBeforeSegmentIds: section.blank_line_before_segment_ids
     }),
     playback,
     clip: getPlaybackClip(playback),
