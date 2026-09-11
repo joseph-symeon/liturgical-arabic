@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './course.css';
 import courseTracks from '../../data/course/courseTracks.js';
+import { getRecapExerciseIndex } from '../../data/course/exercises.js';
 import {
   getCourseItemLessonIds,
   getCourseItemPhraseIds,
@@ -10,28 +11,12 @@ import {
 } from '../../utils/courseMastery.js';
 import { getStoredPhraseConfidenceMap, PHRASE_PROGRESS_EVENT } from '../../utils/progressScoring.js';
 
-const MARKER_FILL_CONFIDENCE = 0.8;
-
 function formatPercent(value) {
   return `${Math.round(value * 100)}%`;
 }
 
 function getLessonById(lessons, lessonId) {
   return lessons.find(lesson => lesson.id === lessonId);
-}
-
-function getPrerequisiteLabel(item) {
-  if (item.parent_track_id) return null;
-  const prerequisiteTrackIds = item.prerequisite_track_ids || [];
-  const prerequisiteLessonIds = item.prerequisite_lesson_ids || [];
-  if (prerequisiteTrackIds.length === 0 && prerequisiteLessonIds.length === 0) return null;
-  const prerequisiteTrackTitles = prerequisiteTrackIds
-    .map(trackId => courseTracks.find(track => track.id === trackId)?.title)
-    .filter(Boolean);
-  const prerequisiteLessonTitles = prerequisiteLessonIds
-    .map(lessonId => courseTracks.find(track => getCourseItemLessonIds(track).includes(lessonId))?.title)
-    .filter(Boolean);
-  return `Prerequisite: ${[...prerequisiteLessonTitles, ...prerequisiteTrackTitles].join(', ')}`;
 }
 
 function getBonusItems(trackId) {
@@ -70,6 +55,9 @@ export default function CourseOverview({
   const masteryRows = getServiceConfidenceRows(phraseConfidenceById);
   const topMasteryRows = masteryRows.slice(0, 6);
   const selectedTrack = courseTracks.find(item => item.id === selectedTrackId);
+  const coursePhraseCount = new Set(primaryPathItems.flatMap(item => (
+    [...getCourseItemPhraseIds(item)]
+  ))).size;
 
   useEffect(() => {
     function refreshProgress() {
@@ -147,53 +135,49 @@ export default function CourseOverview({
     );
   }
 
-  function renderPathItem(item, index) {
+  function renderPathItem(item) {
     const phraseIds = getCourseItemPhraseIds(item);
     const lessonCount = getCourseItemLessonIds(item).length;
     const itemConfidence = getRequiredTrackConfidence(item, phraseConfidenceById);
-    const isBonus = item.type === 'bonus';
-    const prerequisiteLabel = getPrerequisiteLabel(item);
-    const isConfident = itemConfidence >= MARKER_FILL_CONFIDENCE;
     const isMuted = [...phraseIds].length > 0 && getCourseItemLessonIds(item).every(lessonId => !canAccessLesson(lessonId));
 
     return (
-      <button
-        type="button"
-        className={[
-          'lp-course-path-card',
-          isBonus ? 'bonus' : '',
-          isConfident ? 'confident' : '',
-          isMuted ? 'muted' : ''
-        ].filter(Boolean).join(' ')}
-        key={item.id}
-        onClick={() => openTrack(item)}
-        style={{ '--track-progress': itemConfidence }}
-      >
-        <div className="lp-course-path-card-top">
-          {isBonus
-            ? <span className="lp-course-path-bonus">Bonus</span>
-            : <span className="lp-course-path-number">{index + 1}</span>}
-          {prerequisiteLabel && <span className="lp-course-path-state">{prerequisiteLabel}</span>}
-        </div>
-        <div className="lp-course-path-main">
-          <h3>{item.title}</h3>
-          <div className="lp-course-path-meta">
-            {lessonCount} {lessonCount === 1 ? 'lesson' : 'lessons'} · {getPhraseCountLabel(phraseIds.size)}
-          </div>
-        </div>
-        <div className="lp-course-path-confidence" aria-label={`${formatPercent(itemConfidence)} required track confidence`}>
-          <span>
-            <span style={{ width: `${Math.round(itemConfidence * 100)}%` }} />
+      <li key={item.id}>
+        <button
+          type="button"
+          className={`lp-lesson-selection-item lp-track-selection-item${isMuted ? ' locked' : ''}`}
+          onClick={() => openTrack(item)}
+          aria-label={`${item.title}. ${lessonCount} lessons, ${phraseIds.size} phrases, ${formatPercent(itemConfidence)} confidence.`}
+        >
+          <span className="lp-lesson-selection-copy">
+            <strong>{item.title}</strong>
+            <span>
+              {lessonCount} {lessonCount === 1 ? 'lesson' : 'lessons'} · {getPhraseCountLabel(phraseIds.size)}
+            </span>
           </span>
-          <strong>{formatPercent(itemConfidence)}</strong>
-        </div>
-        <span className="lp-course-path-action" aria-hidden="true">›</span>
-      </button>
+          <span className="lp-lesson-selection-progress" aria-label={`${formatPercent(itemConfidence)} track confidence`}>
+            <span aria-hidden="true"><span style={{ width: `${Math.round(itemConfidence * 100)}%` }} /></span>
+            <strong>{formatPercent(itemConfidence)}</strong>
+          </span>
+        </button>
+      </li>
     );
   }
 
   function renderTrackDetail(track) {
-    const lessonRows = getTrackLessonRows(track);
+    const lessonRows = getTrackLessonRows(track).map(row => {
+      const phraseCount = getLessonPhraseIds(row.lesson).size;
+      const confidence = getLessonConfidence(row.lesson, phraseConfidenceById);
+      const recapIndex = getRecapExerciseIndex(row.lesson);
+      return {
+        ...row,
+        selectionLabel: row.lesson.title,
+        exerciseCount: recapIndex ?? (row.lesson.exercises?.length ?? 0),
+        phraseCount,
+        confidence,
+        isLocked: !canAccessLesson(row.lesson.id)
+      };
+    });
     const phraseIds = getCourseItemPhraseIds(track);
 
     return (
@@ -205,57 +189,33 @@ export default function CourseOverview({
             {lessonRows.length} {lessonRows.length === 1 ? 'lesson' : 'lessons'} · {getPhraseCountLabel(phraseIds.size)}
           </div>
         </div>
-        <div className="lp-track-detail-list">
-          {lessonRows.map(row => {
-            const exerciseCount = row.lesson.exercises?.length ?? 0;
-            const rowPhraseCount = getLessonPhraseIds(row.lesson).size;
-            const lessonConfidence = getLessonConfidence(row.lesson, phraseConfidenceById);
-            const progressState = lessonConfidence >= 0.72
-              ? 'mastered'
-              : lessonConfidence > 0
-                ? 'started'
-                : 'upcoming';
-            const isConfident = lessonConfidence >= MARKER_FILL_CONFIDENCE;
-            const isLocked = !canAccessLesson(row.lesson.id);
-            return (
-              <article
+        <ul className="lp-lesson-selection-list" aria-label={`${track.title} lessons`}>
+          {lessonRows.map(row => (
+            <li key={`${row.type}:${row.id}`}>
+              <button
+                type="button"
                 className={[
-                  'lp-track-lesson-row',
-                  row.type === 'bonus' ? 'bonus' : '',
-                  progressState,
-                  isConfident ? 'confident' : '',
-                  isLocked ? 'locked' : ''
+                  'lp-lesson-selection-item',
+                  selectedLessonId === row.lesson.id ? 'active' : '',
+                  row.isLocked ? 'locked' : ''
                 ].filter(Boolean).join(' ')}
-                key={`${row.type}:${row.id}`}
-                role="button"
-                tabIndex={0}
                 onClick={() => openLesson(row.lesson.id)}
-                onKeyDown={event => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    openLesson(row.lesson.id);
-                  }
-                }}
-                style={{ '--lesson-progress': lessonConfidence }}
+                aria-label={`${row.lesson.title}. ${row.exerciseCount} exercises, ${row.phraseCount} phrases, ${formatPercent(row.confidence)} confidence${row.isLocked ? '. Locked' : ''}.`}
               >
-                <span className="lp-track-lesson-marker">{row.label}</span>
-                <div className="lp-track-lesson-main">
-                  <h3>{row.lesson.title}</h3>
-                  <div className="lp-track-lesson-meta">
-                    {exerciseCount} {exerciseCount === 1 ? 'exercise' : 'exercises'} · {getPhraseCountLabel(rowPhraseCount)}
-                  </div>
-                  <div className="lp-track-lesson-confidence" aria-label={`${formatPercent(lessonConfidence)} confidence`}>
-                    <span>
-                      <span style={{ width: `${Math.round(lessonConfidence * 100)}%` }} />
-                    </span>
-                    <strong>{formatPercent(lessonConfidence)}</strong>
-                  </div>
-                </div>
-                <span className="lp-track-lesson-action" aria-hidden="true">›</span>
-              </article>
-            );
-          })}
-        </div>
+                <span className="lp-lesson-selection-copy">
+                  <strong>{row.lesson.title}</strong>
+                  <span>
+                    {row.exerciseCount} {row.exerciseCount === 1 ? 'exercise' : 'exercises'} · {getPhraseCountLabel(row.phraseCount)}
+                  </span>
+                </span>
+                <span className="lp-lesson-selection-progress" aria-label={`${formatPercent(row.confidence)} confidence`}>
+                  <span aria-hidden="true"><span style={{ width: `${Math.round(row.confidence * 100)}%` }} /></span>
+                  <strong>{formatPercent(row.confidence)}</strong>
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
       </section>
     );
   }
@@ -272,12 +232,13 @@ export default function CourseOverview({
               <div className="lp-view-header">
                 <p className="lp-view-kicker">Course Path</p>
                 <h2 className="lp-view-title" id="course-path-title">Tracks</h2>
-              </div>
-              <div className="lp-course-flow">
-                <div className="lp-course-flow-track">
-                  {primaryPathItems.map((item, index) => renderPathItem(item, index))}
+                <div className="lp-view-meta">
+                  {primaryPathItems.length} tracks · {getPhraseCountLabel(coursePhraseCount)}
                 </div>
               </div>
+              <ul className="lp-lesson-selection-list lp-track-selection-list" aria-label="Course tracks">
+                {primaryPathItems.map(item => renderPathItem(item))}
+              </ul>
             </>
           )}
 	      </section>
@@ -291,58 +252,51 @@ export default function CourseOverview({
               Confidence estimates how ready you are to comprehend and follow along with each service.
             </p>
           </div>
-          <div className="lp-service-mastery-map">
-            <div className="lp-service-mastery-nodes">
-              {topMasteryRows.map(row => (
+          <ul className="lp-lesson-selection-list lp-service-confidence-list" aria-label="Services confidence">
+            {topMasteryRows.map(row => (
+              <li key={row.id}>
                 <button
                   type="button"
-                  className="lp-course-path-card lp-service-mastery-node"
-                  key={row.id}
-                  style={{ '--mastery': row.confidence }}
+                  className="lp-lesson-selection-item lp-service-confidence-item"
                   onClick={() => onSelectService?.(row.id)}
                   aria-label={`Open ${row.title} in Reader. ${formatPercent(row.confidence)} service confidence. ${getPhraseCountLabel(row.totalPhraseCount)}.`}
                 >
-                  <div className="lp-course-path-main lp-service-mastery-node-main">
-                    <h3>{row.title}</h3>
-                    <div className="lp-course-path-meta">{getPhraseCountLabel(row.totalPhraseCount)}</div>
-                  </div>
-                  <div className="lp-course-path-confidence" aria-label={`${formatPercent(row.confidence)} service confidence`}>
-                    <span>
-                      <span style={{ width: `${Math.round(row.confidence * 100)}%` }} />
-                    </span>
+                  <span className="lp-lesson-selection-copy">
+                    <strong>{row.title}</strong>
+                    <span>{getPhraseCountLabel(row.totalPhraseCount)}</span>
+                  </span>
+                  <span className="lp-lesson-selection-progress" aria-label={`${formatPercent(row.confidence)} service confidence`}>
+                    <span aria-hidden="true"><span style={{ width: `${Math.round(row.confidence * 100)}%` }} /></span>
                     <strong>{formatPercent(row.confidence)}</strong>
-                  </div>
-                  <span className="lp-course-path-action" aria-hidden="true">›</span>
+                  </span>
                 </button>
-              ))}
-            </div>
-          </div>
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 
       {!selectedTrack && (
-        <section className="lp-confidence-guide-section" aria-labelledby="confidence-guide-card-title">
+        <section className="lp-confidence-guide-section" aria-labelledby="confidence-guide-section-title">
           <div className="lp-view-header">
             <p className="lp-view-kicker">Progress Model</p>
-            <h2 className="lp-view-title" id="confidence-guide-card-title">Confidence score</h2>
+            <h2 className="lp-view-title" id="confidence-guide-section-title">Confidence score</h2>
           </div>
-          <button
-            type="button"
-            className="lp-course-path-card lp-confidence-guide-card"
-            onClick={onConfidenceGuide}
-          >
-            <div className="lp-course-path-card-top">
-              <span className="lp-course-path-state">Guide</span>
-            </div>
-            <div className="lp-course-path-main">
-              <h3>How confidence works</h3>
-              <div className="lp-course-path-meta">Comprehension, recitation, and memory over time</div>
-            </div>
-            <div className="lp-confidence-guide-card-meter" aria-hidden="true">
-              <span style={{ width: '84%' }} />
-            </div>
-            <span className="lp-course-path-action" aria-hidden="true">›</span>
-          </button>
+          <ul className="lp-lesson-selection-list lp-confidence-guide-entry-list">
+            <li>
+              <button
+                type="button"
+                className="lp-lesson-selection-item lp-confidence-guide-entry"
+                onClick={onConfidenceGuide}
+              >
+                <span className="lp-lesson-selection-copy">
+                  <strong>How confidence works</strong>
+                  <span>Comprehension, recitation, and memory over time</span>
+                </span>
+                <span className="lp-confidence-guide-entry-action" aria-hidden="true">›</span>
+              </button>
+            </li>
+          </ul>
         </section>
       )}
     </main>

@@ -17,35 +17,43 @@ export default function ConfidenceGuidePage({ onCourseOverview }) {
           </p>
         </div>
 
-        <div className="lp-confidence-guide-grid">
-          <article className="lp-confidence-guide-panel primary">
-            <h3>One Score, Two Skills</h3>
-            <p>
-              Each phrase combines Comprehension and Recitation. Comprehension tracks whether you recognize the meaning; Recitation tracks whether you can follow and chant it with the audio.
-            </p>
-          </article>
+        <ul className="lp-lesson-selection-list lp-confidence-guide-list">
+          <li>
+            <article className="lp-confidence-guide-panel">
+              <h3>One Score, Two Skills</h3>
+              <p>
+                Each phrase combines Comprehension and Recitation. Comprehension tracks whether you recognize the meaning; Recitation tracks whether you can follow and chant it with the audio.
+              </p>
+            </article>
+          </li>
 
-          <article className="lp-confidence-guide-panel">
-            <h3>Practice Raises It</h3>
-            <p>
-              Harder comprehension tasks give stronger evidence than easier ones. Repeated practice on the same day still helps, but it counts less than remembering the phrase on a later day.
-            </p>
-          </article>
+          <li>
+            <article className="lp-confidence-guide-panel">
+              <h3>Practice Raises It</h3>
+              <p>
+                Harder comprehension tasks give stronger evidence than easier ones. Repeated practice on the same day still helps, but it counts less than remembering the phrase on a later day.
+              </p>
+            </article>
+          </li>
 
-          <article className="lp-confidence-guide-panel">
-            <h3>Time Lowers It</h3>
-            <p>
-              The score uses a half-life style memory model. A phrase practiced only once will fade sooner; a phrase remembered across several days will stay strong longer.
-            </p>
-          </article>
+          <li>
+            <article className="lp-confidence-guide-panel">
+              <h3>Time Lowers It</h3>
+              <p>
+                The score uses a half-life style memory model. A phrase practiced only once will fade sooner; a phrase remembered across several days will stay strong longer.
+              </p>
+            </article>
+          </li>
 
-          <article className="lp-confidence-guide-panel">
-            <h3>Review Strengthens It</h3>
-            <p>
-              When confidence drops, the phrase is ready for review. A successful review after time away is stronger evidence than more drilling right after you first learned it.
-            </p>
-          </article>
-        </div>
+          <li>
+            <article className="lp-confidence-guide-panel">
+              <h3>Review Strengthens It</h3>
+              <p>
+                When confidence drops, the phrase is ready for review. A successful review after time away is stronger evidence than more drilling right after you first learned it.
+              </p>
+            </article>
+          </li>
+        </ul>
 
         <div className="lp-confidence-guide-example" aria-label="Example confidence story">
           <div>

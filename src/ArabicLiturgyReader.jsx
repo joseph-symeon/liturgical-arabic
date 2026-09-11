@@ -175,11 +175,11 @@ export default function ArabicLiturgyReader({
           onClick: function selectSection() {
             onSelectSection(sectionIndex);
           },
-          className: "reader-service-section-card"
+          className: "reader-service-section-item"
         },
         h(
           "span",
-          { className: "reader-service-section-card-inner" },
+          { className: "reader-service-section-item-inner" },
           h("span", { className: `reader-service-section-title text-left ${isGrouped ? "reader-service-home-section-title" : ""}` }, section.section || `Section ${sectionIndex + 1}`),
           titlePhrase
             ? h(
@@ -206,11 +206,11 @@ export default function ArabicLiturgyReader({
 
       const groupPhrase = item.groupTitlePhrase ? phrases[item.groupTitlePhrase] : null;
       return h(
-        "details",
-        { className: "lp-course-unit", key: item.group, open: true },
+        "section",
+        { className: "reader-service-section-group", key: item.group },
         h(
-          "summary",
-          { className: "lp-course-unit-summary" },
+          "header",
+          { className: "reader-service-section-group-header" },
           h("span", { className: "reader-service-group-title" }, item.group),
           groupPhrase
             ? h(
@@ -248,7 +248,7 @@ export default function ArabicLiturgyReader({
       }),
       h(
         "div",
-        { className: "lp-course-overview" },
+        { className: "lp-course-overview reader-service-section-list" },
         serviceHome?.items.map(renderSectionGroup)
       )
     );

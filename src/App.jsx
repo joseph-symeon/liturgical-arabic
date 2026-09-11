@@ -1148,34 +1148,36 @@ export default function App() {
             </p>
           </div>
 
-          <nav className="lp-service-mastery-map" aria-label="Home">
-            <div className="lp-service-mastery-nodes app-home-destination-nodes">
-              <button
-                type="button"
-                onClick={goToReaderIndex}
-                className="lp-course-path-card lp-service-mastery-node app-home-destination-card"
-              >
-                <div className="lp-course-path-main lp-service-mastery-node-main">
-                  <h3>Reader</h3>
-                  <div className="lp-course-path-meta">Service texts</div>
-                </div>
-                <span className="lp-course-path-action" aria-hidden="true">›</span>
-              </button>
-
-              {COURSE_LESSONS.length > 0 && (
+          <nav aria-label="Home">
+            <ul className="lp-lesson-selection-list app-home-destination-list">
+              <li>
                 <button
                   type="button"
-                  onClick={goToCourseOverview}
-                  className="lp-course-path-card lp-service-mastery-node app-home-destination-card"
+                  onClick={goToReaderIndex}
+                  className="lp-lesson-selection-item app-home-destination-item"
                 >
-                  <div className="lp-course-path-main lp-service-mastery-node-main">
-                    <h3>Course</h3>
-                    <div className="lp-course-path-meta">Lessons and practice</div>
-                  </div>
-                  <span className="lp-course-path-action" aria-hidden="true">›</span>
+                  <span className="lp-lesson-selection-copy">
+                    <strong>Reader</strong>
+                    <span>Service texts</span>
+                  </span>
                 </button>
+              </li>
+
+              {COURSE_LESSONS.length > 0 && (
+                <li>
+                  <button
+                    type="button"
+                    onClick={goToCourseOverview}
+                    className="lp-lesson-selection-item app-home-destination-item"
+                  >
+                    <span className="lp-lesson-selection-copy">
+                      <strong>Course</strong>
+                      <span>Lessons and practice</span>
+                    </span>
+                  </button>
+                </li>
               )}
-            </div>
+            </ul>
           </nav>
         </section>
       </main>
@@ -1215,45 +1217,41 @@ export default function App() {
             <p className="lp-view-kicker">Reader</p>
             <h1 className="lp-view-title" id="reader-services-title">Service Texts</h1>
           </div>
-          <div className="lp-service-mastery-map">
-            <div className="lp-service-mastery-nodes app-reader-service-nodes">
-              {READER_SERVICE_TEXTS.map(serviceText => {
-                const arabicTitle = getServiceArabicTitleParts(serviceText);
-                return (
+          <ul className="lp-lesson-selection-list app-reader-service-list" aria-label="Service texts">
+            {READER_SERVICE_TEXTS.map(serviceText => {
+              const arabicTitle = getServiceArabicTitleParts(serviceText);
+              return (
+                <li key={serviceText.id}>
                   <button
-                    key={serviceText.id}
                     type="button"
-                    className="lp-course-path-card lp-service-mastery-node app-reader-service-card"
+                    className="lp-lesson-selection-item app-reader-service-item"
                     onClick={() => goToTableOfContents(serviceText.id)}
                   >
-                    <div className="lp-course-path-main lp-service-mastery-node-main">
-                      <div className="app-reader-service-language-grid">
-                        <div className="app-reader-service-language-stack">
-                        <h3>{getServiceHomeTitle(serviceText)}</h3>
-                        <div className="lp-course-path-meta">{getServiceHomeSubtitle(serviceText)}</div>
-                        </div>
-                        {(arabicTitle.title || arabicTitle.subtitle) && (
-                          <div className="app-reader-service-language-stack app-reader-service-language-stack-arabic" dir="rtl">
-                            {arabicTitle.title && (
-                              <div className="app-reader-service-arabic-title">
-                                {arabicTitle.title}
-                              </div>
-                            )}
-                            {arabicTitle.subtitle && (
-                              <div className="app-reader-service-arabic-subtitle">
-                                {arabicTitle.subtitle}
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <span className="lp-course-path-action" aria-hidden="true">›</span>
+                    <span className="app-reader-service-language-grid">
+                      <span className="app-reader-service-language-stack">
+                        <span className="app-reader-service-english-title">{getServiceHomeTitle(serviceText)}</span>
+                        <span className="app-reader-service-subtitle">{getServiceHomeSubtitle(serviceText)}</span>
+                      </span>
+                      {(arabicTitle.title || arabicTitle.subtitle) && (
+                        <span className="app-reader-service-language-stack app-reader-service-language-stack-arabic" dir="rtl">
+                          {arabicTitle.title && (
+                            <span className="app-reader-service-arabic-title">
+                              {arabicTitle.title}
+                            </span>
+                          )}
+                          {arabicTitle.subtitle && (
+                            <span className="app-reader-service-arabic-subtitle">
+                              {arabicTitle.subtitle}
+                            </span>
+                          )}
+                        </span>
+                      )}
+                    </span>
                   </button>
-                );
-              })}
-            </div>
-          </div>
+                </li>
+              );
+            })}
+          </ul>
         </section>
       </main>
     );

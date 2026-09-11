@@ -6,39 +6,20 @@
   margin-bottom: 28px;
 }
 
-.app-home-destination-nodes {
+.app-home-destination-list {
   max-width: 860px;
 }
 
-.app-home-destination-card {
-  grid-template-rows: auto;
+.app-home-destination-item {
+  grid-template-columns: minmax(0, 1fr);
 }
 
-.app-home-destination-card .lp-course-path-main {
-  align-self: center;
+.app-reader-service-list {
+  max-width: 860px;
 }
 
-.app-home-destination-card .lp-course-path-action {
-  grid-row: 1;
-}
-
-.app-reader-service-card {
-  border-color: var(--path-card-border);
-  background: var(--path-card-surface);
-  grid-template-rows: auto;
-}
-
-.app-reader-service-card:hover {
-  border-color: color-mix(in srgb, var(--study-muted, #78716c) 28%, var(--path-card-border));
-  background: var(--path-card-surface);
-}
-
-.app-reader-service-card .lp-course-path-main {
-  align-self: center;
-}
-
-.app-reader-service-card .lp-course-path-action {
-  grid-row: 1;
+.app-reader-service-item {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .app-reader-service-language-grid {
@@ -55,12 +36,24 @@
   min-width: 0;
 }
 
-.app-reader-service-language-stack h3 {
+.app-reader-service-language-stack h3,
+.app-reader-service-english-title {
   min-width: 0;
 }
 
-.app-reader-service-language-stack .lp-course-path-meta {
+.app-reader-service-english-title {
+  color: var(--path-card-text);
+  font-size: 17px;
+  font-weight: 760;
+  line-height: 1.2;
+}
+
+.app-reader-service-subtitle {
   margin-top: 0;
+  color: var(--study-muted, #78716c);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .app-reader-service-language-stack-arabic {
@@ -81,6 +74,18 @@
   font-size: 14px;
   font-weight: 650;
   line-height: 1.3;
+}
+
+@media (max-width: 680px) {
+  .app-home-destination-item .lp-lesson-selection-copy {
+    display: grid;
+  }
+
+  .app-home-destination-item .lp-lesson-selection-copy > strong,
+  .app-home-destination-item .lp-lesson-selection-copy > span {
+    grid-column: auto;
+    grid-row: auto;
+  }
 }
 
 .app-account-toggle {
