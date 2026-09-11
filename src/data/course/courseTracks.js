@@ -5,7 +5,7 @@ const courseTracks = [
   {
     id: "track-trisagion",
     type: "track",
-    title: "Trisagion & Opening Prayers",
+    title: "Introductory Prayers",
     subtitle: "Opening prayers",
     description: "Begin with the most reusable mercy prayer, then build the opening prayer sequence piece by piece.",
     lesson_ids: [

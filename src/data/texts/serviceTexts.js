@@ -1712,18 +1712,18 @@ export const serviceTextDefinitions = [
   },
   {
     "id": "trisagion-prayers",
-    "title": "The Trisagion Prayers",
-    "short_title": "The Trisagion Prayers",
+    "title": "Introductory Prayers",
+    "short_title": "Introductory Prayers",
     "show_in_reader_nav": true,
     "nav_single_section_direct": true,
     "display_title": {
       "english": [
         {
-          "text": "The Trisagion Prayers"
+          "text": "Introductory Prayers"
         }
       ],
       "arabic_phrase_ids": [
-        "section-trisagion-prayers"
+        "section-introductory-prayers"
       ],
       "icon": "homeAltarIcon",
       "icon_max_height": 300
@@ -1733,8 +1733,8 @@ export const serviceTextDefinitions = [
     "sections": [
       {
         "section_id": "trisagion-prayers",
-        "section": "The Trisagion Prayers",
-        "section_title_phrase": "section-trisagion-prayers",
+        "section": "Introductory Prayers",
+        "section_title_phrase": "section-introductory-prayers",
         "speaker_override": "role-reader",
         "blank_line_before_segment_ids": [
           "trisagion-prayers-glory-to-thee-o-god",

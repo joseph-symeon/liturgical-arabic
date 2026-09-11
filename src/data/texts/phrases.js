@@ -2039,6 +2039,16 @@ const phrases = {
       "vespers"
     ]
   },
+  "section-introductory-prayers": {
+    "arabic": "الصَّلَوَاتُ الافتِتَاحِيَّةُ",
+    "translation": "Introductory Prayers",
+    "literal": "The opening prayers",
+    "tags": [
+      "opening",
+      "section-title",
+      "trisagion"
+    ]
+  },
   "section-hymn-st-simeon": {
     "arabic": "تَسْبِحَةُ القِدِّيسِ سِمْعَانَ القَابِلِ الإِلَهَ",
     "translation": "The Hymn of St. Simeon the God-Receiver",
