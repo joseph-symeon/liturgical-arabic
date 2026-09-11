@@ -189,7 +189,7 @@ export const alignmentDefinitions = [
             "end_seconds": 8.4
           },
           {
-            "phrase_id": "save-us-001",
+            "phrase_id": "dismissal-and-save-us-001",
             "start_seconds": 8.4,
             "end_seconds": 10.22
           }

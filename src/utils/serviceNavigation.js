@@ -20,6 +20,20 @@ export function getServiceSectionGroups(sections = []) {
   }, []);
 }
 
+export function opensServiceSectionDirectly(serviceText) {
+  return Boolean(
+    serviceText?.nav_single_section_direct
+      && serviceText.sections?.length === 1
+  );
+}
+
+export function getReaderBackDestination(serviceText, selectedSectionIndex) {
+  if (selectedSectionIndex === null || opensServiceSectionDirectly(serviceText)) {
+    return "reader-index";
+  }
+  return "table-of-contents";
+}
+
 export function getServiceNavigation(serviceText) {
   if (!serviceText) return [];
 

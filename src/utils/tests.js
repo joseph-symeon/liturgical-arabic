@@ -13,6 +13,7 @@ import {
 } from "./arabic.js";
 import { getServiceSectionPlayback } from "./servicePlayback.js";
 import { resolvePendingPlaybackTime } from "./passageTiming.js";
+import { getReaderBackDestination, opensServiceSectionDirectly } from "./serviceNavigation.js";
 import {
   canUpdateExerciseRange,
   formatExerciseRange,
@@ -83,6 +84,18 @@ export function runTests() {
   console.assert(readerSections[0].section === "The Preparation for the Divine Liturgy", "First reader section should be titled The Preparation for the Divine Liturgy.");
   console.assert(defaultServiceText.id === "divine-liturgy-john-chrysostom", "Default service text should be the Divine Liturgy.");
   console.assert(0.5 <= 0.8 && 0.8 <= 1.2, "Default speech rate should be inside the UI range.");
+  console.assert(
+    opensServiceSectionDirectly({ nav_single_section_direct: true, sections: [{}] })
+      && !opensServiceSectionDirectly({ nav_single_section_direct: true, sections: [{}, {}] })
+      && !opensServiceSectionDirectly({ sections: [{}] }),
+    "Only explicitly configured one-section services should bypass their table of contents."
+  );
+  console.assert(
+    getReaderBackDestination({ nav_single_section_direct: true, sections: [{}] }, 0) === "reader-index"
+      && getReaderBackDestination({ sections: [{}, {}] }, 0) === "table-of-contents"
+      && getReaderBackDestination({ sections: [{}, {}] }, null) === "reader-index",
+    "Reader back navigation should target the nearest page that actually exists."
+  );
 
   const lordsPrayerLesson = lessons.find(lesson => lesson.id === "lesson-lords-prayer");
   const lordsPrayerOpening = composeExerciseRange(lordsPrayerLesson, 0, 1);
@@ -110,6 +123,13 @@ export function runTests() {
   console.assert(
     composeExerciseRange(antiphonsLesson, 2, 3)?.audio_clip.end_seconds === 179.8,
     "Compound selection should allow adjacent Antiphon exercises separated by a natural pause."
+  );
+  const throughThePrayersExercise = exercises["dismissal-through-the-prayers-summary"];
+  console.assert(
+    throughThePrayersExercise.captions.length === 8
+      && throughThePrayersExercise.captions[6]?.phrase_id === "dismissal-and-save-us-001"
+      && throughThePrayersExercise.captions[7]?.phrase_id === "amen-001",
+    "Through the prayers karaoke should retain the dismissal-specific save-us phrase and final Amen timing."
   );
   console.assert(
     getRecapExerciseIndex(antiphonsLesson) === antiphonsLesson.exercises.length - 1,

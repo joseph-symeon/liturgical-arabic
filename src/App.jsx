@@ -11,7 +11,11 @@ import courseTracks from "./data/course/courseTracks.js";
 import lessons from "./data/course/lessons.js";
 import { composeExerciseRange, getRecapExerciseIndex } from "./data/course/exercises.js";
 import { getExerciseTitle } from "./components/course/exerciseTitles.js";
-import { getServiceNavigation } from "./utils/serviceNavigation.js";
+import {
+  getReaderBackDestination,
+  getServiceNavigation,
+  opensServiceSectionDirectly
+} from "./utils/serviceNavigation.js";
 import { getArabicText } from "./utils/arabic.js";
 import { formatExerciseRange, parseExerciseRange } from "./utils/exerciseRanges.js";
 import {
@@ -875,10 +879,8 @@ export default function App() {
 
   function goToTableOfContents(serviceTextId = selectedServiceTextId) {
     const serviceText = getReaderServiceText(serviceTextId);
-    const opensSingleSectionDirectly = serviceText.nav_single_section_direct
-      && serviceText.sections?.length === 1;
     setSelectedServiceTextId(serviceTextId);
-    setSelectedSectionIndex(opensSingleSectionDirectly ? 0 : null);
+    setSelectedSectionIndex(opensServiceSectionDirectly(serviceText) ? 0 : null);
     setSelectedCourseTrackId(null);
     setView("reader");
     if (isNarrowViewport) setMenuOpen(false);
@@ -1017,12 +1019,15 @@ export default function App() {
     : clampedExerciseIndex;
   const canUseAppBack = view !== "home" || Boolean(selectedCourseTrack);
   const isLessonActivityView = view === "lessons" && courseStudyWorkspace !== "home";
+  const readerBackDestination = view === "reader"
+    ? getReaderBackDestination(getReaderServiceText(selectedServiceTextId), selectedSectionIndex)
+    : null;
   const appBackLabel =
     view === "course-overview" && selectedCourseTrack
       ? "Back to Course Overview"
       : view === "lessons"
         ? (isLessonActivityView ? "Back to Lesson" : "Back to Track")
-        : view === "reader" && selectedSectionIndex !== null
+        : view === "reader" && readerBackDestination === "table-of-contents"
           ? "Back to Table of Contents"
           : view === "reader"
             ? "Back to Service Texts"
@@ -1112,7 +1117,7 @@ export default function App() {
     }
 
     if (view === "reader") {
-      if (selectedSectionIndex !== null) {
+      if (readerBackDestination === "table-of-contents") {
         goToTableOfContents(selectedServiceTextId);
         return;
       }
