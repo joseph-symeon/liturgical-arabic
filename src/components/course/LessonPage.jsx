@@ -350,9 +350,14 @@ export default function LessonPage({
   const rangeExerciseTitles = rangeExerciseItems.map((item, rangeIndex) => (
     item.title || getExerciseTitle(lesson, selectedExerciseRange.startIndex + rangeIndex)
   ));
-  const exerciseTitle = supportsCompoundSelection && !isRecapSelected && rangeExerciseItems.length > 1
-    ? `${rangeExerciseTitles[0]} ... ${rangeExerciseTitles[rangeExerciseTitles.length - 1]}`
-    : getExerciseTitle(lesson, selectedExerciseIndex);
+  const isFullExerciseRangeSelected = supportsCompoundSelection
+    && selectedExerciseRange.startIndex === 0
+    && selectedExerciseRange.endIndex === selectableExerciseCount - 1;
+  const exerciseTitle = isFullExerciseRangeSelected
+    ? lesson.title
+    : supportsCompoundSelection && !isRecapSelected && rangeExerciseItems.length > 1
+      ? `${rangeExerciseTitles[0]} ... ${rangeExerciseTitles[rangeExerciseTitles.length - 1]}`
+      : getExerciseTitle(lesson, selectedExerciseIndex);
   const hasMultipleExercises = exerciseItems.length > 1;
   const lessonPhraseCount = getLessonPhraseIds(lesson).size;
   const selectedExercisePhraseCount = new Set(getExercisePhraseIds(selectedRangeExercise)).size;
@@ -601,7 +606,16 @@ export default function LessonPage({
       setSelectionCleared(true);
       return;
     }
-    if (supportsCompoundSelection && (selectionCleared || isRecapSelected)) {
+    if (supportsCompoundSelection && isExerciseSelected && (isRecapSelected || isFullExerciseRangeSelected)) {
+      if (exerciseIndex === 0) {
+        setSelectionCleared(true);
+        return;
+      }
+      setSelectionCleared(false);
+      onSelectExerciseRange?.(0, exerciseIndex - 1, STUDY_SKILLS.home);
+      return;
+    }
+    if (supportsCompoundSelection && selectionCleared) {
       setSelectionCleared(false);
       onSelectExerciseRange?.(exerciseIndex, exerciseIndex, STUDY_SKILLS.home);
       return;
@@ -712,7 +726,7 @@ export default function LessonPage({
                 && selectedExerciseRange.endIndex === selectableExerciseCount - 1
             )}
             isRowDisabled={(item, exerciseIndex) => {
-              if (!supportsCompoundSelection || selectionCleared || isRecapSelected) return false;
+              if (!supportsCompoundSelection || selectionCleared || isRecapSelected || isFullExerciseRangeSelected) return false;
               const candidateRange = updateExerciseRange(selectedExerciseRange, exerciseIndex);
               const candidateExercise = composeExerciseRange(lesson, candidateRange.startIndex, candidateRange.endIndex);
               return !(

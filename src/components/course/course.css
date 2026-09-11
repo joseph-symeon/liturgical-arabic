@@ -3747,6 +3747,10 @@
   list-style: none;
 }
 
+.lp-view-header:has(+ .lp-lesson-selection-list) {
+  margin-bottom: 0;
+}
+
 .lp-track-selection-list {
   max-width: 860px;
 }

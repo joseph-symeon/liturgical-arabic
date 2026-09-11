@@ -15,6 +15,11 @@ export default function HoverPhrase(props) {
   const text = getArabicText(phrase, props.arabicMode);
   const spokenText = phrase.arabic;
   const isRubric = phrase.tags?.includes("rubric");
+  const className = [isRubric ? "liturgical-red" : null, props.className].filter(Boolean).join(" ") || undefined;
+
+  if (props.interactive === false) {
+    return h("span", { className }, text);
+  }
 
   return h(
     InteractiveText,
@@ -22,7 +27,7 @@ export default function HoverPhrase(props) {
       spokenText,
       speechRate: props.speechRate,
       tooltip: h(PhraseTooltip, { phrase }),
-      className: [isRubric ? "liturgical-red" : null, props.className].filter(Boolean).join(" ") || undefined
+      className
     },
     text
   );

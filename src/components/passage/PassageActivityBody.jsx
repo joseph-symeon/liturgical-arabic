@@ -2381,6 +2381,7 @@ export default function PassageActivityBody({
                         arabicFontFamily={arabicFontFamily}
                         arabicFontWeight={arabicFontWeight}
                         arabicFontSize={arabicFontSize}
+                        interactive={false}
                       />
                     </span>
                     <span className="lp-study-home-phrase-meaning">
@@ -2410,6 +2411,7 @@ export default function PassageActivityBody({
                       arabicFontFamily={arabicFontFamily}
                       arabicFontWeight={arabicFontWeight}
                       arabicFontSize={arabicFontSize}
+                      interactive={false}
                     />
                   </span>
                   <span className="lp-study-home-phrase-meaning">
