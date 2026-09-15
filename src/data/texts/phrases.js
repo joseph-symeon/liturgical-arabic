@@ -12318,7 +12318,7 @@ const phrases = {
     ]
   },
   "creed-father-almighty-001": {
-    "arabic": "أَبٍ ضَابِطِ الكُلِّ",
+    "arabic": "آبٍ ضَابِطِ الكُلِّ",
     "translation": "the Father Almighty",
     "literal": "Father, ruler of all",
     "tags": [
