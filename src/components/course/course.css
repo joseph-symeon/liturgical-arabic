@@ -150,6 +150,19 @@
   line-height: 1.04;
 }
 
+.bilingual-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: clamp(6px, 2vw, 18px);
+}
+
+.bilingual-title-english,
+.bilingual-title-arabic {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .lp-view-header > .lp-view-kicker + :is(.lp-view-title, .reader-page-title-row) {
   margin-top: 12px;
 }

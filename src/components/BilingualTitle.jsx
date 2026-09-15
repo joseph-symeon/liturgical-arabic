@@ -34,13 +34,13 @@ export default function BilingualTitle({
     as,
     {
       className:
-        `grid grid-cols-2 items-baseline gap-4 ${className}`.trim()
+        `bilingual-title ${className}`.trim()
     },
-    h("span", { className: "text-left" }, english),
+    h("span", { className: "bilingual-title-english text-left" }, english),
     h(
       "span",
       {
-        className: "text-right",
+        className: "bilingual-title-arabic text-right",
         dir: "rtl",
         style: {
           fontFamily: arabicFontFamily,
