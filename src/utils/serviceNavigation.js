@@ -21,10 +21,7 @@ export function getServiceSectionGroups(sections = []) {
 }
 
 export function opensServiceSectionDirectly(serviceText) {
-  return Boolean(
-    serviceText?.nav_single_section_direct
-      && serviceText.sections?.length === 1
-  );
+  return serviceText?.sections?.length === 1;
 }
 
 export function getReaderBackDestination(serviceText, selectedSectionIndex) {

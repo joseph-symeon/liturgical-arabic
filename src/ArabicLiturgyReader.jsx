@@ -7,7 +7,6 @@ import { getArabicText } from "./utils/arabic.js";
 import { createServiceSectionPassage } from "./utils/passages.js";
 import { getServiceNavigation } from "./utils/serviceNavigation.js";
 import "./components/course/course.css";
-import "./reader.css";
 
 const h = React.createElement;
 
@@ -41,7 +40,9 @@ export default function ArabicLiturgyReader({
       ? serviceText.nav_title
       : null);
   const selectedSection = isTableOfContents ? null : readerSections[selectedSectionIndex] || readerSections[0];
-  const selectedSectionEyebrow = selectedSection?.section_group || serviceText.title;
+  const selectedSectionEyebrow = readerSections.length === 1
+    ? "Reader"
+    : selectedSection?.section_group || serviceText.title;
   const passage = isTableOfContents
     ? null
     : createServiceSectionPassage({
@@ -55,19 +56,30 @@ export default function ArabicLiturgyReader({
     return getArabicText(phrase, arabicMode);
   }
 
-  function renderSectionNav(className) {
-    function renderNavLabel(action, destination) {
+  function renderSectionNav() {
+    function renderNavLabel(action, destination, direction) {
+      const arrow = h(
+        "span",
+        { className: "page-nav-arrow", "aria-hidden": true },
+        direction === "previous" ? "←" : "→"
+      );
       return h(
         React.Fragment,
         null,
-        h("span", { className: "page-nav-label" }, action),
+        h(
+          "span",
+          { className: "page-nav-label" },
+          direction === "previous" ? arrow : null,
+          action,
+          direction === "next" ? arrow : null
+        ),
         destination ? h("span", { className: "page-nav-destination" }, destination) : null
       );
     }
 
     return h(
       "nav",
-      { className: `${className} page-nav`, dir: "ltr", "aria-label": "Liturgy section navigation" },
+      { className: "page-nav", dir: "ltr", "aria-label": "Liturgy section navigation" },
       h(
         "div",
         { className: "page-nav-grid" },
@@ -79,7 +91,7 @@ export default function ArabicLiturgyReader({
             disabled: !hasPreviousSection,
             className: "page-nav-button page-nav-button-start"
           },
-          renderNavLabel("Previous", previousSectionTitle)
+          renderNavLabel("Previous", previousSectionTitle, "previous")
         ),
         h(
           "button",
@@ -89,7 +101,7 @@ export default function ArabicLiturgyReader({
             disabled: !hasNextSection,
             className: "page-nav-button page-nav-button-end"
           },
-          renderNavLabel("Next", nextSectionTitle)
+          renderNavLabel("Next", nextSectionTitle, "next")
         )
       )
     );
@@ -103,6 +115,7 @@ export default function ArabicLiturgyReader({
           phraseId: titlePhrase,
           arabicMode,
           speechRate,
+          speechEnabled: false,
           arabicFontFamily,
           arabicFontWeight: "500",
           className: "lp-view-title reader-section-title"
@@ -211,12 +224,12 @@ export default function ArabicLiturgyReader({
         h(
           "header",
           { className: "reader-service-section-group-header" },
-          h("span", { className: "reader-service-group-title" }, item.group),
+          h("span", { className: "lp-view-kicker reader-service-group-title" }, item.group),
           groupPhrase
             ? h(
                 "span",
                 {
-                  className: "reader-service-group-arabic text-right",
+                  className: "lp-view-kicker reader-service-group-arabic text-right",
                   dir: "rtl",
                   style: {
                     fontFamily: arabicFontFamily,
@@ -255,6 +268,36 @@ export default function ArabicLiturgyReader({
   }
 
   function renderSectionPassage() {
+    if (passage.has_hidden_quiet_prayers) {
+      return h(
+        "div",
+        {
+          className: "reader-quiet-prayers-notice",
+          dir: "ltr",
+          role: "note",
+          style: { fontSize: arabicFontSize }
+        },
+        h("p", { className: "reader-quiet-prayers-notice-title" }, "Silent prayers are hidden"),
+        h("p", { className: "reader-quiet-prayers-notice-summary" }, "The prayers in this section are said silently by the priest."),
+        h(
+          "div",
+          { className: "reader-quiet-prayers-notice-actions" },
+          h(
+            "div",
+            { className: "reader-quiet-prayers-notice-action" },
+            h("span", { className: "reader-quiet-prayers-notice-marker" }, "Aع"),
+            h("span", null, "Enable ", h("strong", null, "Silent prayers"), " in the display menu at the upper right.")
+          ),
+          h(
+            "div",
+            { className: "reader-quiet-prayers-notice-action" },
+            h("span", { className: "reader-quiet-prayers-notice-marker", "aria-hidden": true }, "→"),
+            h("span", null, "Select ", h("strong", null, "Next"), " to progress to the next audible section.")
+          )
+        )
+      );
+    }
+
     return h(PassageRenderer, {
       key: passage.segment_ids.join(":") + selectedSectionIndex,
       section: {
@@ -264,6 +307,7 @@ export default function ArabicLiturgyReader({
       },
       arabicMode,
       speechRate,
+      speechEnabled: false,
       arabicFontFamily,
       arabicFontWeight,
       arabicFontSize,
@@ -274,8 +318,8 @@ export default function ArabicLiturgyReader({
 
   function renderSectionPage() {
     return h(
-      "div",
-      { className: "reader-section-layout" },
+      React.Fragment,
+      null,
       renderReaderHeader({
         kicker: selectedSectionEyebrow,
         title: selectedSection.section,
@@ -289,7 +333,7 @@ export default function ArabicLiturgyReader({
       h(
         "footer",
         { className: "reader-section-footer" },
-        renderSectionNav("bottom-page-nav grid gap-2")
+        renderSectionNav()
       )
     );
   }
@@ -309,7 +353,11 @@ export default function ArabicLiturgyReader({
       ? renderTableOfContents()
       : renderSectionPage(),
     isTableOfContents
-      ? renderSectionNav("bottom-page-nav grid gap-2")
+      ? h(
+          "footer",
+          { className: "reader-section-footer" },
+          renderSectionNav()
+        )
       : null
   );
 }

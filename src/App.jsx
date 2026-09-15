@@ -95,7 +95,7 @@ const DEFAULT_DISPLAY_SETTINGS = {
   arabicMode: "light",
   readerLayout: "line",
   showQuietPrayers: false,
-  arabicFontFamily: SYSTEM_SANS_FONT,
+  arabicFontFamily: "serif",
   arabicFontWeight: "300",
   arabicFontSize: DEFAULT_ARABIC_FONT_SIZE,
   showPracticeToolbar: true
@@ -1142,7 +1142,7 @@ export default function App() {
         <section className="lp-course-flow-section" aria-labelledby="home-title">
           <div className="lp-view-header app-home-header">
             <p className="lp-view-kicker">Liturgical Arabic</p>
-            <h1 className="lp-view-title" id="home-title">Lisan al-Quddas</h1>
+            <h1 className="lp-view-title" id="home-title">Antiochian Reader</h1>
             <p className="lp-service-mastery-intro">
               Read service texts and build comprehension through guided practice.
             </p>
@@ -1157,8 +1157,8 @@ export default function App() {
                   className="lp-lesson-selection-item app-home-destination-item"
                 >
                   <span className="lp-lesson-selection-copy">
-                    <strong>Reader</strong>
-                    <span>Service texts</span>
+                    <strong>Read</strong>
+                    <span>service texts</span>
                   </span>
                 </button>
               </li>
@@ -1171,8 +1171,8 @@ export default function App() {
                     className="lp-lesson-selection-item app-home-destination-item"
                   >
                     <span className="lp-lesson-selection-copy">
-                      <strong>Course</strong>
-                      <span>Lessons and practice</span>
+                      <strong>Learn</strong>
+                      <span>Liturgical Arabic</span>
                     </span>
                   </button>
                 </li>
@@ -1783,9 +1783,9 @@ export default function App() {
       >
           <header className="lp-nav-panel-header">
             <button type="button" className="lp-nav-brand" onClick={goHome}>
-              <span className="lp-nav-brand-mark" aria-hidden="true">L</span>
+              <span className="lp-nav-brand-mark" aria-hidden="true">A</span>
               <span className="lp-nav-brand-copy">
-                <span className="lp-nav-brand-title">Lisan al-Quddas</span>
+                <span className="lp-nav-brand-title">Antiochian Reader</span>
                 <span className="lp-nav-brand-subtitle">Liturgical Arabic</span>
               </span>
             </button>

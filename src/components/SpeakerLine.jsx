@@ -53,6 +53,7 @@ export default function SpeakerLine(props) {
             {
               spokenText: phrase.arabic,
               speechRate: props.speechRate,
+              speechEnabled: props.speechEnabled,
               tooltip: h(PhraseTooltip, { phrase })
             },
             speakerLabel,
@@ -91,6 +92,7 @@ export default function SpeakerLine(props) {
         line: props.line,
         arabicMode: props.arabicMode,
         speechRate: props.speechRate,
+        speechEnabled: props.speechEnabled,
         arabicFontFamily: props.arabicFontFamily,
         arabicFontWeight: props.arabicFontWeight,
         arabicFontSize: props.arabicFontSize

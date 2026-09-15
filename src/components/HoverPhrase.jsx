@@ -26,6 +26,7 @@ export default function HoverPhrase(props) {
     {
       spokenText,
       speechRate: props.speechRate,
+      speechEnabled: props.speechEnabled,
       tooltip: h(PhraseTooltip, { phrase }),
       className
     },

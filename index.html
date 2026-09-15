@@ -120,7 +120,9 @@
     }
 
     .page-nav-label {
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       max-width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -128,6 +130,11 @@
       font-size: 12px;
       font-weight: 600;
       line-height: 1.2;
+    }
+
+    .page-nav-arrow {
+      font-size: 1.15em;
+      line-height: 1;
     }
 
     .page-nav-destination {
@@ -148,10 +155,6 @@
       display: flex;
       min-height: calc(100svh - 120px);
       flex-direction: column;
-    }
-
-    .bottom-page-nav.page-nav {
-      margin-top: auto;
     }
 
     .bottom-nav-page > .lp-passage-experience {

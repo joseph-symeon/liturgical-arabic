@@ -85,13 +85,13 @@ export function runTests() {
   console.assert(defaultServiceText.id === "divine-liturgy-john-chrysostom", "Default service text should be the Divine Liturgy.");
   console.assert(0.5 <= 0.8 && 0.8 <= 1.2, "Default speech rate should be inside the UI range.");
   console.assert(
-    opensServiceSectionDirectly({ nav_single_section_direct: true, sections: [{}] })
-      && !opensServiceSectionDirectly({ nav_single_section_direct: true, sections: [{}, {}] })
-      && !opensServiceSectionDirectly({ sections: [{}] }),
-    "Only explicitly configured one-section services should bypass their table of contents."
+    opensServiceSectionDirectly({ sections: [{}] })
+      && !opensServiceSectionDirectly({ sections: [{}, {}] })
+      && !opensServiceSectionDirectly({ sections: [] }),
+    "Only one-section services should bypass their table of contents."
   );
   console.assert(
-    getReaderBackDestination({ nav_single_section_direct: true, sections: [{}] }, 0) === "reader-index"
+    getReaderBackDestination({ sections: [{}] }, 0) === "reader-index"
       && getReaderBackDestination({ sections: [{}, {}] }, 0) === "table-of-contents"
       && getReaderBackDestination({ sections: [{}, {}] }, null) === "reader-index",
     "Reader back navigation should target the nearest page that actually exists."

@@ -106,11 +106,15 @@ export default function InteractiveText(props) {
   function handleClick(e) {
     if (e && e.stopPropagation) e.stopPropagation();
     if (usesHover) {
-      speakArabic(props.spokenText, props.speechRate);
+      if (props.speechEnabled !== false) {
+        speakArabic(props.spokenText, props.speechRate);
+      }
       return;
     }
     if (isOpen) {
-      speakArabic(props.spokenText, props.speechRate);
+      if (props.speechEnabled !== false) {
+        speakArabic(props.spokenText, props.speechRate);
+      }
     } else {
       document.dispatchEvent(new CustomEvent("interactive-text-open", { detail: idRef.current }));
       setTooltipPosition(null);

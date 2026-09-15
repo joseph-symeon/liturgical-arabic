@@ -6,6 +6,7 @@ export default function PassageRenderer({
   arabicMode,
   readerLayout,
   speechRate,
+  speechEnabled,
   arabicFontFamily,
   arabicFontWeight,
   arabicFontSize,
@@ -18,6 +19,7 @@ export default function PassageRenderer({
       arabicMode={arabicMode}
       readerLayout={readerLayout}
       speechRate={speechRate}
+      speechEnabled={speechEnabled}
       arabicFontFamily={arabicFontFamily}
       arabicFontWeight={arabicFontWeight}
       arabicFontSize={arabicFontSize}

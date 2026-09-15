@@ -12,6 +12,7 @@ export default function BilingualTitle({
   phraseId,
   arabicMode,
   speechRate,
+  speechEnabled,
   arabicFontFamily,
   arabicFontWeight = "500",
   className = ""
@@ -51,6 +52,7 @@ export default function BilingualTitle({
         {
           spokenText: phrase.arabic,
           speechRate,
+          speechEnabled,
           tooltip: h(PhraseTooltip, { phrase })
         },
         arabicText

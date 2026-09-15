@@ -1715,7 +1715,6 @@ export const serviceTextDefinitions = [
     "title": "Introductory Prayers",
     "short_title": "Introductory Prayers",
     "show_in_reader_nav": true,
-    "nav_single_section_direct": true,
     "display_title": {
       "english": [
         {
@@ -1927,7 +1926,6 @@ export const serviceTextDefinitions = [
     "title": "Various Prayers",
     "short_title": "Trisagion Prayers for the Departed",
     "show_in_reader_nav": true,
-    "nav_single_section_direct": true,
     "display_title": {
       "english": [
         {
@@ -2045,7 +2043,13 @@ export function getServiceText(serviceTextId) {
 export const defaultServiceTextId = "divine-liturgy-john-chrysostom";
 export const defaultServiceText = serviceTexts[defaultServiceTextId];
 const readerServiceTextOrder = [
-  "great-vespers"
+  "trisagion-prayers",
+  "great-vespers",
+  "divine-liturgy-john-chrysostom",
+  "divine-liturgy-basil",
+  "thanksgiving-prayers",
+  "departed-trisagion-prayers",
+  "psalter-psalm-50"
 ];
 
 export const readerServiceTexts = serviceTextDefinitions

@@ -35,6 +35,7 @@ export default function LiturgyLine(props) {
         part: part,
         arabicMode: props.arabicMode,
         speechRate: props.speechRate,
+        speechEnabled: props.speechEnabled,
         interactive: props.interactive,
         className: part.className
       });

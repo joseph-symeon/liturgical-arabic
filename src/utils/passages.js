@@ -79,6 +79,16 @@ export function createServiceSectionPassage({
 
   const sectionAudio = getServiceSectionAudio(serviceText.id, section, sectionIndex);
   const shouldShowQuietPrayers = section.include_quiet_segments || showQuietPrayers;
+  const lines = getLinesForSegmentIds(section.segment_ids, {
+    showQuietPrayers: shouldShowQuietPrayers,
+    splitSegmentPhrases: section.split_segment_phrases,
+    omittedPhraseIds: section.omit_phrase_ids,
+    speakerOverride: Object.hasOwn(section, "speaker_override") ? section.speaker_override : undefined,
+    blankLineBeforeSegmentIds: section.blank_line_before_segment_ids
+  });
+  const hasHiddenQuietPrayers = !shouldShowQuietPrayers
+    && lines.length === 0
+    && (section.segment_ids || []).some(segmentId => segments[segmentId]?.tags?.includes("quiet"));
   const playback = sectionAudio
     ? getServiceSectionPlayback({
         service_text_id: serviceText.id,
@@ -95,13 +105,8 @@ export function createServiceSectionPassage({
     section,
     section_index: sectionIndex,
     segment_ids: section.segment_ids,
-    lines: getLinesForSegmentIds(section.segment_ids, {
-      showQuietPrayers: shouldShowQuietPrayers,
-      splitSegmentPhrases: section.split_segment_phrases,
-      omittedPhraseIds: section.omit_phrase_ids,
-      speakerOverride: Object.hasOwn(section, "speaker_override") ? section.speaker_override : undefined,
-      blankLineBeforeSegmentIds: section.blank_line_before_segment_ids
-    }),
+    lines,
+    has_hidden_quiet_prayers: hasHiddenQuietPrayers,
     playback,
     clip: getPlaybackClip(playback),
     captions: getPlaybackCaptions(playback),
