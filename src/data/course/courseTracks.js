@@ -47,6 +47,7 @@ const courseTracks = [
       "lesson-blessed-is-the-kingdom",
       "lesson-hymn-to-the-theotokos",
       "lesson-antiphons",
+      "lesson-second-antiphon",
       "lesson-calling-remembrance",
       "lesson-little-litanies",
       "lesson-entrance",

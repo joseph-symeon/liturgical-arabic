@@ -1,4 +1,4 @@
-import exercises from '../../data/course/exercises.js';
+import exercises, { getRecapExerciseIndex } from '../../data/course/exercises.js';
 import phrases from '../../data/texts/phrases.js';
 
 function getOrderedLines(exercise) {
@@ -36,10 +36,10 @@ export function getExerciseTitle(lesson, exerciseIndex) {
   const exerciseItem = lesson?.exercises?.[exerciseIndex];
   const exerciseId = exerciseItem?.exercise_id;
   const exercise = exerciseId ? exercises[exerciseId] : null;
-  const isFinalExercise = exerciseIndex === (lesson?.exercises?.length ?? 0) - 1;
+  const isRecapExercise = exerciseIndex === getRecapExerciseIndex(lesson);
 
   return capitalizeFirstLetter(
-    exerciseItem?.title || (isFinalExercise ? lesson?.title : null) || getGeneratedExerciseTitle(exercise) || `Exercise ${exerciseIndex + 1}`
+    exerciseItem?.title || (isRecapExercise ? lesson?.title : null) || getGeneratedExerciseTitle(exercise) || `Exercise ${exerciseIndex + 1}`
   );
 }
 

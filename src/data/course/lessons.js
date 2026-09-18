@@ -91,15 +91,28 @@ const lessons = [
   {
     "id": "lesson-antiphons",
     "unit_id": "unit-2",
-    "title": "The Antiphons",
-    "title_phrase": "section-antiphons",
+    "title": "The First Antiphon",
+    "title_phrase": "section-first-antiphon",
     "display_order": 3,
     "quizlet_deck_url": null,
     "exercises": [
       {
         "exercise_id": "first-antiphon-through-theotokos",
         "activity_policy": "standard"
-      },
+      }
+    ]
+  },
+  {
+    "id": "lesson-second-antiphon",
+    "unit_id": "unit-2",
+    "title": "The Second Antiphon",
+    "title_phrase": "section-second-antiphon",
+    "display_order": 4,
+    "quizlet_deck_url": null,
+    "recap_exercise_id": null,
+    "allow_repeated_phrase_ids": true,
+    "allow_continuous_audio_gaps": true,
+    "exercises": [
       {
         "exercise_id": "antiphon-save-us-son-of-god",
         "activity_policy": "standard"
@@ -127,11 +140,6 @@ const lessons = [
       {
         "exercise_id": "antiphon-glorified-with-father",
         "audio_sequence": "only-begotten-hymn",
-        "activity_policy": "standard"
-      },
-      {
-        "title": "O Word of God. Glorified Together.",
-        "exercise_id": "antiphons-summary",
         "activity_policy": "standard"
       }
     ]
@@ -622,7 +630,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "The Entrance",
     "title_phrase": "section-entrance",
-    "display_order": 6,
+    "display_order": 7,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -748,7 +756,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "The Little Litanies",
     "title_phrase": "section-little-litany",
-    "display_order": 4,
+    "display_order": 5,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -778,7 +786,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "Calling to remembrance",
     "title_phrase": "calling-remembrance-001",
-    "display_order": 5,
+    "display_order": 6,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -801,7 +809,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "Liturgy of the Word",
     "title_phrase": "section-liturgy-word",
-    "display_order": 7,
+    "display_order": 8,
     "quizlet_deck_url": null,
     "exercises": [
       {
@@ -823,7 +831,7 @@ const lessons = [
     "unit_id": "unit-2",
     "title": "The Cherubic Hymn",
     "title_phrase": "section-cherubic-hymn",
-    "display_order": 8,
+    "display_order": 9,
     "quizlet_deck_url": null,
     "exercises": [
       {

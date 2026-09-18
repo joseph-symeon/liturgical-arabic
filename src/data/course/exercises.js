@@ -158,26 +158,6 @@ export const exerciseDefinitions = [
     }
   },
   {
-    "id": "antiphons-summary",
-    "segment_ids": [
-      "antiphon-word-of-god-only-begotten",
-      "antiphon-deathless",
-      "antiphon-accepted-incarnate",
-      "antiphon-from-theotokos",
-      "antiphon-became-man",
-      "antiphon-crucified",
-      "antiphon-trampled-death",
-      "antiphon-one-of-trinity",
-      "antiphon-glorified-with-father"
-    ],
-    "service_text_id": "divine-liturgy-john-chrysostom",
-    "service_range": {
-      "section_id": "second-antiphon",
-      "start_segment_id": "antiphon-word-of-god-only-begotten",
-      "end_segment_id": "antiphon-glorified-with-father"
-    }
-  },
-  {
     "id": "litany-peace-peace-from-above",
     "segment_ids": [
       "litany-peace-from-above"
@@ -2554,6 +2534,11 @@ function getExerciseAlignmentId(exercise) {
 
 export function getRecapExerciseIndex(lesson) {
   const items = lesson?.exercises || [];
+  if (Object.prototype.hasOwnProperty.call(lesson || {}, 'recap_exercise_id')) {
+    if (!lesson.recap_exercise_id) return null;
+    const recapIndex = items.findIndex(item => item.exercise_id === lesson.recap_exercise_id);
+    return recapIndex >= 0 ? recapIndex : null;
+  }
   return items.length > 1 ? items.length - 1 : null;
 }
 
@@ -2582,15 +2567,16 @@ export function composeExerciseRange(lesson, startIndex, endIndex) {
     const sequenceIsCompatible = currentSequence || nextSequence
       ? currentSequence === nextSequence
       : true;
-    return sequenceIsCompatible
-      && gapSeconds >= 0
-      && gapSeconds <= MAX_COMPOUND_AUDIO_GAP_SECONDS;
+    return gapSeconds >= 0 && (
+      lesson.allow_continuous_audio_gaps
+        || (sequenceIsCompatible && gapSeconds <= MAX_COMPOUND_AUDIO_GAP_SECONDS)
+    );
   });
   if (!hasCompatibleBoundaries) return null;
 
   const segmentIds = sourceExercises.flatMap(exercise => exercise.segment_ids || []);
   const phraseIds = sourceExercises.flatMap(exercise => getPhraseIdsForLines(exercise.lines));
-  if (new Set(phraseIds).size !== phraseIds.length) return null;
+  if (!lesson.allow_repeated_phrase_ids && new Set(phraseIds).size !== phraseIds.length) return null;
 
   const captions = sourceExercises
     .flatMap(getAlignedCaptions)

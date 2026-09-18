@@ -320,6 +320,9 @@ export function validateData() {
     if (lesson.title_phrase && !phraseIds.has(lesson.title_phrase)) {
       errors.push(`Lesson "${lesson.id}" references missing title phrase "${lesson.title_phrase}".`);
     }
+    if (lesson.recap_exercise_id && !(lesson.exercises || []).some(item => item.exercise_id === lesson.recap_exercise_id)) {
+      errors.push(`Lesson "${lesson.id}" references missing recap exercise "${lesson.recap_exercise_id}".`);
+    }
     let previousAudioSequenceItem = null;
     (lesson.exercises || []).forEach(item => {
       if (!exerciseIds.has(item.exercise_id)) {

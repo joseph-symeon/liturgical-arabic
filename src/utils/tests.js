@@ -3,6 +3,7 @@ import segments from "../data/texts/segments.js";
 import { defaultServiceText } from "../data/texts/serviceTexts.js";
 import lessons from "../data/course/lessons.js";
 import exercises, { composeExerciseRange, getRecapExerciseIndex } from "../data/course/exercises.js";
+import { getExerciseTitle } from "../components/course/exerciseTitles.js";
 import { validateData } from "./dataValidation.js";
 import {
   applyLightDiacritics,
@@ -115,14 +116,21 @@ export function runTests() {
       === exercises["lords-prayer-summary"].segment_ids.join("|"),
     "The Lord's Prayer full range should match the existing recap content."
   );
-  const antiphonsLesson = lessons.find(lesson => lesson.id === "lesson-antiphons");
+  const firstAntiphonLesson = lessons.find(lesson => lesson.id === "lesson-antiphons");
+  const secondAntiphonLesson = lessons.find(lesson => lesson.id === "lesson-second-antiphon");
   console.assert(
-    composeExerciseRange(antiphonsLesson, 1, 2) === null,
-    "Compound selection should reject the 51-second break between Antiphon exercises."
+    firstAntiphonLesson.title === "The First Antiphon"
+      && firstAntiphonLesson.exercises.length === 1
+      && secondAntiphonLesson.title === "The Second Antiphon"
+      && secondAntiphonLesson.exercises.length === 6,
+    "The Antiphons should be split into separate First and Second Antiphon lessons."
   );
+  const fullSecondAntiphon = composeExerciseRange(secondAntiphonLesson, 0, 5);
   console.assert(
-    composeExerciseRange(antiphonsLesson, 2, 3)?.audio_clip.end_seconds === 179.8,
-    "Compound selection should allow adjacent Antiphon exercises separated by a natural pause."
+    fullSecondAntiphon?.audio_clip.start_seconds === 81
+      && fullSecondAntiphon.audio_clip.end_seconds === 218.22
+      && fullSecondAntiphon.source_exercise_ids.length === 6,
+    "Second Antiphon Select all should span continuously from its earliest to latest phrase."
   );
   const throughThePrayersExercise = exercises["dismissal-through-the-prayers-summary"];
   console.assert(
@@ -132,8 +140,12 @@ export function runTests() {
     "Through the prayers karaoke should retain the dismissal-specific save-us phrase and final Amen timing."
   );
   console.assert(
-    getRecapExerciseIndex(antiphonsLesson) === antiphonsLesson.exercises.length - 1,
-    "Existing recap exercises should remain outside compound selection."
+    getRecapExerciseIndex(secondAntiphonLesson) === null,
+    "The Second Antiphon should expose all six exercises without a synthetic recap."
+  );
+  console.assert(
+    getExerciseTitle(secondAntiphonLesson, 5) === "Glorified together with",
+    "A no-recap lesson should derive its final exercise title from its opening phrases."
   );
   const heavenlyKingLesson = lessons.find(lesson => lesson.id === "lesson-heavenly-king");
   const heavenlyKingCompound = composeExerciseRange(heavenlyKingLesson, 0, 4);

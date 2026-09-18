@@ -831,7 +831,10 @@ export default function App() {
   }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex, selectedExerciseEndIndex]);
 
   useEffect(() => {
-    const navigationKey = `${view}:${selectedServiceTextId}:${selectedSectionIndex ?? "toc"}:${selectedCourseTrackId ?? ""}:${selectedLessonId ?? ""}:${selectedExerciseIndex}-${selectedExerciseEndIndex}`;
+    const exerciseNavigationKey = view === "lessons" && courseStudyWorkspace === "home"
+      ? "study-home"
+      : `${selectedExerciseIndex}-${selectedExerciseEndIndex}`;
+    const navigationKey = `${view}:${selectedServiceTextId}:${selectedSectionIndex ?? "toc"}:${selectedCourseTrackId ?? ""}:${selectedLessonId ?? ""}:${courseStudyWorkspace}:${exerciseNavigationKey}`;
     if (previousNavigationKeyRef.current === null) {
       previousNavigationKeyRef.current = navigationKey;
       return;
@@ -842,7 +845,7 @@ export default function App() {
     window.requestAnimationFrame(() => {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     });
-  }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex, selectedExerciseEndIndex]);
+  }, [view, selectedServiceTextId, selectedSectionIndex, selectedCourseTrackId, selectedLessonId, selectedExerciseIndex, selectedExerciseEndIndex, courseStudyWorkspace]);
 
   useEffect(() => {
     if (syncStatus === "loading") return;
