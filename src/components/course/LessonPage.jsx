@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import './course.css';
 import PassageExperience from '../passage/PassageExperience.jsx';
 import SelectionTable from '../SelectionTable.jsx';
+import CourseAccountPrompt from './CourseAccountPrompt.jsx';
 import exercises, {
   canUseActivityType,
   composeExerciseRange,
@@ -200,7 +201,8 @@ export default function LessonPage({
   selectedExerciseIndex,
   selectedExerciseEndIndex = selectedExerciseIndex,
   showProgressPrompt = false,
-  onProgressPrompt,
+  onCreateAccount,
+  onSignIn,
   onStudySkillChange,
   onCourseTrack,
   onSelectExercise,
@@ -522,17 +524,7 @@ export default function LessonPage({
 
   function renderProgressPrompt() {
     if (!showProgressPrompt) return null;
-    return (
-      <aside className="lp-course-progress-prompt" aria-label="Preview mode">
-        <div>
-          <strong>Preview mode</strong>
-          <span>Sign in to access the full course and save progress across devices.</span>
-        </div>
-        <button type="button" onClick={onProgressPrompt}>
-          Sign in
-        </button>
-      </aside>
-    );
+    return <CourseAccountPrompt onCreateAccount={onCreateAccount} onSignIn={onSignIn} />;
   }
 
   function renderRecitationWorkspace() {

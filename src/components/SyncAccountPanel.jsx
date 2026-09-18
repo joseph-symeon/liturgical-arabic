@@ -26,9 +26,10 @@ export default function SyncAccountPanel({
   onUpdatePassword,
   onSignOut,
   onResetProgress,
-  onClose
+  onClose,
+  initialMode = "sign-in"
 }) {
-  const [mode, setMode] = useState("sign-in");
+  const [mode, setMode] = useState(initialMode);
   const [email, setEmail] = useState(session?.user?.email || "");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");

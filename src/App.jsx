@@ -448,6 +448,7 @@ export default function App() {
   const [syncStatus, setSyncStatus] = useState(() => canSyncUserState() ? "loading" : "disabled");
   const [syncMessage, setSyncMessage] = useState("");
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const [accountPanelMode, setAccountPanelMode] = useState("sign-in");
   const [isNarrowViewport, setIsNarrowViewport] = useState(false);
   const [isCompactChrome, setIsCompactChrome] = useState(false);
   const previousNavigationKeyRef = useRef(null);
@@ -901,10 +902,19 @@ export default function App() {
     setDisplayMenuOpen(false);
   }
 
-  function openProgressSignIn() {
+  function openAccountPanel(mode = "sign-in") {
+    setAccountPanelMode(mode);
     setMenuOpen(true);
     setDisplayMenuOpen(false);
     setAccountMenuOpen(true);
+  }
+
+  function openProgressSignIn() {
+    openAccountPanel("sign-in");
+  }
+
+  function openProgressCreateAccount() {
+    openAccountPanel("create");
   }
 
   function canAccessCourseLesson(lessonId) {
@@ -912,7 +922,7 @@ export default function App() {
   }
 
   function handleBlockedCourseLesson() {
-    openProgressSignIn();
+    openProgressCreateAccount();
   }
 
   function goToCourseTrack(trackId) {
@@ -1270,7 +1280,10 @@ export default function App() {
       <button
         type="button"
         className={["app-profile-row", signedIn ? "signed-in" : "", needsAttention ? "needs-attention" : "", className].filter(Boolean).join(" ")}
-        onClick={() => setAccountMenuOpen(open => !open)}
+        onClick={() => {
+          if (!accountMenuOpen) setAccountPanelMode("sign-in");
+          setAccountMenuOpen(open => !open);
+        }}
         aria-expanded={accountMenuOpen}
         aria-label={signedIn ? "Open account settings" : "Sign in to sync progress"}
       >
@@ -1300,6 +1313,7 @@ export default function App() {
         {accountMenuOpen && (
           <div className="app-nav-profile-panel">
             <SyncAccountPanel
+              key={accountPanelMode}
               session={syncSession}
               syncStatus={syncStatus}
               syncMessage={syncMessage}
@@ -1311,6 +1325,7 @@ export default function App() {
               onSignOut={handleSyncSignOut}
               onResetProgress={handleResetProgress}
               onClose={() => setAccountMenuOpen(false)}
+              initialMode={accountPanelMode}
             />
           </div>
         )}
@@ -1879,7 +1894,8 @@ export default function App() {
             selectedExerciseIndex={clampedExerciseIndex}
             selectedTrackId={selectedCourseTrack?.id ?? null}
             showProgressPrompt={showCourseProgressPrompt}
-            onProgressPrompt={openProgressSignIn}
+            onCreateAccount={openProgressCreateAccount}
+            onSignIn={openProgressSignIn}
             canAccessLesson={canAccessCourseLesson}
             onBlockedLesson={handleBlockedCourseLesson}
             onSelectTrack={goToCourseTrack}
@@ -1905,7 +1921,8 @@ export default function App() {
             selectedExerciseIndex={clampedExerciseIndex}
             selectedExerciseEndIndex={clampedExerciseEndIndex}
             showProgressPrompt={showCourseProgressPrompt}
-            onProgressPrompt={openProgressSignIn}
+            onCreateAccount={openProgressCreateAccount}
+            onSignIn={openProgressSignIn}
             onStudySkillChange={setCourseStudyWorkspace}
             onCourseTrack={goToSelectedLessonTrack}
             onSelectExercise={(exerciseIndex, studyWorkspace) => goToLessonStudyHome(selectedLessonId, exerciseIndex, studyWorkspace)}

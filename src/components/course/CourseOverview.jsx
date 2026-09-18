@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './course.css';
+import CourseAccountPrompt from './CourseAccountPrompt.jsx';
 import courseTracks from '../../data/course/courseTracks.js';
 import { getRecapExerciseIndex } from '../../data/course/exercises.js';
 import {
@@ -42,7 +43,8 @@ export default function CourseOverview({
   selectedLessonId,
   selectedTrackId,
   showProgressPrompt = false,
-  onProgressPrompt,
+  onCreateAccount,
+  onSignIn,
   canAccessLesson = () => true,
   onBlockedLesson,
   onSelectTrack,
@@ -122,16 +124,18 @@ export default function CourseOverview({
 
   function renderProgressPrompt() {
     if (!showProgressPrompt) return null;
+    return <CourseAccountPrompt onCreateAccount={onCreateAccount} onSignIn={onSignIn} />;
+  }
+
+  function renderLockStatus() {
     return (
-      <aside className="lp-course-progress-prompt" aria-label="Preview mode">
-        <div>
-          <strong>Preview mode</strong>
-          <span>Sign in to access the full course and save progress across devices.</span>
-        </div>
-        <button type="button" onClick={onProgressPrompt}>
-          Sign in
-        </button>
-      </aside>
+      <span className="lp-lesson-lock-status">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="5" y="10" width="14" height="10" rx="2" />
+          <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+        </svg>
+        Account required
+      </span>
     );
   }
 
@@ -147,7 +151,7 @@ export default function CourseOverview({
           type="button"
           className={`lp-lesson-selection-item lp-track-selection-item${isMuted ? ' locked' : ''}`}
           onClick={() => openTrack(item)}
-          aria-label={`${item.title}. ${lessonCount} lessons, ${phraseIds.size} phrases, ${formatPercent(itemConfidence)} confidence.`}
+          aria-label={`${item.title}. ${lessonCount} lessons, ${phraseIds.size} phrases, ${formatPercent(itemConfidence)} confidence${isMuted ? '. Account required' : ''}.`}
         >
           <span className="lp-lesson-selection-copy">
             <strong>{item.title}</strong>
@@ -155,10 +159,14 @@ export default function CourseOverview({
               {lessonCount} {lessonCount === 1 ? 'lesson' : 'lessons'} · {getPhraseCountLabel(phraseIds.size)}
             </span>
           </span>
-          <span className="lp-lesson-selection-progress" aria-label={`${formatPercent(itemConfidence)} track confidence`}>
-            <span aria-hidden="true"><span style={{ width: `${Math.round(itemConfidence * 100)}%` }} /></span>
-            <strong>{formatPercent(itemConfidence)}</strong>
-          </span>
+          {isMuted
+            ? renderLockStatus()
+            : (
+              <span className="lp-lesson-selection-progress" aria-label={`${formatPercent(itemConfidence)} track confidence`}>
+                <span aria-hidden="true"><span style={{ width: `${Math.round(itemConfidence * 100)}%` }} /></span>
+                <strong>{formatPercent(itemConfidence)}</strong>
+              </span>
+            )}
         </button>
       </li>
     );
@@ -200,7 +208,7 @@ export default function CourseOverview({
                   row.isLocked ? 'locked' : ''
                 ].filter(Boolean).join(' ')}
                 onClick={() => openLesson(row.lesson.id)}
-                aria-label={`${row.lesson.title}. ${row.exerciseCount} exercises, ${row.phraseCount} phrases, ${formatPercent(row.confidence)} confidence${row.isLocked ? '. Locked' : ''}.`}
+                aria-label={`${row.lesson.title}. ${row.exerciseCount} exercises, ${row.phraseCount} phrases, ${formatPercent(row.confidence)} confidence${row.isLocked ? '. Account required' : ''}.`}
               >
                 <span className="lp-lesson-selection-copy">
                   <strong>{row.lesson.title}</strong>
@@ -208,10 +216,14 @@ export default function CourseOverview({
                     {row.exerciseCount} {row.exerciseCount === 1 ? 'exercise' : 'exercises'} · {getPhraseCountLabel(row.phraseCount)}
                   </span>
                 </span>
-                <span className="lp-lesson-selection-progress" aria-label={`${formatPercent(row.confidence)} confidence`}>
-                  <span aria-hidden="true"><span style={{ width: `${Math.round(row.confidence * 100)}%` }} /></span>
-                  <strong>{formatPercent(row.confidence)}</strong>
-                </span>
+                {row.isLocked
+                  ? renderLockStatus()
+                  : (
+                    <span className="lp-lesson-selection-progress" aria-label={`${formatPercent(row.confidence)} confidence`}>
+                      <span aria-hidden="true"><span style={{ width: `${Math.round(row.confidence * 100)}%` }} /></span>
+                      <strong>{formatPercent(row.confidence)}</strong>
+                    </span>
+                  )}
               </button>
             </li>
           ))}

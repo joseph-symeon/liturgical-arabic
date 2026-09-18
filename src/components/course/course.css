@@ -3614,7 +3614,7 @@
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.82);
 }
 
-.lp-course-progress-prompt div {
+.lp-course-progress-copy {
   display: grid;
   gap: 3px;
   min-width: 0;
@@ -3634,12 +3634,17 @@
   line-height: 1.25;
 }
 
+.lp-course-progress-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .lp-course-progress-prompt button {
   min-height: 32px;
-  border: 0;
+  border: 1px solid transparent;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--path-accent) 18%, #f5f5f4);
-  color: color-mix(in srgb, var(--path-accent) 76%, #1c1917);
   cursor: pointer;
   font: inherit;
   font-size: 13px;
@@ -3648,7 +3653,22 @@
   padding: 7px 13px;
 }
 
-.lp-course-progress-prompt button:hover {
+.lp-course-progress-prompt button.primary {
+  background: var(--path-accent);
+  color: #fff;
+}
+
+.lp-course-progress-prompt button.secondary {
+  border-color: color-mix(in srgb, var(--path-accent) 28%, #d6d3d1);
+  background: transparent;
+  color: color-mix(in srgb, var(--path-accent) 76%, #1c1917);
+}
+
+.lp-course-progress-prompt button.primary:hover {
+  background: color-mix(in srgb, var(--path-accent) 88%, #1c1917);
+}
+
+.lp-course-progress-prompt button.secondary:hover {
   background: color-mix(in srgb, var(--path-accent) 24%, #f5f5f4);
 }
 
@@ -3799,6 +3819,17 @@
 .lp-lesson-selection-item.locked .lp-lesson-selection-copy,
 .lp-lesson-selection-item.locked .lp-lesson-selection-progress {
   opacity: 0.5;
+}
+
+.lp-lesson-lock-status {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-self: end;
+  color: var(--study-muted);
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
 }
 
 .lp-lesson-selection-copy {
@@ -5253,6 +5284,10 @@
     justify-self: start;
   }
 
+  .lp-course-progress-actions {
+    justify-content: flex-start;
+  }
+
   .lp-view-header {
     margin-bottom: 28px;
   }
@@ -6438,12 +6473,22 @@
     box-shadow: inset 0 1px 0 color-mix(in srgb, var(--dark-text) 4%, transparent);
   }
 
-  .lp-course-progress-prompt button {
-    background: color-mix(in srgb, var(--path-accent) 22%, var(--dark-surface));
+  .lp-course-progress-prompt button.primary {
+    background: var(--path-accent);
+    color: #fff;
+  }
+
+  .lp-course-progress-prompt button.secondary {
+    border-color: color-mix(in srgb, var(--path-accent) 34%, var(--dark-border));
+    background: transparent;
     color: color-mix(in srgb, var(--path-accent) 72%, var(--dark-text));
   }
 
-  .lp-course-progress-prompt button:hover {
+  .lp-course-progress-prompt button.primary:hover {
+    background: color-mix(in srgb, var(--path-accent) 86%, #000);
+  }
+
+  .lp-course-progress-prompt button.secondary:hover {
     background: color-mix(in srgb, var(--path-accent) 30%, var(--dark-surface));
   }
 
