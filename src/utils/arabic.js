@@ -13,6 +13,7 @@ function isArabicScriptCharacter(character) {
 
 export function applyLightDiacritics(text) {
   return safeString(text)
+    .replace(/ٱ/g, "ا")
     .replace(/\u064E(?=\u0651?[اى])/gu, function removeFathaBeforeLongA(mark, index, source) {
       const longA = source[index + 1] === "\u0651" ? source[index + 2] : source[index + 1];
       if (longA !== "ا") return "";

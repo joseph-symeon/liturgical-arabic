@@ -15950,7 +15950,7 @@ const phrases = {
     ]
   },
   "have-mercy-001": {
-    "arabic": "ارْحَمْ",
+    "arabic": "ٱرْحَمْ",
     "translation": "have mercy",
     "literal": "have mercy",
     "tags": [
