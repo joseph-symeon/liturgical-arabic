@@ -600,7 +600,8 @@ export default function LessonPage({
     }
     if (supportsCompoundSelection && isExerciseSelected && (isRecapSelected || isFullExerciseRangeSelected)) {
       if (exerciseIndex === 0) {
-        setSelectionCleared(true);
+        setSelectionCleared(false);
+        onSelectExerciseRange?.(1, selectableExerciseCount - 1, STUDY_SKILLS.home);
         return;
       }
       setSelectionCleared(false);

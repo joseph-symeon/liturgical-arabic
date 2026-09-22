@@ -166,6 +166,14 @@ export function runTests() {
     expandedExerciseRange.startIndex === 0 && expandedExerciseRange.endIndex === 2,
     "Exercise ranges should expand through adjacent exercises."
   );
+  const rangeWithoutFirstExercise = updateExerciseRange(
+    { startIndex: 0, endIndex: 4 },
+    0
+  );
+  console.assert(
+    rangeWithoutFirstExercise.startIndex === 1 && rangeWithoutFirstExercise.endIndex === 4,
+    "Deselecting the first exercise should preserve the rest of a full selection."
+  );
   console.assert(
     !canUpdateExerciseRange({ startIndex: 1, endIndex: 2 }, 4),
     "Exercise ranges should reject nonadjacent additions."
