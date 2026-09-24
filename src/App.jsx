@@ -210,6 +210,22 @@ function getReaderServiceText(serviceTextId) {
     || defaultServiceText;
 }
 
+function getDefaultLessonExerciseSelection(lessonId) {
+  const lesson = lessons.find(item => item.id === lessonId);
+  const exerciseCount = lesson?.exercises?.length || 0;
+  if (exerciseCount <= 1) return { startIndex: 0, endIndex: 0 };
+
+  const recapExerciseIndex = getRecapExerciseIndex(lesson);
+  if (recapExerciseIndex !== null) {
+    return { startIndex: recapExerciseIndex, endIndex: recapExerciseIndex };
+  }
+
+  const lastExerciseIndex = exerciseCount - 1;
+  return composeExerciseRange(lesson, 0, lastExerciseIndex)
+    ? { startIndex: 0, endIndex: lastExerciseIndex }
+    : { startIndex: 0, endIndex: 0 };
+}
+
 function parseNavigationHash() {
   if (typeof window === "undefined") {
     return {
@@ -318,13 +334,15 @@ function parseNavigationHash() {
     }
     const lessonId = parts[1] || DEFAULT_LESSON_ID;
     if (parts[2] !== "exercise") {
+      const exerciseSelection = getDefaultLessonExerciseSelection(lessonId);
       return {
         view: "lessons",
         selectedServiceTextId: DEFAULT_READER_SERVICE_TEXT_ID,
         selectedSectionIndex: null,
         selectedCourseTrackId: null,
         selectedLessonId: lessonId,
-        selectedExerciseIndex: 0
+        selectedExerciseIndex: exerciseSelection.startIndex,
+        selectedExerciseEndIndex: exerciseSelection.endIndex
       };
     }
     const exerciseSelection = parseExerciseRange(parts[2] === "exercise" ? parts[3] : '1');
@@ -981,6 +999,20 @@ export default function App() {
     setView("lessons");
     if (isNarrowViewport) setMenuOpen(false);
     setDisplayMenuOpen(false);
+  }
+
+  function goToLessonFromOverview(lessonId, exerciseIndex = 0, studyWorkspace = "recitation") {
+    if (studyWorkspace !== "home") {
+      goToLessonStudyHome(lessonId, exerciseIndex, studyWorkspace);
+      return;
+    }
+    const exerciseSelection = getDefaultLessonExerciseSelection(lessonId);
+    goToLessonExerciseRange(
+      lessonId,
+      exerciseSelection.startIndex,
+      exerciseSelection.endIndex,
+      studyWorkspace
+    );
   }
 
   function goToPreviousSection() {
@@ -1902,7 +1934,7 @@ export default function App() {
             canAccessLesson={canAccessCourseLesson}
             onBlockedLesson={handleBlockedCourseLesson}
             onSelectTrack={goToCourseTrack}
-            onSelectExercise={goToLessonStudyHome}
+            onSelectExercise={goToLessonFromOverview}
             onSelectService={goToTableOfContents}
             onConfidenceGuide={goToConfidenceGuide}
           />
