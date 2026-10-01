@@ -10638,7 +10638,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-we-magnify-001": {
-    "arabic": "إيّاكِ نُعَظِّم",
+    "arabic": "إِيَّاكِ نُعَظِّمُ",
     "translation": "we magnify thee",
     "literal": "thee we magnify",
     "tags": [
@@ -10648,7 +10648,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-truly-you-are-001": {
-    "arabic": "حقاً إنَّكِ",
+    "arabic": "حَقًّا إِنَّكِ",
     "translation": "and art truly",
     "literal": "truly thou art",
     "tags": [
@@ -10658,7 +10658,7 @@ const phrases = {
     ]
   },
   "theotokos-nominative-001": {
-    "arabic": "والِدَةُ الإِلَه",
+    "arabic": "وَالِدَةُ الإِلَهِ",
     "translation": "Theotokos",
     "literal": "The Bearer of God",
     "tags": [
@@ -10668,7 +10668,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-without-corruption-001": {
-    "arabic": "التي بِغَيْرِ فَسادٍ",
+    "arabic": "الَّتِي بِغَيْرِ فَسَادٍ",
     "translation": "thou who without corruption",
     "literal": "who without corruption",
     "tags": [
@@ -10678,7 +10678,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-bear-word-001": {
-    "arabic": "وَلَدَتْ كَلِمَةَ الله",
+    "arabic": "وَلَدَتْ كَلِمَةَ اللهِ",
     "translation": "didst bear God the Word",
     "literal": "gave birth to the Word of God",
     "tags": [
@@ -10688,7 +10688,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-more-glorious-001": {
-    "arabic": "وأرْفَعُ مَجْداً",
+    "arabic": "وَأَرْفَعُ مَجْدًا",
     "translation": "and more glorious",
     "literal": "and higher in glory",
     "tags": [
@@ -10698,7 +10698,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-beyond-compare-than-001": {
-    "arabic": "بِغَيْرِ قِياسٍ مِنَ",
+    "arabic": "بِغَيْرِ قِيَاسٍ مِنَ",
     "translation": "beyond compare than",
     "literal": "beyond measure than",
     "tags": [
@@ -10708,7 +10708,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-seraphim-001": {
-    "arabic": "السّيرافِيم",
+    "arabic": "السِّيرَافِيمِ",
     "translation": "the seraphim",
     "literal": "the Seraphim",
     "tags": [
@@ -10718,7 +10718,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-o-she-who-is-001": {
-    "arabic": "يا مَنْ هِيَ",
+    "arabic": "يَا مَنْ هِيَ",
     "translation": "",
     "literal": "O she who is",
     "tags": [
@@ -10728,7 +10728,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-more-honorable-001": {
-    "arabic": "أكْرَمُ مِنَ",
+    "arabic": "أَكْرَمُ مِنَ",
     "translation": "more honorable than",
     "literal": "more honorable than",
     "tags": [
@@ -10738,7 +10738,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-cherubim-001": {
-    "arabic": "الشّيرُوبِيم",
+    "arabic": "الشِّيرُوبِيمِ",
     "translation": "the cherubim",
     "literal": "the Cherubim",
     "tags": [
@@ -10748,7 +10748,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-mother-our-god-001": {
-    "arabic": "أمَّ إِلَهِنا",
+    "arabic": "أُمَّ إِلَهِنَا",
     "translation": "and the Mother of our God",
     "literal": "mother of our God",
     "tags": [
@@ -10758,7 +10758,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-blameless-mother-001": {
-    "arabic": "البَرِيئَةَ مِنْ كُلِّ العُيوب",
+    "arabic": "البَرِيئَةَ مِنْ كُلِّ العُيُوبِ",
     "translation": "and all-blameless",
     "literal": "free from all faults",
     "tags": [
@@ -10768,7 +10768,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-ever-blessed-001": {
-    "arabic": "الدائِمَةَ الطُّوبى",
+    "arabic": "الدَّائِمَةَ الطُّوبَى",
     "translation": "the ever-blessed",
     "literal": "the perpetual blessedness",
     "tags": [
@@ -10778,7 +10778,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-bless-theotokos-001": {
-    "arabic": "نُغَبِّطُ والِدَةَ الإِلَهِ",
+    "arabic": "نُغَبِّطُ وَالِدَةَ الإِلَهِ",
     "translation": "to bless thee, O Theotokos",
     "literal": "we bless the Bearer of God",
     "tags": [
@@ -10788,7 +10788,7 @@ const phrases = {
     ]
   },
   "theotokos-hymn-meet-bless-001": {
-    "arabic": "بِواجِبِ الْإِسْتِئهَالِ حقاً",
+    "arabic": "بِوَاجِبِ الاِسْتِئْهَالِ حَقًّا",
     "translation": "It is truly meet",
     "literal": "with due worthiness, truly",
     "tags": [
